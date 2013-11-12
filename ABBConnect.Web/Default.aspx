@@ -138,6 +138,21 @@
                             <small>Et harum quidem rerum facilis est et expedita distinctio</small>
                         </div>
                     </div>
+                    <div id="feed-post-comment-container">
+                        <div class="feed-post-comment-info pull-left">
+                            <img src="content/img/avatar-abb-small.png" alt="user-avatar">
+                        </div>
+                        <div class="feed-post-comment-data">
+                            <textarea type="text" id="feed-post-comment-input-997" class="feed-post-comment-input" onclick="focusOnFeedCommentContainer(997)">Write comment...</textarea>
+                            <div id="feed-post-comment-additional-settings-997" class="dont-show">
+                                <div class="feed-single-comment-hr"></div>
+                                <div class="feed-post-comment-button-container">
+                                    <button type="button" class="btn btn-primary btn-sm" onclick="hideFullFeedCommentContainer(997)">Cancel</button>
+                                    <button type="button" class="btn btn-primary btn-sm" onclick="postFeedComment(997)">Post</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
                 </div>
             </div>
         </div>
@@ -191,7 +206,7 @@
                     </div>
                 </div>
             </div>
-             <div id="feed-container-995" class="feed-container">
+            <div id="feed-container-995" class="feed-container">
                 <div class="feed-inner-container feed-inner-container-warning">
                     <div class="feed-information">
                         <img class="feed-avatar" alt="" src="content/img/avatar-abb-2.png">
