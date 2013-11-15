@@ -12,5 +12,9 @@ namespace BLL
         List<Feed> LoadHistoryFeedsBySensor(int sensorID);
         bool PublishFeed(UserFeed feed);
         void PublishComment(int feedID, Comment comment);
+        List<User> LoadFeedTags(int feedId);
+        List<Comment> LoadFeedComments(int feedId);
+        List<Feed> LoadLatest10Feeds();
+        List<Feed> LoadLatest20Feeds();
     }
 }

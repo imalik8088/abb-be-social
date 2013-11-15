@@ -9,7 +9,7 @@ namespace BLL
     interface IUserFeedManager
     {
         List<Feed> LoadUserFeeds(string userName);
-        List<Feed> LoadUserFeedsByLocation(string location);
-        List<Feed> LoadUserFeedsByTime(DateTime startTime, DateTime endTime);
+        //List<Feed> LoadUserFeedsByLocation(string location);
+        //List<Feed> LoadUserFeedsByTime(DateTime startTime, DateTime endTime);
     }
 }

@@ -6,37 +6,36 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    public class UserFeed: Feed
+    public class SensorVTData
     {
-        public UserFeed()
+        public SensorVTData()
         {
-            owner = new User();
-            mediaFilePath = "";
+            this.creationTime = DateTime.MinValue;
         }
 
-        private User owner;
-        public User Owner
+        private DateTime creationTime;
+        public DateTime CreationTime
         {
             get
             {
-                return owner;
+                return creationTime;
             }
             set
             {
-                owner = value;
+                creationTime = value;
             }
         }
 
-        private string mediaFilePath;
-        public string MediaFilePath
+        private int rawData;
+        public int RawData
         {
             get
             {
-                return mediaFilePath;
+                return rawData;
             }
             set
             {
-                mediaFilePath = value;
+                rawData = value;
             }
         }
     }

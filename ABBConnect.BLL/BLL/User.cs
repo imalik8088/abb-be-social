@@ -8,6 +8,18 @@ namespace BLL
 {
     public class User
     {
+        public User()
+        {
+            this.userName = "";
+            this.phoneNumber = "";
+            this.lastName = "";
+            this.companyTitle = "";
+            this.email = "";
+            this.firstName = "";
+            this.workRoom = "";
+            this.iD = -1;
+        }
+
         private string userName;
         public string UserName
         {

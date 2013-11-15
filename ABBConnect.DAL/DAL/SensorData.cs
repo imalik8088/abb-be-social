@@ -20,34 +20,24 @@ namespace DAL
             this.sqlCommand = this.sqlConnection.CreateCommand();
         }
 
-        public DataTable RetrieveSensorInformation(int sensorID)
+        public DataTable GetSensorInformation(int sensorID)
         {
+            DataTable table = new DataTable();
+
             try
             {
-                this.sqlConnection.Open();
                 this.sqlCommand.CommandText = "GetSensorInformation";
                 this.sqlCommand.CommandType = CommandType.StoredProcedure;
 
                 SqlParameter sensor_ID = new SqlParameter("@sensorID", SqlDbType.Int);
                 sensor_ID.Direction = ParameterDirection.Input;
-                sensor_ID.Value = sensorID == null ? -1 : sensorID;
+                sensor_ID.Value = sensorID == -1 ? -1 : sensorID;
                 this.sqlCommand.Parameters.Add(sensor_ID);
 
-                DataTable table = new DataTable();
+                this.sqlConnection.Open();
                 SqlDataAdapter da = new SqlDataAdapter(this.sqlCommand);
 
                 da.Fill(table);
-
-                foreach (DataRow row in table.Rows)
-                {
-                    string name = row["Id"].ToString();
-                    string description = row["Name"].ToString();
-                    string icoFileName = row["MIN_Critical"].ToString();
-                    string installScript = row["MAX_Critical"].ToString();
-
-                }
-
-                return table;
             }
             catch (Exception e)
             {
@@ -58,46 +48,47 @@ namespace DAL
                 this.sqlCommand.Parameters.Clear();
                 this.sqlConnection.Close();
             }
-            return null;
+            return table;
         }
 
-        public DataTable RetrieveHistoricalSensorData(int sensorID, DateTime from, DateTime to)
+        public DataTable RetrieveHistoricalSensorData(int sensorID, DateTime startingTime, DateTime endingTime)
         {
+            DataTable table = new DataTable();
+
             try
             {
-                this.sqlConnection.Open();
                 this.sqlCommand.CommandText = "GetHistoricalDataFromSensor";
                 this.sqlCommand.CommandType = CommandType.StoredProcedure;
 
                 SqlParameter sensor_ID = new SqlParameter("@sensorID", SqlDbType.Int);
                 sensor_ID.Direction = ParameterDirection.Input;
-                sensor_ID.Value = sensorID == null ? -1 : sensorID;
+                sensor_ID.Value = sensorID == -1 ? -1 : sensorID;
                 this.sqlCommand.Parameters.Add(sensor_ID);
 
-                SqlParameter fromPar = new SqlParameter("@from", SqlDbType.DateTime);
-                fromPar.Direction = ParameterDirection.Input;
-                fromPar.Value = from == null ? DateTime.MinValue : from;
-                this.sqlCommand.Parameters.Add(fromPar);
+                SqlParameter startingTimeParam = new SqlParameter("@from", SqlDbType.DateTime);
+                startingTimeParam.Direction = ParameterDirection.Input;
 
-                SqlParameter toPar = new SqlParameter("@to", SqlDbType.DateTime);
-                toPar.Direction = ParameterDirection.Input;
-                toPar.Value = to == null ? DateTime.MinValue : to;
-                this.sqlCommand.Parameters.Add(toPar);
+                if (startingTime == DateTime.MinValue)
+                    startingTimeParam.Value = DBNull.Value;
+                else
+                    startingTimeParam.Value = startingTime;
 
-                DataTable table = new DataTable();
+                this.sqlCommand.Parameters.Add(startingTimeParam);
+
+                SqlParameter endingTimeParam = new SqlParameter("@to", SqlDbType.DateTime);
+                endingTimeParam.Direction = ParameterDirection.Input;
+
+                if (endingTime == DateTime.MinValue)
+                    endingTimeParam.Value = DBNull.Value;
+                else
+                    endingTimeParam.Value = endingTime;
+
+                this.sqlCommand.Parameters.Add(endingTimeParam);
+
+                this.sqlConnection.Open();
                 SqlDataAdapter da = new SqlDataAdapter(this.sqlCommand);
 
                 da.Fill(table);
-
-                //foreach (DataRow row in table.Rows)
-                //{
-                //    string name = row["RawValue"].ToString();
-                //    string description = row["CreationTimeStamp"].ToString();
-
-                //    Console.WriteLine(name + " " + description);
-                //}
-
-                return table;
             }
             catch (Exception e)
             {
@@ -108,7 +99,7 @@ namespace DAL
                 this.sqlCommand.Parameters.Clear();
                 this.sqlConnection.Close();
             }
-            return null;
+            return table;
         }
 
         public int RetrieveCurrentSensorData(int sensorID)
@@ -117,7 +108,6 @@ namespace DAL
 
             try
             {
-                this.sqlConnection.Open();
                 this.sqlCommand.CommandText = "GetLatestSensorValue";
                 this.sqlCommand.CommandType = CommandType.StoredProcedure;
 
@@ -128,6 +118,7 @@ namespace DAL
 
                 try
                 {
+                    this.sqlConnection.Open();
                     returnedValue = Convert.ToInt32(this.sqlCommand.ExecuteScalar());
                 }
                 catch (FormatException e)
@@ -149,50 +140,6 @@ namespace DAL
                 this.sqlConnection.Close();
             }
             return returnedValue;
-        }
-
-        public DataTable RetrieveSensorAlarms(int sensorID)
-        {
-            try
-            {
-                this.sqlConnection.Open();
-                this.sqlCommand.CommandText = "GetSensorAlarms";
-                this.sqlCommand.CommandType = CommandType.StoredProcedure;
-
-                SqlParameter sensor_ID = new SqlParameter("@sensorID", SqlDbType.Int);
-                sensor_ID.Direction = ParameterDirection.Input;
-                sensor_ID.Value = sensorID == null ? -1 : sensorID;
-                this.sqlCommand.Parameters.Add(sensor_ID);
-
-                DataTable table = new DataTable();
-                SqlDataAdapter da = new SqlDataAdapter(this.sqlCommand);
-
-                da.Fill(table);
-
-                foreach (DataRow row in table.Rows)
-                {
-                    string name = row["SensorName"].ToString();
-                    string description = row["SensorID"].ToString();
-                    string icoFileName = row["timestamp"].ToString();
-                    string installScript = row["Value"].ToString();
-                    string installssScript = row["PriorityName"].ToString();
-
-                    Console.WriteLine(name + " " + description + " " + icoFileName + " " + installScript + " " + installssScript);
-
-                }
-
-                return table;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Error: " + e);
-            }
-            finally
-            {
-                this.sqlCommand.Parameters.Clear();
-                this.sqlConnection.Close();
-            }
-            return null;
         }
     }
 }

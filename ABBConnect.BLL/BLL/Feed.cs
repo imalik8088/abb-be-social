@@ -8,6 +8,16 @@ namespace BLL
 {
     public class Feed
     {
+        public Feed()
+        {
+            this.comments = new List<Comment>();
+            this.tags = new List<User>();
+            this.timeStamp = DateTime.MinValue;
+            this.location = "";
+            this.content = "";
+            this.category = "";
+        }
+
         private int iD;
         public int ID
         {

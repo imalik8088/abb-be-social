@@ -8,6 +8,13 @@ namespace BLL
 {
     public class Sensor
     {
+        public Sensor()
+        {
+            this.sensorValues = new List<SensorVTData>();
+            this.name = "";
+            this.location = "";
+        }
+
         private int iD;
         public int ID
         {
@@ -20,6 +27,8 @@ namespace BLL
                 iD = value;
             }
         }
+
+        
 
         private string name;
         public string Name
@@ -47,8 +56,21 @@ namespace BLL
             }
         }
 
-        private int lowerBoundary;
-        public int LowerBoundary
+        private List<SensorVTData> sensorValues;
+        public List<SensorVTData> SensorValues
+        {
+            get
+            {
+                return sensorValues;
+            }
+            set
+            {
+                sensorValues = value;
+            }
+        }
+
+        private decimal lowerBoundary;
+        public decimal LowerBoundary
         {
             get
             {
@@ -60,8 +82,8 @@ namespace BLL
             }
         }
 
-        private int upperBoundary;
-        public int UpperBoundary
+        private decimal upperBoundary;
+        public decimal UpperBoundary
         {
             get
             {

@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommonData.cs" />
     <Compile Include="Connection.cs" />
     <Compile Include="FeedData.cs" />
     <Compile Include="HumanFeedData.cs" />

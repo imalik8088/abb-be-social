@@ -36,8 +36,8 @@
     </StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BackEnd">
-      <HintPath>..\BackEnd\BackEnd\bin\Debug\BackEnd.dll</HintPath>
+    <Reference Include="DAL">
+      <HintPath>..\DAL\DAL\bin\Debug\DAL.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -49,8 +49,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Comment.cs" />
+    <Compile Include="CommonDataManager.cs" />
     <Compile Include="Feed.cs" />
     <Compile Include="FeedManager.cs" />
+    <Compile Include="ICommonDataManager.cs" />
+    <Compile Include="ISensorFeedManager.cs" />
     <Compile Include="ISensorManager.cs" />
     <Compile Include="IUserFeedManager.cs" />
     <Compile Include="IUserManager.cs" />
@@ -59,8 +62,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sensor.cs" />
     <Compile Include="SensorFeed.cs" />
+    <Compile Include="SensorFeedManager.cs" />
     <Compile Include="SensorHistoryData.cs" />
     <Compile Include="SensorManager.cs" />
+    <Compile Include="SensorVTData.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserFeed.cs" />
     <Compile Include="UserFeedManager.cs" />

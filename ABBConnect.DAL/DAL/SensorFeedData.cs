@@ -21,35 +21,19 @@ namespace DAL
             this.sqlCommand = this.sqlConnection.CreateCommand();
         }
 
-        public DataTable RetrieveSensorFeedsByTime(int sensorID, DateTime startTime, DateTime endTime)
+        public DataTable GetAllSensorFeeds()
         {
+            DataTable table = new DataTable();
+
             try
             {
-                this.sqlConnection.Open();
-                this.sqlCommand.CommandText = "GetSensorFeedsByTime";
+                this.sqlCommand.CommandText = "GetAllSensorFeeds";
                 this.sqlCommand.CommandType = CommandType.StoredProcedure;
 
-                SqlParameter sensor_ID = new SqlParameter("@sensorID", SqlDbType.Int);
-                sensor_ID.Direction = ParameterDirection.Input;
-                sensor_ID.Value = sensorID == null ? -1 : sensorID;
-                this.sqlCommand.Parameters.Add(sensor_ID);
-
-                SqlParameter fromPar = new SqlParameter("@startTime", SqlDbType.DateTime);
-                fromPar.Direction = ParameterDirection.Input;
-                fromPar.Value = startTime == null ? DateTime.MinValue : startTime;
-                this.sqlCommand.Parameters.Add(fromPar);
-
-                SqlParameter toPar = new SqlParameter("@endTime", SqlDbType.DateTime);
-                toPar.Direction = ParameterDirection.Input;
-                toPar.Value = endTime == null ? DateTime.MinValue : endTime;
-                this.sqlCommand.Parameters.Add(toPar);
-
-                DataTable table = new DataTable();
+                this.sqlConnection.Open();
                 SqlDataAdapter da = new SqlDataAdapter(this.sqlCommand);
 
                 da.Fill(table);
-
-                return table;
             }
             catch (Exception e)
             {
@@ -60,28 +44,47 @@ namespace DAL
                 this.sqlCommand.Parameters.Clear();
                 this.sqlConnection.Close();
             }
-            return null;
+            return table;
         }
 
-        public DataTable RetrieveSensorFeedsFromLocation(string location)
+        public DataTable GetAllSensorFeedsByFilter(string location, DateTime startingTime, DateTime endingTime)
         {
+            DataTable table = new DataTable();
+
             try
             {
-                this.sqlConnection.Open();
-                this.sqlCommand.CommandText = "GetSensorFeedsFromLocation";
+                this.sqlCommand.CommandText = "GetAllSensorFeedsByFilter";
                 this.sqlCommand.CommandType = CommandType.StoredProcedure;
 
                 SqlParameter locationParam = new SqlParameter("@location", SqlDbType.NVarChar, 50);
                 locationParam.Direction = ParameterDirection.Input;
-                locationParam.Value = location == null ? "" : location;
+                locationParam.Value = this.ToDBNull(location);
                 this.sqlCommand.Parameters.Add(locationParam);
 
-                DataTable table = new DataTable();
+                SqlParameter startingTimeParam = new SqlParameter("@startTime", SqlDbType.DateTime);
+                startingTimeParam.Direction = ParameterDirection.Input;
+
+                if (startingTime == DateTime.MinValue)
+                    startingTimeParam.Value = DBNull.Value;
+                else
+                    startingTimeParam.Value = startingTime;
+
+                this.sqlCommand.Parameters.Add(startingTimeParam);
+
+                SqlParameter endingTimeParam = new SqlParameter("@endTime", SqlDbType.DateTime);
+                endingTimeParam.Direction = ParameterDirection.Input;
+
+                if (endingTime == DateTime.MinValue)
+                    endingTimeParam.Value = DBNull.Value;
+                else
+                    endingTimeParam.Value = endingTime;
+
+                this.sqlCommand.Parameters.Add(endingTimeParam);
+
+                this.sqlConnection.Open();
                 SqlDataAdapter da = new SqlDataAdapter(this.sqlCommand);
 
                 da.Fill(table);
-
-                return table;
             }
             catch (Exception e)
             {
@@ -92,23 +95,27 @@ namespace DAL
                 this.sqlCommand.Parameters.Clear();
                 this.sqlConnection.Close();
             }
-            return null;
+            return table;
         }
 
-        public DataTable RetrieveAlarmsFromSensorFeed()
+        public DataTable GetSensorFeeds(int sensorId)
         {
+            DataTable table = new DataTable();
+
             try
             {
-                this.sqlConnection.Open();
-                this.sqlCommand.CommandText = "GetAllAlarms";
+                this.sqlCommand.CommandText = "GetSensorFeeds";
                 this.sqlCommand.CommandType = CommandType.StoredProcedure;
 
-                DataTable table = new DataTable();
+                SqlParameter sensorIdParam = new SqlParameter("@sensorID", SqlDbType.Int);
+                sensorIdParam.Direction = ParameterDirection.Input;
+                sensorIdParam.Value = sensorId == -1 ? -1 : sensorId;
+                this.sqlCommand.Parameters.Add(sensorIdParam);
+
+                this.sqlConnection.Open();
                 SqlDataAdapter da = new SqlDataAdapter(this.sqlCommand);
 
                 da.Fill(table);
-
-                return table;
             }
             catch (Exception e)
             {
@@ -119,33 +126,52 @@ namespace DAL
                 this.sqlCommand.Parameters.Clear();
                 this.sqlConnection.Close();
             }
-            return null;
+            return table;
         }
 
-        public DataTable RetrieveAllAlarmsByTime(DateTime startTime, DateTime endTime)
+        public DataTable GetSensorFeedsByFilter(int sensorId, string location, DateTime startingTime, DateTime endingTime)
         {
+            DataTable table = new DataTable();
+
             try
             {
-                this.sqlConnection.Open();
-                this.sqlCommand.CommandText = "GetAllAlarmsbyTime";
+                this.sqlCommand.CommandText = "GetSensorFeedsByFilter";
                 this.sqlCommand.CommandType = CommandType.StoredProcedure;
 
-                SqlParameter fromPar = new SqlParameter("@startTime", SqlDbType.DateTime);
-                fromPar.Direction = ParameterDirection.Input;
-                fromPar.Value = startTime == null ? DateTime.MinValue : startTime;
-                this.sqlCommand.Parameters.Add(fromPar);
+                SqlParameter sensorIdParam = new SqlParameter("@sensorID", SqlDbType.Int);
+                sensorIdParam.Direction = ParameterDirection.Input;
+                sensorIdParam.Value = sensorId == -1 ? -1 : sensorId;
+                this.sqlCommand.Parameters.Add(sensorIdParam);
 
-                SqlParameter toPar = new SqlParameter("@endTime", SqlDbType.DateTime);
-                toPar.Direction = ParameterDirection.Input;
-                toPar.Value = endTime == null ? DateTime.MinValue : endTime;
-                this.sqlCommand.Parameters.Add(toPar);
+                SqlParameter locationParam = new SqlParameter("@location", SqlDbType.NVarChar, 50);
+                locationParam.Direction = ParameterDirection.Input;
+                locationParam.Value = this.ToDBNull(location);
+                this.sqlCommand.Parameters.Add(locationParam);
 
-                DataTable table = new DataTable();
+                SqlParameter startingTimeParam = new SqlParameter("@startTime", SqlDbType.DateTime);
+                startingTimeParam.Direction = ParameterDirection.Input;
+
+                if (startingTime == DateTime.MinValue)
+                    startingTimeParam.Value = DBNull.Value;
+                else
+                    startingTimeParam.Value = startingTime;
+
+                this.sqlCommand.Parameters.Add(startingTimeParam);
+
+                SqlParameter endingTimeParam = new SqlParameter("@endTime", SqlDbType.DateTime);
+                endingTimeParam.Direction = ParameterDirection.Input;
+
+                if (endingTime == DateTime.MinValue)
+                    endingTimeParam.Value = DBNull.Value;
+                else
+                    endingTimeParam.Value = endingTime;
+
+                this.sqlCommand.Parameters.Add(endingTimeParam);
+
+                this.sqlConnection.Open();
                 SqlDataAdapter da = new SqlDataAdapter(this.sqlCommand);
 
                 da.Fill(table);
-
-                return table;
             }
             catch (Exception e)
             {
@@ -156,51 +182,14 @@ namespace DAL
                 this.sqlCommand.Parameters.Clear();
                 this.sqlConnection.Close();
             }
-            return null;
+            return table;
         }
 
-        public DataTable RetrieveSensorAlarms(int sensorID)
+        public object ToDBNull(object value)
         {
-            try
-            {
-                this.sqlConnection.Open();
-                this.sqlCommand.CommandText = "GetSensorAlarms";
-                this.sqlCommand.CommandType = CommandType.StoredProcedure;
-
-                SqlParameter sensor_ID = new SqlParameter("@sensorID", SqlDbType.Int);
-                sensor_ID.Direction = ParameterDirection.Input;
-                sensor_ID.Value = sensorID == null ? -1 : sensorID;
-                this.sqlCommand.Parameters.Add(sensor_ID);
-
-                DataTable table = new DataTable();
-                SqlDataAdapter da = new SqlDataAdapter(this.sqlCommand);
-
-                da.Fill(table);
-
-                foreach (DataRow row in table.Rows)
-                {
-                    string name = row["SensorName"].ToString();
-                    string description = row["SensorID"].ToString();
-                    string icoFileName = row["timestamp"].ToString();
-                    string installScript = row["Value"].ToString();
-                    string installssScript = row["PriorityName"].ToString();
-
-                    Console.WriteLine(name + " " + description + " " + icoFileName + " " + installScript + " " + installssScript);
-
-                }
-
-                return table;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Error: " + e);
-            }
-            finally
-            {
-                this.sqlCommand.Parameters.Clear();
-                this.sqlConnection.Close();
-            }
-            return null;
+            if (null != value)
+                return value;
+            return DBNull.Value;
         }
     }
 }

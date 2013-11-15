@@ -12,7 +12,6 @@ namespace DAL
     {
         private SqlConnection sqlConnection;
         private SqlCommand sqlCommand;
-        //private SqlDataReader data;
 
         public UserData()
             : base()
@@ -21,8 +20,10 @@ namespace DAL
             this.sqlCommand = this.sqlConnection.CreateCommand();
         }
 
-        public DataTable RetrieveUserInformation(string userName)
+        public DataTable GetUserInformation(string userName)
         {
+            DataTable table = new DataTable();
+
             try
             {
                 this.sqlConnection.Open();
@@ -34,12 +35,9 @@ namespace DAL
                 user_Name.Value = userName == null ? "" : userName;
                 this.sqlCommand.Parameters.Add(user_Name);
 
-                DataTable table = new DataTable();
                 SqlDataAdapter da = new SqlDataAdapter(this.sqlCommand);
 
                 da.Fill(table);
-
-                return table;
             }
             catch (Exception e)
             {
@@ -50,18 +48,17 @@ namespace DAL
                 this.sqlCommand.Parameters.Clear();
                 this.sqlConnection.Close();
             }
-            return null;
+            return table;
         }
 
         public bool CheckCredentials(string userName, string password)
         {
 
             bool result = false;
-            int returnedValue = -1;
+            int returnedValue = -10000;
 
             try
             {
-                this.sqlConnection.Open();
                 this.sqlCommand.CommandText = "Login";
                 this.sqlCommand.CommandType = CommandType.StoredProcedure;
 
@@ -78,11 +75,14 @@ namespace DAL
                 SqlParameter retVal = this.sqlCommand.Parameters.Add("@ret", SqlDbType.Int);
                 retVal.Direction = ParameterDirection.Output;
 
-                //this.sqlCommand.Parameters.Add(retVal);
-
-                this.sqlCommand.ExecuteNonQuery();
+                this.sqlConnection.Open();
+                result = Convert.ToBoolean(this.sqlCommand.ExecuteNonQuery());
                 returnedValue = (int)this.sqlCommand.Parameters["@ret"].Value;
-                result = true;
+
+                if (returnedValue == 1)
+                    result = true;
+                else
+                    result = false;
             }
             catch (Exception e)
             {

@@ -21,11 +21,12 @@ namespace DAL
             this.sqlCommand = this.sqlConnection.CreateCommand();
         }
 
-        public DataTable RetrieveUserFeeds(string userName)
+        public DataTable GetUserFeeds(string userName)
         {
+            DataTable table = new DataTable();
+
             try
             {
-                this.sqlConnection.Open();
                 this.sqlCommand.CommandText = "GetUserFeeds";
                 this.sqlCommand.CommandType = CommandType.StoredProcedure;
 
@@ -34,12 +35,10 @@ namespace DAL
                 user_Name.Value = userName == null ? "" : userName;
                 this.sqlCommand.Parameters.Add(user_Name);
 
-                DataTable table = new DataTable();
+                this.sqlConnection.Open();
                 SqlDataAdapter da = new SqlDataAdapter(this.sqlCommand);
 
                 da.Fill(table);
-
-                return table;
             }
             catch (Exception e)
             {
@@ -50,28 +49,129 @@ namespace DAL
                 this.sqlCommand.Parameters.Clear();
                 this.sqlConnection.Close();
             }
-            return null;
+            return table;
         }
 
-        public DataTable RetrieveHumanFeedsFromLocation(string location)
+        public DataTable GetAllUserFeeds()
         {
+            DataTable table = new DataTable();
+
             try
             {
+                this.sqlCommand.CommandText = "GetAllUserFeeds";
+                this.sqlCommand.CommandType = CommandType.StoredProcedure;
+
                 this.sqlConnection.Open();
-                this.sqlCommand.CommandText = "GetUserFeedsByLocation";
+                SqlDataAdapter da = new SqlDataAdapter(this.sqlCommand);
+
+                da.Fill(table);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: " + e);
+            }
+            finally
+            {
+                this.sqlCommand.Parameters.Clear();
+                this.sqlConnection.Close();
+            }
+            return table;
+        }
+
+        public DataTable GetUserFeedsByFilter(string userName, string location, DateTime startingTime, DateTime endingTime)
+        {
+            DataTable table = new DataTable();
+
+            try
+            {
+                this.sqlCommand.CommandText = "GetUserFeedsByFilter";
+                this.sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter userNameParam = new SqlParameter("@username", SqlDbType.NVarChar, 50);
+                userNameParam.Direction = ParameterDirection.Input;
+                userNameParam.Value = userName == null ? "" : userName;
+                this.sqlCommand.Parameters.Add(userNameParam);
+
+                SqlParameter locationParam = new SqlParameter("@location", SqlDbType.NVarChar, 50);
+                locationParam.Direction = ParameterDirection.Input;
+                locationParam.Value = this.ToDBNull(location);
+                this.sqlCommand.Parameters.Add(locationParam);
+
+                SqlParameter startingTimeParam = new SqlParameter("@startTime", SqlDbType.DateTime);
+                startingTimeParam.Direction = ParameterDirection.Input;
+
+                if (startingTime == DateTime.MinValue)
+                    startingTimeParam.Value = DBNull.Value;
+                else
+                    startingTimeParam.Value = startingTime;
+
+                this.sqlCommand.Parameters.Add(startingTimeParam);
+
+                SqlParameter endingTimeParam = new SqlParameter("@endTime", SqlDbType.DateTime);
+                endingTimeParam.Direction = ParameterDirection.Input;
+
+                if (endingTime == DateTime.MinValue)
+                    endingTimeParam.Value = DBNull.Value;
+                else
+                    endingTimeParam.Value = endingTime;
+
+                this.sqlCommand.Parameters.Add(endingTimeParam);
+
+                this.sqlConnection.Open();
+                SqlDataAdapter da = new SqlDataAdapter(this.sqlCommand);
+
+                da.Fill(table);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: " + e);
+            }
+            finally
+            {
+                this.sqlCommand.Parameters.Clear();
+                this.sqlConnection.Close();
+            }
+            return table;
+        }
+
+        public DataTable GetAllUserFeedsByFilter(string location, DateTime startingTime, DateTime endingTime)
+        {
+            DataTable table = new DataTable();
+
+            try
+            {
+                this.sqlCommand.CommandText = "GetAllUserFeedsByFilter";
                 this.sqlCommand.CommandType = CommandType.StoredProcedure;
 
                 SqlParameter locationParam = new SqlParameter("@location", SqlDbType.NVarChar, 50);
                 locationParam.Direction = ParameterDirection.Input;
-                locationParam.Value = location == null ? "" : location;
+                locationParam.Value = this.ToDBNull(location);
                 this.sqlCommand.Parameters.Add(locationParam);
 
-                DataTable table = new DataTable();
+                SqlParameter startingTimeParam = new SqlParameter("@startTime", SqlDbType.DateTime);
+                startingTimeParam.Direction = ParameterDirection.Input;
+
+                if (startingTime == DateTime.MinValue)
+                    startingTimeParam.Value = DBNull.Value;
+                else
+                    startingTimeParam.Value = startingTime;
+
+                this.sqlCommand.Parameters.Add(startingTimeParam);
+
+                SqlParameter endingTimeParam = new SqlParameter("@endTime", SqlDbType.DateTime);
+                endingTimeParam.Direction = ParameterDirection.Input;
+
+                if (endingTime == DateTime.MinValue)
+                    endingTimeParam.Value = DBNull.Value;
+                else
+                    endingTimeParam.Value = endingTime;
+
+                this.sqlCommand.Parameters.Add(endingTimeParam);
+
+                this.sqlConnection.Open();
                 SqlDataAdapter da = new SqlDataAdapter(this.sqlCommand);
 
                 da.Fill(table);
-
-                return table;
             }
             catch (Exception e)
             {
@@ -82,44 +182,14 @@ namespace DAL
                 this.sqlCommand.Parameters.Clear();
                 this.sqlConnection.Close();
             }
-            return null;
+            return table;
         }
 
-        public DataTable RetrieveHumanFeedsByTime(DateTime startTime, DateTime endTime)
+        public object ToDBNull(object value)
         {
-            try
-            {
-                this.sqlConnection.Open();
-                this.sqlCommand.CommandText = "GetUserFeedsByTime";
-                this.sqlCommand.CommandType = CommandType.StoredProcedure;
-
-                SqlParameter fromPar = new SqlParameter("@startTime", SqlDbType.DateTime);
-                fromPar.Direction = ParameterDirection.Input;
-                fromPar.Value = startTime == null ? DateTime.MinValue : startTime;
-                this.sqlCommand.Parameters.Add(fromPar);
-
-                SqlParameter toPar = new SqlParameter("@endTime", SqlDbType.DateTime);
-                toPar.Direction = ParameterDirection.Input;
-                toPar.Value = endTime == null ? DateTime.MinValue : endTime;
-                this.sqlCommand.Parameters.Add(toPar);
-
-                DataTable table = new DataTable();
-                SqlDataAdapter da = new SqlDataAdapter(this.sqlCommand);
-
-                da.Fill(table);
-
-                return table;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Error: " + e);
-            }
-            finally
-            {
-                this.sqlCommand.Parameters.Clear();
-                this.sqlConnection.Close();
-            }
-            return null;
+            if (null != value)
+                return value;
+            return DBNull.Value;
         }
     }
 

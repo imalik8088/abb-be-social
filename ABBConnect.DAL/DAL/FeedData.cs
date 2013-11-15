@@ -20,9 +20,137 @@ namespace DAL
             this.sqlCommand = this.sqlConnection.CreateCommand();
         }
 
-        public DataTable RetrieveLatestFeeds()
+        /// <summary>
+        /// A method used to get all the feeds posted in the db.
+        /// </summary>
+        /// <returns>A DataTable containing</returns>
+        public DataTable GetLatestFeeds()
         {
-            return null;
+            DataTable table = new DataTable();
+
+            try
+            {
+                this.sqlCommand.CommandText = "GetLatestFeeds";
+                this.sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                this.sqlConnection.Open();
+                SqlDataAdapter da = new SqlDataAdapter(this.sqlCommand);
+
+                da.Fill(table);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: " + e);
+            }
+            finally
+            {
+                this.sqlCommand.Parameters.Clear();
+                this.sqlConnection.Close();
+            }
+            return table;
+        }
+
+        public DataTable GetLatest10Feeds()
+        {
+            DataTable table = new DataTable();
+
+            try
+            {
+                this.sqlCommand.CommandText = "GetLatest10Feeds";
+                this.sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                this.sqlConnection.Open();
+                SqlDataAdapter da = new SqlDataAdapter(this.sqlCommand);
+
+                da.Fill(table);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: " + e);
+            }
+            finally
+            {
+                this.sqlCommand.Parameters.Clear();
+                this.sqlConnection.Close();
+            }
+            return table;
+        }
+
+        public DataTable GetLatest20Feeds()
+        {
+            DataTable table = new DataTable();
+
+            try
+            {
+                this.sqlCommand.CommandText = "GetLatest20Feeds";
+                this.sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                this.sqlConnection.Open();
+                SqlDataAdapter da = new SqlDataAdapter(this.sqlCommand);
+
+                da.Fill(table);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: " + e);
+            }
+            finally
+            {
+                this.sqlCommand.Parameters.Clear();
+                this.sqlConnection.Close();
+            }
+            return table;
+        }
+
+        public DataTable GetLatestFeedByFilter(string location, DateTime startingTime, DateTime endingTime)
+        {
+            DataTable table = new DataTable();
+
+            try
+            {
+                this.sqlCommand.CommandText = "GetLatestFeedsByFilter";
+                this.sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter locationParam = new SqlParameter("@location", SqlDbType.NVarChar, 50);
+                locationParam.Direction = ParameterDirection.Input;
+                locationParam.Value = this.ToDBNull(location);
+                this.sqlCommand.Parameters.Add(locationParam);
+
+                SqlParameter startingTimeParam = new SqlParameter("@startTime", SqlDbType.DateTime);
+                startingTimeParam.Direction = ParameterDirection.Input;
+
+                if (startingTime == DateTime.MinValue)
+                    startingTimeParam.Value = DBNull.Value;
+                else
+                    startingTimeParam.Value = startingTime;
+
+                this.sqlCommand.Parameters.Add(startingTimeParam);
+
+                SqlParameter endingTimeParam = new SqlParameter("@endTime", SqlDbType.DateTime);
+                endingTimeParam.Direction = ParameterDirection.Input;
+
+                if (endingTime == DateTime.MinValue)
+                    endingTimeParam.Value = DBNull.Value;
+                else
+                    endingTimeParam.Value = endingTime;
+
+                this.sqlCommand.Parameters.Add(endingTimeParam);
+
+                this.sqlConnection.Open();
+                SqlDataAdapter da = new SqlDataAdapter(this.sqlCommand);
+
+                da.Fill(table);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: " + e);
+            }
+            finally
+            {
+                this.sqlCommand.Parameters.Clear();
+                this.sqlConnection.Close();
+            }
+            return table;
         }
 
         public bool PublishFeed(string userName, List<string> tags, string location, string content, string category, string filePath, int priorityID)
@@ -31,7 +159,6 @@ namespace DAL
 
             try
             {
-                this.sqlConnection.Open();
                 this.sqlCommand.CommandText = "AddFeed";
                 this.sqlCommand.CommandType = CommandType.StoredProcedure;
 
@@ -59,7 +186,8 @@ namespace DAL
                 retVal.Direction = ParameterDirection.Output;
 
                 //returnValue = Convert.ToBoolean(this.sqlCommand.ExecuteNonQuery());
-                this.sqlCommand.ExecuteNonQuery();
+                this.sqlConnection.Open();
+                returnValue = Convert.ToBoolean(this.sqlCommand.ExecuteNonQuery());
                 int insertedFeedId = (int)this.sqlCommand.Parameters["@retFeedId"].Value;
 
                 this.sqlCommand.CommandText = "AddTagToFeed";
@@ -127,11 +255,170 @@ namespace DAL
             return returnValue;
         }
 
-        public DataTable RetrieveUserHistoryFeeds(string userName, DateTime from, DateTime to)
+        public DataTable GetUserHistoryFeeds(string userName, DateTime from, DateTime to)
         {
             return null;
         }
 
+        public DataTable GetFeedsByFilter(string name, string location, DateTime startingTime, DateTime endingTime, string feedType)
+        {
+            DataTable table = new DataTable();
 
+            try
+            {
+                this.sqlCommand.CommandText = "GetFeedsByFilter";
+                this.sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter userNameParam = new SqlParameter("@Name", SqlDbType.NVarChar, 50);
+                userNameParam.Direction = ParameterDirection.Input;
+                userNameParam.Value = this.ToDBNull(name);
+                this.sqlCommand.Parameters.Add(userNameParam);
+
+                SqlParameter locationParam = new SqlParameter("@location", SqlDbType.NVarChar, 50);
+                locationParam.Direction = ParameterDirection.Input;
+                locationParam.Value = this.ToDBNull(location);
+                this.sqlCommand.Parameters.Add(locationParam);
+
+                SqlParameter startingTimeParam = new SqlParameter("@startTime", SqlDbType.DateTime);
+                startingTimeParam.Direction = ParameterDirection.Input;
+
+                if (startingTime == DateTime.MinValue)
+                    startingTimeParam.Value = DBNull.Value;
+                else
+                    startingTimeParam.Value = startingTime;
+
+                this.sqlCommand.Parameters.Add(startingTimeParam);
+
+                SqlParameter endingTimeParam = new SqlParameter("@endTime", SqlDbType.DateTime);
+                endingTimeParam.Direction = ParameterDirection.Input;
+
+                if (endingTime == DateTime.MinValue)
+                    endingTimeParam.Value = DBNull.Value;
+                else
+                    endingTimeParam.Value = endingTime;
+
+                this.sqlCommand.Parameters.Add(endingTimeParam);
+
+                SqlParameter feedTypeParam = new SqlParameter("@FeedType", SqlDbType.NVarChar, 50);
+                feedTypeParam.Direction = ParameterDirection.Input;
+                feedTypeParam.Value = this.ToDBNull(feedType);
+                this.sqlCommand.Parameters.Add(feedTypeParam);
+
+                this.sqlConnection.Open();
+                SqlDataAdapter da = new SqlDataAdapter(this.sqlCommand);
+
+                da.Fill(table);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: " + e);
+            }
+            finally
+            {
+                this.sqlCommand.Parameters.Clear();
+                this.sqlConnection.Close();
+            }
+            return table;
+        }
+
+        public DataTable GetFeedComments(int feedId)
+        {
+            DataTable table = new DataTable();
+
+            try
+            {
+                this.sqlConnection.Open();
+                this.sqlCommand.CommandText = "GetFeedComments";
+                this.sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter feedIdParam = new SqlParameter("@feedId", SqlDbType.Int);
+                feedIdParam.Direction = ParameterDirection.Input;
+                feedIdParam.Value = feedId == -1 ? -1 : feedId;
+                this.sqlCommand.Parameters.Add(feedIdParam);
+
+                SqlDataAdapter da = new SqlDataAdapter(this.sqlCommand);
+
+                da.Fill(table);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: " + e);
+            }
+            finally
+            {
+                this.sqlCommand.Parameters.Clear();
+                this.sqlConnection.Close();
+            }
+            return table;
+        }
+
+        public DataTable GetFeedTags(int feedId)
+        {
+            DataTable table = new DataTable();
+
+            try
+            {
+                this.sqlConnection.Open();
+                this.sqlCommand.CommandText = "GetFeedTags";
+                this.sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter feedIdParam = new SqlParameter("@feedId", SqlDbType.Int);
+                feedIdParam.Direction = ParameterDirection.Input;
+                feedIdParam.Value = feedId == -1 ? -1 : feedId;
+                this.sqlCommand.Parameters.Add(feedIdParam);
+
+                SqlDataAdapter da = new SqlDataAdapter(this.sqlCommand);
+
+                da.Fill(table);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: " + e);
+            }
+            finally
+            {
+                this.sqlCommand.Parameters.Clear();
+                this.sqlConnection.Close();
+            }
+            return table;
+        }
+
+        public DataTable GetLatestXFeeds(int numberOfFeeds)
+        {
+            DataTable table = new DataTable();
+
+            try
+            {
+                this.sqlConnection.Open();
+                this.sqlCommand.CommandText = "GetLatestXFeeds";
+                this.sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter numberOfFeedsParam = new SqlParameter("@X", SqlDbType.Int);
+                numberOfFeedsParam.Direction = ParameterDirection.Input;
+                numberOfFeedsParam.Value = numberOfFeeds == -1 ? -1 : numberOfFeeds;
+                this.sqlCommand.Parameters.Add(numberOfFeedsParam);
+
+                SqlDataAdapter da = new SqlDataAdapter(this.sqlCommand);
+
+                da.Fill(table);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: " + e);
+            }
+            finally
+            {
+                this.sqlCommand.Parameters.Clear();
+                this.sqlConnection.Close();
+            }
+            return table;
+        }
+
+        public object ToDBNull(object value)
+        {
+            if (null != value)
+                return value;
+            return DBNull.Value;
+        }
     }
 }

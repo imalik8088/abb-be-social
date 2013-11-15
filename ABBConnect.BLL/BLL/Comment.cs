@@ -8,9 +8,63 @@ namespace BLL
 {
     public class Comment
     {
-        private int ID { get; set; }
-        private User owner { get; set; }
-        private DateTime timeStamp { get; set; }
-        private string content { get; set; }
+        public Comment()
+        {
+            this.owner = new User();
+            this.content = "";
+            this.timeStamp = DateTime.MinValue;
+        }
+
+        private int iD;
+        public int ID
+        {
+            get
+            {
+                return iD;
+            }
+            set
+            {
+                iD = value;
+            }
+        }
+
+        private User owner;
+        public User Owner
+        {
+            get
+            {
+                return owner;
+            }
+            set
+            {
+                owner = value;
+            }
+        }
+
+        private DateTime timeStamp;
+        public DateTime TimeStamp
+        {
+            get
+            {
+                return timeStamp;
+            }
+            set
+            {
+                timeStamp = value;
+            }
+        }
+
+        private string content;
+        public string Content
+        {
+            get
+            {
+                return content;
+            }
+            set
+            {
+                content = value;
+            }
+        }
     }
 }
