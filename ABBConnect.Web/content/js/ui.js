@@ -1,6 +1,5 @@
 
 // Not the best solution cause every HTML element has ID of parent on itself, but its reliable one.
-
 function focusOnFeedCommentContainer(feedId)
 {
     $("#feed-post-comment-input-" + feedId.toString()).focus();
@@ -23,7 +22,16 @@ function hideFullFeedCommentContainer(feedId)
     $("#feed-post-comment-input-" + feedId.toString()).val('Write comment...');
 }
 
-function postFeedComment(feedId)
+function AjaxPostFeedComment(feedId)
 {
-    alert("AJAX POST CALL");
+    PageMethods.AjaxPostFeedComment(feedId, AjaxPostFeedCommentSuccess);
+}
+function AjaxPostFeedCommentSuccess(result, userContext, methodName)
+{
+    alert(result);
+}
+
+function initUI()
+{   
+    $('.dropdown-toggle').dropdown();
 }

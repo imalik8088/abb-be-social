@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Home.aspx.cs" Inherits="_Home" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
  
@@ -13,23 +13,27 @@
                     </div>
                     <div class="form-group button-group">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-warning">Action #1</button>
+                            <button type="button" class="btn btn-warning">Feed Selection</button>
                             <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
                                 <span class="caret"></span>
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Critical</a></li>
+                                <li><a href="#">Warning</a></li>
+                                <li class="divider"></li>                                
+                                <li><a href="#">All</a></li>
                             </ul>
                         </div>
                         <div class="btn-group">
-                            <button type="button" class="btn btn-danger">Action #2</button>
+                            <button type="button" class="btn btn-danger">Publish</button>
                             <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
                                 <span class="caret"></span>
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Note</a></li>
+                                <li><a href="#">Picture</a></li>
                             </ul>
                         </div>
                     </div>
@@ -148,7 +152,7 @@
                                 <div class="feed-single-comment-hr"></div>
                                 <div class="feed-post-comment-button-container">
                                     <button type="button" class="btn btn-primary btn-sm" onclick="hideFullFeedCommentContainer(997)">Cancel</button>
-                                    <button type="button" class="btn btn-primary btn-sm" onclick="postFeedComment(997)">Post</button>
+                                    <button type="button" class="btn btn-primary btn-sm" onclick="AjaxPostFeedComment(997)">Post</button>
                                 </div>
                             </div>
                         </div>
