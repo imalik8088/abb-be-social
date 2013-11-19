@@ -29,13 +29,14 @@
                                 <fieldset>
                                     <img src="content/img/abb_logo.png" class="sign-in-logo">
                                     <hr>
+                                    <asp:Label ID="LoginSuccedLabel" class="feed-name-danger" Visible="false" Text="Wrong username or password!" runat="server"/>
                                     <div class="input-group">
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                                        <input type="text" class="form-control" placeholder="Username" required="" autofocus="">
+                                        <input type="text" id="txtUsername" class="form-control" placeholder="Username" required="" autofocus="" runat="server">
                                     </div>
                                     <div class="input-group">
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                        <input type="password" class="form-control" placeholder="Password" required="">
+                                        <input type="password" id="txtPassword" class="form-control" placeholder="Password" required="" runat="server">
                                     </div>
                                     <div class="checkbox">
                                         <label>
@@ -43,7 +44,7 @@
                                             Remember Me
                                         </label>
                                     </div>
-                                    <input class="btn btn-lg btn-danger btn-block" type="submit" value="Login">
+                                    <asp:Button id="ButtonLogin" class="btn btn-lg btn-danger btn-block" Text="Login" OnClick="LoginButtonClick" runat="server"/>                                    
                                 </fieldset>
                             </form>
                         </div>
