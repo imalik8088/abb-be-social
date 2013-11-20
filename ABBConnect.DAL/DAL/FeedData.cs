@@ -190,15 +190,9 @@ namespace DAL
                 returnValue = Convert.ToBoolean(this.sqlCommand.ExecuteNonQuery());
                 int insertedFeedId = (int)this.sqlCommand.Parameters["@retFeedId"].Value;
 
-                this.sqlCommand.CommandText = "AddTagToFeed";
-                this.sqlCommand.CommandType = CommandType.StoredProcedure;
-
                 foreach (string taggedUser in tags)
                 {
-                    this.sqlCommand.Parameters.Clear();
-                    this.sqlCommand.Parameters.AddWithValue("@feedId", insertedFeedId);
-                    this.sqlCommand.Parameters.AddWithValue("@username", taggedUser);
-                    returnValue = Convert.ToBoolean(this.sqlCommand.ExecuteNonQuery());
+                    returnValue = this.IncludeTagFeed(insertedFeedId, taggedUser);
                 }
             }
             catch (Exception e)
@@ -209,6 +203,38 @@ namespace DAL
             {
                 this.sqlCommand.Parameters.Clear();
                 this.sqlConnection.Close();
+            }
+
+            return returnValue;
+        }
+
+        public bool IncludeTagFeed(int feedId, string userName)
+        {
+            bool returnValue = false;
+
+            try
+            {
+                this.sqlCommand.CommandText = "AddTagToFeed";
+                this.sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                this.sqlCommand.Parameters.Clear();
+                this.sqlCommand.Parameters.AddWithValue("@feedId", feedId);
+
+                SqlParameter user_Name = new SqlParameter("@username", SqlDbType.NVarChar, 50);
+                user_Name.Direction = ParameterDirection.Input;
+                user_Name.Value = userName == null ? "" : userName;
+                this.sqlCommand.Parameters.Add(user_Name);
+
+                returnValue = Convert.ToBoolean(this.sqlCommand.ExecuteNonQuery());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: " + e);
+            }
+            finally
+            {
+                this.sqlCommand.Parameters.Clear();
+                //this.sqlConnection.Close();
             }
 
             return returnValue;
