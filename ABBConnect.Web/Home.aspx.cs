@@ -13,6 +13,7 @@ public partial class _Home : System.Web.UI.Page
     public static string AjaxPostFeedComment(int feedId)
     {
         FeedManager fm = new FeedManager();
+
         List<Feed> last20Feeds = fm.LoadLatest20Feeds();
         return last20Feeds[0].Content.ToString() + "@" + DateTime.Now.ToLongTimeString();
     }
