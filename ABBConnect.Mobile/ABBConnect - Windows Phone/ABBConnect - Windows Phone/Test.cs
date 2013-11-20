@@ -7,7 +7,7 @@ namespace ABBConnect___Windows_Phone
 {
     class Test
     {
-        int ID, priority;
+        int ID, priority, test;
 
         public int Priority
         {
