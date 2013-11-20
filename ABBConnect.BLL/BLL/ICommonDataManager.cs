@@ -9,6 +9,6 @@ namespace BLL
     interface ICommonDataManager
     {
         List<string> GetLocations();
-        List<string> GetFeedCategories();
+        List<Category> GetFeedCategories();
     }
 }

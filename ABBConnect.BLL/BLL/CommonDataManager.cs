@@ -35,22 +35,55 @@ namespace BLL
             return locList;
         }
 
-        public List<string> GetFeedCategories()
+        public List<Category> GetFeedCategories()
         {
             DataTable categoryTable = commonDbData.GetPostGategories();
-            List<string> catList = new List<string>();
+            List<Category> catList = new List<Category>();
+            bool castRes = false;
+            int tempInt = -1;
 
             foreach (DataRow row in categoryTable.Rows)
             {
-                string category = row["Name"].ToString();
+                Category tempCat = new Category();
 
-                if (category == null)
-                    category = "";
+                castRes = CastStringToInt(row["Id"].ToString(), ref tempInt);
+                if (castRes)
+                    tempCat.Id = tempInt;
 
-                catList.Add(category);
+                string categoryName = row["Name"].ToString();
+
+                if (categoryName == null)
+                    categoryName = "";
+                else
+                    tempCat.CategoryName = categoryName;
+
+                if (!tempCat.CategoryName.Contains("Sensor"))
+                    catList.Add(tempCat);
+
             }
 
             return catList;
+        }
+
+        private static bool CastStringToInt(string str, ref int returnValue)
+        {
+            bool result = false;
+
+            try
+            {
+                returnValue = Convert.ToInt32(str);
+                result = true;
+            }
+            catch (FormatException e)
+            {
+                Console.WriteLine("Input string is not a sequence of digits.");
+            }
+            catch (OverflowException e)
+            {
+                Console.WriteLine("The number cannot fit in an Int32.");
+            }
+
+            return result;
         }
 
     }
