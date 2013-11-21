@@ -19,10 +19,13 @@ namespace BLL
 
         public Sensor LoadSensorInformation(int sensorID)
         {
-            DataTable infoTable = sensorDbData.GetSensorInformation(sensorID);
+            DataSet infoSet = sensorDbData.GetSensorInformation(sensorID);
             Sensor selectedSensor = new Sensor();
             int tempInt = 0;
             bool castRes = false;
+
+            DataTableCollection infoCollection = infoSet.Tables;
+            DataTable infoTable = infoCollection[0];
 
             foreach (DataRow row in infoTable.Rows)
             {
@@ -59,9 +62,9 @@ namespace BLL
 
         public SensorHistoryData LoadHistoryValuesBySensor(int sensorID, DateTime startingTime, DateTime endingTime)
         {
-            DataTable historyTable = new DataTable();
+            DataSet historySet = new DataSet();
 
-            historyTable = sensorDbData.RetrieveHistoricalSensorData(sensorID, startingTime, endingTime);
+            historySet = sensorDbData.RetrieveHistoricalSensorData(sensorID, startingTime, endingTime);
 
             SensorHistoryData senHistData = new SensorHistoryData();
             senHistData.Owner.ID = sensorID;
@@ -69,6 +72,9 @@ namespace BLL
             int tempInt = 0;
             bool castRes = false;
             SensorVTData senData = new SensorVTData();
+
+            DataTableCollection historyCollection = historySet.Tables;
+            DataTable historyTable = historyCollection[0];
 
             foreach (DataRow row in historyTable.Rows)
             {

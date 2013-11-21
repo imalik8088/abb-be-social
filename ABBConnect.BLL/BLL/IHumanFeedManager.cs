@@ -8,7 +8,7 @@ namespace BLL
 {
     interface IHumanFeedManager
     {
-        List<Feed> LoadAllHumanFeeds();
-        List<Feed> LoadAllHumanFeedsByFilter(string location, DateTime startingTime, DateTime endingTime);
+        List<HumanFeed> LoadAllHumanFeeds();
+        List<HumanFeed> LoadAllHumanFeedsByFilter(string location, DateTime startingTime, DateTime endingTime);
     }
 }

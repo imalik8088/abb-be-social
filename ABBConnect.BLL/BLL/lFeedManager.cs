@@ -11,7 +11,7 @@ namespace BLL
         List<Feed> LoadNewFeeds();
         bool PublishFeed(HumanFeed feed);
         bool PublishComment(int feedID, Comment comment);
-        bool AddTagToFeed(int feedId, Human user);
+        bool AddTagToFeed(int feedId, string username);
         List<Human> LoadFeedTags(int feedId);
         List<Comment> LoadFeedComments(int feedId);
         List<Feed> LoadLatestXFeeds(int numberOfFeeds);

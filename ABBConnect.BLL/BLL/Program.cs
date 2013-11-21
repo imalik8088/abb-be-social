@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Transformation_Layer;
 
 namespace BLL
 {
@@ -11,10 +12,10 @@ namespace BLL
         static void Main(string[] args)
         {
             HumanManager um = new HumanManager();
-            Human u = um.LoadUserInformation(1);
+            Human u = um.LoadHumanInformation(1);
             Console.WriteLine(u.FirstName);
             //Console.WriteLine(um.Login("simpm","password"));
-            HumanFeedManager ufm = new HumanFeedManager();
+            //HumanFeedManager ufm = new HumanFeedManager();
             //SensorManager sm = new SensorManager();
             //Console.WriteLine(sm.LoadSensorInformation(1001).LowerBoundary);
 
@@ -57,7 +58,7 @@ namespace BLL
             //FeedManager fm = new FeedManager();
             //List<Feed> lsfeed = fm.LoadLatest20Feeds();
 
-            List<HumanFeed> lsfeed = ufm.LoadUserFeedsByFilter("rgn09003" , "ControlRoom 1B", DateTime.MinValue, DateTime.MinValue);
+            //List<HumanFeed> lsfeed = ufm.LoadUserFeedsByFilter("rgn09003" , "ControlRoom 1B", DateTime.MinValue, DateTime.MinValue);
 
             //foreach (Feed f in lsfeed)
             //{

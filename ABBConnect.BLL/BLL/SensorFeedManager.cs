@@ -19,11 +19,14 @@ namespace BLL
 
         public List<SensorFeed> GetAllSensorFeeds()
         {
-            DataSet senFeedTable = senFeedDbData.GetAllSensorFeeds();
+            DataSet senFeedSet = senFeedDbData.GetAllSensorFeeds();
             List<SensorFeed> lsSenFeed = new List<SensorFeed>();
             SensorFeed senFeed = new SensorFeed();
             int tempInt = 0;
             bool castRes = false;
+
+            DataTableCollection senFeedCollection = senFeedSet.Tables;
+            DataTable senFeedTable = senFeedCollection[0];
 
             foreach (DataRow row in senFeedTable.Rows)
             {
@@ -94,158 +97,14 @@ namespace BLL
             if (String.IsNullOrEmpty(location))
                 location = null;
 
-            DataSet senFeedTable = senFeedDbData.GetAllSensorFeedsByFilter(location, startingTime, endingTime);
+            DataSet senFeedSet = senFeedDbData.GetAllSensorFeedsByFilter(location, startingTime, endingTime);
             List<SensorFeed> lsSenFeed = new List<SensorFeed>();
             SensorFeed senFeed = new SensorFeed();
             int tempInt = 0;
             bool castRes = false;
 
-            foreach (DataRow row in senFeedTable.Rows)
-            {
-                StringBuilder tempContainer = new StringBuilder();
-                tempContainer.Append(row["Location"].ToString());
-
-                if (tempContainer.ToString() == null)
-                    senFeed.Location = "";
-                else
-                    senFeed.Location = tempContainer.ToString();
-
-                tempContainer.Clear();
-                tempContainer.Append(row["Text"].ToString());
-
-                if (tempContainer.ToString() == null)
-                    senFeed.Content = "";
-                else
-                    senFeed.Content = tempContainer.ToString();
-
-                tempContainer.Clear();
-                tempContainer.Append(row["CreationTimeStamp"].ToString());
-
-                if (tempContainer.ToString() == null)
-                    senFeed.TimeStamp = DateTime.MinValue;
-                else
-                    senFeed.TimeStamp = Convert.ToDateTime(tempContainer.ToString());
-
-                tempContainer.Clear();
-                tempContainer.Append(row["SensorName"].ToString());
-
-                if (tempContainer.ToString() == null)
-                    senFeed.Owner.Name = "";
-                else
-                    senFeed.Owner.Name = tempContainer.ToString();
-
-                tempContainer.Clear();
-                tempContainer.Append(row["Id"].ToString());
-
-                castRes = CastStringToInt(tempContainer.ToString(), ref tempInt);
-                if (castRes)
-                    senFeed.Owner.ID = tempInt;
-
-                tempContainer.Clear();
-                tempContainer.Append(row["PrioValue"].ToString());
-
-                castRes = CastStringToInt(tempContainer.ToString(), ref tempInt);
-                if (castRes)
-                    senFeed.Priority = tempInt;
-
-                tempContainer.Clear();
-                tempContainer.Append(row["PrioCategory"].ToString());
-
-                if (tempContainer.ToString() == null)
-                    senFeed.Category = "";
-                else
-                    senFeed.Category = tempContainer.ToString();
-
-                tempContainer.Clear();
-                lsSenFeed.Add(senFeed);
-                senFeed = new SensorFeed();
-            }
-
-            return lsSenFeed;
-        }
-
-        public List<SensorFeed> GetSensorFeeds(int sensorId)
-        {
-            DataTable senFeedTable = senFeedDbData.GetSensorFeeds(sensorId);
-            List<SensorFeed> lsSenFeed = new List<SensorFeed>();
-            SensorFeed senFeed = new SensorFeed();
-            int tempInt = 0;
-            bool castRes = false;
-
-            foreach (DataRow row in senFeedTable.Rows)
-            {
-                StringBuilder tempContainer = new StringBuilder();
-                tempContainer.Append(row["Location"].ToString());
-
-                if (tempContainer.ToString() == null)
-                    senFeed.Location = "";
-                else
-                    senFeed.Location = tempContainer.ToString();
-
-                tempContainer.Clear();
-                tempContainer.Append(row["Text"].ToString());
-
-                if (tempContainer.ToString() == null)
-                    senFeed.Content = "";
-                else
-                    senFeed.Content = tempContainer.ToString();
-
-                tempContainer.Clear();
-                tempContainer.Append(row["CreationTimeStamp"].ToString());
-
-                if (tempContainer.ToString() == null)
-                    senFeed.TimeStamp = DateTime.MinValue;
-                else
-                    senFeed.TimeStamp = Convert.ToDateTime(tempContainer.ToString());
-
-                tempContainer.Clear();
-                tempContainer.Append(row["SensorName"].ToString());
-
-                if (tempContainer.ToString() == null)
-                    senFeed.Owner.Name = "";
-                else
-                    senFeed.Owner.Name = tempContainer.ToString();
-
-                tempContainer.Clear();
-                tempContainer.Append(row["Id"].ToString());
-
-                castRes = CastStringToInt(tempContainer.ToString(), ref tempInt);
-                if (castRes)
-                    senFeed.Owner.ID = tempInt;
-
-                tempContainer.Clear();
-                tempContainer.Append(row["PrioValue"].ToString());
-
-                castRes = CastStringToInt(tempContainer.ToString(), ref tempInt);
-                if (castRes)
-                    senFeed.Priority = tempInt;
-
-                tempContainer.Clear();
-                tempContainer.Append(row["PrioCategory"].ToString());
-
-                if (tempContainer.ToString() == null)
-                    senFeed.Category = "";
-                else
-                    senFeed.Category = tempContainer.ToString();
-
-                tempContainer.Clear();
-                lsSenFeed.Add(senFeed);
-                senFeed = new SensorFeed();
-            }
-
-            return lsSenFeed;
-        }
-
-        public List<SensorFeed> GetSensorFeedsByFilter(int sensorId, string location, DateTime startingTime, DateTime endingTime)
-        {
-            if (String.IsNullOrEmpty(location))
-                location = null;
-
-            DataTable senFeedTable = senFeedDbData.GetSensorFeedsByFilter(sensorId, location, startingTime, endingTime);
-            List<SensorFeed> lsSenFeed = new List<SensorFeed>();
-            SensorFeed senFeed = new SensorFeed();
-            int tempInt = 0;
-            bool castRes = false;
+            DataTableCollection senFeedCollection = senFeedSet.Tables;
+            DataTable senFeedTable = senFeedCollection[0];
 
             foreach (DataRow row in senFeedTable.Rows)
             {

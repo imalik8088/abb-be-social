@@ -19,11 +19,13 @@ namespace BLL
 
         public List<Feed> LoadNewFeeds()
         {
-            DataTable newFeedsTable = postDbData.GetLatestFeeds();
+            DataSet newFeedsSet = postDbData.GetLatestFeeds();
             List<Feed> lsFeed = new List<Feed>();
             HumanFeed usFeed;
             SensorFeed senFeed;
             int tempInt = 0;
+
+            DataTable newFeedsTable = newFeedsSet.Tables[0];
 
             foreach (DataRow row in newFeedsTable.Rows)
             {
@@ -116,11 +118,13 @@ namespace BLL
 
         public List<Feed> LoadLatestXFeeds(int feedNum)
         {
-            DataTable newFeedsTable = postDbData.GetLatestXFeeds(feedNum);
+            DataSet newFeedsSet = postDbData.GetLatestXFeeds(feedNum);
             List<Feed> lsFeed = new List<Feed>();
             HumanFeed usFeed;
             SensorFeed senFeed;
             int tempInt = 0;
+
+            DataTable newFeedsTable = newFeedsSet.Tables[0];
 
             foreach (DataRow row in newFeedsTable.Rows)
             {
@@ -216,11 +220,13 @@ namespace BLL
             if (String.IsNullOrEmpty(location))
                 location = null;
 
-            DataTable newFeedsTable = postDbData.GetLatestFeedByFilter(location, startingTime, endingTime);
+            DataSet newFeedsSet = postDbData.GetLatestFeedByFilter(location, startingTime, endingTime);
             List<Feed> lsFeed = new List<Feed>();
             HumanFeed usFeed;
             SensorFeed senFeed;
             int tempInt = 0;
+
+            DataTable newFeedsTable = newFeedsSet.Tables[0];
 
             foreach (DataRow row in newFeedsTable.Rows)
             {
@@ -328,7 +334,7 @@ namespace BLL
                 foreach (Human u in feed.Tags)
                     taggedUsers.Add(u.UserName);
 
-                return this.postDbData.PublishFeed(feed.Owner.UserName, taggedUsers, feed.Location,
+                return this.postDbData.PublishFeed(feed.Owner.ID, taggedUsers, feed.Location,
                     feed.Content, feed.Category, feed.MediaFilePath, feed.ID);
             }
         }
@@ -357,10 +363,12 @@ namespace BLL
 
         public List<Comment> LoadFeedComments(int feedId)
         {
-            DataTable commentsTable = postDbData.GetFeedComments(feedId);
+            DataSet commentsSet = postDbData.GetFeedComments(feedId);
 
             List<Comment> lsComments = new List<Comment>();
             Comment tempComment = new Comment();
+
+            DataTable commentsTable = commentsSet.Tables[0];
 
             foreach (DataRow row in commentsTable.Rows)
             {
@@ -394,10 +402,12 @@ namespace BLL
 
         public List<Human> LoadFeedTags(int feedId)
         {
-            DataTable tagsTable = postDbData.GetFeedTags(feedId);
+            DataSet tagsSet = postDbData.GetFeedTags(feedId);
 
             List<Human> lsUsers = new List<Human>();
             Human tempUser = new Human();
+
+            DataTable tagsTable = tagsSet.Tables[0];
 
             foreach (DataRow row in tagsTable.Rows)
             {
@@ -450,6 +460,12 @@ namespace BLL
             }
 
             return result;
+        }
+
+
+        public List<Feed> LoadFeedsByFilter(string username, string location, DateTime startingTime, DateTime endingTime, string feedType)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -25,7 +25,7 @@ namespace BLL
                 return false;
         }
 
-        public Human LoadUserInformation(int humanId)
+        public Human LoadHumanInformation(int humanId)
         {
             DataSet infoSet = userDbData.GetHumanInformation(humanId);
             Human selectedUser = new Human();
@@ -84,17 +84,6 @@ namespace BLL
             }
 
             return selectedUser;
-        }
-
-        public bool UpdateUserInformation(Human user)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        public Human LoadHumanInformation(int humandId)
-        {
-            throw new NotImplementedException();
         }
     }
 }
