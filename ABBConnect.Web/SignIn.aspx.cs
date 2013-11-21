@@ -15,10 +15,12 @@ public partial class SignIn : System.Web.UI.Page
         string userName = txtUsername.Value;
         string password = txtPassword.Value;
 
-        //human = hm.LoadUserInformation(userName);
+        // Just to try, waitting for the right function
+        human = hm.LoadHumanInformation(1);
 
         if (hm.Login(userName, password))
         {
+            Session["humanID"] = human.ID;
             Response.Redirect("Home.aspx");
         }
         else

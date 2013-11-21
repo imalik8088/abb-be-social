@@ -66,6 +66,11 @@
                             <span class="text-label">ABB Connect </span>
                         </a>
                     </li>
+                      <li>
+                        <a href="login.html" data-original-title="">
+                            <asp:Label ID="labelHuman" class="text-label" runat="server"></asp:Label>
+                        </a>
+                    </li>
                      <li>
                         <a href="login.html" data-original-title="">
                              <span class="glyphicon glyphicon-lock"></span>
