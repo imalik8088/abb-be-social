@@ -12,7 +12,10 @@ public partial class MasterPage : System.Web.UI.MasterPage
     {
         HumanManager hm = new HumanManager();
         Human human = new Human();
-        human = hm.LoadHumanInformation((int)Session["humanID"]);
-        labelHuman.Text = human.FirstName + " " + human.LastName;
+        if (Session["humanID"] != null)
+        {
+            human = hm.LoadHumanInformation((int)Session["humanID"]);
+            labelHuman.Text = human.FirstName + " " + human.LastName;
+        }
     }
 }
