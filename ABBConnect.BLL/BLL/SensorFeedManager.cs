@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL;
+using Transformation_Layer;
 using System.Data;
 
 namespace BLL
@@ -19,7 +19,7 @@ namespace BLL
 
         public List<SensorFeed> GetAllSensorFeeds()
         {
-            DataTable senFeedTable = senFeedDbData.GetAllSensorFeeds();
+            DataSet senFeedTable = senFeedDbData.GetAllSensorFeeds();
             List<SensorFeed> lsSenFeed = new List<SensorFeed>();
             SensorFeed senFeed = new SensorFeed();
             int tempInt = 0;
@@ -94,7 +94,7 @@ namespace BLL
             if (String.IsNullOrEmpty(location))
                 location = null;
 
-            DataTable senFeedTable = senFeedDbData.GetAllSensorFeedsByFilter(location, startingTime, endingTime);
+            DataSet senFeedTable = senFeedDbData.GetAllSensorFeedsByFilter(location, startingTime, endingTime);
             List<SensorFeed> lsSenFeed = new List<SensorFeed>();
             SensorFeed senFeed = new SensorFeed();
             int tempInt = 0;

@@ -27,12 +27,16 @@ namespace BLL
 
         public Human LoadUserInformation(int humanId)
         {
-            DataSet infoTable = userDbData.GetHumanInformation(humanId);
+            DataSet infoSet = userDbData.GetHumanInformation(humanId);
             Human selectedUser = new Human();
+
+            DataTableCollection infoCollection = infoSet.Tables;
+
+            DataTable infoTable = infoCollection[0];
 
             foreach (DataRow row in infoTable.Rows)
             {
-                string tempString = row["UserName"].ToString();
+                string tempString = row["Name"].ToString();
                 
                 if (tempString == null)
                     selectedUser.UserName = "";
@@ -83,6 +87,12 @@ namespace BLL
         }
 
         public bool UpdateUserInformation(Human user)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public Human LoadHumanInformation(int humandId)
         {
             throw new NotImplementedException();
         }

@@ -9,12 +9,14 @@ namespace BLL
     interface IFeedManager
     {
         List<Feed> LoadNewFeeds();
-        List<Feed> LoadHistoryFeedsBySensor(int sensorID);
-        bool PublishFeed(UserFeed feed);
-        void PublishComment(int feedID, Comment comment);
-        List<User> LoadFeedTags(int feedId);
+        bool PublishFeed(HumanFeed feed);
+        bool PublishComment(int feedID, Comment comment);
+        bool AddTagToFeed(int feedId, Human user);
+        List<Human> LoadFeedTags(int feedId);
         List<Comment> LoadFeedComments(int feedId);
-        List<Feed> LoadLatest10Feeds();
-        List<Feed> LoadLatest20Feeds();
+        List<Feed> LoadLatestXFeeds(int numberOfFeeds);
+        List<Feed> LoadFeedsByFilter(string username, string location, DateTime startingTime, DateTime endingTime, string feedType);
+        List<Feed> LoadNewFeedsByFilter(string location, DateTime startingTime, DateTime endingTime);
+
     }
 }

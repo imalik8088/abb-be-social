@@ -11,7 +11,7 @@ namespace BLL
         public Feed()
         {
             this.comments = new List<Comment>();
-            this.tags = new List<User>();
+            this.tags = new List<Human>();
             this.timeStamp = DateTime.MinValue;
             this.location = "";
             this.content = "";
@@ -44,8 +44,8 @@ namespace BLL
             }
         }
 
-        private List<User> tags;
-        public List<User> Tags
+        private List<Human> tags;
+        public List<Human> Tags
         {
             get
             {

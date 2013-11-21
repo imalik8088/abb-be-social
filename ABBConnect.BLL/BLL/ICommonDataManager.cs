@@ -10,5 +10,7 @@ namespace BLL
     {
         List<string> GetLocations();
         List<Category> GetFeedCategories();
+        List<Feed> GetUserFeedByFilter(int userId, string location, DateTime startingTime, DateTime endingTime);
+        List<Feed> GetUserFeeds(int userId);
     }
 }

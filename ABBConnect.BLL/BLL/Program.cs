@@ -10,11 +10,11 @@ namespace BLL
     {
         static void Main(string[] args)
         {
-            //UserManager um = new UserManager();
-            //User u = um.LoadUserInformation("simpm");
-            //Console.WriteLine(u.FirstName);
+            HumanManager um = new HumanManager();
+            Human u = um.LoadUserInformation(1);
+            Console.WriteLine(u.FirstName);
             //Console.WriteLine(um.Login("simpm","password"));
-            UserFeedManager ufm = new UserFeedManager();
+            HumanFeedManager ufm = new HumanFeedManager();
             //SensorManager sm = new SensorManager();
             //Console.WriteLine(sm.LoadSensorInformation(1001).LowerBoundary);
 
@@ -57,23 +57,23 @@ namespace BLL
             //FeedManager fm = new FeedManager();
             //List<Feed> lsfeed = fm.LoadLatest20Feeds();
 
-            List<UserFeed> lsfeed = ufm.LoadUserFeedsByFilter("rgn09003" , "ControlRoom 1B", DateTime.MinValue, DateTime.MinValue);
+            List<HumanFeed> lsfeed = ufm.LoadUserFeedsByFilter("rgn09003" , "ControlRoom 1B", DateTime.MinValue, DateTime.MinValue);
 
-            foreach (Feed f in lsfeed)
-            {
-                Console.WriteLine(f.Content);
+            //foreach (Feed f in lsfeed)
+            //{
+            //    Console.WriteLine(f.Content);
 
-                if(f.Tags.Count>0)
-                    foreach (User u in f.Tags)
-                    {
-                        Console.WriteLine(u.UserName);
-                    }
+            //    if(f.Tags.Count>0)
+            //        foreach (Human u in f.Tags)
+            //        {
+            //            Console.WriteLine(u.UserName);
+            //        }
 
-                foreach (Comment u in f.Comments)
-                {
-                    Console.WriteLine(u.Content);
-                }
-            }
+            //    foreach (Comment u in f.Comments)
+            //    {
+            //        Console.WriteLine(u.Content);
+            //    }
+            //}
 
             Console.ReadKey();
         }
