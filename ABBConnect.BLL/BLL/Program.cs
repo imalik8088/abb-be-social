@@ -15,7 +15,7 @@ namespace BLL
             Human u = um.LoadHumanInformation(1);
             //Console.WriteLine(u.FirstName);
             //Console.WriteLine(um.Login("rgn09003","password"));
-            //HumanFeedManager ufm = new HumanFeedManager();
+            HumanFeedManager ufm = new HumanFeedManager();
             //SensorManager sm = new SensorManager();
             //Console.WriteLine(sm.LoadSensorInformation(1001).LowerBoundary);
 
@@ -46,16 +46,16 @@ namespace BLL
 
             FeedManager sfm = new FeedManager();
             HumanFeed hf = new HumanFeed();
-            hf.Owner.ID = 3;
-            hf.Location = "ControlRoom 1B";
-            hf.Content = "BLL speaking";
-            hf.Category = "WorkPost";
-            hf.MediaFilePath = "";
-            hf.Priority = 3;
-            Human h = new Human();
-            h.UserName = "dpa12001";
-            hf.Tags.Add(h);
-            sfm.PublishFeed(hf);
+            //hf.Owner.ID = 3;
+            //hf.Location = "ControlRoom 1B";
+            //hf.Content = "BLL speaking";
+            //hf.Category = "WorkPost";
+            //hf.MediaFilePath = "";
+            //hf.Priority = 3;
+            //Human h = new Human();
+            //h.UserName = "dpa12001";
+            //hf.Tags.Add(h);
+            //sfm.PublishFeed(hf);
             List<Feed> lsf = new List<Feed>();
             lsf = sfm.LoadLatestXFeeds(5);
             //lsf = sfm.GetSensorFeeds(1002);
@@ -73,23 +73,23 @@ namespace BLL
             //FeedManager fm = new FeedManager();
             //List<Feed> lsfeed = fm.LoadLatest20Feeds();
 
-            //List<HumanFeed> lsfeed = ufm.LoadUserFeedsByFilter("rgn09003" , "ControlRoom 1B", DateTime.MinValue, DateTime.MinValue);
+            List<HumanFeed> lsfeed = ufm.LoadAllHumanFeeds();
 
-            //foreach (Feed f in lsfeed)
-            //{
-            //    Console.WriteLine(f.Content);
+            foreach (Feed f in lsfeed)
+            {
+                Console.WriteLine(f.Content);
 
-            //    if(f.Tags.Count>0)
-            //        foreach (Human u in f.Tags)
-            //        {
-            //            Console.WriteLine(u.UserName);
-            //        }
+                if (f.Tags.Count > 0)
+                    foreach (Human h in f.Tags)
+                    {
+                        Console.WriteLine(h.UserName);
+                    }
 
-            //    foreach (Comment u in f.Comments)
-            //    {
-            //        Console.WriteLine(u.Content);
-            //    }
-            //}
+                foreach (Comment c in f.Comments)
+                {
+                    Console.WriteLine(c.Content);
+                }
+            }
 
             Console.ReadKey();
         }

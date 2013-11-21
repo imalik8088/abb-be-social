@@ -448,6 +448,7 @@ namespace BLL
         {
             DataSet tagsSet = postDbData.GetFeedTags(feedId);
 
+            int tempInt = 0;
             List<Human> lsUsers = new List<Human>();
             Human tempUser = new Human();
 
@@ -466,6 +467,12 @@ namespace BLL
 
                 tempContainer.Append(AvoidStringNulls(row["UserName"].ToString()));
                 tempUser.UserName = tempContainer.ToString();
+                tempContainer.Clear();
+
+                tempContainer.Append(AvoidStringNulls(row["UserId"].ToString()));
+
+                if (CastStringToInt(tempContainer.ToString(), ref tempInt))
+                    tempUser.ID = tempInt;
                 tempContainer.Clear();
 
                 lsUsers.Add(tempUser);
