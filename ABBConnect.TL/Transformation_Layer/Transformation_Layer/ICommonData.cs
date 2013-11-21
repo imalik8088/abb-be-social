@@ -11,7 +11,5 @@ namespace Transformation_Layer
     {
         DataSet GetAllLocations();
         DataSet GetPostGategories();
-        DataSet GetUserFeeds(int userId);
-        DataSet GetUserFeedsByFilter(int userId, string location, DateTime startingTime, DateTime endingTime);
     }
 }

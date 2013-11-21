@@ -18,5 +18,7 @@ namespace Transformation_Layer
         bool PublishFeed(int userId, List<string> tags, string location, string content, string category, string filePath, int priorityID);
         DataSet GetLatestFeedByFilter(string location, DateTime startingTime, DateTime endingTime);
         DataSet GetLatestFeeds();
+        DataSet GetUserFeeds(int userId);
+        DataSet GetUserFeedsByFilter(int userId, string location, DateTime startingTime, DateTime endingTime);
     }
 }
