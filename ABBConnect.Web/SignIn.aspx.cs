@@ -10,14 +10,14 @@ public partial class SignIn : System.Web.UI.Page
 {
     public void LoginButtonClick(Object sender, EventArgs e)
     {
-        UserManager um = new UserManager();
-        User user = new User();
+        HumanManager hm = new HumanManager();
+        Human human = new Human();
         string userName = txtUsername.Value;
         string password = txtPassword.Value;
 
-        user = um.LoadUserInformation(userName);
+        //human = hm.LoadUserInformation(userName);
 
-        if (um.Login(userName, password))
+        if (hm.Login(userName, password))
         {
             Response.Redirect("Home.aspx");
         }
