@@ -7,7 +7,7 @@ using System.Data;
 
 namespace Transformation_Layer
 {
-    class HumanFeedData: IHumanFeedData
+    public class HumanFeedData: IHumanFeedData
     {
         public DataSet GetAllHumanFeeds()
         {

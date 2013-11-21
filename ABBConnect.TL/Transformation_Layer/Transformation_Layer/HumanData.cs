@@ -7,7 +7,7 @@ using System.Data;
 
 namespace Transformation_Layer
 {
-    class HumanData: IHumanData
+    public class HumanData: IHumanData
     {
 
         public bool CheckCredentials(string username, string password)
