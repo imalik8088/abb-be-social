@@ -53,7 +53,7 @@ namespace BLL
                     selectedSensor.UpperBoundary = tempDec;
                 }
 
-                selectedSensor.Location = "";
+                //selectedSensor.Location = "";
 
             }
 
