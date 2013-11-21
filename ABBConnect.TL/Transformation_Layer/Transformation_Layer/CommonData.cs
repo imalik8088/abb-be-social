@@ -7,7 +7,7 @@ using System.Data;
 
 namespace Transformation_Layer
 {
-    class CommonData: ICommonData
+    public class CommonData: ICommonData
     {
 
         public DataSet GetAllLocations()

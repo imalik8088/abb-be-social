@@ -7,7 +7,7 @@ using System.Data;
 
 namespace Transformation_Layer
 {
-    class SensorData: ISensorData
+    public class SensorData: ISensorData
     {
         public int RetrieveCurrentSensorData(int sensorID)
         {

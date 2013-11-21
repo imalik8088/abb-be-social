@@ -7,7 +7,7 @@ using System.Data;
 
 namespace Transformation_Layer
 {
-    class SensorFeedData: ISensorFeedData
+    public class SensorFeedData: ISensorFeedData
     {
         public DataSet GetAllSensorFeeds()
         {

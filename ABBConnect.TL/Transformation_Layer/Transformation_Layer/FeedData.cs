@@ -7,7 +7,7 @@ using System.Data;
 
 namespace Transformation_Layer
 {
-    class FeedData: IFeedData
+    public class FeedData: IFeedData
     {
         public DataSet GetLatestXFeeds(int numberOfFeeds)
         {
