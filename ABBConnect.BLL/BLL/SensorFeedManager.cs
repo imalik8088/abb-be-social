@@ -74,7 +74,12 @@ namespace BLL
 
                 castRes = CastStringToInt(tempContainer.ToString(), ref tempInt);
                 if (castRes)
+                {
+                    FeedManager tempFeedMng = new FeedManager();
                     senFeed.ID = tempInt;
+                    senFeed.Tags = tempFeedMng.LoadFeedTags(tempInt);
+                    senFeed.Comments = tempFeedMng.LoadFeedComments(tempInt);
+                }
 
                 tempContainer.Clear();
                 tempContainer.Append(row["PrioValue"].ToString());
@@ -166,7 +171,12 @@ namespace BLL
 
                 castRes = CastStringToInt(tempContainer.ToString(), ref tempInt);
                 if (castRes)
+                {
+                    FeedManager tempFeedMng = new FeedManager();
                     senFeed.ID = tempInt;
+                    senFeed.Tags = tempFeedMng.LoadFeedTags(tempInt);
+                    senFeed.Comments = tempFeedMng.LoadFeedComments(tempInt);
+                }
 
                 tempContainer.Clear();
                 tempContainer.Append(row["PrioCategory"].ToString());
