@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL;
+using Transformation_Layer;
 using System.Data;
 
 namespace BLL
@@ -19,21 +19,23 @@ namespace BLL
 
         public List<Feed> LoadNewFeeds()
         {
-            DataTable newFeedsTable = postDbData.GetLatestFeeds();
+            DataSet newFeedsSet = postDbData.GetLatestFeeds();
             List<Feed> lsFeed = new List<Feed>();
-            UserFeed usFeed;
+            HumanFeed usFeed;
             SensorFeed senFeed;
             int tempInt = 0;
+
+            DataTable newFeedsTable = newFeedsSet.Tables[0];
 
             foreach (DataRow row in newFeedsTable.Rows)
             {
                 StringBuilder tempContainer = new StringBuilder();
-                tempContainer.Append(AvoidStringNulls(row["FeedType"].ToString()));
+                tempContainer.Append(AvoidStringNulls(row["Type"].ToString()));
 
                 if (tempContainer.ToString().Equals("Human"))
                 {
                     tempContainer.Clear();
-                    usFeed = new UserFeed();
+                    usFeed = new HumanFeed();
 
                     tempContainer.Append(AvoidStringNulls(row["PrioValue"].ToString()));
 
@@ -41,23 +43,21 @@ namespace BLL
                         usFeed.Priority = tempInt;
                     tempContainer.Clear();
 
+                    tempContainer.Append(AvoidStringNulls(row["UserId"].ToString()));
+
+                    if (CastStringToInt(tempContainer.ToString(), ref tempInt))
+                        usFeed.Owner.ID = tempInt;
+                    tempContainer.Clear();
+
                     tempContainer.Append(AvoidStringNulls(row["PrioCategory"].ToString()));
                     usFeed.Category = tempContainer.ToString();
                     tempContainer.Clear();
 
-                    tempContainer.Append(AvoidStringNulls(row["FirstName"].ToString()));
-                    usFeed.Owner.FirstName = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["LastName"].ToString()));
-                    usFeed.Owner.LastName = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Name"].ToString()));
+                    tempContainer.Append(AvoidStringNulls(row["Username"].ToString()));
                     usFeed.Owner.UserName = tempContainer.ToString();
                     tempContainer.Clear();
 
-                    tempContainer.Append(AvoidStringNulls(row["Content"].ToString()));
+                    tempContainer.Append(AvoidStringNulls(row["Text"].ToString()));
                     usFeed.Content = tempContainer.ToString();
                     tempContainer.Clear();
 
@@ -65,14 +65,19 @@ namespace BLL
                     usFeed.MediaFilePath = tempContainer.ToString();
                     tempContainer.Clear();
 
+                    tempContainer.Append(AvoidStringNulls(row["CreationTimeStamp"].ToString()));
+                    usFeed.TimeStamp = Convert.ToDateTime(tempContainer.ToString());
+                    tempContainer.Clear();
+
                     tempContainer.Append(AvoidStringNulls(row["Location"].ToString()));
                     usFeed.Location = tempContainer.ToString();
                     tempContainer.Clear();
 
-                    tempContainer.Append(AvoidStringNulls(row["FeedId"].ToString()));
+                    tempContainer.Append(AvoidStringNulls(row["FeedId"].ToString()));                        
 
                     if (CastStringToInt(tempContainer.ToString(), ref tempInt))
                     {
+                        usFeed.ID = tempInt;
                         usFeed.Tags = LoadFeedTags(tempInt);
                         usFeed.Comments = LoadFeedComments(tempInt);
                     }
@@ -95,11 +100,11 @@ namespace BLL
                     senFeed.Category = tempContainer.ToString();
                     tempContainer.Clear();
 
-                    tempContainer.Append(AvoidStringNulls(row["Name"].ToString()));
+                    tempContainer.Append(AvoidStringNulls(row["Username"].ToString()));
                     senFeed.Owner.Name = tempContainer.ToString();
                     tempContainer.Clear();
 
-                    tempContainer.Append(AvoidStringNulls(row["Content"].ToString()));
+                    tempContainer.Append(AvoidStringNulls(row["Text"].ToString()));
                     senFeed.Content = tempContainer.ToString();
                     tempContainer.Clear();
 
@@ -107,198 +112,23 @@ namespace BLL
                     senFeed.Location = tempContainer.ToString();
                     tempContainer.Clear();
 
-                    lsFeed.Add(senFeed);
-                }
-            }
-
-            return lsFeed;
-        }
-
-        public List<Feed> LoadLatest10Feeds()
-        {
-            DataTable newFeedsTable = postDbData.GetLatest10Feeds();
-            List<Feed> lsFeed = new List<Feed>();
-            UserFeed usFeed;
-            SensorFeed senFeed;
-            int tempInt = 0;
-
-            foreach (DataRow row in newFeedsTable.Rows)
-            {
-                StringBuilder tempContainer = new StringBuilder();
-                tempContainer.Append(AvoidStringNulls(row["FeedType"].ToString()));
-
-                if (tempContainer.ToString().Equals("Human"))
-                {
-                    tempContainer.Clear();
-                    usFeed = new UserFeed();
-
-                    tempContainer.Append(AvoidStringNulls(row["PrioValue"].ToString()));
-
+                    tempContainer.Append(AvoidStringNulls(row["UserId"].ToString()));
                     if (CastStringToInt(tempContainer.ToString(), ref tempInt))
-                        usFeed.Priority = tempInt;
+                        senFeed.Owner.ID = tempInt;
                     tempContainer.Clear();
 
-                    tempContainer.Append(AvoidStringNulls(row["PrioCategory"].ToString()));
-                    usFeed.Category = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["FirstName"].ToString()));
-                    usFeed.Owner.FirstName = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["LastName"].ToString()));
-                    usFeed.Owner.LastName = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Name"].ToString()));
-                    usFeed.Owner.UserName = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Content"].ToString()));
-                    usFeed.Content = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["FilePath"].ToString()));
-                    usFeed.MediaFilePath = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Location"].ToString()));
-                    usFeed.Location = tempContainer.ToString();
+                    tempContainer.Append(AvoidStringNulls(row["CreationTimeStamp"].ToString()));
+                    senFeed.TimeStamp = Convert.ToDateTime(tempContainer.ToString());
                     tempContainer.Clear();
 
                     tempContainer.Append(AvoidStringNulls(row["FeedId"].ToString()));
 
                     if (CastStringToInt(tempContainer.ToString(), ref tempInt))
                     {
-                        usFeed.Tags = LoadFeedTags(tempInt);
-                        usFeed.Comments = LoadFeedComments(tempInt);
+                        senFeed.ID = tempInt;
+                        senFeed.Tags = LoadFeedTags(tempInt);
+                        senFeed.Comments = LoadFeedComments(tempInt);
                     }
-                    tempContainer.Clear();
-
-                    lsFeed.Add(usFeed);
-                }
-                else
-                {
-                    tempContainer.Clear();
-                    senFeed = new SensorFeed();
-
-                    tempContainer.Append(AvoidStringNulls(row["PrioValue"].ToString()));
-
-                    if (CastStringToInt(tempContainer.ToString(), ref tempInt))
-                        senFeed.Priority = tempInt;
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["PrioCategory"].ToString()));
-                    senFeed.Category = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Name"].ToString()));
-                    senFeed.Owner.Name = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Content"].ToString()));
-                    senFeed.Content = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Location"].ToString()));
-                    senFeed.Location = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    lsFeed.Add(senFeed);
-                }
-            }
-
-            return lsFeed;
-        }
-
-        public List<Feed> LoadLatest20Feeds()
-        {
-            DataTable newFeedsTable = postDbData.GetLatest20Feeds();
-            List<Feed> lsFeed = new List<Feed>();
-            UserFeed usFeed;
-            SensorFeed senFeed;
-            int tempInt = 0;
-
-            foreach (DataRow row in newFeedsTable.Rows)
-            {
-                StringBuilder tempContainer = new StringBuilder();
-                tempContainer.Append(AvoidStringNulls(row["FeedType"].ToString()));
-
-                if (tempContainer.ToString().Equals("Human"))
-                {
-                    tempContainer.Clear();
-                    usFeed = new UserFeed();
-
-                    tempContainer.Append(AvoidStringNulls(row["PrioValue"].ToString()));
-
-                    if (CastStringToInt(tempContainer.ToString(), ref tempInt))
-                        usFeed.Priority = tempInt;
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["PrioCategory"].ToString()));
-                    usFeed.Category = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["FirstName"].ToString()));
-                    usFeed.Owner.FirstName = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["LastName"].ToString()));
-                    usFeed.Owner.LastName = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Name"].ToString()));
-                    usFeed.Owner.UserName = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Content"].ToString()));
-                    usFeed.Content = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["FilePath"].ToString()));
-                    usFeed.MediaFilePath = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Location"].ToString()));
-                    usFeed.Location = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["FeedId"].ToString()));
-
-                    if (CastStringToInt(tempContainer.ToString(), ref tempInt))
-                    {
-                        usFeed.Tags = LoadFeedTags(tempInt);
-                        usFeed.Comments = LoadFeedComments(tempInt);
-                    }
-                    tempContainer.Clear();
-
-                    lsFeed.Add(usFeed);
-                }
-                else
-                {
-                    tempContainer.Clear();
-                    senFeed = new SensorFeed();
-
-                    tempContainer.Append(AvoidStringNulls(row["PrioValue"].ToString()));
-
-                    if (CastStringToInt(tempContainer.ToString(), ref tempInt))
-                        senFeed.Priority = tempInt;
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["PrioCategory"].ToString()));
-                    senFeed.Category = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Name"].ToString()));
-                    senFeed.Owner.Name = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Content"].ToString()));
-                    senFeed.Content = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Location"].ToString()));
-                    senFeed.Location = tempContainer.ToString();
                     tempContainer.Clear();
 
                     lsFeed.Add(senFeed);
@@ -310,21 +140,23 @@ namespace BLL
 
         public List<Feed> LoadLatestXFeeds(int feedNum)
         {
-            DataTable newFeedsTable = postDbData.GetLatestXFeeds(feedNum);
+            DataSet newFeedsSet = postDbData.GetLatestXFeeds(feedNum);
             List<Feed> lsFeed = new List<Feed>();
-            UserFeed usFeed;
+            HumanFeed usFeed;
             SensorFeed senFeed;
             int tempInt = 0;
+
+            DataTable newFeedsTable = newFeedsSet.Tables[0];
 
             foreach (DataRow row in newFeedsTable.Rows)
             {
                 StringBuilder tempContainer = new StringBuilder();
-                tempContainer.Append(AvoidStringNulls(row["FeedType"].ToString()));
+                tempContainer.Append(AvoidStringNulls(row["Type"].ToString()));
 
                 if (tempContainer.ToString().Equals("Human"))
                 {
                     tempContainer.Clear();
-                    usFeed = new UserFeed();
+                    usFeed = new HumanFeed();
 
                     tempContainer.Append(AvoidStringNulls(row["PrioValue"].ToString()));
 
@@ -332,28 +164,30 @@ namespace BLL
                         usFeed.Priority = tempInt;
                     tempContainer.Clear();
 
+                    tempContainer.Append(AvoidStringNulls(row["UserId"].ToString()));
+
+                    if (CastStringToInt(tempContainer.ToString(), ref tempInt))
+                        usFeed.Owner.ID = tempInt;
+                    tempContainer.Clear();
+
                     tempContainer.Append(AvoidStringNulls(row["PrioCategory"].ToString()));
                     usFeed.Category = tempContainer.ToString();
                     tempContainer.Clear();
 
-                    tempContainer.Append(AvoidStringNulls(row["FirstName"].ToString()));
-                    usFeed.Owner.FirstName = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["LastName"].ToString()));
-                    usFeed.Owner.LastName = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Name"].ToString()));
+                    tempContainer.Append(AvoidStringNulls(row["Username"].ToString()));
                     usFeed.Owner.UserName = tempContainer.ToString();
                     tempContainer.Clear();
 
-                    tempContainer.Append(AvoidStringNulls(row["Content"].ToString()));
+                    tempContainer.Append(AvoidStringNulls(row["Text"].ToString()));
                     usFeed.Content = tempContainer.ToString();
                     tempContainer.Clear();
 
                     tempContainer.Append(AvoidStringNulls(row["FilePath"].ToString()));
                     usFeed.MediaFilePath = tempContainer.ToString();
+                    tempContainer.Clear();
+
+                    tempContainer.Append(AvoidStringNulls(row["CreationTimeStamp"].ToString()));
+                    usFeed.TimeStamp = Convert.ToDateTime(tempContainer.ToString());
                     tempContainer.Clear();
 
                     tempContainer.Append(AvoidStringNulls(row["Location"].ToString()));
@@ -364,6 +198,7 @@ namespace BLL
 
                     if (CastStringToInt(tempContainer.ToString(), ref tempInt))
                     {
+                        usFeed.ID = tempInt;
                         usFeed.Tags = LoadFeedTags(tempInt);
                         usFeed.Comments = LoadFeedComments(tempInt);
                     }
@@ -386,16 +221,35 @@ namespace BLL
                     senFeed.Category = tempContainer.ToString();
                     tempContainer.Clear();
 
-                    tempContainer.Append(AvoidStringNulls(row["Name"].ToString()));
+                    tempContainer.Append(AvoidStringNulls(row["Username"].ToString()));
                     senFeed.Owner.Name = tempContainer.ToString();
                     tempContainer.Clear();
 
-                    tempContainer.Append(AvoidStringNulls(row["Content"].ToString()));
+                    tempContainer.Append(AvoidStringNulls(row["Text"].ToString()));
                     senFeed.Content = tempContainer.ToString();
                     tempContainer.Clear();
 
                     tempContainer.Append(AvoidStringNulls(row["Location"].ToString()));
                     senFeed.Location = tempContainer.ToString();
+                    tempContainer.Clear();
+
+                    tempContainer.Append(AvoidStringNulls(row["UserId"].ToString()));
+                    if (CastStringToInt(tempContainer.ToString(), ref tempInt))
+                        senFeed.Owner.ID = tempInt;
+                    tempContainer.Clear();
+
+                    tempContainer.Append(AvoidStringNulls(row["CreationTimeStamp"].ToString()));
+                    senFeed.TimeStamp = Convert.ToDateTime(tempContainer.ToString());
+                    tempContainer.Clear();
+
+                    tempContainer.Append(AvoidStringNulls(row["FeedId"].ToString()));
+
+                    if (CastStringToInt(tempContainer.ToString(), ref tempInt))
+                    {
+                        senFeed.ID = tempInt;
+                        senFeed.Tags = LoadFeedTags(tempInt);
+                        senFeed.Comments = LoadFeedComments(tempInt);
+                    }
                     tempContainer.Clear();
 
                     lsFeed.Add(senFeed);
@@ -410,11 +264,13 @@ namespace BLL
             if (String.IsNullOrEmpty(location))
                 location = null;
 
-            DataTable newFeedsTable = postDbData.GetLatestFeedByFilter(location, startingTime, endingTime);
+            DataSet newFeedsSet = postDbData.GetLatestFeedByFilter(location, startingTime, endingTime);
             List<Feed> lsFeed = new List<Feed>();
-            UserFeed usFeed;
+            HumanFeed usFeed;
             SensorFeed senFeed;
             int tempInt = 0;
+
+            DataTable newFeedsTable = newFeedsSet.Tables[0];
 
             foreach (DataRow row in newFeedsTable.Rows)
             {
@@ -424,7 +280,7 @@ namespace BLL
                 if (tempContainer.ToString().Equals("Human"))
                 {
                     tempContainer.Clear();
-                    usFeed = new UserFeed();
+                    usFeed = new HumanFeed();
 
                     tempContainer.Append(AvoidStringNulls(row["PrioValue"].ToString()));
 
@@ -505,30 +361,25 @@ namespace BLL
             return lsFeed;
         }
 
-        public List<Feed> LoadHistoryFeedsBySensor(int sensorID)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool PublishFeed(UserFeed feed)
+        public bool PublishFeed(HumanFeed feed)
         {
             List<string> taggedUsers = new List<string>();
 
-            if (String.IsNullOrEmpty(feed.Owner.UserName))
+            if (feed.Owner.ID <= 0)
                 return false;
             else if (String.IsNullOrEmpty(feed.Content) && String.IsNullOrEmpty(feed.MediaFilePath))
                 return false;
             else if (String.IsNullOrEmpty(feed.Category) || feed.Priority == 0)
                 return false;
-            else if (feed.ID <= 0)
+            else if (feed.Priority <= 0)
                 return false;
             else
             {
-                foreach (User u in feed.Tags)
+                foreach (Human u in feed.Tags)
                     taggedUsers.Add(u.UserName);
 
-                return this.postDbData.PublishFeed(feed.Owner.UserName, taggedUsers, feed.Location,
-                    feed.Content, feed.Category, feed.MediaFilePath, feed.ID);
+                return this.postDbData.PublishFeed(feed.Owner.ID, taggedUsers, feed.Location,
+                    feed.Content, feed.Category, feed.MediaFilePath, feed.Priority);
             }
         }
 
@@ -556,10 +407,12 @@ namespace BLL
 
         public List<Comment> LoadFeedComments(int feedId)
         {
-            DataTable commentsTable = postDbData.GetFeedComments(feedId);
+            DataSet commentsSet = postDbData.GetFeedComments(feedId);
 
             List<Comment> lsComments = new List<Comment>();
             Comment tempComment = new Comment();
+
+            DataTable commentsTable = commentsSet.Tables[0];
 
             foreach (DataRow row in commentsTable.Rows)
             {
@@ -591,12 +444,14 @@ namespace BLL
             return lsComments;
         }
 
-        public List<User> LoadFeedTags(int feedId)
+        public List<Human> LoadFeedTags(int feedId)
         {
-            DataTable tagsTable = postDbData.GetFeedTags(feedId);
+            DataSet tagsSet = postDbData.GetFeedTags(feedId);
 
-            List<User> lsUsers = new List<User>();
-            User tempUser = new User();
+            List<Human> lsUsers = new List<Human>();
+            Human tempUser = new Human();
+
+            DataTable tagsTable = tagsSet.Tables[0];
 
             foreach (DataRow row in tagsTable.Rows)
             {
@@ -614,7 +469,7 @@ namespace BLL
                 tempContainer.Clear();
 
                 lsUsers.Add(tempUser);
-                tempUser = new User();
+                tempUser = new Human();
             }
 
             return lsUsers;
@@ -649,6 +504,12 @@ namespace BLL
             }
 
             return result;
+        }
+
+
+        public List<Feed> LoadFeedsByFilter(string username, string location, DateTime startingTime, DateTime endingTime, string feedType)
+        {
+            throw new NotImplementedException();
         }
     }
 }

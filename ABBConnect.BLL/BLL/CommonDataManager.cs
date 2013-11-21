@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL;
+using Transformation_Layer;
 using System.Data;
 
 namespace BLL
@@ -19,8 +19,10 @@ namespace BLL
 
         public List<string> GetLocations()
         {
-            DataTable locationTable = commonDbData.GetAllLocations();
+            DataSet locationSet = commonDbData.GetAllLocations();
             List<string> locList = new List<string>();
+
+            DataTable locationTable = locationSet.Tables[0];
 
             foreach (DataRow row in locationTable.Rows)
             {
@@ -37,10 +39,12 @@ namespace BLL
 
         public List<Category> GetFeedCategories()
         {
-            DataTable categoryTable = commonDbData.GetPostGategories();
+            DataSet categorySet = commonDbData.GetPostGategories();
             List<Category> catList = new List<Category>();
             bool castRes = false;
             int tempInt = -1;
+
+            DataTable categoryTable = categorySet.Tables[0];
 
             foreach (DataRow row in categoryTable.Rows)
             {
@@ -86,5 +90,16 @@ namespace BLL
             return result;
         }
 
+
+
+        public List<Feed> GetUserFeedByFilter(int userId, string location, DateTime startingTime, DateTime endingTime)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Feed> GetUserFeeds(int userId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -10,7 +10,7 @@ namespace BLL
     {
         public Comment()
         {
-            this.owner = new User();
+            this.owner = new Human();
             this.content = "";
             this.timeStamp = DateTime.MinValue;
         }
@@ -28,8 +28,8 @@ namespace BLL
             }
         }
 
-        private User owner;
-        public User Owner
+        private Human owner;
+        public Human Owner
         {
             get
             {
