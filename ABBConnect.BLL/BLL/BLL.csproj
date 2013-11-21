@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{53D940ED-6008-4172-A45B-BAAD6BC044A0}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BLL</RootNamespace>
     <AssemblyName>BLL</AssemblyName>
@@ -36,9 +36,6 @@
     </StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DAL">
-      <HintPath>..\DAL\DAL\bin\Debug\DAL.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,8 +43,12 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Transformation_Layer">
+      <HintPath>..\..\ABBConnect.TL\Transformation_Layer\Transformation_Layer\bin\Debug\Transformation_Layer.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Category.cs" />
     <Compile Include="Comment.cs" />
     <Compile Include="CommonDataManager.cs" />
     <Compile Include="Feed.cs" />
@@ -55,8 +56,8 @@
     <Compile Include="ICommonDataManager.cs" />
     <Compile Include="ISensorFeedManager.cs" />
     <Compile Include="ISensorManager.cs" />
-    <Compile Include="IUserFeedManager.cs" />
-    <Compile Include="IUserManager.cs" />
+    <Compile Include="IHumanFeedManager.cs" />
+    <Compile Include="IHumanManager.cs" />
     <Compile Include="lFeedManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -66,10 +67,10 @@
     <Compile Include="SensorHistoryData.cs" />
     <Compile Include="SensorManager.cs" />
     <Compile Include="SensorVTData.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="UserFeed.cs" />
-    <Compile Include="UserFeedManager.cs" />
-    <Compile Include="UserManager.cs" />
+    <Compile Include="Human.cs" />
+    <Compile Include="HumanFeed.cs" />
+    <Compile Include="HumanFeedManager.cs" />
+    <Compile Include="HumanManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

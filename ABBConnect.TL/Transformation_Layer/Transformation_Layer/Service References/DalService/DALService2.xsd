@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/ServerService" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ServerService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:8966/DALService.svc?xsd=xsd1" namespace="http://schemas.datacontract.org/2004/07/System.Data" />
+  <xs:complexType name="ArrayOfDAL">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DAL" nillable="true" type="tns:DAL" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDAL" nillable="true" type="tns:ArrayOfDAL" />
+  <xs:complexType name="DAL">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System.Data" minOccurs="0" name="ParamaterDirection" type="q1:ParameterDirection" />
+      <xs:element minOccurs="0" name="ParamaterName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ParamaterValue" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Paramatertype" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Size" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DAL" nillable="true" type="tns:DAL" />
+</xs:schema>
