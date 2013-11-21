@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Home.aspx.cs" Inherits="_Home" %>
+<%@ Register src="controls/FeedPage.ascx" tagname="FeedPage" tagprefix="abbConnect" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
  
@@ -159,6 +160,8 @@
                     </div> 
                 </div>
             </div>
+            <hr>
+            <abbconnect:feedpage ID="FeedPage" runat="server" />
         </div>
         <div class="col-md-6">
             <div class="feed-header">
