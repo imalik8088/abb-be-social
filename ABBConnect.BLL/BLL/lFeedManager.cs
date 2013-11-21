@@ -17,6 +17,7 @@ namespace BLL
         List<Feed> LoadLatestXFeeds(int numberOfFeeds);
         List<Feed> LoadFeedsByFilter(string username, string location, DateTime startingTime, DateTime endingTime, string feedType);
         List<Feed> LoadNewFeedsByFilter(string location, DateTime startingTime, DateTime endingTime);
-
+        List<Feed> GetUserFeedByFilter(int userId, string location, DateTime startingTime, DateTime endingTime);
+        List<Feed> GetUserFeeds(int userId);
     }
 }

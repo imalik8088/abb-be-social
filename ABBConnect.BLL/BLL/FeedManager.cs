@@ -518,5 +518,16 @@ namespace BLL
         {
             throw new NotImplementedException();
         }
+
+
+        public List<Feed> GetUserFeedByFilter(int userId, string location, DateTime startingTime, DateTime endingTime)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Feed> GetUserFeeds(int userId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
