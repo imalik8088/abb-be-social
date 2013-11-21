@@ -13,8 +13,8 @@ namespace BLL
         {
             HumanManager um = new HumanManager();
             Human u = um.LoadHumanInformation(1);
-            Console.WriteLine(u.FirstName);
-            //Console.WriteLine(um.Login("simpm","password"));
+            //Console.WriteLine(u.FirstName);
+            //Console.WriteLine(um.Login("rgn09003","password"));
             //HumanFeedManager ufm = new HumanFeedManager();
             //SensorManager sm = new SensorManager();
             //Console.WriteLine(sm.LoadSensorInformation(1001).LowerBoundary);
@@ -24,14 +24,17 @@ namespace BLL
             //SensorHistoryData hisData = new SensorHistoryData();
             //hisData = sm.LoadHistoryValuesBySensor(1001, myDate, DateTime.Now);
 
+            CommonDataManager cdm = new CommonDataManager();
+
+           
 
             //CommonDataManager cm = new CommonDataManager();
-            //List<string> loc = cm.GetLocations();
-            //List<string> loc = cm.GetFeedCategories();
+            //List<string> loc = cdm.GetLocations();
+            //List<Category> loc = cdm.GetFeedCategories();
 
-            //foreach (string str in loc)
+            //foreach (Category str in loc)
             //{
-            //    Console.WriteLine(str);
+            //    Console.WriteLine(str.CategoryName);
             //}
 
             //List<Feed> feedList = new List<Feed>();
@@ -41,19 +44,31 @@ namespace BLL
             //    Console.WriteLine(f.Location);
             //}
 
-            SensorFeedManager sfm = new SensorFeedManager();
-            List<SensorFeed> lsf = new List<SensorFeed>();
-            //lsf = sfm.GetAllSensorFeeds();
+            FeedManager sfm = new FeedManager();
+            HumanFeed hf = new HumanFeed();
+            hf.Owner.ID = 3;
+            hf.Location = "ControlRoom 1B";
+            hf.Content = "BLL speaking";
+            hf.Category = "WorkPost";
+            hf.MediaFilePath = "";
+            hf.Priority = 3;
+            Human h = new Human();
+            h.UserName = "dpa12001";
+            hf.Tags.Add(h);
+            sfm.PublishFeed(hf);
+            List<Feed> lsf = new List<Feed>();
+            lsf = sfm.LoadLatestXFeeds(5);
             //lsf = sfm.GetSensorFeeds(1002);
             //lsf = sfm.GetAllSensorFeedsByFilter(null, myDate, DateTime.Now);
             //lsf = sfm.GetAllSensorFeedsByFilter("Machine 1", DateTime.MinValue, DateTime.MinValue);
             //lsf = sfm.GetSensorFeedsByFilter(1001, null, DateTime.MinValue, DateTime.MinValue);
 
-            //foreach (SensorFeed sf in lsf)
-            //{
-            //    Console.WriteLine(sf.Content);
-            //    Console.WriteLine(sf.Owner.Name);
-            //}
+            foreach (Feed sf in lsf)
+            {
+                Console.WriteLine(sf.Content);
+                Console.WriteLine(sf.ID);
+                Console.WriteLine(sf.TimeStamp);
+            }
 
             //FeedManager fm = new FeedManager();
             //List<Feed> lsfeed = fm.LoadLatest20Feeds();

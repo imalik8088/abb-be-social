@@ -55,7 +55,7 @@ namespace BLL
                     senFeed.TimeStamp = Convert.ToDateTime(tempContainer.ToString());
 
                 tempContainer.Clear();
-                tempContainer.Append(row["SensorName"].ToString());
+                tempContainer.Append(row["Username"].ToString());
 
                 if (tempContainer.ToString() == null)
                     senFeed.Owner.Name = "";
@@ -63,11 +63,18 @@ namespace BLL
                     senFeed.Owner.Name = tempContainer.ToString();
 
                 tempContainer.Clear();
-                tempContainer.Append(row["Id"].ToString());
+                tempContainer.Append(row["UserId"].ToString());
 
                 castRes = CastStringToInt(tempContainer.ToString(), ref tempInt);
                 if (castRes)
                     senFeed.Owner.ID = tempInt;
+
+                tempContainer.Clear();
+                tempContainer.Append(row["FeedId"].ToString());
+
+                castRes = CastStringToInt(tempContainer.ToString(), ref tempInt);
+                if (castRes)
+                    senFeed.ID = tempInt;
 
                 tempContainer.Clear();
                 tempContainer.Append(row["PrioValue"].ToString());
@@ -133,7 +140,7 @@ namespace BLL
                     senFeed.TimeStamp = Convert.ToDateTime(tempContainer.ToString());
 
                 tempContainer.Clear();
-                tempContainer.Append(row["SensorName"].ToString());
+                tempContainer.Append(row["Username"].ToString());
 
                 if (tempContainer.ToString() == null)
                     senFeed.Owner.Name = "";
@@ -141,7 +148,7 @@ namespace BLL
                     senFeed.Owner.Name = tempContainer.ToString();
 
                 tempContainer.Clear();
-                tempContainer.Append(row["Id"].ToString());
+                tempContainer.Append(row["UserId"].ToString());
 
                 castRes = CastStringToInt(tempContainer.ToString(), ref tempInt);
                 if (castRes)
@@ -153,6 +160,13 @@ namespace BLL
                 castRes = CastStringToInt(tempContainer.ToString(), ref tempInt);
                 if (castRes)
                     senFeed.Priority = tempInt;
+
+                tempContainer.Clear();
+                tempContainer.Append(row["FeedId"].ToString());
+
+                castRes = CastStringToInt(tempContainer.ToString(), ref tempInt);
+                if (castRes)
+                    senFeed.ID = tempInt;
 
                 tempContainer.Clear();
                 tempContainer.Append(row["PrioCategory"].ToString());

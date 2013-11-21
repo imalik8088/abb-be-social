@@ -30,7 +30,7 @@ namespace BLL
             foreach (DataRow row in newFeedsTable.Rows)
             {
                 StringBuilder tempContainer = new StringBuilder();
-                tempContainer.Append(AvoidStringNulls(row["FeedType"].ToString()));
+                tempContainer.Append(AvoidStringNulls(row["Type"].ToString()));
 
                 if (tempContainer.ToString().Equals("Human"))
                 {
@@ -43,23 +43,21 @@ namespace BLL
                         usFeed.Priority = tempInt;
                     tempContainer.Clear();
 
+                    tempContainer.Append(AvoidStringNulls(row["UserId"].ToString()));
+
+                    if (CastStringToInt(tempContainer.ToString(), ref tempInt))
+                        usFeed.Owner.ID = tempInt;
+                    tempContainer.Clear();
+
                     tempContainer.Append(AvoidStringNulls(row["PrioCategory"].ToString()));
                     usFeed.Category = tempContainer.ToString();
                     tempContainer.Clear();
 
-                    tempContainer.Append(AvoidStringNulls(row["FirstName"].ToString()));
-                    usFeed.Owner.FirstName = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["LastName"].ToString()));
-                    usFeed.Owner.LastName = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Name"].ToString()));
+                    tempContainer.Append(AvoidStringNulls(row["Username"].ToString()));
                     usFeed.Owner.UserName = tempContainer.ToString();
                     tempContainer.Clear();
 
-                    tempContainer.Append(AvoidStringNulls(row["Content"].ToString()));
+                    tempContainer.Append(AvoidStringNulls(row["Text"].ToString()));
                     usFeed.Content = tempContainer.ToString();
                     tempContainer.Clear();
 
@@ -67,14 +65,19 @@ namespace BLL
                     usFeed.MediaFilePath = tempContainer.ToString();
                     tempContainer.Clear();
 
+                    tempContainer.Append(AvoidStringNulls(row["CreationTimeStamp"].ToString()));
+                    usFeed.TimeStamp = Convert.ToDateTime(tempContainer.ToString());
+                    tempContainer.Clear();
+
                     tempContainer.Append(AvoidStringNulls(row["Location"].ToString()));
                     usFeed.Location = tempContainer.ToString();
                     tempContainer.Clear();
 
-                    tempContainer.Append(AvoidStringNulls(row["FeedId"].ToString()));
+                    tempContainer.Append(AvoidStringNulls(row["FeedId"].ToString()));                        
 
                     if (CastStringToInt(tempContainer.ToString(), ref tempInt))
                     {
+                        usFeed.ID = tempInt;
                         usFeed.Tags = LoadFeedTags(tempInt);
                         usFeed.Comments = LoadFeedComments(tempInt);
                     }
@@ -97,16 +100,35 @@ namespace BLL
                     senFeed.Category = tempContainer.ToString();
                     tempContainer.Clear();
 
-                    tempContainer.Append(AvoidStringNulls(row["Name"].ToString()));
+                    tempContainer.Append(AvoidStringNulls(row["Username"].ToString()));
                     senFeed.Owner.Name = tempContainer.ToString();
                     tempContainer.Clear();
 
-                    tempContainer.Append(AvoidStringNulls(row["Content"].ToString()));
+                    tempContainer.Append(AvoidStringNulls(row["Text"].ToString()));
                     senFeed.Content = tempContainer.ToString();
                     tempContainer.Clear();
 
                     tempContainer.Append(AvoidStringNulls(row["Location"].ToString()));
                     senFeed.Location = tempContainer.ToString();
+                    tempContainer.Clear();
+
+                    tempContainer.Append(AvoidStringNulls(row["UserId"].ToString()));
+                    if (CastStringToInt(tempContainer.ToString(), ref tempInt))
+                        senFeed.Owner.ID = tempInt;
+                    tempContainer.Clear();
+
+                    tempContainer.Append(AvoidStringNulls(row["CreationTimeStamp"].ToString()));
+                    senFeed.TimeStamp = Convert.ToDateTime(tempContainer.ToString());
+                    tempContainer.Clear();
+
+                    tempContainer.Append(AvoidStringNulls(row["FeedId"].ToString()));
+
+                    if (CastStringToInt(tempContainer.ToString(), ref tempInt))
+                    {
+                        senFeed.ID = tempInt;
+                        senFeed.Tags = LoadFeedTags(tempInt);
+                        senFeed.Comments = LoadFeedComments(tempInt);
+                    }
                     tempContainer.Clear();
 
                     lsFeed.Add(senFeed);
@@ -129,7 +151,7 @@ namespace BLL
             foreach (DataRow row in newFeedsTable.Rows)
             {
                 StringBuilder tempContainer = new StringBuilder();
-                tempContainer.Append(AvoidStringNulls(row["FeedType"].ToString()));
+                tempContainer.Append(AvoidStringNulls(row["Type"].ToString()));
 
                 if (tempContainer.ToString().Equals("Human"))
                 {
@@ -142,28 +164,30 @@ namespace BLL
                         usFeed.Priority = tempInt;
                     tempContainer.Clear();
 
+                    tempContainer.Append(AvoidStringNulls(row["UserId"].ToString()));
+
+                    if (CastStringToInt(tempContainer.ToString(), ref tempInt))
+                        usFeed.Owner.ID = tempInt;
+                    tempContainer.Clear();
+
                     tempContainer.Append(AvoidStringNulls(row["PrioCategory"].ToString()));
                     usFeed.Category = tempContainer.ToString();
                     tempContainer.Clear();
 
-                    tempContainer.Append(AvoidStringNulls(row["FirstName"].ToString()));
-                    usFeed.Owner.FirstName = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["LastName"].ToString()));
-                    usFeed.Owner.LastName = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Name"].ToString()));
+                    tempContainer.Append(AvoidStringNulls(row["Username"].ToString()));
                     usFeed.Owner.UserName = tempContainer.ToString();
                     tempContainer.Clear();
 
-                    tempContainer.Append(AvoidStringNulls(row["Content"].ToString()));
+                    tempContainer.Append(AvoidStringNulls(row["Text"].ToString()));
                     usFeed.Content = tempContainer.ToString();
                     tempContainer.Clear();
 
                     tempContainer.Append(AvoidStringNulls(row["FilePath"].ToString()));
                     usFeed.MediaFilePath = tempContainer.ToString();
+                    tempContainer.Clear();
+
+                    tempContainer.Append(AvoidStringNulls(row["CreationTimeStamp"].ToString()));
+                    usFeed.TimeStamp = Convert.ToDateTime(tempContainer.ToString());
                     tempContainer.Clear();
 
                     tempContainer.Append(AvoidStringNulls(row["Location"].ToString()));
@@ -174,6 +198,7 @@ namespace BLL
 
                     if (CastStringToInt(tempContainer.ToString(), ref tempInt))
                     {
+                        usFeed.ID = tempInt;
                         usFeed.Tags = LoadFeedTags(tempInt);
                         usFeed.Comments = LoadFeedComments(tempInt);
                     }
@@ -196,16 +221,35 @@ namespace BLL
                     senFeed.Category = tempContainer.ToString();
                     tempContainer.Clear();
 
-                    tempContainer.Append(AvoidStringNulls(row["Name"].ToString()));
+                    tempContainer.Append(AvoidStringNulls(row["Username"].ToString()));
                     senFeed.Owner.Name = tempContainer.ToString();
                     tempContainer.Clear();
 
-                    tempContainer.Append(AvoidStringNulls(row["Content"].ToString()));
+                    tempContainer.Append(AvoidStringNulls(row["Text"].ToString()));
                     senFeed.Content = tempContainer.ToString();
                     tempContainer.Clear();
 
                     tempContainer.Append(AvoidStringNulls(row["Location"].ToString()));
                     senFeed.Location = tempContainer.ToString();
+                    tempContainer.Clear();
+
+                    tempContainer.Append(AvoidStringNulls(row["UserId"].ToString()));
+                    if (CastStringToInt(tempContainer.ToString(), ref tempInt))
+                        senFeed.Owner.ID = tempInt;
+                    tempContainer.Clear();
+
+                    tempContainer.Append(AvoidStringNulls(row["CreationTimeStamp"].ToString()));
+                    senFeed.TimeStamp = Convert.ToDateTime(tempContainer.ToString());
+                    tempContainer.Clear();
+
+                    tempContainer.Append(AvoidStringNulls(row["FeedId"].ToString()));
+
+                    if (CastStringToInt(tempContainer.ToString(), ref tempInt))
+                    {
+                        senFeed.ID = tempInt;
+                        senFeed.Tags = LoadFeedTags(tempInt);
+                        senFeed.Comments = LoadFeedComments(tempInt);
+                    }
                     tempContainer.Clear();
 
                     lsFeed.Add(senFeed);
@@ -321,13 +365,13 @@ namespace BLL
         {
             List<string> taggedUsers = new List<string>();
 
-            if (String.IsNullOrEmpty(feed.Owner.UserName))
+            if (feed.Owner.ID <= 0)
                 return false;
             else if (String.IsNullOrEmpty(feed.Content) && String.IsNullOrEmpty(feed.MediaFilePath))
                 return false;
             else if (String.IsNullOrEmpty(feed.Category) || feed.Priority == 0)
                 return false;
-            else if (feed.ID <= 0)
+            else if (feed.Priority <= 0)
                 return false;
             else
             {
@@ -335,7 +379,7 @@ namespace BLL
                     taggedUsers.Add(u.UserName);
 
                 return this.postDbData.PublishFeed(feed.Owner.ID, taggedUsers, feed.Location,
-                    feed.Content, feed.Category, feed.MediaFilePath, feed.ID);
+                    feed.Content, feed.Category, feed.MediaFilePath, feed.Priority);
             }
         }
 
