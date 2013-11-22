@@ -10,6 +10,7 @@ namespace Transformation_Layer
     interface IFeedData
     {
         DataSet GetLatestXFeeds(int numberOfFeeds);
+        DataSet GetLatestXFeedsFromId(int feedId, int numberOfFeeds);
         DataSet GetFeedTags(int feedId);
         DataSet GetFeedComments(int feedId);
         DataSet GetFeedsByFilter(string name, string location, DateTime startingTime, DateTime endingTime, string feedType);

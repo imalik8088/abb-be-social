@@ -481,5 +481,41 @@ namespace Transformation_Layer
             return userFeedByFilter;
 
         }
+
+
+        public DataSet GetLatestXFeedsFromId(int feedId, int numberOfFeeds)
+        {
+            DataSet feedInfo = new DataSet();
+            SQLParameter[] parameters = new SQLParameter[2];
+            SQLParameter tempParam = new SQLParameter();
+
+            tempParam.ParamaterName = "@feedID";
+            tempParam.ParamaterValue = numberOfFeeds;
+            tempParam.ParamaterDirection = ParameterDirection.Input;
+            tempParam.ParamaterDirectionSpecified = true;
+            tempParam.ParameterType = SqlDbType.Int;
+            tempParam.ParameterTypeSpecified = true;
+
+            parameters[0] = tempParam;
+            tempParam = new SQLParameter();
+
+            tempParam.ParamaterName = "@X";
+            tempParam.ParamaterValue = numberOfFeeds;
+            tempParam.ParamaterDirection = ParameterDirection.Input;
+            tempParam.ParamaterDirectionSpecified = true;
+            tempParam.ParameterType = SqlDbType.Int;
+            tempParam.ParameterTypeSpecified = true;
+
+            parameters[1] = tempParam;
+
+            DALServiceClient servcClient = new DALServiceClient();
+            servcClient.Open();
+
+            feedInfo = servcClient.ExecuteDataSet("GetLatestXFeedsFromId", parameters);
+
+            servcClient.Close();
+
+            return feedInfo;
+        }
     }
 }
