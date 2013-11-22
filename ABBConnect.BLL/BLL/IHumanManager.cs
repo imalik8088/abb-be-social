@@ -10,5 +10,6 @@ namespace BLL
     {
         bool Login(string userName, string password);
         Human LoadHumanInformation(int humandId);
+        Human LoadHumanInformationByUsername(string username);
     }
 }

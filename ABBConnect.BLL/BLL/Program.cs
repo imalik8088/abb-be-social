@@ -12,8 +12,8 @@ namespace BLL
         static void Main(string[] args)
         {
             HumanManager um = new HumanManager();
-            Human u = um.LoadHumanInformation(1);
-            //Console.WriteLine(u.FirstName);
+            Human u = um.LoadHumanInformationByUsername("dks12001");
+            Console.WriteLine(u.FirstName);
             //Console.WriteLine(um.Login("rgn09003","password"));
             HumanFeedManager ufm = new HumanFeedManager();
             //SensorManager sm = new SensorManager();
@@ -57,7 +57,7 @@ namespace BLL
             //hf.Tags.Add(h);
             //sfm.PublishFeed(hf);
             List<Feed> lsf = new List<Feed>();
-            lsf = sfm.LoadLatestXFeeds(5);
+            lsf = sfm.LoadLatestXFeedsFromId(28,5);
             //lsf = sfm.GetSensorFeeds(1002);
             //lsf = sfm.GetAllSensorFeedsByFilter(null, myDate, DateTime.Now);
             //lsf = sfm.GetAllSensorFeedsByFilter("Machine 1", DateTime.MinValue, DateTime.MinValue);
@@ -73,23 +73,23 @@ namespace BLL
             //FeedManager fm = new FeedManager();
             //List<Feed> lsfeed = fm.LoadLatest20Feeds();
 
-            List<HumanFeed> lsfeed = ufm.LoadAllHumanFeeds();
+            //List<HumanFeed> lsfeed = ufm.LoadAllHumanFeeds();
 
-            foreach (Feed f in lsfeed)
-            {
-                Console.WriteLine(f.Content);
+            //foreach (Feed f in lsfeed)
+            //{
+            //    Console.WriteLine(f.Content);
 
-                if (f.Tags.Count > 0)
-                    foreach (Human h in f.Tags)
-                    {
-                        Console.WriteLine(h.UserName);
-                    }
+            //    if (f.Tags.Count > 0)
+            //        foreach (Human h in f.Tags)
+            //        {
+            //            Console.WriteLine(h.UserName);
+            //        }
 
-                foreach (Comment c in f.Comments)
-                {
-                    Console.WriteLine(c.Content);
-                }
-            }
+            //    foreach (Comment c in f.Comments)
+            //    {
+            //        Console.WriteLine(c.Content);
+            //    }
+            //}
 
             Console.ReadKey();
         }

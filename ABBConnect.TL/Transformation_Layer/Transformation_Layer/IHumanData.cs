@@ -11,5 +11,6 @@ namespace Transformation_Layer
     {
         bool CheckCredentials(string userName, string password);
         DataSet GetHumanInformation(int humanId);
+        DataSet GetHumanInformationByUsername(string username);
     }
 }
