@@ -1,16 +1,30 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Home.aspx.cs" Inherits="_Home" %>
-<%@ Register src="controls/FeedPage.ascx" tagname="FeedPage" tagprefix="abbConnect" %>
+
+<%@ Register Src="controls/FeedPage.ascx" TagName="FeedPage" TagPrefix="abbConnect" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
- 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <script src="content/js/jquery-2.0.3.min.js"></script>
+    <script src="content/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        //delegates for modals, so we can clear the data between the hides.
+        //at the moment, it has to be like this, i couldn't make it work with removeData
+        $(document).delegate('#modalNote', 'hidden.bs.modal', function (event) {
+            $(this).find('textarea').val(null).blur();
+        });
+
+        $(document).delegate('#modalPicture', 'hidden.bs.modal', function (event) {
+            $(this).find('textarea').val(null).blur();
+        });
+    </script>
+
     <div class="row">
         <div class="col-md-6">
             <div class="feed-header">
                 <div class="form-inline">
                     <div class="form-group">
-                        <h3><span class="glyphicon glyphicon-link"></span> User feeds <small>Feeds from human source</small></h3>
+                        <h3><span class="glyphicon glyphicon-link"></span>User feeds <small>Feeds from human source</small></h3>
                     </div>
                     <div class="form-group button-group">
                         <div class="btn-group">
@@ -22,7 +36,7 @@
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="#">Critical</a></li>
                                 <li><a href="#">Warning</a></li>
-                                <li class="divider"></li>                                
+                                <li class="divider"></li>
                                 <li><a href="#">All</a></li>
                             </ul>
                         </div>
@@ -33,10 +47,63 @@
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Note</a></li>
-                                <li><a href="#">Picture</a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#modalNote">Note</a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#modalPicture">Picture</a></li>
                             </ul>
                         </div>
+
+                        <div class="modal fade" id="modalNote" tabindex="-1" role="dialog" aria-labelledby="modalNoteLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="myModalLabel">Add a new note</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h5>Please insert new note text:</h5>
+                                        <!-- Textbox -->
+                                        <div class="input-group">
+                                            <span class="input-group-addon"></span>
+                                            <textarea class="input" placeholder="Insert your note text here..." style="width: 100%; resize: vertical"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="ClearModal()">Close</button>
+                                        <button type="button" class="btn btn-primary">Post new note</button>
+                                    </div>
+                                </div>
+                                <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                        </div>
+                        <!-- /.modal -->
+
+                        <div class="modal fade" id="modalPicture" tabindex="-1" role="dialog" aria-labelledby="modalPictureLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="H1">Add a new picture note</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h5>Please insert the description of the picture:</h5>
+                                        <!-- Textbox -->
+                                        <div class="input-group">
+                                            <span class="input-group-addon"></span>
+                                            <textarea class="input" placeholder="Insert your note text here..." style="width: 100%; resize: vertical"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Post new picture note</button>
+                                    </div>
+                                </div>
+                                <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                        </div>
+                        <!-- /.modal -->
+
                     </div>
                 </div>
             </div>
@@ -157,17 +224,17 @@
                                 </div>
                             </div>
                         </div>
-                    </div> 
+                    </div>
                 </div>
             </div>
             <hr>
-            <abbconnect:feedpage ID="FeedPage" runat="server" />
+            <abbConnect:FeedPage ID="FeedPage" runat="server" />
         </div>
         <div class="col-md-6">
             <div class="feed-header">
                 <div class="form-inline">
                     <div class="form-group">
-                        <h3><span class="glyphicon glyphicon-flash"></span> Sensor feeds <small>Feeds from sensor source</small></h3>
+                        <h3><span class="glyphicon glyphicon-flash"></span>Sensor feeds <small>Feeds from sensor source</small></h3>
                     </div>
                 </div>
             </div>
@@ -183,9 +250,9 @@
                         </a>
                         <span class="feed-date-time">at Jul 15th, 2013 11:24
                         </span>
-                        <span class="feed-body row">                
-                              <div id="gauge-996" class="feed-gauge pull-left feed-gauge-size">
-                            </div>          
+                        <span class="feed-body row">
+                            <div id="gauge-996" class="feed-gauge pull-left feed-gauge-size">
+                            </div>
                             <div class="bs-callout bs-callout-danger feed-gauge-margin">
                                 <h4>No default class</h4>
                                 <div class="bs-callout-hr"></div>
@@ -225,9 +292,9 @@
                         </a>
                         <span class="feed-date-time">at Jul 15th, 2013 11:24
                         </span>
-                        <span class="feed-body row">                
-                              <div id="gauge-995" class="feed-gauge pull-left feed-gauge-size">
-                            </div>          
+                        <span class="feed-body row">
+                            <div id="gauge-995" class="feed-gauge pull-left feed-gauge-size">
+                            </div>
                             <div class="bs-callout bs-callout-warning feed-gauge-margin">
                                 <h4>No default class</h4>
                                 <div class="bs-callout-hr"></div>
@@ -263,7 +330,7 @@
             id: "gauge-996",
             value: getRandomInt(800, 980),
             min: 0,
-            max: 1000 ,
+            max: 1000,
             title: "Water flow [m3/h]",
             gaugeWidthScale: 0.5
         });
@@ -276,4 +343,3 @@
         });
     </script>
 </asp:Content>
-

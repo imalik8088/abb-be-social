@@ -13,7 +13,7 @@ public partial class controls_FeedPage : System.Web.UI.UserControl
     protected void Page_Load(object sender, EventArgs e)
     {
         FeedManager fm = new FeedManager();
-        List<Feed> last20Feeds = fm.LoadLatest20Feeds();
+        List<Feed> last20Feeds = fm.LoadLatestXFeeds(20);
 
         FeedRepeater.DataSource = last20Feeds;
         FeedRepeater.DataBind();        

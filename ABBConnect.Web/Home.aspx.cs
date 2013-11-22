@@ -14,7 +14,7 @@ public partial class _Home : System.Web.UI.Page
     {
         FeedManager fm = new FeedManager();
 
-        List<Feed> last20Feeds = fm.LoadLatest20Feeds();
+        List<Feed> last20Feeds = fm.LoadLatestXFeeds(20);
         return last20Feeds[0].Content.ToString() + "@" + DateTime.Now.ToLongTimeString();
     }
 
