@@ -15,6 +15,7 @@ namespace BLL
         List<Human> LoadFeedTags(int feedId);
         List<Comment> LoadFeedComments(int feedId);
         List<Feed> LoadLatestXFeeds(int numberOfFeeds);
+        List<Feed> LoadLatestXFeedsFromId(int startingId, int numberOfFeeds);
         List<Feed> LoadFeedsByFilter(string username, string location, DateTime startingTime, DateTime endingTime, string feedType);
         List<Feed> LoadNewFeedsByFilter(string location, DateTime startingTime, DateTime endingTime);
         List<Feed> GetUserFeedByFilter(int userId, string location, DateTime startingTime, DateTime endingTime);
