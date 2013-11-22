@@ -73,7 +73,7 @@ namespace Transformation_Layer
             tempParam.ParamaterValue = humanId;
             tempParam.ParamaterDirection = ParameterDirection.Input;
             tempParam.ParamaterDirectionSpecified = true;
-            tempParam.ParameterType = SqlDbType.NVarChar;
+            tempParam.ParameterType = SqlDbType.Int;
             tempParam.ParameterTypeSpecified = true;
 
             parameters[0] = tempParam;
@@ -82,6 +82,33 @@ namespace Transformation_Layer
             servcClient.Open();
 
             humanInfo = servcClient.ExecuteDataSet("GetHumanInformation", parameters);
+
+            servcClient.Close();
+
+            return humanInfo;
+        }
+
+
+        public DataSet GetHumanInformationByUsername(string username)
+        {
+            DataSet humanInfo = new DataSet();
+            SQLParameter[] parameters = new SQLParameter[1];
+            SQLParameter tempParam = new SQLParameter();
+
+            tempParam.ParamaterName = "@UserName";
+            tempParam.ParamaterValue = username;
+            tempParam.ParamaterDirection = ParameterDirection.Input;
+            tempParam.ParamaterDirectionSpecified = true;
+            tempParam.ParameterType = SqlDbType.NVarChar;
+            tempParam.ParameterTypeSpecified = true;
+            tempParam.Size = "50";
+
+            parameters[0] = tempParam;
+
+            DALServiceClient servcClient = new DALServiceClient();
+            servcClient.Open();
+
+            humanInfo = servcClient.ExecuteDataSet("GetHumanInformationByUsername", parameters);
 
             servcClient.Close();
 
