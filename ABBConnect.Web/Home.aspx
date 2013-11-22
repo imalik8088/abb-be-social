@@ -11,12 +11,15 @@
         //delegates for modals, so we can clear the data between the hides.
         //at the moment, it has to be like this, i couldn't make it work with removeData
         $(document).delegate('#modalNote', 'hidden.bs.modal', function (event) {
-            $(this).find('textarea').val(null).blur();
+            //$(this).data('bs.modal').$element.removeData();
+            $(this).html($(this).html());
         });
 
         $(document).delegate('#modalPicture', 'hidden.bs.modal', function (event) {
-            $(this).find('textarea').val(null).blur();
+            //$(this).find('textarea').val(null).blur();
+            $(this).html($(this).html());
         });
+
     </script>
 
     <div class="row">
@@ -64,12 +67,12 @@
                                         <!-- Textbox -->
                                         <div class="input-group">
                                             <span class="input-group-addon"></span>
-                                            <textarea class="input" placeholder="Insert your note text here..." style="width: 100%; resize: vertical"></textarea>
+                                            <textarea id="textareaNote" class="input" placeholder="Insert your note text here..." style="width: 100%; resize: vertical"></textarea>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal" onclick="ClearModal()">Close</button>
-                                        <button type="button" class="btn btn-primary">Post new note</button>
+                                        <button type="button" class="btn btn-primary" onclick="AjaxPostNewFeed()">Post new note</button>
                                     </div>
                                 </div>
                                 <!-- /.modal-content -->
@@ -86,12 +89,27 @@
                                         <h4 class="modal-title" id="H1">Add a new picture note</h4>
                                     </div>
                                     <div class="modal-body">
+                                        <br />
                                         <h5>Please insert the description of the picture:</h5>
+
                                         <!-- Textbox -->
                                         <div class="input-group">
                                             <span class="input-group-addon"></span>
                                             <textarea class="input" placeholder="Insert your note text here..." style="width: 100%; resize: vertical"></textarea>
                                         </div>
+
+                                        <!-- File upload-->
+                                        <input id="filePicture" type="file" style="display: none" />
+                                        <div class="input-append">
+                                            <input id="inputPicturePath" class="input-large" type="text" style="width: 85%;" />
+                                            <a class="btn" onclick="$('input[id=filePicture]').click();">Browse</a>
+                                        </div>
+
+                                        <script type="text/javascript">
+                                            $('input[id=filePicture]').change(function () {
+                                                $('#inputPicturePath').val($(this).val());
+                                            });
+                                        </script>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -40,6 +40,7 @@ function AjaxPostFeedCommentSuccess(result, userContext, methodName)
     //LoadFeedsAgain and display them, cause there is maybe new +1 comments
     AjaxGetAllFeedComments(result);
 }
+
 function AjaxGetAllFeedComments(feedID)
 {
     PageMethods.AjaxGetAllFeedComments(feedID, OnAjaxGetAllFeedCommentsSuccess);
@@ -49,6 +50,19 @@ function OnAjaxGetAllFeedCommentsSuccess(result, userContext, methodName)
     alert("loaded:" + result.FeedId);
     //$("#feed-container-" + result.FeedId + ".feed-comments-container").html(result.CommentsRawData);
 }
+
+function AjaxPostNewFeed() {
+    var feedContentData = $("#textareaNote").val();
+
+    PageMethods.AjaxPostNewFeed(feedContentData, OnAjaxPostNewFeedSuccess);
+}
+function OnAjaxPostNewFeedSuccess(result, userContext, methodName) {
+    alert("Post successful:" + result);
+    $("#modalNote").modal('hide');
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
+}
+
 
 function initUI()
 {   

@@ -42,6 +42,29 @@ public partial class _Home : System.Web.UI.Page
         return afc;
     }
 
+    [System.Web.Services.WebMethod]
+    public static Boolean AjaxPostNewFeed(string feedContentData)
+    {
+        /* Check if user is loged, if not, return null, since we cannot do redirect from WebMethod
+         * 
+         */
+
+        FeedManager fm = new FeedManager();
+        HumanManager hm = new HumanManager();
+
+        Human feedOwner = new Human();
+        //feedOwner = hm.LoadHumanInformation(int.Parse(HttpContext.Current.Session["humanID"].ToString()));
+
+        HumanFeed newFeed = new HumanFeed();
+        newFeed.Content = feedContentData;
+        newFeed.Owner = feedOwner;
+        newFeed.TimeStamp = DateTime.Now;
+
+        //Boolean result = fm.PublishFeed(newFeed);
+        //return result;
+        return true;
+    }
+
     protected void Page_Load(object sender, EventArgs e)
     {
 
