@@ -20,7 +20,7 @@ public partial class SignIn : System.Web.UI.Page
 
         if (hm.Login(userName, password))
         {
-            Session["humanID"] = human.ID;
+            Session.Add("humanID", 1);
             Response.Redirect("Home.aspx");
         }
         else

@@ -24,11 +24,30 @@ function hideFullFeedCommentContainer(feedId)
 
 function AjaxPostFeedComment(feedId)
 {
-    PageMethods.AjaxPostFeedComment(feedId, AjaxPostFeedCommentSuccess);
+    var feedCommentData = $("#feed-post-comment-input-" + feedId).val();
+    PageMethods.AjaxPostFeedComment(feedId, feedCommentData, AjaxPostFeedCommentSuccess);
+
+    // Clear input text
+    $("#feed-post-comment-input-" + feedId).val('');  
+
+    //Remove Box
+    hideFullFeedCommentContainer(feedId);
 }
 function AjaxPostFeedCommentSuccess(result, userContext, methodName)
 {
     alert(result);
+
+    //LoadFeedsAgain and display them, cause there is maybe new +1 comments
+    AjaxGetAllFeedComments(result);
+}
+function AjaxGetAllFeedComments(feedID)
+{
+    PageMethods.AjaxGetAllFeedComments(feedID, OnAjaxGetAllFeedCommentsSuccess);
+}
+function OnAjaxGetAllFeedCommentsSuccess(result, userContext, methodName)
+{
+    alert("loaded:" + result.FeedId);
+    //$("#feed-container-" + result.FeedId + ".feed-comments-container").html(result.CommentsRawData);
 }
 
 function initUI()

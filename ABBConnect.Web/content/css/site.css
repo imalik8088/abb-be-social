@@ -284,6 +284,7 @@ header .logo
     display: block;
     padding: 5px 10px;
     position: relative;
+    min-height:80px;
 }
 .feed-message-default
 {
@@ -480,4 +481,14 @@ img.feed-avatar
 {
     margin:auto;
     display:block;
+}
+/*Bootstrap label addons*/
+.label-default 
+{
+  background-color: #5bc0de;
+}
+.label-default[href]:hover,
+.label-default[href]:focus 
+{
+  background-color: #31b0d5;
 }

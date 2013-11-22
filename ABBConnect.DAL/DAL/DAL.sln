@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{D234912B-8ADF-48E4-A342-EEE338ADF593}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL.csproj", "{D234912B-8ADF-48E4-A342-EEE338ADF593}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
