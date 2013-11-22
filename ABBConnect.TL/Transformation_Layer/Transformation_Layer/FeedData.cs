@@ -490,7 +490,7 @@ namespace Transformation_Layer
             SQLParameter tempParam = new SQLParameter();
 
             tempParam.ParamaterName = "@feedID";
-            tempParam.ParamaterValue = numberOfFeeds;
+            tempParam.ParamaterValue = feedId;
             tempParam.ParamaterDirection = ParameterDirection.Input;
             tempParam.ParamaterDirectionSpecified = true;
             tempParam.ParameterType = SqlDbType.Int;
