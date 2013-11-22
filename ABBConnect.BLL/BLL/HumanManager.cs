@@ -79,7 +79,48 @@ namespace BLL
                     selectedUser.WorkRoom = tempString;
 
                 selectedUser.CompanyTitle = "";
+                selectedUser.ID = humanId;
 
+            }
+
+            return selectedUser;
+        }
+
+
+        public Human LoadHumanInformationByUsername(string username)
+        {
+            DataSet infoSet = userDbData.GetHumanInformationByUsername(username);
+            Human selectedUser = new Human();
+
+            DataTableCollection infoCollection = infoSet.Tables;
+
+            DataTable infoTable = infoCollection[0];
+
+            foreach (DataRow row in infoTable.Rows)
+            {
+                string tempString = row["Name"].ToString();
+                selectedUser.UserName = tempString == null ? "" : tempString;
+
+                tempString = row["FirstName"].ToString();
+                selectedUser.FirstName = tempString == null ? "" : tempString;
+
+                tempString = row["LastName"].ToString();
+                selectedUser.LastName = tempString == null ? "" : tempString;
+
+                tempString = row["PhoneNumber"].ToString();
+                selectedUser.PhoneNumber = tempString == null ? "" : tempString;
+
+                tempString = row["Email"].ToString();
+                selectedUser.Email = tempString == null ? "" : tempString;
+
+                tempString = row["Location"].ToString();
+                selectedUser.WorkRoom = tempString == null ? "" : tempString;
+
+                tempString = row["Id"].ToString();
+                int tempInt;
+                bool result = Int32.TryParse(tempString, out tempInt);
+                if (true == result)
+                    selectedUser.ID = tempInt;
 
             }
 
