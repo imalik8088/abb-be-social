@@ -1,3 +1,5 @@
+!*.dll
+
 # OS generated files #
 ######################
 .DS_Store
@@ -20,6 +22,7 @@ Thumbs.db
 
 [Rr]elease/
 x64/
+[Bb]in/
 build/
 [Oo]bj/
 
