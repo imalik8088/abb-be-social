@@ -14,8 +14,14 @@ public partial class MasterPage : System.Web.UI.MasterPage
         Human human = new Human();
         if (Session["humanID"] != null)
         {
-            human = hm.LoadHumanInformation((int)Session["humanID"]);
+            human = hm.LoadHumanInformation(int.Parse(HttpContext.Current.Session["humanID"].ToString()));
             labelHuman.Text = human.FirstName + " " + human.LastName;
         }
+    }
+
+    [System.Web.Services.WebMethod]
+    public void OnClickSignOut()
+    {
+        Session.Abandon();
     }
 }

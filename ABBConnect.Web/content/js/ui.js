@@ -110,3 +110,7 @@ function ClearModalBodyListener() {
 function initUI() {
     $('.dropdown-toggle').dropdown();
 }
+
+function OnClickSignOut() {
+    window.location.replace("SignIn.aspx");
+}
