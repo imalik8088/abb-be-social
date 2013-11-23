@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BLL;
+using System.Web.Script.Serialization;
 
 
 public partial class _Home : System.Web.UI.Page
@@ -43,7 +44,7 @@ public partial class _Home : System.Web.UI.Page
     }
 
     [System.Web.Services.WebMethod]
-    public static Boolean AjaxPostNewFeed(string feedContentData)
+    public static Boolean AjaxPostNewFeed(string feedContentData, string feedType, int feedPriority)
     {
         /* Check if user is loged, if not, return null, since we cannot do redirect from WebMethod
          * 
@@ -59,14 +60,44 @@ public partial class _Home : System.Web.UI.Page
         newFeed.Content = feedContentData;
         newFeed.Owner = feedOwner;
         newFeed.TimeStamp = DateTime.Now;
+        newFeed.Category = feedType;
 
-        //TODO add at least category and priority. then uncomment the publishing and the result
-        //hardcoded, alter so it's inputted
-        newFeed.Priority = 1;
-        newFeed.Category = "WorkPost";
+        //TODO create dynamic priority fetching
+        newFeed.Priority = feedPriority;
 
         Boolean result = fm.PublishFeed(newFeed);
         return result;
+    }
+
+    [System.Web.Services.WebMethod]
+    public static string AjaxGetPostTypes()
+    {
+        CommonDataManager commonDataManager = new CommonDataManager();
+        List<Category> categories = commonDataManager.GetFeedCategories();
+
+        JavaScriptSerializer serializer = new JavaScriptSerializer();
+
+        string returnString = serializer.Serialize(categories);
+
+        return returnString;
+    }
+
+    [System.Web.Services.WebMethod]
+    public static string AjaxGetPostPriorities()
+    {
+        //TODO delete in favor of dynamic fetching
+        //convert the enums into a dictionary
+        var enumType = typeof(Priority);
+        var enumDictionary = enumType
+            .GetFields()
+            .Where(x => x.IsLiteral)
+            .ToDictionary(x => x.Name, x => (int)Enum.Parse(enumType, x.Name));
+
+        JavaScriptSerializer serializer = new JavaScriptSerializer();
+
+        string returnString = serializer.Serialize(enumDictionary);
+
+        return returnString;
     }
 
     protected void Page_Load(object sender, EventArgs e)

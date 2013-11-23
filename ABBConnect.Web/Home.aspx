@@ -5,23 +5,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <script src="content/js/jquery-2.0.3.min.js"></script>
-    <script src="content/js/bootstrap.min.js"></script>
-    <script type="text/javascript">
-        //delegates for modals, so we can clear the data between the hides.
-        //at the moment, it has to be like this, i couldn't make it work with removeData
-        $(document).delegate('#modalNote', 'hidden.bs.modal', function (event) {
-            //$(this).data('bs.modal').$element.removeData();
-            $(this).html($(this).html());
-        });
-
-        $(document).delegate('#modalPicture', 'hidden.bs.modal', function (event) {
-            //$(this).find('textarea').val(null).blur();
-            $(this).html($(this).html());
-        });
-
-    </script>
-
     <div class="row">
         <div class="col-md-6">
             <div class="feed-header">
@@ -69,10 +52,20 @@
                                             <span class="input-group-addon"></span>
                                             <textarea id="textareaNote" class="input" placeholder="Insert your note text here..." style="width: 100%; resize: vertical"></textarea>
                                         </div>
+                                        <br />
+                                        <h5>Please select the note type:</h5>
+                                        <!--SelectBox for post body-->
+                                        <select class="form-control" id="selectModalNoteMessage">
+                                        </select>
+                                        <br />
+                                        <h5>Please select the note priority:</h5>
+                                        <!--SelectBox for priority-->
+                                        <select class="form-control" id="selectModalNotePriority">
+                                        </select>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="ClearModal()">Close</button>
-                                        <button type="button" class="btn btn-primary" onclick="AjaxPostNewFeed()">Post new note</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="AjaxPostNewFeed()">Post new note</button>
                                     </div>
                                 </div>
                                 <!-- /.modal-content -->
@@ -89,15 +82,6 @@
                                         <h4 class="modal-title" id="H1">Add a new picture note</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <br />
-                                        <h5>Please insert the description of the picture:</h5>
-
-                                        <!-- Textbox -->
-                                        <div class="input-group">
-                                            <span class="input-group-addon"></span>
-                                            <textarea class="input" placeholder="Insert your note text here..." style="width: 100%; resize: vertical"></textarea>
-                                        </div>
-
                                         <!-- File upload-->
                                         <input id="filePicture" type="file" style="display: none" />
                                         <div class="input-append">
@@ -110,10 +94,19 @@
                                                 $('#inputPicturePath').val($(this).val());
                                             });
                                         </script>
+
+                                        <br />
+                                        <h5>Please insert the description of the picture:</h5>
+
+                                        <!-- Textbox -->
+                                        <div class="input-group">
+                                            <span class="input-group-addon"></span>
+                                            <textarea class="input" placeholder="Insert your note text here..." style="width: 100%; resize: vertical"></textarea>
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Post new picture note</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="ClearModal()">Close</button>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="ClearModal()">Post new picture note</button>
                                     </div>
                                 </div>
                                 <!-- /.modal-content -->
@@ -359,5 +352,11 @@
             max: 400,
             title: "Wind speed [km/h]"
         });
+
+        //listener for clearing the modals
+        ClearModalBodyListener();
+
+        PopulateSelectBoxPostType();
+        PopulateSelectBoxPriority();
     </script>
 </asp:Content>
