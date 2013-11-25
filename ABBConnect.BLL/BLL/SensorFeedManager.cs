@@ -92,9 +92,9 @@ namespace BLL
                 tempContainer.Append(row["PrioCategory"].ToString());
 
                 if (tempContainer.ToString() == null)
-                    senFeed.Category = "";
+                    senFeed.Category.CategoryName = "";
                 else
-                    senFeed.Category = tempContainer.ToString();
+                    senFeed.Category.CategoryName = tempContainer.ToString();
 
                 tempContainer.Clear();
                 lsSenFeed.Add(senFeed);
@@ -182,9 +182,9 @@ namespace BLL
                 tempContainer.Append(row["PrioCategory"].ToString());
 
                 if (tempContainer.ToString() == null)
-                    senFeed.Category = "";
+                    senFeed.Category.CategoryName = "";
                 else
-                    senFeed.Category = tempContainer.ToString();
+                    senFeed.Category.CategoryName = tempContainer.ToString();
 
                 tempContainer.Clear();
                 lsSenFeed.Add(senFeed);

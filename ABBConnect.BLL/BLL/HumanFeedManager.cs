@@ -43,7 +43,7 @@ namespace BLL
                 tempContainer.Clear();
 
                 tempContainer.Append(AvoidStringNulls(row["PrioCategory"].ToString()));
-                usFeed.Category = tempContainer.ToString();
+                usFeed.Category.CategoryName = tempContainer.ToString();
                 tempContainer.Clear();
 
                 tempContainer.Append(AvoidStringNulls(row["FilePath"].ToString()));
@@ -134,11 +134,10 @@ namespace BLL
                 tempContainer.Clear();
                 tempContainer.Append(row["PrioCategory"].ToString());
                  if (tempContainer.ToString() == null)
-                    usFeed.Category = "";
+                    usFeed.Category.CategoryName = "";
                 else
-                    usFeed.Category = tempContainer.ToString();
+                    usFeed.Category.CategoryName = tempContainer.ToString();
 
-                usFeed.Category = tempContainer.ToString();
                 tempContainer.Clear();
                 
                 tempContainer.Append((row["CreationTimeStamp"].ToString()));

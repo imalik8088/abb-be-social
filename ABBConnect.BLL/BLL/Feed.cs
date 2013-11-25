@@ -15,7 +15,7 @@ namespace BLL
             this.timeStamp = DateTime.MinValue;
             this.location = "";
             this.content = "";
-            this.category = "";
+            this.category.CategoryName = "";
         }
 
         private int iD;

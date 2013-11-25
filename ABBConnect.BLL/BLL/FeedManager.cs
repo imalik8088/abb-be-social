@@ -50,7 +50,7 @@ namespace BLL
                     tempContainer.Clear();
 
                     tempContainer.Append(AvoidStringNulls(row["PrioCategory"].ToString()));
-                    usFeed.Category = tempContainer.ToString();
+                    usFeed.Category.CategoryName = tempContainer.ToString();
                     tempContainer.Clear();
 
                     tempContainer.Append(AvoidStringNulls(row["Username"].ToString()));
@@ -97,7 +97,7 @@ namespace BLL
                     tempContainer.Clear();
 
                     tempContainer.Append(AvoidStringNulls(row["PrioCategory"].ToString()));
-                    senFeed.Category = tempContainer.ToString();
+                    senFeed.Category.CategoryName = tempContainer.ToString();
                     tempContainer.Clear();
 
                     tempContainer.Append(AvoidStringNulls(row["Username"].ToString()));
@@ -171,7 +171,7 @@ namespace BLL
                     tempContainer.Clear();
 
                     tempContainer.Append(AvoidStringNulls(row["PrioCategory"].ToString()));
-                    usFeed.Category = tempContainer.ToString();
+                    usFeed.Category.CategoryName = tempContainer.ToString();
                     tempContainer.Clear();
 
                     tempContainer.Append(AvoidStringNulls(row["Username"].ToString()));
@@ -218,7 +218,7 @@ namespace BLL
                     tempContainer.Clear();
 
                     tempContainer.Append(AvoidStringNulls(row["PrioCategory"].ToString()));
-                    senFeed.Category = tempContainer.ToString();
+                    senFeed.Category.CategoryName = tempContainer.ToString();
                     tempContainer.Clear();
 
                     tempContainer.Append(AvoidStringNulls(row["Username"].ToString()));
@@ -289,7 +289,7 @@ namespace BLL
                     tempContainer.Clear();
 
                     tempContainer.Append(AvoidStringNulls(row["PrioCategory"].ToString()));
-                    usFeed.Category = tempContainer.ToString();
+                    usFeed.Category.CategoryName = tempContainer.ToString();
                     tempContainer.Clear();
 
                     tempContainer.Append(AvoidStringNulls(row["FirstName"].ToString()));
@@ -339,7 +339,7 @@ namespace BLL
                     tempContainer.Clear();
 
                     tempContainer.Append(AvoidStringNulls(row["PrioCategory"].ToString()));
-                    senFeed.Category = tempContainer.ToString();
+                    senFeed.Category.CategoryName = tempContainer.ToString();
                     tempContainer.Clear();
 
                     tempContainer.Append(AvoidStringNulls(row["Name"].ToString()));
@@ -562,7 +562,7 @@ namespace BLL
                     tempContainer.Clear();
 
                     tempContainer.Append(AvoidStringNulls(row["PrioCategory"].ToString()));
-                    usFeed.Category = tempContainer.ToString();
+                    usFeed.Category.CategoryName = tempContainer.ToString();
                     tempContainer.Clear();
 
                     tempContainer.Append(AvoidStringNulls(row["Username"].ToString()));
@@ -609,7 +609,7 @@ namespace BLL
                     tempContainer.Clear();
 
                     tempContainer.Append(AvoidStringNulls(row["PrioCategory"].ToString()));
-                    senFeed.Category = tempContainer.ToString();
+                    senFeed.Category.CategoryName = tempContainer.ToString();
                     tempContainer.Clear();
 
                     tempContainer.Append(AvoidStringNulls(row["Username"].ToString()));
