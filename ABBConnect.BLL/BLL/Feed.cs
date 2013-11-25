@@ -83,8 +83,8 @@ namespace BLL
             }
         }
 
-        private string category;
-        public string Category
+        private Category category;
+        public Category Category
         {
             get
             {

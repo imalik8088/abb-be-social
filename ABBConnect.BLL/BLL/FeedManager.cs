@@ -369,9 +369,7 @@ namespace BLL
                 return false;
             else if (String.IsNullOrEmpty(feed.Content) && String.IsNullOrEmpty(feed.MediaFilePath))
                 return false;
-            else if (String.IsNullOrEmpty(feed.Category) || feed.Priority == 0)
-                return false;
-            else if (feed.Priority <= 0)
+            else if (feed.Category.Id < 1)
                 return false;
             else
             {
@@ -379,7 +377,7 @@ namespace BLL
                     taggedUsers.Add(u.UserName);
 
                 return this.postDbData.PublishFeed(feed.Owner.ID, taggedUsers, feed.Location,
-                    feed.Content, feed.Category, feed.MediaFilePath, feed.Priority);
+                    feed.Content, feed.Category.CategoryName, feed.MediaFilePath, feed.Category.Id);
             }
         }
 
