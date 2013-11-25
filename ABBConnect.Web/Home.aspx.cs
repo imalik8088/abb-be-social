@@ -49,7 +49,7 @@ public partial class _Home : System.Web.UI.Page
         /* Check if user is loged, if not, return null, since we cannot do redirect from WebMethod
          * 
          */
-
+        CommonDataManager cdm = new CommonDataManager();
         FeedManager fm = new FeedManager();
         HumanManager hm = new HumanManager();
 
@@ -60,7 +60,7 @@ public partial class _Home : System.Web.UI.Page
         newFeed.Content = feedContentData;
         newFeed.Owner = feedOwner;
         newFeed.TimeStamp = DateTime.Now;
-        newFeed.Category = feedType;
+        newFeed.Category = cdm.GetFeedCategories().Where(tempCat => tempCat.CategoryName == feedType).Single();
 
         //TODO create dynamic priority fetching
         newFeed.Priority = feedPriority;

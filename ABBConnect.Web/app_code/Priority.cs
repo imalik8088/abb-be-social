@@ -9,9 +9,9 @@ using System.Web;
 public enum Priority
 {
     //TODO remove this in favor of dynamic priority fetching
-    Low=1,
-    Medium=2,
+    Low=5,
+    Medium=4,
     High=3,
-    VeryHigh=4,
-    Danger=5
+    VeryHigh=2,
+    Danger=1
 }

@@ -17,10 +17,10 @@ public class Core
         switch (intPriorityId)
         {
             case 1:
-                cssClassName = "critical";
+                cssClassName = "danger";
                 break;
             case 2:
-                cssClassName = "critical";
+                cssClassName = "danger";
                 break;                
             case 3:
                 cssClassName = "warning";
