@@ -136,6 +136,7 @@
     <Content Include="Background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="camera.png" />
     <Content Include="Icons\B8Xb1E5.jpg" />
     <Content Include="Icons\symbol_comment.png" />
     <Content Include="Icons\symbol_tag.png" />
