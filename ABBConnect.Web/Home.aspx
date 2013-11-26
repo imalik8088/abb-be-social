@@ -58,10 +58,6 @@
                                         <select class="form-control" id="selectModalNoteMessage">
                                         </select>
                                         <br />
-                                        <h5>Please select the note priority:</h5>
-                                        <!--SelectBox for priority-->
-                                        <select class="form-control" id="selectModalNotePriority">
-                                        </select>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -357,6 +353,5 @@
         ClearModalBodyListener();
 
         PopulateSelectBoxPostType();
-        PopulateSelectBoxPriority();
     </script>
 </asp:Content>
