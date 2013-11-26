@@ -6,10 +6,29 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BLL;
 using System.Web.Script.Serialization;
+using System.IO;
 
 
 public partial class _Home : System.Web.UI.Page
 {
+    [System.Web.Services.WebMethod]
+    public static AjaxFeeds AjaxLoadMoreFeeds(int lastLoadedFeedId)
+    {
+        AjaxFeeds af = new AjaxFeeds(lastLoadedFeedId);
+        Page page = new Page();
+        page.ClientIDMode = ClientIDMode.Static;
+
+        controls_FeedPage fp = (controls_FeedPage)page.LoadControl("controls/FeedPage.ascx");
+        page.Controls.Add(fp);
+        fp.EnableViewState = false;
+        fp.LastFeedId = lastLoadedFeedId;
+
+        StringWriter textWriter = new StringWriter();
+        HttpContext.Current.Server.Execute(page, textWriter, false);
+
+        af.FeedsRawData = textWriter.ToString();
+        return af;
+    }
     [System.Web.Services.WebMethod]
     public static int AjaxPostFeedComment(int feedId, string feedCommentData)
     {
@@ -30,8 +49,6 @@ public partial class _Home : System.Web.UI.Page
 
         fm.PublishComment(feedId, feedComment);
         return feedId;
-
-        //DEBUG return "INSERT EXECUTED {" + feedId + " , " + int.Parse(HttpContext.Current.Session["humanID"].ToString()) + "} @" + DateTime.Now.ToLongTimeString();
     }
     [System.Web.Services.WebMethod]
     public static AjaxFeedComments AjaxGetAllFeedComments(int feedId)
@@ -81,6 +98,6 @@ public partial class _Home : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        FeedPage.LastFeedId = 86;
     }
 }

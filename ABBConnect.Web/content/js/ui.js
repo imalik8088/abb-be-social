@@ -18,6 +18,15 @@ function hideFullFeedCommentContainer(feedId) {
     $("#feed-post-comment-input-" + feedId.toString()).val('Write comment...');
 }
 
+function AjaxLoadMoreFeeds(lastLoadedFeedId) {
+    PageMethods.AjaxLoadMoreFeeds(lastLoadedFeedId, AjaxLoadMoreFeedsSuccess);
+}
+function AjaxLoadMoreFeedsSuccess(result, userContext, methodName) {
+
+    var feedsRawData = $(result.FeedsRawData).hide().fadeIn("fast");
+    $('#feedsContainer').append(feedsRawData);
+}
+
 function AjaxPostFeedComment(feedId) {
     var feedCommentData = $("#feed-post-comment-input-" + feedId).val();
     PageMethods.AjaxPostFeedComment(feedId, feedCommentData, AjaxPostFeedCommentSuccess);
