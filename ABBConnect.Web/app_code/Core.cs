@@ -16,19 +16,19 @@ public class Core
 
         switch (intPriorityId)
         {
-            case 1:
+            case 5:
                 cssClassName = "danger";
                 break;
-            case 2:
+            case 4:
                 cssClassName = "danger";
                 break;                
             case 3:
                 cssClassName = "warning";
                 break;                
-            case 4:
-                cssClassName = "warning";
+            case 2:
+                cssClassName = "default";
                 break;                
-            case 5:
+            case 1:
                 cssClassName = "default";
                 break;
         }
