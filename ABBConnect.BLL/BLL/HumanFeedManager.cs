@@ -76,7 +76,7 @@ namespace BLL
 
                 castRes = CastStringToInt(tempContainer.ToString(), ref tempInt);
                 if (castRes)
-                    usFeed.Priority = tempInt;
+                    usFeed.Category.Priority = tempInt;
 
                 tempContainer.Clear();
 
@@ -166,7 +166,7 @@ namespace BLL
 
                 castRes = CastStringToInt(tempContainer.ToString(), ref tempInt);
                 if (castRes)
-                    usFeed.Priority = tempInt;
+                    usFeed.Category.Priority = tempInt;
 
                 tempContainer.Clear();
 

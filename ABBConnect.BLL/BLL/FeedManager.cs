@@ -40,7 +40,7 @@ namespace BLL
                     tempContainer.Append(AvoidStringNulls(row["PrioValue"].ToString()));
 
                     if (CastStringToInt(tempContainer.ToString(), ref tempInt))
-                        usFeed.Priority = tempInt;
+                        usFeed.Category.Priority = tempInt;
                     tempContainer.Clear();
 
                     tempContainer.Append(AvoidStringNulls(row["UserId"].ToString()));
@@ -93,7 +93,7 @@ namespace BLL
                     tempContainer.Append(AvoidStringNulls(row["PrioValue"].ToString()));
 
                     if (CastStringToInt(tempContainer.ToString(), ref tempInt))
-                        senFeed.Priority = tempInt;
+                        senFeed.Category.Priority = tempInt;
                     tempContainer.Clear();
 
                     tempContainer.Append(AvoidStringNulls(row["PrioCategory"].ToString()));
@@ -161,7 +161,7 @@ namespace BLL
                     tempContainer.Append(AvoidStringNulls(row["PrioValue"].ToString()));
 
                     if (CastStringToInt(tempContainer.ToString(), ref tempInt))
-                        usFeed.Priority = tempInt;
+                        usFeed.Category.Priority = tempInt;
                     tempContainer.Clear();
 
                     tempContainer.Append(AvoidStringNulls(row["UserId"].ToString()));
@@ -214,7 +214,7 @@ namespace BLL
                     tempContainer.Append(AvoidStringNulls(row["PrioValue"].ToString()));
 
                     if (CastStringToInt(tempContainer.ToString(), ref tempInt))
-                        senFeed.Priority = tempInt;
+                        senFeed.Category.Priority = tempInt;
                     tempContainer.Clear();
 
                     tempContainer.Append(AvoidStringNulls(row["PrioCategory"].ToString()));
@@ -285,7 +285,7 @@ namespace BLL
                     tempContainer.Append(AvoidStringNulls(row["PrioValue"].ToString()));
 
                     if (CastStringToInt(tempContainer.ToString(), ref tempInt))
-                        usFeed.Priority = tempInt;
+                        usFeed.Category.Priority = tempInt;
                     tempContainer.Clear();
 
                     tempContainer.Append(AvoidStringNulls(row["PrioCategory"].ToString()));
@@ -335,7 +335,7 @@ namespace BLL
                     tempContainer.Append(AvoidStringNulls(row["PrioValue"].ToString()));
 
                     if (CastStringToInt(tempContainer.ToString(), ref tempInt))
-                        senFeed.Priority = tempInt;
+                        senFeed.Category.Priority = tempInt;
                     tempContainer.Clear();
 
                     tempContainer.Append(AvoidStringNulls(row["PrioCategory"].ToString()));
@@ -552,7 +552,7 @@ namespace BLL
                     tempContainer.Append(AvoidStringNulls(row["PrioValue"].ToString()));
 
                     if (CastStringToInt(tempContainer.ToString(), ref tempInt))
-                        usFeed.Priority = tempInt;
+                        usFeed.Category.Priority = tempInt;
                     tempContainer.Clear();
 
                     tempContainer.Append(AvoidStringNulls(row["UserId"].ToString()));
@@ -605,7 +605,7 @@ namespace BLL
                     tempContainer.Append(AvoidStringNulls(row["PrioValue"].ToString()));
 
                     if (CastStringToInt(tempContainer.ToString(), ref tempInt))
-                        senFeed.Priority = tempInt;
+                        senFeed.Category.Priority = tempInt;
                     tempContainer.Clear();
 
                     tempContainer.Append(AvoidStringNulls(row["PrioCategory"].ToString()));

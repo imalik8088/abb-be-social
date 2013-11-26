@@ -33,5 +33,18 @@ namespace BLL
                 id = value;
             }
         }
+
+        private int priority;
+        public int Priority
+        {
+            get
+            {
+                return priority;
+            }
+            set
+            {
+                priority = value;
+            }
+        }
     }
 }

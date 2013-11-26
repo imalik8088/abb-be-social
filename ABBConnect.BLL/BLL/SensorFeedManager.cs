@@ -86,7 +86,7 @@ namespace BLL
 
                 castRes = CastStringToInt(tempContainer.ToString(), ref tempInt);
                 if (castRes)
-                    senFeed.Priority = tempInt;
+                    senFeed.Category.Priority = tempInt;
 
                 tempContainer.Clear();
                 tempContainer.Append(row["PrioCategory"].ToString());
@@ -164,7 +164,7 @@ namespace BLL
 
                 castRes = CastStringToInt(tempContainer.ToString(), ref tempInt);
                 if (castRes)
-                    senFeed.Priority = tempInt;
+                    senFeed.Category.Priority = tempInt;
 
                 tempContainer.Clear();
                 tempContainer.Append(row["FeedId"].ToString());
