@@ -17,10 +17,10 @@ namespace ABBConnect___Windows_Phone
             InitializeComponent();
         }
 
-        public NoImageFeedControl(string author, string username, string content, int noOfTags, int noOfComments, string location, DateTime timestamp)
+        public NoImageFeedControl(int id, string username, string content, int noOfTags, int noOfComments, string location, DateTime timestamp)
         {
             InitializeComponent();
-            SetAuthor(author, username);
+            SetAuthor(id, username);
             SetContent(content);
             SetNumberOfTags(noOfTags);
             SetNumberOfComments(noOfComments);
@@ -39,10 +39,10 @@ namespace ABBConnect___Windows_Phone
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Feed.xaml", UriKind.Relative));
         }
 
-        internal void SetAuthor(string p, string username)
+        internal void SetAuthor(int id, string username)
         {
-            Author.Text = p;
-            Author.Tag = username;
+            Author.Text = username;
+            Author.Tag = id;
         }
 
         internal void SetContent(string p)

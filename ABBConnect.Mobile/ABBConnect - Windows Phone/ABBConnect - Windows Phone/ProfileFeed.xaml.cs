@@ -24,13 +24,11 @@ namespace ABBConnect___Windows_Phone
 
         private void FillFeedList(Test t)
         {
-            NoImageFeedControl nfc = new NoImageFeedControl(t.Author, "rgn09003", t.Content, t.Tags.Count, t.Comments.Count, t.Location, t.Timestamp);
+           // NoImageFeedControl nfc = new NoImageFeedControl(t.Author, "rgn09003", t.Content, t.Tags.Count, t.Comments.Count, t.Location, t.Timestamp);
             FeedControl fc = new FeedControl(t.Author, "rgn09003", t.Content, t.Tags.Count, t.Comments.Count, t.Location, t.Timestamp, "");
 
-            if (new Random().Next(0, 100) % 2 == 0)
-                lstbFeeds.Items.Add(fc);
-            else
-                lstbFeeds.Items.Add(nfc);
+            lstbFeeds.Items.Add(fc);
+
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

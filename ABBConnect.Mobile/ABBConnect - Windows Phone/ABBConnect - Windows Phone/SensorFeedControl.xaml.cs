@@ -19,11 +19,11 @@ namespace ABBConnect___Windows_Phone
             InitializeComponent();
         }
 
-        public SensorFeedControl(string author, int id, string content, string location, DateTime dateTime)
+        public SensorFeedControl(int id, string username, string content, string location, DateTime dateTime)
         {
             InitializeComponent();
 
-            SetAuthor(author, id);
+            SetAuthor(id, username);
             SetContent(content);
             SetLocation(location);
             SetTimeStamp(dateTime);
@@ -40,9 +40,9 @@ namespace ABBConnect___Windows_Phone
         }
 
 
-        internal void SetAuthor(string p, int id)
+        internal void SetAuthor(int id, string username)
         {
-            Author.Text = p;
+            Author.Text = username;
             Author.Tag = id;
         }
 

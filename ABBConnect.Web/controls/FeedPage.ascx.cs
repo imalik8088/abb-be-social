@@ -10,18 +10,23 @@ using BLL;
 
 public partial class controls_FeedPage : System.Web.UI.UserControl
 {
+    // Default Feed Settings
+    public int PageSize = 10;
+    public int LastFeedId = 0;
+
     protected void Page_Load(object sender, EventArgs e)
     {
         FeedManager fm = new FeedManager();
-        List<Feed> last20Feeds = fm.LoadLatestXFeeds(100);
+        List<Feed> singlePageFeeds = fm.LoadLatestXFeedsFromId(this.LastFeedId, this.PageSize);
 
-        FeedRepeater.DataSource = last20Feeds;
+        FeedRepeater.DataSource = singlePageFeeds;
         FeedRepeater.DataBind();        
     }
 
     protected void FeedRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
     {      
         Literal l = new Literal();
+        HtmlAnchor a = new HtmlAnchor();
         HtmlGenericControl hgc = new HtmlGenericControl();
         if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
         {
@@ -42,6 +47,9 @@ public partial class controls_FeedPage : System.Web.UI.UserControl
             feedCommentsRepeater.DataSource = currentFeed.Comments;
             feedCommentsRepeater.DataBind();
 
+            // Render LoadMore Link
+            a = (HtmlAnchor)this.FindControl("load_more");
+            a.Attributes.Add("onclick", "$(this).fadeOut(300); AjaxLoadMoreFeeds(" + currentFeed.ID +  ")");
         }
     }
 

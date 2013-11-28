@@ -399,6 +399,15 @@ img.feed-avatar
     margin-top:5px;
     text-align:right;
 }
+.feed-page-load-more-container
+{    
+    text-align:center;
+}
+.feed-page-load-more-anchor
+{    
+    padding-left:60px;
+    padding-right:60px;
+}
 /* Sensor config */
 .feed-gauge-size
 {

@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ABBConnectWCF" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/ABBJSONService" />
+      <xs:element name="LogIn">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="LogInResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="LogInResult" type="xs:boolean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetHumanInformation">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetHumanInformationResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/ABBJSONService" minOccurs="0" name="GetHumanInformationResult" nillable="true" type="q1:GetHumanInformation_Result" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetHumanInformationByUsername">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetHumanInformationByUsernameResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/ABBJSONService" minOccurs="0" name="GetHumanInformationByUsernameResult" nillable="true" type="q2:GetHumanInformationByUsername_Result" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetLatestXFeeds">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="X" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetLatestXFeedsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/ABBJSONService" minOccurs="0" name="GetLatestXFeedsResult" nillable="true" type="q3:ArrayOfGetLatestXFeeds_Result" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetLatestXFeedsFromId">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="X" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetLatestXFeedsFromIdResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/ABBJSONService" minOccurs="0" name="GetLatestXFeedsFromIdResult" nillable="true" type="q4:ArrayOfGetLatestXFeedsFromId_Result" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="PostFeed">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="text" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="filepath" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="prioId" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="PostFeedResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="PostFeedResult" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetCategories">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetCategoriesResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/ABBJSONService" minOccurs="0" name="GetCategoriesResult" nillable="true" type="q5:ArrayOfGetPriorityCategories_Result" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetFeedComments">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="feedId" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetFeedCommentsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/ABBJSONService" minOccurs="0" name="GetFeedCommentsResult" nillable="true" type="q6:ArrayOfGetFeedComments_Result" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetFeedTags">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="feedId" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetFeedTagsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/ABBJSONService" minOccurs="0" name="GetFeedTagsResult" nillable="true" type="q7:ArrayOfGetFeedTags_Result" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="anyType" nillable="true" type="xs:anyType" />
+      <xs:element name="anyURI" nillable="true" type="xs:anyURI" />
+      <xs:element name="base64Binary" nillable="true" type="xs:base64Binary" />
+      <xs:element name="boolean" nillable="true" type="xs:boolean" />
+      <xs:element name="byte" nillable="true" type="xs:byte" />
+      <xs:element name="dateTime" nillable="true" type="xs:dateTime" />
+      <xs:element name="decimal" nillable="true" type="xs:decimal" />
+      <xs:element name="double" nillable="true" type="xs:double" />
+      <xs:element name="float" nillable="true" type="xs:float" />
+      <xs:element name="int" nillable="true" type="xs:int" />
+      <xs:element name="long" nillable="true" type="xs:long" />
+      <xs:element name="QName" nillable="true" type="xs:QName" />
+      <xs:element name="short" nillable="true" type="xs:short" />
+      <xs:element name="string" nillable="true" type="xs:string" />
+      <xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte" />
+      <xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt" />
+      <xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong" />
+      <xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort" />
+      <xs:element name="char" nillable="true" type="tns:char" />
+      <xs:simpleType name="char">
+        <xs:restriction base="xs:int" />
+      </xs:simpleType>
+      <xs:element name="duration" nillable="true" type="tns:duration" />
+      <xs:simpleType name="duration">
+        <xs:restriction base="xs:duration">
+          <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?" />
+          <xs:minInclusive value="-P10675199DT2H48M5.4775808S" />
+          <xs:maxInclusive value="P10675199DT2H48M5.4775807S" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="guid" nillable="true" type="tns:guid" />
+      <xs:simpleType name="guid">
+        <xs:restriction base="xs:string">
+          <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:attribute name="FactoryType" type="xs:QName" />
+      <xs:attribute name="Id" type="xs:ID" />
+      <xs:attribute name="Ref" type="xs:IDREF" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/ABBJSONService" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ABBJSONService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="GetHumanInformation_Result">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Location" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PhoneNumber" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="GetHumanInformation_Result" nillable="true" type="tns:GetHumanInformation_Result" />
+      <xs:complexType name="GetHumanInformationByUsername_Result">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Location" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PhoneNumber" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="GetHumanInformationByUsername_Result" nillable="true" type="tns:GetHumanInformationByUsername_Result" />
+      <xs:complexType name="ArrayOfGetLatestXFeeds_Result">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="GetLatestXFeeds_Result" nillable="true" type="tns:GetLatestXFeeds_Result" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfGetLatestXFeeds_Result" nillable="true" type="tns:ArrayOfGetLatestXFeeds_Result" />
+      <xs:complexType name="GetLatestXFeeds_Result">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CreationTimeStamp" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="FeedId" type="xs:int" />
+          <xs:element minOccurs="0" name="FilePath" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Location" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PrioCategory" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PrioValue" type="xs:int" />
+          <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="UserId" type="xs:int" />
+          <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="GetLatestXFeeds_Result" nillable="true" type="tns:GetLatestXFeeds_Result" />
+      <xs:complexType name="ArrayOfGetLatestXFeedsFromId_Result">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="GetLatestXFeedsFromId_Result" nillable="true" type="tns:GetLatestXFeedsFromId_Result" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfGetLatestXFeedsFromId_Result" nillable="true" type="tns:ArrayOfGetLatestXFeedsFromId_Result" />
+      <xs:complexType name="GetLatestXFeedsFromId_Result">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CreationTimeStamp" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="FeedId" type="xs:int" />
+          <xs:element minOccurs="0" name="FilePath" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Location" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PrioCategory" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PrioValue" type="xs:int" />
+          <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="UserId" type="xs:int" />
+          <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="GetLatestXFeedsFromId_Result" nillable="true" type="tns:GetLatestXFeedsFromId_Result" />
+      <xs:complexType name="ArrayOfGetPriorityCategories_Result">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="GetPriorityCategories_Result" nillable="true" type="tns:GetPriorityCategories_Result" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfGetPriorityCategories_Result" nillable="true" type="tns:ArrayOfGetPriorityCategories_Result" />
+      <xs:complexType name="GetPriorityCategories_Result">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="GetPriorityCategories_Result" nillable="true" type="tns:GetPriorityCategories_Result" />
+      <xs:complexType name="ArrayOfGetFeedComments_Result">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="GetFeedComments_Result" nillable="true" type="tns:GetFeedComments_Result" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfGetFeedComments_Result" nillable="true" type="tns:ArrayOfGetFeedComments_Result" />
+      <xs:complexType name="GetFeedComments_Result">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CommentText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CreationTimeStamp" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="GetFeedComments_Result" nillable="true" type="tns:GetFeedComments_Result" />
+      <xs:complexType name="ArrayOfGetFeedTags_Result">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="GetFeedTags_Result" nillable="true" type="tns:GetFeedTags_Result" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfGetFeedTags_Result" nillable="true" type="tns:ArrayOfGetFeedTags_Result" />
+      <xs:complexType name="GetFeedTags_Result">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="UserId" type="xs:int" />
+          <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="GetFeedTags_Result" nillable="true" type="tns:GetFeedTags_Result" />
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="IABBConnectWCF_LogIn_InputMessage">
+    <wsdl:part name="parameters" element="tns:LogIn" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_LogIn_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LogInResponse" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetHumanInformation_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetHumanInformation" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetHumanInformation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetHumanInformationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetHumanInformationByUsername_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetHumanInformationByUsername" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetHumanInformationByUsername_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetHumanInformationByUsernameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetLatestXFeeds_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLatestXFeeds" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetLatestXFeeds_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLatestXFeedsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetLatestXFeedsFromId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLatestXFeedsFromId" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetLatestXFeedsFromId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLatestXFeedsFromIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_PostFeed_InputMessage">
+    <wsdl:part name="parameters" element="tns:PostFeed" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_PostFeed_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PostFeedResponse" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetCategories_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCategories" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetCategories_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCategoriesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetFeedComments_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFeedComments" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetFeedComments_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFeedCommentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetFeedTags_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFeedTags" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetFeedTags_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFeedTagsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IABBConnectWCF">
+    <wsdl:operation name="LogIn">
+      <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/LogIn" message="tns:IABBConnectWCF_LogIn_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/LogInResponse" message="tns:IABBConnectWCF_LogIn_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetHumanInformation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/GetHumanInformation" message="tns:IABBConnectWCF_GetHumanInformation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/GetHumanInformationResponse" message="tns:IABBConnectWCF_GetHumanInformation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetHumanInformationByUsername">
+      <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/GetHumanInformationByUsername" message="tns:IABBConnectWCF_GetHumanInformationByUsername_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/GetHumanInformationByUsernameResponse" message="tns:IABBConnectWCF_GetHumanInformationByUsername_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLatestXFeeds">
+      <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/GetLatestXFeeds" message="tns:IABBConnectWCF_GetLatestXFeeds_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/GetLatestXFeedsResponse" message="tns:IABBConnectWCF_GetLatestXFeeds_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLatestXFeedsFromId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/GetLatestXFeedsFromId" message="tns:IABBConnectWCF_GetLatestXFeedsFromId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/GetLatestXFeedsFromIdResponse" message="tns:IABBConnectWCF_GetLatestXFeedsFromId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PostFeed">
+      <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/PostFeed" message="tns:IABBConnectWCF_PostFeed_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/PostFeedResponse" message="tns:IABBConnectWCF_PostFeed_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCategories">
+      <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/GetCategories" message="tns:IABBConnectWCF_GetCategories_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/GetCategoriesResponse" message="tns:IABBConnectWCF_GetCategories_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFeedComments">
+      <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/GetFeedComments" message="tns:IABBConnectWCF_GetFeedComments_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/GetFeedCommentsResponse" message="tns:IABBConnectWCF_GetFeedComments_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFeedTags">
+      <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/GetFeedTags" message="tns:IABBConnectWCF_GetFeedTags_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/GetFeedTagsResponse" message="tns:IABBConnectWCF_GetFeedTags_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:service name="ABBConnectWCF" />
+</wsdl:definitions>

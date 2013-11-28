@@ -18,6 +18,15 @@ function hideFullFeedCommentContainer(feedId) {
     $("#feed-post-comment-input-" + feedId.toString()).val('Write comment...');
 }
 
+function AjaxLoadMoreFeeds(lastLoadedFeedId) {
+    PageMethods.AjaxLoadMoreFeeds(lastLoadedFeedId, AjaxLoadMoreFeedsSuccess);
+}
+function AjaxLoadMoreFeedsSuccess(result, userContext, methodName) {
+
+    var feedsRawData = $(result.FeedsRawData).hide().fadeIn("fast");
+    $('#feedsContainer').append(feedsRawData);
+}
+
 function AjaxPostFeedComment(feedId) {
     var feedCommentData = $("#feed-post-comment-input-" + feedId).val();
     PageMethods.AjaxPostFeedComment(feedId, feedCommentData, AjaxPostFeedCommentSuccess);
@@ -46,9 +55,8 @@ function OnAjaxGetAllFeedCommentsSuccess(result, userContext, methodName) {
 function AjaxPostNewFeed() {
     var feedContentData = $("#textareaNote").val();
     var feedType = $("#selectModalNoteMessage").val();
-    var feedPriority = $("#selectModalNotePriority").val();
 
-    PageMethods.AjaxPostNewFeed(feedContentData, feedType, feedPriority, OnAjaxPostNewFeedSuccess);
+    PageMethods.AjaxPostNewFeed(feedContentData, feedType, OnAjaxPostNewFeedSuccess);
 }
 function OnAjaxPostNewFeedSuccess(result, userContext, methodName) {
     if (result == true)
@@ -72,22 +80,6 @@ function OnPopulateSelectBoxPostType(result, userContext, methodName) {
         opt = document.createElement("option");
         opt.value = typeArray[i].CategoryName;
         opt.text = typeArray[i].CategoryName;
-        obj.appendChild(opt);
-    }
-}
-
-function PopulateSelectBoxPriority() {
-    PageMethods.AjaxGetPostPriorities(OnPopulateSelectBoxPostPriority);
-}
-function OnPopulateSelectBoxPostPriority(result, userContext, methodName) {
-    //receives a dictionary of priorities
-    var priorityDictionary = JSON.parse(result);
-    var obj = document.getElementById('selectModalNotePriority');
-
-    for (var key in priorityDictionary) {
-        opt = document.createElement("option");
-        opt.value = priorityDictionary[key];
-        opt.text = key;
         obj.appendChild(opt);
     }
 }
