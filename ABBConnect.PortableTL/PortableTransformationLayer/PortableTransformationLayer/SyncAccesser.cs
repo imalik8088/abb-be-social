@@ -24,7 +24,7 @@ using System.Threading.Tasks;
 
 namespace PortableTransformationLayer
 {
-    class SyncAccesser
+    public class SyncAccesser
     {
         private readonly string url = "http://83.255.84.243:85/ServiceJSON/ABBConnectWCF.svc/";
         List<GetLatestXFeeds_Result> ret;
