@@ -18,6 +18,7 @@ namespace BLL
             base.Tags = new List<Human>();
             this.owner = new Human();
 
+            base.ID = res.FeedId;
             base.Comments = listCom;
             base.Tags = listTag;
             base.TimeStamp = res.CreationTimeStamp;

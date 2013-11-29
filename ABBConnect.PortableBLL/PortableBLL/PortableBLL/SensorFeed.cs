@@ -16,6 +16,7 @@ namespace BLL
             base.Tags = new List<Human>();
             this.owner = new Sensor();
 
+            base.ID = res.FeedId;
             base.Comments = listCom;
             base.Tags = listTag;
             base.TimeStamp = res.CreationTimeStamp;
