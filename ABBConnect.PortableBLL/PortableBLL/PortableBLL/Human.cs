@@ -25,6 +25,7 @@ namespace BLL
             userName = result.Name;
             lastName = result.LastName;
             firstName = result.FirstName;
+            this.phoneNumber = result.PhoneNumber;
             email = result.Email;
             workRoom = result.Location;
             companyTitle = ""; 
@@ -35,6 +36,7 @@ namespace BLL
             userName = result.Name;
             lastName = result.LastName;
             firstName = result.FirstName;
+            this.phoneNumber = result.PhoneNumber;
             email = result.Email;
             workRoom = result.Location;
             companyTitle = "";
