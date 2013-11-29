@@ -23,6 +23,8 @@ namespace ABBConnect___Windows_Phone
     public partial class MainPage : PhoneApplicationPage
     {
         // Constructor
+        BLL.Human currentUser;
+
         public MainPage()
         {
 
@@ -32,13 +34,25 @@ namespace ABBConnect___Windows_Phone
             DataContext = App.ViewModel;
             this.Loaded += new RoutedEventHandler(MainPage_Loaded);
 
-
-            //  List<Test> feeds = new List<Test>();
-
+            LoadUser();
             LoadNewFeeds(10);
            // CreateControlsUsingObjects();
 
      
+        }
+        private async void LoadUser()
+        {
+            BLL.HumanManager hm = new BLL.HumanManager();
+            //  List<Test> feeds = new List<Test>();
+            currentUser = await hm.LoadHumanInformationByUsername("rgn09003");
+
+            lblEmailClick.Text = currentUser.Email;
+            lblPhoneClick.Text = currentUser.PhoneNumber;
+            lblNameClick.Text = currentUser.FirstName + " " + currentUser.LastName;
+            lblLocationClick.Text = currentUser.WorkRoom;
+
+            lblUserName.Text = currentUser.UserName;
+            lblTime.Text = DateTime.Now.ToShortTimeString();
         }
 
         private async void LoadNewFeeds(int amount)
@@ -74,10 +88,10 @@ namespace ABBConnect___Windows_Phone
         {
             for (int i = 0; i < feeds.Count; i++)
             {
-                if (feeds[i] is HumanFeed)
-                    FillFeedList((HumanFeed)feeds[i]);
+                if (feeds[i] is BLL.HumanFeed)
+                    FillFeedList((BLL.HumanFeed)feeds[i]);
                 else
-                    FillFeedList((SensorFeed)feeds[i]);
+                    FillFeedList((BLL.SensorFeed)feeds[i]);
             }
 
         }
@@ -107,11 +121,6 @@ namespace ABBConnect___Windows_Phone
 
         }
 
-        private void btnTakePicture_Click(object sender, RoutedEventArgs e)
-        {
-
- 
-        }
     
         void CameraCapture_Completed(object sender, PhotoResult e)
         {
@@ -132,9 +141,9 @@ namespace ABBConnect___Windows_Phone
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/ProfileFeed.xaml", UriKind.Relative));
         }
       
-        private void FillFeedList(HumanFeed t)
+        private void FillFeedList(BLL.HumanFeed hf)
         {
-            NoImageFeedControl nfc = new NoImageFeedControl(t.Owner.ID, t.Owner.UserName, t.Content, t.Tags.Count, t.Comments.Count, t.Location, t.TimeStamp);
+            NoImageFeedControl nfc = new NoImageFeedControl(hf);
             lstbFeeds.Items.Add(nfc);
         }
 
@@ -169,5 +178,32 @@ namespace ABBConnect___Windows_Phone
             }
 
         }
+
+
+        private async void btnPublish_MouseLeftButtonUp(object sender, RoutedEventArgs e)
+        {
+            BLL.FeedManager fm = new FeedManager();
+
+            BLL.HumanFeed hf = new BLL.HumanFeed();
+
+            //feed.Owner.ID, feed.Content, feed.MediaFilePath, feed.Category.Id
+            if (txtbContent.Text == "" || currentUser.ID == -1)
+                return;
+
+            hf.Owner.ID = currentUser.ID;
+            hf.Content = txtbContent.Text;
+            hf.MediaFilePath = "hej";//imgCapture.Source.ToString();
+            hf.Category.Id = 2;
+
+            bool res = await fm.PublishFeed(hf);
+
+            int hej;
+            if (res)
+                hej = 0;
+            else
+                hej = 1;
+        }
+   
+        
     }
 }

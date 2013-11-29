@@ -42,7 +42,7 @@
                     <ListBox x:Name="lstbTags" HorizontalAlignment="Left" Height="46" Margin="20,453,0,0" VerticalAlignment="Top" Width="436" SelectionMode="Multiple"/>
 
 
-                    <Button x:Name="btnPublish" Content="Publish" HorizontalAlignment="Left" Margin="10,504,0,0" VerticalAlignment="Top" Width="436" Height="93"/>
+                    <Button x:Name="btnPublish" Content="Publish" HorizontalAlignment="Left" Margin="10,504,0,0" VerticalAlignment="Top" Width="436" Height="93" Click="btnPublish_MouseLeftButtonUp"/>
                     <Image x:Name="imgCapture" HorizontalAlignment="Left" Height="245" Margin="55,32,0,0" VerticalAlignment="Top" Width="354" MouseLeftButtonUp="imgCapture_MouseLeftButtonUp" />
                     <TextBlock x:Name="lblUserName" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Text="Robert Gustavsson" VerticalAlignment="Top"/>
                     <TextBlock x:Name="lblTime" HorizontalAlignment="Left" Margin="364,5,0,0" TextWrapping="Wrap" Text="14:35" VerticalAlignment="Top"/>
@@ -54,18 +54,18 @@
             <controls:PivotItem Header="Profile">
                 <Grid>
                     <TextBlock x:Name="lblName" HorizontalAlignment="Left" Margin="30,10,0,0" TextWrapping="Wrap" Text="NAME" VerticalAlignment="Top"/>
-                    <TextBlock x:Name="lblNameClick" HorizontalAlignment="Left" Margin="30,42,0,0" TextWrapping="Wrap" Text="Robert Gustavsson" VerticalAlignment="Top" FontSize="32" RenderTransformOrigin="0.513,-0.111"/>
+                    <TextBlock x:Name="lblNameClick" HorizontalAlignment="Left" Margin="30,42,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="32" RenderTransformOrigin="0.513,-0.111"/>
 
 
                     <TextBlock x:Name="lblEmail" HorizontalAlignment="Left" Margin="30,120,0,0" TextWrapping="Wrap" Text="EMAIL" VerticalAlignment="Top"/>
-                    <TextBlock x:Name="lblEmailClick" HorizontalAlignment="Left" Margin="30,152,0,0" TextWrapping="Wrap" Text="rgn09003@student.mdh.se" VerticalAlignment="Top" FontSize="32"/>
+                    <TextBlock x:Name="lblEmailClick" HorizontalAlignment="Left" Margin="30,152,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="32"/>
 
 
                     <TextBlock x:Name="lblPhone" HorizontalAlignment="Left" Margin="30,230,0,0" TextWrapping="Wrap" Text="PHONE" VerticalAlignment="Top"/>
-                    <TextBlock x:Name="lblPhoneClick" HorizontalAlignment="Left" Margin="30,262,0,0" TextWrapping="Wrap" Text="0723065596" VerticalAlignment="Top" FontSize="32"/>
+                    <TextBlock x:Name="lblPhoneClick" HorizontalAlignment="Left" Margin="30,262,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="32"/>
 
                     <TextBlock x:Name="lblLocatio" HorizontalAlignment="Left" Margin="30,340,0,0" TextWrapping="Wrap" Text="LOCATION" VerticalAlignment="Top"/>
-                    <TextBlock x:Name="lblLocationClick" HorizontalAlignment="Left" Margin="30,367,0,0" TextWrapping="Wrap" Text="Control Room 1A" VerticalAlignment="Top" FontSize="32"/>
+                    <TextBlock x:Name="lblLocationClick" HorizontalAlignment="Left" Margin="30,367,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="32"/>
                 </Grid>
             </controls:PivotItem>
             <controls:PivotItem Header="SavedFilters">

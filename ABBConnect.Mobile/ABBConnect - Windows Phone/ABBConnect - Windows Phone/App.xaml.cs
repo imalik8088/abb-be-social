@@ -18,6 +18,20 @@ namespace ABBConnect___Windows_Phone
     public partial class App : Application
     {
         private static MainViewModel viewModel = null;
+        private static BLL.HumanFeed hFeed = new BLL.HumanFeed();
+
+        public static BLL.HumanFeed HFeed
+        {
+            get { return App.hFeed; }
+            set { App.hFeed = value; }
+        }
+        private static BLL.SensorFeed sFeed = new BLL.SensorFeed();
+
+        public static BLL.SensorFeed SFeed
+        {
+            get { return App.sFeed; }
+            set { App.sFeed = value; }
+        }
 
         /// <summary>
         /// A static ViewModel used by the views to bind against.

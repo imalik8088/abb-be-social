@@ -12,31 +12,36 @@ namespace ABBConnect___Windows_Phone
 {
     public partial class NoImageFeedControl : UserControl
     {
+        private BLL.HumanFeed hFeed;
+
         public NoImageFeedControl()
         {
             InitializeComponent();
         }
 
-        public NoImageFeedControl(int id, string username, string content, int noOfTags, int noOfComments, string location, DateTime timestamp)
+        public NoImageFeedControl(BLL.HumanFeed hf)
         {
             InitializeComponent();
-            SetAuthor(id, username);
-            SetContent(content);
-            SetNumberOfTags(noOfTags);
-            SetNumberOfComments(noOfComments);
-            SetLocation(location);
-            SetTimeStamp(timestamp);
+            SetAuthor(hf.Owner.ID, hf.Owner.UserName);
+            SetContent(hf.Content);
+            SetNumberOfTags(hf.Tags.Count);
+            SetNumberOfComments(hf.Comments.Count);
+            SetLocation(hf.Location);
+            SetTimeStamp(hf.TimeStamp);
+            hFeed = hf;
         }
 
         private void Author_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+           
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/ProfileFeed.xaml?username=" + Author.Tag, UriKind.Relative));
 
         }
 
         private void Content_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Feed.xaml", UriKind.Relative));
+            App.HFeed = hFeed;   
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/HumanFeed.xaml", UriKind.Relative));
         }
 
         internal void SetAuthor(int id, string username)
