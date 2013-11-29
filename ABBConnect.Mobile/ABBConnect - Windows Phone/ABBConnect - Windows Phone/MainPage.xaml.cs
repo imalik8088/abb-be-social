@@ -22,7 +22,6 @@ namespace ABBConnect___Windows_Phone
 {
     public partial class MainPage : PhoneApplicationPage
     {
-        
         // Constructor
         public MainPage()
         {
@@ -36,19 +35,43 @@ namespace ABBConnect___Windows_Phone
 
             //  List<Test> feeds = new List<Test>();
 
-            CallMe();
-            
+            LoadNewFeeds(10);
            // CreateControlsUsingObjects();
 
      
         }
 
-        private async void CallMe()
+        private async void LoadNewFeeds(int amount)
         {
+            pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
+
             BLL.FeedManager fm = new FeedManager();
+            List<BLL.Feed> feeds = await fm.LoadLatestXFeeds(amount);
+            AddFeedsToList(feeds);
 
-            List<BLL.Feed> feeds = await fm.LoadLatestXFeeds(40);
+            CreateButton(feeds[feeds.Count - 1].ID);
 
+            pgbLoadFeed.Visibility = System.Windows.Visibility.Collapsed;
+        }
+
+        private async void LoadNewFeedsFromId(int amount, int id)
+        {
+            pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
+
+         
+            BLL.FeedManager fm = new FeedManager();
+            List<BLL.Feed> feeds = await fm.LoadLatestXFeedsFromId(id, amount);
+            //remove button
+            lstbFeeds.Items.RemoveAt(lstbFeeds.Items.Count - 1);
+
+            AddFeedsToList(feeds);
+            CreateButton(feeds[feeds.Count - 1].ID);
+
+            pgbLoadFeed.Visibility = System.Windows.Visibility.Collapsed;
+        }
+
+        private void AddFeedsToList(List<BLL.Feed> feeds)
+        {
             for (int i = 0; i < feeds.Count; i++)
             {
                 if (feeds[i] is HumanFeed)
@@ -56,6 +79,21 @@ namespace ABBConnect___Windows_Phone
                 else
                     FillFeedList((SensorFeed)feeds[i]);
             }
+
+        }
+
+        private void CreateButton(int id)
+        {
+
+
+            Button b = new Button();
+            b.Name = "btnLoadNewFeeds";
+            b.Width = 456;
+            b.Height = 80;
+            b.Content = "Load more feeds";
+
+            b.Click += (s, e) => { LoadNewFeedsFromId(20, id); };
+            lstbFeeds.Items.Add(b);
         }
 
         // Load data for the ViewModel Items
@@ -69,12 +107,12 @@ namespace ABBConnect___Windows_Phone
 
         }
 
-
         private void btnTakePicture_Click(object sender, RoutedEventArgs e)
         {
 
  
         }
+    
         void CameraCapture_Completed(object sender, PhotoResult e)
         {
             if (e.TaskResult == TaskResult.OK)
@@ -93,6 +131,7 @@ namespace ABBConnect___Windows_Phone
         {
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/ProfileFeed.xaml", UriKind.Relative));
         }
+      
         private void FillFeedList(HumanFeed t)
         {
             NoImageFeedControl nfc = new NoImageFeedControl(t.Owner.ID, t.Owner.UserName, t.Content, t.Tags.Count, t.Comments.Count, t.Location, t.TimeStamp);
