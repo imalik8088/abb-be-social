@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using PortableTransformationLayer;
 using PortableTransformationLayer.ABBConnectServiceRef;
+using System.Threading.Tasks;
 
 namespace BLL
 {
@@ -21,9 +22,9 @@ namespace BLL
             throw new NotImplementedException();
         }
 
-        public List<Category> GetFeedCategories()
+        public async Task<List<Category>> GetFeedCategories()
         {
-            List<GetPriorityCategories_Result> list = acceser.GetCategories();
+            List<GetPriorityCategories_Result> list = await acceser.GetCategories().ConfigureAwait(false);
             List<Category> retList = new List<Category>();
 
             foreach (GetPriorityCategories_Result res in list)

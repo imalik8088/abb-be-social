@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using PortableTransformationLayer;
 using PortableTransformationLayer.ABBConnectServiceRef;
+using System.Threading.Tasks;
 
 
 namespace BLL
@@ -17,21 +18,21 @@ namespace BLL
             accesser = new Accesser();
         }
 
-        public bool Login(string userName, string password)
+        public async Task<bool> Login(string userName, string password)
         {
-            return accesser.LogIn(userName, password);
+            return await accesser.LogIn(userName, password).ConfigureAwait(false); ;
 
         }
 
-        public Human LoadHumanInformation(int humanId)
+        public async Task<Human> LoadHumanInformation(int humanId)
         {
-            return new Human(accesser.GetHumanInformation(humanId));
+            return new Human(await accesser.GetHumanInformation(humanId).ConfigureAwait(false));
         }
 
 
-        public Human LoadHumanInformationByUsername(string username)
+        public async Task<Human> LoadHumanInformationByUsername(string username)
         {
-            return new Human(accesser.GetHumanInformationByUserName(username));
+            return new Human(await accesser.GetHumanInformationByUserName(username).ConfigureAwait(false));
         }
     }
 }

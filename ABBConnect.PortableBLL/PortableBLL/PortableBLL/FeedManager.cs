@@ -26,9 +26,9 @@ namespace BLL
 
             foreach (GetLatestXFeeds_Result res in list)
                 if (res.Type == "Human")
-                    retList.Add(new HumanFeed(res, LoadFeedComments(res.FeedId), LoadFeedTags(res.FeedId)));
+                    retList.Add(new HumanFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false), await LoadFeedTags(res.FeedId).ConfigureAwait(false)));
                 else
-                    retList.Add(new SensorFeed(res, LoadFeedComments(res.FeedId), LoadFeedTags(res.FeedId)));       
+                    retList.Add(new SensorFeed(res,  await LoadFeedComments(res.FeedId).ConfigureAwait(false), await LoadFeedTags(res.FeedId).ConfigureAwait(false)));       
 
             return retList;
            
@@ -43,26 +43,26 @@ namespace BLL
             foreach (GetLatestXFeeds_Result res in list)
             {
                 if (res.Type == "Human")
-                    retList.Add(new HumanFeed(res, LoadFeedComments(res.FeedId), LoadFeedTags(res.FeedId)));
+                    retList.Add(new HumanFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false), await LoadFeedTags(res.FeedId).ConfigureAwait(false)));
                 else
-                    retList.Add(new SensorFeed(res, LoadFeedComments(res.FeedId), LoadFeedTags(res.FeedId)));
+                    retList.Add(new SensorFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false), await LoadFeedTags(res.FeedId).ConfigureAwait(false)));
             }
 
             return retList;
 
         }
 
-        public List<Feed> LoadNewFeedsByFilter(string location, DateTime startingTime, DateTime endingTime)
+        public  async Task<List<Feed>> LoadNewFeedsByFilter(string location, DateTime startingTime, DateTime endingTime)
         {
             throw new NotImplementedException();
            
         }
 
-        public bool PublishFeed(HumanFeed feed)
+        public  async Task<bool> PublishFeed(HumanFeed feed)
         {
             try
             {
-                int feedID = acceser.PublishFeed(feed.Owner.ID, feed.Content, feed.MediaFilePath, feed.Category.Id);
+                int feedID = await acceser.PublishFeed(feed.Owner.ID, feed.Content, feed.MediaFilePath, feed.Category.Id).ConfigureAwait(false);
                 //NEEDS TO BE CHNAGED WHEN YOU CAN ACCESS ADDCOMMENT AND ADDTAGS
                 return true;
             }
@@ -74,15 +74,15 @@ namespace BLL
 
         }
 
-        public bool AddTagToFeed(int feedId, string username)
+        public  async Task<bool> AddTagToFeed(int feedId, string username)
         {
             throw new NotImplementedException();
 
         }
 
-        public List<Comment> LoadFeedComments(int feedId)
+        public  async Task<List<Comment>> LoadFeedComments(int feedId)
         {
-            List<GetFeedComments_Result> list = acceser.GetFeedComments(feedId);
+            List<GetFeedComments_Result> list = await acceser.GetFeedComments(feedId).ConfigureAwait(false);
             List<Comment> retList = new List<Comment>();
 
             foreach (GetFeedComments_Result res in list)
@@ -92,9 +92,9 @@ namespace BLL
 
         }
 
-        public List<Human> LoadFeedTags(int feedId)
+        public  async Task<List<Human>> LoadFeedTags(int feedId)
         {
-            List<GetFeedTags_Result> list = acceser.GetFeedTags(feedId);
+            List<GetFeedTags_Result> list = await acceser.GetFeedTags(feedId).ConfigureAwait(false);
             List<Human> retList = new List<Human>();
 
             foreach (GetFeedTags_Result res in list)
@@ -104,27 +104,27 @@ namespace BLL
 
         }
 
-        public List<Feed> LoadFeedsByFilter(string username, string location, DateTime startingTime, DateTime endingTime, string feedType)
+        public  async Task<List<Feed>> LoadFeedsByFilter(string username, string location, DateTime startingTime, DateTime endingTime, string feedType)
         {
             throw new NotImplementedException();
         }
 
-        public List<Feed> GetUserFeedByFilter(int userId, string location, DateTime startingTime, DateTime endingTime)
+        public  async Task<List<Feed>> GetUserFeedByFilter(int userId, string location, DateTime startingTime, DateTime endingTime)
         {
             throw new NotImplementedException();
         }
 
-        public List<Feed> GetUserFeeds(int userId)
+        public  async Task<List<Feed>> GetUserFeeds(int userId)
         {
             throw new NotImplementedException();
         }
 
-        public bool PublishComment(int feedID, Comment comment)
+        public  async Task<bool> PublishComment(int feedID, Comment comment)
         {
             throw new NotImplementedException();
         }
 
-        public List<Feed> LoadNewFeeds()
+        public  async Task<List<Feed>> LoadNewFeeds()
         {
             throw new NotImplementedException();
         }
