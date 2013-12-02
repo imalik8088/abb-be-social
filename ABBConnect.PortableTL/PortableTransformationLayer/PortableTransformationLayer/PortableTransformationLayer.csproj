@@ -36,6 +36,7 @@
     <Compile Include="Accesser.cs" />
     <Compile Include="Async.cs" />
     <Compile Include="CommonData.cs" />
+    <Compile Include="FeedData.cs" />
     <Compile Include="HumanData.cs" />
     <Compile Include="HumanFeedData.cs" />
     <Compile Include="ICommonData.cs" />
