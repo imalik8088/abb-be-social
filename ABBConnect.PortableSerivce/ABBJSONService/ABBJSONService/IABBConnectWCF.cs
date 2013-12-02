@@ -48,6 +48,58 @@ namespace ABBJSONService
         [WebInvoke]
         List<GetFeedTags_Result> GetFeedTags(string feedId);
 
+        [OperationContract]
+        [WebInvoke]
+        List<GetAllHumanFeeds_Result> GetHumanFeeds();
+
+        [OperationContract]
+        [WebInvoke]
+        List<GetAllHumanFeedsByFilter_Result> GetHumanFeedsByFilter(string location, string startingTime, string endingTime);
+
+        [OperationContract]
+        [WebInvoke]
+        List<GetAllSensorFeeds_Result> GetSensorFeeds();
+
+        [OperationContract]
+        [WebInvoke]
+        List<GetAllSensorFeedsByFilter_Result> GetSensorFeedsByFilter(string location, string startingTime, string endingTime);
+
+        [OperationContract]
+        [WebInvoke]
+        List<GetUserFeeds_Result> GetUserFeeds();
+
+        [OperationContract]
+        [WebInvoke]
+        List<GetUserFeedsByFilter_Result> GetUserFeedsByFilter(string location, string startingTime, string endingTime);
+
+        [OperationContract]
+        [WebInvoke]
+        List<string> GetLocations();
+
+        [OperationContract]
+        [WebInvoke]
+        GetSensorInformation_Result GetSensorInformation(string id);
+
+        [OperationContract]
+        [WebInvoke]
+        List<GetHistoricalDataFromSensor_Result> GetHistoricalDataFromSensor(string id, string startingTime, string endingTime);
+
+        [OperationContract]
+        [WebInvoke]
+        string GetLastSensorValue(string id);
+
+        [OperationContract]
+        [WebInvoke]
+        void PostComment(string feedId, string username, string text);
+
+        [OperationContract]
+        [WebInvoke]
+        List<GetLatestFeedsByFilter_Result> GetLatestFeedsByFilter(string location, string startingTime, string endingTime);
+
+        [OperationContract]
+        [WebInvoke]
+        List<GetFeedsByFilter_Result> GetFeedsByFilter(string name, string location, string startingTime, string endingTime, string feedType);
+
     }
 
 }
