@@ -13,7 +13,7 @@ namespace PortableTransformationLayer
 {
     class SensorData: ISensorData
     {
-        public async Task<GetSensorInformation_Result> GetSensorInformation(int id)
+        public async Task<ABBConnectServiceRef.GetSensorInformation_Result> GetSensorInformation(int id)
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(url);
@@ -21,7 +21,7 @@ namespace PortableTransformationLayer
             return JsonConvert.DeserializeObject<GetSensorInformation_Result>(response);  
         }
 
-        public async Task<List<GetHistoricalDataFromSensor_Result>> GetHistoricalDataFromSensor(int id, DateTime startingTime, DateTime endingTime)
+        public async Task<List<ABBConnectServiceRef.GetHistoricalDataFromSensor_Result>> GetHistoricalDataFromSensor(int id, DateTime startingTime, DateTime endingTime)
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(url);
