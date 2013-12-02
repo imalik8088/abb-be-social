@@ -12,6 +12,8 @@ namespace ABBConnect___Windows_Phone
 {
     public partial class FeedControl : UserControl
     {
+
+
         public FeedControl()
         {
             InitializeComponent();

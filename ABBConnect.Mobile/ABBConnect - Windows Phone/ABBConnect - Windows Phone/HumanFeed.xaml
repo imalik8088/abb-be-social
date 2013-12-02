@@ -19,17 +19,57 @@
         <!--Pivot Control-->
         <controls:Pivot Title="Feed">
             <!--Pivot item one-->
-            <controls:PivotItem >
+            <controls:PivotItem Header="Feed" >
                 <Grid>
-                    <TextBlock x:Name="Author" HorizontalAlignment="Left" Margin="364,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
-                    <TextBlock x:Name="Timestamp" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="Author" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="Timestamp" HorizontalAlignment="Left" Margin="403,10,0,0" TextWrapping="Wrap" Text="Time" VerticalAlignment="Top"/>
                     <Image x:Name="Image" HorizontalAlignment="Left" Height="357" Margin="10,42,0,0" VerticalAlignment="Top" Width="436" Grid.ColumnSpan="2"/>
-                    <TextBlock x:Name="Location" HorizontalAlignment="Left" Margin="10,399,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
-                    <TextBlock x:Name="Content" HorizontalAlignment="Left" Margin="10,426,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="Location" HorizontalAlignment="Left" Margin="10,399,0,0" TextWrapping="Wrap" Text="Location" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="Content" HorizontalAlignment="Left" Margin="10,426,0,0" TextWrapping="Wrap" Text="Content" VerticalAlignment="Top" Height="103" Width="436"/>
+                </Grid>
+            </controls:PivotItem>
+            <controls:PivotItem Header="Comments">
+                <Grid>
+                    <ListBox x:Name="lstbComments"
+                             HorizontalAlignment="Left"
+                             Height="587" Margin="10,10,0,0" 
+                             VerticalAlignment="Top" 
+                             Width="436"
+                             ItemsSource="{Binding}" >
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" Margin="2">
+                                        <TextBlock Text="Author:" Margin="2" />
+                                        <TextBlock Text="{Binding Owner.UserName}" Margin="2" />
+                                        <TextBlock Text="Time:" Margin="10,2,0,2" />
+                                        <TextBlock Text="{Binding TimeStamp}" Margin="2" />
+                                        <TextBlock Text="Comment:" Margin="2,2,0,0" />
+                                        <TextBlock Text="{Binding Content}" Margin="2" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                    </ListBox>
 
 
                 </Grid>
-
+            </controls:PivotItem>
+            <controls:PivotItem Header="Tags">
+                <Grid>
+                    <ListBox x:Name="lstbTags" HorizontalAlignment="Left"
+                             Height="587" Margin="10,10,0,0"
+                             VerticalAlignment="Top" 
+                             Width="436"
+                             ItemsSource="{Binding}" >
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" Margin="2">
+                                        <TextBlock Text="Name:" Margin="2" />
+                                        <TextBlock Text="{Binding UserName}" Margin="2" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
             </controls:PivotItem>
 
         </controls:Pivot>

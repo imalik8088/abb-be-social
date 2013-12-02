@@ -9,23 +9,24 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:local="clr-namespace:ABBConnect___Windows_Phone"
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768" 
-    d:DataContext="{d:DesignData SampleData/MainViewModelSampleData.xaml}"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
-
+    <!-- 
+    d:DataContext="{d:DesignData SampleData/MainViewModelSampleData.xaml}" -->
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
         <controls:Pivot Title="ABBConnect">
             <!--Pivot item one-->
-            <controls:PivotItem Header="Feeds" x:Name="piFeed" Loaded="piFeed_Loaded" Width="456" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+            <controls:PivotItem Header="Feeds" x:Name="piFeed" Width="456" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                 <Grid HorizontalAlignment="Left" Height="607" VerticalAlignment="Top" Width="456">
                     <ListBox x:Name="lstbFeeds" HorizontalAlignment="Left" Height="597" VerticalAlignment="Top" Width="456">
                     </ListBox>
-                    <ProgressBar x:Name="pgbLoadFeed" HorizontalAlignment="Left" Height="77" Margin="10,-62,0,0" VerticalAlignment="Top" Width="436" IsIndeterminate="True"/>
+                    <TextBlock x:Name="lblNewFeeds" HorizontalAlignment="Left" Text="New feeds loaded" Margin="10,-34,0,607" Width="436" />
+                    <ProgressBar x:Name="pgbLoadFeed" HorizontalAlignment="Left" Height="77" Margin="10,-77,0,0" VerticalAlignment="Top" Width="436" IsIndeterminate="True"/>
                 </Grid>
 
 
@@ -68,7 +69,7 @@
                     <TextBlock x:Name="lblLocationClick" HorizontalAlignment="Left" Margin="30,367,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="32"/>
                 </Grid>
             </controls:PivotItem>
-            <controls:PivotItem Header="SavedFilters">
+            <controls:PivotItem Header="Filters">
                 <!--Triple line list no text wrapping-->
                 <ListBox x:Name="ThirdListBox" Margin="10,10,-22,-10">
                 </ListBox>
