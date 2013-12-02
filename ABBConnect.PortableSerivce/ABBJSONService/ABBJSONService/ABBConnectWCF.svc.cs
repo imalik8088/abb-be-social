@@ -761,7 +761,7 @@ namespace ABBJSONService
         }
 
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetLastSensorValue/{id}")]
-        public string GetLastSensorValue(string id)
+        public int GetLastSensorValue(string id)
         {
             id = id.Replace("{", "");
             id = id.Replace("}", "");
@@ -789,7 +789,13 @@ namespace ABBJSONService
                 }
                 sqlConn.Close();
             }
-            return value;
+
+            int numValue;
+            bool parsed = Int32.TryParse(value, out numValue);
+
+
+
+            return numValue;
         }
 
         [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, UriTemplate = "PostComment/{feedId}/{username}/{text}")]

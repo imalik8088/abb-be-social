@@ -86,7 +86,7 @@ namespace ABBJSONService
 
         [OperationContract]
         [WebInvoke]
-        string GetLastSensorValue(string id);
+        int GetLastSensorValue(string id);
 
         [OperationContract]
         [WebInvoke]
