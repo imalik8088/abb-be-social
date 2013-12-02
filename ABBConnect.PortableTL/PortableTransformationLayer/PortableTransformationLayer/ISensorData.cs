@@ -9,6 +9,8 @@ namespace PortableTransformationLayer
 {
     interface ISensorData
     {
-        Task<GetSensorInformation_Result> GetSensorInformation(string id);
+        Task<GetSensorInformation_Result> GetSensorInformation(int id);
+        Task<List<GetHistoricalDataFromSensor_Result>> GetHistoricalDataFromSensor(int id, DateTime startingTime, DateTime endingTime);
+        Task<int> GetLastSensorValue(int id);
     }
 }
