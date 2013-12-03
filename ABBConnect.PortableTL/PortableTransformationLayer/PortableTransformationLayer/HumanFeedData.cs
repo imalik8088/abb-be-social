@@ -13,10 +13,17 @@ namespace PortableTransformationLayer
 {
     class HumanFeedData:IHumanFeedData
     {
+        private Connection urlServer;
+
+        public HumanFeedData()
+        {
+            urlServer = new Connection();
+        }
+
         public async Task<List<GetAllHumanFeeds_Result>> GetHumanFeeds()
         {
             var client = new HttpClient();
-            client.BaseAddress = new Uri(url);
+            client.BaseAddress = new Uri(urlServer.Url);
             var response = await client.GetStringAsync("GetHumanFeeds").ConfigureAwait(false);
             return JsonConvert.DeserializeObject<List<GetAllHumanFeeds_Result>>(response); 
         }
@@ -24,7 +31,7 @@ namespace PortableTransformationLayer
         public async Task<List<GetAllHumanFeedsByFilter_Result>> GetHumanFeedsByFilter(string location, string startingTime, string endingTime)
         {
             var client = new HttpClient();
-            client.BaseAddress = new Uri(url);
+            client.BaseAddress = new Uri(urlServer.Url);
             var response = await client.GetStringAsync("GetHumanFeedsByFilter/" + location + "/" + startingTime + "/" + endingTime).ConfigureAwait(false);
             return JsonConvert.DeserializeObject<List<GetAllHumanFeedsByFilter_Result>>(response); 
         }

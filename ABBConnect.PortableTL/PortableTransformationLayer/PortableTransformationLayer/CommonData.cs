@@ -13,10 +13,17 @@ namespace PortableTransformationLayer
 {
     class CommonData: ICommonData
     {
+        private Connection urlServer;
+
+        public CommonData()
+        {
+            urlServer = new Connection();
+        }
+
         public async Task<List<ABBConnectServiceRef.GetPriorityCategories_Result>> GetCategories()
         {
             var client = new HttpClient();
-            client.BaseAddress = new Uri(url);
+            client.BaseAddress = new Uri(urlServer.Url);
             var response = await client.GetStringAsync("GetCategories").ConfigureAwait(false);
             return JsonConvert.DeserializeObject<List<GetPriorityCategories_Result>>(response);
         }
@@ -24,7 +31,7 @@ namespace PortableTransformationLayer
         public async Task<List<string>> GetLocations()
         {
             var client = new HttpClient();
-            client.BaseAddress = new Uri(url);
+            client.BaseAddress = new Uri(urlServer.Url);
             var response = await client.GetStringAsync("GetLocations").ConfigureAwait(false);
             return JsonConvert.DeserializeObject<List<string>>(response);
         }

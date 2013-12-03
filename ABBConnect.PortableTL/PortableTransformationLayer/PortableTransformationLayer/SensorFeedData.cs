@@ -13,10 +13,17 @@ namespace PortableTransformationLayer
 {
     class SensorFeedData: ISensorFeedData
     {
+        private Connection urlServer;
+
+        public SensorFeedData()
+        {
+            urlServer = new Connection();
+        }
+
         public async Task<List<GetAllSensorFeeds_Result>> GetSensorFeeds()
         {
             var client = new HttpClient();
-            client.BaseAddress = new Uri(url);
+            client.BaseAddress = new Uri(urlServer.Url);
             var response = await client.GetStringAsync("GetSensorFeeds").ConfigureAwait(false);
             return JsonConvert.DeserializeObject<List<GetAllSensorFeeds_Result>>(response); 
         }
@@ -24,7 +31,7 @@ namespace PortableTransformationLayer
         public async Task<List<GetAllSensorFeedsByFilter_Result>> GetSensorFeedsByFilter(string location, string startingTime, string endingTime)
         {
             var client = new HttpClient();
-            client.BaseAddress = new Uri(url);
+            client.BaseAddress = new Uri(urlServer.Url);
             var response = await client.GetStringAsync("GetSensorFeedsByFilter/" + location + "/" + startingTime + "/" + endingTime).ConfigureAwait(false);
             return JsonConvert.DeserializeObject<List<GetAllSensorFeedsByFilter_Result>>(response);
         }
