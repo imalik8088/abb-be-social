@@ -28,11 +28,12 @@ namespace PortableTransformationLayer
             return JsonConvert.DeserializeObject<List<GetAllSensorFeeds_Result>>(response); 
         }
 
-        public async Task<List<GetAllSensorFeedsByFilter_Result>> GetSensorFeedsByFilter(string location, string startingTime, string endingTime)
+        public async Task<List<GetAllSensorFeedsByFilter_Result>> GetSensorFeedsByFilter(string location, DateTime startingTime, DateTime endingTime)
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(urlServer.Url);
-            var response = await client.GetStringAsync("GetSensorFeedsByFilter/" + location + "/" + startingTime + "/" + endingTime).ConfigureAwait(false);
+            var response = await client.GetStringAsync("GetSensorFeedsByFilter/" 
+                + location + "/" + startingTime.ToString() + "/" + endingTime.ToString()).ConfigureAwait(false);
             return JsonConvert.DeserializeObject<List<GetAllSensorFeedsByFilter_Result>>(response);
         }
     }

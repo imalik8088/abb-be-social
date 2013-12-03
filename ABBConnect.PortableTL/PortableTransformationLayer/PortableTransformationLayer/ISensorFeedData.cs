@@ -10,6 +10,6 @@ namespace PortableTransformationLayer
     interface ISensorFeedData
     {
         Task<List<GetAllSensorFeeds_Result>> GetSensorFeeds();
-        Task<List<GetAllSensorFeedsByFilter_Result>> GetSensorFeedsByFilter(string location, string startingTime, string endingTime);
+        Task<List<GetAllSensorFeedsByFilter_Result>> GetSensorFeedsByFilter(string location, DateTime startingTime, DateTime endingTime);
     }
 }

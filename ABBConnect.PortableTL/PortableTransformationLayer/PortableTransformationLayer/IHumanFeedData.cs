@@ -10,6 +10,6 @@ namespace PortableTransformationLayer
     interface IHumanFeedData
     {
         Task<List<GetAllHumanFeeds_Result>> GetHumanFeeds();
-        Task<List<GetAllHumanFeedsByFilter_Result>> GetHumanFeedsByFilter(string location, string startingTime, string endingTime);
+        Task<List<GetAllHumanFeedsByFilter_Result>> GetHumanFeedsByFilter(string location, DateTime startingTime, DateTime endingTime);
     }
 }
