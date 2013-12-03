@@ -33,10 +33,6 @@ namespace BLL
             content = res.Text;
             category.CategoryName = res.PrioCategory;
             category.Priority = res.PrioValue;
-
-            
-            
-
         }
 
         private int iD;

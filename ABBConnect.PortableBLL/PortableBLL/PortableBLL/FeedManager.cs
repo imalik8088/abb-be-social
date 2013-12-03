@@ -11,16 +11,16 @@ namespace BLL
 {
     public class FeedManager: IFeedManager
     {
-        Accesser acceser;
+        FeedData feedData;
 
         public FeedManager()
         {
-            acceser = new Accesser();
+            feedData = new FeedData();
         }
 
         public async Task<List<Feed>> LoadLatestXFeeds(int feedNum)
         {
-            List<GetLatestXFeeds_Result> list = await acceser.GetLatestXFeeds(feedNum).ConfigureAwait(false);
+            List<GetLatestXFeeds_Result> list = await feedData.GetLatestXFeeds(feedNum).ConfigureAwait(false);
 
             List<Feed> retList = new List<Feed>();
 
@@ -36,7 +36,7 @@ namespace BLL
 
         public async Task<List<Feed>> LoadLatestXFeedsFromId(int startingId, int numberOfFeeds)
         {
-            List<GetLatestXFeeds_Result> list = await acceser.GetLatestXFeedsFromId(numberOfFeeds, startingId);
+            List<GetLatestXFeeds_Result> list = await feedData.GetLatestXFeedsFromId(numberOfFeeds, startingId);
 
             List<Feed> retList = new List<Feed>();
 
@@ -62,7 +62,7 @@ namespace BLL
         {
             try
             {
-                int feedID = await acceser.PublishFeed(feed.Owner.ID, feed.Content, feed.MediaFilePath, feed.Category.Id).ConfigureAwait(false);
+                int feedID = await feedData.PublishFeed(feed.Owner.ID, feed.Content, feed.MediaFilePath, feed.Category.Id).ConfigureAwait(false);
                 //NEEDS TO BE CHNAGED WHEN YOU CAN ACCESS ADDCOMMENT AND ADDTAGS
                 return true;
             }
@@ -82,7 +82,7 @@ namespace BLL
 
         public  async Task<List<Comment>> LoadFeedComments(int feedId)
         {
-            List<GetFeedComments_Result> list = await acceser.GetFeedComments(feedId).ConfigureAwait(false);
+            List<GetFeedComments_Result> list = await feedData.GetFeedComments(feedId).ConfigureAwait(false);
             List<Comment> retList = new List<Comment>();
 
             foreach (GetFeedComments_Result res in list)
@@ -94,7 +94,7 @@ namespace BLL
 
         public  async Task<List<Human>> LoadFeedTags(int feedId)
         {
-            List<GetFeedTags_Result> list = await acceser.GetFeedTags(feedId).ConfigureAwait(false);
+            List<GetFeedTags_Result> list = await feedData.GetFeedTags(feedId).ConfigureAwait(false);
             List<Human> retList = new List<Human>();
 
             foreach (GetFeedTags_Result res in list)

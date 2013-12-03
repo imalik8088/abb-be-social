@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using PortableTransformationLayer;
+using PortableTransformationLayer.ABBConnectServiceRef;
+using System.Threading.Tasks;
 
 
 namespace BLL
@@ -9,15 +12,16 @@ namespace BLL
     public class HumanFeedManager: IHumanFeedManager
     {
 
+        private HumanFeedData humFeedData;
 
         public HumanFeedManager()
         {
-         
+            humFeedData = new HumanFeedData();
         }
 
         // METHOD: GetAllUserFeeds
 
-        public List<HumanFeed> LoadAllHumanFeeds()
+        public async Task<List<HumanFeed>> LoadAllHumanFeeds()
         {
             throw new NotImplementedException();
             
@@ -29,22 +33,6 @@ namespace BLL
         {
             throw new NotImplementedException();
 
-        }
-
-        private static bool CastStringToInt(string str, ref int returnValue)
-        {
-            throw new NotImplementedException();
-
-        }
-
-        private static string AvoidStringNulls(string str)
-        {
-            string resStr = "";
-
-            if (str != null)
-                resStr = str;
-
-            return resStr;
         }
     }
 }
