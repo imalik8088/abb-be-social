@@ -16,7 +16,7 @@ namespace ABBJSONService
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class ABBConnectWCF : IABBConnectWCF
     {
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "LogIn/{username}&{password}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "LogIn?username={username}&password={password}")]
         public bool LogIn(string username, string password)
         {
             int result = 0;
@@ -45,7 +45,7 @@ namespace ABBJSONService
             return (result == 1 ? true : false);
         }
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetHumanInfo/{id}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetHumanInfo?id={id}")]
         public GetHumanInformation_Result GetHumanInformation(string id)
         {
             int iD = Int32.Parse(id);
@@ -80,7 +80,7 @@ namespace ABBJSONService
             return h;
         }
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetHumanInfoByUsername/{username}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetHumanInfoByUsername?username={username}")]
         public GetHumanInformationByUsername_Result GetHumanInformationByUsername(string username)
         {
             GetHumanInformationByUsername_Result h = new GetHumanInformationByUsername_Result();
@@ -115,7 +115,7 @@ namespace ABBJSONService
             return h;
         }
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetLatestXFeeds/{x}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetLatestXFeeds?num={x}")]
         List<GetLatestXFeeds_Result> IABBConnectWCF.GetLatestXFeeds(string X)
         {
             List<GetLatestXFeeds_Result> feeds = new List<GetLatestXFeeds_Result>();
@@ -156,7 +156,7 @@ namespace ABBJSONService
             return feeds;
         }
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetLatestXFeeds/{x}&{id}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetLatestXFeedsFromId?num={x}&id={id}")]
         List<GetLatestXFeedsFromId_Result> IABBConnectWCF.GetLatestXFeedsFromId(string X, string Id)
         {
             List<GetLatestXFeedsFromId_Result> feeds = new List<GetLatestXFeedsFromId_Result>();
@@ -199,7 +199,7 @@ namespace ABBJSONService
         }
 
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "PostFeed/{id}&{text}&{filepath}&{prioID}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "PostFeed?id={id}&text={text}&path={filepath}&priority={prioID}")]
         public int PostFeed(string id, string text, string filepath, string prioId)
         {
             int result = 0;
@@ -264,7 +264,7 @@ namespace ABBJSONService
             return cats;
         }
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetFeedComments/{feedId}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetFeedComments?feedId={feedId}")]
         public List<GetFeedComments_Result> GetFeedComments(string feedId)
         {
             List<GetFeedComments_Result> comments = new List<GetFeedComments_Result>();
@@ -301,7 +301,7 @@ namespace ABBJSONService
             return comments;
         }
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetFeedTags/{feedId}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetFeedTags?feedId={feedId}")]
         public List<GetFeedTags_Result> GetFeedTags(string feedId)
         {
             List<GetFeedTags_Result> tags = new List<GetFeedTags_Result>();
@@ -384,7 +384,7 @@ namespace ABBJSONService
             return feeds;
         }
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetHumanFeedsByFilter/{location}/{startingTime}/{endingTime}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetHumanFeedsByFilter?location={location}&start={startingTime}&end={endingTime}")]
         List<GetAllHumanFeedsByFilter_Result> IABBConnectWCF.GetHumanFeedsByFilter(string location, string startingTime, string endingTime)
         {
             List<GetAllHumanFeedsByFilter_Result> feeds = new List<GetAllHumanFeedsByFilter_Result>();
@@ -477,7 +477,7 @@ namespace ABBJSONService
             return feeds;
         }
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetSensorFeedsByFilter/{location}/{startingTime}/{endingTime}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetSensorFeedsByFilter?location={location}&start={startingTime}&end={endingTime}")]
         List<GetAllSensorFeedsByFilter_Result> IABBConnectWCF.GetSensorFeedsByFilter(string location, string startingTime, string endingTime)
         {
             List<GetAllSensorFeedsByFilter_Result> feeds = new List<GetAllSensorFeedsByFilter_Result>();
@@ -487,25 +487,19 @@ namespace ABBJSONService
 
                 sqlConn.Open();
                 string sqlQuery = "GetAllSensorFeedsByFilter";
-
-                location = location.Replace("{", "");
-                location = location.Replace("}", "");
-                startingTime = startingTime.Replace("{", "");
-                startingTime = startingTime.Replace("}", "");
-                endingTime = endingTime.Replace("{", "");
-                endingTime = endingTime.Replace("}", "");
+                DateTime minValue = DateTime.MinValue;
 
                 using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@location", SqlDbType.NVarChar, 50).Value = location;
 
-                    if (startingTime.Equals("null") || startingTime.Equals("DateTime.MinValue"))
+                    if (startingTime.Equals(minValue.ToString()))
                         cmd.Parameters.Add("@startTime", SqlDbType.DateTime).Value = DBNull.Value;
                     else
                         cmd.Parameters.Add("@startTime", SqlDbType.DateTime).Value = Convert.ToDateTime(startingTime);
 
-                    if (endingTime.Equals("null") || endingTime.Equals("DateTime.MinValue"))
+                    if (endingTime.Equals(minValue.ToString()))
                         cmd.Parameters.Add("@endTime", SqlDbType.DateTime).Value = DBNull.Value;
                     else
                         cmd.Parameters.Add("@endTime", SqlDbType.DateTime).Value = Convert.ToDateTime(endingTime);
@@ -576,7 +570,7 @@ namespace ABBJSONService
             return feeds;
         }
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetUserFeedsByFilter/{location}/{startingTime}/{endingTime}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetUserFeedsByFilter?location={location}&start={startingTime}&end={endingTime}")]
         List<GetUserFeedsByFilter_Result> IABBConnectWCF.GetUserFeedsByFilter(string location, string startingTime, string endingTime)
         {
             List<GetUserFeedsByFilter_Result> feeds = new List<GetUserFeedsByFilter_Result>();
@@ -587,24 +581,19 @@ namespace ABBJSONService
                 sqlConn.Open();
                 string sqlQuery = "GetUserFeedsByFilter";
 
-                location = location.Replace("{", "");
-                location = location.Replace("}", "");
-                startingTime = startingTime.Replace("{", "");
-                startingTime = startingTime.Replace("}", "");
-                endingTime = endingTime.Replace("{", "");
-                endingTime = endingTime.Replace("}", "");
+                DateTime minValue = DateTime.MinValue;
 
                 using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@location", SqlDbType.NVarChar, 50).Value = location;
 
-                    if (startingTime.Equals("null") || startingTime.Equals("DateTime.MinValue"))
+                    if (startingTime.Equals(minValue.ToString()))
                         cmd.Parameters.Add("@startTime", SqlDbType.DateTime).Value = DBNull.Value;
                     else
                         cmd.Parameters.Add("@startTime", SqlDbType.DateTime).Value = Convert.ToDateTime(startingTime);
 
-                    if (endingTime.Equals("null") || endingTime.Equals("DateTime.MinValue"))
+                    if (endingTime.Equals(minValue.ToString()))
                         cmd.Parameters.Add("@endTime", SqlDbType.DateTime).Value = DBNull.Value;
                     else
                         cmd.Parameters.Add("@endTime", SqlDbType.DateTime).Value = Convert.ToDateTime(endingTime);
@@ -665,11 +654,9 @@ namespace ABBJSONService
             return locations;
         }
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetSensorInfo/{id}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetSensorInfo?id={id}")]
         public GetSensorInformation_Result GetSensorInformation(string id)
         {
-            id = id.Replace("{", "");
-            id = id.Replace("}", "");
             int iD = Int32.Parse(id);
             GetSensorInformation_Result s = new GetSensorInformation_Result();
 
@@ -700,8 +687,7 @@ namespace ABBJSONService
             return s;
         }
 
-
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetPastSensorData/{id}/{startingTime}/{endingTime}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetPastSensorData?id={id}&start={startingTime}&end={endingTime}")]
         List<GetHistoricalDataFromSensor_Result> IABBConnectWCF.GetHistoricalDataFromSensor(string id, string startingTime, string endingTime)
         {
             List<GetHistoricalDataFromSensor_Result> histData = new List<GetHistoricalDataFromSensor_Result>();
@@ -712,12 +698,7 @@ namespace ABBJSONService
                 sqlConn.Open();
                 string sqlQuery = "GetHistoricalDataFromSensor";
 
-                id = id.Replace("{", "");
-                id = id.Replace("}", "");
-                startingTime = startingTime.Replace("{", "");
-                startingTime = startingTime.Replace("}", "");
-                endingTime = endingTime.Replace("{", "");
-                endingTime = endingTime.Replace("}", "");
+                DateTime minValue = DateTime.MinValue;
 
                 int iD = Int32.Parse(id);
 
@@ -726,12 +707,12 @@ namespace ABBJSONService
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@sensorID", SqlDbType.Int).Value = iD;
 
-                    if (startingTime.Equals("null") || startingTime.Equals("DateTime.MinValue"))
+                    if (startingTime.Equals(minValue.ToString()))
                         cmd.Parameters.Add("@from", SqlDbType.DateTime).Value = DBNull.Value;
                     else
                         cmd.Parameters.Add("@from", SqlDbType.DateTime).Value = Convert.ToDateTime(startingTime);
 
-                    if (endingTime.Equals("null") || endingTime.Equals("DateTime.MinValue"))
+                    if (endingTime.Equals(minValue.ToString()))
                         cmd.Parameters.Add("@to", SqlDbType.DateTime).Value = DBNull.Value;
                     else
                         cmd.Parameters.Add("@to", SqlDbType.DateTime).Value = Convert.ToDateTime(endingTime);
@@ -754,11 +735,9 @@ namespace ABBJSONService
             return histData;
         }
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetLastSensorValue/{id}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetLastSensorValue?id={id}")]
         public int GetLastSensorValue(string id)
         {
-            id = id.Replace("{", "");
-            id = id.Replace("}", "");
             int iD = Int32.Parse(id);
             string value = "";
 
@@ -818,7 +797,7 @@ namespace ABBJSONService
         }
 
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "FilterLatestFeeds/{location}/{startingTime}/{endingTime}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "FilterLatestFeeds?location={location}&start={startingTime}&end={endingTime}")]
         List<GetLatestFeedsByFilter_Result> IABBConnectWCF.GetLatestFeedsByFilter(string location, string startingTime, string endingTime)
         {
             List<GetLatestFeedsByFilter_Result> feeds = new List<GetLatestFeedsByFilter_Result>();
@@ -828,18 +807,19 @@ namespace ABBJSONService
 
                 sqlConn.Open();
                 string sqlQuery = "GetLatestFeedsByFilter";
+                DateTime minValue = DateTime.MinValue;
 
                 using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@location", SqlDbType.NVarChar, 50).Value = location;
 
-                    if (startingTime.Equals("null") || startingTime.Equals("DateTime.MinValue"))
+                    if (startingTime.Equals(minValue.ToString()))
                         cmd.Parameters.Add("@startTime", SqlDbType.DateTime).Value = DBNull.Value;
                     else
                         cmd.Parameters.Add("@startTime", SqlDbType.DateTime).Value = Convert.ToDateTime(startingTime);
 
-                    if (endingTime.Equals("null") || endingTime.Equals("DateTime.MinValue"))
+                    if (endingTime.Equals(minValue.ToString()))
                         cmd.Parameters.Add("@endTime", SqlDbType.DateTime).Value = DBNull.Value;
                     else
                         cmd.Parameters.Add("@endTime", SqlDbType.DateTime).Value = Convert.ToDateTime(endingTime);
@@ -870,7 +850,7 @@ namespace ABBJSONService
             return feeds;
         }
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "FilterFeeds/{name}/{location}/{startingTime}/{endingTime}/{feedType}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "FilterFeeds?name={name}&location={location}&start={startingTime}&end={endingTime}&type={feedType}")]
         List<GetFeedsByFilter_Result> IABBConnectWCF.GetFeedsByFilter(string name, string location, string startingTime, string endingTime, string feedType)
         {
             List<GetFeedsByFilter_Result> feeds = new List<GetFeedsByFilter_Result>();
@@ -880,6 +860,7 @@ namespace ABBJSONService
 
                 sqlConn.Open();
                 string sqlQuery = "GetLatestFeedsByFilter";
+                DateTime minValue = DateTime.MinValue;
 
                 using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConn))
                 {
@@ -887,12 +868,12 @@ namespace ABBJSONService
                     cmd.Parameters.Add("@Name", SqlDbType.NVarChar, 50).Value = name;
                     cmd.Parameters.Add("@location", SqlDbType.NVarChar, 50).Value = location;
 
-                    if (startingTime.Equals("null") || startingTime.Equals("DateTime.MinValue"))
+                    if (startingTime.Equals(minValue.ToString()))
                         cmd.Parameters.Add("@startTime", SqlDbType.DateTime).Value = DBNull.Value;
                     else
                         cmd.Parameters.Add("@startTime", SqlDbType.DateTime).Value = Convert.ToDateTime(startingTime);
 
-                    if (endingTime.Equals("null") || endingTime.Equals("DateTime.MinValue"))
+                    if (endingTime.Equals(minValue.ToString()))
                         cmd.Parameters.Add("@endTime", SqlDbType.DateTime).Value = DBNull.Value;
                     else
                         cmd.Parameters.Add("@endTime", SqlDbType.DateTime).Value = Convert.ToDateTime(endingTime);
