@@ -394,25 +394,19 @@ namespace ABBJSONService
 
                 sqlConn.Open();
                 string sqlQuery = "GetAllHumanFeedsByFilter";
-
-                location = location.Replace("{", "");
-                location = location.Replace("}", "");
-                startingTime = startingTime.Replace("{", "");
-                startingTime = startingTime.Replace("}", "");
-                endingTime = endingTime.Replace("{", "");
-                endingTime = endingTime.Replace("}", "");
+                DateTime minValue = DateTime.MinValue;
 
                 using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@location", SqlDbType.NVarChar, 50).Value = location;
 
-                    if (startingTime.Equals("null") || startingTime.Equals("DateTime.MinValue"))
+                    if (startingTime.Equals(minValue.ToString()))
                         cmd.Parameters.Add("@startTime", SqlDbType.DateTime).Value = DBNull.Value;
                     else
                         cmd.Parameters.Add("@startTime", SqlDbType.DateTime).Value = Convert.ToDateTime(startingTime);
 
-                    if (endingTime.Equals("null") || endingTime.Equals("DateTime.MinValue"))
+                    if (endingTime.Equals(minValue.ToString()))
                         cmd.Parameters.Add("@endTime", SqlDbType.DateTime).Value = DBNull.Value;
                     else
                         cmd.Parameters.Add("@endTime", SqlDbType.DateTime).Value = Convert.ToDateTime(endingTime);
