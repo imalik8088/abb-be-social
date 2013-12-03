@@ -10,21 +10,21 @@ namespace BLL
 {
     public class CommonDataManager: ICommonDataManager
     {
-        Accesser acceser;
+        CommonData commonData;
 
         public CommonDataManager()
         {
-            acceser = new Accesser();
+            commonData = new CommonData();
         }
 
-        public List<string> GetLocations()
+        public async Task<List<string>> GetLocations()
         {
-            throw new NotImplementedException();
+            return await commonData.GetLocations().ConfigureAwait(false);
         }
 
         public async Task<List<Category>> GetFeedCategories()
         {
-            List<GetPriorityCategories_Result> list = await acceser.GetCategories().ConfigureAwait(false);
+            List<GetPriorityCategories_Result> list = await commonData.GetCategories().ConfigureAwait(false);
             List<Category> retList = new List<Category>();
 
             foreach (GetPriorityCategories_Result res in list)

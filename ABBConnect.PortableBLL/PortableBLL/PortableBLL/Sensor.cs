@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using PortableTransformationLayer.ABBConnectServiceRef;
 
 namespace BLL
 {
@@ -11,6 +12,16 @@ namespace BLL
         {
             this.sensorValues = new List<SensorVTData>();
             this.name = "";
+            this.location = "";
+        }
+
+        public Sensor(GetSensorInformation_Result entitySensor)
+        {
+            this.iD = entitySensor.Id;
+            this.sensorValues = new List<SensorVTData>();
+            this.name = entitySensor.Name;
+            this.upperBoundary = entitySensor.MAX_Critical.GetValueOrDefault();
+            this.lowerBoundary = entitySensor.MIN_Critical.GetValueOrDefault();
             this.location = "";
         }
 

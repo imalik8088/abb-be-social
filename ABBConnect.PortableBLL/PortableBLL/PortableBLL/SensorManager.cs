@@ -2,46 +2,39 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using PortableTransformationLayer;
+using PortableTransformationLayer.ABBConnectServiceRef;
+using System.Threading.Tasks;
 
 namespace BLL
 {
     public class SensorManager:ISensorManager
     {
-    
+
+        private SensorData senData;
 
         public SensorManager()
         {
-            ;
+            senData = new SensorData();
         }
 
-        public Sensor LoadSensorInformation(int sensorID)
+        public async Task<Sensor> LoadSensorInformation(int sensorID)
+        {
+            GetSensorInformation_Result tempSensor = await senData.GetSensorInformation(sensorID).ConfigureAwait(false);
+            Sensor responseSensor = new Sensor(tempSensor);
+            return responseSensor;
+
+        }
+
+        public async Task<SensorHistoryData> LoadHistoryValuesBySensor(int sensorID, DateTime startingTime, DateTime endingTime)
         {
             throw new NotImplementedException();
 
         }
 
-        public SensorHistoryData LoadHistoryValuesBySensor(int sensorID, DateTime startingTime, DateTime endingTime)
+        public async Task<int> LoadCurrentValuesBySensor(int sensorID)
         {
-            throw new NotImplementedException();
-
-        }
-
-        public int LoadCurrentValuesBySensor(int sensorID)
-        {
-            throw new NotImplementedException();
-
-        }
-
-        private static bool CastStringToInt(string str, ref int returnValue)
-        {
-            throw new NotImplementedException();
-
-        }
-
-        private static decimal CastStringToDecimal(string str)
-        {
-            throw new NotImplementedException();
+            return await senData.GetLastSensorValue(sensorID).ConfigureAwait(false);
 
         }
     }

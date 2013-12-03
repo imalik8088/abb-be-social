@@ -8,7 +8,7 @@ namespace BLL
 {
     interface ICommonDataManager
     {
-        List<string> GetLocations();
+        Task<List<string>> GetLocations();
         Task<List<Category>> GetFeedCategories();
     }
 }

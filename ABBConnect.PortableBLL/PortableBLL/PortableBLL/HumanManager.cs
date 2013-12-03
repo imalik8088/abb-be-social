@@ -11,28 +11,28 @@ namespace BLL
 {
     public class HumanManager : IHumanManager
     {
-        Accesser accesser;
+        HumanData humanData;
 
         public HumanManager()
         {
-            accesser = new Accesser();
+            humanData = new HumanData();
         }
 
         public async Task<bool> Login(string userName, string password)
         {
-            return await accesser.LogIn(userName, password).ConfigureAwait(false); ;
+            return await humanData.LogIn(userName, password).ConfigureAwait(false); ;
 
         }
 
         public async Task<Human> LoadHumanInformation(int humanId)
         {
-            return new Human(await accesser.GetHumanInformation(humanId).ConfigureAwait(false));
+            return new Human(await humanData.GetHumanInformation(humanId).ConfigureAwait(false));
         }
 
 
         public async Task<Human> LoadHumanInformationByUsername(string username)
         {
-            return new Human(await accesser.GetHumanInformationByUserName(username).ConfigureAwait(false));
+            return new Human(await humanData.GetHumanInformationByUserName(username).ConfigureAwait(false));
         }
     }
 }
