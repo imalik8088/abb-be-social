@@ -11,7 +11,7 @@ using System.Net.Http;
 
 namespace PortableTransformationLayer
 {
-    class FeedData: IFeedData
+    public class FeedData: IFeedData
     {
         private Connection urlServer;
 

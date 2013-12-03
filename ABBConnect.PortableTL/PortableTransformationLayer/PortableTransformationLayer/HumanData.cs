@@ -11,7 +11,7 @@ using System.Net.Http;
 
 namespace PortableTransformationLayer
 {
-    class HumanData: IHumanData
+    public class HumanData: IHumanData
     {
         private Connection urlServer;
 

@@ -11,7 +11,7 @@ using System.Net.Http;
 
 namespace PortableTransformationLayer
 {
-    class CommonData: ICommonData
+    public class CommonData: ICommonData
     {
         private Connection urlServer;
 

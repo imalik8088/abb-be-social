@@ -11,7 +11,7 @@ using System.Net.Http;
 
 namespace PortableTransformationLayer
 {
-    class SensorFeedData: ISensorFeedData
+    public class SensorFeedData: ISensorFeedData
     {
         private Connection urlServer;
 
