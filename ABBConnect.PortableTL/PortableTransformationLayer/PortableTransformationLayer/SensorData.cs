@@ -24,7 +24,7 @@ namespace PortableTransformationLayer
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(urlServer.Url);
-            var response = await client.GetStringAsync("GetSensorInfo/" + id.ToString()).ConfigureAwait(false);
+            var response = await client.GetStringAsync("GetSensorInfo?id=" + id.ToString()).ConfigureAwait(false);
             return JsonConvert.DeserializeObject<GetSensorInformation_Result>(response);  
         }
 
@@ -32,8 +32,8 @@ namespace PortableTransformationLayer
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(urlServer.Url);
-            var response = await client.GetStringAsync("GetPastSensorData/" + id.ToString() 
-                + "/" + startingTime.ToString() + "/" + endingTime.ToString()).ConfigureAwait(false);
+            var response = await client.GetStringAsync("GetPastSensorData?id=" + id.ToString() 
+                + "&start=" + startingTime.ToString() + "&end=" + endingTime.ToString()).ConfigureAwait(false);
             return JsonConvert.DeserializeObject<List<GetHistoricalDataFromSensor_Result>>(response); 
         }
 
@@ -41,7 +41,7 @@ namespace PortableTransformationLayer
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(urlServer.Url);
-            var response = await client.GetStringAsync("GetLastSensorValue/" + id.ToString()).ConfigureAwait(false);
+            var response = await client.GetStringAsync("GetLastSensorValue?id=" + id.ToString()).ConfigureAwait(false);
             return JsonConvert.DeserializeObject<int>(response);  
         }
     }

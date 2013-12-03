@@ -24,7 +24,7 @@ namespace PortableTransformationLayer
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(urlServer.Url);
-            var response = await client.GetStringAsync("GetLatestXFeeds/" + X.ToString()).ConfigureAwait(false);
+            var response = await client.GetStringAsync("GetLatestXFeeds?num=" + X.ToString()).ConfigureAwait(false);
 
             //   var result =  response.Content.ReadAsStringAsync().Result;
             List<GetLatestXFeeds_Result> ret = JsonConvert.DeserializeObject<List<GetLatestXFeeds_Result>>(response);
@@ -37,7 +37,7 @@ namespace PortableTransformationLayer
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(urlServer.Url);
-            var response = await client.GetStringAsync("GetLatestXFeeds/" + X.ToString() + "&" + Id.ToString()).ConfigureAwait(false);
+            var response = await client.GetStringAsync("GetLatestXFeedsFromId?num=" + X.ToString() + "&id=" + Id.ToString()).ConfigureAwait(false);
             return JsonConvert.DeserializeObject<List<GetLatestXFeeds_Result>>(response); 
         }
 
@@ -45,7 +45,7 @@ namespace PortableTransformationLayer
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(urlServer.Url);
-            var response = await client.GetStringAsync("GetFeedComments/" + feedId).ConfigureAwait(false);
+            var response = await client.GetStringAsync("GetFeedComments?feedId=" + feedId).ConfigureAwait(false);
             return JsonConvert.DeserializeObject<List<GetFeedComments_Result>>(response);
         }
 
@@ -53,7 +53,7 @@ namespace PortableTransformationLayer
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(urlServer.Url);
-            var response = await client.GetStringAsync("GetFeedTags/" + feedId).ConfigureAwait(false);
+            var response = await client.GetStringAsync("GetFeedTags?feedId=" + feedId).ConfigureAwait(false);
             return JsonConvert.DeserializeObject<List<GetFeedTags_Result>>(response);
         }
 
@@ -61,7 +61,8 @@ namespace PortableTransformationLayer
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(urlServer.Url);
-            var response = await client.GetStringAsync("PostFeed/" + usrId.ToString() + "&" + text + "&" + filepath + "&" + prioId.ToString()).ConfigureAwait(false);
+            var response = await client.GetStringAsync("PostFeed?id=" + usrId.ToString() 
+                + "&text=" + text + "&path=" + filepath + "&priority=" + prioId.ToString()).ConfigureAwait(false);
             var obj = JsonConvert.DeserializeObject<string>(response);
             return int.Parse(obj);
         }
@@ -70,8 +71,8 @@ namespace PortableTransformationLayer
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(urlServer.Url);
-            var response = await client.GetStringAsync("GetUserFeedsByFilter/" + location 
-                + "/" + startingTime.ToString() + "/" + endingTime.ToString()).ConfigureAwait(false);
+            var response = await client.GetStringAsync("GetUserFeedsByFilter?location=" 
+                + location + "&start=" + startingTime.ToString() + "&end=" + endingTime.ToString()).ConfigureAwait(false);
             return JsonConvert.DeserializeObject<List<GetUserFeedsByFilter_Result>>(response);
         }
 
@@ -89,8 +90,9 @@ namespace PortableTransformationLayer
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(urlServer.Url);
-            var response = await client.GetStringAsync("FilterFeeds/" + name + "/" + location
-                + "/" + startingTime.ToString() + "/" + endingTime.ToString() + "/" + feedType).ConfigureAwait(false);
+            var response = await client.GetStringAsync("FilterFeeds?name=" + name 
+                + "&location=" + location + "&start=" + startingTime.ToString() + "&end=" + 
+                endingTime.ToString() + "&type=" + feedType).ConfigureAwait(false);
             return JsonConvert.DeserializeObject<List<GetFeedsByFilter_Result>>(response);
         }
 
@@ -98,8 +100,8 @@ namespace PortableTransformationLayer
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(urlServer.Url);
-            var response = await client.GetStringAsync("FilterLatestFeeds/" + location
-                + "/" + startingTime.ToString() + "/" + endingTime.ToString()).ConfigureAwait(false);
+            var response = await client.GetStringAsync("FilterLatestFeeds?location=" + location
+                + "&start=" + startingTime.ToString() + "&end=" + endingTime.ToString()).ConfigureAwait(false);
             return JsonConvert.DeserializeObject<List<GetLatestFeedsByFilter_Result>>(response);
         }
     }

@@ -32,8 +32,8 @@ namespace PortableTransformationLayer
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(urlServer.Url);
-            var response = await client.GetStringAsync("GetHumanFeedsByFilter/" 
-                + location + "/" + startingTime.ToString() + "/" + endingTime.ToString()).ConfigureAwait(false);
+            var response = await client.GetStringAsync("GetHumanFeedsByFilter?" 
+                + "location=" + location + "&start=" + startingTime.ToString() + "&end=" + endingTime.ToString()).ConfigureAwait(false);
             return JsonConvert.DeserializeObject<List<GetAllHumanFeedsByFilter_Result>>(response); 
         }
     }

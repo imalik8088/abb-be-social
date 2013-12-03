@@ -24,7 +24,8 @@ namespace PortableTransformationLayer
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(urlServer.Url);
-            var response = await client.GetStringAsync("LogIn/" + usrName + "&" + pw).ConfigureAwait(false);
+            var response = await client.GetStringAsync("LogIn?username=" 
+                + usrName + "&password=" + pw).ConfigureAwait(false);
             return JsonConvert.DeserializeObject<bool>(response);
         }
 
@@ -32,7 +33,7 @@ namespace PortableTransformationLayer
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(urlServer.Url);
-            var response = await client.GetStringAsync("GetHumanInfo/" + Id.ToString()).ConfigureAwait(false);
+            var response = await client.GetStringAsync("GetHumanInfo?id=" + Id.ToString()).ConfigureAwait(false);
             return JsonConvert.DeserializeObject<GetHumanInformation_Result>(response);
         }
 
@@ -40,7 +41,7 @@ namespace PortableTransformationLayer
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(urlServer.Url);
-            var response = await client.GetStringAsync("GetHumanInfoByUsername/" + username).ConfigureAwait(false);
+            var response = await client.GetStringAsync("GetHumanInfoByUsername?username=" + username).ConfigureAwait(false);
             return JsonConvert.DeserializeObject<GetHumanInformationByUsername_Result>(response);
         }
     }
