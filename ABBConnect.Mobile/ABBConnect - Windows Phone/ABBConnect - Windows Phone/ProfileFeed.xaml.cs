@@ -25,7 +25,7 @@ namespace ABBConnect___Windows_Phone
         private void FillFeedList(Test t)
         {
            // NoImageFeedControl nfc = new NoImageFeedControl(t.Author, "rgn09003", t.Content, t.Tags.Count, t.Comments.Count, t.Location, t.Timestamp);
-            FeedControl fc = new FeedControl(t.Author, "rgn09003", t.Content, t.Tags.Count, t.Comments.Count, t.Location, t.Timestamp, "");
+            FeedControl fc = new FeedControl(0, "rgn09003", t.Content, t.Tags.Count, t.Comments.Count, t.Location, t.Timestamp, "");
 
             lstbFeeds.Items.Add(fc);
 

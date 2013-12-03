@@ -7,18 +7,22 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using System.Text;
+using System.IO;
+using System.Windows.Media.Imaging;
 
 namespace ABBConnect___Windows_Phone
 {
     public partial class FeedControl : UserControl
     {
+        private BLL.HumanFeed hFeed;
 
 
         public FeedControl()
         {
             InitializeComponent();
         }
-        public FeedControl(string author, string username, string content, int noOfTags, int noOfComments, string location, DateTime timestamp, string filePath)
+        public FeedControl(int author, string username, string content, int noOfTags, int noOfComments, string location, DateTime timestamp, string filePath)
         {
             InitializeComponent();
             SetAuthor(author, username);
@@ -30,9 +34,29 @@ namespace ABBConnect___Windows_Phone
             SetImage(filePath);
         }
 
+        public FeedControl(BLL.HumanFeed hf)
+        {
+            // TODO: Complete member initialization
+            InitializeComponent();
+            SetAuthor(hf.Owner.ID, hf.Owner.UserName);
+            SetContent(hf.Content);
+            SetNumberOfTags(hf.Tags.Count);
+            SetNumberOfComments(hf.Comments.Count);
+            SetLocation(hf.Location);
+            SetTimeStamp(hf.TimeStamp);
+            SetImage(hf.MediaFilePath);
+
+            hFeed = hf;
+        }
+
         private void SetImage(string filePath)
         {
-                //do nothing yet!
+            Byte[] imageBytes = Convert.FromBase64String(filePath);
+            MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
+            ms.Write(imageBytes, 0, imageBytes.Length);
+            BitmapImage bmp = new BitmapImage();
+            bmp.SetSource(ms);
+            imgImage.Source = bmp;
         }
 
         private void Author_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -46,10 +70,10 @@ namespace ABBConnect___Windows_Phone
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Feed.xaml", UriKind.Relative));
         }
 
-        internal void SetAuthor(string p, string username)
+        internal void SetAuthor(int id, string username)
         {
-            Author.Text = p;
-            Author.Tag = username;
+            Author.Text = username;
+            Author.Tag = id;
         }
 
         internal void SetContent(string p)

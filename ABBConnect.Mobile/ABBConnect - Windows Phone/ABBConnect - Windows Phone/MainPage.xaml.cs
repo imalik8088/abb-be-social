@@ -21,6 +21,7 @@ using System.IO;
 using System.Windows.Media.Imaging;
 using System.Text;
 using System.Windows.Threading;
+using System.IO.IsolatedStorage;
 
 namespace ABBConnect___Windows_Phone
 {
@@ -33,6 +34,8 @@ namespace ABBConnect___Windows_Phone
         const int NUMBEROFFEEDS = 10;
         DispatcherTimer timerNewFeed, timerLabel;
         List<BLL.Feed> feeds;
+
+        string chosenImg;
 
         /// <summary>
         /// Constructot
@@ -259,8 +262,43 @@ namespace ABBConnect___Windows_Phone
                 bmp.SetSource(e.ChosenPhoto);
                 imgCapture.Source = bmp;
 
+                //Convert the photo to bytes
+                Byte[] photoBytes = new byte[e.ChosenPhoto.Length];
+
+                // rewind first
+                e.ChosenPhoto.Position = 0;
+
+                // now succeeds
+                e.ChosenPhoto.Read(photoBytes, 0, photoBytes.Length);
+
                 
-                
+                //UNCOMMENT TO ENABLE SENDING IMAGE TO DB
+
+                //chosenImg = Convert.ToBase64String(photoBytes);
+
+                //TESTING
+                /*
+                BLL.HumanFeed hf = new BLL.HumanFeed();
+                hf.MediaFilePath = chosenImg;
+                hf.ID = 190;
+                hf.Location = "hej";
+                hf.TimeStamp = new DateTime();
+                hf.Owner.ID = 1;
+                hf.Owner.UserName = "rgn09003";
+                hf.Comments = new List<Comment>();
+                hf.Tags = new List<Human>();
+
+                FeedControl fc = new FeedControl(hf);
+
+
+                IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
+                appSettings.Add("img", chosenImg);
+
+                lstbFeeds.Items.Add(fc);
+                   
+
+                int hej = 10;
+                 */
             }
         }
 
@@ -283,13 +321,28 @@ namespace ABBConnect___Windows_Phone
         {
             //CHECK IF THE FEED CONTATINS A PICTURE!!
 
-            NoImageFeedControl nfc = new NoImageFeedControl(hf);
+            if (hf.MediaFilePath == "none" || hf.MediaFilePath == "")
+            {
+                NoImageFeedControl nfc = new NoImageFeedControl(hf);
 
-            if (index == -1)
-                lstbFeeds.Items.Add(nfc);
+                if (index == -1)
+                    lstbFeeds.Items.Add(nfc);
+                else
+                    lstbFeeds.Items.Insert(index, nfc);
+            }
             else
-                lstbFeeds.Items.Insert(index, nfc);
+            {
+                FeedControl fc = new FeedControl(hf);
+
+                if (index == -1)
+                    lstbFeeds.Items.Add(fc);
+                else
+                    lstbFeeds.Items.Insert(index, fc);
+            }
+
+
         }
+
 
         /// <summary>
         /// Fill the list with sensor feeds, send -1 as index if it should be added in the end
@@ -341,14 +394,24 @@ namespace ABBConnect___Windows_Phone
 
             hf.Owner.ID = currentUser.ID;
             hf.Content = txtbContent.Text;
-            hf.MediaFilePath = "none";
+            hf.MediaFilePath = (String.IsNullOrEmpty(chosenImg) ? "none" : chosenImg);
             hf.Category.Id = 2;
+
+
+            //DEBUG STUFF
+           // lblTags.Text = hf.MediaFilePath;
 
             bool res = await fm.PublishFeed(hf);
 
-            txtbContent.Text = "";
-            MessageBox.Show("Feed Published");
+            if (res)
+            {
+                txtbContent.Text = "";
+                MessageBox.Show("Feed Published");
+            }
+            else
+                MessageBox.Show("Something went wrong");
         }
+
      
     }
 }

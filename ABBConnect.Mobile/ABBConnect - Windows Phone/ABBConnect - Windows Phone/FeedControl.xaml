@@ -9,7 +9,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}" Height="445" Width="456">
 
     <Grid x:Name="gridFeedControl" Margin="0,0,0,10" Background="{StaticResource PhoneChromeBrush}" >
-        <Image x:Name="Image" Source="Icons/B8Xb1E5.jpg"  HorizontalAlignment="Left" Height="238" Margin="91,57,0,0" VerticalAlignment="Top" Width="280" MouseLeftButtonDown="Content_MouseLeftButtonDown"/>
+        <Image x:Name="imgImage"  HorizontalAlignment="Left" Height="238" Margin="91,57,0,0" VerticalAlignment="Top" Width="280" MouseLeftButtonDown="Content_MouseLeftButtonDown"/>
         <TextBlock x:Name="Text"  FontSize="20" HorizontalAlignment="Left" Margin="30,319,0,0" TextWrapping="Wrap" Text="This is some awseom content that is aawesome" VerticalAlignment="Top" RenderTransformOrigin="2.341,6.889" MouseLeftButtonDown="Content_MouseLeftButtonDown" Width="396"/>
         <TextBlock x:Name="Author" FontSize="20" HorizontalAlignment="Left" Margin="30,5,0,0" TextWrapping="Wrap" Text="Robert Gustavsson" VerticalAlignment="Top" RenderTransformOrigin="2.341,6.889" MouseLeftButtonDown="Author_MouseLeftButtonDown" FontWeight="Bold"/>
         <TextBlock x:Name="Tags" FontSize="18" HorizontalAlignment="Left" Margin="46,396,0,17" TextWrapping="Wrap" Text="11" RenderTransformOrigin="2.341,6.889" MouseLeftButtonDown="Content_MouseLeftButtonDown" TextAlignment="Center" Width="25" Foreground="#FF969696"/>
