@@ -99,6 +99,10 @@ namespace ABBJSONService
         [OperationContract]
         [WebInvoke]
         List<GetFeedsByFilter_Result> GetFeedsByFilter(string name, string location, string startingTime, string endingTime, string feedType);
+        
+        [OperationContract]
+        [WebInvoke]
+        List<GetLatestXFeeds_Result> GetXFeedsByFilter(string id, string location, string startingTime, string endingTime, string feedType, string startId, string numFeeds);
 
     }
 
