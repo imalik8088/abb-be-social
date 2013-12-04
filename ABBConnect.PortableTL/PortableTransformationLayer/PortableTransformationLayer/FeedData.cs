@@ -20,19 +20,6 @@ namespace PortableTransformationLayer
             urlServer = new Connection();
         }
 
-        public async Task<List<ABBConnectServiceRef.GetLatestXFeeds_Result>> GetLatestXFeeds(int X)
-        {
-            var client = new HttpClient();
-            client.BaseAddress = new Uri(urlServer.Url);
-            var response = await client.GetStringAsync("GetLatestXFeeds?num=" + X.ToString()).ConfigureAwait(false);
-
-            //   var result =  response.Content.ReadAsStringAsync().Result;
-            List<GetLatestXFeeds_Result> ret = JsonConvert.DeserializeObject<List<GetLatestXFeeds_Result>>(response);
-
-            // Task<List<GetLatestXFeeds_Result>> namn = ret;
-            return ret;
-        }
-
         public async Task<List<ABBConnectServiceRef.GetFeedComments_Result>> GetFeedComments(int feedId)
         {
             var client = new HttpClient();
