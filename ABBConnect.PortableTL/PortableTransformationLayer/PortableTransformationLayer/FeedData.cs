@@ -33,14 +33,6 @@ namespace PortableTransformationLayer
             return ret;
         }
 
-        public async Task<List<ABBConnectServiceRef.GetLatestXFeeds_Result>> GetLatestXFeedsFromId(int X, int Id)
-        {
-            var client = new HttpClient();
-            client.BaseAddress = new Uri(urlServer.Url);
-            var response = await client.GetStringAsync("GetLatestXFeedsFromId?num=" + X.ToString() + "&id=" + Id.ToString()).ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<List<GetLatestXFeeds_Result>>(response); 
-        }
-
         public async Task<List<ABBConnectServiceRef.GetFeedComments_Result>> GetFeedComments(int feedId)
         {
             var client = new HttpClient();
@@ -67,42 +59,15 @@ namespace PortableTransformationLayer
             return int.Parse(obj);
         }
 
-        public async Task<List<GetUserFeedsByFilter_Result>> GetUserFeedsByFilter(string location, DateTime startingTime, DateTime endingTime)
+        public async Task<List<GetFeedsByFilter_Result>> GetFeedsByFilter(int userId, string location, DateTime startingTime, DateTime endingTime, string feedType, int startId, int numFeeds)
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(urlServer.Url);
-            var response = await client.GetStringAsync("GetUserFeedsByFilter?location=" 
-                + location + "&start=" + startingTime.ToString() + "&end=" + endingTime.ToString()).ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<List<GetUserFeedsByFilter_Result>>(response);
-        }
-
-
-        public async Task<List<GetUserFeeds_Result>> GetUserFeeds()
-        {
-            var client = new HttpClient();
-            client.BaseAddress = new Uri(urlServer.Url);
-            var response = await client.GetStringAsync("GetUserFeeds").ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<List<GetUserFeeds_Result>>(response);
-        }
-
-
-        public async Task<List<GetFeedsByFilter_Result>> GetFeedsByFilter(string name, string location, DateTime startingTime, DateTime endingTime, string feedType)
-        {
-            var client = new HttpClient();
-            client.BaseAddress = new Uri(urlServer.Url);
-            var response = await client.GetStringAsync("FilterFeeds?name=" + name 
-                + "&location=" + location + "&start=" + startingTime.ToString() + "&end=" + 
-                endingTime.ToString() + "&type=" + feedType).ConfigureAwait(false);
+            var response = await client.GetStringAsync("FilterFeedsByFilter?userId=" + userId 
+                + "&location=" + location + "&start=" + startingTime..ToString() + "&end=" + 
+                endingTime.ToString() + "&type=" + feedType + "&feedId=" + startId + 
+                "&numFeeds=" + numFeeds).ConfigureAwait(false);
             return JsonConvert.DeserializeObject<List<GetFeedsByFilter_Result>>(response);
-        }
-
-        public async Task<List<GetLatestFeedsByFilter_Result>> GetLatestFeedsByFilter(string location, DateTime startingTime, DateTime endingTime)
-        {
-            var client = new HttpClient();
-            client.BaseAddress = new Uri(urlServer.Url);
-            var response = await client.GetStringAsync("FilterLatestFeeds?location=" + location
-                + "&start=" + startingTime.ToString() + "&end=" + endingTime.ToString()).ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<List<GetLatestFeedsByFilter_Result>>(response);
         }
     }
 }
