@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PortableBLL
 {
-    class UserManager: IUserManager
+    class UserManager : IUserManager
     {
         private UserData usrData;
 
@@ -26,7 +26,30 @@ namespace PortableBLL
 
         public async Task<SensorHistoryData> LoadHistoryValuesBySensor(int sensorID, DateTime startingTime, DateTime endingTime)
         {
-            throw new NotImplementedException();
+            List<GetHistoricalDataFromSensor_Result> listHistData = await usrData.GetHistoricalDataFromSensor(sensorID, startingTime, endingTime);
+
+            UserManager senInfoMng = new UserManager();
+ 
+            SensorHistoryData senHistData = new SensorHistoryData(await senInfoMng.LoadSensorInformation(sensorID));
+            senHistData.StartingTime = startingTime;
+            senHistData.EndingTime = endingTime;
+
+            foreach (GetHistoricalDataFromSensor_Result res in listHistData)
+            {
+                SensorVTData sensorData = new SensorVTData();
+
+                int rawInt;
+	            bool convertRes = int.TryParse(res.RawValue, out rawInt);
+	            if (convertRes == true)
+	            {
+                    sensorData.RawData = rawInt;
+	            }
+
+                sensorData.CreationTime = res.CreationTimeStamp ?? DateTime.Now; 
+                senHistData.Owner.SensorValues.Add(sensorData);
+            }
+
+            return senHistData;
         }
 
         public async Task<int> LoadCurrentValuesBySensor(int sensorID)

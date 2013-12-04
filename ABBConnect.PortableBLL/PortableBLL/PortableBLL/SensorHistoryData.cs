@@ -7,9 +7,9 @@ namespace PortableBLL
 {
     public class SensorHistoryData
     {
-        public SensorHistoryData()
+        public SensorHistoryData(Sensor owner)
         {
-            this.owner = new Sensor();
+            this.owner = owner;
             this.startingTime = DateTime.MinValue;
             this.endingTime = DateTime.MinValue;
         }

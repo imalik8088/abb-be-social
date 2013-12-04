@@ -11,8 +11,6 @@ namespace PortableBLL
 {
     public class FeedManager: IFeedManager
     {
-        public class FeedManager : IFeedManager
-        {
             FeedData feedData;
 
             public FeedManager()
@@ -26,11 +24,17 @@ namespace PortableBLL
 
                 List<Feed> retList = new List<Feed>();
 
+                UserManager userInforMng = new UserManager();
+
                 foreach (GetLatestXFeeds_Result res in list)
                     if (res.Type == "Human")
-                        retList.Add(new HumanFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false), await LoadFeedTags(res.FeedId).ConfigureAwait(false)));
+                        retList.Add(new HumanFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false),
+                                                  await LoadFeedTags(res.FeedId).ConfigureAwait(false),
+                                                  await userInforMng.LoadHumanInformation(res.UserId)));
                     else
-                        retList.Add(new SensorFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false), await LoadFeedTags(res.FeedId).ConfigureAwait(false)));
+                        retList.Add(new SensorFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false), 
+                                                   await LoadFeedTags(res.FeedId).ConfigureAwait(false),
+                                                   await userInforMng.LoadSensorInformation(res.UserId)));
 
                 return retList;
 
@@ -42,12 +46,18 @@ namespace PortableBLL
 
                 List<Feed> retList = new List<Feed>();
 
+                UserManager userInforMng = new UserManager();
+
                 foreach (GetLatestXFeeds_Result res in list)
                 {
                     if (res.Type == "Human")
-                        retList.Add(new HumanFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false), await LoadFeedTags(res.FeedId).ConfigureAwait(false)));
+                        retList.Add(new HumanFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false),
+                                                  await LoadFeedTags(res.FeedId).ConfigureAwait(false),
+                                                  await userInforMng.LoadHumanInformation(res.UserId)));
                     else
-                        retList.Add(new SensorFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false), await LoadFeedTags(res.FeedId).ConfigureAwait(false)));
+                        retList.Add(new SensorFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false),
+                                                   await LoadFeedTags(res.FeedId).ConfigureAwait(false),
+                                                   await userInforMng.LoadSensorInformation(res.UserId)));
                 }
 
                 return retList;
@@ -112,35 +122,47 @@ namespace PortableBLL
             }
 
 
-            public async Task<List<Feed>> LoadFeedsByType(FeedType feedType, int numFeeds)
+            public async Task<List<Feed>> LoadFeedsByType(FeedType.FeedSource feedType, int numFeeds)
             {
                 List<GetLatestXFeeds_Result> list = await feedData.GetFeedsByFilter(-1, "", DateTime.MinValue, DateTime.MinValue, feedType.ToString(), -1, numFeeds);
 
                 List<Feed> retList = new List<Feed>();
 
+                UserManager userInforMng = new UserManager();
+
                 foreach (GetLatestXFeeds_Result res in list)
                 {
                     if (res.Type == "Human")
-                        retList.Add(new HumanFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false), await LoadFeedTags(res.FeedId).ConfigureAwait(false)));
+                        retList.Add(new HumanFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false), 
+                                                  await LoadFeedTags(res.FeedId).ConfigureAwait(false),
+                                                  await userInforMng.LoadHumanInformation(res.UserId)));
                     else
-                        retList.Add(new SensorFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false), await LoadFeedTags(res.FeedId).ConfigureAwait(false)));
+                        retList.Add(new SensorFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false),
+                                                   await LoadFeedTags(res.FeedId).ConfigureAwait(false),
+                                                   await userInforMng.LoadSensorInformation(res.UserId)));
                 }
 
                 return retList;
             }
 
-            public async Task<List<Feed>> LoadFeedsByType(FeedType feedType, int numFeeds, int startId)
+            public async Task<List<Feed>> LoadFeedsByType(FeedType.FeedSource feedType, int numFeeds, int startId)
             {
                 List<GetLatestXFeeds_Result> list = await feedData.GetFeedsByFilter(-1, "", DateTime.MinValue, DateTime.MinValue, feedType.ToString(), startId, numFeeds);
 
                 List<Feed> retList = new List<Feed>();
 
+                UserManager userInforMng = new UserManager();
+
                 foreach (GetLatestXFeeds_Result res in list)
                 {
                     if (res.Type == "Human")
-                        retList.Add(new HumanFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false), await LoadFeedTags(res.FeedId).ConfigureAwait(false)));
+                        retList.Add(new HumanFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false),
+                                                  await LoadFeedTags(res.FeedId).ConfigureAwait(false),
+                                                  await userInforMng.LoadHumanInformation(res.UserId)));
                     else
-                        retList.Add(new SensorFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false), await LoadFeedTags(res.FeedId).ConfigureAwait(false)));
+                        retList.Add(new SensorFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false),
+                                                   await LoadFeedTags(res.FeedId).ConfigureAwait(false),
+                                                   await userInforMng.LoadSensorInformation(res.UserId)));
                 }
 
                 return retList;
@@ -152,12 +174,18 @@ namespace PortableBLL
 
                 List<Feed> retList = new List<Feed>();
 
+                UserManager userInforMng = new UserManager();
+
                 foreach (GetLatestXFeeds_Result res in list)
                 {
                     if (res.Type == "Human")
-                        retList.Add(new HumanFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false), await LoadFeedTags(res.FeedId).ConfigureAwait(false)));
+                        retList.Add(new HumanFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false),
+                                                  await LoadFeedTags(res.FeedId).ConfigureAwait(false),
+                                                  await userInforMng.LoadHumanInformation(res.UserId)));
                     else
-                        retList.Add(new SensorFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false), await LoadFeedTags(res.FeedId).ConfigureAwait(false)));
+                        retList.Add(new SensorFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false),
+                                                   await LoadFeedTags(res.FeedId).ConfigureAwait(false),
+                                                   await userInforMng.LoadSensorInformation(res.UserId)));
                 }
 
                 return retList;
@@ -169,12 +197,18 @@ namespace PortableBLL
 
                 List<Feed> retList = new List<Feed>();
 
+                UserManager userInforMng = new UserManager();
+
                 foreach (GetLatestXFeeds_Result res in list)
                 {
                     if (res.Type == "Human")
-                        retList.Add(new HumanFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false), await LoadFeedTags(res.FeedId).ConfigureAwait(false)));
+                        retList.Add(new HumanFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false),
+                                                  await LoadFeedTags(res.FeedId).ConfigureAwait(false),
+                                                  await userInforMng.LoadHumanInformation(res.UserId)));
                     else
-                        retList.Add(new SensorFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false), await LoadFeedTags(res.FeedId).ConfigureAwait(false)));
+                        retList.Add(new SensorFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false),
+                                                   await LoadFeedTags(res.FeedId).ConfigureAwait(false),
+                                                   await userInforMng.LoadSensorInformation(res.UserId)));
                 }
 
                 return retList;
@@ -186,12 +220,18 @@ namespace PortableBLL
 
                 List<Feed> retList = new List<Feed>();
 
+                UserManager userInforMng = new UserManager();
+
                 foreach (GetLatestXFeeds_Result res in list)
                 {
                     if (res.Type == "Human")
-                        retList.Add(new HumanFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false), await LoadFeedTags(res.FeedId).ConfigureAwait(false)));
+                        retList.Add(new HumanFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false),
+                                                  await LoadFeedTags(res.FeedId).ConfigureAwait(false),
+                                                  await userInforMng.LoadHumanInformation(res.UserId)));
                     else
-                        retList.Add(new SensorFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false), await LoadFeedTags(res.FeedId).ConfigureAwait(false)));
+                        retList.Add(new SensorFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false),
+                                                   await LoadFeedTags(res.FeedId).ConfigureAwait(false),
+                                                   await userInforMng.LoadSensorInformation(res.UserId)));
                 }
 
                 return retList;
@@ -203,12 +243,18 @@ namespace PortableBLL
 
                 List<Feed> retList = new List<Feed>();
 
+                UserManager userInforMng = new UserManager();
+
                 foreach (GetLatestXFeeds_Result res in list)
                 {
                     if (res.Type == "Human")
-                        retList.Add(new HumanFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false), await LoadFeedTags(res.FeedId).ConfigureAwait(false)));
+                        retList.Add(new HumanFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false),
+                                                  await LoadFeedTags(res.FeedId).ConfigureAwait(false),
+                                                  await userInforMng.LoadHumanInformation(res.UserId)));
                     else
-                        retList.Add(new SensorFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false), await LoadFeedTags(res.FeedId).ConfigureAwait(false)));
+                        retList.Add(new SensorFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false),
+                                                   await LoadFeedTags(res.FeedId).ConfigureAwait(false),
+                                                   await userInforMng.LoadSensorInformation(res.UserId)));
                 }
 
                 return retList;
@@ -220,12 +266,18 @@ namespace PortableBLL
 
                 List<Feed> retList = new List<Feed>();
 
+                UserManager userInforMng = new UserManager();
+
                 foreach (GetLatestXFeeds_Result res in list)
                 {
                     if (res.Type == "Human")
-                        retList.Add(new HumanFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false), await LoadFeedTags(res.FeedId).ConfigureAwait(false)));
+                        retList.Add(new HumanFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false),
+                                                  await LoadFeedTags(res.FeedId).ConfigureAwait(false),
+                                                  await userInforMng.LoadHumanInformation(res.UserId)));
                     else
-                        retList.Add(new SensorFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false), await LoadFeedTags(res.FeedId).ConfigureAwait(false)));
+                        retList.Add(new SensorFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false),
+                                                   await LoadFeedTags(res.FeedId).ConfigureAwait(false),
+                                                   await userInforMng.LoadSensorInformation(res.UserId)));
                 }
 
                 return retList;
@@ -237,12 +289,18 @@ namespace PortableBLL
 
                 List<Feed> retList = new List<Feed>();
 
+                UserManager userInforMng = new UserManager();
+
                 foreach (GetLatestXFeeds_Result res in list)
                 {
                     if (res.Type == "Human")
-                        retList.Add(new HumanFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false), await LoadFeedTags(res.FeedId).ConfigureAwait(false)));
+                        retList.Add(new HumanFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false),
+                                                  await LoadFeedTags(res.FeedId).ConfigureAwait(false),
+                                                  await userInforMng.LoadHumanInformation(res.UserId)));
                     else
-                        retList.Add(new SensorFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false), await LoadFeedTags(res.FeedId).ConfigureAwait(false)));
+                        retList.Add(new SensorFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false),
+                                                   await LoadFeedTags(res.FeedId).ConfigureAwait(false),
+                                                   await userInforMng.LoadSensorInformation(res.UserId)));
                 }
 
                 return retList;
@@ -253,16 +311,5 @@ namespace PortableBLL
             {
                 throw new NotImplementedException();
             }
-
-            public Task<List<Feed>> LoadFeedsByType(FeedType.type feedType, int numFeeds)
-            {
-                throw new NotImplementedException();
-            }
-
-            public Task<List<Feed>> LoadFeedsByType(FeedType.type feedType, int numFeeds, int startId)
-            {
-                throw new NotImplementedException();
-            }
-        }
     }
 }
