@@ -41,7 +41,6 @@
     <Compile Include="FeedManagerSync.cs" />
     <Compile Include="Human.cs" />
     <Compile Include="HumanFeed.cs" />
-    <Compile Include="HumanManager.cs" />
     <Compile Include="ICommonDataManager.cs" />
     <Compile Include="ISyncFeedManager.cs" />
     <Compile Include="IUserManager.cs" />
@@ -51,7 +50,6 @@
     <Compile Include="Sensor.cs" />
     <Compile Include="SensorFeed.cs" />
     <Compile Include="SensorHistoryData.cs" />
-    <Compile Include="SensorManager.cs" />
     <Compile Include="SensorVTData.cs" />
     <Compile Include="Service References\ABBConnectServiceRef\Reference.cs">
       <AutoGen>True</AutoGen>
