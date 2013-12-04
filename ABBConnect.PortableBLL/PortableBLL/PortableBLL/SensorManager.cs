@@ -6,7 +6,7 @@ using PortableTransformationLayer;
 using PortableTransformationLayer.ABBConnectServiceRef;
 using System.Threading.Tasks;
 
-namespace BLL
+namespace PortableBLL
 {
     public class SensorManager:ISensorManager
     {
@@ -23,19 +23,16 @@ namespace BLL
             GetSensorInformation_Result tempSensor = await senData.GetSensorInformation(sensorID).ConfigureAwait(false);
             Sensor responseSensor = new Sensor(tempSensor);
             return responseSensor;
-
         }
 
         public async Task<SensorHistoryData> LoadHistoryValuesBySensor(int sensorID, DateTime startingTime, DateTime endingTime)
         {
             throw new NotImplementedException();
-
         }
 
         public async Task<int> LoadCurrentValuesBySensor(int sensorID)
         {
             return await senData.GetLastSensorValue(sensorID).ConfigureAwait(false);
-
         }
     }
 }

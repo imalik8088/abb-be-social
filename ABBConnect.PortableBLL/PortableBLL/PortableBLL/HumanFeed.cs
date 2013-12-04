@@ -1,7 +1,8 @@
 ﻿
 using PortableTransformationLayer.ABBConnectServiceRef;
 using System.Collections.Generic;
-namespace BLL
+
+namespace PortableBLL
 {
     public class HumanFeed: Feed
     {

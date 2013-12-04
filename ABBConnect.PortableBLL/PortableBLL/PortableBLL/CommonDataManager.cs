@@ -6,7 +6,7 @@ using PortableTransformationLayer;
 using PortableTransformationLayer.ABBConnectServiceRef;
 using System.Threading.Tasks;
 
-namespace BLL
+namespace PortableBLL
 {
     public class CommonDataManager: ICommonDataManager
     {

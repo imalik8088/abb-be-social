@@ -7,7 +7,7 @@ using PortableTransformationLayer.ABBConnectServiceRef;
 using System.Threading.Tasks;
 
 
-namespace BLL
+namespace PortableBLL
 {
     public class FeedManager: IFeedManager
     {

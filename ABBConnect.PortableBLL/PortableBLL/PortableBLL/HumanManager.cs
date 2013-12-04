@@ -29,7 +29,6 @@ namespace BLL
             return new Human(await humanData.GetHumanInformation(humanId).ConfigureAwait(false));
         }
 
-
         public async Task<Human> LoadHumanInformationByUsername(string username)
         {
             return new Human(await humanData.GetHumanInformationByUserName(username).ConfigureAwait(false));

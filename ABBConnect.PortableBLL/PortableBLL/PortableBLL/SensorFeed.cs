@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using PortableTransformationLayer.ABBConnectServiceRef;
 
-namespace BLL
+namespace PortableBLL
 {
     public class SensorFeed: Feed
     {

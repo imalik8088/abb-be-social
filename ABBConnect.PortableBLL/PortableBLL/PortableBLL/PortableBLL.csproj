@@ -46,6 +46,7 @@
     <Compile Include="IHumanManager.cs" />
     <Compile Include="ISensorManager.cs" />
     <Compile Include="ISyncFeedManager.cs" />
+    <Compile Include="IUserManager.cs" />
     <Compile Include="lFeedManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -59,6 +60,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="UserManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Threading.Tasks">

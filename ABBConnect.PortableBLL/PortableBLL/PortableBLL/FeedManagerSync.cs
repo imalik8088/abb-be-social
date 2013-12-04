@@ -7,7 +7,7 @@ using PortableTransformationLayer.ABBConnectServiceRef;
 
 /* JUST A TEST CLASS FOR KNOW!!!! */
 
-namespace BLL
+namespace PortableBLL
 {
     public class FeedManagerSync
     {
