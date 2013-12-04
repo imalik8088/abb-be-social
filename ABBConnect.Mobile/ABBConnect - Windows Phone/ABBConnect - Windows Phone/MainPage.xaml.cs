@@ -397,7 +397,6 @@ namespace ABBConnect___Windows_Phone
             hf.MediaFilePath = (String.IsNullOrEmpty(chosenImg) ? "none" : chosenImg);
             hf.Category.Id = 2;
 
-
             //DEBUG STUFF
            // lblTags.Text = hf.MediaFilePath;
 
