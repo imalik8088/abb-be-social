@@ -39,6 +39,7 @@
     <Compile Include="Feed.cs" />
     <Compile Include="FeedManager.cs" />
     <Compile Include="FeedManagerSync.cs" />
+    <Compile Include="FeedType.cs" />
     <Compile Include="Human.cs" />
     <Compile Include="HumanFeed.cs" />
     <Compile Include="ICommonDataManager.cs" />
