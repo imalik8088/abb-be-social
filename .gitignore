@@ -158,4 +158,4 @@ Desktop.ini
 $RECYCLE.BIN/
 
 !*.dll
-!/ABBConnect.PortableBLL/PortableBLL/PortableBLL/bin/Debug/
+!ABBConnect.PortableBLL/**/*
