@@ -43,8 +43,6 @@
     <Compile Include="HumanFeed.cs" />
     <Compile Include="HumanManager.cs" />
     <Compile Include="ICommonDataManager.cs" />
-    <Compile Include="IHumanManager.cs" />
-    <Compile Include="ISensorManager.cs" />
     <Compile Include="ISyncFeedManager.cs" />
     <Compile Include="IUserManager.cs" />
     <Compile Include="lFeedManager.cs" />

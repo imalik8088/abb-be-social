@@ -10,9 +10,16 @@ namespace PortableBLL
 {
     class UserManager: IUserManager
     {
+        private UserData usrData;
+
+        public UserManager()
+        {
+            usrData = new UserData();
+        }
+
         public async Task<Sensor> LoadSensorInformation(int sensorID)
         {
-            GetSensorInformation_Result tempSensor = await senData.GetSensorInformation(sensorID).ConfigureAwait(false);
+            GetSensorInformation_Result tempSensor = await usrData.GetSensorInformation(sensorID).ConfigureAwait(false);
             Sensor responseSensor = new Sensor(tempSensor);
             return responseSensor;
         }
@@ -24,23 +31,23 @@ namespace PortableBLL
 
         public async Task<int> LoadCurrentValuesBySensor(int sensorID)
         {
-            return await senData.GetLastSensorValue(sensorID).ConfigureAwait(false);
+            return await usrData.GetLastSensorValue(sensorID).ConfigureAwait(false);
         }
 
         public async Task<bool> Login(string userName, string password)
         {
-            return await humanData.LogIn(userName, password).ConfigureAwait(false); ;
+            return await usrData.LogIn(userName, password).ConfigureAwait(false); ;
 
         }
 
         public async Task<Human> LoadHumanInformation(int humanId)
         {
-            return new Human(await humanData.GetHumanInformation(humanId).ConfigureAwait(false));
+            return new Human(await usrData.GetHumanInformation(humanId).ConfigureAwait(false));
         }
 
         public async Task<Human> LoadHumanInformationByUsername(string username)
         {
-            return new Human(await humanData.GetHumanInformationByUserName(username).ConfigureAwait(false));
+            return new Human(await usrData.GetHumanInformationByUserName(username).ConfigureAwait(false));
         }
     }
 }
