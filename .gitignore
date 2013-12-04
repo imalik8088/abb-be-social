@@ -1,4 +1,5 @@
 !*.dll
+!bin/
 
 # OS generated files #
 ######################
