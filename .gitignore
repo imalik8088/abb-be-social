@@ -1,4 +1,4 @@
-!*.dll
+
 
 # OS generated files #
 ######################
@@ -158,3 +158,5 @@ Desktop.ini
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
 
+!*.dll
+!ABBConnect.PortableBLL/PortableBLL/PortableBLL/bin/Release/
