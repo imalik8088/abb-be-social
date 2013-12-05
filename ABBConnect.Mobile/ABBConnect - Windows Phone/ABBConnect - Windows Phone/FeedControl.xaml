@@ -20,6 +20,5 @@
         <Image Source="symbol_location.png" HorizontalAlignment="Left" Height="15" Margin="30,300,0,0" VerticalAlignment="Top" Width="15"/>
         <TextBlock x:Name="Timestamp" FontSize="18" HorizontalAlignment="Right" Margin="0,5,31,408" TextWrapping="Wrap" RenderTransformOrigin="2.341,6.889" MouseLeftButtonDown="Content_MouseLeftButtonDown" TextAlignment="Center" Width="29" Foreground="#FF969696" Text="10h"/>
         <TextBlock x:Name="Comments" FontSize="18" HorizontalAlignment="Left" Margin="89,396,0,17" TextWrapping="Wrap" RenderTransformOrigin="2.341,6.889" MouseLeftButtonDown="Content_MouseLeftButtonDown" TextAlignment="Center" Width="29" Foreground="#FF969696" Text="9"/>
-
-    </Grid>
+       </Grid>
 </UserControl>

@@ -10,6 +10,6 @@
     d:DesignHeight="180" d:DesignWidth="456">
     
     <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}">
-
+        <TextBlock Height="30" HorizontalAlignment="Left" Margin="204,107,0,0" Name="textBlock1" Text="TexasdfasdftBlock" VerticalAlignment="Top" />
     </Grid>
 </UserControl>
