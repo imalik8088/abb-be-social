@@ -7,19 +7,20 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using PortableBLL;
 
 namespace ABBConnect___Windows_Phone
 {
     public partial class NoImageFeedControl : UserControl
     {
-        private BLL.HumanFeed hFeed;
+        private PortableBLL.HumanFeed hFeed;
 
         public NoImageFeedControl()
         {
             InitializeComponent();
         }
 
-        public NoImageFeedControl(BLL.HumanFeed hf)
+        public NoImageFeedControl(PortableBLL.HumanFeed hf)
         {
             InitializeComponent();
             SetAuthor(hf.Owner.ID, hf.Owner.UserName);

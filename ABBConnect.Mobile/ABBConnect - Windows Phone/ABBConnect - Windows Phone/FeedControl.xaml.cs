@@ -15,7 +15,7 @@ namespace ABBConnect___Windows_Phone
 {
     public partial class FeedControl : UserControl
     {
-        private BLL.HumanFeed hFeed;
+        private PortableBLL.HumanFeed hFeed;
 
 
         public FeedControl()
@@ -34,9 +34,8 @@ namespace ABBConnect___Windows_Phone
             SetImage(filePath);
         }
 
-        public FeedControl(BLL.HumanFeed hf)
+        public FeedControl(PortableBLL.HumanFeed hf)
         {
-            // TODO: Complete member initialization
             InitializeComponent();
             SetAuthor(hf.Owner.ID, hf.Owner.UserName);
             SetContent(hf.Content);
@@ -51,12 +50,14 @@ namespace ABBConnect___Windows_Phone
 
         private void SetImage(string filePath)
         {
+            /*
             Byte[] imageBytes = Convert.FromBase64String(filePath);
             MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
             ms.Write(imageBytes, 0, imageBytes.Length);
             BitmapImage bmp = new BitmapImage();
             bmp.SetSource(ms);
             imgImage.Source = bmp;
+             */
         }
 
         private void Author_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)

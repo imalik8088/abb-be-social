@@ -15,7 +15,6 @@ using Microsoft.Devices;
 using Microsoft.Xna.Framework.Media;
 using System.Threading;
 using PortableBLL;
-using BLL;
 using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Media.Imaging;
@@ -28,12 +27,12 @@ namespace ABBConnect___Windows_Phone
     public partial class MainPage : PhoneApplicationPage
     {
         // Constructor
-        BLL.Human currentUser;
-        BLL.FeedManager fm;
+        PortableBLL.Human currentUser;
+        PortableBLL.FeedManager fm;
         const int UPDATETIME = 30;
         const int NUMBEROFFEEDS = 10;
         DispatcherTimer timerNewFeed, timerLabel;
-        List<BLL.Feed> feeds;
+        List<PortableBLL.Feed> feeds;
 
         string chosenImg;
 
@@ -89,7 +88,7 @@ namespace ABBConnect___Windows_Phone
                 return;
 
             //load the newest feed
-            List<BLL.Feed> latestFeed = await fm.LoadLatestXFeeds(1);
+            List<PortableBLL.Feed> latestFeed = await fm.LoadLatestXFeeds(1);
 
             //get the latest ID and the amount between the first ID and this
             int id = latestFeed[0].ID;
@@ -112,8 +111,8 @@ namespace ABBConnect___Windows_Phone
         /// </summary>
         private async void LoadUser()
         {
-            BLL.HumanManager hm = new BLL.HumanManager();
-            currentUser = await hm.LoadHumanInformationByUsername("rgn09003");
+            PortableBLL.UserManager um = new PortableBLL.UserManager();
+            currentUser = await um.LoadHumanInformationByUsername("rgn09003");
 
             lblEmailClick.Text = currentUser.Email;
             lblPhoneClick.Text = currentUser.PhoneNumber;
@@ -173,7 +172,7 @@ namespace ABBConnect___Windows_Phone
         {
             pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
 
-            List<BLL.Feed> newFeeds = await fm.LoadLatestXFeedsFromId(id + 1, amount);
+            List<PortableBLL.Feed> newFeeds = await fm.LoadLatestXFeedsFromId(id + 1, amount);
 
             for (int i = 0; i < newFeeds.Count; i++)
                 feeds.Insert(i, newFeeds[i]);
@@ -189,14 +188,14 @@ namespace ABBConnect___Windows_Phone
         /// Add all the feeds to the list to be shown (Adds in the end)
         /// </summary>
         /// <param name="feeds"></param>
-        private void AddFeedsToList(List<BLL.Feed> feeds)
+        private void AddFeedsToList(List<PortableBLL.Feed> feeds)
         {
             for (int i = 0; i < feeds.Count; i++)
             {
-                if (feeds[i] is BLL.HumanFeed)
-                    FillFeedList((BLL.HumanFeed)feeds[i], -1);
+                if (feeds[i] is PortableBLL.HumanFeed)
+                    FillFeedList((PortableBLL.HumanFeed)feeds[i], -1);
                 else
-                    FillFeedList((BLL.SensorFeed)feeds[i], -1);
+                    FillFeedList((PortableBLL.SensorFeed)feeds[i], -1);
             }
         }
         
@@ -204,14 +203,14 @@ namespace ABBConnect___Windows_Phone
       /// Inserts feeds in the beginning of the list that is shown
       /// </summary>
       /// <param name="feeds"></param>
-        private void InsertFeedsToList(List<BLL.Feed> feeds)
+        private void InsertFeedsToList(List<PortableBLL.Feed> feeds)
         {
             for (int i = 0; i < feeds.Count; i++)
             {
-                if (feeds[i] is BLL.HumanFeed)
-                    FillFeedList((BLL.HumanFeed)feeds[i], i);
+                if (feeds[i] is PortableBLL.HumanFeed)
+                    FillFeedList((PortableBLL.HumanFeed)feeds[i], i);
                 else
-                    FillFeedList((BLL.SensorFeed)feeds[i], i);
+                    FillFeedList((PortableBLL.SensorFeed)feeds[i], i);
             }
         }
 
@@ -317,7 +316,7 @@ namespace ABBConnect___Windows_Phone
         /// </summary>
         /// <param name="hf"></param>
         /// <param name="index"></param>
-        private void FillFeedList(BLL.HumanFeed hf, int index)
+        private void FillFeedList(PortableBLL.HumanFeed hf, int index)
         {
             //CHECK IF THE FEED CONTATINS A PICTURE!!
 
@@ -384,9 +383,9 @@ namespace ABBConnect___Windows_Phone
         /// <param name="e"></param>
         private async void btnPublish_MouseLeftButtonUp(object sender, RoutedEventArgs e)
         {
-            BLL.FeedManager fm = new FeedManager();
+            PortableBLL.FeedManager fm = new FeedManager();
 
-            BLL.HumanFeed hf = new BLL.HumanFeed();
+            PortableBLL.HumanFeed hf = new PortableBLL.HumanFeed();
 
             //feed.Owner.ID, feed.Content, feed.MediaFilePath, feed.Category.Id
             if (txtbContent.Text == "" || currentUser.ID == -1)

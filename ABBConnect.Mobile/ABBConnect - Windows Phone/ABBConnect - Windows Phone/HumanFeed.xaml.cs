@@ -24,7 +24,7 @@ namespace ABBConnect___Windows_Phone
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            BLL.HumanFeed hf = App.HFeed;
+            PortableBLL.HumanFeed hf = App.HFeed;
 
             Author.Text = hf.Owner.UserName;
 

@@ -18,16 +18,16 @@ namespace ABBConnect___Windows_Phone
     public partial class App : Application
     {
         private static MainViewModel viewModel = null;
-        private static BLL.HumanFeed hFeed = new BLL.HumanFeed();
+        private static PortableBLL.HumanFeed hFeed = new PortableBLL.HumanFeed();
 
-        public static BLL.HumanFeed HFeed
+        public static PortableBLL.HumanFeed HFeed
         {
             get { return App.hFeed; }
             set { App.hFeed = value; }
         }
-        private static BLL.SensorFeed sFeed = new BLL.SensorFeed();
+        private static PortableBLL.SensorFeed sFeed = new PortableBLL.SensorFeed();
 
-        public static BLL.SensorFeed SFeed
+        public static PortableBLL.SensorFeed SFeed
         {
             get { return App.sFeed; }
             set { App.sFeed = value; }

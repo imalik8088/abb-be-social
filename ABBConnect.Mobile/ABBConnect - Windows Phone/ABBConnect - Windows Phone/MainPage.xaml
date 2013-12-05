@@ -48,7 +48,7 @@
                     <TextBlock x:Name="lblUserName" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Text="Robert Gustavsson" VerticalAlignment="Top"/>
                     <TextBlock x:Name="lblTime" HorizontalAlignment="Left" Margin="364,5,0,0" TextWrapping="Wrap" Text="14:35" VerticalAlignment="Top"/>
                     <TextBlock x:Name="lbl_TapToTakePhoto" MouseLeftButtonUp="imgCapture_MouseLeftButtonUp" HorizontalAlignment="Left" Margin="155,139,0,0" TextWrapping="Wrap" Text="Tap to add photo" VerticalAlignment="Top" RenderTransformOrigin="0.165,0.648"/>
-                    <Image Height="100" HorizontalAlignment="Left" MouseLeftButtonUp="imgCapture_MouseLeftButtonUp" Margin="176,165,0,0" Name="image1" Stretch="Fill" VerticalAlignment="Top" Width="100" Source="/ABBConnect%20-%20Windows%20Phone;component/Icons/camera.png" />
+                    <Image x:Name="CameraIcon" Height="100" HorizontalAlignment="Left" MouseLeftButtonUp="imgCapture_MouseLeftButtonUp" Margin="176,165,0,0" Stretch="Fill" VerticalAlignment="Top" Width="100" Source="/ABBConnect%20-%20Windows%20Phone;component/Icons/camera.png" />
                 </Grid>
             </controls:PivotItem>
             <controls:PivotItem Header="Profile">
