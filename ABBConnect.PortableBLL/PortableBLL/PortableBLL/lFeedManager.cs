@@ -16,8 +16,8 @@ namespace PortableBLL
         Task<List<Feed>> LoadLatestXFeeds(int numberOfFeeds);
         Task<List<Feed>> LoadLatestXFeedsFromId(int startingId, int numberOfFeeds);
         Task<List<Feed>> LoadFeedsByFilter(string username, string location, DateTime startingTime, DateTime endingTime, string feedType);
-        Task<List<Feed>> LoadFeedsByType(FeedType feedType, int numFeeds);
-        Task<List<Feed>> LoadFeedsByType(FeedType feedType, int numFeeds, int startId);
+        Task<List<Feed>> LoadFeedsByType(FeedType.FeedSource feedType, int numFeeds);
+        Task<List<Feed>> LoadFeedsByType(FeedType.FeedSource feedType, int numFeeds, int startId);
         Task<List<Feed>> LoadFeedsByDate(DateTime feedStartTime, DateTime feedEndTime, int numFeeds);
         Task<List<Feed>> LoadFeedsByDate(DateTime feedStartTime, DateTime feedEndTime, int numFeeds, int startId);
         Task<List<Feed>> LoadFeedsByLocation(string location, int numFeeds);

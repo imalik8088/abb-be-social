@@ -7,7 +7,7 @@ namespace PortableBLL
 {
     public class FeedType
     {
-        enum Type
+        public enum FeedSource
         {
             Human,
             Sensor
