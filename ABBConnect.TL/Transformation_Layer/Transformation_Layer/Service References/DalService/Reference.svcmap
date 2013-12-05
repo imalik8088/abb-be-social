@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="dcc54f67-5ee3-41c2-ba14-b976de52eeb1" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8966/DALService.svc?wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="DALService.xsd" MetadataType="Schema" ID="42798f5d-9723-4142-b89c-802b4ea7d78d" SourceId="1" SourceUrl="http://localhost:8966/DALService.svc?xsd=xsd5" />
+    <MetadataFile FileName="DALService1.xsd" MetadataType="Schema" ID="0d25610d-f9c3-45a6-8ffd-944358f8b906" SourceId="1" SourceUrl="http://localhost:8966/DALService.svc?xsd=xsd6" />
+    <MetadataFile FileName="DALService2.xsd" MetadataType="Schema" ID="62cfa35e-e77b-46dd-95ae-5d1f0bfc9e7b" SourceId="1" SourceUrl="http://localhost:8966/DALService.svc?xsd=xsd7" />
+    <MetadataFile FileName="DALService3.xsd" MetadataType="Schema" ID="8af6b1aa-7eba-4b71-99d5-22b187f16c28" SourceId="1" SourceUrl="http://localhost:8966/DALService.svc?xsd=xsd8" />
+    <MetadataFile FileName="DALService.wsdl" MetadataType="Wsdl" ID="6d081db7-7ab8-470a-96c6-fc6c094a2fde" SourceId="1" SourceUrl="http://localhost:8966/DALService.svc?wsdl" />
+    <MetadataFile FileName="DALService4.xsd" MetadataType="Schema" ID="873885fa-7203-4808-9e4e-a83ca45e3a64" SourceId="1" SourceUrl="http://localhost:8966/DALService.svc?xsd=xsd0" />
+    <MetadataFile FileName="DALService5.xsd" MetadataType="Schema" ID="a006486c-4ab6-4b3f-b48f-8c13312ddcc5" SourceId="1" SourceUrl="http://localhost:8966/DALService.svc?xsd=xsd1" />
+    <MetadataFile FileName="DALService6.xsd" MetadataType="Schema" ID="afd891f2-5b35-49b7-b029-1845da6a6d64" SourceId="1" SourceUrl="http://localhost:8966/DALService.svc?xsd=xsd2" />
+    <MetadataFile FileName="DALService7.xsd" MetadataType="Schema" ID="21d2ac5f-17ba-4767-87a3-a205fc311b16" SourceId="1" SourceUrl="http://localhost:8966/DALService.svc?xsd=xsd3" />
+    <MetadataFile FileName="DALService8.xsd" MetadataType="Schema" ID="c14aed72-b133-454e-8e4d-925397727fe4" SourceId="1" SourceUrl="http://localhost:8966/DALService.svc?xsd=xsd4" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

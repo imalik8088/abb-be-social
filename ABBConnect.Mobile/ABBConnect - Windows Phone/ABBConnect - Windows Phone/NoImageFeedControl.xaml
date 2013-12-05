@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="ABBConnect___Windows_Phone.NoImageFeedControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}" Width="456"
+    d:DesignHeight="225" d:DesignWidth="456">
+
+    <Grid x:Name="gridFeedControl" Margin="0,0,0,10" Background="{StaticResource PhoneChromeBrush}" >
+        <Image x:Name="TimeSymbol" Source="/Icons/symbol_timer.png" HorizontalAlignment="Left" Height="24" Margin="374,8,0,0" VerticalAlignment="Top" Width="20"/>
+        <TextBlock x:Name="Timestamp" FontSize="18" HorizontalAlignment="Right" Margin="0,5,30,188" TextWrapping="Wrap" RenderTransformOrigin="2.341,6.889" MouseLeftButtonDown="Content_MouseLeftButtonDown" TextAlignment="Center" Width="29" Foreground="#FF969696" Text="10h"/>
+        <TextBlock x:Name="Author" FontSize="20" HorizontalAlignment="Left" Margin="30,5,0,0" TextWrapping="Wrap" Text="Robert Gustavsson" VerticalAlignment="Top" RenderTransformOrigin="2.341,6.889" MouseLeftButtonDown="Author_MouseLeftButtonDown" FontWeight="Bold"/>
+        <TextBlock x:Name="Location" HorizontalAlignment="Left" Margin="49,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Foreground="#FF969696" d:LayoutOverrides="VerticalAlignment"><Run Text="Machine "/><Run Text="2"/></TextBlock>
+        <Image Source="symbol_location.png" HorizontalAlignment="Left" Height="15" Margin="30,50,0,0" VerticalAlignment="Top" Width="15" d:LayoutOverrides="VerticalAlignment"/>
+        <TextBlock x:Name="Text"  FontSize="20" HorizontalAlignment="Left" Margin="30,69,0,0" TextWrapping="Wrap" Text="Message for the next shift ...." VerticalAlignment="Top" RenderTransformOrigin="2.341,6.889" MouseLeftButtonDown="Content_MouseLeftButtonDown" Width="396"/>
+        <TextBlock x:Name="Tags" FontSize="18" HorizontalAlignment="Left" Margin="46,179,0,14" TextWrapping="Wrap" Text="11" RenderTransformOrigin="2.341,6.889" MouseLeftButtonDown="Content_MouseLeftButtonDown" TextAlignment="Center" Width="25" Foreground="#FF969696"/>
+        <Image Source="/Icons/symbol_tag.png" HorizontalAlignment="Left" Height="20" Margin="30,184,0,0" VerticalAlignment="Top" Width="20"/>
+        <Image Source="/Icons/symbol_comment.png" HorizontalAlignment="Left" Height="23" Margin="73,181,0,0" VerticalAlignment="Top" Width="23" RenderTransformOrigin="2.522,0.565"/>
+        <TextBlock x:Name="Comments" FontSize="18" HorizontalAlignment="Left" Margin="89,179,0,14" TextWrapping="Wrap" RenderTransformOrigin="2.341,6.889" MouseLeftButtonDown="Content_MouseLeftButtonDown" TextAlignment="Center" Width="29" Foreground="#FF969696" Text="9"/>
+
+    </Grid>
+</UserControl>

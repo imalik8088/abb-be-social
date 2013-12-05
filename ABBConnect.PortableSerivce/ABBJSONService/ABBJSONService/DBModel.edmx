@@ -1,0 +1,884 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ABBConnectModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="ABBConnectModelStoreContainer" />
+        <Function Name="AddCommentToFeed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="feedId" Type="int" Mode="In" />
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+          <Parameter Name="text" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="AddFeed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+          <Parameter Name="text" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="filePath" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="feedPriorityId" Type="int" Mode="In" />
+          <Parameter Name="retFeedId" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="AddSensorValues" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sensorID" Type="int" Mode="In" />
+          <Parameter Name="data" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AddTagToFeed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="feedId" Type="int" Mode="In" />
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="AddUserSavedFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+          <Parameter Name="FilterName" Type="nvarchar" Mode="In" />
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="Location" Type="nvarchar" Mode="In" />
+          <Parameter Name="TagUserId1" Type="int" Mode="In" />
+          <Parameter Name="TagUserId2" Type="int" Mode="In" />
+          <Parameter Name="TagUserId3" Type="int" Mode="In" />
+          <Parameter Name="TagUserId4" Type="int" Mode="In" />
+          <Parameter Name="TagUserId5" Type="int" Mode="In" />
+        </Function>
+        <Function Name="fn_diagramobjects" ReturnType="int" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllHumanFeeds" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllHumanFeedsByFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="location" Type="nvarchar" Mode="In" />
+          <Parameter Name="startTime" Type="datetime" Mode="In" />
+          <Parameter Name="endTime" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="GetAllSensorFeeds" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllSensorFeedsByFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="location" Type="nvarchar" Mode="In" />
+          <Parameter Name="startTime" Type="datetime" Mode="In" />
+          <Parameter Name="endTime" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="GetAllSensors" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetFeedComments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="feedId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetFeedsByFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="location" Type="nvarchar" Mode="In" />
+          <Parameter Name="startTime" Type="datetime" Mode="In" />
+          <Parameter Name="endTime" Type="datetime" Mode="In" />
+          <Parameter Name="FeedType" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetFeedTags" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="feedId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetHistoricalDataFromSensor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sensorID" Type="int" Mode="In" />
+          <Parameter Name="from" Type="datetime" Mode="In" />
+          <Parameter Name="to" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="GetHumanInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetHumanInformationByUsername" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetLatestFeeds" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetLatestFeedsByFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="location" Type="nvarchar" Mode="In" />
+          <Parameter Name="startTime" Type="datetime" Mode="In" />
+          <Parameter Name="endTime" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="GetLatestSensorValue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sensorID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetLatestXFeeds" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="X" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetLatestXFeedsFromId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="feedID" Type="int" Mode="In" />
+          <Parameter Name="X" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetLocations" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetPriorityCategories" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetSensorInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sensorID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetUserFeeds" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetUserFeedsByFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+          <Parameter Name="location" Type="nvarchar" Mode="In" />
+          <Parameter Name="startTime" Type="datetime" Mode="In" />
+          <Parameter Name="endTime" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="GetUserSavedFilters" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetUsersByName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="query" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="nvarchar" Mode="In" />
+          <Parameter Name="ret" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="SetBounderyValue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sensorID" Type="int" Mode="In" />
+          <Parameter Name="lBoundery" Type="decimal" Mode="In" />
+          <Parameter Name="uBoundery" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ABBConnectModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ABBConnectEntities" p1:LazyLoadingEnabled="true" >
+          <FunctionImport Name="AddCommentToFeed">
+            <Parameter Name="feedId" Mode="In" Type="Int32" />
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="text" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AddFeed">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+            <Parameter Name="text" Mode="In" Type="String" />
+            <Parameter Name="filePath" Mode="In" Type="String" />
+            <Parameter Name="feedPriorityId" Mode="In" Type="Int32" />
+            <Parameter Name="retFeedId" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AddSensorValues">
+            <Parameter Name="sensorID" Mode="In" Type="Int32" />
+            <Parameter Name="data" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AddTagToFeed">
+            <Parameter Name="feedId" Mode="In" Type="Int32" />
+            <Parameter Name="username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AddUserSavedFilter">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+            <Parameter Name="FilterName" Mode="In" Type="String" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Location" Mode="In" Type="String" />
+            <Parameter Name="TagUserId1" Mode="In" Type="Int32" />
+            <Parameter Name="TagUserId2" Mode="In" Type="Int32" />
+            <Parameter Name="TagUserId3" Mode="In" Type="Int32" />
+            <Parameter Name="TagUserId4" Mode="In" Type="Int32" />
+            <Parameter Name="TagUserId5" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllHumanFeeds" ReturnType="Collection(ABBConnectModel.GetAllHumanFeeds_Result)" />
+          <FunctionImport Name="GetAllHumanFeedsByFilter" ReturnType="Collection(ABBConnectModel.GetAllHumanFeedsByFilter_Result)">
+            <Parameter Name="location" Mode="In" Type="String" />
+            <Parameter Name="startTime" Mode="In" Type="DateTime" />
+            <Parameter Name="endTime" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllSensorFeeds" ReturnType="Collection(ABBConnectModel.GetAllSensorFeeds_Result)" />
+          <FunctionImport Name="GetAllSensorFeedsByFilter" ReturnType="Collection(ABBConnectModel.GetAllSensorFeedsByFilter_Result)">
+            <Parameter Name="location" Mode="In" Type="String" />
+            <Parameter Name="startTime" Mode="In" Type="DateTime" />
+            <Parameter Name="endTime" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllSensors" ReturnType="Collection(ABBConnectModel.GetAllSensors_Result)" />
+          <FunctionImport Name="GetFeedComments" ReturnType="Collection(ABBConnectModel.GetFeedComments_Result)">
+            <Parameter Name="feedId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetFeedsByFilter" ReturnType="Collection(ABBConnectModel.GetFeedsByFilter_Result)">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="location" Mode="In" Type="String" />
+            <Parameter Name="startTime" Mode="In" Type="DateTime" />
+            <Parameter Name="endTime" Mode="In" Type="DateTime" />
+            <Parameter Name="FeedType" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetFeedTags" ReturnType="Collection(ABBConnectModel.GetFeedTags_Result)">
+            <Parameter Name="feedId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetHistoricalDataFromSensor" ReturnType="Collection(ABBConnectModel.GetHistoricalDataFromSensor_Result)">
+            <Parameter Name="sensorID" Mode="In" Type="Int32" />
+            <Parameter Name="from" Mode="In" Type="DateTime" />
+            <Parameter Name="to" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetHumanInformation" ReturnType="Collection(ABBConnectModel.GetHumanInformation_Result)">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetHumanInformationByUsername" ReturnType="Collection(ABBConnectModel.GetHumanInformationByUsername_Result)">
+            <Parameter Name="UserName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetLatestFeeds" ReturnType="Collection(ABBConnectModel.GetLatestFeeds_Result)" />
+          <FunctionImport Name="GetLatestFeedsByFilter" ReturnType="Collection(ABBConnectModel.GetLatestFeedsByFilter_Result)">
+            <Parameter Name="location" Mode="In" Type="String" />
+            <Parameter Name="startTime" Mode="In" Type="DateTime" />
+            <Parameter Name="endTime" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetLatestSensorValue" ReturnType="Collection(String)">
+            <Parameter Name="sensorID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetLatestXFeeds" ReturnType="Collection(ABBConnectModel.GetLatestXFeeds_Result)">
+            <Parameter Name="X" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetLatestXFeedsFromId" ReturnType="Collection(ABBConnectModel.GetLatestXFeedsFromId_Result)">
+            <Parameter Name="feedID" Mode="In" Type="Int32" />
+            <Parameter Name="X" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetLocations" ReturnType="Collection(String)" />
+          <FunctionImport Name="GetPriorityCategories" ReturnType="Collection(ABBConnectModel.GetPriorityCategories_Result)" />
+          <FunctionImport Name="GetSensorInformation" ReturnType="Collection(ABBConnectModel.GetSensorInformation_Result)">
+            <Parameter Name="sensorID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUserFeeds" ReturnType="Collection(ABBConnectModel.GetUserFeeds_Result)">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUserFeedsByFilter" ReturnType="Collection(ABBConnectModel.GetUserFeedsByFilter_Result)">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+            <Parameter Name="location" Mode="In" Type="String" />
+            <Parameter Name="startTime" Mode="In" Type="DateTime" />
+            <Parameter Name="endTime" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetUserSavedFilters" ReturnType="Collection(ABBConnectModel.GetUserSavedFilters_Result)">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUsersByName" ReturnType="Collection(ABBConnectModel.GetUsersByName_Result)">
+            <Parameter Name="query" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Login" ReturnType="Collection(ABBConnectModel.Login_Result)">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="ret" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SetBounderyValue">
+            <Parameter Name="sensorID" Mode="In" Type="Int32" />
+            <Parameter Name="lBoundery" Mode="In" Type="Decimal" />
+            <Parameter Name="uBoundery" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(ABBConnectModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(ABBConnectModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="GetAllHumanFeeds_Result">
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="Type" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="CreationTimeStamp" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Text" Nullable="true" />
+          <Property Type="String" Name="FilePath" Nullable="true" />
+          <Property Type="String" Name="PrioCategory" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="PrioValue" Nullable="false" />
+          <Property Type="Int32" Name="FeedId" Nullable="false" />
+          <Property Type="String" Name="Location" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetAllHumanFeedsByFilter_Result">
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="Type" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="CreationTimeStamp" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Text" Nullable="true" />
+          <Property Type="String" Name="FilePath" Nullable="true" />
+          <Property Type="String" Name="PrioCategory" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="PrioValue" Nullable="false" />
+          <Property Type="Int32" Name="FeedId" Nullable="false" />
+          <Property Type="String" Name="Location" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetAllSensorFeeds_Result">
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="Type" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="CreationTimeStamp" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Text" Nullable="true" />
+          <Property Type="String" Name="FilePath" Nullable="true" />
+          <Property Type="String" Name="PrioCategory" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="PrioValue" Nullable="false" />
+          <Property Type="Int32" Name="FeedId" Nullable="false" />
+          <Property Type="String" Name="Location" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetAllSensorFeedsByFilter_Result">
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="Type" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="CreationTimeStamp" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Text" Nullable="true" />
+          <Property Type="String" Name="FilePath" Nullable="true" />
+          <Property Type="String" Name="PrioCategory" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="PrioValue" Nullable="false" />
+          <Property Type="Int32" Name="FeedId" Nullable="false" />
+          <Property Type="String" Name="Location" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetAllSensors_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="MIN_Critical" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="MAX_Critical" Nullable="true" Precision="18" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="GetFeedComments_Result">
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="CommentText" Nullable="false" MaxLength="1000" />
+          <Property Type="DateTime" Name="CreationTimeStamp" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="GetFeedsByFilter_Result">
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="Type" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="CreationTimeStamp" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Text" Nullable="true" />
+          <Property Type="String" Name="FilePath" Nullable="true" />
+          <Property Type="String" Name="PrioCategory" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="PrioValue" Nullable="false" />
+          <Property Type="Int32" Name="FeedId" Nullable="false" />
+          <Property Type="String" Name="Location" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetFeedTags_Result">
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetHistoricalDataFromSensor_Result">
+          <Property Type="String" Name="RawValue" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="CreationTimeStamp" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="GetHumanInformation_Result">
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="PhoneNumber" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Location" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetHumanInformationByUsername_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="PhoneNumber" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Location" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetLatestFeeds_Result">
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="Type" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="CreationTimeStamp" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Text" Nullable="true" />
+          <Property Type="String" Name="FilePath" Nullable="true" />
+          <Property Type="String" Name="PrioCategory" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="PrioValue" Nullable="false" />
+          <Property Type="Int32" Name="FeedId" Nullable="false" />
+          <Property Type="String" Name="Location" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetLatestFeedsByFilter_Result">
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="Type" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="CreationTimeStamp" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Text" Nullable="true" />
+          <Property Type="String" Name="FilePath" Nullable="true" />
+          <Property Type="String" Name="PrioCategory" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="PrioValue" Nullable="false" />
+          <Property Type="Int32" Name="FeedId" Nullable="false" />
+          <Property Type="String" Name="Location" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetLatestXFeeds_Result">
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="Type" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="CreationTimeStamp" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Text" Nullable="true" />
+          <Property Type="String" Name="FilePath" Nullable="true" />
+          <Property Type="String" Name="PrioCategory" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="PrioValue" Nullable="false" />
+          <Property Type="Int32" Name="FeedId" Nullable="false" />
+          <Property Type="String" Name="Location" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetLatestXFeedsFromId_Result">
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="Type" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="CreationTimeStamp" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Text" Nullable="true" />
+          <Property Type="String" Name="FilePath" Nullable="true" />
+          <Property Type="String" Name="PrioCategory" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="PrioValue" Nullable="false" />
+          <Property Type="Int32" Name="FeedId" Nullable="false" />
+          <Property Type="String" Name="Location" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetPriorityCategories_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetSensorInformation_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="MIN_Critical" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="MAX_Critical" Nullable="true" Precision="18" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="GetUserFeeds_Result">
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="Type" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="CreationTimeStamp" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Text" Nullable="true" />
+          <Property Type="String" Name="FilePath" Nullable="true" />
+          <Property Type="String" Name="PrioCategory" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="PrioValue" Nullable="false" />
+          <Property Type="Int32" Name="FeedId" Nullable="false" />
+          <Property Type="String" Name="Location" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetUserFeedsByFilter_Result">
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="Type" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="CreationTimeStamp" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Text" Nullable="true" />
+          <Property Type="String" Name="FilePath" Nullable="true" />
+          <Property Type="String" Name="PrioCategory" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="PrioValue" Nullable="false" />
+          <Property Type="Int32" Name="FeedId" Nullable="false" />
+          <Property Type="String" Name="Location" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetUserSavedFilters_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="FilterName" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="EndDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Location" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="UserId1" Nullable="true" />
+          <Property Type="Int32" Name="UserId2" Nullable="true" />
+          <Property Type="Int32" Name="UserId3" Nullable="true" />
+          <Property Type="Int32" Name="UserId4" Nullable="true" />
+          <Property Type="Int32" Name="UserId5" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetUsersByName_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="isHuman" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Login_Result">
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="PhoneNumber" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ABBConnectModelStoreContainer" CdmEntityContainer="ABBConnectEntities" >
+          <FunctionImportMapping FunctionImportName="AddCommentToFeed" FunctionName="ABBConnectModel.Store.AddCommentToFeed" />
+          <FunctionImportMapping FunctionImportName="AddFeed" FunctionName="ABBConnectModel.Store.AddFeed" />
+          <FunctionImportMapping FunctionImportName="AddSensorValues" FunctionName="ABBConnectModel.Store.AddSensorValues" />
+          <FunctionImportMapping FunctionImportName="AddTagToFeed" FunctionName="ABBConnectModel.Store.AddTagToFeed" />
+          <FunctionImportMapping FunctionImportName="AddUserSavedFilter" FunctionName="ABBConnectModel.Store.AddUserSavedFilter" />
+          <FunctionImportMapping FunctionImportName="GetAllHumanFeeds" FunctionName="ABBConnectModel.Store.GetAllHumanFeeds">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ABBConnectModel.GetAllHumanFeeds_Result">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CreationTimeStamp" ColumnName="CreationTimeStamp" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="PrioCategory" ColumnName="PrioCategory" />
+                <ScalarProperty Name="PrioValue" ColumnName="PrioValue" />
+                <ScalarProperty Name="FeedId" ColumnName="FeedId" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllHumanFeedsByFilter" FunctionName="ABBConnectModel.Store.GetAllHumanFeedsByFilter">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ABBConnectModel.GetAllHumanFeedsByFilter_Result">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CreationTimeStamp" ColumnName="CreationTimeStamp" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="PrioCategory" ColumnName="PrioCategory" />
+                <ScalarProperty Name="PrioValue" ColumnName="PrioValue" />
+                <ScalarProperty Name="FeedId" ColumnName="FeedId" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllSensorFeeds" FunctionName="ABBConnectModel.Store.GetAllSensorFeeds">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ABBConnectModel.GetAllSensorFeeds_Result">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CreationTimeStamp" ColumnName="CreationTimeStamp" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="PrioCategory" ColumnName="PrioCategory" />
+                <ScalarProperty Name="PrioValue" ColumnName="PrioValue" />
+                <ScalarProperty Name="FeedId" ColumnName="FeedId" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllSensorFeedsByFilter" FunctionName="ABBConnectModel.Store.GetAllSensorFeedsByFilter">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ABBConnectModel.GetAllSensorFeedsByFilter_Result">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CreationTimeStamp" ColumnName="CreationTimeStamp" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="PrioCategory" ColumnName="PrioCategory" />
+                <ScalarProperty Name="PrioValue" ColumnName="PrioValue" />
+                <ScalarProperty Name="FeedId" ColumnName="FeedId" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllSensors" FunctionName="ABBConnectModel.Store.GetAllSensors">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ABBConnectModel.GetAllSensors_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MIN_Critical" ColumnName="MIN_Critical" />
+                <ScalarProperty Name="MAX_Critical" ColumnName="MAX_Critical" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetFeedComments" FunctionName="ABBConnectModel.Store.GetFeedComments">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ABBConnectModel.GetFeedComments_Result">
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="CommentText" ColumnName="CommentText" />
+                <ScalarProperty Name="CreationTimeStamp" ColumnName="CreationTimeStamp" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetFeedsByFilter" FunctionName="ABBConnectModel.Store.GetFeedsByFilter">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ABBConnectModel.GetFeedsByFilter_Result">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CreationTimeStamp" ColumnName="CreationTimeStamp" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="PrioCategory" ColumnName="PrioCategory" />
+                <ScalarProperty Name="PrioValue" ColumnName="PrioValue" />
+                <ScalarProperty Name="FeedId" ColumnName="FeedId" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetFeedTags" FunctionName="ABBConnectModel.Store.GetFeedTags">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ABBConnectModel.GetFeedTags_Result">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetHistoricalDataFromSensor" FunctionName="ABBConnectModel.Store.GetHistoricalDataFromSensor">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ABBConnectModel.GetHistoricalDataFromSensor_Result">
+                <ScalarProperty Name="RawValue" ColumnName="RawValue" />
+                <ScalarProperty Name="CreationTimeStamp" ColumnName="CreationTimeStamp" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetHumanInformation" FunctionName="ABBConnectModel.Store.GetHumanInformation">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ABBConnectModel.GetHumanInformation_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetHumanInformationByUsername" FunctionName="ABBConnectModel.Store.GetHumanInformationByUsername">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ABBConnectModel.GetHumanInformationByUsername_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetLatestFeeds" FunctionName="ABBConnectModel.Store.GetLatestFeeds">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ABBConnectModel.GetLatestFeeds_Result">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CreationTimeStamp" ColumnName="CreationTimeStamp" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="PrioCategory" ColumnName="PrioCategory" />
+                <ScalarProperty Name="PrioValue" ColumnName="PrioValue" />
+                <ScalarProperty Name="FeedId" ColumnName="FeedId" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetLatestFeedsByFilter" FunctionName="ABBConnectModel.Store.GetLatestFeedsByFilter">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ABBConnectModel.GetLatestFeedsByFilter_Result">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CreationTimeStamp" ColumnName="CreationTimeStamp" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="PrioCategory" ColumnName="PrioCategory" />
+                <ScalarProperty Name="PrioValue" ColumnName="PrioValue" />
+                <ScalarProperty Name="FeedId" ColumnName="FeedId" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetLatestSensorValue" FunctionName="ABBConnectModel.Store.GetLatestSensorValue" />
+          <FunctionImportMapping FunctionImportName="GetLatestXFeeds" FunctionName="ABBConnectModel.Store.GetLatestXFeeds">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ABBConnectModel.GetLatestXFeeds_Result">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CreationTimeStamp" ColumnName="CreationTimeStamp" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="PrioCategory" ColumnName="PrioCategory" />
+                <ScalarProperty Name="PrioValue" ColumnName="PrioValue" />
+                <ScalarProperty Name="FeedId" ColumnName="FeedId" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetLatestXFeedsFromId" FunctionName="ABBConnectModel.Store.GetLatestXFeedsFromId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ABBConnectModel.GetLatestXFeedsFromId_Result">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CreationTimeStamp" ColumnName="CreationTimeStamp" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="PrioCategory" ColumnName="PrioCategory" />
+                <ScalarProperty Name="PrioValue" ColumnName="PrioValue" />
+                <ScalarProperty Name="FeedId" ColumnName="FeedId" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetLocations" FunctionName="ABBConnectModel.Store.GetLocations" />
+          <FunctionImportMapping FunctionImportName="GetPriorityCategories" FunctionName="ABBConnectModel.Store.GetPriorityCategories">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ABBConnectModel.GetPriorityCategories_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetSensorInformation" FunctionName="ABBConnectModel.Store.GetSensorInformation">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ABBConnectModel.GetSensorInformation_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MIN_Critical" ColumnName="MIN_Critical" />
+                <ScalarProperty Name="MAX_Critical" ColumnName="MAX_Critical" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUserFeeds" FunctionName="ABBConnectModel.Store.GetUserFeeds">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ABBConnectModel.GetUserFeeds_Result">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CreationTimeStamp" ColumnName="CreationTimeStamp" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="PrioCategory" ColumnName="PrioCategory" />
+                <ScalarProperty Name="PrioValue" ColumnName="PrioValue" />
+                <ScalarProperty Name="FeedId" ColumnName="FeedId" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUserFeedsByFilter" FunctionName="ABBConnectModel.Store.GetUserFeedsByFilter">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ABBConnectModel.GetUserFeedsByFilter_Result">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CreationTimeStamp" ColumnName="CreationTimeStamp" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="PrioCategory" ColumnName="PrioCategory" />
+                <ScalarProperty Name="PrioValue" ColumnName="PrioValue" />
+                <ScalarProperty Name="FeedId" ColumnName="FeedId" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUserSavedFilters" FunctionName="ABBConnectModel.Store.GetUserSavedFilters">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ABBConnectModel.GetUserSavedFilters_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FilterName" ColumnName="FilterName" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="UserId1" ColumnName="UserId1" />
+                <ScalarProperty Name="UserId2" ColumnName="UserId2" />
+                <ScalarProperty Name="UserId3" ColumnName="UserId3" />
+                <ScalarProperty Name="UserId4" ColumnName="UserId4" />
+                <ScalarProperty Name="UserId5" ColumnName="UserId5" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUsersByName" FunctionName="ABBConnectModel.Store.GetUsersByName">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ABBConnectModel.GetUsersByName_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="isHuman" ColumnName="isHuman" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Login" FunctionName="ABBConnectModel.Store.Login">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ABBConnectModel.Login_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SetBounderyValue" FunctionName="ABBConnectModel.Store.SetBounderyValue" />
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="ABBConnectModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="ABBConnectModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="ABBConnectModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="ABBConnectModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ABBConnectModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="ABBConnectModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ABBConnectModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="ABBConnectModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ABBConnectModel.Store.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

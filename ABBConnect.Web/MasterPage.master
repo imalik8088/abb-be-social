@@ -1,0 +1,129 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>ABBConnect</title>
+    <!-- Bootstrap -->
+    <link href="<%=ResolveUrl("~/content/css/bootstrap.css")%>" rel="stylesheet" type="text/css" />
+    <link href="<%=ResolveUrl("~/content/css/site.css")%>" rel="stylesheet" type="text/css" />
+    <script src="<%=ResolveUrl("~/content/js/jquery-2.0.3.min.js")%>" type="text/javascript"></script>
+    <script src="<%=ResolveUrl("~/content/js/bootstrap.js")%>" type="text/javascript"></script>
+    <script src="<%=ResolveUrl("~/content/js/ui.js")%>" type="text/javascript"></script>
+
+    <!-- Plugins -->
+    <script src="<%=ResolveUrl("~/content/js/bootstrap.js")%>" type="text/javascript"></script>
+      <script src="<%=ResolveUrl("~/content/js/jquery.timeago.js")%>" type="text/javascript"></script>
+    <script src="<%=ResolveUrl("~/content/js/justgage.1.0.1.min.js")%>" type="text/javascript"></script>
+    <script src="<%=ResolveUrl("~/content/js/raphael.2.1.0.min.js")%>" type="text/javascript"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <header>
+            <div class="logo">           
+                <img src="content/img/abb_logo_64.png" class="logo-img">     
+            </div>
+            <div id="header-menu-blocks-left">
+                <ul>
+                    <li>
+                        <a href="index.html" data-original-title="">
+                            <span class="glyphicon glyphicon-envelope"></span>
+                        </a>
+                    </li>
+                     <li>
+                        <a href="index.html" data-original-title="">
+                            <span class="glyphicon glyphicon-comment"></span>
+                        </a>
+                    </li>
+                     <li>
+                        <a href="index.html" data-original-title="">
+                            <span class="glyphicon glyphicon-flash"></span>
+                        </a>
+                    </li>
+                      <li>
+                        <a href="index.html" data-original-title="">
+                            <span class="glyphicon glyphicon-cog"></span>
+                        </a>
+                    </li>
+                      <li>
+                        <a href="index.html" data-original-title="">
+                            <span class="glyphicon glyphicon-cloud-upload"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="search-container">
+                <input type="text" class="search-input" value="Search me..">
+                <button data-original-title=""></button>
+            </div>
+            <div id="header-menu-blocks-right">
+                <ul>
+                    <li>
+                        <a href="login.html" data-original-title="">
+                            <span class="text-label">ABB Connect </span>
+                        </a>
+                    </li>
+                      <li>
+                        <a href="login.html" data-original-title="">
+                            <asp:Label ID="labelHuman" class="text-label" runat="server"></asp:Label>
+                        </a>
+                    </li>
+                     <li>
+                        <a href="login.html" data-original-title="">
+                             <span class="glyphicon glyphicon-lock"></span>
+                        </a>
+                    </li>                   
+                </ul>
+            </div>
+        </header>
+        <div class="main-container">
+            <div id="main-navigation">                
+                <ul>
+                    <li>
+                        <a class="active">
+                            <span class="glyphicon glyphicon-phone"></span>Feeds
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <span class="glyphicon glyphicon-stats"></span>Stats
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <span class="glyphicon glyphicon-envelope"></span>Inbox
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <span class="glyphicon glyphicon-plus"></span>Publish
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <span class="glyphicon glyphicon-cog"></span>Settings
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <span class="glyphicon glyphicon-log-out" onclick="OnClickSignOut()"></span>Sign out
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="dashboard-container">                
+                 <asp:scriptmanager ID="Scriptmanager1" runat="server" EnablePageMethods="true"></asp:scriptmanager>
+                  <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                  </asp:ContentPlaceHolder>
+            </div>
+        </div>
+    </form>
+</body>
+<script>
+    // Init UI
+    initUI();
+</script>
+</html>
