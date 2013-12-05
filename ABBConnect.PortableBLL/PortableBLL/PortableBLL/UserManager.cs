@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PortableBLL
 {
-    class UserManager : IUserManager
+    public class UserManager : IUserManager
     {
         private UserData usrData;
 
