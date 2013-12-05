@@ -164,10 +164,18 @@
     </Content>
     <Resource Include="Icons\camera.png" />
     <Content Include="Icons\B8Xb1E5.jpg" />
-    <Content Include="Icons\symbol_comment.png" />
-    <Content Include="Icons\symbol_tag.png" />
-    <Content Include="Icons\symbol_timer.png" />
-    <Content Include="Icons\symbol_warning.png" />
+    <Content Include="Icons\symbol_comment.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\symbol_tag.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\symbol_timer.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\symbol_warning.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="SplashScreenImage.jpg" />
   </ItemGroup>
   <ItemGroup>
