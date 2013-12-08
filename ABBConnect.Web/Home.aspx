@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Home.aspx.cs" Inherits="_Home" %>
 
 <%@ Register Src="controls/FeedPage.ascx" TagName="FeedPage" TagPrefix="abbConnect" %>
+<%@ Register Src="controls/NewFeedPagelet.ascx" TagName="NewFeedPagelet" TagPrefix="abbConnect" %>
+<%@ Register Src="controls/Commentlet.ascx" TagName="Commentlet" TagPrefix="abbConnect" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>

@@ -49,7 +49,11 @@ function AjaxGetAllFeedComments(feedID) {
 }
 function OnAjaxGetAllFeedCommentsSuccess(result, userContext, methodName) {
     alert("loaded:" + result.FeedId);
-    //$("#feed-container-" + result.FeedId + ".feed-comments-container").html(result.CommentsRawData);
+
+    var commentsRawData = $(result.FeedCommentsRawData).hide().fadeIn("fast");
+
+
+    $("#feed-container-" + result.FeedId).find(".feed-comments-container").html(commentsRawData);
 }
 
 function AjaxPostNewFeed() {
@@ -59,10 +63,22 @@ function AjaxPostNewFeed() {
     PageMethods.AjaxPostNewFeed(feedContentData, feedType, OnAjaxPostNewFeedSuccess);
 }
 function OnAjaxPostNewFeedSuccess(result, userContext, methodName) {
-    if (result == true)
+    if (result) {
         alert("Post successful!");
-    else
+        AjaxDisplayNewFeed();
+    }
+    else {
         alert("Post unsuccessful!");
+    }
+}
+
+//called if the posting is successful. adds the feeds on top of the container
+function AjaxDisplayNewFeed() {
+    PageMethods.AjaxDisplayNewFeed(AjaxDisplayNewFeedSuccess);
+}
+function AjaxDisplayNewFeedSuccess(result, userContext, methodName) {
+    var feedsRawData = $(result.FeedsRawData).hide().fadeIn("fast");
+    $('#feedsContainer').prepend(feedsRawData);
 }
 
 function PopulateSelectBoxPostType() {
