@@ -242,6 +242,9 @@ namespace ABBConnect___Windows_Phone
                 App.ViewModel.LoadData();
             }
 
+            //reset timer
+            timerNewFeed.Stop();
+            timerNewFeed.Start();
 
         }
   
