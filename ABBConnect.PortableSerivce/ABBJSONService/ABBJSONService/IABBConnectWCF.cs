@@ -90,7 +90,15 @@ namespace ABBJSONService
 
         [OperationContract]
         [WebInvoke]
-        void PostComment(string feedId, string username, string text);
+        bool PostComment(string feedId, string username, string text);
+
+        [OperationContract]
+        [WebInvoke]
+        bool AddTag(string feedId, string username);
+
+        [OperationContract]
+        [WebInvoke]
+        bool FollowSensor(string humanId, string sensorId);
 
         [OperationContract]
         [WebInvoke]
@@ -104,6 +112,9 @@ namespace ABBJSONService
         [WebInvoke]
         List<GetLatestXFeeds_Result> GetXFeedsByFilter(string id, string location, string startingTime, string endingTime, string feedType, string startId, string numFeeds);
 
+        [OperationContract]
+        [WebInvoke]
+        int SaveFilter(string userId, string filterName, string startingTime, string endingTime, string location);
     }
 
 }
