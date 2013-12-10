@@ -17,5 +17,6 @@ namespace ABBJSONService
         public string Name { get; set; }
         public Nullable<decimal> MIN_Critical { get; set; }
         public Nullable<decimal> MAX_Critical { get; set; }
+        public string Unit { get; set; }
     }
 }

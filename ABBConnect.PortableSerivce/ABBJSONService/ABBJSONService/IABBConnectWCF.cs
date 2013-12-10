@@ -123,6 +123,10 @@ namespace ABBJSONService
         [OperationContract]
         [WebInvoke]
         bool AddFilterUser(string userId, string filterId);
+
+        [OperationContract]
+        [WebInvoke]
+        List<GetUserSavedFilters_Result> GetSavedFilter(string userId);
     }
 
 }

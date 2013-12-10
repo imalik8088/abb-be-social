@@ -93,7 +93,7 @@ namespace ABBJSONService
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddTagToFeed", feedIdParameter, usernameParameter);
         }
     
-        public virtual int AddUserSavedFilter(Nullable<int> userId, string filterName, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, string location)
+        public virtual int AddUserSavedFilter(Nullable<int> userId, string filterName, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, string location, string type)
         {
             var userIdParameter = userId.HasValue ?
                 new ObjectParameter("UserId", userId) :
@@ -115,7 +115,11 @@ namespace ABBJSONService
                 new ObjectParameter("Location", location) :
                 new ObjectParameter("Location", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddUserSavedFilter", userIdParameter, filterNameParameter, startDateParameter, endDateParameter, locationParameter);
+            var typeParameter = type != null ?
+                new ObjectParameter("Type", type) :
+                new ObjectParameter("Type", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddUserSavedFilter", userIdParameter, filterNameParameter, startDateParameter, endDateParameter, locationParameter, typeParameter);
         }
     
         public virtual ObjectResult<GetAllHumanFeeds_Result> GetAllHumanFeeds()

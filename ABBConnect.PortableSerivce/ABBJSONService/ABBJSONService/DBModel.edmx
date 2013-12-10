@@ -36,6 +36,7 @@
           <Parameter Name="StartDate" Type="datetime" Mode="In" />
           <Parameter Name="EndDate" Type="datetime" Mode="In" />
           <Parameter Name="Location" Type="nvarchar" Mode="In" />
+          <Parameter Name="Type" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="AddUserToSavedFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserId" Type="int" Mode="In" />
@@ -205,6 +206,7 @@
             <Parameter Name="StartDate" Mode="In" Type="DateTime" />
             <Parameter Name="EndDate" Mode="In" Type="DateTime" />
             <Parameter Name="Location" Mode="In" Type="String" />
+            <Parameter Name="Type" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetAllHumanFeeds" ReturnType="Collection(ABBConnectModel.GetAllHumanFeeds_Result)" />
           <FunctionImport Name="GetAllHumanFeedsByFilter" ReturnType="Collection(ABBConnectModel.GetAllHumanFeedsByFilter_Result)">
@@ -328,10 +330,10 @@
             <Parameter Name="FilterId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetFollowedSensors" ReturnType="Collection(Int32)">
-            <Parameter Name="HumanUserId" Mode="In" Type="Int32" />
+          <Parameter Name="HumanUserId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetUserSavedFiltersTagedUsers" ReturnType="Collection(ABBConnectModel.GetUserSavedFiltersTagedUsers_Result)">
-            <Parameter Name="FilterId" Mode="In" Type="Int32" />
+          <Parameter Name="FilterId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetXFeedsByFilter" ReturnType="Collection(ABBConnectModel.GetXFeedsByFilter_Result)">
             <Parameter Name="UserId" Mode="In" Type="Int32" />
@@ -504,6 +506,7 @@
           <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
           <Property Type="Decimal" Name="MIN_Critical" Nullable="true" Precision="18" Scale="2" />
           <Property Type="Decimal" Name="MAX_Critical" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="Unit" Nullable="false" MaxLength="5" />
         </ComplexType>
         <ComplexType Name="GetUserFeeds_Result">
           <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
@@ -821,6 +824,7 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="MIN_Critical" ColumnName="MIN_Critical" />
                 <ScalarProperty Name="MAX_Critical" ColumnName="MAX_Critical" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

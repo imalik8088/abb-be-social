@@ -712,9 +712,10 @@ namespace ABBJSONService
                         if (reader.Read())
                         {
                             s.Id = (int)reader[0];
-                            s.Name = (string)reader[1];
-                            s.MIN_Critical = (decimal)reader[2];
-                            s.MAX_Critical = (decimal)reader[3];
+                            s.Unit = (string)reader[1];
+                            s.Name = (string)reader[2];
+                            s.MIN_Critical = (decimal)reader[3];
+                            s.MAX_Critical = (decimal)reader[4];
                         }
                     }
                 }
@@ -1182,6 +1183,46 @@ namespace ABBJSONService
                 return true;
             else
                 return false;
+        }
+
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetUserFilters?userId={userId}")]
+        public List<GetUserSavedFilters_Result> GetSavedFilter(string userId)
+        {
+            int iD = Int32.Parse(userId);
+            List<GetUserSavedFilters_Result> savedFilters = new List<GetUserSavedFilters_Result>();
+
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            {
+
+                sqlConn.Open();
+                string sqlQuery = "GetUserSavedFilters";
+
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = iD;
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        ;
+                        while (reader.Read())
+                        {
+                            GetUserSavedFilters_Result filter = new GetUserSavedFilters_Result();
+                            filter.ID = (int)reader[0];
+                            filter.UserId = (int)reader[1];
+                            filter.FilterName = (string)reader[2];
+                            filter.StartDate = (DateTime)reader[3];
+                            filter.EndDate = (DateTime)reader[4];
+                            filter.Location = (string)reader[5];
+                           // filter.ty
+
+                            savedFilters.Add(filter);
+                        }
+                    }
+                }
+                sqlConn.Close();
+            }
+            return savedFilters;
         }
     }
 }
