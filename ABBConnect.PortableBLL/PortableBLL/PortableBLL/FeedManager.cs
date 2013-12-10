@@ -84,7 +84,7 @@ namespace PortableBLL
 
             public async Task<bool> AddTagToFeed(int feedId, string username)
             {
-                throw new NotImplementedException();
+                return await feedData.AddFeedTag(feedId, username);
 
             }
 
@@ -120,7 +120,7 @@ namespace PortableBLL
 
             public async Task<bool> PublishComment(int feedID, Comment comment)
             {
-                throw new NotImplementedException();
+                return await feedData.PublishComment(feedID, comment.Owner.UserName, comment.Content);
             }
 
 
