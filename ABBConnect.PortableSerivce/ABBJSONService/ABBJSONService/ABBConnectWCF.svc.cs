@@ -1211,10 +1211,22 @@ namespace ABBJSONService
                             filter.ID = (int)reader[0];
                             filter.UserId = (int)reader[1];
                             filter.FilterName = (string)reader[2];
-                            filter.StartDate = (DateTime)reader[3];
-                            filter.EndDate = (DateTime)reader[4];
-                            filter.Location = (string)reader[5];
-                           // filter.ty
+                            object sqlCell = reader[3];
+                            filter.StartDate = (sqlCell == System.DBNull.Value)
+                                ? DateTime.MinValue
+                                : Convert.ToDateTime(sqlCell);
+                            sqlCell = reader[4];
+                            filter.EndDate = (sqlCell == System.DBNull.Value)
+                                ? DateTime.MinValue
+                                : Convert.ToDateTime(sqlCell);
+                            sqlCell = reader[5];
+                            filter.Location = (sqlCell == System.DBNull.Value)
+                                ? ""
+                                : (string)sqlCell;
+                            sqlCell = reader[6];
+                            filter.Type = (sqlCell == System.DBNull.Value)
+                                ? ""
+                                : (string)sqlCell;
 
                             savedFilters.Add(filter);
                         }
@@ -1223,6 +1235,79 @@ namespace ABBJSONService
                 sqlConn.Close();
             }
             return savedFilters;
+        }
+
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "SearchByName?name={query}")]
+        List<GetUsersByName_Result> IABBConnectWCF.SearchUsersByName(string query)
+        {
+            List<GetUsersByName_Result> users = new List<GetUsersByName_Result>();
+
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            {
+
+                sqlConn.Open();
+                string sqlQuery = "GetUsersByName";
+
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@query", SqlDbType.NVarChar, 50).Value = query;
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        ;
+                        while (reader.Read())
+                        {
+                            GetUsersByName_Result user = new GetUsersByName_Result();
+                            user.Id = (int)reader[0];
+                            user.Name = (string)reader[1];
+                            user.FirstName = (string)reader[2];
+                            user.LastName = (string)reader[3];
+                            user.isHuman = (bool)reader[4];
+
+                            users.Add(user);
+                        }
+                    }
+                }
+                sqlConn.Close();
+            }
+            return users;
+        }
+
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetFilterTaggedUsers?filterId={filterId}")]
+        public List<GetUserSavedFiltersTagedUsers_Result> GetFilterTaggedUsers(string filterId)
+        {
+            List<GetUserSavedFiltersTagedUsers_Result> taggedUsers = new List<GetUserSavedFiltersTagedUsers_Result>();
+
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            {
+
+                sqlConn.Open();
+                string sqlQuery = "GetUserSavedFiltersTagedUsers";
+
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@FilterId", SqlDbType.Int).Value = Int32.Parse(filterId); ;
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        ;
+                        while (reader.Read())
+                        {
+                            GetUserSavedFiltersTagedUsers_Result user = new GetUserSavedFiltersTagedUsers_Result();
+                            user.Id = (int)reader[0];
+                            user.Name = (string)reader[1];
+                            user.FirstName = (string)reader[2];
+                            user.LastName = (string)reader[3];
+
+                            taggedUsers.Add(user);
+                        }
+                    }
+                }
+                sqlConn.Close();
+            }
+            return taggedUsers;
         }
     }
 }

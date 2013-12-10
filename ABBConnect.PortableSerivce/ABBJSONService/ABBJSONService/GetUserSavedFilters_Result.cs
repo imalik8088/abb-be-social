@@ -19,10 +19,6 @@ namespace ABBJSONService
         public Nullable<System.DateTime> StartDate { get; set; }
         public Nullable<System.DateTime> EndDate { get; set; }
         public string Location { get; set; }
-        public Nullable<int> UserId1 { get; set; }
-        public Nullable<int> UserId2 { get; set; }
-        public Nullable<int> UserId3 { get; set; }
-        public Nullable<int> UserId4 { get; set; }
-        public Nullable<int> UserId5 { get; set; }
+        public string Type { get; set; }
     }
 }

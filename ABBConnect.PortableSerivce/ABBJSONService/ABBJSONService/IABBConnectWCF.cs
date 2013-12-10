@@ -127,6 +127,14 @@ namespace ABBJSONService
         [OperationContract]
         [WebInvoke]
         List<GetUserSavedFilters_Result> GetSavedFilter(string userId);
+
+        [OperationContract]
+        [WebInvoke]
+        List<GetUsersByName_Result> SearchUsersByName(string query);
+
+        [OperationContract]
+        [WebInvoke]
+        List<GetUserSavedFiltersTagedUsers_Result> GetFilterTaggedUsers(string filterId);
     }
 
 }
