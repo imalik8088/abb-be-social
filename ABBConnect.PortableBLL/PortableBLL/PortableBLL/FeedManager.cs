@@ -71,8 +71,13 @@ namespace PortableBLL
                 try
                 {
                     int feedID = await feedData.PublishFeed(feed.Owner.ID, feed.Content, feed.MediaFilePath, feed.Category.Id).ConfigureAwait(false);
-                    //NEEDS TO BE CHNAGED WHEN YOU CAN ACCESS ADDCOMMENT AND ADDTAGS
-                    return true;
+
+                    bool success = true;
+                    foreach(Human tempHuman in feed.Tags)
+                    {
+                        success = await feedData.AddFeedTag(feed.ID, feed.Owner.UserName);
+                    }
+                    return success;
                 }
                 catch (Exception)
                 {
