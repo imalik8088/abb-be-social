@@ -93,8 +93,10 @@ namespace PortableBLL
                 List<GetFeedComments_Result> list = await feedData.GetFeedComments(feedId).ConfigureAwait(false);
                 List<Comment> retList = new List<Comment>();
 
+                UserManager userInforMng = new UserManager();
+
                 foreach (GetFeedComments_Result res in list)
-                    retList.Add(new Comment(res));
+                    retList.Add(new Comment(res, await userInforMng.LoadHumanInformationByUsername(res.UserName)));
 
                 return retList;
 

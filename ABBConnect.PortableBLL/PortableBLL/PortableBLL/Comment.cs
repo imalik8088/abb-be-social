@@ -14,14 +14,12 @@ namespace PortableBLL
             this.timeStamp = DateTime.MinValue;
         }
 
-        public Comment(PortableTransformationLayer.ABBConnectServiceRef.GetFeedComments_Result res)
+        public Comment(PortableTransformationLayer.ABBConnectServiceRef.GetFeedComments_Result res, Human owner)
         {
             this.owner = new Human();
             timeStamp = res.CreationTimeStamp;
             Content = res.CommentText;
-            owner.FirstName = res.FirstName;
-            owner.LastName = res.LastName;
-            owner.UserName = res.UserName;
+            this.owner = owner;
         }
 
         private int iD;
