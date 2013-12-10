@@ -10,7 +10,7 @@ namespace PortableBLL
     {
         public Human()
         {
-            this.userName = "";
+            this.username = "";
             this.phoneNumber = "";
             this.lastName = "";
             this.companyTitle = "";
@@ -19,33 +19,46 @@ namespace PortableBLL
             this.workRoom = "";
             this.iD = -1;
         }
+
+        public Human(GetUsersByName_Result result)
+        {
+            this.iD = result.Id;
+            this.username = result.Name;
+            this.firstName = result.FirstName;
+            this.lastName = result.LastName;
+            this.workRoom = "";
+            this.companyTitle = "";
+            this.email = "";
+            this.phoneNumber = "";
+        }
+
         public Human(GetHumanInformation_Result result)
         {
             iD = -1;
-            userName = result.Name;
+            this.username = result.Name;
             lastName = result.LastName;
             firstName = result.FirstName;
             this.phoneNumber = result.PhoneNumber;
             email = result.Email;
-            workRoom = result.Location;
+            this.workRoom = result.Location;
             companyTitle = ""; 
         }
         public Human(GetHumanInformationByUsername_Result result)
         {
             iD = result.Id;
-            userName = result.Name;
+            this.username = result.Name;
             lastName = result.LastName;
             firstName = result.FirstName;
             this.phoneNumber = result.PhoneNumber;
             email = result.Email;
-            workRoom = result.Location;
+            this.workRoom = result.Location;
             companyTitle = "";
         }
 
         public Human(GetFeedTags_Result res)
         {
             iD = res.UserId;
-            userName = res.UserName;
+            this.username = res.UserName;
             firstName = res.FirstName;
             lastName = res.LastName;
             this.phoneNumber = "";
@@ -55,16 +68,29 @@ namespace PortableBLL
             
         }
 
-        private string userName;
+        private string username;
         public string UserName
         {
             get
             {
-                return userName;
+                return username;
             }
             set
             {
-                userName = value;
+                username = value;
+            }
+        }
+
+        private string workRoom;
+        public string WorkRoom
+        {
+            get
+            {
+                return workRoom;
+            }
+            set
+            {
+                workRoom = value;
             }
         }
 
@@ -104,19 +130,6 @@ namespace PortableBLL
             set
             {
                 companyTitle = value;
-            }
-        }
-
-        private string workRoom;
-        public string WorkRoom
-        {
-            get
-            {
-                return workRoom;
-            }
-            set
-            {
-                workRoom = value;
             }
         }
 

@@ -13,6 +13,7 @@ namespace PortableBLL
             this.sensorValues = new List<SensorVTData>();
             this.name = "";
             this.location = "";
+            this.unitMetric = "";
         }
 
         public Sensor(GetSensorInformation_Result entitySensor)
@@ -23,6 +24,7 @@ namespace PortableBLL
             this.upperBoundary = entitySensor.MAX_Critical.GetValueOrDefault();
             this.lowerBoundary = entitySensor.MIN_Critical.GetValueOrDefault();
             this.location = "";
+            this.unitMetric = "";
         }
 
         private int iD;
@@ -37,8 +39,6 @@ namespace PortableBLL
                 iD = value;
             }
         }
-
-        
 
         private string name;
         public string Name
@@ -102,6 +102,19 @@ namespace PortableBLL
             set
             {
                 upperBoundary = value;
+            }
+        }
+
+        private string unitMetric;
+        public string UnitMetric
+        {
+            get
+            {
+                return unitMetric;
+            }
+            set
+            {
+                unitMetric = value;
             }
         }
     }

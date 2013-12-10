@@ -72,5 +72,53 @@ namespace PortableBLL
         {
             return new Human(await usrData.GetHumanInformationByUserName(username).ConfigureAwait(false));
         }
+
+        public async Task<List<Human>> SearchUserByName(string query)
+        {
+            List<GetUsersByName_Result> list = await usrData.SearchUsersByName(query).ConfigureAwait(false);
+
+            List<Human> retList = new List<Human>();
+
+            UserManager userInforMng = new UserManager();
+
+            foreach (GetUsersByName_Result res in list)
+                if (res.isHuman)
+                {
+                    retList.Add(new Human(res));
+                }
+
+            return retList;
+        }
+
+
+        public async Task<List<Human>> GetAllHumanUsers()
+        {
+            List<GetUsersByName_Result> list = await usrData.SearchUsersByName("").ConfigureAwait(false);
+
+            List<Human> retList = new List<Human>();
+
+            foreach (GetUsersByName_Result res in list)
+                if (res.isHuman)
+                {
+                    retList.Add(new Human(res));
+                }
+
+            return retList;
+        }
+
+        public async Task<List<Sensor>> GetAllSensors()
+        {
+            List<GetUsersByName_Result> list = await usrData.SearchUsersByName("").ConfigureAwait(false);
+
+            List<Sensor> retList = new List<Sensor>();
+
+            foreach (GetUsersByName_Result res in list)
+                if (!res.isHuman)
+                {
+                    retList.Add(await LoadSensorInformation(res.Id));
+                }
+
+            return retList;
+        }
     }
 }
