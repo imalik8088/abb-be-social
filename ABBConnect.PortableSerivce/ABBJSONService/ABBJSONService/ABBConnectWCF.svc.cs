@@ -1261,8 +1261,14 @@ namespace ABBJSONService
                             GetUsersByName_Result user = new GetUsersByName_Result();
                             user.Id = (int)reader[0];
                             user.Name = (string)reader[1];
-                            user.FirstName = (string)reader[2];
-                            user.LastName = (string)reader[3];
+                            object sqlCell = reader[2];
+                            user.FirstName = (sqlCell == System.DBNull.Value)
+                                ? ""
+                                : (string)sqlCell;
+                            sqlCell = reader[3];
+                            user.LastName = (sqlCell == System.DBNull.Value)
+                                ? ""
+                                : (string)sqlCell;
                             user.isHuman = (bool)reader[4];
 
                             users.Add(user);
