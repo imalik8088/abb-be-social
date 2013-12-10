@@ -45,7 +45,15 @@ namespace ABBConnect___Windows_Phone
             Content.Text = hf.Content;
 
             lstbTags.ItemsSource = hf.Tags;
-            lstbComments.ItemsSource = hf.Comments;
+
+
+            foreach (PortableBLL.Comment c in hf.Comments)
+            {
+                CommentControl cc = new CommentControl(c.Owner.FirstName + c.Owner.LastName, c.TimeStamp, c.ID, c.Content);
+                lstbComments.Items.Add(cc);
+            }
+
+            lstbComments.Items.Add(new MakeCommentControl());
 
 
 

@@ -32,24 +32,9 @@
                 <Grid>
                     <ListBox x:Name="lstbComments"
                              HorizontalAlignment="Left"
-                             Height="587" Margin="10,10,0,0" 
+                             Height="587" 
                              VerticalAlignment="Top" 
-                             Width="436"
-                             ItemsSource="{Binding}" >
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" Margin="2">
-                                        <TextBlock Text="Author:" Margin="2" />
-                                        <TextBlock Text="{Binding Owner.UserName}" Margin="2" />
-                                        <TextBlock Text="Time:" Margin="10,2,0,2" />
-                                        <TextBlock Text="{Binding TimeStamp}" Margin="2" />
-                                        <TextBlock Text="Comment:" Margin="2,2,0,0" />
-                                        <TextBlock Text="{Binding Content}" Margin="2" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                    </ListBox>
-
+                             Width="456"/>
 
                 </Grid>
             </controls:PivotItem>
@@ -63,8 +48,9 @@
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" Margin="2">
-                                        <TextBlock Text="Name:" Margin="2" />
-                                        <TextBlock Text="{Binding UserName}" Margin="2" />
+                                        <Image HorizontalAlignment="Left" Source="Icons/symbol_tag.png" Height="26" Margin="2" VerticalAlignment="Top" Width="26"/>
+                                        <TextBlock Text="{Binding FirstName}" Margin="2" FontSize="32"/>
+                                        <TextBlock Text="{Binding LastName}" Margin="2" FontSize="32"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>

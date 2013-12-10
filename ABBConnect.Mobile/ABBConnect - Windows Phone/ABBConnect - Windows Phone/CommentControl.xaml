@@ -7,9 +7,13 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    d:DesignHeight="180" d:DesignWidth="456">
-    
-    <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}">
-        <TextBlock Height="30" HorizontalAlignment="Left" Margin="204,107,0,0" Name="textBlock1" Text="TexasdfasdftBlock" VerticalAlignment="Top" />
+    d:DesignHeight="160" d:DesignWidth="456">
+
+    <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}" Margin="0,0,0,10">
+        <TextBlock x:Name="lblUserName" Height="30" HorizontalAlignment="Left" Margin="10,10,0,0"  Text="Username" VerticalAlignment="Top" MouseLeftButtonUp="lblUserName_MouseLeftButtonUp" />
+        <TextBlock  x:Name="lblText" HorizontalAlignment="Left" Margin="10,45,0,0" TextWrapping="Wrap" Text="Hello, this is a comment on a little post, mihihihihihi" VerticalAlignment="Top" Height="110" Width="436"/>
+        <TextBlock x:Name="lblTime" Height="30" HorizontalAlignment="Left" Margin="410,10,0,0"  Text="1d" VerticalAlignment="Top" Width="36" />
+        <Image HorizontalAlignment="Left" Source="Icons/symbol_timer.png" Height="20" Margin="385,15,0,0" VerticalAlignment="Top" Width="20"/>
+
     </Grid>
 </UserControl>

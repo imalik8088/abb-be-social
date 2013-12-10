@@ -29,7 +29,7 @@ namespace ABBConnect___Windows_Phone
         // Constructor
         PortableBLL.Human currentUser;
         PortableBLL.FeedManager fm;
-        const int UPDATETIME = 30;
+        const int UPDATETIME = 15;
         const int NUMBEROFFEEDS = 10;
         DispatcherTimer timerNewFeed, timerLabel;
         List<PortableBLL.Feed> feeds;
