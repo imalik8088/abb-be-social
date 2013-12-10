@@ -264,6 +264,42 @@ namespace ABBJSONService
             return cats;
         }
 
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetSensors")]
+        public List<GetAllSensors_Result> GetAllSensors()
+        {
+            List<GetAllSensors_Result> sensors = new List<GetAllSensors_Result>();
+
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            {
+
+                sqlConn.Open();
+                string sqlQuery = "GetAllSensors";
+
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        ;
+                        while (reader.Read())
+                        {
+                            GetAllSensors_Result sensor = new GetAllSensors_Result();
+                            sensor.Id = (int)reader[0];
+                            sensor.Name = (string)reader[1];
+                            sensor.MIN_Critical = (decimal)reader[2];
+                            sensor.MAX_Critical = (decimal)reader[3];
+
+
+                            sensors.Add(sensor);
+                        }
+                    }
+                }
+                sqlConn.Close();
+            }
+            return sensors;
+        }
+
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetFeedComments?feedId={feedId}")]
         public List<GetFeedComments_Result> GetFeedComments(string feedId)
         {
@@ -1054,18 +1090,16 @@ namespace ABBJSONService
             return feeds;
         }
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "SaveFilter?userId={userId}&name={filterName}&start={startingTime}&end={endingTime}&location={location}")]
-        public int SaveFilter(string userId, string filterName, string startingTime, string endingTime, string location)
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "SaveFilter?userId={userId}&name={filterName}&start={startingTime}&end={endingTime}&location={location}&feedType={feedType}")]
+        public int SaveFilter(string userId, string filterName, string startingTime, string endingTime, string location, string feedType)
         {
-            return 0;
-            /*
-            
+            int retValue=-1;         
 
             using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
             {
 
                 sqlConn.Open();
-                string sqlQuery = "GetXFeedsByFilter";
+                string sqlQuery = "AddUserSavedFilter";
 
                 using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConn))
                 {
@@ -1073,72 +1107,81 @@ namespace ABBJSONService
 
                     try
                     {
-                        if (id.Equals(""))
-                            cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = DBNull.Value;
-                        else
-                            cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = int.Parse(id);
+                        cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = int.Parse(userId);
 
                         if (location.Equals(""))
-                            cmd.Parameters.Add("@location", SqlDbType.NVarChar, 50).Value = DBNull.Value;
+                            cmd.Parameters.Add("@Location", SqlDbType.NVarChar, 50).Value = DBNull.Value;
                         else
-                            cmd.Parameters.Add("@location", SqlDbType.NVarChar, 50).Value = location;
+                            cmd.Parameters.Add("@Location", SqlDbType.NVarChar, 50).Value = location;
 
                         if (startingTime.Equals(""))
-                            cmd.Parameters.Add("@startTime", SqlDbType.DateTime).Value = DBNull.Value;
+                            cmd.Parameters.Add("@StartDate", SqlDbType.DateTime).Value = DBNull.Value;
                         else
-                            cmd.Parameters.Add("@startTime", SqlDbType.DateTime).Value = Convert.ToDateTime(startingTime);
+                            cmd.Parameters.Add("@StartDate", SqlDbType.DateTime).Value = Convert.ToDateTime(startingTime);
 
                         if (endingTime.Equals(""))
-                            cmd.Parameters.Add("@endTime", SqlDbType.DateTime).Value = DBNull.Value;
+                            cmd.Parameters.Add("@EndDate", SqlDbType.DateTime).Value = DBNull.Value;
                         else
-                            cmd.Parameters.Add("@endTime", SqlDbType.DateTime).Value = Convert.ToDateTime(endingTime);
+                            cmd.Parameters.Add("@EndDate", SqlDbType.DateTime).Value = Convert.ToDateTime(endingTime);
 
                         if (feedType.Equals(""))
-                            cmd.Parameters.Add("@FeedType", SqlDbType.NVarChar, 50).Value = DBNull.Value;
+                            cmd.Parameters.Add("@Type", SqlDbType.NVarChar, 50).Value = DBNull.Value;
                         else
-                            cmd.Parameters.Add("@FeedType", SqlDbType.NVarChar, 50).Value = feedType;
+                            cmd.Parameters.Add("@Type", SqlDbType.NVarChar, 50).Value = feedType;
 
-                        if (startId.Equals(""))
-                            cmd.Parameters.Add("@startingFeedId", SqlDbType.Int).Value = DBNull.Value;
-                        else
-                            cmd.Parameters.Add("@startingFeedId", SqlDbType.Int).Value = int.Parse(startId);
-
-                        if (numFeeds.Equals(""))
-                            cmd.Parameters.Add("@numOfFeeds", SqlDbType.Int).Value = DBNull.Value;
-                        else
-                            cmd.Parameters.Add("@numOfFeeds", SqlDbType.Int).Value = int.Parse(numFeeds);
+                        cmd.Parameters.Add("@FilterName", SqlDbType.NVarChar, 50).Value = filterName;
                     }
 
                     catch (Exception)
                     {
                         cmd.Dispose();
                         sqlConn.Close();
-                        return null;
+                        return -1;
                     }
+
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         ;
-                        while (reader.Read())
+                        if (reader.Read())
                         {
-                            GetLatestXFeeds_Result feed = new GetLatestXFeeds_Result();
-                            feed.Username = (string)reader[0];
-                            feed.UserId = (int)reader[1];
-                            feed.Type = (string)reader[2];
-                            feed.CreationTimeStamp = (DateTime)reader[3];
-                            feed.Text = (string)reader[4];
-                            feed.FilePath = (string)reader[5] != null ? (string)reader[5] : "";
-                            feed.PrioCategory = (string)reader[6];
-                            feed.PrioValue = (int)reader[7];
-                            feed.FeedId = (int)reader[8];
-                            feed.Location = (string)reader[9];
-
-                            feeds.Add(feed);
+                            retValue = (int)reader[0];
                         }
                     }
                 }
+                
                 sqlConn.Close();
             }
-            return feeds;*/
+            return retValue;
+        }
+
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "TagUserInFilter?userId={userId}&filterId={filterId}")]
+        public bool AddFilterUser(string userId, string filterId)
+        {
+            int userIntId = Int32.Parse(userId);
+            int filterIntId = Int32.Parse(filterId);
+            int rowsAffected = 0;
+
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            {
+
+                sqlConn.Open();
+                string sqlQuery = "AddUserToSavedFilter";
+
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = userIntId;
+                    cmd.Parameters.Add("@FilterId", SqlDbType.Int).Value = filterIntId;
+
+                    rowsAffected = cmd.ExecuteNonQuery();
+                }
+                sqlConn.Close();
+            }
+
+            if (rowsAffected > 0)
+                return true;
+            else
+                return false;
         }
     }
 }

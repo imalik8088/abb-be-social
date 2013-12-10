@@ -42,6 +42,10 @@ namespace ABBJSONService
 
         [OperationContract]
         [WebInvoke]
+        List<GetAllSensors_Result> GetAllSensors();
+
+        [OperationContract]
+        [WebInvoke]
         List<GetFeedComments_Result> GetFeedComments(string feedId);
 
         [OperationContract]
@@ -114,7 +118,11 @@ namespace ABBJSONService
 
         [OperationContract]
         [WebInvoke]
-        int SaveFilter(string userId, string filterName, string startingTime, string endingTime, string location);
+        int SaveFilter(string userId, string filterName, string startingTime, string endingTime, string location, string feedType);
+
+        [OperationContract]
+        [WebInvoke]
+        bool AddFilterUser(string userId, string filterId);
     }
 
 }
