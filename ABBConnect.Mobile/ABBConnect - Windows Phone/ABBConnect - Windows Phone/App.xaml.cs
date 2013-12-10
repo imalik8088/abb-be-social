@@ -17,6 +17,15 @@ namespace ABBConnect___Windows_Phone
 {
     public partial class App : Application
     {
+        private static PortableBLL.Human currentUser = new PortableBLL.Human();
+
+        public static PortableBLL.Human CurrentUser
+        {
+            get { return App.currentUser; }
+            set { App.currentUser = value; }
+        }
+
+
         private static MainViewModel viewModel = null;
         private static PortableBLL.HumanFeed hFeed = new PortableBLL.HumanFeed();
 

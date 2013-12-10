@@ -34,7 +34,12 @@
                              HorizontalAlignment="Left"
                              Height="587" 
                              VerticalAlignment="Top" 
-                             Width="456"/>
+                             Width="456">
+                        <TextBlock TextWrapping="Wrap" Text="Enter Comment:" Margin="15,0,0,0"/>
+                        <TextBox x:Name="txtbComment" Margin="0,0,0,0" Height="126" TextWrapping="Wrap" Text="TextBox" Width="456"/>
+                        <Button x:Name="btnPublish" Margin="100,0,0,0" Content="Publish" Width="250" Click="btnPublish_Click"/>
+
+                    </ListBox>
 
                 </Grid>
             </controls:PivotItem>

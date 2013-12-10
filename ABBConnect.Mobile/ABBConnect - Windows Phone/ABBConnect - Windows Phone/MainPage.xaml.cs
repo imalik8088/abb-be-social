@@ -29,10 +29,13 @@ namespace ABBConnect___Windows_Phone
         // Constructor
         PortableBLL.Human currentUser;
         PortableBLL.FeedManager fm;
-        const int UPDATETIME = 15;
+        const int UPDATETIME = 15, SHOWLABELTIME = 4;
         const int NUMBEROFFEEDS = 10;
         DispatcherTimer timerNewFeed, timerLabel;
         List<PortableBLL.Feed> feeds;
+        bool ini;
+
+        FeedType.FeedSource currentFeedType;
 
         string chosenImg;
 
@@ -43,7 +46,7 @@ namespace ABBConnect___Windows_Phone
         {
 
             InitializeComponent();
-
+            ini = false;
             // Set the data context of the listbox control to the sample data
             DataContext = App.ViewModel;
             this.Loaded += new RoutedEventHandler(MainPage_Loaded);
@@ -53,16 +56,19 @@ namespace ABBConnect___Windows_Phone
             timerNewFeed = new DispatcherTimer { Interval = new TimeSpan(0,0,UPDATETIME) };
             timerNewFeed.Tick += new EventHandler(timerNewFeed_tick);
             timerNewFeed.Start();
-            timerLabel = new DispatcherTimer { Interval = new TimeSpan(0, 0, 10) };
+            timerLabel = new DispatcherTimer { Interval = new TimeSpan(0, 0, SHOWLABELTIME) };
             timerNewFeed.Tick += new EventHandler(timerLabel_tick);
 
             LoadUser();
             LoadNewFeeds(NUMBEROFFEEDS);
 
             lblNewFeeds.Text = "";
+
+            currentFeedType = new FeedType.FeedSource();
+            currentFeedType = FeedType.FeedSource.Human;
            // CreateControlsUsingObjects();
 
-     
+            ini = true;
         }
 
         /// <summary>
@@ -88,7 +94,8 @@ namespace ABBConnect___Windows_Phone
                 return;
 
             //load the newest feed
-            List<PortableBLL.Feed> latestFeed = await fm.LoadLatestXFeeds(1);
+            List<PortableBLL.Feed> latestFeed = await fm.LoadFeedsByType(currentFeedType, 1);
+           // List<PortableBLL.Feed> latestFeed = await fm.LoadLatestXFeeds(1);
 
             //get the latest ID and the amount between the first ID and this
             int id = latestFeed[0].ID;
@@ -131,8 +138,8 @@ namespace ABBConnect___Windows_Phone
         {
             pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
 
-
-            feeds = await fm.LoadLatestXFeeds(amount);
+            feeds = await fm.LoadFeedsByType(currentFeedType, amount);
+            //feeds = await fm.LoadLatestXFeeds(amount);
             AddFeedsToList(feeds);
 
             CreateButton(feeds[feeds.Count - 1].ID);
@@ -149,7 +156,10 @@ namespace ABBConnect___Windows_Phone
         {
             pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
 
-            List<Feed> newFeeds = await fm.LoadLatestXFeedsFromId(id, amount);
+
+            List<PortableBLL.Feed> newFeeds = await fm.LoadFeedsByType(currentFeedType, amount, id);
+
+            //List<Feed> newFeeds = await fm.LoadLatestXFeedsFromId(id, amount);
 
             //remove button
             lstbFeeds.Items.RemoveAt(lstbFeeds.Items.Count - 1);
@@ -172,14 +182,14 @@ namespace ABBConnect___Windows_Phone
         {
             pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
 
-            List<PortableBLL.Feed> newFeeds = await fm.LoadLatestXFeedsFromId(id + 1, amount);
+            List<PortableBLL.Feed> newFeeds = await fm.LoadFeedsByType(currentFeedType, amount, id + 1);
+            //  List<PortableBLL.Feed> newFeeds = await fm.LoadLatestXFeedsFromId(id + 1, amount);
 
             for (int i = 0; i < newFeeds.Count; i++)
                 feeds.Insert(i, newFeeds[i]);
 
 
             InsertFeedsToList(newFeeds);
-            //CreateButton(feeds[feeds.Count - 1].ID);
              
             pgbLoadFeed.Visibility = System.Windows.Visibility.Collapsed;
         }
@@ -345,7 +355,6 @@ namespace ABBConnect___Windows_Phone
 
         }
 
-
         /// <summary>
         /// Fill the list with sensor feeds, send -1 as index if it should be added in the end
         /// </summary>
@@ -412,6 +421,60 @@ namespace ABBConnect___Windows_Phone
             else
                 MessageBox.Show("Something went wrong");
         }
+
+
+        private void ToggleSwitch_Checked(object sender, RoutedEventArgs e)
+        {
+            if (!ini)
+                return;
+
+            currentFeedType = FeedType.FeedSource.Sensor;
+           
+            lstbFeeds.Items.Clear();
+            feeds.Clear();
+            LoadNewFeeds(NUMBEROFFEEDS);
+            
+    
+                
+        }
+
+        private void tgsType_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (!ini)
+                return;
+
+            currentFeedType = FeedType.FeedSource.Human;
+
+            lstbFeeds.Items.Clear();
+            feeds.Clear();
+            LoadNewFeeds(NUMBEROFFEEDS);
+            
+        }
+
+        private void brdrHuman_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            brdrHuman.Background = GetColorFromHexa("#FFB5BBBB");
+            brdrSensor.Background = GetColorFromHexa("#FF515B5B");
+        }
+
+        private void brdrSensor_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            brdrSensor.Background = GetColorFromHexa("#FFB5BBBB");
+            brdrHuman.Background = GetColorFromHexa("#FF515B5B");
+        }
+        private SolidColorBrush GetColorFromHexa(string hexaColor)
+        {
+            return new SolidColorBrush(
+                Color.FromArgb(
+                    Convert.ToByte(hexaColor.Substring(1, 2), 16),
+                    Convert.ToByte(hexaColor.Substring(3, 2), 16),
+                    Convert.ToByte(hexaColor.Substring(5, 2), 16),
+                    Convert.ToByte(hexaColor.Substring(7, 2), 16)
+                )
+            );
+        }
+
+
 
      
     }

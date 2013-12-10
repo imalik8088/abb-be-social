@@ -12,7 +12,7 @@
     <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}">
         <TextBlock x:Name="lblComment" Height="30" HorizontalAlignment="Left" Margin="182,10,0,0"  Text="Comment" VerticalAlignment="Top" />
         <TextBox x:Name="txtbText"  HorizontalAlignment="Left" Height="110" Margin="10,32,0,0" TextWrapping="Wrap" Text="Enter comment..." VerticalAlignment="Top" Width="436"/>
-        <Button x:Name="btnPublishComment" Content="Publish" HorizontalAlignment="Left" Margin="10,129,0,0" VerticalAlignment="Top" Height="71" Width="436" BorderThickness="10,3" Background="Black"/>
+        <Button x:Name="btnPublishComment" Content="Publish" HorizontalAlignment="Left" Margin="10,129,0,0" VerticalAlignment="Top" Height="71" Width="436" BorderThickness="10,3" Background="Black" Click="btnPublishComment_Click"/>
 
     </Grid>
 </UserControl>

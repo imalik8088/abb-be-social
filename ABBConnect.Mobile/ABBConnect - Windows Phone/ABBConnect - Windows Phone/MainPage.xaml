@@ -1,5 +1,4 @@
 <phone:PhoneApplicationPage
-    x:Class="ABBConnect___Windows_Phone.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -8,6 +7,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:local="clr-namespace:ABBConnect___Windows_Phone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    x:Class="ABBConnect___Windows_Phone.MainPage"
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768" 
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -23,10 +24,12 @@
             <!--Pivot item one-->
             <controls:PivotItem Header="Feeds" x:Name="piFeed" Width="456" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                 <Grid HorizontalAlignment="Left" Height="607" VerticalAlignment="Top" Width="456">
-                    <ListBox x:Name="lstbFeeds" HorizontalAlignment="Left" Height="597" VerticalAlignment="Top" Width="456">
-                    </ListBox>
+                    <ListBox x:Name="lstbFeeds" HorizontalAlignment="Left" Height="607" VerticalAlignment="Top" Width="456"/>
                     <TextBlock x:Name="lblNewFeeds" HorizontalAlignment="Left" Text="New feeds loaded" Margin="10,-34,0,607" Width="436" />
                     <ProgressBar x:Name="pgbLoadFeed" HorizontalAlignment="Left" Height="77" Margin="10,-77,0,0" VerticalAlignment="Top" Width="436" IsIndeterminate="True"/>
+                    <toolkit:ToggleSwitch x:Name="tgsType" HorizontalAlignment="Left" Margin="257,-155,0,0" VerticalAlignment="Top" Content="" Height="104" Width="170" Checked="ToggleSwitch_Checked" Unchecked="tgsType_Unchecked" />
+                    <TextBlock HorizontalAlignment="Left" Margin="400,-144,0,0" TextWrapping="Wrap" Text="S" VerticalAlignment="Top"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="281,-144,0,0" TextWrapping="Wrap" Text="H" VerticalAlignment="Top" RenderTransformOrigin="-9.818,0.593"/>
                 </Grid>
 
 
@@ -68,10 +71,20 @@
                     <TextBlock x:Name="lblLocationClick" HorizontalAlignment="Left" Margin="30,367,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="32"/>
                 </Grid>
             </controls:PivotItem>
-            <controls:PivotItem Header="Filters">
-                <!--Triple line list no text wrapping-->
-                <ListBox x:Name="ThirdListBox" Margin="10,10,-22,-10">
-                </ListBox>
+            <controls:PivotItem Header="Filters" Margin="10,0,10,28">
+                <Grid>
+
+                    <!--Triple line list no text wrapping-->
+                    <ListBox x:Name="ThirdListBox" Margin="-4,10,4,15"/>
+                    <toolkit:WrapPanel HorizontalAlignment="Left" Height="158" VerticalAlignment="Top" Width="456">
+                        <Border x:Name="brdrSensor" BorderBrush="Gray" Background="#FF515B5B" BorderThickness="3" Margin="219,13,-370,-149" MouseLeftButtonUp="brdrSensor_MouseLeftButtonUp">
+                            <TextBlock Text="Sensor" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <Border  x:Name="brdrHuman"  BorderBrush="Gray" Background="#FFB5BBBB" BorderThickness="3" Margin="63,13,-214,-149" MouseLeftButtonUp="brdrHuman_MouseLeftButtonUp">
+                            <TextBlock Text="Human" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </toolkit:WrapPanel>
+                </Grid>
             </controls:PivotItem>
         </controls:Pivot>
     </Grid>
