@@ -68,5 +68,24 @@ namespace PortableTransformationLayer
             var response = await client.GetStringAsync(url).ConfigureAwait(false);
             return JsonConvert.DeserializeObject<List<GetLatestXFeeds_Result>>(response);
         }
+
+        public async Task<bool> PublishComment(int feedId, string username, string comment)
+        {
+            var client = new HttpClient();
+            client.BaseAddress = new Uri(urlServer.Url);
+            var response = await client.GetStringAsync("PostComment?feedId=" + feedId +
+                           "&username=" + username + "&comment=" + comment).ConfigureAwait(false);
+            return JsonConvert.DeserializeObject<bool>(response); ;
+        }
+
+
+        public async Task<bool> AddFeedTag(int feedId, string username)
+        {
+            var client = new HttpClient();
+            client.BaseAddress = new Uri(urlServer.Url);
+            var response = await client.GetStringAsync("AddTag?feedId=" + feedId +
+                           "&username=" + username).ConfigureAwait(false);
+            return JsonConvert.DeserializeObject<bool>(response); ;
+        }
     }
 }
