@@ -15,5 +15,6 @@ namespace PortableTransformationLayer
         Task<bool> LogIn(string usrName, string pw);
         Task<GetHumanInformation_Result> GetHumanInformation(int Id);
         Task<GetHumanInformationByUsername_Result> GetHumanInformationByUserName(string username);
+        Task<List<GetUsersByName_Result>> SearchUsersByName(string query);
     }
 }

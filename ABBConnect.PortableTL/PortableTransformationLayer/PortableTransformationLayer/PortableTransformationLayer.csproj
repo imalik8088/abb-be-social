@@ -101,10 +101,10 @@
     <None Include="Service References\ABBConnectServiceRef\PortableTransformationLayer.ABBConnectServiceRef.GetAllHumanFeeds_Result.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\ABBConnectServiceRef\PortableTransformationLayer.ABBConnectServiceRef.GetAllSensorFeedsByFilter_Result.datasource">
+    <None Include="Service References\ABBConnectServiceRef\PortableTransformationLayer.ABBConnectServiceRef.GetAllSensorFeeds_Result.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\ABBConnectServiceRef\PortableTransformationLayer.ABBConnectServiceRef.GetAllSensorFeeds_Result.datasource">
+    <None Include="Service References\ABBConnectServiceRef\PortableTransformationLayer.ABBConnectServiceRef.GetAllSensors_Result.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ABBConnectServiceRef\PortableTransformationLayer.ABBConnectServiceRef.GetFeedComments_Result.datasource">
@@ -114,12 +114,6 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ABBConnectServiceRef\PortableTransformationLayer.ABBConnectServiceRef.GetFeedTags_Result.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\ABBConnectServiceRef\PortableTransformationLayer.ABBConnectServiceRef.GetHistoricalDataFromSensor_Result.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\ABBConnectServiceRef\PortableTransformationLayer.ABBConnectServiceRef.GetHumanInformationByUsername_Result.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ABBConnectServiceRef\PortableTransformationLayer.ABBConnectServiceRef.GetHumanInformation_Result.datasource">
@@ -144,6 +138,12 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ABBConnectServiceRef\PortableTransformationLayer.ABBConnectServiceRef.GetUserFeeds_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ABBConnectServiceRef\PortableTransformationLayer.ABBConnectServiceRef.GetUserSavedFilters_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ABBConnectServiceRef\PortableTransformationLayer.ABBConnectServiceRef.GetUsersByName_Result.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
   </ItemGroup>

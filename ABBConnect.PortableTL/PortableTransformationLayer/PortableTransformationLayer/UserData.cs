@@ -69,5 +69,14 @@ namespace PortableTransformationLayer
             var response = await client.GetStringAsync("GetHumanInfoByUsername?username=" + username).ConfigureAwait(false);
             return JsonConvert.DeserializeObject<GetHumanInformationByUsername_Result>(response);
         }
+
+
+        public async Task<List<GetUsersByName_Result>> SearchUsersByName(string query)
+        {
+            var client = new HttpClient();
+            client.BaseAddress = new Uri(urlServer.Url);
+            var response = await client.GetStringAsync("SearchByName?name=" + query).ConfigureAwait(false);
+            return JsonConvert.DeserializeObject<List<GetUsersByName_Result>>(response);
+        }
     }
 }
