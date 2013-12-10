@@ -17,7 +17,7 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
-        <controls:Pivot Title="Robert Gustavsson">
+        <controls:Pivot Title="Robert Gustavsson" x:Name="pivHead">
 
             <!--Pivot item two-->
             <controls:PivotItem Header="Feeds">

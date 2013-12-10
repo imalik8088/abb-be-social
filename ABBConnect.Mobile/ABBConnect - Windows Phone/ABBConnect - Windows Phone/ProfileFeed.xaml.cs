@@ -12,14 +12,18 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
 using System.Windows.Navigation;
+using PortableBLL;
 
 namespace ABBConnect___Windows_Phone
 {
     public partial class ProfileFeed : PhoneApplicationPage
     {
+        Human currentUser;
+
         public ProfileFeed()
         {
             InitializeComponent();
+            currentUser = new Human();
         }
 
         private void FillFeedList(Test t)
@@ -31,30 +35,24 @@ namespace ABBConnect___Windows_Phone
 
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected  async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            string name = NavigationContext.QueryString["username"];
+            UserManager um = new UserManager();
+            string strUserId = NavigationContext.QueryString["userID"];
 
-            for (int i = 0; i < 20; i++)
-            {
+            int userId = int.Parse(strUserId);
 
-                Test t = new Test();
-                t.ID1 = i;
-                t.Content = "This is a very beautiful content post! I love Robert, he is awesome and I really hope this work now!!";
-                t.Location = "Control Room 1";
-                t.Priority = 4;
-                t.Timestamp = DateTime.Now;
-                t.Category = "Sticky Note";
-                t.Author = "Robert Gustavsson";
+            if (userId == App.CurrentUser.ID) //info already read from DB
+                currentUser = App.CurrentUser;
+            else
+                currentUser = await um.LoadHumanInformation(userId);
 
-                for (int j = 0; j < 4; j++)
-                {
-                    t.Comments.Add("hej hej " + i + j);
-                    t.Tags.Add("Tag " + j);
-                }
+            lblEmailClick.Text = currentUser.Email;
+            lblNameClick.Text = currentUser.FirstName + " " + currentUser.LastName;
+            lblPhoneClick.Text = currentUser.PhoneNumber;
+            lblLocationClick.Text = currentUser.WorkRoom;
 
-                FillFeedList(t);
-            }
+            pivHead.Title = lblNameClick.Text;
         }
 
         private void lblEmailClick_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

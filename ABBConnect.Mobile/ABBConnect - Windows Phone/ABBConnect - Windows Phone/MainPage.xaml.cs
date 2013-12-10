@@ -21,6 +21,7 @@ using System.Windows.Media.Imaging;
 using System.Text;
 using System.Windows.Threading;
 using System.IO.IsolatedStorage;
+using Microsoft.Phone.Shell;
 
 namespace ABBConnect___Windows_Phone
 {
@@ -66,6 +67,8 @@ namespace ABBConnect___Windows_Phone
 
             currentFeedType = new FeedType.FeedSource();
             currentFeedType = FeedType.FeedSource.Human;
+
+            this.ApplicationBar = this.Resources["appBar"] as ApplicationBar;
            // CreateControlsUsingObjects();
 
             ini = true;
@@ -121,13 +124,13 @@ namespace ABBConnect___Windows_Phone
             PortableBLL.UserManager um = new PortableBLL.UserManager();
             currentUser = await um.LoadHumanInformationByUsername("rgn09003");
 
+            /*
             lblEmailClick.Text = currentUser.Email;
             lblPhoneClick.Text = currentUser.PhoneNumber;
             lblNameClick.Text = currentUser.FirstName + " " + currentUser.LastName;
             lblLocationClick.Text = currentUser.WorkRoom;
+             * */
 
-            lblUserName.Text = currentUser.UserName;
-            lblTime.Text = DateTime.Now.ToShortTimeString();
         }
 
         /// <summary>
@@ -474,7 +477,22 @@ namespace ABBConnect___Windows_Phone
             );
         }
 
+        private void TagIcon_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
 
+        }
+
+        private void GoToMyProfile(object sender, EventArgs e)
+        {
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/ProfileFeed.xaml?userID=" + currentUser.ID, UriKind.Relative));
+        }
+
+
+        private void OnLogOut(object sender, EventArgs e)
+        {
+            MessageBox.Show("You will log out if you click here");
+        }
+        
 
      
     }
