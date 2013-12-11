@@ -122,5 +122,15 @@ namespace PortableBLL
 
             return retList;
         }
+
+
+        public async Task<User> LoadUserInformation(int userId)
+        {
+            Sensor tempSensor = await LoadSensorInformation(userId).ConfigureAwait(false);
+            if (tempSensor == null)
+                return await LoadHumanInformation(userId);
+            else
+                return tempSensor;
+        }
     }
 }
