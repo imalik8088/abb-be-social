@@ -73,18 +73,20 @@ namespace PortableBLL
             return new Human(await usrData.GetHumanInformationByUserName(username).ConfigureAwait(false));
         }
 
-        public async Task<List<Human>> SearchUserByName(string query)
+        public async Task<List<User>> SearchUserByName(string query)
         {
             List<GetUsersByName_Result> list = await usrData.SearchUsersByName(query).ConfigureAwait(false);
 
-            List<Human> retList = new List<Human>();
-
-            UserManager userInforMng = new UserManager();
+            List<User> retList = new List<User>();
 
             foreach (GetUsersByName_Result res in list)
                 if (res.isHuman)
                 {
                     retList.Add(new Human(res));
+                }
+                else
+                {
+                    retList.Add(await LoadSensorInformation(res.Id));
                 }
 
             return retList;

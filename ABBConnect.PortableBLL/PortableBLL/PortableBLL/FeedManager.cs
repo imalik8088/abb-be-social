@@ -120,9 +120,6 @@ namespace PortableBLL
             }
 
 
-
-
-
             public async Task<bool> PublishComment(int feedID, Comment comment)
             {
                 return await feedData.PublishComment(feedID, comment.Owner.UserName, comment.Content);

@@ -14,7 +14,7 @@ namespace PortableBLL
         Task<Sensor> LoadSensorInformation(int sensorID);
         Task<SensorHistoryData> LoadHistoryValuesBySensor(int sensorID, DateTime startingTime, DateTime endingTime);
         Task<int> LoadCurrentValuesBySensor(int sensorID);
-        Task<List<Human>> SearchUserByName(string query);
+        Task<List<User>> SearchUserByName(string query);
         Task<List<Human>> GetAllHumanUsers();
         Task<List<Sensor>> GetAllSensors();
     }

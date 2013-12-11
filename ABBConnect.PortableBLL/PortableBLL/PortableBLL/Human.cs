@@ -6,27 +6,27 @@ using PortableTransformationLayer.ABBConnectServiceRef;
 
 namespace PortableBLL
 {
-    public class Human
+    public class Human: User
     {
         public Human()
         {
-            this.username = "";
+            base.UserName = "";
             this.phoneNumber = "";
             this.lastName = "";
             this.companyTitle = "";
             this.email = "";
             this.firstName = "";
-            this.workRoom = "";
-            this.iD = -1;
+            base.Location = "";
+            base.ID = -1;
         }
 
         public Human(GetUsersByName_Result result)
         {
-            this.iD = result.Id;
-            this.username = result.Name;
+            base.ID = result.Id;
+            base.UserName = result.Name;
             this.firstName = result.FirstName;
             this.lastName = result.LastName;
-            this.workRoom = "";
+            base.Location = "";
             this.companyTitle = "";
             this.email = "";
             this.phoneNumber = "";
@@ -34,64 +34,38 @@ namespace PortableBLL
 
         public Human(GetHumanInformation_Result result)
         {
-            iD = -1;
-            this.username = result.Name;
+            base.ID = -1;
+            base.UserName = result.Name;
             lastName = result.LastName;
             firstName = result.FirstName;
             this.phoneNumber = result.PhoneNumber;
             email = result.Email;
-            this.workRoom = result.Location;
+            base.Location = result.Location;
             companyTitle = ""; 
         }
         public Human(GetHumanInformationByUsername_Result result)
         {
-            iD = result.Id;
-            this.username = result.Name;
+            base.ID = result.Id;
+            base.UserName = result.Name;
             lastName = result.LastName;
             firstName = result.FirstName;
             this.phoneNumber = result.PhoneNumber;
             email = result.Email;
-            this.workRoom = result.Location;
+            base.Location = result.Location;
             companyTitle = "";
         }
 
         public Human(GetFeedTags_Result res)
         {
-            iD = res.UserId;
-            this.username = res.UserName;
+            base.ID = res.UserId;
+            base.UserName = res.UserName;
             firstName = res.FirstName;
             lastName = res.LastName;
             this.phoneNumber = "";
             this.companyTitle = "";
             this.email = "";
-            this.workRoom = "";
+            base.Location = "";
             
-        }
-
-        private string username;
-        public string UserName
-        {
-            get
-            {
-                return username;
-            }
-            set
-            {
-                username = value;
-            }
-        }
-
-        private string workRoom;
-        public string WorkRoom
-        {
-            get
-            {
-                return workRoom;
-            }
-            set
-            {
-                workRoom = value;
-            }
         }
 
         private string phoneNumber;
@@ -156,20 +130,6 @@ namespace PortableBLL
             set
             {
                 lastName = value;
-            }
-        }
-
-        private int iD;
-        private GetFeedTags_Result res;
-        public int ID
-        {
-            get
-            {
-                return iD;
-            }
-            set
-            {
-                iD = value;
             }
         }
         

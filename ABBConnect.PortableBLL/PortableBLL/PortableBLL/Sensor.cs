@@ -6,64 +6,25 @@ using PortableTransformationLayer.ABBConnectServiceRef;
 
 namespace PortableBLL
 {
-    public class Sensor
+    public class Sensor: User
     {
         public Sensor()
         {
             this.sensorValues = new List<SensorVTData>();
-            this.name = "";
-            this.location = "";
+            base.UserName = "";
+            base.Location = "";
             this.unitMetric = "";
         }
 
         public Sensor(GetSensorInformation_Result entitySensor)
         {
-            this.iD = entitySensor.Id;
+            base.ID = entitySensor.Id;
             this.sensorValues = new List<SensorVTData>();
-            this.name = entitySensor.Name;
+            base.UserName = entitySensor.Name;
             this.upperBoundary = entitySensor.MAX_Critical.GetValueOrDefault();
             this.lowerBoundary = entitySensor.MIN_Critical.GetValueOrDefault();
-            this.location = "";
+            base.Location = "";
             this.unitMetric = "";
-        }
-
-        private int iD;
-        public int ID
-        {
-            get
-            {
-                return iD;
-            }
-            set
-            {
-                iD = value;
-            }
-        }
-
-        private string name;
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
-            set
-            {
-                name = value;
-            }
-        }
-
-        private string location;
-        public string Location
-        {
-            get
-            {
-                return location;
-            }
-            set
-            {
-                location = value;
-            }
         }
 
         private List<SensorVTData> sensorValues;
