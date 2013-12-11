@@ -32,9 +32,9 @@ namespace PortableBLL
             this.phoneNumber = "";
         }
 
-        public Human(GetHumanInformation_Result result)
+        public Human(GetHumanInformation_Result result, int humanId)
         {
-            base.ID = -1;
+            base.ID = humanId;
             base.UserName = result.Name;
             lastName = result.LastName;
             firstName = result.FirstName;

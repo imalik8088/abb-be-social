@@ -65,7 +65,7 @@ namespace PortableBLL
 
         public async Task<Human> LoadHumanInformation(int humanId)
         {
-            return new Human(await usrData.GetHumanInformation(humanId).ConfigureAwait(false));
+            return new Human(await usrData.GetHumanInformation(humanId).ConfigureAwait(false), humanId);
         }
 
         public async Task<Human> LoadHumanInformationByUsername(string username)
