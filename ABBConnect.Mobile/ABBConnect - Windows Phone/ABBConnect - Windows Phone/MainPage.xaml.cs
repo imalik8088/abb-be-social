@@ -60,14 +60,16 @@ namespace ABBConnect___Windows_Phone
             timerLabel = new DispatcherTimer { Interval = new TimeSpan(0, 0, SHOWLABELTIME) };
             timerNewFeed.Tick += new EventHandler(timerLabel_tick);
 
+            currentFeedType = new FeedType.FeedSource();
+            currentFeedType = FeedType.FeedSource.Human;
+
             LoadUser();
             LoadNewFeeds(NUMBEROFFEEDS);
 
             lblNewFeeds.Text = "";
             NoCache = 1;
 
-            currentFeedType = new FeedType.FeedSource();
-            currentFeedType = FeedType.FeedSource.Human;
+
 
             this.ApplicationBar = this.Resources["appBar"] as ApplicationBar;
            // CreateControlsUsingObjects();
@@ -127,8 +129,6 @@ namespace ABBConnect___Windows_Phone
 
             if (NoCache > 5)
                 NoCache = 1;
-
-            latestFeed.Clear();
         }
 
         /// <summary>
@@ -136,10 +136,18 @@ namespace ABBConnect___Windows_Phone
         /// </summary>
         private async void LoadUser()
         {
-            PortableBLL.UserManager um = new PortableBLL.UserManager();
-            currentUser = await um.LoadHumanInformationByUsername("rgn09003");
+            try
+            {
+                PortableBLL.UserManager um = new PortableBLL.UserManager();
+                currentUser = await um.LoadHumanInformationByUsername("rgn09003");
 
-            App.CurrentUser = currentUser;
+                App.CurrentUser = currentUser;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
             /*
             lblEmailClick.Text = currentUser.Email;
             lblPhoneClick.Text = currentUser.PhoneNumber;
@@ -157,11 +165,24 @@ namespace ABBConnect___Windows_Phone
         {
             pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
 
-            feeds = await fm.LoadFeedsByType(currentFeedType, amount);
-            //feeds = await fm.LoadLatestXFeeds(amount);
-            AddFeedsToList(feeds);
+            try
+            {
+                feeds = await fm.LoadFeedsByType(currentFeedType, amount);
 
-            CreateButton(feeds[feeds.Count - 1].ID);
+                if (feeds.Count == 0)
+                {
+                    MessageBox.Show("No feeds loaded");
+                    return;
+                }
+
+                AddFeedsToList(feeds);
+                CreateButton(feeds[feeds.Count - 1].ID);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
 
             pgbLoadFeed.Visibility = System.Windows.Visibility.Collapsed;
         }
@@ -514,6 +535,9 @@ namespace ABBConnect___Windows_Phone
 
         private void OnRefresh(object sender, EventArgs e)
         {
+            if (!ini)
+                return;
+
             pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
             timerNewFeed.Stop();
             CheckNewFeeds();
