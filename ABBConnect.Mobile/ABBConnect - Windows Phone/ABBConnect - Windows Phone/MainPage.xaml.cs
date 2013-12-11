@@ -124,6 +124,7 @@ namespace ABBConnect___Windows_Phone
             PortableBLL.UserManager um = new PortableBLL.UserManager();
             currentUser = await um.LoadHumanInformationByUsername("rgn09003");
 
+            App.CurrentUser = currentUser;
             /*
             lblEmailClick.Text = currentUser.Email;
             lblPhoneClick.Text = currentUser.PhoneNumber;
@@ -426,44 +427,42 @@ namespace ABBConnect___Windows_Phone
         }
 
 
-        private void ToggleSwitch_Checked(object sender, RoutedEventArgs e)
-        {
-            if (!ini)
-                return;
-
-            currentFeedType = FeedType.FeedSource.Sensor;
-           
-            lstbFeeds.Items.Clear();
-            feeds.Clear();
-            LoadNewFeeds(NUMBEROFFEEDS);
-            
-    
-                
-        }
-
-        private void tgsType_Unchecked(object sender, RoutedEventArgs e)
-        {
-            if (!ini)
-                return;
-
-            currentFeedType = FeedType.FeedSource.Human;
-
-            lstbFeeds.Items.Clear();
-            feeds.Clear();
-            LoadNewFeeds(NUMBEROFFEEDS);
-            
-        }
-
         private void brdrHuman_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             brdrHuman.Background = GetColorFromHexa("#FFB5BBBB");
             brdrSensor.Background = GetColorFromHexa("#FF515B5B");
+
+            ChangeFeedType(FeedType.FeedSource.Human);
         }
 
         private void brdrSensor_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             brdrSensor.Background = GetColorFromHexa("#FFB5BBBB");
             brdrHuman.Background = GetColorFromHexa("#FF515B5B");
+
+            ChangeFeedType(FeedType.FeedSource.Sensor);
+            
+        }
+
+        private void ChangeFeedType(FeedType.FeedSource feedType)
+        {
+             if (!ini)
+                return;
+
+             try
+             {
+                 currentFeedType = feedType;
+
+                 lstbFeeds.Items.Clear();
+                 feeds.Clear();
+                 LoadNewFeeds(NUMBEROFFEEDS);
+             }
+             catch (Exception e)
+             {
+
+                 MessageBox.Show(e.Message);
+             }
+
         }
         private SolidColorBrush GetColorFromHexa(string hexaColor)
         {
@@ -492,7 +491,11 @@ namespace ABBConnect___Windows_Phone
         {
             MessageBox.Show("You will log out if you click here");
         }
-        
+
+        private void OnSearchUser(object sender, EventArgs e)
+        {
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/SearchUser.xaml", UriKind.Relative));            
+        }
 
      
     }
