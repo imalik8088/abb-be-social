@@ -16,5 +16,9 @@ namespace PortableTransformationLayer
         Task<GetHumanInformation_Result> GetHumanInformation(int Id);
         Task<GetHumanInformationByUsername_Result> GetHumanInformationByUserName(string username);
         Task<List<GetUsersByName_Result>> SearchUsersByName(string query);
+        Task<List<GetUserSavedFilters_Result>> GetUserSavedFilters(int userId);
+        Task<List<GetUserSavedFiltersTagedUsers_Result>> GetFilterTaggedUsers(int filterId);
+        Task<int> AddFilter(int userId, string filterName, DateTime startingTime, DateTime endingTime, string location, string feedType);
+        Task<bool> AddUserToFilter(int userId, int filterId);
     }
 }
