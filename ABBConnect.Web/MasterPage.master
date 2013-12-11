@@ -56,18 +56,18 @@
                 </ul>
             </div>
             <div class="search-container">
-                <input type="text" class="search-input" value="Search me..">
+                <input type="text" class="search-input" placeholder="Search me..">
                 <button data-original-title=""></button>
             </div>
             <div id="header-menu-blocks-right">
                 <ul>
                     <li>
-                        <a href="login.html" data-original-title="">
+                        <a href="Home.aspx" data-original-title="">
                             <span class="text-label">ABB Connect </span>
                         </a>
                     </li>
                       <li>
-                        <a href="login.html" data-original-title="">
+                        <a href="ProfilePage.aspx" data-original-title="">
                             <asp:Label ID="labelHuman" class="text-label" runat="server"></asp:Label>
                         </a>
                     </li>
