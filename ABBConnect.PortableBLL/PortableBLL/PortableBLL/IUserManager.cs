@@ -18,5 +18,8 @@ namespace PortableBLL
         Task<List<User>> SearchUserByName(string query);
         Task<List<Human>> GetAllHumanUsers();
         Task<List<Sensor>> GetAllSensors();
+        Task<List<Filter>> GetUserSavedFilters(int userId);
+        Task<List<User>> GetFilterTaggedUsers(int filterId);
+
     }
 }

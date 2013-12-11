@@ -132,5 +132,32 @@ namespace PortableBLL
             else
                 return tempSensor;
         }
+
+
+        public async Task<List<Filter>> GetUserSavedFilters(int userId)
+        {
+            List<GetUserSavedFilters_Result> list = await usrData.GetUserSavedFilters(userId).ConfigureAwait(false);
+
+            List<Filter> filterList = new List<Filter>();
+
+            foreach (GetUserSavedFilters_Result entityFilter in list)
+                filterList.Add(new Filter(entityFilter, await GetFilterTaggedUsers(entityFilter.ID)));
+
+            return filterList;
+        }
+
+        public async Task<List<User>> GetFilterTaggedUsers(int filterId)
+        {
+            List<GetUserSavedFiltersTagedUsers_Result> list = await usrData.GetFilterTaggedUsers(filterId).ConfigureAwait(false);
+
+            List<User> userList = new List<User>();
+
+            foreach(GetUserSavedFiltersTagedUsers_Result entityUser in list)
+            {
+                userList.Add(new User(entityUser));
+            }
+
+            return userList;
+        }
     }
 }

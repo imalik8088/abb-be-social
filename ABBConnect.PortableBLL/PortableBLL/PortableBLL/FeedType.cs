@@ -9,6 +9,7 @@ namespace PortableBLL
     {
         public enum FeedSource
         {
+            None,
             Human,
             Sensor
         };

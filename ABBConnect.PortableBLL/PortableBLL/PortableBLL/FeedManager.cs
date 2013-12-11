@@ -310,8 +310,85 @@ namespace PortableBLL
                 return retList;
             }
 
+            public async Task<List<Feed>> LoadFeedsByFilter(int userId, string location, DateTime startingTime, DateTime endingTime, FeedType.FeedSource feedType, int numFeeds)
+            {
+                List<GetLatestXFeeds_Result> list = await feedData.GetFeedsByFilter(userId < 0 ? -1 : userId,
+                                                                                     System.String.IsNullOrEmpty(location) ? "" : location,
+                                                                                     startingTime,
+                                                                                     endingTime,
+                                                                                     feedType.Equals(null) ? "" : feedType.ToString(),
+                                                                                     -1,
+                                                                                     numFeeds < 0 ? -1 : numFeeds
+                                                                                     );
 
-            public Task<List<Feed>> LoadFeedsByFilter(string username, string location, DateTime startingTime, DateTime endingTime, string feedType)
+                List<Feed> retList = new List<Feed>();
+
+                UserManager userInforMng = new UserManager();
+
+                foreach (GetLatestXFeeds_Result res in list)
+                {
+                    if (res.Type == "Human")
+                        retList.Add(new HumanFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false),
+                                                  await LoadFeedTags(res.FeedId).ConfigureAwait(false),
+                                                  await userInforMng.LoadHumanInformation(res.UserId)));
+                    else
+                        retList.Add(new SensorFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false),
+                                                   await LoadFeedTags(res.FeedId).ConfigureAwait(false),
+                                                   await userInforMng.LoadSensorInformation(res.UserId)));
+                }
+
+                return retList;
+            }
+
+            public async Task<List<Feed>> LoadFeedsByFilter(int userId, string location, DateTime startingTime, DateTime endingTime, FeedType.FeedSource feedType, int startId, int numFeeds)
+            {
+                List<GetLatestXFeeds_Result> list = await feedData.GetFeedsByFilter(userId < 0 ? -1 : userId,
+                                                                                       String.IsNullOrEmpty(location) ? "" : location,
+                                                                                       startingTime.Equals(null) ? DateTime.MinValue : startingTime,
+                                                                                       endingTime.Equals(null) ? DateTime.MinValue : endingTime,
+                                                                                       feedType.Equals(null) ? "" : feedType.ToString(),
+                                                                                       startId < 0 ? -1 : startId,
+                                                                                       numFeeds < 0 ? -1 : numFeeds
+                                                                                       );
+
+                List<Feed> retList = new List<Feed>();
+
+                UserManager userInforMng = new UserManager();
+
+                foreach (GetLatestXFeeds_Result res in list)
+                {
+                    if (res.Type == "Human")
+                        retList.Add(new HumanFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false),
+                                                  await LoadFeedTags(res.FeedId).ConfigureAwait(false),
+                                                  await userInforMng.LoadHumanInformation(res.UserId)));
+                    else
+                        retList.Add(new SensorFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false),
+                                                   await LoadFeedTags(res.FeedId).ConfigureAwait(false),
+                                                   await userInforMng.LoadSensorInformation(res.UserId)));
+                }
+
+                return retList;
+
+            }
+
+            public async Task<List<Feed>> LoadFeedsFromSavedFilter(Filter savedFilter, int numFeed)
+            {
+                List<Feed> retList = new List<Feed>();
+                UserManager userInforMng = new UserManager();
+                //var result = retList;
+                //List<string> resultList = result.ToList();
+                if (savedFilter.UsersOnFilter.Count > 0)
+                    foreach (User filteredUser in savedFilter.UsersOnFilter)
+                    {
+                        retList.Concat(await LoadFeedsByFilter(filteredUser.ID, savedFilter.Location, savedFilter.StartDate, savedFilter.EndDate, savedFilter.TypeOfFeed, numFeed).ConfigureAwait(false));
+                    }
+                else
+                    await LoadFeedsByFilter(-1, savedFilter.Location, savedFilter.StartDate, savedFilter.EndDate, savedFilter.TypeOfFeed, numFeed).ConfigureAwait(false);
+
+                return retList;
+            }
+
+            public Task<List<Feed>> LoadFeedsFromSavedFilter(Filter savedFilter, int numFeed, int startId)
             {
                 throw new NotImplementedException();
             }

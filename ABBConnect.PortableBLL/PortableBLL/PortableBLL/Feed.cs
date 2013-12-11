@@ -114,9 +114,6 @@ namespace PortableBLL
         }
 
         private List<Comment> comments;
-        private PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result res;
-        private List<Comment> list1;
-        private List<Human> list2;
         public List<Comment> Comments
         {
             get

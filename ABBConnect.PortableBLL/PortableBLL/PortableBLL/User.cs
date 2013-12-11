@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using PortableTransformationLayer.ABBConnectServiceRef;
 
 namespace PortableBLL
 {
@@ -13,6 +14,12 @@ namespace PortableBLL
             this.iD = -1;
             this.location = "";
             this.username = "";
+        }
+
+        public User(GetUserSavedFiltersTagedUsers_Result entityUser)
+        {
+            this.iD = entityUser.Id;
+            this.username = entityUser.Name;
         }
 
         private int iD;
