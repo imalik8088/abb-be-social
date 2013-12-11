@@ -18,11 +18,10 @@ namespace ABBConnect___Windows_Phone
 {
     public partial class ProfileFeed : PhoneApplicationPage
     {
-        Human currentUser;
+        User currentUser;
         const int NUMOFFEEDS = 10;
         FeedManager fm;
         List<Feed> feeds;
-        FeedType.FeedSource feedType;
 
         public ProfileFeed()
         {
@@ -37,25 +36,34 @@ namespace ABBConnect___Windows_Phone
             NoImageFeedControl fc = new NoImageFeedControl(hf);
 
             lstbFeeds.Items.Add(fc);
-            feedType = FeedType.FeedSource.Human;
+        }
 
+        private void FillFeedList(PortableBLL.SensorFeed sf)
+        {
+            // NoImageFeedControl nfc = new NoImageFeedControl(t.Author, "rgn09003", t.Content, t.Tags.Count, t.Comments.Count, t.Location, t.Timestamp);
+            SensorFeedControl fc = new SensorFeedControl(sf);
 
+            lstbFeeds.Items.Add(fc);
         }
 
 
 
-        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             AddUserInformation();
+        }
 
+        private async void LoadFeeds()
+        {
             pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
-            feeds = await fm.LoadFeedsByUser(currentUser.ID, 10);
+            feeds = await fm.LoadFeedsByUser(currentUser.ID, NUMOFFEEDS);
 
-            AddFeedToList(feeds);
-
-            CreateButton(feeds[feeds.Count -1].ID);
+            if(feeds.Count > 0)
+            {
+                AddFeedToList(feeds);
+                CreateButton(feeds[feeds.Count - 1].ID);
+            }
             pgbLoadFeed.Visibility = System.Windows.Visibility.Collapsed;
-
         }
 
         private void AddFeedToList(List<Feed> feeds)
@@ -65,19 +73,15 @@ namespace ABBConnect___Windows_Phone
                 if (f is PortableBLL.HumanFeed)
                     FillFeedList((PortableBLL.HumanFeed)f);
                 else
-                {
-                    // TODO: Impleent for Sensor also
-                }
+                    FillFeedList((PortableBLL.SensorFeed)f);
             }
         }
 
         private async void LoadMoreFeedsFromId(int numOfFeeds, int id)
         {
-            pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
+            
 
             List<PortableBLL.Feed> newFeeds = await fm.LoadFeedsByUser(currentUser.ID, numOfFeeds, id);
-
-           // List<PortableBLL.Feed> newFeeds = await fm.LoadFeedsByType(currentFeedType, amount, id);
 
             //remove button
             lstbFeeds.Items.RemoveAt(lstbFeeds.Items.Count - 1);
@@ -109,17 +113,43 @@ namespace ABBConnect___Windows_Phone
 
             int userId = int.Parse(strUserId);
 
-            if (userId == App.CurrentUser.ID) //info already read from DB
+            if (userId == App.CurrentUser.ID) //info already read from DB, since the user is logged in
                 currentUser = App.CurrentUser;
             else
-                currentUser = await um.LoadHumanInformation(userId);
+                currentUser = await um.LoadUserInformation(userId);
 
-            lblEmailClick.Text = currentUser.Email;
-            lblNameClick.Text = currentUser.FirstName + " " + currentUser.LastName;
-            lblPhoneClick.Text = currentUser.PhoneNumber;
-            lblLocationClick.Text = currentUser.WorkRoom;
+
+            if (currentUser is Human)
+            {
+                lblEmailClick.Text = ((Human)currentUser).Email;
+                lblNameClick.Text = ((Human)currentUser).FirstName + " " + ((Human)currentUser).LastName;
+                lblPhoneClick.Text = ((Human)currentUser).PhoneNumber;
+
+            }
+            else if (currentUser is Sensor)
+            {
+                lblNameClick.Text = currentUser.UserName + " Unit ( " + ((Sensor)currentUser).UnitMetric + " )";
+                lblEmail.Text = "Lower Boundery";
+                lblEmailClick.Text = ((Sensor)currentUser).LowerBoundary.ToString();
+
+                lblPhone.Text = "UpperBOundery";
+                lblPhoneClick.Text = ((Sensor)currentUser).UpperBoundary.ToString();
+
+                //disable clicking
+                lblPhoneClick.MouseLeftButtonDown -= lblPhoneClick_MouseLeftButtonUp;
+                lblEmailClick.MouseLeftButtonDown -= lblEmailClick_MouseLeftButtonDown;
+            }
+            else
+            {
+                MessageBox.Show("Invalid User ");
+                return;
+            }
+
+            lblLocationClick.Text = currentUser.Location;
 
             pivHead.Title = lblNameClick.Text;
+
+            LoadFeeds();
         }
 
         private void lblEmailClick_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

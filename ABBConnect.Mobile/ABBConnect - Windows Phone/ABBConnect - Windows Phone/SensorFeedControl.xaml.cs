@@ -12,6 +12,8 @@ namespace ABBConnect___Windows_Phone
 {
     public partial class SensorFeedControl : UserControl
     {
+        private PortableBLL.SensorFeed sf;
+
 
 
         public SensorFeedControl()
@@ -28,6 +30,16 @@ namespace ABBConnect___Windows_Phone
             SetLocation(location);
             SetTimeStamp(dateTime);
         }
+
+        public SensorFeedControl(PortableBLL.SensorFeed sf)
+        {
+            InitializeComponent();
+
+            SetAuthor(sf.Owner.ID, sf.Owner.UserName);
+            SetContent(sf.Content);
+            SetLocation(sf.Location);
+            SetTimeStamp(sf.TimeStamp);
+        }
         private void Author_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/ProfileFeed.xaml?username=" + Author.Tag, UriKind.Relative));
@@ -36,7 +48,7 @@ namespace ABBConnect___Windows_Phone
 
         private void Content_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Feed.xaml", UriKind.Relative));
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/HumanFeed.xaml", UriKind.Relative));
         }
 
 

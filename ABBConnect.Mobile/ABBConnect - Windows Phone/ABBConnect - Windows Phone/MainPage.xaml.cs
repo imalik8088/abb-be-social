@@ -367,7 +367,7 @@ namespace ABBConnect___Windows_Phone
         private void FillFeedList(SensorFeed t, int index)
         {
 
-            SensorFeedControl sfc = new SensorFeedControl(t.Owner.ID, t.Owner.Name, t.Content,  t.Location, t.TimeStamp);
+            SensorFeedControl sfc = new SensorFeedControl(t.Owner.ID, t.Owner.UserName, t.Content,  t.Location, t.TimeStamp);
             lstbFeeds.Items.Add(sfc);
         }
 
@@ -464,6 +464,7 @@ namespace ABBConnect___Windows_Phone
              }
 
         }
+   
         private SolidColorBrush GetColorFromHexa(string hexaColor)
         {
             return new SolidColorBrush(
@@ -485,7 +486,6 @@ namespace ABBConnect___Windows_Phone
         {
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/ProfileFeed.xaml?userID=" + currentUser.ID, UriKind.Relative));
         }
-
 
         private void OnLogOut(object sender, EventArgs e)
         {
