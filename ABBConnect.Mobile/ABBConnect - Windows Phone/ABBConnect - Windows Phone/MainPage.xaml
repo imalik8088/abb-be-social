@@ -89,7 +89,21 @@
                 <Grid>
 
                     <!--Triple line list no text wrapping-->
-                    <ListBox x:Name="ThirdListBox" Margin="-4,10,4,15"/>
+                    <ListBox x:Name="lstbSavedFilters" HorizontalAlignment="Left"
+                             Height="439" Margin="10,158,0,0"
+                             VerticalAlignment="Top" 
+                             Width="436"
+                             ItemsSource="{Binding}" SelectionChanged="lstbSavedFilters_SelectionChanged"
+                             >
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Margin="2">
+                                    <Image HorizontalAlignment="Left" Source="Icons/symbol_location.png" Height="26" Margin="2" VerticalAlignment="Top" Width="26"/>
+                                    <TextBlock Text="{Binding Name}" Margin="2" FontSize="32"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                     <toolkit:WrapPanel HorizontalAlignment="Left" Height="158" VerticalAlignment="Top" Width="456">
                         <Border x:Name="brdrSensor" BorderBrush="Gray" Background="#FF515B5B" BorderThickness="3" Margin="219,13,-370,-149" MouseLeftButtonUp="brdrSensor_MouseLeftButtonUp">
                             <TextBlock Text="Sensor" HorizontalAlignment="Center" VerticalAlignment="Center"/>

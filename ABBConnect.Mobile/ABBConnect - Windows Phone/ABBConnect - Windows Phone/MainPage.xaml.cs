@@ -34,6 +34,7 @@ namespace ABBConnect___Windows_Phone
         const int NUMBEROFFEEDS = 10;
         DispatcherTimer timerNewFeed, timerLabel;
         List<PortableBLL.Feed> feeds;
+        List<Filter> filters;
         bool ini;
         int NoCache;
         FeedType.FeedSource currentFeedType;
@@ -53,6 +54,7 @@ namespace ABBConnect___Windows_Phone
             this.Loaded += new RoutedEventHandler(MainPage_Loaded);
             fm = new FeedManager();
             feeds = new List<Feed>();
+            filters = new List<Filter>();
 
             timerNewFeed = new DispatcherTimer { Interval = new TimeSpan(0,0,UPDATETIME) };
             timerNewFeed.Tick += new EventHandler(timerNewFeed_tick);
@@ -76,6 +78,16 @@ namespace ABBConnect___Windows_Phone
 
             ini = true;
         }
+
+        private async void GetSavedFeeds()
+        {
+            UserManager um = new UserManager();
+
+            this.filters = await um.GetUserSavedFilters(currentUser.ID);
+
+            lstbSavedFilters.ItemsSource = filters;     
+        }
+
 
         /// <summary>
         /// Hides the label showing that new feeds has been added
@@ -142,6 +154,7 @@ namespace ABBConnect___Windows_Phone
                 currentUser = await um.LoadHumanInformationByUsername("rgn09003");
 
                 App.CurrentUser = currentUser;
+                GetSavedFeeds();
             }
             catch (Exception ex)
             {
@@ -482,22 +495,26 @@ namespace ABBConnect___Windows_Phone
 
         private void ChangeFeedType(FeedType.FeedSource feedType)
         {
-             if (!ini)
-                return;
+            if (!ini)
+            return;
 
-             try
-             {
-                 currentFeedType = feedType;
+            //reset timer
+            timerNewFeed.Stop();
+            timerNewFeed.Start();
 
-                 lstbFeeds.Items.Clear();
-                 feeds.Clear();
-                 LoadNewFeeds(NUMBEROFFEEDS);
-             }
-             catch (Exception e)
-             {
+            try
+            {
+                currentFeedType = feedType;
 
-                 MessageBox.Show(e.Message);
-             }
+                lstbFeeds.Items.Clear();
+                feeds.Clear();
+                LoadNewFeeds(NUMBEROFFEEDS);
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show(e.Message);
+            }
 
         }
    
@@ -549,6 +566,26 @@ namespace ABBConnect___Windows_Phone
         private void txtbContent_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             txtbContent.Text = String.Empty;
+        }
+
+        private async void lstbSavedFilters_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lstbSavedFilters.SelectedIndex == -1) //invalid selection handled
+                return;
+
+            pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
+
+            timerNewFeed.Stop();
+
+            brdrHuman.Background = GetColorFromHexa("#FF515B5B");
+            brdrSensor.Background = GetColorFromHexa("#FF515B5B");
+
+            feeds = await fm.LoadFeedsFromSavedFilter(filters[ lstbSavedFilters.SelectedIndex], 10);
+
+            lstbFeeds.Items.Clear();
+            AddFeedsToList(feeds);
+
+            pgbLoadFeed.Visibility = System.Windows.Visibility.Collapsed;
         }
 
      
