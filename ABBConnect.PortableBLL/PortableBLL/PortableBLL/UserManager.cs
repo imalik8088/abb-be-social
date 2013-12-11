@@ -127,7 +127,7 @@ namespace PortableBLL
         public async Task<User> LoadUserInformation(int userId)
         {
             Sensor tempSensor = await LoadSensorInformation(userId).ConfigureAwait(false);
-            if (tempSensor == null)
+            if (tempSensor.ID == 0 )
                 return await LoadHumanInformation(userId);
             else
                 return tempSensor;
