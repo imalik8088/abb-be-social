@@ -83,7 +83,7 @@ namespace PortableTransformationLayer
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(urlServer.Url);
-            var response = await client.GetStringAsync("GetUserFilters?userId=" + userId).ConfigureAwait(false);
+            var response = await client.GetStringAsync("GetUserFilters?userId=" + userId.ToString()).ConfigureAwait(false);
             return JsonConvert.DeserializeObject<List<GetUserSavedFilters_Result>>(response);
         }
 
@@ -91,7 +91,7 @@ namespace PortableTransformationLayer
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(urlServer.Url);
-            var response = await client.GetStringAsync("GetFilterTaggedUsers?filterId=" + filterId).ConfigureAwait(false);
+            var response = await client.GetStringAsync("GetFilterTaggedUsers?filterId=" + filterId.ToString()).ConfigureAwait(false);
             return JsonConvert.DeserializeObject<List<GetUserSavedFiltersTagedUsers_Result>>(response);
         }
 
