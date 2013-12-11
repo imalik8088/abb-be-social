@@ -12,6 +12,8 @@ namespace ABBConnect___Windows_Phone
 {
     public partial class SensorFeedControl : UserControl
     {
+        private PortableBLL.SensorFeed sf;
+
 
 
         public SensorFeedControl()
@@ -27,6 +29,16 @@ namespace ABBConnect___Windows_Phone
             SetContent(content);
             SetLocation(location);
             SetTimeStamp(dateTime);
+        }
+
+        public SensorFeedControl(PortableBLL.SensorFeed sf)
+        {
+            InitializeComponent();
+
+            SetAuthor(sf.Owner.ID, sf.Owner.UserName);
+            SetContent(sf.Content);
+            SetLocation(sf.Location);
+            SetTimeStamp(sf.TimeStamp);
         }
         private void Author_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {

@@ -29,22 +29,11 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <TextBox x:Name="txtbSearch" HorizontalAlignment="Left" Height="72" Margin="10,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="436" TextInputUpdate="txtbSearch_TextInputUpdate" TextChanged="txtbSearch_TextChanged"/>
+            <TextBox x:Name="txtbSearch" HorizontalAlignment="Left" Height="72" Margin="10,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="436" TextInputUpdate="txtbSearch_TextInputUpdate" TextChanged="txtbSearch_TextChanged"/>
 
 
             <ListBox x:Name="lstbSearchResult" HorizontalAlignment="Left" Height="510" Margin="10,87,0,0"
-                     VerticalAlignment="Top" Width="436"
-                     ItemsSource="{Binding}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="{Binding Path=UserName}" />
-                            <TextBlock Text="{Binding Path=FirstName}" />
-                            <TextBlock Text="{Binding Path=LastName}" />                          
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                     VerticalAlignment="Top" Width="436" />
 
             <!--
             <toolkit:AutoCompleteBox x:Name="acbSearch" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="365"

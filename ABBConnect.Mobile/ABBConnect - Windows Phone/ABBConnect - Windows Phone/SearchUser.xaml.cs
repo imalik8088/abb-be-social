@@ -29,16 +29,25 @@ namespace ABBConnect___Windows_Phone
 
         private async void txtbSearch_TextInputUpdate(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
-            List<Human> humans = await um.SearchUserByName(txtbSearch.Text);
+            List<User> humans = await um.SearchUserByName(txtbSearch.Text);
 
             lstbSearchResult.ItemsSource = humans;
         }
 
         private async void txtbSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            List<Human> humans = await um.SearchUserByName(txtbSearch.Text);
+            List<User> users = await um.SearchUserByName(txtbSearch.Text);
 
-            lstbSearchResult.ItemsSource = humans;
+            lstbSearchResult.Items.Clear();
+
+            foreach (User u in users)
+            {
+                if (u is Human)
+                    lstbSearchResult.Items.Add(new SearchResultControl(((Human)u).FirstName, ((Human)u).LastName, ((Human)u).UserName, ((Human)u).ID));
+                else
+                    lstbSearchResult.Items.Add(new SearchResultControl("", "", ((Sensor)u).UserName, ((Sensor)u).ID));
+            
+            }
         }
     }
 }

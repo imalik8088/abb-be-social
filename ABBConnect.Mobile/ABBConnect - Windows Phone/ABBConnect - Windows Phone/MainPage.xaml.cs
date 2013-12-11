@@ -367,7 +367,7 @@ namespace ABBConnect___Windows_Phone
         private void FillFeedList(SensorFeed t, int index)
         {
 
-            SensorFeedControl sfc = new SensorFeedControl(t.Owner.ID, t.Owner.Name, t.Content,  t.Location, t.TimeStamp);
+            SensorFeedControl sfc = new SensorFeedControl(t.Owner.ID, t.Owner.UserName, t.Content,  t.Location, t.TimeStamp);
             lstbFeeds.Items.Add(sfc);
         }
 
