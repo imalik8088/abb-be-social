@@ -23,9 +23,9 @@
                 <Grid>
                     <TextBlock x:Name="Author" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top"/>
                     <TextBlock x:Name="Timestamp" HorizontalAlignment="Left" Margin="403,10,0,0" TextWrapping="Wrap" Text="Time" VerticalAlignment="Top"/>
-                    <Image x:Name="Image" HorizontalAlignment="Left" Height="357" Margin="10,42,0,0" VerticalAlignment="Top" Width="436" Grid.ColumnSpan="2"/>
-                    <TextBlock x:Name="Location" HorizontalAlignment="Left" Margin="10,399,0,0" TextWrapping="Wrap" Text="Location" VerticalAlignment="Top"/>
-                    <TextBlock x:Name="Content" HorizontalAlignment="Left" Margin="10,426,0,0" TextWrapping="Wrap" Text="Content" VerticalAlignment="Top" Height="103" Width="436"/>
+                    <Image x:Name="Image" HorizontalAlignment="Left" Height="398" Margin="10,199,0,0" VerticalAlignment="Top" Width="436"/>
+                    <TextBlock x:Name="Location" HorizontalAlignment="Left" Margin="191,10,0,0" TextWrapping="Wrap" Text="Location" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="Content" HorizontalAlignment="Left" Margin="10,42,0,0" TextWrapping="Wrap" Text="Content" VerticalAlignment="Top" Height="152" Width="436"/>
                 </Grid>
             </controls:PivotItem>
             <controls:PivotItem Header="Comments">
@@ -36,7 +36,7 @@
                              VerticalAlignment="Top" 
                              Width="456">
                         <TextBlock TextWrapping="Wrap" Text="Enter Comment:" Margin="15,0,0,0"/>
-                        <TextBox x:Name="txtbComment" Margin="0,0,0,0" Height="126" TextWrapping="Wrap" Text="TextBox" Width="456"/>
+                        <TextBox x:Name="txtbComment" Margin="0,0,0,0" Height="126" TextWrapping="Wrap" Text="Enter comment here..." Width="456" MouseLeftButtonDown="txtbComment_MouseLeftButtonDown"/>
                         <Button x:Name="btnPublish" Margin="100,0,0,0" Content="Publish" Width="250" Click="btnPublish_Click"/>
 
                     </ListBox>
@@ -50,15 +50,15 @@
                              VerticalAlignment="Top" 
                              Width="436"
                              ItemsSource="{Binding}" >
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" Margin="2">
-                                        <Image HorizontalAlignment="Left" Source="Icons/symbol_tag.png" Height="26" Margin="2" VerticalAlignment="Top" Width="26"/>
-                                        <TextBlock Text="{Binding FirstName}" Margin="2" FontSize="32"/>
-                                        <TextBlock Text="{Binding LastName}" Margin="2" FontSize="32"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Margin="2">
+                                    <Image HorizontalAlignment="Left" Source="Icons/symbol_tag.png" Height="26" Margin="2" VerticalAlignment="Top" Width="26"/>
+                                    <TextBlock Text="{Binding FirstName}" Margin="2" FontSize="32"/>
+                                    <TextBlock Text="{Binding LastName}" Margin="2" FontSize="32"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
                     </ListBox>
                 </Grid>
             </controls:PivotItem>

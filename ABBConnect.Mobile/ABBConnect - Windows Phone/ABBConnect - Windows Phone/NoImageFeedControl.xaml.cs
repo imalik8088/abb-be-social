@@ -23,7 +23,7 @@ namespace ABBConnect___Windows_Phone
         public NoImageFeedControl(PortableBLL.HumanFeed hf)
         {
             InitializeComponent();
-            SetAuthor(hf.Owner.ID, hf.Owner.UserName);
+            SetAuthor(hf.Owner);
             SetContent(hf.Content);
             SetNumberOfTags(hf.Tags.Count);
             SetNumberOfComments(hf.Comments.Count);
@@ -45,10 +45,10 @@ namespace ABBConnect___Windows_Phone
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/HumanFeed.xaml", UriKind.Relative));
         }
 
-        internal void SetAuthor(int id, string username)
+        internal void SetAuthor(Human h)
         {
-            Author.Text = username;
-            Author.Tag = id;
+            Author.Text = h.FirstName + " " + h.LastName;
+            Author.Tag = h.ID;
         }
 
         internal void SetContent(string p)

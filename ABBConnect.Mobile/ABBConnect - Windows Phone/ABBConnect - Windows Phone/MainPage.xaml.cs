@@ -35,7 +35,7 @@ namespace ABBConnect___Windows_Phone
         DispatcherTimer timerNewFeed, timerLabel;
         List<PortableBLL.Feed> feeds;
         bool ini;
-
+        int NoCache;
         FeedType.FeedSource currentFeedType;
 
         string chosenImg;
@@ -64,6 +64,7 @@ namespace ABBConnect___Windows_Phone
             LoadNewFeeds(NUMBEROFFEEDS);
 
             lblNewFeeds.Text = "";
+            NoCache = 1;
 
             currentFeedType = new FeedType.FeedSource();
             currentFeedType = FeedType.FeedSource.Human;
@@ -90,17 +91,24 @@ namespace ABBConnect___Windows_Phone
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void timerNewFeed_tick(object sender, EventArgs e)
+        private void timerNewFeed_tick(object sender, EventArgs e)
+        {
+            CheckNewFeeds();
+        }
+
+        private async void CheckNewFeeds()
         {
             //if no feeds has been added yet
             if (feeds.Count == 0)
                 return;
 
+            FeedManager fml = new FeedManager();
+            
+            
             //load the newest feed
-            List<PortableBLL.Feed> latestFeed = await fm.LoadFeedsByType(currentFeedType, 1);
-           // List<PortableBLL.Feed> latestFeed = await fm.LoadLatestXFeeds(1);
+            List<PortableBLL.Feed> latestFeed = await fml.LoadFeedsByType(currentFeedType, NoCache);
 
-            //get the latest ID and the amount between the first ID and this
+            //get the latest ID and the amount between the last newest ID and this
             int id = latestFeed[0].ID;
             int amount = id - this.feeds[0].ID;
 
@@ -114,6 +122,13 @@ namespace ABBConnect___Windows_Phone
                 //call all feeeds between them and add them first in the list
                 LoadNewFeedsFromId(amount, id);
             }
+
+            NoCache++;
+
+            if (NoCache > 5)
+                NoCache = 1;
+
+            latestFeed.Clear();
         }
 
         /// <summary>
@@ -495,6 +510,21 @@ namespace ABBConnect___Windows_Phone
         private void OnSearchUser(object sender, EventArgs e)
         {
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/SearchUser.xaml", UriKind.Relative));            
+        }
+
+        private void OnRefresh(object sender, EventArgs e)
+        {
+            pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
+            timerNewFeed.Stop();
+            CheckNewFeeds();
+            timerNewFeed.Start();
+            pgbLoadFeed.Visibility = System.Windows.Visibility.Collapsed;
+
+        }
+
+        private void txtbContent_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            txtbContent.Text = String.Empty;
         }
 
      
