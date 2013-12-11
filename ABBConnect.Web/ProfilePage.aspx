@@ -13,16 +13,6 @@
             <div class="feed-header">
                 <div class="form-inline">
                     <div class="form-group">                
-                        <h3><span class="glyphicon glyphicon-link"></span>Profile info</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            <div class="feed-header">
-                <div class="form-inline">
-                    <div class="form-group">                
                         <h3><span class="glyphicon glyphicon-link"></span>User feeds</h3>
                     </div>
                     <div class="form-group button-group">
@@ -55,6 +45,16 @@
             </div>
             <div id="feedsContainer">
                 <abbConnect:FeedPage ID="FeedPage" runat="server" />
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="feed-header">
+                <div class="form-inline">
+                    <div class="form-group">                
+                        <h3><span class="glyphicon glyphicon-link"></span>Profile info</h3>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
