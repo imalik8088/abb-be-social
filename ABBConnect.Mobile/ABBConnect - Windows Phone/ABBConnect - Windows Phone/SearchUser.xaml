@@ -32,8 +32,8 @@
             <TextBox x:Name="txtbSearch" HorizontalAlignment="Left" Height="72" Margin="10,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="436" TextInputUpdate="txtbSearch_TextInputUpdate" TextChanged="txtbSearch_TextChanged"/>
 
 
-            <ListBox x:Name="lstbSearchResult" HorizontalAlignment="Left" Height="510" Margin="10,87,0,0"
-                     VerticalAlignment="Top" Width="436" />
+            <ListBox x:Name="lstbSearchResult" HorizontalAlignment="Left"  Height="510" Margin="0,87,0,0"
+                 Background="DarkGray"    VerticalAlignment="Top" Width="456" />
 
             <!--
             <toolkit:AutoCompleteBox x:Name="acbSearch" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="365"

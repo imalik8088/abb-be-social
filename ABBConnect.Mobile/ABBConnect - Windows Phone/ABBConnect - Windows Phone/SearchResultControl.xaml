@@ -7,9 +7,9 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    d:DesignHeight="50" d:DesignWidth="456">
+    d:DesignHeight="70" d:DesignWidth="456">
     
-    <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}" Margin="0,0,0,0">
-            <TextBlock x:Name="lblUserName" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Dimitrio Kostopoulos" VerticalAlignment="Top" MouseLeftButtonUp="lblUserName_MouseLeftButtonUp"/>
+    <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}" Margin="0,0,0,10" >
+            <TextBlock FontSize="28" x:Name="lblUserName" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Dimitrios Kostopoulos (catboy666)" VerticalAlignment="Top" MouseLeftButtonUp="lblUserName_MouseLeftButtonUp" Width="436" Height="40"/>
     </Grid>
 </UserControl>

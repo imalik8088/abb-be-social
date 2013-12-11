@@ -94,9 +94,6 @@
     <Compile Include="CommentControl.xaml.cs">
       <DependentUpon>CommentControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MakeCommentControl.xaml.cs">
-      <DependentUpon>MakeCommentControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="NoImageFeedControl.xaml.cs">
       <DependentUpon>NoImageFeedControl.xaml</DependentUpon>
     </Compile>
@@ -106,7 +103,6 @@
     <Compile Include="SearchUser.xaml.cs">
       <DependentUpon>SearchUser.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TestSensor.cs" />
     <Compile Include="HumanFeed.xaml.cs">
       <DependentUpon>HumanFeed.xaml</DependentUpon>
     </Compile>
@@ -123,7 +119,6 @@
     <Compile Include="SensorFeedControl.xaml.cs">
       <DependentUpon>SensorFeedControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Test.cs" />
     <Compile Include="ViewModels\ItemViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
   </ItemGroup>
@@ -145,10 +140,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MakeCommentControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -186,7 +177,7 @@
     <Content Include="Icons\Background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="README_FIRST.txt" />
+    <Content Include="SplashScreenImage.jpg" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
@@ -206,11 +197,10 @@
     <Content Include="Icons\symbol_warning.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="SplashScreenImage.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="favicon.png" />
-    <Resource Include="symbol_location.png" />
+    <Resource Include="Icons\favicon.png" />
+    <Resource Include="Icons\symbol_location.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
