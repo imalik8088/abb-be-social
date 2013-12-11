@@ -28,8 +28,10 @@ namespace PortableBLL
 
             if (entityFilter.Type.Equals("Human"))
                 this.typeOfFeed = FeedType.FeedSource.Human;
-            else
+            else if (entityFilter.Type.Equals("Sensor"))
                 this.typeOfFeed = FeedType.FeedSource.Sensor;
+            else
+                this.typeOfFeed = FeedType.FeedSource.None;
             this.usersOnFilter = taggedUsers;
         }
 

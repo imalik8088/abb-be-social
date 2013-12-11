@@ -312,11 +312,16 @@ namespace PortableBLL
 
             public async Task<List<Feed>> LoadFeedsByFilter(int userId, string location, DateTime startingTime, DateTime endingTime, FeedType.FeedSource feedType, int numFeeds)
             {
+                string typeOfFeed;
+                if (feedType == FeedType.FeedSource.None)
+                    typeOfFeed = "";
+                else
+                    typeOfFeed = feedType.ToString();
                 List<GetLatestXFeeds_Result> list = await feedData.GetFeedsByFilter(userId < 0 ? -1 : userId,
                                                                                      System.String.IsNullOrEmpty(location) ? "" : location,
                                                                                      startingTime,
                                                                                      endingTime,
-                                                                                     feedType.Equals(null) ? "" : feedType.ToString(),
+                                                                                     typeOfFeed,
                                                                                      -1,
                                                                                      numFeeds < 0 ? -1 : numFeeds
                                                                                      );
@@ -342,11 +347,16 @@ namespace PortableBLL
 
             public async Task<List<Feed>> LoadFeedsByFilter(int userId, string location, DateTime startingTime, DateTime endingTime, FeedType.FeedSource feedType, int startId, int numFeeds)
             {
+                string typeOfFeed;
+                if (feedType == FeedType.FeedSource.None)
+                    typeOfFeed = "";
+                else
+                    typeOfFeed = feedType.ToString();
                 List<GetLatestXFeeds_Result> list = await feedData.GetFeedsByFilter(userId < 0 ? -1 : userId,
                                                                                        String.IsNullOrEmpty(location) ? "" : location,
-                                                                                       startingTime.Equals(null) ? DateTime.MinValue : startingTime,
-                                                                                       endingTime.Equals(null) ? DateTime.MinValue : endingTime,
-                                                                                       feedType.Equals(null) ? "" : feedType.ToString(),
+                                                                                       startingTime,
+                                                                                       endingTime,
+                                                                                       typeOfFeed,
                                                                                        startId < 0 ? -1 : startId,
                                                                                        numFeeds < 0 ? -1 : numFeeds
                                                                                        );
@@ -380,17 +390,29 @@ namespace PortableBLL
                 if (savedFilter.UsersOnFilter.Count > 0)
                     foreach (User filteredUser in savedFilter.UsersOnFilter)
                     {
-                        retList.Concat(await LoadFeedsByFilter(filteredUser.ID, savedFilter.Location, savedFilter.StartDate, savedFilter.EndDate, savedFilter.TypeOfFeed, numFeed).ConfigureAwait(false));
+                        retList.AddRange(await LoadFeedsByFilter(filteredUser.ID, savedFilter.Location, savedFilter.StartDate, savedFilter.EndDate, savedFilter.TypeOfFeed, numFeed).ConfigureAwait(false));
                     }
                 else
                     await LoadFeedsByFilter(-1, savedFilter.Location, savedFilter.StartDate, savedFilter.EndDate, savedFilter.TypeOfFeed, numFeed).ConfigureAwait(false);
-
-                return retList;
+                
+                return retList.OrderByDescending(o => o.TimeStamp).ToList();
             }
 
-            public Task<List<Feed>> LoadFeedsFromSavedFilter(Filter savedFilter, int numFeed, int startId)
+            public async Task<List<Feed>> LoadFeedsFromSavedFilter(Filter savedFilter, int numFeed, int startId)
             {
-                throw new NotImplementedException();
+                List<Feed> retList = new List<Feed>();
+                UserManager userInforMng = new UserManager();
+                //var result = retList;
+                //List<string> resultList = result.ToList();
+                if (savedFilter.UsersOnFilter.Count > 0)
+                    foreach (User filteredUser in savedFilter.UsersOnFilter)
+                    {
+                        retList.AddRange(await LoadFeedsByFilter(filteredUser.ID, savedFilter.Location, savedFilter.StartDate, savedFilter.EndDate, savedFilter.TypeOfFeed, startId, numFeed).ConfigureAwait(false));
+                    }
+                else
+                    await LoadFeedsByFilter(-1, savedFilter.Location, savedFilter.StartDate, savedFilter.EndDate, savedFilter.TypeOfFeed, startId, numFeed).ConfigureAwait(false);
+
+                return retList.OrderByDescending(o => o.TimeStamp).ToList();
             }
     }
 }
