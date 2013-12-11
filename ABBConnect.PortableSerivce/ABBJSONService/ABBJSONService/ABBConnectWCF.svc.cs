@@ -1013,7 +1013,6 @@ namespace ABBJSONService
 
             using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
             {
-
                 sqlConn.Open();
                 string sqlQuery = "GetXFeedsByFilter";
 
@@ -1304,8 +1303,12 @@ namespace ABBJSONService
                             GetUserSavedFiltersTagedUsers_Result user = new GetUserSavedFiltersTagedUsers_Result();
                             user.Id = (int)reader[0];
                             user.Name = (string)reader[1];
-                            user.FirstName = (string)reader[2];
-                            user.LastName = (string)reader[3];
+                            object sqlCell = reader[2];
+                            if (sqlCell != System.DBNull.Value)
+                                user.FirstName = (string)sqlCell;
+                            sqlCell = reader[3];
+                            if (sqlCell != System.DBNull.Value)
+                                user.LastName = (string)sqlCell;
 
                             taggedUsers.Add(user);
                         }
