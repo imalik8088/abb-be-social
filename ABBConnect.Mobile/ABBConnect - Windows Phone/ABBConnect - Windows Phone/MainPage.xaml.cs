@@ -60,14 +60,16 @@ namespace ABBConnect___Windows_Phone
             timerLabel = new DispatcherTimer { Interval = new TimeSpan(0, 0, SHOWLABELTIME) };
             timerNewFeed.Tick += new EventHandler(timerLabel_tick);
 
+            currentFeedType = new FeedType.FeedSource();
+            currentFeedType = FeedType.FeedSource.Human;
+
             LoadUser();
             LoadNewFeeds(NUMBEROFFEEDS);
 
             lblNewFeeds.Text = "";
             NoCache = 1;
 
-            currentFeedType = new FeedType.FeedSource();
-            currentFeedType = FeedType.FeedSource.Human;
+
 
             this.ApplicationBar = this.Resources["appBar"] as ApplicationBar;
            // CreateControlsUsingObjects();
