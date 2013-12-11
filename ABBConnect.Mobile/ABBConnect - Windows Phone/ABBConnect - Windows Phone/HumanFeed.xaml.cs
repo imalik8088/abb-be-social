@@ -43,7 +43,7 @@ namespace ABBConnect___Windows_Phone
 
         private void SetLabels()
         {
-            Author.Text = hf.Owner.UserName;
+            Author.Text = hf.Owner.FirstName + " " + hf.Owner.LastName;
 
             //Image.Source = hf.MediaFilePath;
             Location.Text = hf.Location;
@@ -113,6 +113,11 @@ namespace ABBConnect___Windows_Phone
                 lstbComments.Items.Insert(lstbComments.Items.Count - 3, new CommentControl(App.CurrentUser.FirstName + " " + App.CurrentUser.LastName, DateTime.Now, App.CurrentUser.ID, txtbComment.Text));
                 txtbComment.Text = "";            
             }
+        }
+
+        private void txtbComment_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            txtbComment.Text = String.Empty;
         }
     }
 }
