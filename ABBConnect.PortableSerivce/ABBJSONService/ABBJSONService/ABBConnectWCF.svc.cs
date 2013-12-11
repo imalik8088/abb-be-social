@@ -1213,11 +1213,11 @@ namespace ABBJSONService
                             filter.FilterName = (string)reader[2];
                             object sqlCell = reader[3];
                             filter.StartDate = (sqlCell == System.DBNull.Value)
-                                ? DateTime.MinValue
+                                ? DateTime.MinValue.ToUniversalTime()
                                 : Convert.ToDateTime(sqlCell);
                             sqlCell = reader[4];
                             filter.EndDate = (sqlCell == System.DBNull.Value)
-                                ? DateTime.MinValue
+                                ? DateTime.MinValue.ToUniversalTime()
                                 : Convert.ToDateTime(sqlCell);
                             sqlCell = reader[5];
                             filter.Location = (sqlCell == System.DBNull.Value)
