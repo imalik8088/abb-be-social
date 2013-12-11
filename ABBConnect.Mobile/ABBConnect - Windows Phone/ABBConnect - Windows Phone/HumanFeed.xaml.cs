@@ -91,8 +91,18 @@ namespace ABBConnect___Windows_Phone
 
             c.Owner = App.CurrentUser;
             c.Content = txtbComment.Text;
+            bool result;
 
-            bool result = await fm.PublishComment(hf.ID, c);
+            try
+            {
+                 result = await fm.PublishComment(hf.ID, c);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+           
 
             if (!result)
                 MessageBox.Show("Something went wrong, try again later!");

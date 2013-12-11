@@ -19,23 +19,90 @@ namespace ABBConnect___Windows_Phone
     public partial class ProfileFeed : PhoneApplicationPage
     {
         Human currentUser;
+        const int NUMOFFEEDS = 10;
+        FeedManager fm;
+        List<Feed> feeds;
+        FeedType.FeedSource feedType;
 
         public ProfileFeed()
         {
             InitializeComponent();
             currentUser = new Human();
+            fm = new FeedManager();
         }
 
-        private void FillFeedList(Test t)
+        private void FillFeedList(PortableBLL.HumanFeed hf)
         {
            // NoImageFeedControl nfc = new NoImageFeedControl(t.Author, "rgn09003", t.Content, t.Tags.Count, t.Comments.Count, t.Location, t.Timestamp);
-            FeedControl fc = new FeedControl(0, "rgn09003", t.Content, t.Tags.Count, t.Comments.Count, t.Location, t.Timestamp, "");
+            NoImageFeedControl fc = new NoImageFeedControl(hf);
 
             lstbFeeds.Items.Add(fc);
+            feedType = FeedType.FeedSource.Human;
+
 
         }
 
-        protected  async override void OnNavigatedTo(NavigationEventArgs e)
+
+
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            AddUserInformation();
+
+            pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
+            feeds = await fm.LoadFeedsByUser(currentUser.ID, 10);
+
+            AddFeedToList(feeds);
+
+            CreateButton(feeds[feeds.Count -1].ID);
+            pgbLoadFeed.Visibility = System.Windows.Visibility.Collapsed;
+
+        }
+
+        private void AddFeedToList(List<Feed> feeds)
+        {
+            foreach (Feed f in feeds)
+            {
+                if (f is PortableBLL.HumanFeed)
+                    FillFeedList((PortableBLL.HumanFeed)f);
+                else
+                {
+                    // TODO: Impleent for Sensor also
+                }
+            }
+        }
+
+        private async void LoadMoreFeedsFromId(int numOfFeeds, int id)
+        {
+            pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
+
+            List<PortableBLL.Feed> newFeeds = await fm.LoadFeedsByUser(currentUser.ID, numOfFeeds, id);
+
+           // List<PortableBLL.Feed> newFeeds = await fm.LoadFeedsByType(currentFeedType, amount, id);
+
+            //remove button
+            lstbFeeds.Items.RemoveAt(lstbFeeds.Items.Count - 1);
+
+            AddFeedToList(newFeeds);
+
+            //add the new feeds to the common list
+            feeds.AddRange(newFeeds);
+            CreateButton(feeds[feeds.Count - 1].ID);
+
+            pgbLoadFeed.Visibility = System.Windows.Visibility.Collapsed;
+        }
+
+        private void CreateButton(int id)
+        {
+            Button b = new Button();
+            b.Name = "btnLoadNewFeeds";
+            b.Width = 456;
+            b.Height = 80;
+            b.Content = "Load more feeds";
+
+            b.Click += (s, e) => { LoadMoreFeedsFromId(NUMOFFEEDS, id); };
+            lstbFeeds.Items.Add(b);
+        }
+        private async void AddUserInformation()
         {
             UserManager um = new UserManager();
             string strUserId = NavigationContext.QueryString["userID"];

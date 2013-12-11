@@ -19,7 +19,8 @@
     <phone:PhoneApplicationPage.Resources>
         <shell:ApplicationBar x:Name="appBar" IsVisible="True" IsMenuEnabled="True" Mode="Minimized" Opacity="0.60">
             <shell:ApplicationBarIconButton IconUri="Icons/symbol_comment" Text="My Profile" Click="GoToMyProfile"/>
-            <shell:ApplicationBarIconButton IconUri="Icons/symbol_tag" Text="Search User" />
+            <shell:ApplicationBarIconButton IconUri="Icons/symbol_tag" Text="Search User" Click="OnSearchUser" />
+            <shell:ApplicationBarIconButton IconUri="Icons/symbol_timer" Text="Refresh" />
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem
                     Text="Logout"

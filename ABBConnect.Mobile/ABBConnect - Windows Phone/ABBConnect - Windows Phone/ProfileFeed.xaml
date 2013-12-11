@@ -24,6 +24,8 @@
                 <Grid HorizontalAlignment="Left" Height="607" VerticalAlignment="Top" Width="456">
                     <ListBox x:Name="lstbFeeds" HorizontalAlignment="Left" Height="597" VerticalAlignment="Top" Width="456">
                     </ListBox>
+                    <ProgressBar x:Name="pgbLoadFeed" Height="37" Width="446" IsIndeterminate="True" Margin="0,-42,10,612"/>
+
                 </Grid>
             </controls:PivotItem>
 
@@ -34,7 +36,7 @@
                     <TextBlock x:Name="lblName" HorizontalAlignment="Left" Margin="30,10,0,0" TextWrapping="Wrap" Text="NAME" VerticalAlignment="Top"/>
                     <TextBlock x:Name="lblNameClick" HorizontalAlignment="Left" Margin="30,42,0,0" TextWrapping="Wrap" Text="Robert Gustavsson" VerticalAlignment="Top" FontSize="32" RenderTransformOrigin="0.513,-0.111" MouseLeftButtonDown="lblNameClick_MouseLeftButtonDown"/>
 
-                    
+
                     <TextBlock x:Name="lblEmail" HorizontalAlignment="Left" Margin="30,120,0,0" TextWrapping="Wrap" Text="EMAIL" VerticalAlignment="Top"/>
                     <TextBlock x:Name="lblEmailClick" HorizontalAlignment="Left" Margin="30,152,0,0" TextWrapping="Wrap" Text="rgn09003@student.mdh.se" VerticalAlignment="Top" FontSize="32" MouseLeftButtonDown="lblEmailClick_MouseLeftButtonDown"/>
 
@@ -48,5 +50,5 @@
             </controls:PivotItem>
         </controls:Pivot>
     </Grid>
-    
+
 </phone:PhoneApplicationPage>

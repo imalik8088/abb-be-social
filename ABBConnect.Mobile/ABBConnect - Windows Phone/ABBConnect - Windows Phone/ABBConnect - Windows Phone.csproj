@@ -100,6 +100,9 @@
     <Compile Include="NoImageFeedControl.xaml.cs">
       <DependentUpon>NoImageFeedControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SearchUser.xaml.cs">
+      <DependentUpon>SearchUser.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TestSensor.cs" />
     <Compile Include="HumanFeed.xaml.cs">
       <DependentUpon>HumanFeed.xaml</DependentUpon>
@@ -151,6 +154,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ProfileFeed.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SearchUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
