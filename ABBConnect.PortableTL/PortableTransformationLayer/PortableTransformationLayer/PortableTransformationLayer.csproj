@@ -134,6 +134,9 @@
     <None Include="Service References\ABBConnectServiceRef\PortableTransformationLayer.ABBConnectServiceRef.GetSensorInformation_Result.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\ABBConnectServiceRef\PortableTransformationLayer.ABBConnectServiceRef.GetUserActivity_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\ABBConnectServiceRef\PortableTransformationLayer.ABBConnectServiceRef.GetUserFeedsByFilter_Result.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

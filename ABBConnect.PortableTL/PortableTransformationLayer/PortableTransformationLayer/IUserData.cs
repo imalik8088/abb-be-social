@@ -20,5 +20,10 @@ namespace PortableTransformationLayer
         Task<List<GetUserSavedFiltersTagedUsers_Result>> GetFilterTaggedUsers(int filterId);
         Task<int> AddFilter(int userId, string filterName, DateTime startingTime, DateTime endingTime, string location, string feedType);
         Task<bool> AddUserToFilter(int userId, int filterId);
+        Task<bool> FollowSensor(string humanUserId, string sensorUserId);
+        Task<bool> UnfollowSensor(string humanUserId, string sensorUserId);
+        Task<List<int>> GetFollowedSensors(string humanUserId);
+        Task<List<GetUserActivity_Result>> GetUserActivity(string userId);
+
     }
 }

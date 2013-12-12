@@ -194,6 +194,30 @@
   <wsdl:message name="IABBConnectWCF_GetFilterTaggedUsers_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetFilterTaggedUsersResponse" />
   </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetUserActivity_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserActivity" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetUserActivity_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserActivityResponse" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_UnfollowSensor_InputMessage">
+    <wsdl:part name="parameters" element="tns:UnfollowSensor" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_UnfollowSensor_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UnfollowSensorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetFollowedSensors_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFollowedSensors" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetFollowedSensors_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFollowedSensorsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetFeedByFeedId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFeedByFeedId" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetFeedByFeedId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFeedByFeedIdResponse" />
+  </wsdl:message>
   <wsdl:portType name="IABBConnectWCF">
     <wsdl:operation name="LogIn">
       <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/LogIn" message="tns:IABBConnectWCF_LogIn_InputMessage" />
@@ -318,6 +342,22 @@
     <wsdl:operation name="GetFilterTaggedUsers">
       <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/GetFilterTaggedUsers" message="tns:IABBConnectWCF_GetFilterTaggedUsers_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/GetFilterTaggedUsersResponse" message="tns:IABBConnectWCF_GetFilterTaggedUsers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserActivity">
+      <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/GetUserActivity" message="tns:IABBConnectWCF_GetUserActivity_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/GetUserActivityResponse" message="tns:IABBConnectWCF_GetUserActivity_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UnfollowSensor">
+      <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/UnfollowSensor" message="tns:IABBConnectWCF_UnfollowSensor_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/UnfollowSensorResponse" message="tns:IABBConnectWCF_UnfollowSensor_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFollowedSensors">
+      <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/GetFollowedSensors" message="tns:IABBConnectWCF_GetFollowedSensors_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/GetFollowedSensorsResponse" message="tns:IABBConnectWCF_GetFollowedSensors_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFeedByFeedId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/GetFeedByFeedId" message="tns:IABBConnectWCF_GetFeedByFeedId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/GetFeedByFeedIdResponse" message="tns:IABBConnectWCF_GetFeedByFeedId_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:service name="ABBConnectWCF" />

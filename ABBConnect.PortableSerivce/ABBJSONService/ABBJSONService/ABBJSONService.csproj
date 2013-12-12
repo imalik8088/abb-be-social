@@ -99,6 +99,9 @@
     <Compile Include="GetAllSensors_Result.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetFeedByFeedId_Result.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetFeedComments_Result.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -133,6 +136,9 @@
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="GetSensorInformation_Result.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetUserActivity_Result.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="GetUserFeedsByFilter_Result.cs">

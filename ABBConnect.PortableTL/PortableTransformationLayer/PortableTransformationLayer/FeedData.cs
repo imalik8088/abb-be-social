@@ -24,7 +24,7 @@ namespace PortableTransformationLayer
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(urlServer.Url);
-            var response = await client.GetStringAsync("GetFeedComments?feedId=" + feedId).ConfigureAwait(false);
+            var response = await client.GetStringAsync("GetFeedComments?feedId=" + feedId + "&date=" + DateTime.Now).ConfigureAwait(false);
             return JsonConvert.DeserializeObject<List<GetFeedComments_Result>>(response);
         }
 
@@ -86,6 +86,12 @@ namespace PortableTransformationLayer
             var response = await client.GetStringAsync("AddTag?feedId=" + feedId +
                            "&username=" + username).ConfigureAwait(false);
             return JsonConvert.DeserializeObject<bool>(response); ;
+        }
+
+
+        public Task<GetLatestXFeeds_Result> GetFeedByFeedId(string feedId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -118,5 +118,42 @@ namespace PortableTransformationLayer
             var response = await client.GetStringAsync("TagUserInFilter?userId=" + userId + "&filterId=" + filterId).ConfigureAwait(false);
             return JsonConvert.DeserializeObject<bool>(response);
         }
+
+
+        public Task<bool> FollowSensor(string humanUserId, string sensorUserId)
+        {
+            throw new NotImplementedException();
+        }
+
+        //public Task<bool> UnfollowSensor(string humanUserId, string sensorUserId)
+        //{
+        //    return Task<false>;
+        //    //var client = new HttpClient();
+        //    //client.BaseAddress = new Uri(urlServer.Url);
+        //    //var response = await client.GetStringAsync("UnfollowSensor?humanUserId=" + humanUserId.ToString() + "&sensorUserId=" + sensorUserId).ConfigureAwait(false);
+        //    //return JsonConvert.DeserializeObject<bool>(response);
+        //}
+
+        public async Task<List<int>> GetFollowedSensors(string humanUserId)
+        {
+            var client = new HttpClient();
+            client.BaseAddress = new Uri(urlServer.Url);
+            var response = await client.GetStringAsync("GetFollowedSensors?humanUserId=" + humanUserId.ToString()).ConfigureAwait(false);
+            return JsonConvert.DeserializeObject<List<int>>(response);
+        }
+
+        public async Task<List<GetUserActivity_Result>> GetUserActivity(string userId)
+        {
+            var client = new HttpClient();
+            client.BaseAddress = new Uri(urlServer.Url);
+            var response = await client.GetStringAsync("GetUserActivity?userId=" + userId.ToString()).ConfigureAwait(false);
+            return JsonConvert.DeserializeObject<List<GetUserActivity_Result>>(response);
+        }
+
+
+        public Task<bool> UnfollowSensor(string humanUserId, string sensorUserId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

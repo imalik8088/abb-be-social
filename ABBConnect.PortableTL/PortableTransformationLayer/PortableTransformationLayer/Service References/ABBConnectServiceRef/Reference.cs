@@ -2592,6 +2592,111 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetUserActivity_Result", Namespace="http://schemas.datacontract.org/2004/07/ABBJSONService")]
+    public partial class GetUserActivity_Result : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private int FeedIdField;
+        
+        private int IdField;
+        
+        private string TextField;
+        
+        private System.DateTime TimestampField;
+        
+        private string TypeField;
+        
+        private int UserIdField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int FeedId {
+            get {
+                return this.FeedIdField;
+            }
+            set {
+                if ((this.FeedIdField.Equals(value) != true)) {
+                    this.FeedIdField = value;
+                    this.RaisePropertyChanged("FeedId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Text {
+            get {
+                return this.TextField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TextField, value) != true)) {
+                    this.TextField = value;
+                    this.RaisePropertyChanged("Text");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime Timestamp {
+            get {
+                return this.TimestampField;
+            }
+            set {
+                if ((this.TimestampField.Equals(value) != true)) {
+                    this.TimestampField = value;
+                    this.RaisePropertyChanged("Timestamp");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Type {
+            get {
+                return this.TypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TypeField, value) != true)) {
+                    this.TypeField = value;
+                    this.RaisePropertyChanged("Type");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int UserId {
+            get {
+                return this.UserIdField;
+            }
+            set {
+                if ((this.UserIdField.Equals(value) != true)) {
+                    this.UserIdField = value;
+                    this.RaisePropertyChanged("UserId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ABBConnectServiceRef.IABBConnectWCF")]
     public interface IABBConnectWCF {
@@ -2750,6 +2855,26 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
         System.IAsyncResult BeginGetFilterTaggedUsers(string filterId, System.AsyncCallback callback, object asyncState);
         
         PortableTransformationLayer.ABBConnectServiceRef.GetUserSavedFiltersTagedUsers_Result[] EndGetFilterTaggedUsers(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IABBConnectWCF/GetUserActivity", ReplyAction="http://tempuri.org/IABBConnectWCF/GetUserActivityResponse")]
+        System.IAsyncResult BeginGetUserActivity(string userId, System.AsyncCallback callback, object asyncState);
+        
+        PortableTransformationLayer.ABBConnectServiceRef.GetUserActivity_Result[] EndGetUserActivity(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IABBConnectWCF/UnfollowSensor", ReplyAction="http://tempuri.org/IABBConnectWCF/UnfollowSensorResponse")]
+        System.IAsyncResult BeginUnfollowSensor(string humanUserId, string sensorUserId, System.AsyncCallback callback, object asyncState);
+        
+        bool EndUnfollowSensor(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IABBConnectWCF/GetFollowedSensors", ReplyAction="http://tempuri.org/IABBConnectWCF/GetFollowedSensorsResponse")]
+        System.IAsyncResult BeginGetFollowedSensors(string humanUserId, System.AsyncCallback callback, object asyncState);
+        
+        int[] EndGetFollowedSensors(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IABBConnectWCF/GetFeedByFeedId", ReplyAction="http://tempuri.org/IABBConnectWCF/GetFeedByFeedIdResponse")]
+        System.IAsyncResult BeginGetFeedByFeedId(string feedId, System.AsyncCallback callback, object asyncState);
+        
+        PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result EndGetFeedByFeedId(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -3347,6 +3472,82 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetUserActivityCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetUserActivityCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public PortableTransformationLayer.ABBConnectServiceRef.GetUserActivity_Result[] Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((PortableTransformationLayer.ABBConnectServiceRef.GetUserActivity_Result[])(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class UnfollowSensorCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public UnfollowSensorCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public bool Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetFollowedSensorsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetFollowedSensorsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public int[] Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((int[])(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetFeedByFeedIdCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetFeedByFeedIdCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class ABBConnectWCFClient : System.ServiceModel.ClientBase<PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF>, PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF {
         
         private BeginOperationDelegate onBeginLogInDelegate;
@@ -3535,6 +3736,30 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
         
         private System.Threading.SendOrPostCallback onGetFilterTaggedUsersCompletedDelegate;
         
+        private BeginOperationDelegate onBeginGetUserActivityDelegate;
+        
+        private EndOperationDelegate onEndGetUserActivityDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetUserActivityCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginUnfollowSensorDelegate;
+        
+        private EndOperationDelegate onEndUnfollowSensorDelegate;
+        
+        private System.Threading.SendOrPostCallback onUnfollowSensorCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetFollowedSensorsDelegate;
+        
+        private EndOperationDelegate onEndGetFollowedSensorsDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetFollowedSensorsCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetFeedByFeedIdDelegate;
+        
+        private EndOperationDelegate onEndGetFeedByFeedIdDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetFeedByFeedIdCompletedDelegate;
+        
         private BeginOperationDelegate onBeginOpenDelegate;
         
         private EndOperationDelegate onEndOpenDelegate;
@@ -3646,6 +3871,14 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
         public event System.EventHandler<SearchUsersByNameCompletedEventArgs> SearchUsersByNameCompleted;
         
         public event System.EventHandler<GetFilterTaggedUsersCompletedEventArgs> GetFilterTaggedUsersCompleted;
+        
+        public event System.EventHandler<GetUserActivityCompletedEventArgs> GetUserActivityCompleted;
+        
+        public event System.EventHandler<UnfollowSensorCompletedEventArgs> UnfollowSensorCompleted;
+        
+        public event System.EventHandler<GetFollowedSensorsCompletedEventArgs> GetFollowedSensorsCompleted;
+        
+        public event System.EventHandler<GetFeedByFeedIdCompletedEventArgs> GetFeedByFeedIdCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
@@ -5135,6 +5368,192 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
                         filterId}, this.onEndGetFilterTaggedUsersDelegate, this.onGetFilterTaggedUsersCompletedDelegate, userState);
         }
         
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF.BeginGetUserActivity(string userId, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetUserActivity(userId, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        PortableTransformationLayer.ABBConnectServiceRef.GetUserActivity_Result[] PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF.EndGetUserActivity(System.IAsyncResult result) {
+            return base.Channel.EndGetUserActivity(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetUserActivity(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string userId = ((string)(inValues[0]));
+            return ((PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF)(this)).BeginGetUserActivity(userId, callback, asyncState);
+        }
+        
+        private object[] OnEndGetUserActivity(System.IAsyncResult result) {
+            PortableTransformationLayer.ABBConnectServiceRef.GetUserActivity_Result[] retVal = ((PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF)(this)).EndGetUserActivity(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetUserActivityCompleted(object state) {
+            if ((this.GetUserActivityCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetUserActivityCompleted(this, new GetUserActivityCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetUserActivityAsync(string userId) {
+            this.GetUserActivityAsync(userId, null);
+        }
+        
+        public void GetUserActivityAsync(string userId, object userState) {
+            if ((this.onBeginGetUserActivityDelegate == null)) {
+                this.onBeginGetUserActivityDelegate = new BeginOperationDelegate(this.OnBeginGetUserActivity);
+            }
+            if ((this.onEndGetUserActivityDelegate == null)) {
+                this.onEndGetUserActivityDelegate = new EndOperationDelegate(this.OnEndGetUserActivity);
+            }
+            if ((this.onGetUserActivityCompletedDelegate == null)) {
+                this.onGetUserActivityCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetUserActivityCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetUserActivityDelegate, new object[] {
+                        userId}, this.onEndGetUserActivityDelegate, this.onGetUserActivityCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF.BeginUnfollowSensor(string humanUserId, string sensorUserId, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginUnfollowSensor(humanUserId, sensorUserId, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        bool PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF.EndUnfollowSensor(System.IAsyncResult result) {
+            return base.Channel.EndUnfollowSensor(result);
+        }
+        
+        private System.IAsyncResult OnBeginUnfollowSensor(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string humanUserId = ((string)(inValues[0]));
+            string sensorUserId = ((string)(inValues[1]));
+            return ((PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF)(this)).BeginUnfollowSensor(humanUserId, sensorUserId, callback, asyncState);
+        }
+        
+        private object[] OnEndUnfollowSensor(System.IAsyncResult result) {
+            bool retVal = ((PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF)(this)).EndUnfollowSensor(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnUnfollowSensorCompleted(object state) {
+            if ((this.UnfollowSensorCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.UnfollowSensorCompleted(this, new UnfollowSensorCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void UnfollowSensorAsync(string humanUserId, string sensorUserId) {
+            this.UnfollowSensorAsync(humanUserId, sensorUserId, null);
+        }
+        
+        public void UnfollowSensorAsync(string humanUserId, string sensorUserId, object userState) {
+            if ((this.onBeginUnfollowSensorDelegate == null)) {
+                this.onBeginUnfollowSensorDelegate = new BeginOperationDelegate(this.OnBeginUnfollowSensor);
+            }
+            if ((this.onEndUnfollowSensorDelegate == null)) {
+                this.onEndUnfollowSensorDelegate = new EndOperationDelegate(this.OnEndUnfollowSensor);
+            }
+            if ((this.onUnfollowSensorCompletedDelegate == null)) {
+                this.onUnfollowSensorCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnUnfollowSensorCompleted);
+            }
+            base.InvokeAsync(this.onBeginUnfollowSensorDelegate, new object[] {
+                        humanUserId,
+                        sensorUserId}, this.onEndUnfollowSensorDelegate, this.onUnfollowSensorCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF.BeginGetFollowedSensors(string humanUserId, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetFollowedSensors(humanUserId, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        int[] PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF.EndGetFollowedSensors(System.IAsyncResult result) {
+            return base.Channel.EndGetFollowedSensors(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetFollowedSensors(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string humanUserId = ((string)(inValues[0]));
+            return ((PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF)(this)).BeginGetFollowedSensors(humanUserId, callback, asyncState);
+        }
+        
+        private object[] OnEndGetFollowedSensors(System.IAsyncResult result) {
+            int[] retVal = ((PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF)(this)).EndGetFollowedSensors(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetFollowedSensorsCompleted(object state) {
+            if ((this.GetFollowedSensorsCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetFollowedSensorsCompleted(this, new GetFollowedSensorsCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetFollowedSensorsAsync(string humanUserId) {
+            this.GetFollowedSensorsAsync(humanUserId, null);
+        }
+        
+        public void GetFollowedSensorsAsync(string humanUserId, object userState) {
+            if ((this.onBeginGetFollowedSensorsDelegate == null)) {
+                this.onBeginGetFollowedSensorsDelegate = new BeginOperationDelegate(this.OnBeginGetFollowedSensors);
+            }
+            if ((this.onEndGetFollowedSensorsDelegate == null)) {
+                this.onEndGetFollowedSensorsDelegate = new EndOperationDelegate(this.OnEndGetFollowedSensors);
+            }
+            if ((this.onGetFollowedSensorsCompletedDelegate == null)) {
+                this.onGetFollowedSensorsCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetFollowedSensorsCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetFollowedSensorsDelegate, new object[] {
+                        humanUserId}, this.onEndGetFollowedSensorsDelegate, this.onGetFollowedSensorsCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF.BeginGetFeedByFeedId(string feedId, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetFeedByFeedId(feedId, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF.EndGetFeedByFeedId(System.IAsyncResult result) {
+            return base.Channel.EndGetFeedByFeedId(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetFeedByFeedId(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string feedId = ((string)(inValues[0]));
+            return ((PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF)(this)).BeginGetFeedByFeedId(feedId, callback, asyncState);
+        }
+        
+        private object[] OnEndGetFeedByFeedId(System.IAsyncResult result) {
+            PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result retVal = ((PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF)(this)).EndGetFeedByFeedId(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetFeedByFeedIdCompleted(object state) {
+            if ((this.GetFeedByFeedIdCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetFeedByFeedIdCompleted(this, new GetFeedByFeedIdCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetFeedByFeedIdAsync(string feedId) {
+            this.GetFeedByFeedIdAsync(feedId, null);
+        }
+        
+        public void GetFeedByFeedIdAsync(string feedId, object userState) {
+            if ((this.onBeginGetFeedByFeedIdDelegate == null)) {
+                this.onBeginGetFeedByFeedIdDelegate = new BeginOperationDelegate(this.OnBeginGetFeedByFeedId);
+            }
+            if ((this.onEndGetFeedByFeedIdDelegate == null)) {
+                this.onEndGetFeedByFeedIdDelegate = new EndOperationDelegate(this.OnEndGetFeedByFeedId);
+            }
+            if ((this.onGetFeedByFeedIdCompletedDelegate == null)) {
+                this.onGetFeedByFeedIdCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetFeedByFeedIdCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetFeedByFeedIdDelegate, new object[] {
+                        feedId}, this.onEndGetFeedByFeedIdDelegate, this.onGetFeedByFeedIdCompletedDelegate, userState);
+        }
+        
         private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState) {
             return ((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(callback, asyncState);
         }
@@ -5648,6 +6067,59 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
             public PortableTransformationLayer.ABBConnectServiceRef.GetUserSavedFiltersTagedUsers_Result[] EndGetFilterTaggedUsers(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 PortableTransformationLayer.ABBConnectServiceRef.GetUserSavedFiltersTagedUsers_Result[] _result = ((PortableTransformationLayer.ABBConnectServiceRef.GetUserSavedFiltersTagedUsers_Result[])(base.EndInvoke("GetFilterTaggedUsers", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginGetUserActivity(string userId, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = userId;
+                System.IAsyncResult _result = base.BeginInvoke("GetUserActivity", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public PortableTransformationLayer.ABBConnectServiceRef.GetUserActivity_Result[] EndGetUserActivity(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                PortableTransformationLayer.ABBConnectServiceRef.GetUserActivity_Result[] _result = ((PortableTransformationLayer.ABBConnectServiceRef.GetUserActivity_Result[])(base.EndInvoke("GetUserActivity", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginUnfollowSensor(string humanUserId, string sensorUserId, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[2];
+                _args[0] = humanUserId;
+                _args[1] = sensorUserId;
+                System.IAsyncResult _result = base.BeginInvoke("UnfollowSensor", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public bool EndUnfollowSensor(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                bool _result = ((bool)(base.EndInvoke("UnfollowSensor", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginGetFollowedSensors(string humanUserId, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = humanUserId;
+                System.IAsyncResult _result = base.BeginInvoke("GetFollowedSensors", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public int[] EndGetFollowedSensors(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                int[] _result = ((int[])(base.EndInvoke("GetFollowedSensors", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginGetFeedByFeedId(string feedId, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = feedId;
+                System.IAsyncResult _result = base.BeginInvoke("GetFeedByFeedId", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result EndGetFeedByFeedId(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result _result = ((PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result)(base.EndInvoke("GetFeedByFeedId", _args, result)));
                 return _result;
             }
         }

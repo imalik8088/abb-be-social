@@ -64,8 +64,6 @@ namespace PortableBLL
 
             }
 
-
-
             public async Task<bool> PublishFeed(HumanFeed feed)
             {
                 try
@@ -101,7 +99,7 @@ namespace PortableBLL
                 UserManager userInforMng = new UserManager();
 
                 foreach (GetFeedComments_Result res in list)
-                    retList.Add(new Comment(res, await userInforMng.LoadHumanInformationByUsername(res.UserName)));
+                    retList.Add(new Comment(res, await userInforMng.LoadHumanInformationByUsername(res.UserName).ConfigureAwait(false)));
 
                 return retList;
 
@@ -119,12 +117,10 @@ namespace PortableBLL
 
             }
 
-
             public async Task<bool> PublishComment(int feedID, Comment comment)
             {
                 return await feedData.PublishComment(feedID, comment.Owner.UserName, comment.Content);
             }
-
 
             public async Task<List<Feed>> LoadFeedsByType(FeedType.FeedSource feedType, int numFeeds)
             {

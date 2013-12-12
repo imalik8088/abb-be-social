@@ -364,4 +364,21 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="GetUserSavedFiltersTagedUsers_Result" nillable="true" type="tns:GetUserSavedFiltersTagedUsers_Result" />
+  <xs:complexType name="ArrayOfGetUserActivity_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="GetUserActivity_Result" nillable="true" type="tns:GetUserActivity_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfGetUserActivity_Result" nillable="true" type="tns:ArrayOfGetUserActivity_Result" />
+  <xs:complexType name="GetUserActivity_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FeedId" type="xs:int" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Timestamp" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetUserActivity_Result" nillable="true" type="tns:GetUserActivity_Result" />
 </xs:schema>
