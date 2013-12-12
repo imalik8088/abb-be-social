@@ -179,6 +179,7 @@
     </Content>
     <Content Include="Icons\icon-refresh-app-bar.png" />
     <Content Include="Icons\icon-search-app-bar.png" />
+    <Content Include="Icons\icon-sensor.png" />
     <Content Include="Icons\icon-user-app-bar.png" />
     <Content Include="Icons\icon_search.png" />
     <Content Include="SplashScreenImage.jpg" />

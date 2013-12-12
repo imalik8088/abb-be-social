@@ -17,6 +17,8 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
+        <Image Height="35" HorizontalAlignment="Left" Margin="10,15,0,0" x:Name="imgUser" Stretch="Fill" VerticalAlignment="Top" Width="35" Source="/Icons/icon-user-app-bar.png" />
+        <Image Height="35" HorizontalAlignment="Left" Margin="10,15,0,0" x:Name="imgSensor" Stretch="Fill" VerticalAlignment="Top" Width="35" Source="/Icons/icon-sensor.png" />
         <controls:Pivot Title="" x:Name="pivHead">
 
             <!--Pivot item two-->
@@ -56,6 +58,6 @@
                 </Grid>
             </controls:PivotItem>
         </controls:Pivot>
-    </Grid>
+       </Grid>
 
 </phone:PhoneApplicationPage>

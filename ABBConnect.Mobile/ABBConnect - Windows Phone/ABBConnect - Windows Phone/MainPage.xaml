@@ -35,7 +35,8 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
-        <controls:Pivot Title="ABBConnect">
+        <Image Height="35" HorizontalAlignment="Left" Margin="10,15,0,0" Name="image1" Stretch="Fill" VerticalAlignment="Top" Width="35" Source="/ABBConnect%20-%20Windows%20Phone;component/Icons/favicon.png" />
+        <controls:Pivot Title="     ABBConnect">
             <!--Pivot item one-->
             <controls:PivotItem Header="Feeds" x:Name="piFeed" Width="456" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                 <Grid HorizontalAlignment="Left" Height="574" VerticalAlignment="Top" Width="456">
@@ -115,6 +116,6 @@
                 </Grid>
             </controls:PivotItem>
         </controls:Pivot>
-    </Grid>
+        </Grid>
 
 </phone:PhoneApplicationPage>

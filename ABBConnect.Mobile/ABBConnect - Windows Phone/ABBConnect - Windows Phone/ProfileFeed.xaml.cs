@@ -125,6 +125,9 @@ namespace ABBConnect___Windows_Phone
                 lblNameClick.Text = ((Human)currentUser).FirstName + " " + ((Human)currentUser).LastName;
                 lblPhoneClick.Text = ((Human)currentUser).PhoneNumber;
 
+                imgSensor.Visibility = Visibility.Collapsed;  // hide the sensor icon
+                imgUser.Visibility = Visibility.Visible;    // show the user icon
+
             }
             else if (currentUser is Sensor)
             {
@@ -132,8 +135,12 @@ namespace ABBConnect___Windows_Phone
                 lblEmail.Text = "Lower Boundery";
                 lblEmailClick.Text = ((Sensor)currentUser).LowerBoundary.ToString();
 
-                lblPhone.Text = "UpperBOundery";
+                lblPhone.Text = "UpperBoundery";
                 lblPhoneClick.Text = ((Sensor)currentUser).UpperBoundary.ToString();
+
+                // throws a error in runtime.....
+                //imgSensor.Visibility = Visibility.Visible; // show the sensor icon
+                //imgUser.Visibility = Visibility.Collapsed;  // hide the user icon
 
                 //disable clicking
                 lblPhoneClick.MouseLeftButtonDown -= lblPhoneClick_MouseLeftButtonUp;
@@ -145,9 +152,10 @@ namespace ABBConnect___Windows_Phone
                 return;
             }
 
+
             lblLocationClick.Text = currentUser.Location;
 
-            pivHead.Title = lblNameClick.Text;
+            pivHead.Title = "      " + lblNameClick.Text;
 
             LoadFeeds();
         }
