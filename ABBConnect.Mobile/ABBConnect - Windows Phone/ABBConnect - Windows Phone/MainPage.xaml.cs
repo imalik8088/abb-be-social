@@ -36,6 +36,7 @@ namespace ABBConnect___Windows_Phone
         List<PortableBLL.Feed> feeds;
         List<Filter> filters;
         bool ini;
+        bool timerReady;
         int NoCache;
         FeedType.FeedSource currentFeedType;
 
@@ -64,6 +65,7 @@ namespace ABBConnect___Windows_Phone
 
             currentFeedType = new FeedType.FeedSource();
             currentFeedType = FeedType.FeedSource.Human;
+            timerReady = true;
 
             LoadUser();
             LoadNewFeeds(NUMBEROFFEEDS);
@@ -105,9 +107,30 @@ namespace ABBConnect___Windows_Phone
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void timerNewFeed_tick(object sender, EventArgs e)
+        private async void timerNewFeed_tick(object sender, EventArgs e)
         {
-            CheckNewFeeds();
+            if (timerReady)
+            {
+                timerReady = false;
+                await UpdateComments();
+                CheckNewFeeds();
+                timerReady = true;
+            }
+        }
+
+        private async Task UpdateComments()
+        {
+            for (int i = 0; i < feeds.Count; i++)
+            {
+                feeds[i].Comments = await fm.LoadFeedComments(feeds[i].ID);
+
+                if (lstbFeeds.Items[i] is FeedControl)
+                    (lstbFeeds.Items[i] as FeedControl).UpdateComments(feeds[i].Comments);
+                else if (lstbFeeds.Items[i] is NoImageFeedControl)
+                    (lstbFeeds.Items[i] as NoImageFeedControl).UpdateComments(feeds[i].Comments);
+                else
+                    continue; //TODO: ADD THE SAME FOR SENSOR
+            }
         }
 
         private async void CheckNewFeeds()
@@ -151,7 +174,7 @@ namespace ABBConnect___Windows_Phone
             try
             {
                 PortableBLL.UserManager um = new PortableBLL.UserManager();
-                currentUser = await um.LoadHumanInformationByUsername("rgn09003");
+                currentUser = await um.LoadHumanInformationByUsername("dks12001");
 
                 App.CurrentUser = currentUser;
                 GetSavedFeeds();
@@ -585,9 +608,9 @@ namespace ABBConnect___Windows_Phone
             lstbFeeds.Items.Clear();
             AddFeedsToList(feeds);
 
-            pgbLoadFeed.Visibility = System.Windows.Visibility.Collapsed;
-        }
+            lstbSavedFilters.SelectedIndex = -1;
 
-     
+            pgbLoadFeed.Visibility = System.Windows.Visibility.Collapsed;
+        }  
     }
 }

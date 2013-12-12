@@ -22,9 +22,10 @@ namespace PortableTransformationLayer
 
         public async Task<List<ABBConnectServiceRef.GetFeedComments_Result>> GetFeedComments(int feedId)
         {
+            string dateTimePattern = "yy-MM-dd H:mm:ss";
             var client = new HttpClient();
             client.BaseAddress = new Uri(urlServer.Url);
-            var response = await client.GetStringAsync("GetFeedComments?feedId=" + feedId).ConfigureAwait(false);
+            var response = await client.GetStringAsync("GetFeedComments?feedId=" + feedId + "&date=" + DateTime.Now.ToString(dateTimePattern)).ConfigureAwait(false);
             return JsonConvert.DeserializeObject<List<GetFeedComments_Result>>(response);
         }
 
@@ -86,6 +87,15 @@ namespace PortableTransformationLayer
             var response = await client.GetStringAsync("AddTag?feedId=" + feedId +
                            "&username=" + username).ConfigureAwait(false);
             return JsonConvert.DeserializeObject<bool>(response); ;
+        }
+
+
+        public async Task<GetLatestXFeeds_Result> GetFeedByFeedId(int feedId)
+        {
+            var client = new HttpClient();
+            client.BaseAddress = new Uri(urlServer.Url);
+            var response = await client.GetStringAsync("GetFeedByFeedId?feedId=" + feedId).ConfigureAwait(false);
+            return JsonConvert.DeserializeObject<GetLatestXFeeds_Result>(response); ;
         }
     }
 }

@@ -300,8 +300,8 @@ namespace ABBJSONService
             return sensors;
         }
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetFeedComments?feedId={feedId}")]
-        public List<GetFeedComments_Result> GetFeedComments(string feedId)
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetFeedComments?feedId={feedId}&date={currentDate}")]
+        public List<GetFeedComments_Result> GetFeedComments(string feedId, string currentDate)
         {
             List<GetFeedComments_Result> comments = new List<GetFeedComments_Result>();
 
@@ -1075,7 +1075,10 @@ namespace ABBJSONService
                             feed.Type = (string)reader[2];
                             feed.CreationTimeStamp = (DateTime)reader[3];
                             feed.Text = (string)reader[4];
-                            feed.FilePath = (string)reader[5] != null ? (string)reader[5] : "";
+                            object sqlCell = reader[5];
+                            feed.FilePath = (sqlCell == System.DBNull.Value)
+                                ? ""
+                                : (string)sqlCell;
                             feed.PrioCategory = (string)reader[6];
                             feed.PrioValue = (int)reader[7];
                             feed.FeedId = (int)reader[8];
@@ -1317,6 +1320,173 @@ namespace ABBJSONService
                 sqlConn.Close();
             }
             return taggedUsers;
+        }
+
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetUserActivity?userId={userId}")]
+        public List<GetUserActivity_Result> GetUserActivity(string userId)
+        {
+            List<GetUserActivity_Result> activityList = new List<GetUserActivity_Result>();
+
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            {
+                sqlConn.Open();
+                string sqlQuery = "GetUserActivity";
+
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    try
+                    {
+                        cmd.Parameters.Add("@userId", SqlDbType.Int).Value = int.Parse(userId);
+                    }
+
+                    catch (Exception)
+                    {
+                        cmd.Dispose();
+                        sqlConn.Close();
+                        return null;
+                    }
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        ;
+                        while (reader.Read())
+                        {
+                            GetUserActivity_Result userActivity = new GetUserActivity_Result();
+                            userActivity.Id = (int)reader[0];
+                            userActivity.UserId = (int)reader[1];
+                            userActivity.FeedId = (int)reader[2];
+                            userActivity.Type = (string)reader[3];
+                            userActivity.Text = (string)reader[4];
+                            userActivity.Timestamp = (DateTime)reader[5];
+
+                            activityList.Add(userActivity);
+                        }
+                    }
+                }
+                sqlConn.Close();
+            }
+            return activityList;
+        }
+
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "UnfollowSensor?humanUserId={humanUserId}&sensorUserId={sensorUserId}")]
+        public bool UnfollowSensor(string humanUserId, string sensorUserId)
+        {
+            int humanIntId = Int32.Parse(humanUserId);
+            int sensorIntId = Int32.Parse(sensorUserId);
+            int rowsAffected = 0;
+
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            {
+
+                sqlConn.Open();
+                string sqlQuery = "RemoveFollowSensor";
+
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@HumanUserId", SqlDbType.Int).Value = humanIntId;
+                    cmd.Parameters.Add("@SensorUserId", SqlDbType.Int).Value = sensorIntId;
+
+                    rowsAffected = cmd.ExecuteNonQuery();
+                }
+                sqlConn.Close();
+            }
+
+            if (rowsAffected > 0)
+                return true;
+            else
+                return false;
+        }
+
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetFollowedSensors?humanUserId={humanUserId}")]
+        public List<int> GetFollowedSensors(string humanUserId)
+        {
+            List<int> sensorIdList = new List<int>();
+
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            {
+                sqlConn.Open();
+                string sqlQuery = "GetFollowedSensors";
+
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    try
+                    {
+                        cmd.Parameters.Add("@HumanUserId", SqlDbType.Int).Value = int.Parse(humanUserId);
+                    }
+
+                    catch (Exception)
+                    {
+                        cmd.Dispose();
+                        sqlConn.Close();
+                        return null;
+                    }
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        ;
+                        while (reader.Read())
+                        {
+                            sensorIdList.Add((int)reader[0]);
+                        }
+                    }
+                }
+                sqlConn.Close();
+            }
+            return sensorIdList;
+        }
+
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetFeedByFeedId?feedId={feedId}")]
+        public GetLatestXFeeds_Result GetFeedByFeedId(string feedId)
+        {
+            GetLatestXFeeds_Result feed = new GetLatestXFeeds_Result();
+
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            {
+                sqlConn.Open();
+                string sqlQuery = "GetFeedByFeedId";
+
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    try
+                    {
+                        cmd.Parameters.Add("@feedId", SqlDbType.Int).Value = int.Parse(feedId);
+                    }
+
+                    catch (Exception)
+                    {
+                        cmd.Dispose();
+                        sqlConn.Close();
+                        return null;
+                    }
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        ;
+                        if (reader.Read())
+                        {
+                            feed.Username = (string)reader[0];
+                            feed.UserId = (int)reader[1];
+                            feed.Type = (string)reader[2];
+                            feed.CreationTimeStamp = (DateTime)reader[3];
+                            feed.Text = (string)reader[4];
+                            object sqlCell = reader[5];
+                            feed.FilePath = (sqlCell == System.DBNull.Value)
+                                ? ""
+                                : (string)sqlCell;
+                            feed.PrioCategory = (string)reader[6];
+                            feed.PrioValue = (int)reader[7];
+                            feed.FeedId = (int)reader[8];
+                            feed.Location = (string)reader[9];
+                        }
+                    }
+                }
+                sqlConn.Close();
+            }
+            return feed;
         }
     }
 }

@@ -104,6 +104,7 @@ namespace PortableBLL
         public FeedType.FeedSource TypeOfFeed
         {
             get { return typeOfFeed; }
+            set { typeOfFeed = value; }
         }
 
         private List<User> usersOnFilter;

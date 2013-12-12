@@ -60,6 +60,11 @@ namespace ABBConnect___Windows_Phone
         {
             Tags.Text = p.ToString();
         }
+        internal void UpdateComments(List<Comment> comments)
+        {
+            hFeed.Comments = comments;
+            SetNumberOfComments(comments.Count);     
+        }
 
         internal void SetNumberOfComments(int p)
         {

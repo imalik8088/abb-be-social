@@ -118,5 +118,41 @@ namespace PortableTransformationLayer
             var response = await client.GetStringAsync("TagUserInFilter?userId=" + userId + "&filterId=" + filterId).ConfigureAwait(false);
             return JsonConvert.DeserializeObject<bool>(response);
         }
+
+
+        public async Task<bool> FollowSensor(int humanUserId, int sensorUserId)
+        {
+            var client = new HttpClient();
+            client.BaseAddress = new Uri(urlServer.Url);
+            var response = await client.GetStringAsync("FollowSensor?humanId=" + humanUserId.ToString()
+                                                        + "&sensorId=" + sensorUserId.ToString()).ConfigureAwait(false);
+            return JsonConvert.DeserializeObject<bool>(response);
+        }
+
+        public async Task<List<int>> GetFollowedSensors(int humanUserId)
+        {
+            var client = new HttpClient();
+            client.BaseAddress = new Uri(urlServer.Url);
+            var response = await client.GetStringAsync("GetFollowedSensors?humanUserId=" + humanUserId.ToString()).ConfigureAwait(false);
+            return JsonConvert.DeserializeObject<List<int>>(response);
+        }
+
+        public async Task<List<GetUserActivity_Result>> GetUserActivity(int userId)
+        {
+            var client = new HttpClient();
+            client.BaseAddress = new Uri(urlServer.Url);
+            var response = await client.GetStringAsync("GetUserActivity?userId=" + userId.ToString()).ConfigureAwait(false);
+            return JsonConvert.DeserializeObject<List<GetUserActivity_Result>>(response);
+        }
+
+
+        public async Task<bool> UnfollowSensor(int humanUserId, int sensorUserId)
+        {
+            var client = new HttpClient();
+            client.BaseAddress = new Uri(urlServer.Url);
+            var response = await client.GetStringAsync("UnfollowSensor?humanUserId=" + humanUserId.ToString() 
+                                                        + "&sensorUserId=" + sensorUserId.ToString()).ConfigureAwait(false);
+            return JsonConvert.DeserializeObject<bool>(response);
+        }
     }
 }

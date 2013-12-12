@@ -119,5 +119,10 @@ namespace ABBConnect___Windows_Phone
         {
             txtbComment.Text = String.Empty;
         }
+
+        private void lstbTags_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/ProfileFeed.xaml?userID=" + hf.Tags[lstbTags.SelectedIndex].ID, UriKind.Relative));
+        }
     }
 }
