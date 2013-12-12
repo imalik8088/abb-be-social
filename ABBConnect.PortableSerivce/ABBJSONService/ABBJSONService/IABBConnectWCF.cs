@@ -46,7 +46,7 @@ namespace ABBJSONService
 
         [OperationContract]
         [WebInvoke]
-        List<GetFeedComments_Result> GetFeedComments(string feedId);
+        List<GetFeedComments_Result> GetFeedComments(string feedId, string currentDate);
 
         [OperationContract]
         [WebInvoke]
@@ -135,6 +135,22 @@ namespace ABBJSONService
         [OperationContract]
         [WebInvoke]
         List<GetUserSavedFiltersTagedUsers_Result> GetFilterTaggedUsers(string filterId);
+
+        [OperationContract]
+        [WebInvoke]
+        List<GetUserActivity_Result> GetUserActivity(string userId);
+
+        [OperationContract]
+        [WebInvoke]
+        bool UnfollowSensor(string humanUserId, string sensorUserId);
+
+        [OperationContract]
+        [WebInvoke]
+        List<int> GetFollowedSensors(string humanUserId);
+
+        [OperationContract]
+        [WebInvoke]
+        GetLatestXFeeds_Result GetFeedByFeedId(string feedId);
     }
 
 }

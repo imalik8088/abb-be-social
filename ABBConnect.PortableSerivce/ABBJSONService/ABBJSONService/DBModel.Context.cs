@@ -591,5 +591,23 @@ namespace ABBJSONService
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RemoveFollowSensor", humanUserIdParameter, sensorUserIdParameter);
         }
+    
+        public virtual ObjectResult<GetFeedByFeedId_Result> GetFeedByFeedId(Nullable<int> feedId)
+        {
+            var feedIdParameter = feedId.HasValue ?
+                new ObjectParameter("feedId", feedId) :
+                new ObjectParameter("feedId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetFeedByFeedId_Result>("GetFeedByFeedId", feedIdParameter);
+        }
+    
+        public virtual ObjectResult<GetUserActivity_Result> GetUserActivity(Nullable<int> userId)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("userId", userId) :
+                new ObjectParameter("userId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserActivity_Result>("GetUserActivity", userIdParameter);
+        }
     }
 }
