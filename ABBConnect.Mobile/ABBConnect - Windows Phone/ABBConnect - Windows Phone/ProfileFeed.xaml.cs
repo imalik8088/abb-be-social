@@ -51,6 +51,18 @@ namespace ABBConnect___Windows_Phone
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             AddUserInformation();
+            GetUserActivites();
+
+        }
+
+        private async void GetUserActivites()
+        {
+            UserManager um = new UserManager();
+
+            List<Activity> activities = await um.GetUserActivity(currentUser.ID);
+
+            foreach (Activity a in activities)
+                lstbActivities.Items.Add(new ActivityControl(a));
         }
 
         private async void LoadFeeds()

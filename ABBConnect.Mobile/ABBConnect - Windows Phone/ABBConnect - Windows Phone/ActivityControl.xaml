@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="ABBConnect___Windows_Phone.ActivityControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="80" d:DesignWidth="456">
+
+    <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}" Margin="0,0,0,10" MouseLeftButtonUp="LayoutRoot_MouseLeftButtonUp">
+        <TextBlock x:Name="lblText" HorizontalAlignment="Right" Margin="0,35,64,0" TextWrapping="Wrap" Text="Added a comment to a feed by Dimitrios Gustavsson" VerticalAlignment="Top" Height="30" Width="360"/>
+        <TextBlock  x:Name="lblTime" HorizontalAlignment="Left" Margin="422,0,0,0" TextWrapping="Wrap" Text="10d" VerticalAlignment="Top" Height="30" Width="34" RenderTransformOrigin="1.471,0.467"/>
+        <Image  Source="/Icons/symbol_comment.png" x:Name="imgType" HorizontalAlignment="Left" Height="30" Margin="3,35,0,0" VerticalAlignment="Top" Width="29"/>
+        <Image  Source="/Icons/symbol_timer.png" x:Name="imgType_Copy" HorizontalAlignment="Left" Height="20" Margin="401,5,0,0" VerticalAlignment="Top" Width="25" RenderTransformOrigin="2.552,0.567"/>
+
+    </Grid>
+</UserControl>

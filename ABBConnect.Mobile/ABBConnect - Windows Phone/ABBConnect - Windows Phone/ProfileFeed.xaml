@@ -53,7 +53,7 @@
 
             <controls:PivotItem Header="Activity">
                 <Grid HorizontalAlignment="Left" Height="607" VerticalAlignment="Top" Width="456">
-                    <ListBox HorizontalAlignment="Left" Height="607" VerticalAlignment="Top" Width="456"/>
+                    <ListBox x:Name="lstbActivities" HorizontalAlignment="Left" Height="607" VerticalAlignment="Top" Width="456"/>
 
                 </Grid>
             </controls:PivotItem>
