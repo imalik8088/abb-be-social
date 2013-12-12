@@ -69,12 +69,10 @@ namespace ABBConnect___Windows_Phone
         {
 
             //add the comments to the listbox
-            int j = 0;
             foreach (PortableBLL.Comment c in comments)
             {
                 CommentControl cc = new CommentControl(c.Owner.FirstName + " " + c.Owner.LastName, c.TimeStamp, c.ID, c.Content);
-                lstbComments.Items.Insert(j, cc);
-                j++;
+                lstbComments.Items.Add(cc);
             }
         }
 
@@ -85,6 +83,7 @@ namespace ABBConnect___Windows_Phone
                 MessageBox.Show("No comment attached");
                 return;
             }
+            btnPublish.IsEnabled = false;
 
             FeedManager fm = new FeedManager();
             Comment c = new Comment();
@@ -100,6 +99,7 @@ namespace ABBConnect___Windows_Phone
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                btnPublish.IsEnabled = true;
                 return;
             }
            
@@ -108,11 +108,15 @@ namespace ABBConnect___Windows_Phone
                 MessageBox.Show("Something went wrong, try again later!");
             else
             {
-                MessageBox.Show("Comment published");
+                List<Comment> comments = await fm.LoadFeedComments(hf.ID);
+                lstbComments.Items.Insert(3, new CommentControl(comments[0]));
+                lstbComments.UpdateLayout();
 
-                lstbComments.Items.Insert(lstbComments.Items.Count - 3, new CommentControl(App.CurrentUser.FirstName + " " + App.CurrentUser.LastName, DateTime.Now, App.CurrentUser.ID, txtbComment.Text));
-                txtbComment.Text = "";            
+                txtbComment.Text = String.Empty;
+                MessageBox.Show("Comment published");
             }
+            btnPublish.IsEnabled = true;
+
         }
 
         private void txtbComment_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
