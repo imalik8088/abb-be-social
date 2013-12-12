@@ -12,6 +12,8 @@ namespace ABBConnect___Windows_Phone
 {
     public partial class CommentControl : UserControl
     {
+        private PortableBLL.Comment comment;
+
 
         public CommentControl()
         {
@@ -26,6 +28,16 @@ namespace ABBConnect___Windows_Phone
             lblUserName.Tag = userId;
             lblText.Text = text;
             SetTime(creationTime);
+        }
+
+        public CommentControl(PortableBLL.Comment comment)
+        {
+            InitializeComponent();
+
+            lblUserName.Text = comment.Owner.FirstName + " " + comment.Owner.LastName;
+            lblUserName.Tag =  comment.Owner.UserName;
+            lblText.Text = comment.Content;
+            SetTime(comment.TimeStamp);
         }
 
         private void SetTime(DateTime dateTime)

@@ -46,7 +46,7 @@ namespace ABBJSONService
 
         [OperationContract]
         [WebInvoke]
-        List<GetFeedComments_Result> GetFeedComments(string feedId, string currentDate);
+        List<GetFeedComments_Result> GetFeedComments(string feedId, string randomGuid);
 
         [OperationContract]
         [WebInvoke]
@@ -114,7 +114,7 @@ namespace ABBJSONService
         
         [OperationContract]
         [WebInvoke]
-        List<GetLatestXFeeds_Result> GetXFeedsByFilter(string id, string location, string startingTime, string endingTime, string feedType, string startId, string numFeeds);
+        List<GetLatestXFeeds_Result> GetXFeedsByFilter(string id, string location, string startingTime, string endingTime, string feedType, string startId, string numFeeds, string randomGuid);
 
         [OperationContract]
         [WebInvoke]
@@ -150,7 +150,7 @@ namespace ABBJSONService
 
         [OperationContract]
         [WebInvoke]
-        GetLatestXFeeds_Result GetFeedByFeedId(string feedId);
+        GetLatestXFeeds_Result GetFeedByFeedId(string feedId, string randomGuid);
     }
 
 }

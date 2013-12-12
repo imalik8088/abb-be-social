@@ -381,8 +381,8 @@ namespace PortableBLL
             {
                 List<Feed> retList = new List<Feed>();
                 UserManager userInforMng = new UserManager();
-                //var result = retList;
-                //List<string> resultList = result.ToList();
+
+                
                 if (savedFilter.UsersOnFilter.Count > 0)
                     foreach (User filteredUser in savedFilter.UsersOnFilter)
                     {
@@ -391,7 +391,7 @@ namespace PortableBLL
                 else
                     await LoadFeedsByFilter(-1, savedFilter.Location, savedFilter.StartDate, savedFilter.EndDate, savedFilter.TypeOfFeed, numFeed).ConfigureAwait(false);
                 
-                return retList.OrderByDescending(o => o.TimeStamp).ToList();
+                return retList.OrderByDescending(o => o.TimeStamp).ToList().GetRange(0, numFeed-1);
             }
 
             public async Task<List<Feed>> LoadFeedsFromSavedFilter(Filter savedFilter, int numFeed, int startId)
@@ -408,7 +408,25 @@ namespace PortableBLL
                 else
                     await LoadFeedsByFilter(-1, savedFilter.Location, savedFilter.StartDate, savedFilter.EndDate, savedFilter.TypeOfFeed, startId, numFeed).ConfigureAwait(false);
 
-                return retList.OrderByDescending(o => o.TimeStamp).ToList();
+                return retList.OrderByDescending(o => o.TimeStamp).ToList().GetRange(0, numFeed-1);
+            }
+
+
+            public async Task<Feed> GetFeedByFeedId(int feedId)
+            {
+                GetLatestXFeeds_Result entityFeed = await feedData.GetFeedByFeedId(feedId).ConfigureAwait(false);
+
+                UserManager userInforMng = new UserManager();
+
+                if (entityFeed.Type == "Human")
+                    return new HumanFeed(entityFeed, await LoadFeedComments(entityFeed.FeedId).ConfigureAwait(false),
+                                              await LoadFeedTags(entityFeed.FeedId).ConfigureAwait(false),
+                                              await userInforMng.LoadHumanInformation(entityFeed.UserId));
+                else
+                    return new SensorFeed(entityFeed, await LoadFeedComments(entityFeed.FeedId).ConfigureAwait(false),
+                                               await LoadFeedTags(entityFeed.FeedId).ConfigureAwait(false),
+                                               await userInforMng.LoadSensorInformation(entityFeed.UserId));
+
             }
     }
 }

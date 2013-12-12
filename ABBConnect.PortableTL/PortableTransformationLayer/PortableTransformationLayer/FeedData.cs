@@ -22,10 +22,9 @@ namespace PortableTransformationLayer
 
         public async Task<List<ABBConnectServiceRef.GetFeedComments_Result>> GetFeedComments(int feedId)
         {
-            string dateTimePattern = "yy-MM-dd H:mm:ss";
             var client = new HttpClient();
             client.BaseAddress = new Uri(urlServer.Url);
-            var response = await client.GetStringAsync("GetFeedComments?feedId=" + feedId + "&date=" + DateTime.Now.ToString(dateTimePattern)).ConfigureAwait(false);
+            var response = await client.GetStringAsync("GetFeedComments?feedId=" + feedId + "&guid=" + Guid.NewGuid()).ConfigureAwait(false);
             return JsonConvert.DeserializeObject<List<GetFeedComments_Result>>(response);
         }
 
@@ -50,14 +49,15 @@ namespace PortableTransformationLayer
         public async Task<List<GetLatestXFeeds_Result>> GetFeedsByFilter(int userId, string location, DateTime startingTime, DateTime endingTime, string feedType, int startId, int numFeeds)
         {
             string dateTimePattern = "yy-MM-dd H:mm:ss";
-            string url = String.Format("FilterFeedsByFilter?userId={0}&location={1}&start={2}&end={3}&type={4}&feedId={5}&numFeeds={6}",
+            string url = String.Format("FilterFeedsByFilter?userId={0}&location={1}&start={2}&end={3}&type={4}&feedId={5}&numFeeds={6}&guid={7}",
                                         userId == -1 ? "" : userId.ToString(),
                                         location,
                                         startingTime == DateTime.MinValue ? "" : startingTime.ToString(dateTimePattern),
                                         endingTime == DateTime.MinValue ? "" : endingTime.ToString(dateTimePattern),
                                         feedType,
                                         startId == -1 ? "" : startId.ToString(),
-                                        numFeeds == -1 ? "" : numFeeds.ToString());
+                                        numFeeds == -1 ? "" : numFeeds.ToString(),
+                                        Guid.NewGuid());
 
             string backUp = "FilterFeedsByFilter?userId=" + userId
                 + "&location=" + location + "&start=" + startingTime.ToString() + "&end=" +
@@ -94,7 +94,7 @@ namespace PortableTransformationLayer
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(urlServer.Url);
-            var response = await client.GetStringAsync("GetFeedByFeedId?feedId=" + feedId).ConfigureAwait(false);
+            var response = await client.GetStringAsync("GetFeedByFeedId?feedId=" + feedId + "&guid=" + Guid.NewGuid()).ConfigureAwait(false);
             return JsonConvert.DeserializeObject<GetLatestXFeeds_Result>(response); ;
         }
     }

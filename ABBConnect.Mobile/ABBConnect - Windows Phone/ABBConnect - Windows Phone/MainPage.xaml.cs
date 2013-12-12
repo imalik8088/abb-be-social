@@ -120,9 +120,10 @@ namespace ABBConnect___Windows_Phone
 
         private async Task UpdateComments()
         {
+            FeedManager fmm = new FeedManager();
             for (int i = 0; i < feeds.Count; i++)
             {
-                feeds[i].Comments = await fm.LoadFeedComments(feeds[i].ID);
+                feeds[i].Comments = await fmm.LoadFeedComments(feeds[i].ID);
 
                 if (lstbFeeds.Items[i] is FeedControl)
                     (lstbFeeds.Items[i] as FeedControl).UpdateComments(feeds[i].Comments);
