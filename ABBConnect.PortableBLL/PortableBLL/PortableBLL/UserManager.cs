@@ -159,5 +159,36 @@ namespace PortableBLL
 
             return userList;
         }
+
+
+        public Task<int> AddFilter(int userId, string filterName, DateTime startingTime, DateTime endingTime, string location, string feedType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> AddUserToFilter(int userId, int filterId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> FollowSensor(int humanUserId, int sensorUserId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> UnfollowSensor(int humanUserId, int sensorUserId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<int>> GetFollowedSensors(int humanUserId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<Activity>> GetUserActivity(int userId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

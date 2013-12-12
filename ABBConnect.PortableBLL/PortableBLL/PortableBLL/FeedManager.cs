@@ -410,5 +410,11 @@ namespace PortableBLL
 
                 return retList.OrderByDescending(o => o.TimeStamp).ToList();
             }
+
+
+            public Task<Feed> GetFeedByFeedId(int feedId)
+            {
+                throw new NotImplementedException();
+            }
     }
 }
