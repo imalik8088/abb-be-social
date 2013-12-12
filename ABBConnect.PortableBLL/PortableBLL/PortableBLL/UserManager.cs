@@ -161,7 +161,7 @@ namespace PortableBLL
         }
 
 
-        public Task<int> AddFilter(int userId, string filterName, DateTime startingTime, DateTime endingTime, string location, string feedType)
+        public Task<int> AddFilter(int userId, Filter newFilter)
         {
             throw new NotImplementedException();
         }
