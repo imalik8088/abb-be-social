@@ -120,21 +120,16 @@ namespace PortableTransformationLayer
         }
 
 
-        public Task<bool> FollowSensor(string humanUserId, string sensorUserId)
+        public async Task<bool> FollowSensor(int humanUserId, int sensorUserId)
         {
-            throw new NotImplementedException();
+            var client = new HttpClient();
+            client.BaseAddress = new Uri(urlServer.Url);
+            var response = await client.GetStringAsync("FollowSensor?humanId=" + humanUserId.ToString()
+                                                        + "&sensorId=" + sensorUserId.ToString()).ConfigureAwait(false);
+            return JsonConvert.DeserializeObject<bool>(response);
         }
 
-        //public Task<bool> UnfollowSensor(string humanUserId, string sensorUserId)
-        //{
-        //    return Task<false>;
-        //    //var client = new HttpClient();
-        //    //client.BaseAddress = new Uri(urlServer.Url);
-        //    //var response = await client.GetStringAsync("UnfollowSensor?humanUserId=" + humanUserId.ToString() + "&sensorUserId=" + sensorUserId).ConfigureAwait(false);
-        //    //return JsonConvert.DeserializeObject<bool>(response);
-        //}
-
-        public async Task<List<int>> GetFollowedSensors(string humanUserId)
+        public async Task<List<int>> GetFollowedSensors(int humanUserId)
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(urlServer.Url);
@@ -142,7 +137,7 @@ namespace PortableTransformationLayer
             return JsonConvert.DeserializeObject<List<int>>(response);
         }
 
-        public async Task<List<GetUserActivity_Result>> GetUserActivity(string userId)
+        public async Task<List<GetUserActivity_Result>> GetUserActivity(int userId)
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(urlServer.Url);
@@ -151,9 +146,13 @@ namespace PortableTransformationLayer
         }
 
 
-        public Task<bool> UnfollowSensor(string humanUserId, string sensorUserId)
+        public async Task<bool> UnfollowSensor(int humanUserId, int sensorUserId)
         {
-            throw new NotImplementedException();
+            var client = new HttpClient();
+            client.BaseAddress = new Uri(urlServer.Url);
+            var response = await client.GetStringAsync("UnfollowSensor?humanUserId=" + humanUserId.ToString() 
+                                                        + "&sensorUserId=" + sensorUserId.ToString()).ConfigureAwait(false);
+            return JsonConvert.DeserializeObject<bool>(response);
         }
     }
 }
