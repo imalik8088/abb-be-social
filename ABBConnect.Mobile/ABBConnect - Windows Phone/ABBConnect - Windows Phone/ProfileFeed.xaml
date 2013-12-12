@@ -48,6 +48,13 @@
                     <TextBlock x:Name="lblLocationClick" HorizontalAlignment="Left" Margin="30,367,0,0" TextWrapping="Wrap" Text="Control Room 1A" VerticalAlignment="Top" FontSize="32" MouseLeftButtonDown="lblLocationClick_MouseLeftButtonDown"/>
                 </Grid>
             </controls:PivotItem>
+
+            <controls:PivotItem Header="Activity">
+                <Grid HorizontalAlignment="Left" Height="607" VerticalAlignment="Top" Width="456">
+                    <ListBox HorizontalAlignment="Left" Height="607" VerticalAlignment="Top" Width="456"/>
+
+                </Grid>
+            </controls:PivotItem>
         </controls:Pivot>
     </Grid>
 

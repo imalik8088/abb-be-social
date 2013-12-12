@@ -47,6 +47,11 @@ namespace ABBConnect___Windows_Phone
 
             hFeed = hf;
         }
+        internal void UpdateComments(List<PortableBLL.Comment> comments)
+        {
+            hFeed.Comments = comments;
+            SetNumberOfComments(comments.Count);
+        }
 
         private void SetImage(string filePath)
         {

@@ -57,6 +57,11 @@ namespace ABBConnect___Windows_Phone
             Author.Text = username;
             Author.Tag = id;
         }
+        internal void UpdateComments(List<PortableBLL.Comment> comments)
+        {
+            sf.Comments = comments;
+          //TODO: ADD COMMENTS TO SENSOR CONTROL  SetNumberOfComments(comments.Count);
+        }
 
         internal void SetContent(string p)
         {
