@@ -300,8 +300,8 @@ namespace ABBJSONService
             return sensors;
         }
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetFeedComments?feedId={feedId}&date={currentDate}")]
-        public List<GetFeedComments_Result> GetFeedComments(string feedId, string currentDate)
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetFeedComments?feedId={feedId}&guid={randomGuid}")]
+        public List<GetFeedComments_Result> GetFeedComments(string feedId, string randomGuid)
         {
             List<GetFeedComments_Result> comments = new List<GetFeedComments_Result>();
 
@@ -1006,8 +1006,8 @@ namespace ABBJSONService
             return feeds;
         }
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "FilterFeedsByFilter?userId={id}&location={location}&start={startingTime}&end={endingTime}&type={feedType}&feedId={startId}&numFeeds={numFeeds}")]
-        List<GetLatestXFeeds_Result> IABBConnectWCF.GetXFeedsByFilter(string id, string location, string startingTime, string endingTime, string feedType, string startId, string numFeeds)
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "FilterFeedsByFilter?userId={id}&location={location}&start={startingTime}&end={endingTime}&type={feedType}&feedId={startId}&numFeeds={numFeeds}&guid={randomGuid}")]
+        List<GetLatestXFeeds_Result> IABBConnectWCF.GetXFeedsByFilter(string id, string location, string startingTime, string endingTime, string feedType, string startId, string numFeeds, string randomGuid)
         {
             List<GetLatestXFeeds_Result> feeds = new List<GetLatestXFeeds_Result>();
 
@@ -1438,8 +1438,8 @@ namespace ABBJSONService
             return sensorIdList;
         }
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetFeedByFeedId?feedId={feedId}")]
-        public GetLatestXFeeds_Result GetFeedByFeedId(string feedId)
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetFeedByFeedId?feedId={feedId}&guid={randomGuid}")]
+        public GetLatestXFeeds_Result GetFeedByFeedId(string feedId, string randomGuid)
         {
             GetLatestXFeeds_Result feed = new GetLatestXFeeds_Result();
 
