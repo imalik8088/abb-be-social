@@ -25,7 +25,7 @@ namespace PortableTransformationLayer
             string dateTimePattern = "yy-MM-dd H:mm:ss";
             var client = new HttpClient();
             client.BaseAddress = new Uri(urlServer.Url);
-            var response = await client.GetStringAsync("GetFeedComments?feedId=" + feedId + "&date=" + DateTime.Now.ToString(dateTimePattern)).ConfigureAwait(false);
+            var response = await client.GetStringAsync("GetFeedComments?feedId=" + feedId + "&date=" + Guid.NewGuid()).ConfigureAwait(false);
             return JsonConvert.DeserializeObject<List<GetFeedComments_Result>>(response);
         }
 
