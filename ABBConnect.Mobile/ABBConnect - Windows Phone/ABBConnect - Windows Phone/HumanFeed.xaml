@@ -49,7 +49,7 @@
                              Height="587" Margin="10,10,0,0"
                              VerticalAlignment="Top" 
                              Width="436"
-                             ItemsSource="{Binding}" >
+                             ItemsSource="{Binding}" SelectionChanged="lstbTags_SelectionChanged" >
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" Margin="2">
