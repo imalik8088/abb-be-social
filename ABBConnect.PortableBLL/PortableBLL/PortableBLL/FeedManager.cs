@@ -412,9 +412,21 @@ namespace PortableBLL
             }
 
 
-            public Task<Feed> GetFeedByFeedId(int feedId)
+            public async Task<Feed> GetFeedByFeedId(int feedId)
             {
-                throw new NotImplementedException();
+                GetLatestXFeeds_Result entityFeed = await feedData.GetFeedByFeedId(feedId).ConfigureAwait(false);
+
+                UserManager userInforMng = new UserManager();
+
+                if (entityFeed.Type == "Human")
+                    return new HumanFeed(entityFeed, await LoadFeedComments(entityFeed.FeedId).ConfigureAwait(false),
+                                              await LoadFeedTags(entityFeed.FeedId).ConfigureAwait(false),
+                                              await userInforMng.LoadHumanInformation(entityFeed.UserId));
+                else
+                    return new SensorFeed(entityFeed, await LoadFeedComments(entityFeed.FeedId).ConfigureAwait(false),
+                                               await LoadFeedTags(entityFeed.FeedId).ConfigureAwait(false),
+                                               await userInforMng.LoadSensorInformation(entityFeed.UserId));
+
             }
     }
 }

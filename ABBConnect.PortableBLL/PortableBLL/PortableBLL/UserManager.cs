@@ -186,9 +186,18 @@ namespace PortableBLL
             throw new NotImplementedException();
         }
 
-        public Task<List<Activity>> GetUserActivity(int userId)
+        public async Task<List<Activity>> GetUserActivity(int userId)
         {
-            throw new NotImplementedException();
+            List<GetUserActivity_Result> list = await usrData.GetUserActivity(userId).ConfigureAwait(false);
+
+            List<Activity> activityList = new List<Activity>();
+
+            foreach (GetUserActivity_Result entityActivity in list)
+            {
+                activityList.Add(new Activity(entityActivity));
+            }
+
+            return activityList;
         }
     }
 }
