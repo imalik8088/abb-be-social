@@ -661,7 +661,7 @@ namespace DAL
 
                     try
                     {
-                        if (id.Equals(""))
+                        if (id == -1)
                             cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = DBNull.Value;
                         else
                             cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = id;
@@ -686,12 +686,12 @@ namespace DAL
                         else
                             cmd.Parameters.Add("@FeedType", SqlDbType.NVarChar, 50).Value = feedType;
 
-                        if (startId.Equals(""))
+                        if (startId == -1)
                             cmd.Parameters.Add("@startingFeedId", SqlDbType.Int).Value = DBNull.Value;
                         else
                             cmd.Parameters.Add("@startingFeedId", SqlDbType.Int).Value = startId;
 
-                        if (numFeeds.Equals(""))
+                        if (numFeeds == -1)
                             cmd.Parameters.Add("@numOfFeeds", SqlDbType.Int).Value = DBNull.Value;
                         else
                             cmd.Parameters.Add("@numOfFeeds", SqlDbType.Int).Value = numFeeds;
