@@ -30,7 +30,6 @@ namespace DAL
                 sqlConn.Open();
                 string sqlQuery = "GetHistoricalDataFromSensor";
 
-                DateTime minValue = DateTime.MinValue;
 
                 int iD = id;
 
@@ -39,15 +38,15 @@ namespace DAL
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@sensorID", SqlDbType.Int).Value = iD;
 
-                    if (startingTime.Equals(minValue.ToString()))
+                    if (startingTime == DateTime.MinValue)
                         cmd.Parameters.Add("@from", SqlDbType.DateTime).Value = DBNull.Value;
                     else
-                        cmd.Parameters.Add("@from", SqlDbType.DateTime).Value = Convert.ToDateTime(startingTime);
+                        cmd.Parameters.Add("@from", SqlDbType.DateTime).Value = startingTime;
 
-                    if (endingTime.Equals(minValue.ToString()))
+                    if (endingTime == DateTime.MinValue)
                         cmd.Parameters.Add("@to", SqlDbType.DateTime).Value = DBNull.Value;
                     else
-                        cmd.Parameters.Add("@to", SqlDbType.DateTime).Value = Convert.ToDateTime(endingTime);
+                        cmd.Parameters.Add("@to", SqlDbType.DateTime).Value = endingTime;
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -66,8 +65,6 @@ namespace DAL
             }
             return histData;
         }
-
-
 
         public bool UnfollowSensor(int humanUserId, int sensorUserId)
         {
@@ -191,15 +188,15 @@ namespace DAL
                         else
                             cmd.Parameters.Add("@Location", SqlDbType.NVarChar, 50).Value = location;
 
-                        if (startingTime.Equals(""))
+                        if (startingTime == DateTime.MinValue)
                             cmd.Parameters.Add("@StartDate", SqlDbType.DateTime).Value = DBNull.Value;
                         else
-                            cmd.Parameters.Add("@StartDate", SqlDbType.DateTime).Value = Convert.ToDateTime(startingTime);
+                            cmd.Parameters.Add("@StartDate", SqlDbType.DateTime).Value = startingTime;
 
-                        if (endingTime.Equals(""))
+                        if (endingTime == DateTime.MinValue)
                             cmd.Parameters.Add("@EndDate", SqlDbType.DateTime).Value = DBNull.Value;
                         else
-                            cmd.Parameters.Add("@EndDate", SqlDbType.DateTime).Value = Convert.ToDateTime(endingTime);
+                            cmd.Parameters.Add("@EndDate", SqlDbType.DateTime).Value = endingTime;
 
                         if (feedType.Equals(""))
                             cmd.Parameters.Add("@Type", SqlDbType.NVarChar, 50).Value = DBNull.Value;
