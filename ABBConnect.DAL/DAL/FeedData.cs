@@ -674,12 +674,12 @@ namespace DAL
                         if (startingTime == DateTime.MinValue)
                             cmd.Parameters.Add("@startTime", SqlDbType.DateTime).Value = DBNull.Value;
                         else
-                            cmd.Parameters.Add("@startTime", SqlDbType.DateTime).Value = Convert.ToDateTime(startingTime);
+                            cmd.Parameters.Add("@startTime", SqlDbType.DateTime).Value = startingTime;
 
                         if (endingTime == DateTime.MinValue)
                             cmd.Parameters.Add("@endTime", SqlDbType.DateTime).Value = DBNull.Value;
                         else
-                            cmd.Parameters.Add("@endTime", SqlDbType.DateTime).Value = Convert.ToDateTime(endingTime);
+                            cmd.Parameters.Add("@endTime", SqlDbType.DateTime).Value = endingTime;
 
                         if (feedType.Equals(""))
                             cmd.Parameters.Add("@FeedType", SqlDbType.NVarChar, 50).Value = DBNull.Value;
