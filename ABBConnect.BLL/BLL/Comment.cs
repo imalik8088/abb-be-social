@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using DAL;
 
 namespace BLL
 {
@@ -13,6 +13,14 @@ namespace BLL
             this.owner = new Human();
             this.content = "";
             this.timeStamp = DateTime.MinValue;
+        }
+
+        public Comment(GetFeedComments_Result res, Human owner)
+        {
+            this.owner = new Human();
+            timeStamp = res.CreationTimeStamp;
+            Content = res.CommentText;
+            this.owner = owner;
         }
 
         private int iD;
@@ -55,6 +63,7 @@ namespace BLL
         }
 
         private string content;
+        
         public string Content
         {
             get

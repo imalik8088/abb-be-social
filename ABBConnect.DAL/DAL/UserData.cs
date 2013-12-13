@@ -20,12 +20,59 @@ namespace DAL
             this.sqlCommand = this.sqlConnection.CreateCommand();
         }
 
-
-
-        public bool UnfollowSensor(string humanUserId, string sensorUserId)
+        public List<GetHistoricalDataFromSensor_Result> GetHistoricalDataFromSensor(int id, DateTime startingTime, DateTime endingTime)
         {
-            int humanIntId = Int32.Parse(humanUserId);
-            int sensorIntId = Int32.Parse(sensorUserId);
+            List<GetHistoricalDataFromSensor_Result> histData = new List<GetHistoricalDataFromSensor_Result>();
+
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            {
+
+                sqlConn.Open();
+                string sqlQuery = "GetHistoricalDataFromSensor";
+
+                DateTime minValue = DateTime.MinValue;
+
+                int iD = id;
+
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@sensorID", SqlDbType.Int).Value = iD;
+
+                    if (startingTime.Equals(minValue.ToString()))
+                        cmd.Parameters.Add("@from", SqlDbType.DateTime).Value = DBNull.Value;
+                    else
+                        cmd.Parameters.Add("@from", SqlDbType.DateTime).Value = Convert.ToDateTime(startingTime);
+
+                    if (endingTime.Equals(minValue.ToString()))
+                        cmd.Parameters.Add("@to", SqlDbType.DateTime).Value = DBNull.Value;
+                    else
+                        cmd.Parameters.Add("@to", SqlDbType.DateTime).Value = Convert.ToDateTime(endingTime);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        ;
+                        while (reader.Read())
+                        {
+                            GetHistoricalDataFromSensor_Result senData = new GetHistoricalDataFromSensor_Result();
+                            senData.RawValue = (string)reader[0];
+                            senData.CreationTimeStamp = (DateTime)reader[1];
+
+                            histData.Add(senData);
+                        }
+                    }
+                }
+                sqlConn.Close();
+            }
+            return histData;
+        }
+
+
+
+        public bool UnfollowSensor(int humanUserId, int sensorUserId)
+        {
+            int humanIntId = humanUserId;
+            int sensorIntId = sensorUserId;
             int rowsAffected = 0;
 
             using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
@@ -51,7 +98,7 @@ namespace DAL
                 return false;
         }
 
-        public List<int> GetFollowedSensors(string humanUserId)
+        public List<int> GetFollowedSensors(int humanUserId)
         {
             List<int> sensorIdList = new List<int>();
 
@@ -66,7 +113,7 @@ namespace DAL
 
                     try
                     {
-                        cmd.Parameters.Add("@HumanUserId", SqlDbType.Int).Value = int.Parse(humanUserId);
+                        cmd.Parameters.Add("@HumanUserId", SqlDbType.Int).Value = humanUserId;
                     }
 
                     catch (Exception)
@@ -89,9 +136,8 @@ namespace DAL
             return sensorIdList;
         }
 
-        public GetSensorInformation_Result GetSensorInformation(string id)
+        public GetSensorInformation_Result GetSensorInformation(int id)
         {
-            int iD = Int32.Parse(id);
             GetSensorInformation_Result s = new GetSensorInformation_Result();
 
             using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
@@ -103,7 +149,7 @@ namespace DAL
                 using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("@sensorID", SqlDbType.Int).Value = iD;
+                    cmd.Parameters.Add("@sensorID", SqlDbType.Int).Value = id;
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         ;
@@ -122,7 +168,7 @@ namespace DAL
             return s;
         }
 
-        public int SaveFilter(string userId, string filterName, string startingTime, string endingTime, string location, string feedType)
+        public int SaveFilter(int userId, string filterName, DateTime startingTime, DateTime endingTime, string location, string feedType)
         {
             int retValue = -1;
 
@@ -138,7 +184,7 @@ namespace DAL
 
                     try
                     {
-                        cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = int.Parse(userId);
+                        cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = userId;
 
                         if (location.Equals(""))
                             cmd.Parameters.Add("@Location", SqlDbType.NVarChar, 50).Value = DBNull.Value;
@@ -185,9 +231,8 @@ namespace DAL
             return retValue;
         }
 
-        public List<GetUserSavedFilters_Result> GetSavedFilter(string userId)
+        public List<GetUserSavedFilters_Result> GetSavedFilter(int userId)
         {
-            int iD = Int32.Parse(userId);
             List<GetUserSavedFilters_Result> savedFilters = new List<GetUserSavedFilters_Result>();
 
             using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
@@ -199,7 +244,7 @@ namespace DAL
                 using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = iD;
+                    cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = userId;
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -236,7 +281,7 @@ namespace DAL
             return savedFilters;
         }
 
-        List<GetUsersByName_Result> SearchUsersByName(string query)
+        public List<GetUsersByName_Result> SearchUsersByName(string query)
         {
             List<GetUsersByName_Result> users = new List<GetUsersByName_Result>();
 
@@ -278,7 +323,7 @@ namespace DAL
             return users;
         }
 
-        public List<GetUserSavedFiltersTagedUsers_Result> GetFilterTaggedUsers(string filterId)
+        public List<GetUserSavedFiltersTagedUsers_Result> GetFilterTaggedUsers(int filterId)
         {
             List<GetUserSavedFiltersTagedUsers_Result> taggedUsers = new List<GetUserSavedFiltersTagedUsers_Result>();
 
@@ -291,7 +336,7 @@ namespace DAL
                 using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("@FilterId", SqlDbType.Int).Value = Int32.Parse(filterId); ;
+                    cmd.Parameters.Add("@FilterId", SqlDbType.Int).Value = filterId; ;
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -317,7 +362,7 @@ namespace DAL
             return taggedUsers;
         }
 
-        public List<GetUserActivity_Result> GetUserActivity(string userId)
+        public List<GetUserActivity_Result> GetUserActivity(int userId)
         {
             List<GetUserActivity_Result> activityList = new List<GetUserActivity_Result>();
 
@@ -332,7 +377,7 @@ namespace DAL
 
                     try
                     {
-                        cmd.Parameters.Add("@userId", SqlDbType.Int).Value = int.Parse(userId);
+                        cmd.Parameters.Add("@userId", SqlDbType.Int).Value = userId;
                     }
 
                     catch (Exception)
@@ -363,10 +408,8 @@ namespace DAL
             return activityList;
         }
 
-        public bool AddFilterUser(string userId, string filterId)
+        public bool AddFilterUser(int userId, int filterId)
         {
-            int userIntId = Int32.Parse(userId);
-            int filterIntId = Int32.Parse(filterId);
             int rowsAffected = 0;
 
             using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
@@ -378,8 +421,8 @@ namespace DAL
                 using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = userIntId;
-                    cmd.Parameters.Add("@FilterId", SqlDbType.Int).Value = filterIntId;
+                    cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = userId;
+                    cmd.Parameters.Add("@FilterId", SqlDbType.Int).Value = filterId;
 
                     rowsAffected = cmd.ExecuteNonQuery();
                 }
@@ -427,9 +470,9 @@ namespace DAL
             return sensors;
         }
 
-        public GetHumanInformation_Result GetHumanInformation(string id)
+        public GetHumanInformation_Result GetHumanInformation(int id)
         {
-            int iD = Int32.Parse(id);
+
             GetHumanInformation_Result h = new GetHumanInformation_Result();
 
             using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
@@ -521,6 +564,41 @@ namespace DAL
                 sqlConn.Close();
             }
             return (result == 1 ? true : false);
+        }
+
+        public int GetLastSensorValue(int id)
+        {
+            int iD = id;
+            string value = "";
+
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            {
+
+                sqlConn.Open();
+                string sqlQuery = "GetLatestSensorValue";
+
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@sensorID", SqlDbType.Int).Value = iD;
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        ;
+                        if (reader.Read())
+                        {
+                            value = (string)reader[0];
+                        }
+                    }
+                }
+                sqlConn.Close();
+            }
+
+            int numValue;
+            bool parsed = Int32.TryParse(value, out numValue);
+
+
+
+            return numValue;
         }
 
     }

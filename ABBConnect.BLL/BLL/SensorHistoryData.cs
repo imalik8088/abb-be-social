@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace BLL
 {
     public class SensorHistoryData
     {
-        public SensorHistoryData()
+        public SensorHistoryData(Sensor owner)
         {
-            this.owner = new Sensor();
+            this.owner = owner;
             this.startingTime = DateTime.MinValue;
             this.endingTime = DateTime.MinValue;
         }

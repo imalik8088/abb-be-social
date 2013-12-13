@@ -2,652 +2,432 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using DAL;
 using System.Threading.Tasks;
-using Transformation_Layer;
-using System.Data;
+
 
 namespace BLL
 {
     public class FeedManager: IFeedManager
     {
-        private FeedData postDbData;
+            FeedData feedData;
 
-        public FeedManager()
-        {
-            this.postDbData = new FeedData();
-        }
-
-        public List<Feed> LoadNewFeeds()
-        {
-            DataSet newFeedsSet = postDbData.GetLatestFeeds();
-            List<Feed> lsFeed = new List<Feed>();
-            HumanFeed usFeed;
-            SensorFeed senFeed;
-            int tempInt = 0;
-
-            DataTable newFeedsTable = newFeedsSet.Tables[0];
-
-            foreach (DataRow row in newFeedsTable.Rows)
+            public FeedManager()
             {
-                StringBuilder tempContainer = new StringBuilder();
-                tempContainer.Append(AvoidStringNulls(row["Type"].ToString()));
+                feedData = new FeedData();
+            }
 
-                if (tempContainer.ToString().Equals("Human"))
+            public  List<Feed> LoadLatestXFeeds(int feedNum)
+            {
+                
+                List<GetLatestXFeeds_Result> list =  feedData.GetXFeedsByFilter(-1, "", DateTime.MinValue, DateTime.MinValue, "", -1, feedNum);
+
+                List<Feed> retList = new List<Feed>();
+
+                UserManager userInforMng = new UserManager();
+
+                foreach (GetLatestXFeeds_Result res in list)
+                    if (res.Type == "Human")
+                        retList.Add(new HumanFeed(res,  LoadFeedComments(res.FeedId),
+                                                   LoadFeedTags(res.FeedId),
+                                                   userInforMng.LoadHumanInformation(res.UserId)));
+                    else
+                        retList.Add(new SensorFeed(res,  LoadFeedComments(res.FeedId), 
+                                                    LoadFeedTags(res.FeedId),
+                                                    userInforMng.LoadSensorInformation(res.UserId)));
+
+                return retList;
+
+            }
+
+            public  List<Feed> LoadLatestXFeedsFromId(int startingId, int numberOfFeeds)
+            {
+                List<GetLatestXFeeds_Result> list = feedData.GetXFeedsByFilter(-1, "", DateTime.MinValue, DateTime.MinValue, "", startingId, numberOfFeeds);
+
+                List<Feed> retList = new List<Feed>();
+
+                UserManager userInforMng = new UserManager();
+
+                foreach (GetLatestXFeeds_Result res in list)
                 {
-                    tempContainer.Clear();
-                    usFeed = new HumanFeed();
-
-                    tempContainer.Append(AvoidStringNulls(row["PrioValue"].ToString()));
-
-                    if (CastStringToInt(tempContainer.ToString(), ref tempInt))
-                        usFeed.Category.Priority = tempInt;
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["UserId"].ToString()));
-
-                    if (CastStringToInt(tempContainer.ToString(), ref tempInt))
-                        usFeed.Owner.ID = tempInt;
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["PrioCategory"].ToString()));
-                    usFeed.Category.CategoryName = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Username"].ToString()));
-                    usFeed.Owner.UserName = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Text"].ToString()));
-                    usFeed.Content = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["FilePath"].ToString()));
-                    usFeed.MediaFilePath = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["CreationTimeStamp"].ToString()));
-                    usFeed.TimeStamp = Convert.ToDateTime(tempContainer.ToString());
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Location"].ToString()));
-                    usFeed.Location = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["FeedId"].ToString()));                        
-
-                    if (CastStringToInt(tempContainer.ToString(), ref tempInt))
-                    {
-                        usFeed.ID = tempInt;
-                        usFeed.Tags = LoadFeedTags(tempInt);
-                        usFeed.Comments = LoadFeedComments(tempInt);
-                    }
-                    tempContainer.Clear();
-
-                    lsFeed.Add(usFeed);
+                    if (res.Type == "Human")
+                        retList.Add(new HumanFeed(res,  LoadFeedComments(res.FeedId),
+                                                   LoadFeedTags(res.FeedId),
+                                                   userInforMng.LoadHumanInformation(res.UserId)));
+                    else
+                        retList.Add(new SensorFeed(res,  LoadFeedComments(res.FeedId),
+                                                    LoadFeedTags(res.FeedId),
+                                                    userInforMng.LoadSensorInformation(res.UserId)));
                 }
+
+                return retList;
+
+            }
+
+            public  bool PublishFeed(HumanFeed feed)
+            {
+                try
+                {
+                    
+                    int feedID =  feedData.PostFeed(feed.Owner.ID, feed.Content, feed.MediaFilePath, feed.Category.Id);
+
+                    bool success = true;
+                    foreach(Human tempHuman in feed.Tags)
+                    {
+                        success =  feedData.AddTag(feed.ID, feed.Owner.UserName);
+                    }
+                    return success;
+                }
+                catch (Exception)
+                {
+
+                    return false;
+                }
+
+            }
+
+            public  bool AddTagToFeed(int feedId, string username)
+            {
+                return  feedData.AddTag(feedId, username);
+
+            }
+
+            public  List<Comment> LoadFeedComments(int feedId)
+            {
+                List<GetFeedComments_Result> list =  feedData.GetFeedComments(feedId);
+                List<Comment> retList = new List<Comment>();
+
+                UserManager userInforMng = new UserManager();
+
+                foreach (GetFeedComments_Result res in list)
+                    retList.Add(new Comment(res,  userInforMng.LoadHumanInformationByUsername(res.UserName)));
+
+                return retList;
+
+            }
+
+            public  List<Human> LoadFeedTags(int feedId)
+            {
+                List<GetFeedTags_Result> list =  feedData.GetFeedTags(feedId);
+                List<Human> retList = new List<Human>();
+
+                foreach (GetFeedTags_Result res in list)
+                    retList.Add(new Human(res));
+
+                return retList;
+
+            }
+
+            public  bool PublishComment(int feedID, Comment comment)
+            {
+                return  feedData.PostComment(feedID, comment.Owner.UserName, comment.Content);
+            }
+
+            public  List<Feed> LoadFeedsByType(FeedType.FeedSource feedType, int numFeeds)
+            {
+                List<GetLatestXFeeds_Result> list = feedData.GetXFeedsByFilter(-1, "", DateTime.MinValue, DateTime.MinValue, feedType.ToString(), -1, numFeeds);
+
+                List<Feed> retList = new List<Feed>();
+
+                UserManager userInforMng = new UserManager();
+
+                foreach (GetLatestXFeeds_Result res in list)
+                {
+                    if (res.Type == "Human")
+                        retList.Add(new HumanFeed(res,  LoadFeedComments(res.FeedId), 
+                                                   LoadFeedTags(res.FeedId),
+                                                   userInforMng.LoadHumanInformation(res.UserId)));
+                    else
+                        retList.Add(new SensorFeed(res,  LoadFeedComments(res.FeedId),
+                                                    LoadFeedTags(res.FeedId),
+                                                    userInforMng.LoadSensorInformation(res.UserId)));
+                }
+
+                return retList;
+            }
+
+            public  List<Feed> LoadFeedsByType(FeedType.FeedSource feedType, int numFeeds, int startId)
+            {
+                List<GetLatestXFeeds_Result> list = feedData.GetXFeedsByFilter(-1, "", DateTime.MinValue, DateTime.MinValue, feedType.ToString(), startId, numFeeds);
+
+                List<Feed> retList = new List<Feed>();
+
+                UserManager userInforMng = new UserManager();
+
+                foreach (GetLatestXFeeds_Result res in list)
+                {
+                    if (res.Type == "Human")
+                        retList.Add(new HumanFeed(res,  LoadFeedComments(res.FeedId),
+                                                   LoadFeedTags(res.FeedId),
+                                                   userInforMng.LoadHumanInformation(res.UserId)));
+                    else
+                        retList.Add(new SensorFeed(res,  LoadFeedComments(res.FeedId),
+                                                    LoadFeedTags(res.FeedId),
+                                                    userInforMng.LoadSensorInformation(res.UserId)));
+                }
+
+                return retList;
+            }
+
+            public  List<Feed> LoadFeedsByDate(DateTime feedStartTime, DateTime feedEndTime, int numFeeds)
+            {
+                List<GetLatestXFeeds_Result> list = feedData.GetXFeedsByFilter(-1, "", feedStartTime, feedEndTime, "", -1, numFeeds);
+
+                List<Feed> retList = new List<Feed>();
+
+                UserManager userInforMng = new UserManager();
+
+                foreach (GetLatestXFeeds_Result res in list)
+                {
+                    if (res.Type == "Human")
+                        retList.Add(new HumanFeed(res,  LoadFeedComments(res.FeedId),
+                                                   LoadFeedTags(res.FeedId),
+                                                   userInforMng.LoadHumanInformation(res.UserId)));
+                    else
+                        retList.Add(new SensorFeed(res,  LoadFeedComments(res.FeedId),
+                                                    LoadFeedTags(res.FeedId),
+                                                    userInforMng.LoadSensorInformation(res.UserId)));
+                }
+
+                return retList;
+            }
+
+            public  List<Feed> LoadFeedsByDate(DateTime feedStartTime, DateTime feedEndTime, int numFeeds, int startId)
+            {
+                List<GetLatestXFeeds_Result> list = feedData.GetXFeedsByFilter(-1, "", feedStartTime, feedEndTime, "", startId, numFeeds);
+
+                List<Feed> retList = new List<Feed>();
+
+                UserManager userInforMng = new UserManager();
+
+                foreach (GetLatestXFeeds_Result res in list)
+                {
+                    if (res.Type == "Human")
+                        retList.Add(new HumanFeed(res,  LoadFeedComments(res.FeedId),
+                                                   LoadFeedTags(res.FeedId),
+                                                   userInforMng.LoadHumanInformation(res.UserId)));
+                    else
+                        retList.Add(new SensorFeed(res,  LoadFeedComments(res.FeedId),
+                                                    LoadFeedTags(res.FeedId),
+                                                    userInforMng.LoadSensorInformation(res.UserId)));
+                }
+
+                return retList;
+            }
+
+            public  List<Feed> LoadFeedsByLocation(string location, int numFeeds)
+            {
+                List<GetLatestXFeeds_Result> list = feedData.GetXFeedsByFilter(-1, location, DateTime.MinValue, DateTime.MinValue, "", -1, numFeeds);
+
+                List<Feed> retList = new List<Feed>();
+
+                UserManager userInforMng = new UserManager();
+
+                foreach (GetLatestXFeeds_Result res in list)
+                {
+                    if (res.Type == "Human")
+                        retList.Add(new HumanFeed(res,  LoadFeedComments(res.FeedId),
+                                                   LoadFeedTags(res.FeedId),
+                                                   userInforMng.LoadHumanInformation(res.UserId)));
+                    else
+                        retList.Add(new SensorFeed(res,  LoadFeedComments(res.FeedId),
+                                                    LoadFeedTags(res.FeedId),
+                                                    userInforMng.LoadSensorInformation(res.UserId)));
+                }
+
+                return retList;
+            }
+
+            public  List<Feed> LoadFeedsByLocation(string location, int numFeeds, int startId)
+            {
+                List<GetLatestXFeeds_Result> list = feedData.GetXFeedsByFilter(-1, location, DateTime.MinValue, DateTime.MinValue, "", startId, numFeeds);
+
+                List<Feed> retList = new List<Feed>();
+
+                UserManager userInforMng = new UserManager();
+
+                foreach (GetLatestXFeeds_Result res in list)
+                {
+                    if (res.Type == "Human")
+                        retList.Add(new HumanFeed(res,  LoadFeedComments(res.FeedId),
+                                                   LoadFeedTags(res.FeedId),
+                                                   userInforMng.LoadHumanInformation(res.UserId)));
+                    else
+                        retList.Add(new SensorFeed(res,  LoadFeedComments(res.FeedId),
+                                                    LoadFeedTags(res.FeedId),
+                                                    userInforMng.LoadSensorInformation(res.UserId)));
+                }
+
+                return retList;
+            }
+
+            public  List<Feed> LoadFeedsByUser(int userId, int numFeeds)
+            {
+                List<GetLatestXFeeds_Result> list = feedData.GetXFeedsByFilter(userId, "", DateTime.MinValue, DateTime.MinValue, "", -1, numFeeds);
+
+                List<Feed> retList = new List<Feed>();
+
+                UserManager userInforMng = new UserManager();
+
+                foreach (GetLatestXFeeds_Result res in list)
+                {
+                    if (res.Type == "Human")
+                        retList.Add(new HumanFeed(res,  LoadFeedComments(res.FeedId),
+                                                   LoadFeedTags(res.FeedId),
+                                                   userInforMng.LoadHumanInformation(res.UserId)));
+                    else
+                        retList.Add(new SensorFeed(res,  LoadFeedComments(res.FeedId),
+                                                    LoadFeedTags(res.FeedId),
+                                                    userInforMng.LoadSensorInformation(res.UserId)));
+                }
+
+                return retList;
+            }
+
+            public  List<Feed> LoadFeedsByUser(int userId, int numFeeds, int startId)
+            {
+                List<GetLatestXFeeds_Result> list = feedData.GetXFeedsByFilter(userId, "", DateTime.MinValue, DateTime.MinValue, "", startId, numFeeds);
+
+                List<Feed> retList = new List<Feed>();
+
+                UserManager userInforMng = new UserManager();
+
+                foreach (GetLatestXFeeds_Result res in list)
+                {
+                    if (res.Type == "Human")
+                        retList.Add(new HumanFeed(res,  LoadFeedComments(res.FeedId),
+                                                   LoadFeedTags(res.FeedId),
+                                                   userInforMng.LoadHumanInformation(res.UserId)));
+                    else
+                        retList.Add(new SensorFeed(res,  LoadFeedComments(res.FeedId),
+                                                    LoadFeedTags(res.FeedId),
+                                                    userInforMng.LoadSensorInformation(res.UserId)));
+                }
+
+                return retList;
+            }
+
+            public  List<Feed> LoadFeedsByFilter(int userId, string location, DateTime startingTime, DateTime endingTime, FeedType.FeedSource feedType, int numFeeds)
+            {
+                string typeOfFeed;
+                if (feedType == FeedType.FeedSource.None)
+                    typeOfFeed = "";
                 else
+                    typeOfFeed = feedType.ToString();
+                List<GetLatestXFeeds_Result> list =  feedData.GetXFeedsByFilter(userId < 0 ? -1 : userId,
+                                                                                     System.String.IsNullOrEmpty(location) ? "" : location,
+                                                                                     startingTime,
+                                                                                     endingTime,
+                                                                                     typeOfFeed,
+                                                                                     -1,
+                                                                                     numFeeds < 0 ? -1 : numFeeds
+                                                                                     );
+
+                List<Feed> retList = new List<Feed>();
+
+                UserManager userInforMng = new UserManager();
+
+                foreach (GetLatestXFeeds_Result res in list)
                 {
-                    tempContainer.Clear();
-                    senFeed = new SensorFeed();
-
-                    tempContainer.Append(AvoidStringNulls(row["PrioValue"].ToString()));
-
-                    if (CastStringToInt(tempContainer.ToString(), ref tempInt))
-                        senFeed.Category.Priority = tempInt;
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["PrioCategory"].ToString()));
-                    senFeed.Category.CategoryName = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Username"].ToString()));
-                    senFeed.Owner.Name = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Text"].ToString()));
-                    senFeed.Content = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Location"].ToString()));
-                    senFeed.Location = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["UserId"].ToString()));
-                    if (CastStringToInt(tempContainer.ToString(), ref tempInt))
-                        senFeed.Owner.ID = tempInt;
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["CreationTimeStamp"].ToString()));
-                    senFeed.TimeStamp = Convert.ToDateTime(tempContainer.ToString());
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["FeedId"].ToString()));
-
-                    if (CastStringToInt(tempContainer.ToString(), ref tempInt))
-                    {
-                        senFeed.ID = tempInt;
-                        senFeed.Tags = LoadFeedTags(tempInt);
-                        senFeed.Comments = LoadFeedComments(tempInt);
-                    }
-                    tempContainer.Clear();
-
-                    lsFeed.Add(senFeed);
+                    if (res.Type == "Human")
+                        retList.Add(new HumanFeed(res,  LoadFeedComments(res.FeedId),
+                                                   LoadFeedTags(res.FeedId),
+                                                   userInforMng.LoadHumanInformation(res.UserId)));
+                    else
+                        retList.Add(new SensorFeed(res,  LoadFeedComments(res.FeedId),
+                                                    LoadFeedTags(res.FeedId),
+                                                    userInforMng.LoadSensorInformation(res.UserId)));
                 }
+
+                return retList;
             }
 
-            return lsFeed;
-        }
-
-        public List<Feed> LoadLatestXFeeds(int feedNum)
-        {
-            DataSet newFeedsSet = postDbData.GetLatestXFeeds(feedNum);
-            List<Feed> lsFeed = new List<Feed>();
-            HumanFeed usFeed;
-            SensorFeed senFeed;
-            int tempInt = 0;
-
-            DataTable newFeedsTable = newFeedsSet.Tables[0];
-
-            foreach (DataRow row in newFeedsTable.Rows)
+            public  List<Feed> LoadFeedsByFilter(int userId, string location, DateTime startingTime, DateTime endingTime, FeedType.FeedSource feedType, int startId, int numFeeds)
             {
-                StringBuilder tempContainer = new StringBuilder();
-                tempContainer.Append(AvoidStringNulls(row["Type"].ToString()));
-
-                if (tempContainer.ToString().Equals("Human"))
-                {
-                    tempContainer.Clear();
-                    usFeed = new HumanFeed();
-
-                    tempContainer.Append(AvoidStringNulls(row["PrioValue"].ToString()));
-
-                    if (CastStringToInt(tempContainer.ToString(), ref tempInt))
-                        usFeed.Category.Priority = tempInt;
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["UserId"].ToString()));
-
-                    if (CastStringToInt(tempContainer.ToString(), ref tempInt))
-                        usFeed.Owner.ID = tempInt;
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["PrioCategory"].ToString()));
-                    usFeed.Category.CategoryName = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Username"].ToString()));
-                    usFeed.Owner.UserName = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Text"].ToString()));
-                    usFeed.Content = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["FilePath"].ToString()));
-                    usFeed.MediaFilePath = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["CreationTimeStamp"].ToString()));
-                    usFeed.TimeStamp = Convert.ToDateTime(tempContainer.ToString());
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Location"].ToString()));
-                    usFeed.Location = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["FeedId"].ToString()));
-
-                    if (CastStringToInt(tempContainer.ToString(), ref tempInt))
-                    {
-                        usFeed.ID = tempInt;
-                        usFeed.Tags = LoadFeedTags(tempInt);
-                        usFeed.Comments = LoadFeedComments(tempInt);
-                    }
-                    tempContainer.Clear();
-
-                    lsFeed.Add(usFeed);
-                }
+                string typeOfFeed;
+                if (feedType == FeedType.FeedSource.None)
+                    typeOfFeed = "";
                 else
+                    typeOfFeed = feedType.ToString();
+                List<GetLatestXFeeds_Result> list = feedData.GetXFeedsByFilter(userId < 0 ? -1 : userId,
+                                                                                       String.IsNullOrEmpty(location) ? "" : location,
+                                                                                       startingTime,
+                                                                                       endingTime,
+                                                                                       typeOfFeed,
+                                                                                       startId < 0 ? -1 : startId,
+                                                                                       numFeeds < 0 ? -1 : numFeeds
+                                                                                       );
+
+                List<Feed> retList = new List<Feed>();
+
+                UserManager userInforMng = new UserManager();
+
+                foreach (GetLatestXFeeds_Result res in list)
                 {
-                    tempContainer.Clear();
-                    senFeed = new SensorFeed();
-
-                    tempContainer.Append(AvoidStringNulls(row["PrioValue"].ToString()));
-
-                    if (CastStringToInt(tempContainer.ToString(), ref tempInt))
-                        senFeed.Category.Priority = tempInt;
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["PrioCategory"].ToString()));
-                    senFeed.Category.CategoryName = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Username"].ToString()));
-                    senFeed.Owner.Name = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Text"].ToString()));
-                    senFeed.Content = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Location"].ToString()));
-                    senFeed.Location = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["UserId"].ToString()));
-                    if (CastStringToInt(tempContainer.ToString(), ref tempInt))
-                        senFeed.Owner.ID = tempInt;
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["CreationTimeStamp"].ToString()));
-                    senFeed.TimeStamp = Convert.ToDateTime(tempContainer.ToString());
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["FeedId"].ToString()));
-
-                    if (CastStringToInt(tempContainer.ToString(), ref tempInt))
-                    {
-                        senFeed.ID = tempInt;
-                        senFeed.Tags = LoadFeedTags(tempInt);
-                        senFeed.Comments = LoadFeedComments(tempInt);
-                    }
-                    tempContainer.Clear();
-
-                    lsFeed.Add(senFeed);
+                    if (res.Type == "Human")
+                        retList.Add(new HumanFeed(res,  LoadFeedComments(res.FeedId),
+                                                   LoadFeedTags(res.FeedId),
+                                                   userInforMng.LoadHumanInformation(res.UserId)));
+                    else
+                        retList.Add(new SensorFeed(res,  LoadFeedComments(res.FeedId),
+                                                    LoadFeedTags(res.FeedId),
+                                                    userInforMng.LoadSensorInformation(res.UserId)));
                 }
+
+                return retList;
+
             }
 
-            return lsFeed;
-        }
-
-        public List<Feed> LoadNewFeedsByFilter(string location, DateTime startingTime, DateTime endingTime)
-        {
-            if (String.IsNullOrEmpty(location))
-                location = null;
-
-            DataSet newFeedsSet = postDbData.GetLatestFeedByFilter(location, startingTime, endingTime);
-            List<Feed> lsFeed = new List<Feed>();
-            HumanFeed usFeed;
-            SensorFeed senFeed;
-            int tempInt = 0;
-
-            DataTable newFeedsTable = newFeedsSet.Tables[0];
-
-            foreach (DataRow row in newFeedsTable.Rows)
+            public  List<Feed> LoadFeedsFromSavedFilter(Filter savedFilter, int numFeed)
             {
-                StringBuilder tempContainer = new StringBuilder();
-                tempContainer.Append(AvoidStringNulls(row["FeedType"].ToString()));
+                List<Feed> retList = new List<Feed>();
+                UserManager userInforMng = new UserManager();
 
-                if (tempContainer.ToString().Equals("Human"))
-                {
-                    tempContainer.Clear();
-                    usFeed = new HumanFeed();
-
-                    tempContainer.Append(AvoidStringNulls(row["PrioValue"].ToString()));
-
-                    if (CastStringToInt(tempContainer.ToString(), ref tempInt))
-                        usFeed.Category.Priority = tempInt;
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["PrioCategory"].ToString()));
-                    usFeed.Category.CategoryName = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["FirstName"].ToString()));
-                    usFeed.Owner.FirstName = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["LastName"].ToString()));
-                    usFeed.Owner.LastName = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Name"].ToString()));
-                    usFeed.Owner.UserName = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Content"].ToString()));
-                    usFeed.Content = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["FilePath"].ToString()));
-                    usFeed.MediaFilePath = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Location"].ToString()));
-                    usFeed.Location = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["FeedId"].ToString()));
-
-                    if (CastStringToInt(tempContainer.ToString(), ref tempInt))
+                
+                if (savedFilter.UsersOnFilter.Count > 0)
+                    foreach (User filteredUser in savedFilter.UsersOnFilter)
                     {
-                        usFeed.Tags = LoadFeedTags(tempInt);
-                        usFeed.Comments = LoadFeedComments(tempInt);
+                        retList.AddRange( LoadFeedsByFilter(filteredUser.ID, savedFilter.Location, savedFilter.StartDate, savedFilter.EndDate, savedFilter.TypeOfFeed, numFeed));
                     }
-                    tempContainer.Clear();
-
-                    lsFeed.Add(usFeed);
-                }
                 else
-                {
-                    tempContainer.Clear();
-                    senFeed = new SensorFeed();
-
-                    tempContainer.Append(AvoidStringNulls(row["PrioValue"].ToString()));
-
-                    if (CastStringToInt(tempContainer.ToString(), ref tempInt))
-                        senFeed.Category.Priority = tempInt;
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["PrioCategory"].ToString()));
-                    senFeed.Category.CategoryName = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Name"].ToString()));
-                    senFeed.Owner.Name = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Content"].ToString()));
-                    senFeed.Content = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Location"].ToString()));
-                    senFeed.Location = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    lsFeed.Add(senFeed);
-                }
+                     LoadFeedsByFilter(-1, savedFilter.Location, savedFilter.StartDate, savedFilter.EndDate, savedFilter.TypeOfFeed, numFeed);
+                
+                return retList.OrderByDescending(o => o.TimeStamp).ToList().GetRange(0, numFeed-1);
             }
 
-            return lsFeed;
-        }
-
-        public bool PublishFeed(HumanFeed feed)
-        {
-            List<string> taggedUsers = new List<string>();
-
-            if (feed.Owner.ID <= 0)
-                return false;
-            else if (String.IsNullOrEmpty(feed.Content) && String.IsNullOrEmpty(feed.MediaFilePath))
-                return false;
-            else if (feed.Category.Id < 1)
-                return false;
-            else
+            public  List<Feed> LoadFeedsFromSavedFilter(Filter savedFilter, int numFeed, int startId)
             {
-                foreach (Human u in feed.Tags)
-                    taggedUsers.Add(u.UserName);
-
-                return this.postDbData.PublishFeed(feed.Owner.ID, taggedUsers, feed.Location,
-                    feed.Content, feed.Category.CategoryName, feed.MediaFilePath, feed.Category.Id);
-            }
-        }
-
-        public bool AddTagToFeed(int feedId, string username)
-        {
-            if (feedId <= 0)
-                return false;
-            else if (String.IsNullOrEmpty(username))
-                return false;
-            else
-                return this.postDbData.IncludeTagFeed(feedId, username);
-        }
-
-        public bool PublishComment(int feedID, Comment comment)
-        {
-            if (feedID <= 0)
-                return false;
-            else if (String.IsNullOrEmpty(comment.Owner.UserName))
-                return false;
-            else if (String.IsNullOrEmpty(comment.Content))
-                return false;
-            else
-                return this.postDbData.PublishComment(feedID, comment.Owner.UserName, comment.Content);
-        }
-
-        public List<Comment> LoadFeedComments(int feedId)
-        {
-            DataSet commentsSet = postDbData.GetFeedComments(feedId);
-
-            List<Comment> lsComments = new List<Comment>();
-            Comment tempComment = new Comment();
-
-            DataTable commentsTable = commentsSet.Tables[0];
-
-            foreach (DataRow row in commentsTable.Rows)
-            {
-                StringBuilder tempContainer = new StringBuilder();
-                tempContainer.Append(AvoidStringNulls(row["FirstName"].ToString()));
-                tempComment.Owner.FirstName = tempContainer.ToString();
-                tempContainer.Clear();
-
-                tempContainer.Append(AvoidStringNulls(row["LastName"].ToString()));
-                tempComment.Owner.LastName = tempContainer.ToString();
-                tempContainer.Clear();
-
-                tempContainer.Append(AvoidStringNulls(row["UserName"].ToString()));
-                tempComment.Owner.UserName = tempContainer.ToString();
-                tempContainer.Clear();
-
-                tempContainer.Append(AvoidStringNulls(row["CommentText"].ToString()));
-                tempComment.Content = tempContainer.ToString();
-                tempContainer.Clear();
-
-                tempContainer.Append(AvoidStringNulls(row["CreationTimeStamp"].ToString()));
-                tempComment.TimeStamp = Convert.ToDateTime(tempContainer.ToString());
-                tempContainer.Clear();
-
-                lsComments.Add(tempComment);
-                tempComment = new Comment();
-            }
-
-            return lsComments;
-        }
-
-        public List<Human> LoadFeedTags(int feedId)
-        {
-            DataSet tagsSet = postDbData.GetFeedTags(feedId);
-
-            int tempInt = 0;
-            List<Human> lsUsers = new List<Human>();
-            Human tempUser = new Human();
-
-            DataTable tagsTable = tagsSet.Tables[0];
-
-            foreach (DataRow row in tagsTable.Rows)
-            {
-                StringBuilder tempContainer = new StringBuilder();
-                tempContainer.Append(AvoidStringNulls(row["FirstName"].ToString()));
-                tempUser.FirstName = tempContainer.ToString();
-                tempContainer.Clear();
-
-                tempContainer.Append(AvoidStringNulls(row["LastName"].ToString()));
-                tempUser.LastName = tempContainer.ToString();
-                tempContainer.Clear();
-
-                tempContainer.Append(AvoidStringNulls(row["UserName"].ToString()));
-                tempUser.UserName = tempContainer.ToString();
-                tempContainer.Clear();
-
-                tempContainer.Append(AvoidStringNulls(row["UserId"].ToString()));
-
-                if (CastStringToInt(tempContainer.ToString(), ref tempInt))
-                    tempUser.ID = tempInt;
-                tempContainer.Clear();
-
-                lsUsers.Add(tempUser);
-                tempUser = new Human();
-            }
-
-            return lsUsers;
-        }
-
-        private static string AvoidStringNulls(string str)
-        {
-            string resStr = "";
-
-            if (str != null)
-                resStr = str;
-
-            return resStr;
-        }
-
-        private static bool CastStringToInt(string str, ref int returnValue)
-        {
-            bool result = false;
-
-            try
-            {
-                returnValue = Convert.ToInt32(str);
-                result = true;
-            }
-            catch (FormatException e)
-            {
-                Console.WriteLine("Input string is not a sequence of digits.");
-            }
-            catch (OverflowException e)
-            {
-                Console.WriteLine("The number cannot fit in an Int32.");
-            }
-
-            return result;
-        }
-
-
-        public List<Feed> LoadFeedsByFilter(string username, string location, DateTime startingTime, DateTime endingTime, string feedType)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        public List<Feed> GetUserFeedByFilter(int userId, string location, DateTime startingTime, DateTime endingTime)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Feed> GetUserFeeds(int userId)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        public List<Feed> LoadLatestXFeedsFromId(int startingId, int numberOfFeeds)
-        {
-            DataSet newFeedsSet = postDbData.GetLatestXFeedsFromId(startingId, numberOfFeeds);
-            List<Feed> lsFeed = new List<Feed>();
-            HumanFeed usFeed;
-            SensorFeed senFeed;
-            int tempInt = 0;
-
-            DataTable newFeedsTable = newFeedsSet.Tables[0];
-
-            foreach (DataRow row in newFeedsTable.Rows)
-            {
-                StringBuilder tempContainer = new StringBuilder();
-                tempContainer.Append(AvoidStringNulls(row["Type"].ToString()));
-
-                if (tempContainer.ToString().Equals("Human"))
-                {
-                    tempContainer.Clear();
-                    usFeed = new HumanFeed();
-
-                    tempContainer.Append(AvoidStringNulls(row["PrioValue"].ToString()));
-
-                    if (CastStringToInt(tempContainer.ToString(), ref tempInt))
-                        usFeed.Category.Priority = tempInt;
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["UserId"].ToString()));
-
-                    if (CastStringToInt(tempContainer.ToString(), ref tempInt))
-                        usFeed.Owner.ID = tempInt;
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["PrioCategory"].ToString()));
-                    usFeed.Category.CategoryName = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Username"].ToString()));
-                    usFeed.Owner.UserName = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Text"].ToString()));
-                    usFeed.Content = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["FilePath"].ToString()));
-                    usFeed.MediaFilePath = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["CreationTimeStamp"].ToString()));
-                    usFeed.TimeStamp = Convert.ToDateTime(tempContainer.ToString());
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Location"].ToString()));
-                    usFeed.Location = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["FeedId"].ToString()));
-
-                    if (CastStringToInt(tempContainer.ToString(), ref tempInt))
+                List<Feed> retList = new List<Feed>();
+                UserManager userInforMng = new UserManager();
+                //var result = retList;
+                //List<string> resultList = result.ToList();
+                if (savedFilter.UsersOnFilter.Count > 0)
+                    foreach (User filteredUser in savedFilter.UsersOnFilter)
                     {
-                        usFeed.ID = tempInt;
-                        usFeed.Tags = LoadFeedTags(tempInt);
-                        usFeed.Comments = LoadFeedComments(tempInt);
+                        retList.AddRange( LoadFeedsByFilter(filteredUser.ID, savedFilter.Location, savedFilter.StartDate, savedFilter.EndDate, savedFilter.TypeOfFeed, startId, numFeed));
                     }
-                    tempContainer.Clear();
-
-                    lsFeed.Add(usFeed);
-                }
                 else
-                {
-                    tempContainer.Clear();
-                    senFeed = new SensorFeed();
+                     LoadFeedsByFilter(-1, savedFilter.Location, savedFilter.StartDate, savedFilter.EndDate, savedFilter.TypeOfFeed, startId, numFeed);
 
-                    tempContainer.Append(AvoidStringNulls(row["PrioValue"].ToString()));
-
-                    if (CastStringToInt(tempContainer.ToString(), ref tempInt))
-                        senFeed.Category.Priority = tempInt;
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["PrioCategory"].ToString()));
-                    senFeed.Category.CategoryName = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Username"].ToString()));
-                    senFeed.Owner.Name = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Text"].ToString()));
-                    senFeed.Content = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["Location"].ToString()));
-                    senFeed.Location = tempContainer.ToString();
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["UserId"].ToString()));
-                    if (CastStringToInt(tempContainer.ToString(), ref tempInt))
-                        senFeed.Owner.ID = tempInt;
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["CreationTimeStamp"].ToString()));
-                    senFeed.TimeStamp = Convert.ToDateTime(tempContainer.ToString());
-                    tempContainer.Clear();
-
-                    tempContainer.Append(AvoidStringNulls(row["FeedId"].ToString()));
-
-                    if (CastStringToInt(tempContainer.ToString(), ref tempInt))
-                    {
-                        senFeed.ID = tempInt;
-                        senFeed.Tags = LoadFeedTags(tempInt);
-                        senFeed.Comments = LoadFeedComments(tempInt);
-                    }
-                    tempContainer.Clear();
-
-                    lsFeed.Add(senFeed);
-                }
+                return retList.OrderByDescending(o => o.TimeStamp).ToList().GetRange(0, numFeed-1);
             }
 
-            return lsFeed;
-        }
+
+            public  Feed GetFeedByFeedId(int feedId)
+            {
+                GetLatestXFeeds_Result entityFeed =  feedData.GetFeedByFeedId(feedId);
+
+                UserManager userInforMng = new UserManager();
+
+                if (entityFeed.Type == "Human")
+                    return new HumanFeed(entityFeed,  LoadFeedComments(entityFeed.FeedId),
+                                               LoadFeedTags(entityFeed.FeedId),
+                                               userInforMng.LoadHumanInformation(entityFeed.UserId));
+                else
+                    return new SensorFeed(entityFeed,  LoadFeedComments(entityFeed.FeedId),
+                                                LoadFeedTags(entityFeed.FeedId),
+                                                userInforMng.LoadSensorInformation(entityFeed.UserId));
+
+            }
     }
 }

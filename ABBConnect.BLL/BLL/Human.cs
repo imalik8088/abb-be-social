@@ -2,35 +2,70 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using DAL;
 
 namespace BLL
 {
-    public class Human
+    public class Human: User
     {
         public Human()
         {
-            this.userName = "";
+            base.UserName = "";
             this.phoneNumber = "";
             this.lastName = "";
             this.companyTitle = "";
             this.email = "";
             this.firstName = "";
-            this.workRoom = "";
-            this.iD = -1;
+            base.Location = "";
+            base.ID = -1;
         }
 
-        private string userName;
-        public string UserName
+        public Human(GetUsersByName_Result result)
         {
-            get
-            {
-                return userName;
-            }
-            set
-            {
-                userName = value;
-            }
+            base.ID = result.Id;
+            base.UserName = result.Name;
+            this.firstName = result.FirstName;
+            this.lastName = result.LastName;
+            base.Location = "";
+            this.companyTitle = "";
+            this.email = "";
+            this.phoneNumber = "";
+        }
+
+        public Human(GetHumanInformation_Result result, int humanId)
+        {
+            base.ID = humanId;
+            base.UserName = result.Name;
+            lastName = result.LastName;
+            firstName = result.FirstName;
+            this.phoneNumber = result.PhoneNumber;
+            email = result.Email;
+            base.Location = result.Location;
+            companyTitle = ""; 
+        }
+        public Human(GetHumanInformationByUsername_Result result)
+        {
+            base.ID = result.Id;
+            base.UserName = result.Name;
+            lastName = result.LastName;
+            firstName = result.FirstName;
+            this.phoneNumber = result.PhoneNumber;
+            email = result.Email;
+            base.Location = result.Location;
+            companyTitle = "";
+        }
+
+        public Human(GetFeedTags_Result res)
+        {
+            base.ID = res.UserId;
+            base.UserName = res.UserName;
+            firstName = res.FirstName;
+            lastName = res.LastName;
+            this.phoneNumber = "";
+            this.companyTitle = "";
+            this.email = "";
+            base.Location = "";
+            
         }
 
         private string phoneNumber;
@@ -72,19 +107,6 @@ namespace BLL
             }
         }
 
-        private string workRoom;
-        public string WorkRoom
-        {
-            get
-            {
-                return workRoom;
-            }
-            set
-            {
-                workRoom = value;
-            }
-        }
-
         private string firstName;
         public string FirstName
         {
@@ -108,19 +130,6 @@ namespace BLL
             set
             {
                 lastName = value;
-            }
-        }
-
-        private int iD;
-        public int ID
-        {
-            get
-            {
-                return iD;
-            }
-            set
-            {
-                iD = value;
             }
         }
         

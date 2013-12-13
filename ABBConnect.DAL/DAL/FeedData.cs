@@ -22,7 +22,7 @@ namespace DAL
 
 
 
-        List<GetLatestXFeeds_Result> GetLatestXFeeds(string X)
+        List<GetLatestXFeeds_Result> GetLatestXFeeds(int X)
         {
             List<GetLatestXFeeds_Result> feeds = new List<GetLatestXFeeds_Result>();
 
@@ -35,7 +35,7 @@ namespace DAL
                 using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("@X", SqlDbType.Int).Value = int.Parse(X);
+                    cmd.Parameters.Add("@X", SqlDbType.Int).Value = X;
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         ;
@@ -62,7 +62,7 @@ namespace DAL
             return feeds;
         }
 
-        List<GetLatestXFeedsFromId_Result> GetLatestXFeedsFromId(string X, string Id)
+        List<GetLatestXFeedsFromId_Result> GetLatestXFeedsFromId(int X, int Id)
         {
             List<GetLatestXFeedsFromId_Result> feeds = new List<GetLatestXFeedsFromId_Result>();
 
@@ -103,7 +103,7 @@ namespace DAL
             return feeds;
         }
 
-        public int PostFeed(string id, string text, string filepath, string prioId)
+        public int PostFeed(int id, string text, string filepath, int prioId)
         {
             int result = 0;
 
@@ -133,7 +133,7 @@ namespace DAL
             return result;
         }
 
-        public List<GetFeedComments_Result> GetFeedComments(string feedId, string randomGuid)
+        public List<GetFeedComments_Result> GetFeedComments(int feedId)
         {
             List<GetFeedComments_Result> comments = new List<GetFeedComments_Result>();
 
@@ -169,7 +169,7 @@ namespace DAL
             return comments;
         }
 
-        public List<GetFeedTags_Result> GetFeedTags(string feedId)
+        public List<GetFeedTags_Result> GetFeedTags(int feedId)
         {
             List<GetFeedTags_Result> tags = new List<GetFeedTags_Result>();
 
@@ -211,7 +211,7 @@ namespace DAL
             return tags;
         }
 
-        List<GetAllHumanFeeds_Result> GetHumanFeeds()
+        public List<GetAllHumanFeeds_Result> GetHumanFeeds()
         {
             List<GetAllHumanFeeds_Result> feeds = new List<GetAllHumanFeeds_Result>();
 
@@ -249,8 +249,8 @@ namespace DAL
             }
             return feeds;
         }
-
-        List<GetAllHumanFeedsByFilter_Result> GetHumanFeedsByFilter(string location, string startingTime, string endingTime)
+        
+        public List<GetAllHumanFeedsByFilter_Result> GetHumanFeedsByFilter(string location, DateTime startingTime, DateTime endingTime)
         {
             List<GetAllHumanFeedsByFilter_Result> feeds = new List<GetAllHumanFeedsByFilter_Result>();
 
@@ -301,8 +301,7 @@ namespace DAL
             }
             return feeds;
         }
-
-        List<GetAllSensorFeeds_Result> GetSensorFeeds()
+        public List<GetAllSensorFeeds_Result> GetSensorFeeds()
         {
             List<GetAllSensorFeeds_Result> feeds = new List<GetAllSensorFeeds_Result>();
 
@@ -340,8 +339,7 @@ namespace DAL
             }
             return feeds;
         }
-
-        List<GetAllSensorFeedsByFilter_Result> GetSensorFeedsByFilter(string location, string startingTime, string endingTime)
+        public List<GetAllSensorFeedsByFilter_Result> GetSensorFeedsByFilter(string location, DateTime startingTime, DateTime endingTime)
         {
             List<GetAllSensorFeedsByFilter_Result> feeds = new List<GetAllSensorFeedsByFilter_Result>();
 
@@ -392,8 +390,7 @@ namespace DAL
             }
             return feeds;
         }
-
-        List<GetUserFeeds_Result> GetUserFeeds()
+        public List<GetUserFeeds_Result> GetUserFeeds()
         {
             List<GetUserFeeds_Result> feeds = new List<GetUserFeeds_Result>();
 
@@ -431,8 +428,7 @@ namespace DAL
             }
             return feeds;
         }
-
-        List<GetUserFeedsByFilter_Result> GetUserFeedsByFilter(string location, string startingTime, string endingTime)
+        public List<GetUserFeedsByFilter_Result> GetUserFeedsByFilter(string location, DateTime startingTime, DateTime endingTime)
         {
             List<GetUserFeedsByFilter_Result> feeds = new List<GetUserFeedsByFilter_Result>();
 
@@ -485,91 +481,10 @@ namespace DAL
             return feeds;
         }
 
-        List<GetHistoricalDataFromSensor_Result> GetHistoricalDataFromSensor(string id, string startingTime, string endingTime)
+
+        public bool PostComment(int feedId, string username, string text)
         {
-            List<GetHistoricalDataFromSensor_Result> histData = new List<GetHistoricalDataFromSensor_Result>();
-
-            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
-            {
-
-                sqlConn.Open();
-                string sqlQuery = "GetHistoricalDataFromSensor";
-
-                DateTime minValue = DateTime.MinValue;
-
-                int iD = Int32.Parse(id);
-
-                using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConn))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("@sensorID", SqlDbType.Int).Value = iD;
-
-                    if (startingTime.Equals(minValue.ToString()))
-                        cmd.Parameters.Add("@from", SqlDbType.DateTime).Value = DBNull.Value;
-                    else
-                        cmd.Parameters.Add("@from", SqlDbType.DateTime).Value = Convert.ToDateTime(startingTime);
-
-                    if (endingTime.Equals(minValue.ToString()))
-                        cmd.Parameters.Add("@to", SqlDbType.DateTime).Value = DBNull.Value;
-                    else
-                        cmd.Parameters.Add("@to", SqlDbType.DateTime).Value = Convert.ToDateTime(endingTime);
-
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        ;
-                        while (reader.Read())
-                        {
-                            GetHistoricalDataFromSensor_Result senData = new GetHistoricalDataFromSensor_Result();
-                            senData.RawValue = (string)reader[0];
-                            senData.CreationTimeStamp = (DateTime)reader[1];
-
-                            histData.Add(senData);
-                        }
-                    }
-                }
-                sqlConn.Close();
-            }
-            return histData;
-        }
-
-        public int GetLastSensorValue(string id)
-        {
-            int iD = Int32.Parse(id);
-            string value = "";
-
-            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
-            {
-
-                sqlConn.Open();
-                string sqlQuery = "GetLatestSensorValue";
-
-                using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConn))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("@sensorID", SqlDbType.Int).Value = iD;
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        ;
-                        if (reader.Read())
-                        {
-                            value = (string)reader[0];
-                        }
-                    }
-                }
-                sqlConn.Close();
-            }
-
-            int numValue;
-            bool parsed = Int32.TryParse(value, out numValue);
-
-
-
-            return numValue;
-        }
-
-        public bool PostComment(string feedId, string username, string text)
-        {
-            int iD = Int32.Parse(feedId);
+            int iD = feedId;
             int rowsAffected = 0;
 
             using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
@@ -596,9 +511,9 @@ namespace DAL
                 return false;
         }
 
-        public bool AddTag(string feedId, string username)
+        public bool AddTag(int feedId, string username)
         {
-            int iD = Int32.Parse(feedId);
+            int iD = feedId;
             int rowsAffected = 0;
 
             using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
@@ -624,7 +539,7 @@ namespace DAL
                 return false;
         }
 
-        List<GetLatestFeedsByFilter_Result> GetLatestFeedsByFilter(string location, string startingTime, string endingTime)
+        public List<GetLatestFeedsByFilter_Result> GetLatestFeedsByFilter(string location, DateTime startingTime, DateTime endingTime)
         {
             List<GetLatestFeedsByFilter_Result> feeds = new List<GetLatestFeedsByFilter_Result>();
 
@@ -676,7 +591,7 @@ namespace DAL
             return feeds;
         }
 
-        List<GetFeedsByFilter_Result> GetFeedsByFilter(string name, string location, string startingTime, string endingTime, string feedType)
+        public List<GetFeedsByFilter_Result> GetFeedsByFilter(string name, string location, DateTime startingTime, DateTime endingTime, string feedType)
         {
             List<GetFeedsByFilter_Result> feeds = new List<GetFeedsByFilter_Result>();
 
@@ -731,7 +646,7 @@ namespace DAL
             return feeds;
         }
 
-        List<GetLatestXFeeds_Result> GetXFeedsByFilter(string id, string location, string startingTime, string endingTime, string feedType, string startId, string numFeeds, string randomGuid)
+        public List<GetLatestXFeeds_Result> GetXFeedsByFilter(int id, string location, DateTime startingTime, DateTime endingTime, string feedType, int startId, int numFeeds)
         {
             List<GetLatestXFeeds_Result> feeds = new List<GetLatestXFeeds_Result>();
 
@@ -749,7 +664,7 @@ namespace DAL
                         if (id.Equals(""))
                             cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = DBNull.Value;
                         else
-                            cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = int.Parse(id);
+                            cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = id;
 
                         if (location.Equals(""))
                             cmd.Parameters.Add("@location", SqlDbType.NVarChar, 50).Value = DBNull.Value;
@@ -774,12 +689,12 @@ namespace DAL
                         if (startId.Equals(""))
                             cmd.Parameters.Add("@startingFeedId", SqlDbType.Int).Value = DBNull.Value;
                         else
-                            cmd.Parameters.Add("@startingFeedId", SqlDbType.Int).Value = int.Parse(startId);
+                            cmd.Parameters.Add("@startingFeedId", SqlDbType.Int).Value = startId;
 
                         if (numFeeds.Equals(""))
                             cmd.Parameters.Add("@numOfFeeds", SqlDbType.Int).Value = DBNull.Value;
                         else
-                            cmd.Parameters.Add("@numOfFeeds", SqlDbType.Int).Value = int.Parse(numFeeds);
+                            cmd.Parameters.Add("@numOfFeeds", SqlDbType.Int).Value = numFeeds;
                     }
 
                     catch (Exception)
@@ -817,7 +732,7 @@ namespace DAL
             return feeds;
         }
 
-        public GetLatestXFeeds_Result GetFeedByFeedId(string feedId, string randomGuid)
+        public GetLatestXFeeds_Result GetFeedByFeedId(int feedId)
         {
             GetLatestXFeeds_Result feed = new GetLatestXFeeds_Result();
 
@@ -832,7 +747,7 @@ namespace DAL
 
                     try
                     {
-                        cmd.Parameters.Add("@feedId", SqlDbType.Int).Value = int.Parse(feedId);
+                        cmd.Parameters.Add("@feedId", SqlDbType.Int).Value = feedId;
                     }
 
                     catch (Exception)
@@ -867,10 +782,10 @@ namespace DAL
             return feed;
         }
 
-        public bool FollowSensor(string humanId, string sensorId)
+        public bool FollowSensor(int humanId, int sensorId)
         {
-            int humanIntId = Int32.Parse(humanId);
-            int sensorIntId = Int32.Parse(sensorId);
+            int humanIntId = humanId;
+            int sensorIntId = sensorId;
             int rowsAffected = 0;
 
             using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it

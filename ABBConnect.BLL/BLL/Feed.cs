@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using DAL;
 
 namespace BLL
 {
@@ -17,6 +17,22 @@ namespace BLL
             this.content = "";
             this.category = new Category();
             this.category.CategoryName = "";
+        }
+
+
+        public Feed(GetLatestXFeeds_Result res, List<Comment> listCom, List<Human> listTag)
+        {
+            category = new Category();
+            this.comments = new List<Comment>();
+            this.tags = new List<Human>();
+
+            comments = listCom;
+            tags = listTag;
+            timeStamp = res.CreationTimeStamp;
+            location = res.Location;
+            content = res.Text;
+            category.CategoryName = res.PrioCategory;
+            category.Priority = res.PrioValue;
         }
 
         private int iD;
@@ -110,5 +126,12 @@ namespace BLL
             }
         }
 
+        private string feedType;
+
+        public string FeedType
+        {
+            get { return feedType; }
+            set { feedType = value; }
+        }
     }
 }
