@@ -671,12 +671,12 @@ namespace DAL
                         else
                             cmd.Parameters.Add("@location", SqlDbType.NVarChar, 50).Value = location;
 
-                        if (startingTime.Equals(""))
+                        if (startingTime == DateTime.MinValue)
                             cmd.Parameters.Add("@startTime", SqlDbType.DateTime).Value = DBNull.Value;
                         else
                             cmd.Parameters.Add("@startTime", SqlDbType.DateTime).Value = Convert.ToDateTime(startingTime);
 
-                        if (endingTime.Equals(""))
+                        if (endingTime == DateTime.MinValue)
                             cmd.Parameters.Add("@endTime", SqlDbType.DateTime).Value = DBNull.Value;
                         else
                             cmd.Parameters.Add("@endTime", SqlDbType.DateTime).Value = Convert.ToDateTime(endingTime);
