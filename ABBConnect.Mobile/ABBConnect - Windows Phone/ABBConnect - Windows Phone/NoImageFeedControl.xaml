@@ -9,17 +9,17 @@
     Foreground="{StaticResource PhoneForegroundBrush}" Width="456"
     d:DesignHeight="225" d:DesignWidth="456">
 
-    <Grid x:Name="gridFeedControl" Margin="0,0,0,10" Background="{StaticResource PhoneChromeBrush}" >
-        <Image x:Name="TimeSymbol" Source="/Icons/symbol_timer.png" HorizontalAlignment="Left" Height="24" Margin="374,8,0,0" VerticalAlignment="Top" Width="20"/>
-        <TextBlock x:Name="Timestamp" FontSize="18" HorizontalAlignment="Right" Margin="0,5,30,188" TextWrapping="Wrap" RenderTransformOrigin="2.341,6.889" MouseLeftButtonDown="Content_MouseLeftButtonDown" TextAlignment="Center" Width="29" Foreground="#FF969696" Text="10h"/>
-        <TextBlock x:Name="Author" FontSize="20" HorizontalAlignment="Left" Margin="30,5,0,0" TextWrapping="Wrap" Text="Robert Gustavsson" VerticalAlignment="Top" RenderTransformOrigin="2.341,6.889" MouseLeftButtonDown="Author_MouseLeftButtonDown" FontWeight="Bold"/>
-        <TextBlock x:Name="Location" HorizontalAlignment="Left" Margin="49,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Foreground="#FF969696" d:LayoutOverrides="VerticalAlignment"><Run Text="Machine "/><Run Text="2"/></TextBlock>
-        <Image Source="symbol_location.png" HorizontalAlignment="Left" Height="15" Margin="30,50,0,0" VerticalAlignment="Top" Width="15" d:LayoutOverrides="VerticalAlignment"/>
-        <TextBlock x:Name="Text"  FontSize="20" HorizontalAlignment="Left" Margin="30,69,0,0" TextWrapping="Wrap" Text="Message for the next shift ...." VerticalAlignment="Top" RenderTransformOrigin="2.341,6.889" MouseLeftButtonDown="Content_MouseLeftButtonDown" Width="396"/>
-        <TextBlock x:Name="Tags" FontSize="18" HorizontalAlignment="Left" Margin="46,179,0,14" TextWrapping="Wrap" Text="11" RenderTransformOrigin="2.341,6.889" MouseLeftButtonDown="Content_MouseLeftButtonDown" TextAlignment="Center" Width="25" Foreground="#FF969696"/>
-        <Image Source="/Icons/symbol_tag.png" HorizontalAlignment="Left" Height="20" Margin="30,184,0,0" VerticalAlignment="Top" Width="20"/>
-        <Image Source="/Icons/symbol_comment.png" HorizontalAlignment="Left" Height="23" Margin="73,181,0,0" VerticalAlignment="Top" Width="23" RenderTransformOrigin="2.522,0.565"/>
-        <TextBlock x:Name="Comments" FontSize="18" HorizontalAlignment="Left" Margin="89,179,0,14" TextWrapping="Wrap" RenderTransformOrigin="2.341,6.889" MouseLeftButtonDown="Content_MouseLeftButtonDown" TextAlignment="Center" Width="29" Foreground="#FF969696" Text="9"/>
-
+    <Grid x:Name="gridFeedControl" Margin="0,0,0,10" >
+        <Image x:Name="TimeSymbol" Source="/Icons/icon-timer.png" HorizontalAlignment="Left" Height="20" Margin="390,5,0,0" VerticalAlignment="Top" Width="20"/>
+        <TextBlock x:Name="Timestamp" FontSize="18" HorizontalAlignment="Right" Margin="0,5,14,188" TextWrapping="Wrap" RenderTransformOrigin="2.341,6.889" MouseLeftButtonDown="Content_MouseLeftButtonDown" TextAlignment="Right" Width="30" Foreground="#FF8A8A8A" Text="10h"/>
+        <TextBlock x:Name="Author" FontSize="18" HorizontalAlignment="Left" Margin="36,5,0,0" TextWrapping="Wrap" Text="Robert Gustavsson" VerticalAlignment="Top" RenderTransformOrigin="2.341,6.889" MouseLeftButtonDown="Author_MouseLeftButtonDown" FontWeight="Bold"/>
+        <TextBlock x:Name="Location" HorizontalAlignment="Left" Margin="53,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Foreground="#FF8A8A8A" d:LayoutOverrides="VerticalAlignment"><Run Text="Machine "/><Run Text="2"/></TextBlock>
+        <Image Source="/Icons/icon-location-just.png" HorizontalAlignment="Left" Height="18" Margin="33,26,0,0" VerticalAlignment="Top" Width="18" d:LayoutOverrides="VerticalAlignment"/>
+        <TextBlock x:Name="Text"  FontSize="20" HorizontalAlignment="Left" Margin="10,48,0,0" TextWrapping="Wrap" Text="Message for the next shift ...." VerticalAlignment="Top" RenderTransformOrigin="2.341,6.889" MouseLeftButtonDown="Content_MouseLeftButtonDown" Width="432"/>
+        <TextBlock x:Name="Tags" FontSize="18" HorizontalAlignment="Right" Margin="0,5,115,186" TextWrapping="Wrap" Text="11" RenderTransformOrigin="2.341,6.889" MouseLeftButtonDown="Content_MouseLeftButtonDown" TextAlignment="Left" Width="20" Foreground="#FF8A8A8A"/>
+        <Image Source="/Icons/icon-comment.png" Height="20" Margin="345,5,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.522,0.565" HorizontalAlignment="Left" Width="20" />
+        <Image Source="Icons/icon-tag.png" Height="20" Margin="299,5,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.522,0.565" Width="20" HorizontalAlignment="Left" />
+        <TextBlock x:Name="Comments" FontSize="18" HorizontalAlignment="Left" Margin="367,5,0,186" TextWrapping="Wrap" RenderTransformOrigin="2.341,6.889" MouseLeftButtonDown="Content_MouseLeftButtonDown" TextAlignment="Left" Width="20" Foreground="#FF8A8A8A" Text="11"/>
+        <Image Height="20" HorizontalAlignment="Left" Margin="10,5,0,0" Name="image1" Stretch="Fill" VerticalAlignment="Top" Width="20" Source="/Icons/icon-user-app-bar.png" />
     </Grid>
 </UserControl>
