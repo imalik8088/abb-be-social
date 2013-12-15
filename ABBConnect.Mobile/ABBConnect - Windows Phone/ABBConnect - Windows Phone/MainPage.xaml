@@ -36,7 +36,7 @@
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
         <Image Height="35" HorizontalAlignment="Left" Margin="10,15,0,0" Name="image1" Stretch="Fill" VerticalAlignment="Top" Width="35" Source="/ABBConnect%20-%20Windows%20Phone;component/Icons/favicon.png" />
-        <controls:Pivot Title="     ABBConnect">
+        <controls:Pivot Title="     ABB Connect">
             <!--Pivot item one-->
             <controls:PivotItem Header="Feeds" x:Name="piFeed" Width="456" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                 <Grid HorizontalAlignment="Left" Height="574" VerticalAlignment="Top" Width="456">
@@ -56,15 +56,18 @@
             <controls:PivotItem Header="Post" x:Name="piPost">
                 <!--Triple line list no text wrapping-->
                 <Grid>
-                    <TextBlock x:Name="lblContent" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Content" VerticalAlignment="Top" RenderTransformOrigin="0.165,0.648"/>
-                    <TextBox x:Name="txtbContent" HorizontalAlignment="Left" Height="233" Margin="0,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="456" VerticalScrollBarVisibility="Auto" Text="Insert feed content here..." InputScope="Text" MouseLeftButtonDown="txtbContent_MouseLeftButtonDown"/>
+                    <TextBlock x:Name="lblContent" HorizontalAlignment="Left" Margin="42,11,0,0" TextWrapping="Wrap" Text="Message" VerticalAlignment="Top" RenderTransformOrigin="0.165,0.648" Foreground="#FF8A8A8A" />
+                    <TextBox x:Name="txtbContent" HorizontalAlignment="Left" Height="212" Margin="0,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="456" VerticalScrollBarVisibility="Auto" Text="Insert feed content here..." InputScope="Text" MouseLeftButtonDown="txtbContent_MouseLeftButtonDown"/>
 
-                    <Button x:Name="btnPublish" Content="Publish" HorizontalAlignment="Left" Margin="50,468,0,0" VerticalAlignment="Top" Width="353" Height="75" Click="btnPublish_MouseLeftButtonUp"/>
-                    <Image x:Name="imgCapture" HorizontalAlignment="Left" Height="100" Margin="175,346,0,0" VerticalAlignment="Top" Width="107" MouseLeftButtonUp="imgCapture_MouseLeftButtonUp" />
-                    <Image x:Name="CameraIcon" Height="100" HorizontalAlignment="Left" MouseLeftButtonUp="imgCapture_MouseLeftButtonUp" Margin="50,346,0,0" Stretch="Fill" VerticalAlignment="Top" Width="100" Source="/ABBConnect%20-%20Windows%20Phone;component/Icons/camera.png" />
-                    <TextBlock x:Name="lbl_TapToTakePhoto" MouseLeftButtonUp="imgCapture_MouseLeftButtonUp" HorizontalAlignment="Left" Margin="55,319,0,0" TextWrapping="Wrap" Text="Add photo" VerticalAlignment="Top" RenderTransformOrigin="0.165,0.648"/>
-                    <Image x:Name="TagIcon" Height="100" HorizontalAlignment="Left" Margin="303,346,0,0" Stretch="Fill" VerticalAlignment="Top" Width="100" Source="Icons/symbol_tag.png" MouseLeftButtonUp="TagIcon_MouseLeftButtonUp" />
-                    <TextBlock x:Name="lbl_TapToTag" HorizontalAlignment="Left" Margin="316,319,0,0" TextWrapping="Wrap" Text="Add Tag" VerticalAlignment="Top" RenderTransformOrigin="0.165,0.648"/>
+                    <Button x:Name="btnPublish" Content="Publish" HorizontalAlignment="Left" Margin="10,468,0,0" VerticalAlignment="Top" Width="436" Height="75" Click="btnPublish_MouseLeftButtonUp"/>
+                    <Image x:Name="imgCapture" HorizontalAlignment="Left" Height="100" Margin="136,346,0,0" VerticalAlignment="Top" Width="107" MouseLeftButtonUp="imgCapture_MouseLeftButtonUp" />
+                    <Image x:Name="CameraIcon" Height="100" HorizontalAlignment="Left" MouseLeftButtonUp="imgCapture_MouseLeftButtonUp" Margin="20,344,0,0" Stretch="Fill" VerticalAlignment="Top" Width="100" Source="Icons/camera.png" />
+                    <TextBlock x:Name="lbl_TapToTakePhoto" MouseLeftButtonUp="imgCapture_MouseLeftButtonUp" HorizontalAlignment="Left" Margin="141,379,0,0" TextWrapping="Wrap" Text="Take a picture" VerticalAlignment="Top" RenderTransformOrigin="0.165,0.648" Foreground="White" />
+                    <Image x:Name="TagIcon" Height="56" HorizontalAlignment="Left" Margin="93,250,0,0" Stretch="Fill" VerticalAlignment="Top" Width="56" Source="Icons/symbol_tag.png" MouseLeftButtonUp="TagIcon_MouseLeftButtonUp" />
+                    <!--<TextBlock x:Name="lbl_TapToTag" HorizontalAlignment="Left" Margin="227,263,0,0" TextWrapping="Wrap" Text="Add Tag" VerticalAlignment="Top" RenderTransformOrigin="0.165,0.648"/>-->
+                    <Image Height="20" HorizontalAlignment="Left" Margin="15,15,0,0" Name="imaged" Stretch="Fill" VerticalAlignment="Top" Width="20" Source="/Icons/icon-comment.png" />
+                    <TextBlock x:Name="lblTag" HorizontalAlignment="Left" Margin="43,239,0,0" TextWrapping="Wrap" Text="Tag" VerticalAlignment="Top" RenderTransformOrigin="0.165,0.648" Foreground="#FF8A8A8A" />
+                    <Image Height="20" HorizontalAlignment="Left" Margin="15,242,0,0" Name="image2" Stretch="Fill" VerticalAlignment="Top" Width="20" Source="/Icons/icon-tag.png" />
                 </Grid>
             </controls:PivotItem>
             <!--
