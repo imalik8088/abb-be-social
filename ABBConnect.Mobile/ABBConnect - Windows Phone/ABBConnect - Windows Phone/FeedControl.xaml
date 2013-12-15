@@ -9,12 +9,14 @@
     Foreground="{StaticResource PhoneForegroundBrush}" Height="445" Width="456">
 
     <Grid x:Name="gridFeedControl" Margin="0,0,0,10" Background="{StaticResource PhoneChromeBrush}" >
+        <Image x:Name="TimeSymbol" Source="/Icons/icon-timer.png" HorizontalAlignment="Left" Height="20" Margin="390,5,0,0" VerticalAlignment="Top" Width="20"/>
+        
         <Image x:Name="imgImage"  HorizontalAlignment="Left" Height="238" Margin="91,57,0,0" VerticalAlignment="Top" Width="280" MouseLeftButtonDown="Content_MouseLeftButtonDown"/>
         <TextBlock x:Name="Text"  FontSize="20" HorizontalAlignment="Left" Margin="30,319,0,0" TextWrapping="Wrap" Text="This is some awseom content that is aawesome" VerticalAlignment="Top" RenderTransformOrigin="2.341,6.889" MouseLeftButtonDown="Content_MouseLeftButtonDown" Width="396"/>
         <TextBlock x:Name="Author" FontSize="20" HorizontalAlignment="Left" Margin="30,5,0,0" TextWrapping="Wrap" Text="Robert Gustavsson" VerticalAlignment="Top" RenderTransformOrigin="2.341,6.889" MouseLeftButtonDown="Author_MouseLeftButtonDown" FontWeight="Bold"/>
         <TextBlock x:Name="Tags" FontSize="18" HorizontalAlignment="Left" Margin="46,396,0,17" TextWrapping="Wrap" Text="11" RenderTransformOrigin="2.341,6.889" MouseLeftButtonDown="Content_MouseLeftButtonDown" TextAlignment="Center" Width="25" Foreground="#FF969696"/>
         <TextBlock x:Name="Location" HorizontalAlignment="Left" Margin="49,297,0,0" TextWrapping="Wrap" Text="Machine 1" VerticalAlignment="Top" FontSize="14" Foreground="#FF969696"/>
-        <Image x:Name="TimeSymbol" Source="Icons/symbol_timer.png" HorizontalAlignment="Left" Height="24" Margin="374,8,0,0" VerticalAlignment="Top" Width="20"/>
+        <!--<Image x:Name="TimeSymbol" Source="Icons/symbol_timer.png" HorizontalAlignment="Left" Height="24" Margin="374,8,0,0" VerticalAlignment="Top" Width="20"/>-->
         <Image Source="Icons/symbol_tag.png" HorizontalAlignment="Left" Height="20" Margin="30,401,0,0" VerticalAlignment="Top" Width="20"/>
         <Image Source="Icons/symbol_comment.png" HorizontalAlignment="Left" Height="23" Margin="73,398,0,0" VerticalAlignment="Top" Width="23" RenderTransformOrigin="2.522,0.565"/>
         <Image Source="symbol_location.png" HorizontalAlignment="Left" Height="15" Margin="30,300,0,0" VerticalAlignment="Top" Width="15"/>

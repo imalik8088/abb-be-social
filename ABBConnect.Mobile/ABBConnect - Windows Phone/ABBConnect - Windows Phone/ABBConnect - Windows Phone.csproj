@@ -185,11 +185,14 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Icons\icon-comment.png" />
+    <Resource Include="Icons\icon-email.png" />
     <Content Include="Icons\icon-location-just.png" />
+    <Resource Include="Icons\icon-location.png" />
     <Content Include="Icons\icon-refresh-app-bar.png" />
     <Content Include="Icons\icon-search-app-bar.png" />
     <Content Include="Icons\icon-sensor.png" />
     <Content Include="Icons\icon-tag.png" />
+    <Resource Include="Icons\icon-telephone.png" />
     <Content Include="Icons\icon-timer.png" />
     <Content Include="Icons\icon-user-app-bar.png" />
     <Content Include="Icons\icon_search.png" />
