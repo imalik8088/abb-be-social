@@ -10,7 +10,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        HumanManager hm = new HumanManager();
+        UserManager hm = new UserManager();
         Human human = new Human();
         if (Session["humanID"] != null)
         {

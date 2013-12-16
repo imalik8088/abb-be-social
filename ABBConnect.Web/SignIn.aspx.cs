@@ -10,7 +10,7 @@ public partial class SignIn : System.Web.UI.Page
 {
     public void LoginButtonClick(Object sender, EventArgs e)
     {
-        HumanManager hm = new HumanManager();
+        UserManager hm = new UserManager();
         Human human = new Human();
         string userName = txtUsername.Value;
         string password = txtPassword.Value;

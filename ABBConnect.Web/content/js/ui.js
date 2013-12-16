@@ -60,7 +60,11 @@ function AjaxPostNewFeed() {
     var feedContentData = $("#textareaNote").val();
     var feedType = $("#selectModalNoteMessage").val();
 
-    PageMethods.AjaxPostNewFeed(feedContentData, feedType, OnAjaxPostNewFeedSuccess);
+    // fetch the selectize instance
+    var selectize = $('#input-tags')[0].selectize;
+    var tags = selectize.getValue();
+
+    PageMethods.AjaxPostNewFeed(feedContentData, feedType, tags, OnAjaxPostNewFeedSuccess);
 }
 function OnAjaxPostNewFeedSuccess(result, userContext, methodName) {
     if (result) {
@@ -89,27 +93,73 @@ function OnPopulateSelectBoxPostType(result, userContext, methodName) {
     var typeArray = JSON.parse(result);
     var obj = document.getElementById('selectModalNoteMessage');
 
-    //TODO search pattern for splitting strings by capital letters
-    //var stringList = typeArray[0].CategoryName.split(/(?=[A-Z])/);
-
     for (var i = 0; i < typeArray.length; i++) {
         opt = document.createElement("option");
         opt.value = typeArray[i].CategoryName;
-        opt.text = typeArray[i].CategoryName;
+        opt.text = typeArray[i].CategoryName.split(/(?=[A-Z])/).join(' ');
         obj.appendChild(opt);
     }
 }
 
 function ClearModalBodyListener() {
+
+    //initialization of the selection field, called once
+    var $select = $('#input-tags').selectize({
+        plugins: ['remove_button'],
+        labelField: 'FirstName',
+        valueField: 'UserName',
+        searchField: ['FirstName', 'LastName'],
+        delimiter: ',',
+        create: false,
+        options: [],
+        load: function (query, callback) {
+            if (!query.length) return callback();
+
+            AjaxGetQueriedUsers(query);
+
+            function AjaxGetQueriedUsers(query) {
+                PageMethods.AjaxGetQueriedUsers(query, AjaxGetQueriedUsersSuccess);
+            }
+
+            function AjaxGetQueriedUsersSuccess(result, userContext, methodName) {
+                //the result is an array of User objects
+                var users = JSON.parse(result);
+                callback(users);
+            }
+        },
+        render: {
+            //rendering of the options in the dropdown menu
+            option: function (item, escape) {
+                return '<div>' +
+                    '<span class="humanName">' + escape(item.FirstName) + '</span>' +
+                    '<span class="space"> </span>' +
+                    '<span class="humanSurname">' + escape(item.LastName) + '</span>' +
+                '</div>';
+            },
+            //rendering of selected items
+            item: function (item, escape) {
+                return '<div>' +
+                    '<span class="humanName">' + escape(item.FirstName) + '</span>' +
+                    '<span class="space"> </span>' +
+                    '<span class="humanSurname">' + escape(item.LastName) + '</span>' +
+                '</div>';
+            }
+        }
+    });
+
+    var selectize = $select[0].selectize;
+
     //delegates for modals, so we can clear the data between the hides.
-    //at the moment, it has to be like this, i couldn't make it work with removeData
-    $(document).delegate('#modalNote', 'hidden.bs.modal', function (event) {
-        //$(this).data('bs.modal').$element.removeData();
-        $(this).html($(this).html());
+    $(document).delegate('#modalNote', 'hide.bs.modal', function (event) {
+
+        //$(this).html($(this).html());
+        $('#selectModalNoteMessage').html($('#selectModalNoteMessage').html());
+        $('#textareaNote').val('').blur();
+        selectize.clear();
     });
 
     $(document).delegate('#modalPicture', 'hidden.bs.modal', function (event) {
-        //$(this).find('textarea').val(null).blur();
+
         $(this).html($(this).html());
     });
 }
@@ -117,6 +167,54 @@ function ClearModalBodyListener() {
 
 function initUI() {
     $('.dropdown-toggle').dropdown();
+
+    //initialization of the search bar, called once
+    var $select = $('#search-input-bar').selectize({
+        labelField: 'FirstName',
+        valueField: 'UserName',
+        searchField: ['FirstName', 'LastName'],
+        delimiter: ',',
+        create: false,
+        options: [],
+        load: function (query, callback) {
+            if (!query.length) return callback();
+
+            AjaxGetQueriedUsers(query);
+
+            function AjaxGetQueriedUsers(query) {
+                PageMethods.AjaxGetQueriedUsers(query, AjaxGetQueriedUsersSuccess);
+            }
+
+            function AjaxGetQueriedUsersSuccess(result, userContext, methodName) {
+                //the result is an array of User objects
+                var users = JSON.parse(result);
+                callback(users);
+            }
+        },
+        render: {
+            //rendering of the options in the dropdown menu
+            option: function (item, escape) {
+                return '<div>' +
+                    '<span class="humanName">' + escape(item.FirstName) + '</span>' +
+                    '<span class="space"> </span>' +
+                    '<span class="humanSurname">' + escape(item.LastName) + '</span>' +
+                '</div>';
+            },
+            //rendering of selected items
+            item: function (item, escape) {
+                return '<div>' +
+                    '<span class="humanName">' + escape(item.FirstName) + '</span>' +
+                    '<span class="space"> </span>' +
+                    '<span class="humanSurname">' + escape(item.LastName) + '</span>' +
+                '</div>';
+            }
+        },
+        onItemAdd: function (value, $item) {
+            //TODO add redirect to user page
+            alert(value);
+        }
+    });
+
 }
 
 function OnClickSignOut() {

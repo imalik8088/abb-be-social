@@ -11,7 +11,7 @@ public partial class _UserPage : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        HumanManager hm = new HumanManager();
+        UserManager hm = new UserManager();
         Human human = new Human();
         FeedManager fm = new FeedManager();
 

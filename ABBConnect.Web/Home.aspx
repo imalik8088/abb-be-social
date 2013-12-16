@@ -140,7 +140,7 @@
             </div>
         </div>
     </div>
-   <!-- Modals -->
+    <!-- Modals -->
     <div id="modals">
         <div class="modal fade" id="modalNote" tabindex="-1" role="dialog" aria-labelledby="modalNoteLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -157,7 +157,38 @@
                         <hr>
                         <h5>Please insert new note text:</h5>
                         <!-- Textbox -->
-                        <textarea id="textareaNote" class="input col-md-12" placeholder="Insert your note text here..." rows="5" ></textarea>
+                        <textarea id="textareaNote" class="input col-md-12" placeholder="Insert your note text here..." rows="5"></textarea>
+                        <br />
+                        <br />
+                        <!-- Tagging -->
+                        <h5>Tag users:</h5>
+                        <div id="input-tags-div">
+                            <input id="input-tags" class="demo-default selectized" type="text" tabindex="-1" style="display: none;"></input>
+                            <script>
+                                //var data = ['haha', 'ihi', 'oho','meh'];
+                                //var items = data.map(function (x) { return { item: x }; });
+
+                                ////initialization of the selection field
+                                //var $select =  $('#input-tags').selectize({
+                                //    plugins: ['remove_button'],
+                                //    delimiter: ',',
+                                //    persist: false,
+                                //    options: items,
+                                //    labelField: "item",
+                                //    valueField: "item",
+                                //    searchField: ['item']
+                                //});
+
+
+                                //var data2 = ['haha', 'ihi', 'oho', 'meh','wiki','iki'];
+                                //var items2= data.map(function (x) { return { item: x }; });
+
+                                //var selectize = $select[0].selectize;
+                                //selectize.addOption({ item: 'wiki' });
+                                //selectize.refreshOptions();
+
+                            </script>
+                        </div>
                         <br />
                     </div>
                     <div class="modal-footer">
