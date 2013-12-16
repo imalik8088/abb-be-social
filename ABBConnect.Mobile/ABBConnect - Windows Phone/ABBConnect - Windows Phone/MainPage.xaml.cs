@@ -87,9 +87,11 @@ namespace ABBConnect___Windows_Phone
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-
+            
             string userName = NavigationContext.QueryString["userName"];
             LoadUser(userName);
+
+            NavigationService.RemoveBackEntry();
 
         }
 
@@ -583,6 +585,10 @@ namespace ABBConnect___Windows_Phone
         private void OnLogOut(object sender, EventArgs e)
         {
             MessageBox.Show("You will log out if you click here");
+            var settings = IsolatedStorageSettings.ApplicationSettings;
+            settings.Clear();
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/LogIn.xaml", UriKind.Relative));
+
         }
 
         private void OnSearchUser(object sender, EventArgs e)

@@ -22,6 +22,34 @@ namespace ABBConnect___Windows_Phone
             
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            string username, pw;
+
+            var settings = IsolatedStorageSettings.ApplicationSettings;
+
+            if (settings.TryGetValue<string>("userName", out username))
+            {
+                txtUsername.Text = username;
+                if (settings.TryGetValue<string>("password", out pw))
+                {
+
+                    txtPassword.Password = pw;
+                    txtUsername.Text = username;
+                }
+            }
+            else
+            {
+                txtPassword.Password = "";
+                txtUsername.Text = "";
+            }
+
+
+       
+
+        }
+
+
         private async  void CheckCredentials()
         {
             UserManager um = new UserManager();
@@ -77,6 +105,9 @@ namespace ABBConnect___Windows_Phone
             }
 
         }
+
+
+
         public void SaveStringObject(string username, string pw)
         {
             var settings = IsolatedStorageSettings.ApplicationSettings;
