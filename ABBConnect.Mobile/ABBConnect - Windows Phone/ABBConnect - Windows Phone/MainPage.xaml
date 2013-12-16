@@ -14,8 +14,8 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="True">
-
+    shell:SystemTray.IsVisible="True"
+    >
     <phone:PhoneApplicationPage.Resources>
         <shell:ApplicationBar x:Name="appBar" IsVisible="True" IsMenuEnabled="True" Mode="Default" Opacity="0.60">
             <shell:ApplicationBarIconButton IconUri="/Icons/icon-user-app-bar.png" Text="My Profile" Click="GoToMyProfile"/>

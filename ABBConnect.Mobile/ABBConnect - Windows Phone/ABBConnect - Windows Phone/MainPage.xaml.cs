@@ -22,6 +22,9 @@ using System.Text;
 using System.Windows.Threading;
 using System.IO.IsolatedStorage;
 using Microsoft.Phone.Shell;
+using System.Windows.Navigation;
+using System.Collections.ObjectModel;
+using System.Runtime.Serialization;
 
 namespace ABBConnect___Windows_Phone
 {
@@ -67,7 +70,6 @@ namespace ABBConnect___Windows_Phone
             currentFeedType = FeedType.FeedSource.Human;
             timerReady = true;
 
-            LoadUser();
             LoadNewFeeds(NUMBEROFFEEDS);
 
             lblNewFeeds.Text = "";
@@ -78,8 +80,19 @@ namespace ABBConnect___Windows_Phone
             this.ApplicationBar = this.Resources["appBar"] as ApplicationBar;
            // CreateControlsUsingObjects();
 
+
             ini = true;
         }
+
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+
+            string userName = NavigationContext.QueryString["userName"];
+            LoadUser(userName);
+
+        }
+
 
         private async void GetSavedFeeds()
         {
@@ -170,12 +183,12 @@ namespace ABBConnect___Windows_Phone
         /// <summary>
         /// Load the logged in user to display his personal info
         /// </summary>
-        private async void LoadUser()
+        private async void LoadUser(string userName)
         {
             try
             {
                 PortableBLL.UserManager um = new PortableBLL.UserManager();
-                currentUser = await um.LoadHumanInformationByUsername("dks12001");
+                currentUser = await um.LoadHumanInformationByUsername(userName);
 
                 App.CurrentUser = currentUser;
                 GetSavedFeeds();
@@ -211,7 +224,7 @@ namespace ABBConnect___Windows_Phone
                     MessageBox.Show("No feeds loaded");
                     return;
                 }
-
+                lstbFeeds.Items.Clear();
                 AddFeedsToList(feeds);
                 CreateButton(feeds[feeds.Count - 1].ID);
             }
@@ -616,6 +629,8 @@ namespace ABBConnect___Windows_Phone
             lstbSavedFilters.SelectedIndex = -1; //reset the selection to be able to click the same filtering again
 
             pgbLoadFeed.Visibility = System.Windows.Visibility.Collapsed;
-        }  
+        }
+
+    
     }
 }
