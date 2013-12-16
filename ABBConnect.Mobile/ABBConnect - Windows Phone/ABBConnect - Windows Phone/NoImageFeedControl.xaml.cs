@@ -18,6 +18,7 @@ namespace ABBConnect___Windows_Phone
         public NoImageFeedControl()
         {
             InitializeComponent();
+            
         }
 
         public NoImageFeedControl(PortableBLL.HumanFeed hf)
@@ -30,6 +31,8 @@ namespace ABBConnect___Windows_Phone
             SetLocation(hf.Location);
             SetTimeStamp(hf.TimeStamp);
             hFeed = hf;
+            base.Height = 140;
+            base.Width = 456;
         }
 
         private void Author_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -53,17 +56,27 @@ namespace ABBConnect___Windows_Phone
 
         internal void SetContent(string p)
         {
-            Text.Text = p;
+            if (p.Length > 80)
+            {
+                string tmp = p.Substring(0, 80);
+
+                Text.Text =  tmp.TrimEnd() + "...";
+            }
+            else
+                Text.Text = p;
+
+           // gridFeedControl.Height = Text.Height;
         }
 
         internal void SetNumberOfTags(int p)
         {
             Tags.Text = p.ToString();
         }
-        internal void UpdateComments(List<Comment> comments)
+        internal void UpdateFeed(List<Comment> comments)
         {
             hFeed.Comments = comments;
-            SetNumberOfComments(comments.Count);     
+            SetNumberOfComments(comments.Count);
+            SetTimeStamp(hFeed.TimeStamp);
         }
 
         internal void SetNumberOfComments(int p)

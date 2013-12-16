@@ -30,8 +30,8 @@ namespace ABBConnect___Windows_Phone
         // Constructor
         PortableBLL.Human currentUser;
         PortableBLL.FeedManager fm;
-        const int UPDATETIME = 15, SHOWLABELTIME = 4;
-        const int NUMBEROFFEEDS = 10;
+        const int UPDATETIME = 30, SHOWLABELTIME = 4;
+        const int NUMBEROFFEEDS = 15;
         DispatcherTimer timerNewFeed, timerLabel;
         List<PortableBLL.Feed> feeds;
         List<Filter> filters;
@@ -128,7 +128,7 @@ namespace ABBConnect___Windows_Phone
                 if (lstbFeeds.Items[i] is FeedControl)
                     (lstbFeeds.Items[i] as FeedControl).UpdateComments(feeds[i].Comments);
                 else if (lstbFeeds.Items[i] is NoImageFeedControl)
-                    (lstbFeeds.Items[i] as NoImageFeedControl).UpdateComments(feeds[i].Comments);
+                    (lstbFeeds.Items[i] as NoImageFeedControl).UpdateFeed(feeds[i].Comments);
                 else
                     continue; //TODO: ADD THE SAME FOR SENSOR
             }
@@ -561,7 +561,10 @@ namespace ABBConnect___Windows_Phone
 
         private void GoToMyProfile(object sender, EventArgs e)
         {
-            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/ProfileFeed.xaml?userID=" + currentUser.ID, UriKind.Relative));
+            if (currentUser == null)
+                MessageBox.Show("Unable to redirect since no user is detected, please check your internet connection");
+            else
+                (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/ProfileFeed.xaml?userID=" + currentUser.ID, UriKind.Relative));
         }
 
         private void OnLogOut(object sender, EventArgs e)
@@ -609,7 +612,8 @@ namespace ABBConnect___Windows_Phone
             lstbFeeds.Items.Clear();
             AddFeedsToList(feeds);
 
-            lstbSavedFilters.SelectedIndex = -1;
+
+            lstbSavedFilters.SelectedIndex = -1; //reset the selection to be able to click the same filtering again
 
             pgbLoadFeed.Visibility = System.Windows.Visibility.Collapsed;
         }  
