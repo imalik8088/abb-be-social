@@ -1,8 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="ProfilePage.aspx.cs" Inherits="_UserPage" %>
 
-<%@ Register Src="controls/FeedPage.ascx" TagName="FeedPage" TagPrefix="abbConnect" %>
-<%@ Register Src="controls/NewFeedPagelet.ascx" TagName="NewFeedPagelet" TagPrefix="abbConnect" %>
-<%@ Register Src="controls/Commentlet.ascx" TagName="Commentlet" TagPrefix="abbConnect" %>
+<%@ Register Src="controls/ProfileFeedPage.ascx" TagName="ProfileFeedPage" TagPrefix="abbConnect" %>
+<%@ Register Src="controls/FeedComments.ascx" TagName="FeedComments" TagPrefix="abbConnect" %>
+<%@ Register Src="controls/RealTimeSensorFeedPage.ascx" TagName="RealTimeSensorFeedPage" TagPrefix="abbConnect" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
@@ -17,21 +17,23 @@
                     </div>
                     <div class="form-group button-group">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-warning">Feed Selection</button>
-                            <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
+                            <button id="human-feed-filter-selector-left" type="button" class="btn btn-info">Feed Selection</button>
+                            <button id="human-feed-filter-selector-right" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
                                 <span class="caret"></span>
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Critical</a></li>
-                                <li><a href="#">Warning</a></li>
+                                <li><a href="#">Work post </a></li>
+                                <li><a href="#">Sticky note</a></li>
+                                <li><a href="#">Vacation post</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">All</a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#modalHumanFeedsAddDateFilter">Date <span id="humanFeedsDateFilterIsActive" class="label label-success dont-show">ACTIVE</span></a>
+                                </li>
                             </ul>
                         </div>
                         <div class="btn-group">
-                            <button type="button" class="btn btn-danger">Publish</button>
-                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                            <button type="button" class="btn btn-primary">Publish</button>
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                 <span class="caret"></span>
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
@@ -44,10 +46,10 @@
                 </div>
             </div>
             <div id="feedsContainer">
-                <abbConnect:FeedPage ID="FeedPage" runat="server" />
+                <abbConnect:ProfileFeedPage ID="ProfileFeedPage" runat="server" />
             </div>
+            <div id="loading_throbber_human_feeds" class="loading-throbber" data-container="feedsContainer"></div>
         </div>
-
         <div class="col-md-6">
             <div class="feed-header">
                 <div class="form-inline">
@@ -55,12 +57,78 @@
                         <h3><span class="glyphicon glyphicon-link"></span>Profile info</h3>
                     </div>
                 </div>
+            </div> 
+            <div id='feed-container-one'>
+            <div class="feed-inner-container feed-inner-container-default">
+                <div class="feed-information">
+                    <img class="profile-avatar" alt="" src="content/img/avatar-abb.png">
+                </div>
+                <div class="profile-view feed-message-default">
+                    <a href="#" class="feed-name feed-name-default profile-page-user">
+                        <asp:Literal runat="server" ID="UserName"></asp:Literal>
+                    </a>
+                    <span class="view-body">                        
+                        <a href class="user-info feed-name-default">Location:</a>
+                        <asp:Literal runat="server" ID="UserLocation"></asp:Literal><br/>
+                        <a href class="user-info feed-name-default">Email:</a>
+                        <asp:Literal runat="server" ID="UserEmail"></asp:Literal><br/>
+                        <a href class="user-info feed-name-default">Phone number:</a>
+                        <asp:Literal runat="server" ID="UserPhoneNumber"></asp:Literal><br/>
+                    </span>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Modals -->
+   <!-- Modals -->
     <div id="modals">
+        <div class="modal fade" id="modalHumanFeedsAddDateFilter">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title">Date Filter</h4>
+                    </div>
+                    <div class="modal-body np">
+                        <table class="table table-filter">
+                            <tbody>
+                                <tr class="no-tb">
+                                    <td><input id="chbHumanFeedsFilterStartDate" type="checkbox" class="bs" data-datepicker="datepickerStart"/></td>
+                                    <td class="filterDateText">Starting Date</td>
+                                    <td>
+                                        <div id="datepickerStart">
+                                            <div class="input-group date">
+                                                <input type="text" class="form-control">
+                                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                 <tr class="no-bb">
+                                    <td><input id="chbHumanFeedsFilterEndDate" type="checkbox" class="bs" data-datepicker="datepickerEnd"/></td>
+                                    <td class="filterDateText">Ending Date</td>
+                                    <td>
+                                         <div id="datepickerEnd">
+                                            <div class="input-group date">
+                                                <input type="text" class="form-control">
+                                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="SaveHumanFeedsFilterData(1)">Save changes</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
         <div class="modal fade" id="modalNote" tabindex="-1" role="dialog" aria-labelledby="modalNoteLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -128,7 +196,38 @@
             </div>
             <!-- /.modal-dialog -->
         </div>
-        <!-- /.modal -->
+        <!-- /.modal -->       
     </div>
-   
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterStartDateIsChecked" Value="false"/>
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterStartDateValue"/>
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterEndDateIsChecked" Value="false"/>
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterEndDateValue"/>
+    
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="realTimeSensorFeedsFilterStartDateIsChecked" Value="false"/>
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="realTimeSensorFeedsFilterStartDateValue"/>
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="realTimeSensorFeedsFilterEndDateIsChecked" Value="false"/>
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="realTimeSensorFeedsFilterEndDateValue"/>
+    <script>
+        // Instances of sensor gauges, should be in ui.js !
+        //var g1 = new JustGage({
+        //    id: "gauge-996",
+        //    value: getRandomInt(800, 980),
+        //    min: 0,
+        //    max: 1000,
+        //    title: "Water flow [m3/h]",
+        //    gaugeWidthScale: 0.5
+        //});
+        //var g2 = new JustGage({
+        //    id: "gauge-995",
+        //    value: getRandomInt(110, 280),
+        //    min: 0,
+        //    max: 400,
+        //    title: "Wind speed [km/h]"
+        //});
+
+        //listener for clearing the modals
+        //ClearModalBodyListener();
+
+        //  PopulateSelectBoxPostType();
+    </script>
 </asp:Content>

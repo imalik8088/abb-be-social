@@ -649,3 +649,37 @@ img.feed-avatar {
     .label-vacation[href]:focus {
         background-color: #66a329;
     }
+/*Profile page*/
+.profile-page-user
+{
+	font-size:18px;
+	font-weight:bold;
+}
+.profile-view 
+{
+    text-align: left;    
+    margin-left: 150px;
+    display: block;
+    padding: 5px 10px;
+    position: relative;
+    min-height:160px;
+}
+.profile-view .view-body
+{
+    display: block;
+    color: #333;
+    padding-top: 10px;
+}
+img.profile-avatar
+{
+    height: 140px;
+    width: 140px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    margin-right: 10px;    
+}
+.user-info
+{
+	font-size: 13px;
+}
