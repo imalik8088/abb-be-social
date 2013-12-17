@@ -73,7 +73,7 @@ namespace PortableBLL
                     bool success = true;
                     foreach(Human tempHuman in feed.Tags)
                     {
-                        success = await feedData.AddFeedTag(feed.ID, feed.Owner.UserName);
+                        success = await feedData.AddFeedTag(feedID, feed.Owner.UserName);
                     }
                     return success;
                 }
