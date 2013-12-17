@@ -40,11 +40,27 @@ namespace PortableTransformationLayer
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(urlServer.Url);
-            var response = await client.GetStringAsync("PostFeed?id=" + usrId.ToString() 
+            var response = await client.GetStringAsync("PostFeed?id=" + usrId.ToString()
                 + "&text=" + text + "&path=" + filepath + "&priority=" + prioId.ToString()).ConfigureAwait(false);
             var obj = JsonConvert.DeserializeObject<string>(response);
             return int.Parse(obj);
         }
+
+        //public async Task<int> PublishFeed(int usrId, string text, string filepath, int prioId)
+        //{
+        //    MemoryStream stream = new MemoryStream();
+        //    StreamWriter writer = new StreamWriter(stream);
+        //    writer.Write(filepath);
+        //    writer.Flush();
+        //    stream.Position = 0;
+
+        //    var client = new HttpClient();
+        //    client.BaseAddress = new Uri(urlServer.Url);
+        //    var response = await client.PostAsync("PostFeed?id=" + usrId.ToString()
+        //        + "&text=" + text + "&priority=" + prioId.ToString(), stream).ConfigureAwait(false);
+        //    var obj = JsonConvert.DeserializeObject<string>(response);
+        //    return int.Parse(obj);
+        //}
 
         public async Task<List<GetLatestXFeeds_Result>> GetFeedsByFilter(int userId, string location, DateTime startingTime, DateTime endingTime, string feedType, int startId, int numFeeds)
         {
