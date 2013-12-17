@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using System.IO;
 
 namespace ABBJSONService
 {
@@ -32,9 +33,12 @@ namespace ABBJSONService
         [WebInvoke]
         List<GetLatestXFeedsFromId_Result> GetLatestXFeedsFromId(string X, string Id);
 
+        //[OperationContract]
+        //[WebInvoke]
+        //int PostFeed(string id, string text, string filepath, string prioId);
         [OperationContract]
         [WebInvoke]
-        int PostFeed(string id, string text, string filepath, string prioId);
+        int PostFeed(string id, string text, string prioId, Stream imageContent);
 
         [OperationContract]
         [WebInvoke]

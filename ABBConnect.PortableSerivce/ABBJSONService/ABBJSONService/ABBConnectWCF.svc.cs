@@ -8,6 +8,7 @@ using System.ServiceModel;
 using System.ServiceModel.Activation;
 using System.ServiceModel.Web;
 using System.Text;
+using System.IO;
 
 namespace ABBJSONService
 {
@@ -199,10 +200,44 @@ namespace ABBJSONService
         }
 
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "PostFeed?id={id}&text={text}&path={filepath}&priority={prioID}")]
-        public int PostFeed(string id, string text, string filepath, string prioId)
+        //[WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "PostFeed?id={id}&text={text}&path={filepath}&priority={prioID}")]
+        //public int PostFeed(string id, string text, string filepath, string prioId)
+        //{
+        //    int result = 0;
+
+        //    using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+        //    {
+
+        //        sqlConn.Open();
+        //        string sqlQuery = "AddFeed";
+
+        //        using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConn))
+        //        {
+        //            cmd.CommandType = CommandType.StoredProcedure;
+        //            SqlParameter param = new SqlParameter("@retFeedId", SqlDbType.Int);
+        //            param.Direction = ParameterDirection.Output;
+        //            cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = id;
+        //            cmd.Parameters.Add("@text", SqlDbType.NVarChar).Value = text;
+        //            cmd.Parameters.Add("@filePath", SqlDbType.NVarChar).Value = filepath;
+        //            cmd.Parameters.Add("@feedPriorityId", SqlDbType.Int).Value = prioId;
+        //            cmd.Parameters.Add(param);
+
+        //            cmd.ExecuteNonQuery();
+
+        //            result = (int)cmd.Parameters["@retFeedId"].Value;
+        //        }
+        //        sqlConn.Close();
+        //    }
+        //    return result;
+        //}
+
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "PostFeed?id={id}&text={text}&priority={prioID}")]
+        public int PostFeed(string id, string text, string prioId, Stream imageContent)
         {
             int result = 0;
+
+            StreamReader reader = new StreamReader(imageContent);
+            string filepath = reader.ReadToEnd();
 
             using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
             {
