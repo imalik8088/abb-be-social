@@ -45,7 +45,10 @@ namespace ABBConnect___Windows_Phone
                 if (u is Human)
                     lstbSearchResult.Items.Add(new SearchResultControl(((Human)u).FirstName, ((Human)u).LastName, ((Human)u).UserName, ((Human)u).ID, false));
                 else
-                    lstbSearchResult.Items.Add(new SearchResultControl("", "", ((Sensor)u).UserName, ((Sensor)u).ID, false));
+                {
+                    //Uncomment to enableing sensor tagging
+                    //lstbSearchResult.Items.Add(new SearchResultControl("", "", ((Sensor)u).UserName, ((Sensor)u).ID, false));
+                }
             }
         }
 
