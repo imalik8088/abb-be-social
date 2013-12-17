@@ -10,10 +10,21 @@ using Microsoft.Phone.Shell;
 using PortableBLL;
 using System.IO.IsolatedStorage;
 
+/*
+ * Written by: Robert Gustavsson
+ * Project: Social Media in the Process Automation Industry (ABB Connect)
+ */
+
 namespace ABBConnect___Windows_Phone
 {
+    /// <summary>
+    /// This is the login page of the application, which enables accessing the application and also to store the usered credentails for future automatic logins.
+    /// </summary>
     public partial class LogIn : PhoneApplicationPage
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public LogIn()
         {
             InitializeComponent();
@@ -22,6 +33,10 @@ namespace ABBConnect___Windows_Phone
             
         }
 
+        /// <summary>
+        /// If the login get redirected to, the textboxes is filled in with the information from the login user
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             string username, pw;
@@ -43,13 +58,11 @@ namespace ABBConnect___Windows_Phone
                 txtPassword.Password = "";
                 txtUsername.Text = "";
             }
-
-
-       
-
         }
 
-
+        /// <summary>
+        /// This method checks the inputed credentials from the user, if they are correct it redirects to mainpage, otherwise it gives an error and the user hae another try.
+        /// </summary>
         private async  void CheckCredentials()
         {
             UserManager um = new UserManager();
@@ -78,6 +91,12 @@ namespace ABBConnect___Windows_Phone
             }
         }
 
+        /// <summary>
+        /// Occours when the user clicks log in, the system tries to log him in. 
+        /// If Remeber me is ticket the sysem saves his credentails in local DB and next time he will be logged in automatically
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             UserManager um = new UserManager();
@@ -107,7 +126,11 @@ namespace ABBConnect___Windows_Phone
         }
 
 
-
+        /// <summary>
+        /// Saves the credentails to the local DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="pw"></param>
         public void SaveStringObject(string username, string pw)
         {
             var settings = IsolatedStorageSettings.ApplicationSettings;

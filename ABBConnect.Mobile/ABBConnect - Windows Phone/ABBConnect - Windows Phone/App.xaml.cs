@@ -13,8 +13,13 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
+
+
 namespace ABBConnect___Windows_Phone
 {
+    /// <summary>
+    /// Generated class
+    /// </summary>
     public partial class App : Application
     {
         private static List<string> tags;

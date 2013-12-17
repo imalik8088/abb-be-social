@@ -13,18 +13,31 @@ using Microsoft.Phone.Controls;
 using System.Windows.Navigation;
 using PortableBLL;
 
+/*
+ * Written by: Robert Gustavsson
+ * Project: Social Media in the Process Automation Industry (ABB Connect)
+ */
+
 namespace ABBConnect___Windows_Phone
 {
+    /// <summary>
+    /// The class that represents the whole information of a feed (tags, content and comments)
+    /// </summary>
     public partial class HumanFeed : PhoneApplicationPage
     {
 
         PortableBLL.HumanFeed hf;
       
+        //Constructor
         public HumanFeed()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// When the application redirects to this page, the feed is loaded
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             hf = App.HFeed;
@@ -36,11 +49,17 @@ namespace ABBConnect___Windows_Phone
      
         }
 
+        /// <summary>
+        /// add the tags to the tag-list
+        /// </summary>
         private void AddTags()
         {
             lstbTags.ItemsSource = hf.Tags;
         }
 
+        /// <summary>
+        /// set the lables of the actual feed
+        /// </summary>
         private void SetLabels()
         {
             Author.Text = hf.Owner.FirstName + " " + hf.Owner.LastName;
@@ -50,6 +69,9 @@ namespace ABBConnect___Windows_Phone
             Content.Text = hf.Content;
         }
 
+        /// <summary>
+        /// Sets the time that has passed since the feed was published
+        /// </summary>
         private void AddTime()
         {
             DateTime dateTime = hf.TimeStamp;
@@ -65,6 +87,10 @@ namespace ABBConnect___Windows_Phone
                 Timestamp.Text = Math.Round(hours).ToString() + "h";
         }
 
+        /// <summary>
+        /// adds all the comments to the comment list, using CommentControl
+        /// </summary>
+        /// <param name="comments"></param>
         private void AddComments(List<Comment> comments)
         {
 
@@ -76,6 +102,11 @@ namespace ABBConnect___Windows_Phone
             }
         }
 
+        /// <summary>
+        /// Occurs when the user has clicked publish in the Pivot of comments, this enables the commeting on feeds
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void btnPublish_Click(object sender, RoutedEventArgs e)
         {
             if (String.IsNullOrEmpty(txtbComment.Text) || String.IsNullOrWhiteSpace(txtbComment.Text))
@@ -119,11 +150,21 @@ namespace ABBConnect___Windows_Phone
 
         }
 
+        /// <summary>
+        /// Removes the already written text in the comment textbox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtbComment_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             txtbComment.Text = String.Empty;
         }
 
+        /// <summary>
+        /// Occurs when the user clicks a username in the tag list, this redirects him to that users profile page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lstbTags_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/ProfileFeed.xaml?userID=" + hf.Tags[lstbTags.SelectedIndex].ID, UriKind.Relative));

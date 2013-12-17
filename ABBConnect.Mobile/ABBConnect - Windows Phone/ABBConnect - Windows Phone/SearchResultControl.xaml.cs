@@ -8,6 +8,11 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
+/*
+ * Written by: Robert Gustavsson
+ * Project: Social Media in the Process Automation Industry (ABB Connect)
+ */
+
 namespace ABBConnect___Windows_Phone
 {
     public partial class SearchResultControl : UserControl

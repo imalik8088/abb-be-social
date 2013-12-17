@@ -503,7 +503,8 @@ namespace ABBConnect___Windows_Phone
                 foreach (string s in App.Tags)
                     hf.Tags.Add(new Human() { UserName = s });
 
-            chosenImg = "";
+            chosenImg = ""; //REMOVE WHÈN SENDING IMG SHALL BE ENABLED!!!
+
             hf.Owner.ID = currentUser.ID;
             hf.Content = txtbContent.Text;
             hf.MediaFilePath = (String.IsNullOrEmpty(chosenImg) ? "none" : chosenImg);
@@ -645,8 +646,6 @@ namespace ABBConnect___Windows_Phone
             lstbSavedFilters.SelectedIndex = -1; //reset the selection to be able to click the same filtering again
 
             pgbLoadFeed.Visibility = System.Windows.Visibility.Collapsed;
-        }
-
-    
+        } 
     }
 }

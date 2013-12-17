@@ -14,8 +14,17 @@ using Microsoft.Phone.Tasks;
 using System.Windows.Navigation;
 using PortableBLL;
 
+/*
+ * Written by: Robert Gustavsson
+ * Project: Social Media in the Process Automation Industry (ABB Connect)
+ */
+
+
 namespace ABBConnect___Windows_Phone
 {
+    /// <summary>
+    /// A page the enables showing contact information of a user, his feeds and also the activity connected to him.
+    /// </summary>
     public partial class ProfileFeed : PhoneApplicationPage
     {
         User currentUser;
@@ -23,6 +32,9 @@ namespace ABBConnect___Windows_Phone
         FeedManager fm;
         List<Feed> feeds;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public ProfileFeed()
         {
             InitializeComponent();
@@ -30,6 +42,10 @@ namespace ABBConnect___Windows_Phone
             fm = new FeedManager();
         }
 
+        /// <summary>
+        /// Add a HumanFeed to the list of feeds 
+        /// </summary>
+        /// <param name="hf"></param>
         private void FillFeedList(PortableBLL.HumanFeed hf)
         {
            // NoImageFeedControl nfc = new NoImageFeedControl(t.Author, "rgn09003", t.Content, t.Tags.Count, t.Comments.Count, t.Location, t.Timestamp);
@@ -38,6 +54,10 @@ namespace ABBConnect___Windows_Phone
             lstbFeeds.Items.Add(fc);
         }
 
+        /// <summary>
+        /// Add a sensor feed to the list of feeds
+        /// </summary>
+        /// <param name="sf"></param>
         private void FillFeedList(PortableBLL.SensorFeed sf)
         {
             // NoImageFeedControl nfc = new NoImageFeedControl(t.Author, "rgn09003", t.Content, t.Tags.Count, t.Comments.Count, t.Location, t.Timestamp);
@@ -47,7 +67,10 @@ namespace ABBConnect___Windows_Phone
         }
 
 
-
+        /// <summary>
+        /// When the user get redirected here, add feeds, userinfo and activity
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             AddUserInformation();
@@ -55,6 +78,9 @@ namespace ABBConnect___Windows_Phone
 
         }
 
+        /// <summary>
+        /// Gets the activies that is bound to the user
+        /// </summary>
         private async void GetUserActivites()
         {
             UserManager um = new UserManager();
@@ -65,6 +91,9 @@ namespace ABBConnect___Windows_Phone
                 lstbActivities.Items.Add(new ActivityControl(a));
         }
 
+        /// <summary>
+        /// load the feeds from the user
+        /// </summary>
         private async void LoadFeeds()
         {
             pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
@@ -78,6 +107,10 @@ namespace ABBConnect___Windows_Phone
             pgbLoadFeed.Visibility = System.Windows.Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// add the loaded feeds to the feed-list
+        /// </summary>
+        /// <param name="feeds"></param>
         private void AddFeedToList(List<Feed> feeds)
         {
             foreach (Feed f in feeds)
@@ -89,10 +122,13 @@ namespace ABBConnect___Windows_Phone
             }
         }
 
+        /// <summary>
+        /// Load more feeds, this method is triggerd when user clicks "load-more" button.
+        /// </summary>
+        /// <param name="numOfFeeds"></param>
+        /// <param name="id"></param>
         private async void LoadMoreFeedsFromId(int numOfFeeds, int id)
-        {
-            
-
+        {         
             List<PortableBLL.Feed> newFeeds = await fm.LoadFeedsByUser(currentUser.ID, numOfFeeds, id);
 
             //remove button
@@ -106,7 +142,11 @@ namespace ABBConnect___Windows_Phone
 
             pgbLoadFeed.Visibility = System.Windows.Visibility.Collapsed;
         }
-
+        
+        /// <summary>
+        /// Creates a button in the end of the feed list, to enable the user to load more feeds
+        /// </summary>
+        /// <param name="id"></param>
         private void CreateButton(int id)
         {
             Button b = new Button();
@@ -118,6 +158,10 @@ namespace ABBConnect___Windows_Phone
             b.Click += (s, e) => { LoadMoreFeedsFromId(NUMOFFEEDS, id); };
             lstbFeeds.Items.Add(b);
         }
+
+        /// <summary>
+        /// Loads the userinfromation from the DB and add it to the screen
+        /// </summary>
         private async void AddUserInformation()
         {
             UserManager um = new UserManager();
@@ -172,6 +216,11 @@ namespace ABBConnect___Windows_Phone
             LoadFeeds();
         }
 
+        /// <summary>
+        /// If email is clicked a mail client is opened and the user can send a mail to the user
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lblEmailClick_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             EmailComposeTask emailComposer = new EmailComposeTask();
@@ -179,6 +228,11 @@ namespace ABBConnect___Windows_Phone
             emailComposer.Show();
         }
 
+        /// <summary>
+        /// If phonenumber is clicked the user calls the user
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lblPhoneClick_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             PhoneCallTask phonecall = new PhoneCallTask();
@@ -186,14 +240,23 @@ namespace ABBConnect___Windows_Phone
             phonecall.Show();
         }
 
+        /// <summary>
+        /// Not used
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lblLocationClick_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             //maybe redirect to a new page and show the feeds from that location
         }
 
+        /// <summary>
+        /// Not used
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lblNameClick_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/myPivotPage.xaml?id=0", UriKind.Relative));
         }
     }
 }
