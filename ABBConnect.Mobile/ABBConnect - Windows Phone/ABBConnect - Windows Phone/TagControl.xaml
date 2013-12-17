@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-    x:Class="ABBConnect___Windows_Phone.SearchUser"
+    x:Class="ABBConnect___Windows_Phone.TagControl"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -24,32 +24,20 @@
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
             <TextBlock Text="ABBConnect" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="Search" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock Text="Tag User(s)" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <TextBox x:Name="txtbSearch" HorizontalAlignment="Left" Height="72" Margin="10,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="436" TextInputUpdate="txtbSearch_TextInputUpdate" TextChanged="txtbSearch_TextChanged"/>
+            <TextBox x:Name="txtbSearch" HorizontalAlignment="Left" Height="72" Margin="10,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="436"  TextChanged="txtbSearch_TextChanged"/>
+            <ListBox x:Name="lstbSearchResult" HorizontalAlignment="Left"  Height="232" Margin="0,82,0,0"
+				Background="Black"    VerticalAlignment="Top" Width="446" SelectionMode="Multiple" SelectionChanged="lstbSearchResult_SelectionChanged" />
+            <ListBox x:Name="lstbTagedUsers" HorizontalAlignment="Left"  Height="188" Margin="0,341,0,0"
+				Background="Black"    VerticalAlignment="Top" Width="446" SelectionMode="Multiple" SelectionChanged="lstbTagedUsers_SelectionChanged" />
+            <TextBlock Text="Selected Users:"  HorizontalAlignment="Left" Margin="10,314,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            <TextBlock Text="Search Users:" HorizontalAlignment="Left" Margin="10,-5,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            <Button x:Name="btnDone" Content="Done" HorizontalAlignment="Left" Margin="119,525,0,0" VerticalAlignment="Top" Width="214" Click="btnDone_Click"/>
 
-
-            <ListBox x:Name="lstbSearchResult" HorizontalAlignment="Left"  Height="510" Margin="0,87,0,0"
-                 Background="Black"    VerticalAlignment="Top" Width="456" />
-
-            <!--
-            <toolkit:AutoCompleteBox x:Name="acbSearch" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="365"
-                                     FilterMode="ContainsOrdinal" ValueMemberPath="" ItemsSource="{Binding}" >
-                <toolkit:AutoCompleteBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="{Binding Path=UserName}" />
-                            <TextBlock Text="{Binding Path=FirstName}" />
-                            <TextBlock Text="{Binding Path=LastName}" />                        
-                        </StackPanel>
-                    </DataTemplate>
-                </toolkit:AutoCompleteBox.ItemTemplate>
-
-            </toolkit:AutoCompleteBox>
-            -->
         </Grid>
     </Grid>
 

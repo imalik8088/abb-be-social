@@ -96,7 +96,7 @@ namespace ABBConnect___Windows_Phone
         }
 
 
-        private async void GetSavedFeeds()
+        private async void GetSavedFilters()
         {
             UserManager um = new UserManager();
 
@@ -193,7 +193,7 @@ namespace ABBConnect___Windows_Phone
                 currentUser = await um.LoadHumanInformationByUsername(userName);
 
                 App.CurrentUser = currentUser;
-                GetSavedFeeds();
+                GetSavedFilters();
             }
             catch (Exception ex)
             {
@@ -378,7 +378,10 @@ namespace ABBConnect___Windows_Phone
                 
                 //UNCOMMENT TO ENABLE SENDING IMAGE TO DB
 
-                //chosenImg = Convert.ToBase64String(photoBytes);
+               // chosenImg = Convert.ToBase64String(photoBytes);
+
+               // MessageBox.Show(chosenImg.Length.ToString());
+                //chosenImg = "";
 
                 //TESTING
                 /*
@@ -495,6 +498,12 @@ namespace ABBConnect___Windows_Phone
             if (txtbContent.Text == "" || currentUser.ID == -1)
                 return;
 
+
+            if (App.Tags != null)
+                foreach (string s in App.Tags)
+                    hf.Tags.Add(new Human() { UserName = s });
+
+            chosenImg = "";
             hf.Owner.ID = currentUser.ID;
             hf.Content = txtbContent.Text;
             hf.MediaFilePath = (String.IsNullOrEmpty(chosenImg) ? "none" : chosenImg);
@@ -571,6 +580,7 @@ namespace ABBConnect___Windows_Phone
 
         private void TagIcon_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/TagControl.xaml", UriKind.Relative));
 
         }
 

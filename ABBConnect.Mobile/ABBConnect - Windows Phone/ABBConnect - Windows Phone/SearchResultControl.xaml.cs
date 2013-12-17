@@ -13,21 +13,41 @@ namespace ABBConnect___Windows_Phone
     public partial class SearchResultControl : UserControl
     {
         int userID;
+        bool redirect;
 
-        public SearchResultControl(string firstname, string lastname, string username, int ID)
+        string userName;
+
+        public string UserName
+        {
+            get { return userName; }
+            set { userName = value; }
+        }
+
+
+        public int UserID
+        {
+            get { return userID; }
+            set { userID = value; }
+        }
+
+        public SearchResultControl(string firstname, string lastname, string username, int ID, bool redirect)
         {
             InitializeComponent();
+           
 
             string display = firstname + " " + lastname + "   (" + username + ")";
             userID = ID;
+            this.redirect = redirect;
+            this.userName = username;
 
             lblUserName.Text = display;
         }
 
         private void lblUserName_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/ProfileFeed.xaml?userID=" + userID, UriKind.Relative));
-
+            if(redirect)
+                (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/ProfileFeed.xaml?userID=" + userID, UriKind.Relative));
         }
+
     }
 }

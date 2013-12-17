@@ -17,6 +17,14 @@ namespace ABBConnect___Windows_Phone
 {
     public partial class App : Application
     {
+        private static List<string> tags;
+
+        public static List<string> Tags
+        {
+            get { return App.tags; }
+            set { App.tags = value; }
+        }
+
         private static PortableBLL.Human currentUser = new PortableBLL.Human();
 
         public static PortableBLL.Human CurrentUser
