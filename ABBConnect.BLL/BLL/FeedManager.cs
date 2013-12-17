@@ -74,7 +74,7 @@ namespace BLL
                     bool success = true;
                     foreach(Human tempHuman in feed.Tags)
                     {
-                        success = feedData.AddTag(feedID, feed.Owner.UserName);
+                        success = feedData.AddTag(feedID, tempHuman.UserName);
                     }
                     return success;
                 }
