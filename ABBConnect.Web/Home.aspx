@@ -1,8 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Home.aspx.cs" Inherits="_Home" %>
+﻿<%@ Page Title="" Language="C#"  MasterPageFile="~/MasterPage.master" AutoEventWireup="true"  CodeFile="Home.aspx.cs" Inherits="_Home" %> 
 
 <%@ Register Src="controls/FeedPage.ascx" TagName="FeedPage" TagPrefix="abbConnect" %>
-<%@ Register Src="controls/NewFeedPagelet.ascx" TagName="NewFeedPagelet" TagPrefix="abbConnect" %>
-<%@ Register Src="controls/Commentlet.ascx" TagName="Commentlet" TagPrefix="abbConnect" %>
+<%@ Register Src="controls/FeedComments.ascx" TagName="FeedComments" TagPrefix="abbConnect" %>
+<%@ Register Src="controls/RealTimeSensorFeedPage.ascx" TagName="RealTimeSensorFeedPage" TagPrefix="abbConnect" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
@@ -16,21 +16,23 @@
                     </div>
                     <div class="form-group button-group">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-warning">Feed Selection</button>
-                            <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
+                            <button id="human-feed-filter-selector-left" type="button" class="btn btn-info">Feed Selection</button>
+                            <button id="human-feed-filter-selector-right" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
                                 <span class="caret"></span>
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Critical</a></li>
-                                <li><a href="#">Warning</a></li>
+                                <li><a href="#">Work post </a></li>
+                                <li><a href="#">Sticky note</a></li>
+                                <li><a href="#">Vacation post</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">All</a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#modalHumanFeedsAddDateFilter">Date <span id="humanFeedsDateFilterIsActive" class="label label-success dont-show">ACTIVE</span></a>
+                                </li>
                             </ul>
                         </div>
                         <div class="btn-group">
-                            <button type="button" class="btn btn-danger">Publish</button>
-                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                            <button type="button" class="btn btn-primary">Publish</button>
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                 <span class="caret"></span>
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
@@ -44,7 +46,8 @@
             </div>
             <div id="feedsContainer">
                 <abbConnect:FeedPage ID="FeedPage" runat="server" />
-            </div>
+            </div>            
+            <div id="loading_throbber_human_feeds" class="loading-throbber" data-container="feedsContainer"></div>
         </div>
         <div class="col-md-6">
             <div class="feed-header">
@@ -54,94 +57,61 @@
                     </div>
                 </div>
             </div>
-            <div id="feed-container-996" class="feed-container">
-                <div class="feed-inner-container feed-inner-container-danger">
-                    <div class="feed-information">
-                        <img class="feed-avatar" alt="" src="content/img/avatar-abb-2.png">
-                        <span class="label label-danger label-feed-information-danger">Danger</span>
-                    </div>
-                    <div class="feed-message feed-message-danger">
-                        <span class="feed-arrow feed-arrow-danger"></span>
-                        <a href="#" class="feed-name feed-name-danger" data-original-title="">Name
-                        </a>
-                        <span class="feed-date-time">at Jul 15th, 2013 11:24
-                        </span>
-                        <span class="feed-body row">
-                            <div id="gauge-996" class="feed-gauge pull-left feed-gauge-size">
-                            </div>
-                            <div class="bs-callout bs-callout-danger feed-gauge-margin">
-                                <h4>No default class</h4>
-                                <div class="bs-callout-hr"></div>
-                                <p>Alerts don't have default classes, only base and modifier classes. A default gray alert doesn't make too much sense, so you're required to specify a type via contextual class. Choose from success, info, warning, or danger.</p>
-                            </div>
-                        </span>
-                    </div>
-                </div>
-                <div class="feed-comments-container">
-                    <div id="feed-single-comment-container-996" class="feed-single-comment-container">
-                        <div class="feed-single-comment-info pull-left">
-                            <img src="content/img/avatar-abb-small.png" alt="user-avatar">
-                        </div>
-                        <div class="feed-single-comment-data">
-                            <div class="name">
-                                <a href="#" data-original-title="">ABB-Something</a>
-                            </div>
-                            <div class="time">
-                                <i class="icon-time"></i>
-                                <span>19 min</span>
-                            </div>
-                            <div class="feed-single-comment-hr"></div>
-                            <small>Et harum quidem rerum facilis est et expedita distinctio</small>
-                        </div>
-                    </div>
-                </div>
+            <div id="real-time-sensor-feedsContainer">
+                <abbConnect:RealTimeSensorFeedPage ID="RealTimeSensorFeedPage" runat="server" />
             </div>
-            <div id="feed-container-995" class="feed-container">
-                <div class="feed-inner-container feed-inner-container-warning">
-                    <div class="feed-information">
-                        <img class="feed-avatar" alt="" src="content/img/avatar-abb-2.png">
-                        <span class="label label-warning label-feed-information-danger">Warning</span>
-                    </div>
-                    <div class="feed-message feed-message-warning">
-                        <span class="feed-arrow feed-arrow-warning"></span>
-                        <a href="#" class="feed-name feed-name-warning" data-original-title="">Name
-                        </a>
-                        <span class="feed-date-time">at Jul 15th, 2013 11:24
-                        </span>
-                        <span class="feed-body row">
-                            <div id="gauge-995" class="feed-gauge pull-left feed-gauge-size">
-                            </div>
-                            <div class="bs-callout bs-callout-warning feed-gauge-margin">
-                                <h4>No default class</h4>
-                                <div class="bs-callout-hr"></div>
-                                <p>Alerts don't have default classes, only base and modifier classes. A default gray alert doesn't make too much sense, so you're required to specify a type via contextual class. Choose from success, info, warning, or danger.</p>
-                            </div>
-                        </span>
-                    </div>
-                </div>
-                <div class="feed-comments-container">
-                    <div id="feed-single-comment-container-995" class="feed-single-comment-container">
-                        <div class="feed-single-comment-info pull-left">
-                            <img src="content/img/avatar-abb-small.png" alt="user-avatar">
-                        </div>
-                        <div class="feed-single-comment-data">
-                            <div class="name">
-                                <a href="#" data-original-title="">ABB-Something</a>
-                            </div>
-                            <div class="time">
-                                <i class="icon-time"></i>
-                                <span>19 min</span>
-                            </div>
-                            <div class="feed-single-comment-hr"></div>
-                            <small>Et harum quidem rerum facilis est et expedita distinctio</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+            <div id="loading_throbber_real_time_sensor_feeds" class="loading-throbber" data-container="real-time-sensor-feedsContainer"></div>
+        </div>        
     </div>
     <!-- Modals -->
     <div id="modals">
+        <div class="modal fade" id="modalHumanFeedsAddDateFilter">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title">Date Filter</h4>
+                    </div>
+                    <div class="modal-body np">
+                        <table class="table table-filter">
+                            <tbody>
+                                <tr class="no-tb">
+                                    <td><input id="chbHumanFeedsFilterStartDate" type="checkbox" class="bs" data-datepicker="datepickerStart"/></td>
+                                    <td class="filterDateText">Starting Date</td>
+                                    <td>
+                                        <div id="datepickerStart">
+                                            <div class="input-group date">
+                                                <input type="text" class="form-control">
+                                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                 <tr class="no-bb">
+                                    <td><input id="chbHumanFeedsFilterEndDate" type="checkbox" class="bs" data-datepicker="datepickerEnd"/></td>
+                                    <td class="filterDateText">Ending Date</td>
+                                    <td>
+                                         <div id="datepickerEnd">
+                                            <div class="input-group date">
+                                                <input type="text" class="form-control">
+                                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="SaveHumanFeedsFilterData(1)">Save changes</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
         <div class="modal fade" id="modalNote" tabindex="-1" role="dialog" aria-labelledby="modalNoteLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -157,43 +127,16 @@
                         <hr>
                         <h5>Please insert new note text:</h5>
                         <!-- Textbox -->
-                        <textarea id="textareaNote" class="input col-md-12" placeholder="Insert your note text here..." rows="5"></textarea>
+                        <textarea id="textareaNote" class="input col-md-12" placeholder="Insert your note text here..." rows="5" ></textarea>
                         <br />
-                        <br />
-                        <!-- Tagging -->
                         <h5>Tag users:</h5>
                         <div id="input-tags-div">
-                            <input id="input-tags" class="demo-default selectized" type="text" tabindex="-1" style="display: none;"></input>
-                            <script>
-                                //var data = ['haha', 'ihi', 'oho','meh'];
-                                //var items = data.map(function (x) { return { item: x }; });
-
-                                ////initialization of the selection field
-                                //var $select =  $('#input-tags').selectize({
-                                //    plugins: ['remove_button'],
-                                //    delimiter: ',',
-                                //    persist: false,
-                                //    options: items,
-                                //    labelField: "item",
-                                //    valueField: "item",
-                                //    searchField: ['item']
-                                //});
-
-
-                                //var data2 = ['haha', 'ihi', 'oho', 'meh','wiki','iki'];
-                                //var items2= data.map(function (x) { return { item: x }; });
-
-                                //var selectize = $select[0].selectize;
-                                //selectize.addOption({ item: 'wiki' });
-                                //selectize.refreshOptions();
-
-                            </script>
+                            <input id="input-tags-post-feed" class="selectized" type="text" tabindex="-1" style="display: none;"/>                         
                         </div>
-                        <br />
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="AjaxPostNewFeed()">Post new note</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="AjaxPublishHumanFeed()">Post new note</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -240,29 +183,21 @@
             </div>
             <!-- /.modal-dialog -->
         </div>
-        <!-- /.modal -->
+        <!-- /.modal -->       
     </div>
-    <script>
-        // Instances of sensor gauges, should be in ui.js !
-        var g1 = new JustGage({
-            id: "gauge-996",
-            value: getRandomInt(800, 980),
-            min: 0,
-            max: 1000,
-            title: "Water flow [m3/h]",
-            gaugeWidthScale: 0.5
-        });
-        var g2 = new JustGage({
-            id: "gauge-995",
-            value: getRandomInt(110, 280),
-            min: 0,
-            max: 400,
-            title: "Wind speed [km/h]"
-        });
-
-        //listener for clearing the modals
-        ClearModalBodyListener();
-
-        PopulateSelectBoxPostType();
-    </script>
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterStartDateIsChecked" Value="false"/>
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterStartDateValue"/>
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterEndDateIsChecked" Value="false"/>
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterEndDateValue"/>
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterLocationIsChecked" Value="false"/>
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterLocation"/>
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterUserId" Value="-1"/>
+    
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="realTimeSensorFeedsFilterStartDateIsChecked" Value="false"/>
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="realTimeSensorFeedsFilterStartDateValue"/>
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="realTimeSensorFeedsFilterEndDateIsChecked" Value="false"/>
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="realTimeSensorFeedsFilterEndDateValue"/>
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="realTimeSensorFeedsFilterLocationIsChecked" Value="false"/>
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="realTimeSensorFeedsFilterLocation"/>
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="realTimeSensorFeedsFilterUserId" Value="-1"/>   
 </asp:Content>

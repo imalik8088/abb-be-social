@@ -21,13 +21,13 @@ public class Core
                 break;
             case 4:
                 cssClassName = "sticky";
-                break;                
+                break;
             case 3:
                 cssClassName = "work";
-                break;                
+                break;
             case 2:
                 cssClassName = "vacation";
-                break;                
+                break;
             case 1:
                 cssClassName = "default";
                 break;

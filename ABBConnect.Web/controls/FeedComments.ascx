@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="Commentlet.ascx.cs" Inherits="controls_Commentlet" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="FeedComments.ascx.cs" Inherits="controls_FeedComments" %>
 <asp:Repeater ID="feedCommentsRepeater" runat="server">
     <ItemTemplate>
         <div id='feed-single-comment-container-<%# DataBinder.Eval(Container.DataItem,"ID")%>' class="feed-single-comment-container">
@@ -7,7 +7,7 @@
             </div>
             <div class="feed-single-comment-data">
                 <div class="name">
-                    <a href="#"><%# DataBinder.Eval(Container.DataItem,"Owner.UserName")%></a>
+                    <a href="userProfile.aspx?userId=<%# DataBinder.Eval(Container.DataItem,"Owner.ID")%>"><%# DataBinder.Eval(Container.DataItem,"Owner.UserName")%></a>
                 </div>
                 <div class="time">
                     <i class="icon-time"></i>
