@@ -163,6 +163,42 @@ public partial class _Home : System.Web.UI.Page
     }
 
     [System.Web.Services.WebMethod]
+    public static bool AjaxPublishHumanPictureFeed(string feedContent, string feedType, string feedTaggedUserIds, string base64Picture)
+    {
+        bool actionResult = false;
+        UserManager userManager = new UserManager();
+        FeedManager feedManager = new FeedManager();
+        CommonDataManager commonDataManager = new CommonDataManager();
+
+        Human feedOwner = new Human();
+        feedOwner = userManager.LoadHumanInformation(int.Parse(HttpContext.Current.Session["humanID"].ToString()));
+
+        List<Human> taggedUsers = new List<Human>();
+        if (feedTaggedUserIds.Length > 0)
+        {
+            string[] feedTaggedUserIdsList = feedTaggedUserIds.Split(',');
+            foreach (string taggedUserId in feedTaggedUserIdsList)
+            {
+                Human fetchedUser = userManager.LoadHumanInformation(int.Parse(taggedUserId));
+                taggedUsers.Add(fetchedUser);
+            }
+        }
+
+        HumanFeed newHumanFeed = new HumanFeed();
+        newHumanFeed.FeedType = feedType;
+        newHumanFeed.Content = feedContent;
+        newHumanFeed.Location = "Madagascar";
+        newHumanFeed.TimeStamp = DateTime.Now;
+        newHumanFeed.Category = commonDataManager.GetFeedCategories().Where(c => c.CategoryName == feedType).FirstOrDefault();
+        newHumanFeed.Tags = taggedUsers;
+        newHumanFeed.Owner = feedOwner;
+        //until this isn't changed to something more semantically correct, we use this field for storing images
+        newHumanFeed.MediaFilePath = base64Picture;
+        actionResult = feedManager.PublishFeed(newHumanFeed);
+        return actionResult;
+    }
+
+    [System.Web.Services.WebMethod]
     public static AjaxFeeds AjaxDisplayNewPublishedHumanFeed(AjaxFeedFilter filter)
     {
         //NOTE: ajaxFeedsHTML is rendered FeedPage, so we return HTML thats going to be appended

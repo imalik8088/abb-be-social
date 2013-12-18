@@ -82,7 +82,7 @@
                                     <td>
                                         <div id="datepickerStart">
                                             <div class="input-group date">
-                                                <input type="text" class="form-control"/>
+                                                <input type="text" class="form-control" />
                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                             </div>
                                         </div>
@@ -166,16 +166,37 @@
                         <br />
                         <!-- File upload-->
                         <h5>Upload the file:</h5>
-                         <input id="filePicture" type="file" runat="server"/>
-                        <%--<input id="filePicture" type="file" style="display: none" />--%>
-                        <%--                        <div class="input-append">
+
+                        <input id="filePicture" type="file"/>
+
+<%--                        <input id="filePicture" type="file" style="display: none" />
+                        <div class="input-append">
                             <input id="inputPicturePath" class="input-large" type="text" style="width: 85%;" />
                             <a class="btn" onclick="$('input[id=filePicture]').click();">Browse</a>
                         </div>--%>
 
+                        <%--<input type='file' class="input-large" id="asd" />--%>
+                        <img id="modalImgFile" src="" hidden="hidden"/>
+                        <%--<div id="base"></div>--%>
+
                         <script type="text/javascript">
-                            $('input[id=filePicture]').change(function () {
-                                $('#inputPicturePath').val($(this).val());
+                            //$('input[id=filePicture]').change(function () {
+                            //    $('#inputPicturePath').val($(this).val());
+                            //});
+
+                            function readImage(input) {
+                                if (input.files && input.files[0]) {
+                                    var FR = new FileReader();
+                                    FR.onload = function (e) {
+                                        $('#modalImgFile').attr("src", e.target.result);
+                                        //$('#base').text(e.target.result);
+                                    };
+                                    FR.readAsDataURL(input.files[0]);
+                                }
+                            }
+
+                            $("#filePicture").change(function () {
+                                readImage(this);
                             });
                         </script>
                         <!--Tagging-->
@@ -185,8 +206,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="ClearModal()">Close</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="ClearModal()">Post new picture note</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="AjaxPublishHumanPictureFeed()">Post new picture note</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->

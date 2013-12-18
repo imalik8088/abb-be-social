@@ -105,6 +105,19 @@ function AjaxPublishHumanFeed() {
 
     PageMethods.AjaxPublishHumanFeed(feedContentData, feedType, tagfeedTaggedUsers, OnAjaxPublishHumanFeedSuccess);
 }
+
+function AjaxPublishHumanPictureFeed() {
+    var feedContentData = $("#textAreaPicture").val();
+    var feedType = $("#selectModalPictureMessage").val();
+
+    var selectize = $('#input-tags-post-picture')[0].selectize;
+    var tagfeedTaggedUsers = selectize.getValue();
+
+    var base64picture = $('#modalImgFile').attr('src');
+
+    PageMethods.AjaxPublishHumanPictureFeed(feedContentData, feedType, tagfeedTaggedUsers, base64picture, OnAjaxPublishHumanFeedSuccess);
+}
+
 function OnAjaxPublishHumanFeedSuccess(result, userContext, methodName) {
     AjaxDisplayNewPublishedHumanFeed();
     //if (result == true) {
@@ -235,14 +248,21 @@ function OnAjaxPopulateSelectBoxPostFeedType(result, userContext, methodName) {
     var selectModalNoteMessage = document.getElementById('selectModalNoteMessage');
     var selectModalPictureMessage = document.getElementById('selectModalPictureMessage');
 
+    AddCategoryOptionsToModal(selectModalNoteMessage, typeArray);
+    AddCategoryOptionsToModal(selectModalPictureMessage, typeArray);
+}
+
+function AddCategoryOptionsToModal(modal, typeArray) {
+
     for (var i = 0; i < typeArray.length; i++) {
-        opt = document.createElement("option");
+        var opt = document.createElement("option");
         opt.value = typeArray[i].CategoryName;
         opt.text = typeArray[i].CategoryName.split(/(?=[A-Z])/).join(' ');
-        selectModalNoteMessage.appendChild(opt);
-        selectModalPictureMessage.appendChild(opt);
+
+        modal.appendChild(opt);
     }
 }
+
 function AjaxGetAvailableUsersToTag() {
     PageMethods.AjaxGetAvailableUsersToTag(OnAjaxGetAvailableUsersToTagSuccess);
 }
