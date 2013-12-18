@@ -109,10 +109,10 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
                     <toolkit:WrapPanel HorizontalAlignment="Left" Height="158" VerticalAlignment="Top" Width="456">
-                        <Border x:Name="brdrSensor" BorderBrush="Gray" Background="#FF515B5B" BorderThickness="3" Margin="219,13,-370,-149" MouseLeftButtonUp="brdrSensor_MouseLeftButtonUp">
+                        <Border Tag="true"  x:Name="brdrSensor" BorderBrush="Gray" Background="#FFB5BBBB" BorderThickness="3" Margin="219,13,-370,-149" MouseLeftButtonUp="brdrSensor_MouseLeftButtonUp">
                             <TextBlock Text="Sensor" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <Border  x:Name="brdrHuman"  BorderBrush="Gray" Background="#FFB5BBBB" BorderThickness="3" Margin="63,13,-214,-149" MouseLeftButtonUp="brdrHuman_MouseLeftButtonUp">
+                        <Border Tag="true" x:Name="brdrHuman"  BorderBrush="Gray" Background="#FFB5BBBB" BorderThickness="3" Margin="63,13,-214,-149" MouseLeftButtonUp="brdrHuman_MouseLeftButtonUp">
                             <TextBlock Text="Human" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </toolkit:WrapPanel>

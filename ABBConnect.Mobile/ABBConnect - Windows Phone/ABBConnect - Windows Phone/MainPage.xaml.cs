@@ -67,7 +67,7 @@ namespace ABBConnect___Windows_Phone
             timerNewFeed.Tick += new EventHandler(timerLabel_tick);
 
             currentFeedType = new FeedType.FeedSource();
-            currentFeedType = FeedType.FeedSource.Human;
+            currentFeedType = FeedType.FeedSource.None;
             timerReady = true;
 
             LoadNewFeeds(NUMBEROFFEEDS);
@@ -527,19 +527,85 @@ namespace ABBConnect___Windows_Phone
 
         private void brdrHuman_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            //unticking human         
+            if (brdrHuman.Tag.Equals("true"))
+            {
+                if (brdrSensor.Tag.Equals("true"))
+                {
+                    ChangeFeedType(FeedType.FeedSource.Sensor);
+                    brdrHuman.Tag = "false";
+                    brdrHuman.Background = GetColorFromHexa("#FF515B5B");
+                }
+                else
+                {
+                    ChangeFeedType(FeedType.FeedSource.None);
+                    brdrHuman.Tag = "false";
+                    brdrHuman.Background = GetColorFromHexa("#FF515B5B");
+                }
+            }
+            else //ticking human
+            {
+                if (brdrSensor.Tag.Equals("true")) //if sensor is ticked
+                {
+                    ChangeFeedType(FeedType.FeedSource.None);
+                    brdrHuman.Background = GetColorFromHexa("#FFB5BBBB");
+                    brdrHuman.Tag = "true";
+                }
+                else //if not sensor is ticked
+                {
+                    ChangeFeedType(FeedType.FeedSource.Human);
+                    brdrHuman.Background = GetColorFromHexa("#FFB5BBBB");
+                    brdrHuman.Tag = "true";
+                }
+            }
+            /*
             brdrHuman.Background = GetColorFromHexa("#FFB5BBBB");
             brdrSensor.Background = GetColorFromHexa("#FF515B5B");
 
             ChangeFeedType(FeedType.FeedSource.Human);
+             */
         }
 
         private void brdrSensor_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            //unticking senosr         
+            if (brdrSensor.Tag.Equals("true"))
+            {
+                if (brdrHuman.Tag.Equals("true"))
+                {
+                    ChangeFeedType(FeedType.FeedSource.Human);
+                    brdrSensor.Tag = "false";
+                    brdrSensor.Background = GetColorFromHexa("#FF515B5B");
+                }
+                else
+                {
+                    ChangeFeedType(FeedType.FeedSource.None);
+                    brdrSensor.Tag = "false";
+                    brdrSensor.Background = GetColorFromHexa("#FF515B5B");
+                }
+            }
+            else //ticking sensor
+            {
+                if (brdrHuman.Tag.Equals("true")) //if human is ticked
+                {
+                    ChangeFeedType(FeedType.FeedSource.None);
+                    brdrSensor.Background = GetColorFromHexa("#FFB5BBBB");
+                    brdrSensor.Tag = "true";
+                }
+                else //if not human is ticked
+                {
+                    ChangeFeedType(FeedType.FeedSource.Sensor);
+                    brdrSensor.Background = GetColorFromHexa("#FFB5BBBB");
+                    brdrSensor.Tag = "true";
+                }
+            }
+
+            /*
             brdrSensor.Background = GetColorFromHexa("#FFB5BBBB");
             brdrHuman.Background = GetColorFromHexa("#FF515B5B");
 
             ChangeFeedType(FeedType.FeedSource.Sensor);
-            
+            */
         }
 
         private void ChangeFeedType(FeedType.FeedSource feedType)
