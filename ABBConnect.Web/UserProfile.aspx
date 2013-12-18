@@ -3,15 +3,16 @@
 <%@ Register Src="controls/FeedPage.ascx" TagName="FeedPage" TagPrefix="abbConnect" %>
 <%@ Register Src="controls/FeedComments.ascx" TagName="FeedComments" TagPrefix="abbConnect" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-      <div class="row">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <div class="row">
         <div class="col-md-6">
             <div class="feed-header">
                 <div class="form-inline">
                     <div class="form-group">
-                        <h3><span class="glyphicon glyphicon-link"></span>User feeds <small><asp:Literal runat="server" ID="litFeedsUserName"></asp:Literal></small></h3>
+                        <h3><span class="glyphicon glyphicon-link"></span>User feeds <small>
+                            <asp:Literal runat="server" ID="litFeedsUserName"></asp:Literal></small></h3>
                     </div>
                     <div class="form-group button-group">
                         <div class="btn-group">
@@ -45,14 +46,15 @@
             </div>
             <div id="feedsContainer">
                 <abbConnect:FeedPage ID="FeedPage" runat="server" />
-            </div>            
+            </div>
             <div id="loading_throbber_human_feeds" class="loading-throbber" data-container="feedsContainer"></div>
         </div>
         <div class="col-md-6">
             <div class="feed-header">
                 <div class="form-inline">
                     <div class="form-group">
-                        <h3><span class="glyphicon glyphicon-user"></span> Profile <small><asp:Literal runat="server" ID="litProfileUserName"></asp:Literal></small></h3>
+                        <h3><span class="glyphicon glyphicon-user"></span>Profile <small>
+                            <asp:Literal runat="server" ID="litProfileUserName"></asp:Literal></small></h3>
                     </div>
                 </div>
             </div>
@@ -60,83 +62,85 @@
                 <div class="feed-inner-container feed-inner-container-default">
                     <div class="feed-information">
                         <img class="feed-avatar" alt="" src="content/img/avatar-abb.png">
-                    </div>     
+                    </div>
                     <div class="feed-message feed-message-default">
-                            <a class="user-info feed-name-default">Username:</a>
-                            <asp:Literal runat="server" ID="litUserName"></asp:Literal><br />
-                            <hr class="mXhr10">
-                            <a class="user-info feed-name-default">Location:</a>
-                            <asp:Literal runat="server" ID="litUserLocation"></asp:Literal><br />
-                            <a class="user-info feed-name-default">Email:</a>
-                            <asp:Literal runat="server" ID="litUserEmail"></asp:Literal><br />
-                            <a class="user-info feed-name-default">Phone number:</a>
-                            <asp:Literal runat="server" ID="litUserPhoneNumber"></asp:Literal><br />
-                    </div>           
-                </div>
-            </div>
-               <div class="feed-header">
-                <div class="form-inline">
-                    <div class="form-group">
-                        <h3><span class="glyphicon glyphicon-comment"></span> Activity <small><asp:Literal runat="server" ID="litActivityUserName"></asp:Literal> </small></h3>
+                        <a class="user-info feed-name-default">Username:</a>
+                        <asp:Literal runat="server" ID="litUserName"></asp:Literal><br />
+                        <hr class="mXhr10">
+                        <a class="user-info feed-name-default">Location:</a>
+                        <asp:Literal runat="server" ID="litUserLocation"></asp:Literal><br />
+                        <a class="user-info feed-name-default">Email:</a>
+                        <asp:Literal runat="server" ID="litUserEmail"></asp:Literal><br />
+                        <a class="user-info feed-name-default">Phone number:</a>
+                        <asp:Literal runat="server" ID="litUserPhoneNumber"></asp:Literal><br />
                     </div>
                 </div>
             </div>
-             <a href="#" class="thumbnail">
-                 <asp:Chart ID="profilePostActivityChart" runat="server" Height="480" Width="640">
-                     <Series>
-                         <asp:Series ChartType="Area" Palette="Pastel" ChartArea="MainChartArea" Legend="Legend1"></asp:Series>
-                     </Series>
-                     <ChartAreas>
-                         <asp:ChartArea Name="MainChartArea" Area3DStyle-Enable3D="true">
-<Area3DStyle Enable3D="True"></Area3DStyle>
-                         </asp:ChartArea>
-                     </ChartAreas>                    
-                     <Titles>
-                         <asp:Title Name="Title1" Text="Number of posts per date">
-                         </asp:Title>
-                     </Titles>
-                 </asp:Chart>
-             </a>
+            <div class="feed-header">
+                <div class="form-inline">
+                    <div class="form-group">
+                        <h3><span class="glyphicon glyphicon-comment"></span>Activity <small>
+                            <asp:Literal runat="server" ID="litActivityUserName"></asp:Literal>
+                        </small></h3>
+                    </div>
+                </div>
+            </div>
+            <a href="#" class="thumbnail">
+                <asp:Chart ID="profilePostActivityChart" runat="server" Height="480" Width="640">
+                    <Series>
+                        <asp:Series ChartType="Area" Palette="Pastel" ChartArea="MainChartArea" Legend="Legend1"></asp:Series>
+                    </Series>
+                    <ChartAreas>
+                        <asp:ChartArea Name="MainChartArea" Area3DStyle-Enable3D="true">
+                            <Area3DStyle Enable3D="True"></Area3DStyle>
+                        </asp:ChartArea>
+                    </ChartAreas>
+                    <Titles>
+                        <asp:Title Name="Title1" Text="Number of posts per date">
+                        </asp:Title>
+                    </Titles>
+                </asp:Chart>
+            </a>
             <hr>
-            
-              <a href="#" class="thumbnail">
-                 <asp:Chart ID="profilePostByDayOfWeekActivityChart" runat="server" Height="480" Width="640" >
-                     <Series>
-                         <asp:Series ChartType="Column" Palette="Pastel" ChartArea="MainChartArea"></asp:Series>
-                     </Series>
-                     <ChartAreas>
-                         <asp:ChartArea Name="MainChartArea" Area3DStyle-Enable3D="true" >
-                         </asp:ChartArea>
-                     </ChartAreas>
-                      <Titles>
-                         <asp:Title Name="Title1" Text="Number of posts per day of week">
-                         </asp:Title>
-                     </Titles>
-                 </asp:Chart>
-             </a>
+
+            <a href="#" class="thumbnail">
+                <asp:Chart ID="profilePostByDayOfWeekActivityChart" runat="server" Height="480" Width="640">
+                    <Series>
+                        <asp:Series ChartType="Column" Palette="Pastel" ChartArea="MainChartArea"></asp:Series>
+                    </Series>
+                    <ChartAreas>
+                        <asp:ChartArea Name="MainChartArea" Area3DStyle-Enable3D="true">
+                        </asp:ChartArea>
+                    </ChartAreas>
+                    <Titles>
+                        <asp:Title Name="Title1" Text="Number of posts per day of week">
+                        </asp:Title>
+                    </Titles>
+                </asp:Chart>
+            </a>
             <hr>
-             <a href="#" class="thumbnail">
-                 <asp:Chart ID="profilePostByFeedTypeChart" runat="server" Height="300" Width="640" >
-                     <Series>
-                         <asp:Series ChartType="Doughnut" Palette="Pastel" ChartArea="MainChartArea" ></asp:Series>
-                     </Series>
-                     <ChartAreas>
-                         <asp:ChartArea Name="MainChartArea" Area3DStyle-Enable3D="true">
-<Area3DStyle Enable3D="True"></Area3DStyle>
-                         </asp:ChartArea>
-                     </ChartAreas>
-                      <Legends>
-                          <asp:Legend Name="Legend1" Title="Feed categories" IsTextAutoFit="true">
-                          </asp:Legend>
-                     </Legends>
-                      <Titles>
-                         <asp:Title Name="Title1" Text="Distribution of categories per posted feeds">
-                         </asp:Title>
-                     </Titles>
-                 </asp:Chart>
-             </a>
+            <a href="#" class="thumbnail">
+                <asp:Chart ID="profilePostByFeedTypeChart" runat="server" Height="300" Width="640">
+                    <Series>
+                        <asp:Series ChartType="Doughnut" Palette="Pastel" ChartArea="MainChartArea"></asp:Series>
+                    </Series>
+                    <ChartAreas>
+                        <asp:ChartArea Name="MainChartArea" Area3DStyle-Enable3D="true">
+                            <Area3DStyle Enable3D="True"></Area3DStyle>
+                        </asp:ChartArea>
+                    </ChartAreas>
+                    <Legends>
+                        <asp:Legend Name="Legend1" Title="Feed categories" IsTextAutoFit="true">
+                        </asp:Legend>
+                    </Legends>
+                    <Titles>
+                        <asp:Title Name="Title1" Text="Distribution of categories per posted feeds">
+                        </asp:Title>
+                    </Titles>
+                </asp:Chart>
+            </a>
         </div>
-      </div>
+    </div>
     <!-- Modals -->
     <div id="modals">
         <div class="modal fade" id="modalHumanFeedsAddDateFilter">
@@ -150,7 +154,8 @@
                         <table class="table table-filter">
                             <tbody>
                                 <tr class="no-tb">
-                                    <td><input id="chbHumanFeedsFilterStartDate" type="checkbox" class="bs" data-datepicker="datepickerStart"/></td>
+                                    <td>
+                                        <input id="chbHumanFeedsFilterStartDate" type="checkbox" class="bs" data-datepicker="datepickerStart" /></td>
                                     <td class="filterDateText">Starting Date</td>
                                     <td>
                                         <div id="datepickerStart">
@@ -161,11 +166,12 @@
                                         </div>
                                     </td>
                                 </tr>
-                                 <tr class="no-bb">
-                                    <td><input id="chbHumanFeedsFilterEndDate" type="checkbox" class="bs" data-datepicker="datepickerEnd"/></td>
+                                <tr class="no-bb">
+                                    <td>
+                                        <input id="chbHumanFeedsFilterEndDate" type="checkbox" class="bs" data-datepicker="datepickerEnd" /></td>
                                     <td class="filterDateText">Ending Date</td>
                                     <td>
-                                         <div id="datepickerEnd">
+                                        <div id="datepickerEnd">
                                             <div class="input-group date">
                                                 <input type="text" class="form-control">
                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
@@ -201,11 +207,11 @@
                         <hr>
                         <h5>Please insert new note text:</h5>
                         <!-- Textbox -->
-                        <textarea id="textareaNote" class="input col-md-12" placeholder="Insert your note text here..." rows="5" ></textarea>
+                        <textarea id="textareaNote" class="input col-md-12" placeholder="Insert your note text here..." rows="5"></textarea>
                         <br />
                         <h5>Tag users:</h5>
                         <div id="input-tags-div">
-                            <input id="input-tags-post-feed" class="selectized" type="text" tabindex="-1" style="display: none;"/>                         
+                            <input id="input-tags-post-feed" class="selectized" type="text" tabindex="-1" style="display: none;" />
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -257,14 +263,14 @@
             </div>
             <!-- /.modal-dialog -->
         </div>
-        <!-- /.modal -->       
+        <!-- /.modal -->
     </div>
-    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterStartDateIsChecked" Value="false"/>
-    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterStartDateValue"/>
-    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterEndDateIsChecked" Value="false"/>
-    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterEndDateValue"/>
-    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterLocationIsChecked" Value="false"/>
-    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterLocation"/>
-    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterUserId" Value="-1"/>    
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterStartDateIsChecked" Value="false" />
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterStartDateValue" />
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterEndDateIsChecked" Value="false" />
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterEndDateValue" />
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterLocationIsChecked" Value="false" />
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterLocation" />
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterUserId" Value="-1" />
 </asp:Content>
 

@@ -18,7 +18,7 @@ function hideFullFeedCommentContainer(feedId) {
     $("#feed-post-comment-input-" + feedId.toString()).val('Write comment...');
 }
 
-function AjaxLoadMoreHumanFeeds(lastLoadedFeedId) {   
+function AjaxLoadMoreHumanFeeds(lastLoadedFeedId) {
     var ajaxFeedFilter = new Object();
     ajaxFeedFilter.startDate = null;
     ajaxFeedFilter.endDate = null;
@@ -26,7 +26,7 @@ function AjaxLoadMoreHumanFeeds(lastLoadedFeedId) {
     ajaxFeedFilter.userId = $('#humanFeedsFilterUserId').val();
 
     if ($('#humanFeedsFilterStartDateIsChecked').val() == 'true') {
-        ajaxFeedFilter.startDate = new Date($('#humanFeedsFilterStartDateValue').val());        
+        ajaxFeedFilter.startDate = new Date($('#humanFeedsFilterStartDateValue').val());
     }
     if ($('#humanFeedsFilterEndDateIsChecked').val() == 'true') {
         ajaxFeedFilter.endDate = new Date($('#humanFeedsFilterEndDateValue').val());
@@ -36,7 +36,7 @@ function AjaxLoadMoreHumanFeeds(lastLoadedFeedId) {
     }
 
     $("#loading_throbber_human_feeds").show();
-    PageMethods.AjaxLoadMoreHumanFeeds(lastLoadedFeedId,  ajaxFeedFilter, AjaxLoadMoreHumanFeedsSuccess);
+    PageMethods.AjaxLoadMoreHumanFeeds(lastLoadedFeedId, ajaxFeedFilter, AjaxLoadMoreHumanFeedsSuccess);
 }
 function AjaxLoadMoreHumanFeedsSuccess(result, userContext, methodName) {
     $("#loading_throbber_human_feeds").hide();
@@ -99,7 +99,7 @@ function OnAjaxGetAllFeedCommentsSuccess(result, userContext, methodName) {
 function AjaxPublishHumanFeed() {
     var feedContentData = $("#textareaNote").val();
     var feedType = $("#selectModalNoteMessage").val();
-   
+
     var selectize = $('#input-tags-post-feed')[0].selectize;
     var tagfeedTaggedUsers = selectize.getValue();
 
@@ -133,7 +133,7 @@ function AjaxDisplayNewPublishedHumanFeed() {
         ajaxFeedFilter.location = $('#realTimeSensorFeedsFilterLocation').val();
     }
 
-    PageMethods.AjaxDisplayNewPublishedHumanFeed(ajaxFeedFilter,AjaxDisplayNewPublishedHumanFeedSuccess);
+    PageMethods.AjaxDisplayNewPublishedHumanFeed(ajaxFeedFilter, AjaxDisplayNewPublishedHumanFeedSuccess);
 }
 function AjaxDisplayNewPublishedHumanFeedSuccess(result, userContext, methodName) {
     var feedsRawData = '';
@@ -161,17 +161,15 @@ function OnPopulateSelectBoxPostType(result, userContext, methodName) {
 }
 
 function ClearModalBodyListener() {
-    //delegates for modals, so we can clear the data between the hides.
-    //at the moment, it has to be like this, i couldn't make it work with removeData
-    $(document).delegate('#modalNote', 'hidden.bs.modal', function (event) {
-        //$(this).data('bs.modal').$element.removeData();
-        $(this).html($(this).html());
-    });
+    ////delegates for modals, so we can clear the data between the hides.
+    ////at the moment, it has to be like this, i couldn't make it work with removeData
+    //$(document).delegate('#modalNote', 'hide.bs.modal', function (event) {
+    //    $(this).html($(this).html());
+    //});
 
-    $(document).delegate('#modalPicture', 'hidden.bs.modal', function (event) {
-        //$(this).find('textarea').val(null).blur();
-        $(this).html($(this).html());
-    });
+    //$(document).delegate('#modalPicture', 'hidden.bs.modal', function (event) {
+    //    $(this).html($(this).html());
+    //});
 }
 function SaveHumanFeedsFilterData(refreshData) {
     if ($('#chbHumanFeedsFilterStartDate').is(':checked') == true) {
@@ -223,7 +221,7 @@ function initSelectize(elementPrefixName, elementId, isLocked) {
             }
         }
     });
-    if (isLocked == true) $select[0].selectize.lock();    
+    if (isLocked == true) $select[0].selectize.lock();
 }
 
 function AjaxPopulateSelectBoxPostFeedType() {
@@ -232,13 +230,17 @@ function AjaxPopulateSelectBoxPostFeedType() {
 function OnAjaxPopulateSelectBoxPostFeedType(result, userContext, methodName) {
     //there are two attributes for each result item: CategoryName and Id
     var typeArray = result;
-    var obj = document.getElementById('selectModalNoteMessage');
+
+    //the two selectboxes
+    var selectModalNoteMessage = document.getElementById('selectModalNoteMessage');
+    var selectModalPictureMessage = document.getElementById('selectModalPictureMessage');
 
     for (var i = 0; i < typeArray.length; i++) {
         opt = document.createElement("option");
         opt.value = typeArray[i].CategoryName;
         opt.text = typeArray[i].CategoryName.split(/(?=[A-Z])/).join(' ');
-        obj.appendChild(opt);
+        selectModalNoteMessage.appendChild(opt);
+        selectModalPictureMessage.appendChild(opt);
     }
 }
 function AjaxGetAvailableUsersToTag() {
@@ -249,19 +251,43 @@ function OnAjaxGetAvailableUsersToTagSuccess(result, userContext, methodName) {
 
     //the result is an array of User objects
     var availableUsers = result;
-    $('#input-tags-post-feed').selectize(
-        {
-            delimiter: ',',
-            persist: false,
-            createOnBlur: true,
-            disabled: true,
-            maxItems: null,
-            valueField: 'ID',
-            labelField: 'UserName',
-            searchField: 'UserName',
-            options: availableUsers,
-            create: false
-    });    
+
+    //save the options for both inputs
+    var options = {
+        delimiter: ',',
+        persist: false,
+        createOnBlur: true,
+        disabled: true,
+        maxItems: null,
+        valueField: 'ID',
+        labelField: 'UserName',
+        searchField: 'UserName',
+        options: availableUsers,
+        create: false
+    };
+
+    var $selectNote = $('#input-tags-post-feed').selectize(options);
+    var $selectPicture = $('#input-tags-post-picture').selectize(options);
+
+    var selectizeNote = $selectNote[0].selectize;
+    var selectizePicture = $selectPicture[0].selectize;
+
+    //delegates for modals, so we can clear the data between the hides.
+    //at the moment, it has to be like this, i couldn't make it work with removeData
+    $(document).delegate('#modalNote', 'hide.bs.modal', function (event) {
+
+        $('#selectModalNoteMessage').html($('#selectModalNoteMessage').html());
+        $('#textareaNote').val('').blur();
+        selectizeNote.clear();
+
+    });
+
+    $(document).delegate('#modalPicture', 'hide.bs.modal', function (event) {
+
+        $('#selectModalPictureMessage').html($('#selectModalPictureMessage').html());
+        $('#textAreaPicture').val('').blur();
+        selectizePicture.clear();
+    });
 }
 
 function initUI() {
@@ -284,16 +310,15 @@ function initUI() {
         uncheckedClass: 'glyphicon glyphicon glyphicon-unchecked'
     });
 
-  
+
     //Checkbox changes value
     $('input[type="checkbox"].bs').change(function () {
-        if ($(this).is(":checked")) {         
-            var datepickerValue = $("#" + $(this).data('datepicker') + " input").val();         
-            if (datepickerValue == '')
-            {
+        if ($(this).is(":checked")) {
+            var datepickerValue = $("#" + $(this).data('datepicker') + " input").val();
+            if (datepickerValue == '') {
                 $(this).attr("checked", false);
-            }          
-           
+            }
+
         }
     });
 

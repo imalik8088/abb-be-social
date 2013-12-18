@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#"  MasterPageFile="~/MasterPage.master" AutoEventWireup="true"  CodeFile="Home.aspx.cs" Inherits="_Home" %> 
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Home.aspx.cs" Inherits="_Home" %>
 
 <%@ Register Src="controls/FeedPage.ascx" TagName="FeedPage" TagPrefix="abbConnect" %>
 <%@ Register Src="controls/FeedComments.ascx" TagName="FeedComments" TagPrefix="abbConnect" %>
@@ -46,7 +46,7 @@
             </div>
             <div id="feedsContainer">
                 <abbConnect:FeedPage ID="FeedPage" runat="server" />
-            </div>            
+            </div>
             <div id="loading_throbber_human_feeds" class="loading-throbber" data-container="feedsContainer"></div>
         </div>
         <div class="col-md-6">
@@ -61,7 +61,7 @@
                 <abbConnect:RealTimeSensorFeedPage ID="RealTimeSensorFeedPage" runat="server" />
             </div>
             <div id="loading_throbber_real_time_sensor_feeds" class="loading-throbber" data-container="real-time-sensor-feedsContainer"></div>
-        </div>        
+        </div>
     </div>
     <!-- Modals -->
     <div id="modals">
@@ -76,22 +76,24 @@
                         <table class="table table-filter">
                             <tbody>
                                 <tr class="no-tb">
-                                    <td><input id="chbHumanFeedsFilterStartDate" type="checkbox" class="bs" data-datepicker="datepickerStart"/></td>
+                                    <td>
+                                        <input id="chbHumanFeedsFilterStartDate" type="checkbox" class="bs" data-datepicker="datepickerStart" /></td>
                                     <td class="filterDateText">Starting Date</td>
                                     <td>
                                         <div id="datepickerStart">
                                             <div class="input-group date">
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control"/>
                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
-                                 <tr class="no-bb">
-                                    <td><input id="chbHumanFeedsFilterEndDate" type="checkbox" class="bs" data-datepicker="datepickerEnd"/></td>
+                                <tr class="no-bb">
+                                    <td>
+                                        <input id="chbHumanFeedsFilterEndDate" type="checkbox" class="bs" data-datepicker="datepickerEnd" /></td>
                                     <td class="filterDateText">Ending Date</td>
                                     <td>
-                                         <div id="datepickerEnd">
+                                        <div id="datepickerEnd">
                                             <div class="input-group date">
                                                 <input type="text" class="form-control">
                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
@@ -125,13 +127,14 @@
                         <select class="form-control" id="selectModalNoteMessage">
                         </select>
                         <hr>
-                        <h5>Please insert new note text:</h5>
                         <!-- Textbox -->
-                        <textarea id="textareaNote" class="input col-md-12" placeholder="Insert your note text here..." rows="5" ></textarea>
+                        <h5>Please insert new note text:</h5>
+                        <textarea id="textareaNote" class="input col-md-12" placeholder="Insert your note text here..." rows="5"></textarea>
                         <br />
+                        <!--Tagging-->
                         <h5>Tag users:</h5>
                         <div id="input-tags-div">
-                            <input id="input-tags-post-feed" class="selectized" type="text" tabindex="-1" style="display: none;"/>                         
+                            <input id="input-tags-post-feed" class="selectized" type="text" tabindex="-1" style="display: none;" />
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -152,26 +155,33 @@
                         <h4 class="modal-title" id="H1">Add a new picture note</h4>
                     </div>
                     <div class="modal-body">
+                        <h5>Please select the picture note type:</h5>
+                        <!--SelectBox for post body-->
+                        <select class="form-control" id="selectModalPictureMessage">
+                        </select>
+                        <br />
+                        <!-- Textbox -->
+                        <h5>Please insert picture description:</h5>
+                        <textarea id="textAreaPicture" class="input col-md-12" placeholder="Insert your note text here..." rows="5"></textarea>
+                        <br />
                         <!-- File upload-->
-                        <input id="filePicture" type="file" style="display: none" />
-                        <div class="input-append">
+                        <h5>Upload the file:</h5>
+                         <input id="filePicture" type="file" runat="server"/>
+                        <%--<input id="filePicture" type="file" style="display: none" />--%>
+                        <%--                        <div class="input-append">
                             <input id="inputPicturePath" class="input-large" type="text" style="width: 85%;" />
                             <a class="btn" onclick="$('input[id=filePicture]').click();">Browse</a>
-                        </div>
+                        </div>--%>
 
                         <script type="text/javascript">
                             $('input[id=filePicture]').change(function () {
                                 $('#inputPicturePath').val($(this).val());
                             });
                         </script>
-
-                        <br />
-                        <h5>Please insert the description of the picture:</h5>
-
-                        <!-- Textbox -->
-                        <div class="input-group">
-                            <span class="input-group-addon"></span>
-                            <textarea class="input" placeholder="Insert your note text here..." style="width: 100%; resize: vertical"></textarea>
+                        <!--Tagging-->
+                        <h5>Tag users:</h5>
+                        <div id="input-tags-div-picture">
+                            <input id="input-tags-post-picture" class="selectized" type="text" tabindex="-1" style="display: none;" />
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -183,21 +193,21 @@
             </div>
             <!-- /.modal-dialog -->
         </div>
-        <!-- /.modal -->       
+        <!-- /.modal -->
     </div>
-    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterStartDateIsChecked" Value="false"/>
-    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterStartDateValue"/>
-    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterEndDateIsChecked" Value="false"/>
-    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterEndDateValue"/>
-    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterLocationIsChecked" Value="false"/>
-    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterLocation"/>
-    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterUserId" Value="-1"/>
-    
-    <asp:HiddenField runat="server" ClientIDMode="Static" ID="realTimeSensorFeedsFilterStartDateIsChecked" Value="false"/>
-    <asp:HiddenField runat="server" ClientIDMode="Static" ID="realTimeSensorFeedsFilterStartDateValue"/>
-    <asp:HiddenField runat="server" ClientIDMode="Static" ID="realTimeSensorFeedsFilterEndDateIsChecked" Value="false"/>
-    <asp:HiddenField runat="server" ClientIDMode="Static" ID="realTimeSensorFeedsFilterEndDateValue"/>
-    <asp:HiddenField runat="server" ClientIDMode="Static" ID="realTimeSensorFeedsFilterLocationIsChecked" Value="false"/>
-    <asp:HiddenField runat="server" ClientIDMode="Static" ID="realTimeSensorFeedsFilterLocation"/>
-    <asp:HiddenField runat="server" ClientIDMode="Static" ID="realTimeSensorFeedsFilterUserId" Value="-1"/>   
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterStartDateIsChecked" Value="false" />
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterStartDateValue" />
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterEndDateIsChecked" Value="false" />
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterEndDateValue" />
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterLocationIsChecked" Value="false" />
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterLocation" />
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="humanFeedsFilterUserId" Value="-1" />
+
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="realTimeSensorFeedsFilterStartDateIsChecked" Value="false" />
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="realTimeSensorFeedsFilterStartDateValue" />
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="realTimeSensorFeedsFilterEndDateIsChecked" Value="false" />
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="realTimeSensorFeedsFilterEndDateValue" />
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="realTimeSensorFeedsFilterLocationIsChecked" Value="false" />
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="realTimeSensorFeedsFilterLocation" />
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="realTimeSensorFeedsFilterUserId" Value="-1" />
 </asp:Content>
