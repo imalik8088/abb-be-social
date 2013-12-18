@@ -36,15 +36,15 @@ namespace PortableTransformationLayer
             return JsonConvert.DeserializeObject<List<GetFeedTags_Result>>(response);
         }
 
-        public async Task<int> PublishFeed(int usrId, string text, string filepath, int prioId)
-        {
-            var client = new HttpClient();
-            client.BaseAddress = new Uri(urlServer.Url);
-            var response = await client.GetStringAsync("PostFeed?id=" + usrId.ToString()
-                + "&text=" + text + "&path=" + filepath + "&priority=" + prioId.ToString()).ConfigureAwait(false);
-            var obj = JsonConvert.DeserializeObject<string>(response);
-            return int.Parse(obj);
-        }
+        //public async Task<int> PublishFeed(int usrId, string text, string filepath, int prioId)
+        //{
+        //    var client = new HttpClient();
+        //    client.BaseAddress = new Uri(urlServer.Url);
+        //    var response = await client.GetStringAsync("PostFeed?id=" + usrId.ToString()
+        //        + "&text=" + text + "&path=" + filepath + "&priority=" + prioId.ToString()).ConfigureAwait(false);
+        //    var obj = JsonConvert.DeserializeObject<string>(response);
+        //    return int.Parse(obj);
+        //}
 
         //public async Task<int> PublishFeed(int usrId, string text, string filepath, int prioId)
         //{
@@ -54,7 +54,10 @@ namespace PortableTransformationLayer
         //    writer.Flush();
         //    stream.Position = 0;
 
+        //    HttpContent httpContent = new StringContent(stream);
+
         //    var client = new HttpClient();
+        //    client.GetStreamAsync();
         //    client.BaseAddress = new Uri(urlServer.Url);
         //    var response = await client.PostAsync("PostFeed?id=" + usrId.ToString()
         //        + "&text=" + text + "&priority=" + prioId.ToString(), stream).ConfigureAwait(false);

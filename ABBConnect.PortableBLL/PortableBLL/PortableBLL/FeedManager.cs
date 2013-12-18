@@ -124,7 +124,9 @@ namespace PortableBLL
 
             public async Task<List<Feed>> LoadFeedsByType(FeedType.FeedSource feedType, int numFeeds)
             {
-                List<GetLatestXFeeds_Result> list = await feedData.GetFeedsByFilter(-1, "", DateTime.MinValue, DateTime.MinValue, feedType.ToString(), -1, numFeeds);
+                string typeOfFeed = Getfeedtype(feedType);
+
+                List<GetLatestXFeeds_Result> list = await feedData.GetFeedsByFilter(-1, "", DateTime.MinValue, DateTime.MinValue, typeOfFeed, -1, numFeeds);
 
                 List<Feed> retList = new List<Feed>();
 
@@ -145,9 +147,21 @@ namespace PortableBLL
                 return retList;
             }
 
+            private static string Getfeedtype(FeedType.FeedSource feedType)
+            {
+                string typeOfFeed;
+                if (feedType == FeedType.FeedSource.None)
+                    typeOfFeed = "";
+                else
+                    typeOfFeed = feedType.ToString();
+                return typeOfFeed;
+            }
+
             public async Task<List<Feed>> LoadFeedsByType(FeedType.FeedSource feedType, int numFeeds, int startId)
             {
-                List<GetLatestXFeeds_Result> list = await feedData.GetFeedsByFilter(-1, "", DateTime.MinValue, DateTime.MinValue, feedType.ToString(), startId, numFeeds);
+                string typeOfFeed = Getfeedtype(feedType);
+
+                List<GetLatestXFeeds_Result> list = await feedData.GetFeedsByFilter(-1, "", DateTime.MinValue, DateTime.MinValue, typeOfFeed, startId, numFeeds);
 
                 List<Feed> retList = new List<Feed>();
 
