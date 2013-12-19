@@ -52,6 +52,9 @@
   <ItemGroup>
     <Reference Include="Microsoft.Phone" />
     <Reference Include="Microsoft.Phone.Controls" />
+    <Reference Include="Microsoft.Phone.Controls.Toolkit">
+      <HintPath>..\packages\WPtoolkit.4.2013.08.16\lib\sl4-windowsphone71\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Phone.Interop" />
     <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -85,16 +88,27 @@
     <Reference Include="mscorlib.extensions" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivityControl.xaml.cs">
+      <DependentUpon>ActivityControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="CommentControl.xaml.cs">
       <DependentUpon>CommentControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LogIn.xaml.cs">
+      <DependentUpon>LogIn.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NoImageFeedControl.xaml.cs">
       <DependentUpon>NoImageFeedControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TestSensor.cs" />
+    <Compile Include="SearchResultControl.xaml.cs">
+      <DependentUpon>SearchResultControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SearchUser.xaml.cs">
+      <DependentUpon>SearchUser.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HumanFeed.xaml.cs">
       <DependentUpon>HumanFeed.xaml</DependentUpon>
     </Compile>
@@ -111,7 +125,9 @@
     <Compile Include="SensorFeedControl.xaml.cs">
       <DependentUpon>SensorFeedControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Test.cs" />
+    <Compile Include="TagControl.xaml.cs">
+      <DependentUpon>TagControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\ItemViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
   </ItemGroup>
@@ -120,6 +136,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="ActivityControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CommentControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -129,6 +149,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="FeedControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LogIn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -144,7 +168,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="SearchResultControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SearchUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SensorFeedControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TagControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -162,17 +198,44 @@
     <Content Include="Icons\Background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Icons\icon-comment.png" />
+    <Resource Include="Icons\icon-email.png" />
+    <Content Include="Icons\icon-location-just.png" />
+    <Resource Include="Icons\icon-location.png" />
+    <Content Include="Icons\icon-refresh-app-bar.png" />
+    <Content Include="Icons\icon-search-app-bar.png" />
+    <Content Include="Icons\icon-sensor.png" />
+    <Content Include="Icons\icon-tag.png" />
+    <Resource Include="Icons\icon-telephone.png" />
+    <Content Include="Icons\icon-timer.png" />
+    <Content Include="Icons\icon-user-app-bar.png" />
+    <Content Include="Icons\icon_search.png" />
+    <Content Include="SplashScreenImage.jpg" />
+    <Content Include="Icons\symbol_refresh.png" />
+    <Content Include="Icons\symbol_user.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
     <Resource Include="Icons\camera.png" />
     <Content Include="Icons\B8Xb1E5.jpg" />
-    <Content Include="Icons\symbol_comment.png" />
-    <Content Include="Icons\symbol_tag.png" />
-    <Content Include="Icons\symbol_timer.png" />
-    <Content Include="Icons\symbol_warning.png" />
-    <Content Include="SplashScreenImage.jpg" />
+    <Content Include="Icons\symbol_comment.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\symbol_tag.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\symbol_timer.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\symbol_warning.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="favicon.png" />
-    <Resource Include="symbol_location.png" />
+    <Resource Include="Icons\favicon.png" />
+    <Resource Include="Icons\symbol_location.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />

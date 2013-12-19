@@ -8,20 +8,19 @@ using BLL;
 
 public partial class MasterPage : System.Web.UI.MasterPage
 {
-    protected void Page_Load(object sender, EventArgs e)
-    {
-        HumanManager hm = new HumanManager();
-        Human human = new Human();
-        if (Session["humanID"] != null)
-        {
-            human = hm.LoadHumanInformation(int.Parse(HttpContext.Current.Session["humanID"].ToString()));
-            labelHuman.Text = human.FirstName + " " + human.LastName;
-        }
-    }
-
     [System.Web.Services.WebMethod]
     public void OnClickSignOut()
     {
-        Session.Abandon();
+        Session.Remove("humanID");
+    }
+    protected  void Page_Load(object sender, EventArgs e)
+    {
+    //    UserManager userManager = new UserManager();
+    //    Human human = new Human();
+    //    if (Session["humanID"] != null)
+    //    {
+    //        human = await userManager.LoadHumanInformation(int.Parse(HttpContext.Current.Session["humanID"].ToString()));
+    //        labelHuman.Text = human.FirstName + " " + human.LastName;
+    //    }
     }
 }

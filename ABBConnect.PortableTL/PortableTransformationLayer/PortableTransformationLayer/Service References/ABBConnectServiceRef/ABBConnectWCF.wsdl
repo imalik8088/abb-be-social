@@ -50,6 +50,12 @@
   <wsdl:message name="IABBConnectWCF_GetCategories_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetCategoriesResponse" />
   </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetAllSensors_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllSensors" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetAllSensors_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllSensorsResponse" />
+  </wsdl:message>
   <wsdl:message name="IABBConnectWCF_GetFeedComments_InputMessage">
     <wsdl:part name="parameters" element="tns:GetFeedComments" />
   </wsdl:message>
@@ -128,6 +134,18 @@
   <wsdl:message name="IABBConnectWCF_PostComment_OutputMessage">
     <wsdl:part name="parameters" element="tns:PostCommentResponse" />
   </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_AddTag_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddTag" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_AddTag_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddTagResponse" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_FollowSensor_InputMessage">
+    <wsdl:part name="parameters" element="tns:FollowSensor" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_FollowSensor_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FollowSensorResponse" />
+  </wsdl:message>
   <wsdl:message name="IABBConnectWCF_GetLatestFeedsByFilter_InputMessage">
     <wsdl:part name="parameters" element="tns:GetLatestFeedsByFilter" />
   </wsdl:message>
@@ -145,6 +163,60 @@
   </wsdl:message>
   <wsdl:message name="IABBConnectWCF_GetXFeedsByFilter_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetXFeedsByFilterResponse" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_SaveFilter_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveFilter" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_SaveFilter_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveFilterResponse" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_AddFilterUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddFilterUser" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_AddFilterUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddFilterUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetSavedFilter_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSavedFilter" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetSavedFilter_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSavedFilterResponse" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_SearchUsersByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchUsersByName" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_SearchUsersByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchUsersByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetFilterTaggedUsers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFilterTaggedUsers" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetFilterTaggedUsers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFilterTaggedUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetUserActivity_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserActivity" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetUserActivity_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserActivityResponse" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_UnfollowSensor_InputMessage">
+    <wsdl:part name="parameters" element="tns:UnfollowSensor" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_UnfollowSensor_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UnfollowSensorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetFollowedSensors_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFollowedSensors" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetFollowedSensors_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFollowedSensorsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetFeedByFeedId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFeedByFeedId" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetFeedByFeedId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFeedByFeedIdResponse" />
   </wsdl:message>
   <wsdl:portType name="IABBConnectWCF">
     <wsdl:operation name="LogIn">
@@ -174,6 +246,10 @@
     <wsdl:operation name="GetCategories">
       <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/GetCategories" message="tns:IABBConnectWCF_GetCategories_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/GetCategoriesResponse" message="tns:IABBConnectWCF_GetCategories_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllSensors">
+      <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/GetAllSensors" message="tns:IABBConnectWCF_GetAllSensors_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/GetAllSensorsResponse" message="tns:IABBConnectWCF_GetAllSensors_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetFeedComments">
       <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/GetFeedComments" message="tns:IABBConnectWCF_GetFeedComments_InputMessage" />
@@ -227,6 +303,14 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/PostComment" message="tns:IABBConnectWCF_PostComment_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/PostCommentResponse" message="tns:IABBConnectWCF_PostComment_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="AddTag">
+      <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/AddTag" message="tns:IABBConnectWCF_AddTag_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/AddTagResponse" message="tns:IABBConnectWCF_AddTag_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FollowSensor">
+      <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/FollowSensor" message="tns:IABBConnectWCF_FollowSensor_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/FollowSensorResponse" message="tns:IABBConnectWCF_FollowSensor_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetLatestFeedsByFilter">
       <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/GetLatestFeedsByFilter" message="tns:IABBConnectWCF_GetLatestFeedsByFilter_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/GetLatestFeedsByFilterResponse" message="tns:IABBConnectWCF_GetLatestFeedsByFilter_OutputMessage" />
@@ -238,6 +322,42 @@
     <wsdl:operation name="GetXFeedsByFilter">
       <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/GetXFeedsByFilter" message="tns:IABBConnectWCF_GetXFeedsByFilter_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/GetXFeedsByFilterResponse" message="tns:IABBConnectWCF_GetXFeedsByFilter_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveFilter">
+      <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/SaveFilter" message="tns:IABBConnectWCF_SaveFilter_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/SaveFilterResponse" message="tns:IABBConnectWCF_SaveFilter_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddFilterUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/AddFilterUser" message="tns:IABBConnectWCF_AddFilterUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/AddFilterUserResponse" message="tns:IABBConnectWCF_AddFilterUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSavedFilter">
+      <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/GetSavedFilter" message="tns:IABBConnectWCF_GetSavedFilter_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/GetSavedFilterResponse" message="tns:IABBConnectWCF_GetSavedFilter_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsersByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/SearchUsersByName" message="tns:IABBConnectWCF_SearchUsersByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/SearchUsersByNameResponse" message="tns:IABBConnectWCF_SearchUsersByName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFilterTaggedUsers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/GetFilterTaggedUsers" message="tns:IABBConnectWCF_GetFilterTaggedUsers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/GetFilterTaggedUsersResponse" message="tns:IABBConnectWCF_GetFilterTaggedUsers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserActivity">
+      <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/GetUserActivity" message="tns:IABBConnectWCF_GetUserActivity_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/GetUserActivityResponse" message="tns:IABBConnectWCF_GetUserActivity_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UnfollowSensor">
+      <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/UnfollowSensor" message="tns:IABBConnectWCF_UnfollowSensor_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/UnfollowSensorResponse" message="tns:IABBConnectWCF_UnfollowSensor_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFollowedSensors">
+      <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/GetFollowedSensors" message="tns:IABBConnectWCF_GetFollowedSensors_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/GetFollowedSensorsResponse" message="tns:IABBConnectWCF_GetFollowedSensors_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFeedByFeedId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/GetFeedByFeedId" message="tns:IABBConnectWCF_GetFeedByFeedId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/GetFeedByFeedIdResponse" message="tns:IABBConnectWCF_GetFeedByFeedId_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:service name="ABBConnectWCF" />

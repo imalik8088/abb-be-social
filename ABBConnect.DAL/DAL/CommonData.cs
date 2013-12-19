@@ -20,57 +20,68 @@ namespace DAL
             this.sqlConnection = base.GetConnection();
             this.sqlCommand = this.sqlConnection.CreateCommand();
         }
-
-        public DataTable GetAllLocations()
+ 
+        public List<GetPriorityCategories_Result> GetCategories()
         {
-            DataTable table = new DataTable();
+            List<GetPriorityCategories_Result> cats = new List<GetPriorityCategories_Result>();
 
-            try
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
             {
-                this.sqlCommand.CommandText = "GetLocations";
-                this.sqlCommand.CommandType = CommandType.StoredProcedure;
 
-                this.sqlConnection.Open();
-                SqlDataAdapter da = new SqlDataAdapter(this.sqlCommand);
+                sqlConn.Open();
+                string sqlQuery = "GetPriorityCategories";
 
-                da.Fill(table);
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        ;
+                        while (reader.Read())
+                        {
+                            GetPriorityCategories_Result cat = new GetPriorityCategories_Result();
+                            cat.Id = (int)reader[0];
+                            cat.Name = (string)reader[1];
+
+
+                            cats.Add(cat);
+                        }
+                    }
+                }
+                sqlConn.Close();
             }
-            catch (Exception e)
-            {
-                Console.WriteLine("Error: " + e);
-            }
-            finally
-            {
-                this.sqlCommand.Parameters.Clear();
-                this.sqlConnection.Close();
-            }
-            return table;
+            return cats;
         }
 
-        public DataTable GetPostGategories()
+        public List<string> GetLocations()
         {
-            DataTable table = new DataTable();
+            List<string> locations = new List<string>();
 
-            try
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
             {
-                this.sqlCommand.CommandText = "GetPriorityCategories";
-                this.sqlCommand.CommandType = CommandType.StoredProcedure;
 
-                this.sqlConnection.Open();
-                SqlDataAdapter da = new SqlDataAdapter(this.sqlCommand);
+                sqlConn.Open();
+                string sqlQuery = "GetLocations";
 
-                da.Fill(table);
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        ;
+                        while (reader.Read())
+                        {
+                            string place = (string)reader[0];
+
+                            locations.Add(place);
+                        }
+                    }
+                }
+                sqlConn.Close();
             }
-            catch (Exception e)
-            {
-                Console.WriteLine("Error: " + e);
-            }
-            finally
-            {
-                this.sqlCommand.Parameters.Clear();
-                this.sqlConnection.Close();
-            }
-            return table;
+            return locations;
         }
-    }
+     }
 }
+

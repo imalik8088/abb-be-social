@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using System.IO;
 
 namespace ABBJSONService
 {
@@ -32,9 +33,12 @@ namespace ABBJSONService
         [WebInvoke]
         List<GetLatestXFeedsFromId_Result> GetLatestXFeedsFromId(string X, string Id);
 
+        //[OperationContract]
+        //[WebInvoke]
+        //int PostFeed(string id, string text, string filepath, string prioId);
         [OperationContract]
         [WebInvoke]
-        int PostFeed(string id, string text, string filepath, string prioId);
+        int PostFeed(string id, string text, string prioId, Stream imageContent);
 
         [OperationContract]
         [WebInvoke]
@@ -42,7 +46,11 @@ namespace ABBJSONService
 
         [OperationContract]
         [WebInvoke]
-        List<GetFeedComments_Result> GetFeedComments(string feedId);
+        List<GetAllSensors_Result> GetAllSensors();
+
+        [OperationContract]
+        [WebInvoke]
+        List<GetFeedComments_Result> GetFeedComments(string feedId, string randomGuid);
 
         [OperationContract]
         [WebInvoke]
@@ -90,7 +98,15 @@ namespace ABBJSONService
 
         [OperationContract]
         [WebInvoke]
-        void PostComment(string feedId, string username, string text);
+        bool PostComment(string feedId, string username, string text);
+
+        [OperationContract]
+        [WebInvoke]
+        bool AddTag(string feedId, string username);
+
+        [OperationContract]
+        [WebInvoke]
+        bool FollowSensor(string humanId, string sensorId);
 
         [OperationContract]
         [WebInvoke]
@@ -102,8 +118,43 @@ namespace ABBJSONService
         
         [OperationContract]
         [WebInvoke]
-        List<GetLatestXFeeds_Result> GetXFeedsByFilter(string id, string location, string startingTime, string endingTime, string feedType, string startId, string numFeeds);
+        List<GetLatestXFeeds_Result> GetXFeedsByFilter(string id, string location, string startingTime, string endingTime, string feedType, string startId, string numFeeds, string randomGuid);
 
+        [OperationContract]
+        [WebInvoke]
+        int SaveFilter(string userId, string filterName, string startingTime, string endingTime, string location, string feedType);
+
+        [OperationContract]
+        [WebInvoke]
+        bool AddFilterUser(string userId, string filterId);
+
+        [OperationContract]
+        [WebInvoke]
+        List<GetUserSavedFilters_Result> GetSavedFilter(string userId);
+
+        [OperationContract]
+        [WebInvoke]
+        List<GetUsersByName_Result> SearchUsersByName(string query);
+
+        [OperationContract]
+        [WebInvoke]
+        List<GetUserSavedFiltersTagedUsers_Result> GetFilterTaggedUsers(string filterId);
+
+        [OperationContract]
+        [WebInvoke]
+        List<GetUserActivity_Result> GetUserActivity(string userId);
+
+        [OperationContract]
+        [WebInvoke]
+        bool UnfollowSensor(string humanUserId, string sensorUserId);
+
+        [OperationContract]
+        [WebInvoke]
+        List<int> GetFollowedSensors(string humanUserId);
+
+        [OperationContract]
+        [WebInvoke]
+        GetLatestXFeeds_Result GetFeedByFeedId(string feedId, string randomGuid);
     }
 
 }

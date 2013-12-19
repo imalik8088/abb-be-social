@@ -12,7 +12,7 @@ namespace PortableBLL
             mediaFilePath = "";
         }
 
-        public HumanFeed(GetLatestXFeeds_Result res, List<Comment> listCom, List<Human> listTag)
+        public HumanFeed(GetLatestXFeeds_Result res, List<Comment> listCom, List<Human> listTag, Human owner)
         {
             base.Category = new Category();
             base.Comments = new List<Comment>();
@@ -28,11 +28,14 @@ namespace PortableBLL
             base.Category.CategoryName = res.PrioCategory;
             base.Category.Priority = res.PrioValue;
 
+            this.owner = owner;
             this.owner.ID = res.UserId;
-            this.owner.UserName = res.Username;
+            
             mediaFilePath = "";
 
         }
+
+
         private Human owner;
         public Human Owner
         {

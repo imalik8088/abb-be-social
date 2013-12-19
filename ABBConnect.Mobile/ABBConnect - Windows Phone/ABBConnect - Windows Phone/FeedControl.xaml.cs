@@ -11,17 +11,39 @@ using System.Text;
 using System.IO;
 using System.Windows.Media.Imaging;
 
+/*
+ * Written by: Robert Gustavsson
+ * Project: Social Media in the Process Automation Industry (ABB Connect)
+ */
+
+
 namespace ABBConnect___Windows_Phone
 {
+    /// <summary>
+    /// A Controls that hold all data needed for the Feeds, this also is they why to represent the data
+    /// </summary>
     public partial class FeedControl : UserControl
     {
-        private BLL.HumanFeed hFeed;
+        private PortableBLL.HumanFeed hFeed;
 
-
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public FeedControl()
         {
             InitializeComponent();
         }
+        /// <summary>
+        /// Constructor with params instead of oject
+        /// </summary>
+        /// <param name="author"></param>
+        /// <param name="username"></param>
+        /// <param name="content"></param>
+        /// <param name="noOfTags"></param>
+        /// <param name="noOfComments"></param>
+        /// <param name="location"></param>
+        /// <param name="timestamp"></param>
+        /// <param name="filePath"></param>
         public FeedControl(int author, string username, string content, int noOfTags, int noOfComments, string location, DateTime timestamp, string filePath)
         {
             InitializeComponent();
@@ -34,9 +56,12 @@ namespace ABBConnect___Windows_Phone
             SetImage(filePath);
         }
 
-        public FeedControl(BLL.HumanFeed hf)
+        /// <summary>
+        /// Constructor with object HumanFeed from the BLL as param, this is currently used
+        /// </summary>
+        /// <param name="hf"></param>
+        public FeedControl(PortableBLL.HumanFeed hf)
         {
-            // TODO: Complete member initialization
             InitializeComponent();
             SetAuthor(hf.Owner.ID, hf.Owner.UserName);
             SetContent(hf.Content);
@@ -49,48 +74,95 @@ namespace ABBConnect___Windows_Phone
             hFeed = hf;
         }
 
+        /// <summary>
+        /// update the number of comments regarding the feed
+        /// </summary>
+        /// <param name="comments"></param>
+        internal void UpdateComments(List<PortableBLL.Comment> comments)
+        {
+            hFeed.Comments = comments;
+            SetNumberOfComments(comments.Count);
+        }
+
+        /// <summary>
+        /// Not in used ATM
+        /// </summary>
+        /// <param name="filePath"></param>
         private void SetImage(string filePath)
         {
+            /*
             Byte[] imageBytes = Convert.FromBase64String(filePath);
             MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
             ms.Write(imageBytes, 0, imageBytes.Length);
             BitmapImage bmp = new BitmapImage();
             bmp.SetSource(ms);
             imgImage.Source = bmp;
+             */
         }
 
+        /// <summary>
+        /// Occours when used clicks the author of the feed and redirects him to the users profile page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Author_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/ProfileFeed.xaml?username=" + Author.Tag, UriKind.Relative));
 
         }
 
+        /// <summary>
+        /// Occours when somewhere else then author name is clicked to redirect the user to the feeds page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Content_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Feed.xaml", UriKind.Relative));
         }
 
+        /// <summary>
+        /// Sets the Author
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="username"></param>
         internal void SetAuthor(int id, string username)
         {
             Author.Text = username;
             Author.Tag = id;
         }
 
+        /// <summary>
+        /// Sets the feed text
+        /// </summary>
+        /// <param name="p"></param>
         internal void SetContent(string p)
         {
             Text.Text = p;
         }
 
+        /// <summary>
+        /// Sets the number of tags of the feed
+        /// </summary>
+        /// <param name="p"></param>
         internal void SetNumberOfTags(int p)
         {
             Tags.Text = p.ToString();
         }
 
+        /// <summary>
+        /// Sets the number of comments of the feed
+        /// </summary>
+        /// <param name="p"></param>
         internal void SetNumberOfComments(int p)
         {
             Comments.Text = p.ToString();
         }
 
+        /// <summary>
+        /// Set the time that has passed since the feed was posted
+        /// </summary>
+        /// <param name="dateTime"></param>
         internal void SetTimeStamp(DateTime dateTime)
         {
             DateTime now = DateTime.Now;
@@ -105,6 +177,10 @@ namespace ABBConnect___Windows_Phone
                 Timestamp.Text = Math.Round(hours).ToString() + "h";
         }
 
+        /// <summary>
+        /// set the location of the feed
+        /// </summary>
+        /// <param name="p"></param>
         internal void SetLocation(string p)
         {
             Location.Text = p;

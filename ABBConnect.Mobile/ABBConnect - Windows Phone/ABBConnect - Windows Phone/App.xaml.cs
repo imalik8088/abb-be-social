@@ -13,21 +13,43 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
+
+
 namespace ABBConnect___Windows_Phone
 {
+    /// <summary>
+    /// Generated class
+    /// </summary>
     public partial class App : Application
     {
-        private static MainViewModel viewModel = null;
-        private static BLL.HumanFeed hFeed = new BLL.HumanFeed();
+        private static List<string> tags;
 
-        public static BLL.HumanFeed HFeed
+        public static List<string> Tags
+        {
+            get { return App.tags; }
+            set { App.tags = value; }
+        }
+
+        private static PortableBLL.Human currentUser = new PortableBLL.Human();
+
+        public static PortableBLL.Human CurrentUser
+        {
+            get { return App.currentUser; }
+            set { App.currentUser = value; }
+        }
+
+
+        private static MainViewModel viewModel = null;
+        private static PortableBLL.HumanFeed hFeed = new PortableBLL.HumanFeed();
+
+        public static PortableBLL.HumanFeed HFeed
         {
             get { return App.hFeed; }
             set { App.hFeed = value; }
         }
-        private static BLL.SensorFeed sFeed = new BLL.SensorFeed();
+        private static PortableBLL.SensorFeed sFeed = new PortableBLL.SensorFeed();
 
-        public static BLL.SensorFeed SFeed
+        public static PortableBLL.SensorFeed SFeed
         {
             get { return App.sFeed; }
             set { App.sFeed = value; }

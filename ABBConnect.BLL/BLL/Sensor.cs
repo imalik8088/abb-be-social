@@ -2,58 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using DAL;
 
 namespace BLL
 {
-    public class Sensor
+    public class Sensor: User
     {
         public Sensor()
         {
             this.sensorValues = new List<SensorVTData>();
-            this.name = "";
-            this.location = "";
+            base.UserName = "";
+            base.Location = "";
+            this.unitMetric = "";
         }
 
-        private int iD;
-        public int ID
+        public Sensor(GetSensorInformation_Result entitySensor)
         {
-            get
-            {
-                return iD;
-            }
-            set
-            {
-                iD = value;
-            }
-        }
-
-        
-
-        private string name;
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
-            set
-            {
-                name = value;
-            }
-        }
-
-        private string location;
-        public string Location
-        {
-            get
-            {
-                return location;
-            }
-            set
-            {
-                location = value;
-            }
+            base.ID = entitySensor.Id;
+            this.sensorValues = new List<SensorVTData>();
+            base.UserName = entitySensor.Name;
+            this.upperBoundary = entitySensor.MAX_Critical.GetValueOrDefault();
+            this.lowerBoundary = entitySensor.MIN_Critical.GetValueOrDefault();
+            base.Location = "";
+            this.unitMetric = entitySensor.Unit;
         }
 
         private List<SensorVTData> sensorValues;
@@ -92,6 +63,19 @@ namespace BLL
             set
             {
                 upperBoundary = value;
+            }
+        }
+
+        private string unitMetric;
+        public string UnitMetric
+        {
+            get
+            {
+                return unitMetric;
+            }
+            set
+            {
+                unitMetric = value;
             }
         }
     }

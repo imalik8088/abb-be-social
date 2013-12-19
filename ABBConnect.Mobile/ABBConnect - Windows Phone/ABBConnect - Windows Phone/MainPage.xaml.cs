@@ -15,25 +15,33 @@ using Microsoft.Devices;
 using Microsoft.Xna.Framework.Media;
 using System.Threading;
 using PortableBLL;
-using BLL;
 using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Media.Imaging;
 using System.Text;
 using System.Windows.Threading;
 using System.IO.IsolatedStorage;
+using Microsoft.Phone.Shell;
+using System.Windows.Navigation;
+using System.Collections.ObjectModel;
+using System.Runtime.Serialization;
 
 namespace ABBConnect___Windows_Phone
 {
     public partial class MainPage : PhoneApplicationPage
     {
         // Constructor
-        BLL.Human currentUser;
-        BLL.FeedManager fm;
-        const int UPDATETIME = 30;
-        const int NUMBEROFFEEDS = 10;
+        PortableBLL.Human currentUser;
+        PortableBLL.FeedManager fm;
+        const int UPDATETIME = 30, SHOWLABELTIME = 4;
+        const int NUMBEROFFEEDS = 15;
         DispatcherTimer timerNewFeed, timerLabel;
-        List<BLL.Feed> feeds;
+        List<PortableBLL.Feed> feeds;
+        List<Filter> filters;
+        bool ini;
+        bool timerReady;
+        int NoCache;
+        FeedType.FeedSource currentFeedType;
 
         string chosenImg;
 
@@ -44,27 +52,59 @@ namespace ABBConnect___Windows_Phone
         {
 
             InitializeComponent();
-
+            ini = false;
             // Set the data context of the listbox control to the sample data
             DataContext = App.ViewModel;
             this.Loaded += new RoutedEventHandler(MainPage_Loaded);
             fm = new FeedManager();
             feeds = new List<Feed>();
+            filters = new List<Filter>();
 
             timerNewFeed = new DispatcherTimer { Interval = new TimeSpan(0,0,UPDATETIME) };
             timerNewFeed.Tick += new EventHandler(timerNewFeed_tick);
             timerNewFeed.Start();
-            timerLabel = new DispatcherTimer { Interval = new TimeSpan(0, 0, 10) };
+            timerLabel = new DispatcherTimer { Interval = new TimeSpan(0, 0, SHOWLABELTIME) };
             timerNewFeed.Tick += new EventHandler(timerLabel_tick);
 
-            LoadUser();
+            currentFeedType = new FeedType.FeedSource();
+            currentFeedType = FeedType.FeedSource.None;
+            timerReady = true;
+
             LoadNewFeeds(NUMBEROFFEEDS);
 
             lblNewFeeds.Text = "";
+            NoCache = 1;
+
+
+
+            this.ApplicationBar = this.Resources["appBar"] as ApplicationBar;
            // CreateControlsUsingObjects();
 
-     
+
+            ini = true;
         }
+
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            
+            string userName = NavigationContext.QueryString["userName"];
+            LoadUser(userName);
+
+            NavigationService.RemoveBackEntry();
+
+        }
+
+
+        private async void GetSavedFilters()
+        {
+            UserManager um = new UserManager();
+
+            this.filters = await um.GetUserSavedFilters(currentUser.ID);
+
+            lstbSavedFilters.ItemsSource = filters;     
+        }
+
 
         /// <summary>
         /// Hides the label showing that new feeds has been added
@@ -84,14 +124,44 @@ namespace ABBConnect___Windows_Phone
         /// <param name="e"></param>
         private async void timerNewFeed_tick(object sender, EventArgs e)
         {
+            if (timerReady)
+            {
+                timerReady = false;
+                await UpdateComments();
+                CheckNewFeeds();
+                timerReady = true;
+            }
+        }
+
+        private async Task UpdateComments()
+        {
+            FeedManager fmm = new FeedManager();
+            for (int i = 0; i < feeds.Count; i++)
+            {
+                feeds[i].Comments = await fmm.LoadFeedComments(feeds[i].ID);
+
+                if (lstbFeeds.Items[i] is FeedControl)
+                    (lstbFeeds.Items[i] as FeedControl).UpdateComments(feeds[i].Comments);
+                else if (lstbFeeds.Items[i] is NoImageFeedControl)
+                    (lstbFeeds.Items[i] as NoImageFeedControl).UpdateFeed(feeds[i].Comments);
+                else
+                    continue; //TODO: ADD THE SAME FOR SENSOR
+            }
+        }
+
+        private async void CheckNewFeeds()
+        {
             //if no feeds has been added yet
             if (feeds.Count == 0)
                 return;
 
+            FeedManager fml = new FeedManager();
+            
+            
             //load the newest feed
-            List<BLL.Feed> latestFeed = await fm.LoadLatestXFeeds(1);
+            List<PortableBLL.Feed> latestFeed = await fml.LoadFeedsByType(currentFeedType, NoCache);
 
-            //get the latest ID and the amount between the first ID and this
+            //get the latest ID and the amount between the last newest ID and this
             int id = latestFeed[0].ID;
             int amount = id - this.feeds[0].ID;
 
@@ -105,23 +175,38 @@ namespace ABBConnect___Windows_Phone
                 //call all feeeds between them and add them first in the list
                 LoadNewFeedsFromId(amount, id);
             }
+
+            NoCache++;
+
+            if (NoCache > 5)
+                NoCache = 1;
         }
 
         /// <summary>
         /// Load the logged in user to display his personal info
         /// </summary>
-        private async void LoadUser()
+        private async void LoadUser(string userName)
         {
-            BLL.HumanManager hm = new BLL.HumanManager();
-            currentUser = await hm.LoadHumanInformationByUsername("rgn09003");
+            try
+            {
+                PortableBLL.UserManager um = new PortableBLL.UserManager();
+                currentUser = await um.LoadHumanInformationByUsername(userName);
 
+                App.CurrentUser = currentUser;
+                GetSavedFilters();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            /*
             lblEmailClick.Text = currentUser.Email;
             lblPhoneClick.Text = currentUser.PhoneNumber;
             lblNameClick.Text = currentUser.FirstName + " " + currentUser.LastName;
             lblLocationClick.Text = currentUser.WorkRoom;
+             * */
 
-            lblUserName.Text = currentUser.UserName;
-            lblTime.Text = DateTime.Now.ToShortTimeString();
         }
 
         /// <summary>
@@ -132,11 +217,24 @@ namespace ABBConnect___Windows_Phone
         {
             pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
 
+            try
+            {
+                feeds = await fm.LoadFeedsByType(currentFeedType, amount);
 
-            feeds = await fm.LoadLatestXFeeds(amount);
-            AddFeedsToList(feeds);
+                if (feeds.Count == 0)
+                {
+                    MessageBox.Show("No feeds loaded");
+                    return;
+                }
+                lstbFeeds.Items.Clear();
+                AddFeedsToList(feeds);
+                CreateButton(feeds[feeds.Count - 1].ID);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
-            CreateButton(feeds[feeds.Count - 1].ID);
 
             pgbLoadFeed.Visibility = System.Windows.Visibility.Collapsed;
         }
@@ -150,7 +248,10 @@ namespace ABBConnect___Windows_Phone
         {
             pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
 
-            List<Feed> newFeeds = await fm.LoadLatestXFeedsFromId(id, amount);
+
+            List<PortableBLL.Feed> newFeeds = await fm.LoadFeedsByType(currentFeedType, amount, id);
+
+            //List<Feed> newFeeds = await fm.LoadLatestXFeedsFromId(id, amount);
 
             //remove button
             lstbFeeds.Items.RemoveAt(lstbFeeds.Items.Count - 1);
@@ -173,14 +274,14 @@ namespace ABBConnect___Windows_Phone
         {
             pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
 
-            List<BLL.Feed> newFeeds = await fm.LoadLatestXFeedsFromId(id + 1, amount);
+            List<PortableBLL.Feed> newFeeds = await fm.LoadFeedsByType(currentFeedType, amount, id + 1);
+            //  List<PortableBLL.Feed> newFeeds = await fm.LoadLatestXFeedsFromId(id + 1, amount);
 
             for (int i = 0; i < newFeeds.Count; i++)
                 feeds.Insert(i, newFeeds[i]);
 
 
             InsertFeedsToList(newFeeds);
-            //CreateButton(feeds[feeds.Count - 1].ID);
              
             pgbLoadFeed.Visibility = System.Windows.Visibility.Collapsed;
         }
@@ -189,14 +290,14 @@ namespace ABBConnect___Windows_Phone
         /// Add all the feeds to the list to be shown (Adds in the end)
         /// </summary>
         /// <param name="feeds"></param>
-        private void AddFeedsToList(List<BLL.Feed> feeds)
+        private void AddFeedsToList(List<PortableBLL.Feed> feeds)
         {
             for (int i = 0; i < feeds.Count; i++)
             {
-                if (feeds[i] is BLL.HumanFeed)
-                    FillFeedList((BLL.HumanFeed)feeds[i], -1);
+                if (feeds[i] is PortableBLL.HumanFeed)
+                    FillFeedList((PortableBLL.HumanFeed)feeds[i], -1);
                 else
-                    FillFeedList((BLL.SensorFeed)feeds[i], -1);
+                    FillFeedList((PortableBLL.SensorFeed)feeds[i], -1);
             }
         }
         
@@ -204,14 +305,14 @@ namespace ABBConnect___Windows_Phone
       /// Inserts feeds in the beginning of the list that is shown
       /// </summary>
       /// <param name="feeds"></param>
-        private void InsertFeedsToList(List<BLL.Feed> feeds)
+        private void InsertFeedsToList(List<PortableBLL.Feed> feeds)
         {
             for (int i = 0; i < feeds.Count; i++)
             {
-                if (feeds[i] is BLL.HumanFeed)
-                    FillFeedList((BLL.HumanFeed)feeds[i], i);
+                if (feeds[i] is PortableBLL.HumanFeed)
+                    FillFeedList((PortableBLL.HumanFeed)feeds[i], i);
                 else
-                    FillFeedList((BLL.SensorFeed)feeds[i], i);
+                    FillFeedList((PortableBLL.SensorFeed)feeds[i], i);
             }
         }
 
@@ -243,6 +344,9 @@ namespace ABBConnect___Windows_Phone
                 App.ViewModel.LoadData();
             }
 
+            //reset timer
+            timerNewFeed.Stop();
+            timerNewFeed.Start();
 
         }
   
@@ -274,7 +378,10 @@ namespace ABBConnect___Windows_Phone
                 
                 //UNCOMMENT TO ENABLE SENDING IMAGE TO DB
 
-                //chosenImg = Convert.ToBase64String(photoBytes);
+               // chosenImg = Convert.ToBase64String(photoBytes);
+
+               // MessageBox.Show(chosenImg.Length.ToString());
+                //chosenImg = "";
 
                 //TESTING
                 /*
@@ -317,7 +424,7 @@ namespace ABBConnect___Windows_Phone
         /// </summary>
         /// <param name="hf"></param>
         /// <param name="index"></param>
-        private void FillFeedList(BLL.HumanFeed hf, int index)
+        private void FillFeedList(PortableBLL.HumanFeed hf, int index)
         {
             //CHECK IF THE FEED CONTATINS A PICTURE!!
 
@@ -343,7 +450,6 @@ namespace ABBConnect___Windows_Phone
 
         }
 
-
         /// <summary>
         /// Fill the list with sensor feeds, send -1 as index if it should be added in the end
         /// </summary>
@@ -352,7 +458,7 @@ namespace ABBConnect___Windows_Phone
         private void FillFeedList(SensorFeed t, int index)
         {
 
-            SensorFeedControl sfc = new SensorFeedControl(t.Owner.ID, t.Owner.Name, t.Content,  t.Location, t.TimeStamp);
+            SensorFeedControl sfc = new SensorFeedControl(t.Owner.ID, t.Owner.UserName, t.Content,  t.Location, t.TimeStamp);
             lstbFeeds.Items.Add(sfc);
         }
 
@@ -384,13 +490,20 @@ namespace ABBConnect___Windows_Phone
         /// <param name="e"></param>
         private async void btnPublish_MouseLeftButtonUp(object sender, RoutedEventArgs e)
         {
-            BLL.FeedManager fm = new FeedManager();
+            PortableBLL.FeedManager fm = new FeedManager();
 
-            BLL.HumanFeed hf = new BLL.HumanFeed();
+            PortableBLL.HumanFeed hf = new PortableBLL.HumanFeed();
 
             //feed.Owner.ID, feed.Content, feed.MediaFilePath, feed.Category.Id
             if (txtbContent.Text == "" || currentUser.ID == -1)
                 return;
+
+
+            if (App.Tags != null)
+                foreach (string s in App.Tags)
+                    hf.Tags.Add(new Human() { UserName = s });
+
+            chosenImg = ""; //REMOVE WHÈN SENDING IMG SHALL BE ENABLED!!!
 
             hf.Owner.ID = currentUser.ID;
             hf.Content = txtbContent.Text;
@@ -411,6 +524,194 @@ namespace ABBConnect___Windows_Phone
                 MessageBox.Show("Something went wrong");
         }
 
-     
+
+        private void brdrHuman_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            //unticking human         
+            if (brdrHuman.Tag.Equals("true"))
+            {
+                if (brdrSensor.Tag.Equals("true"))
+                {
+                    ChangeFeedType(FeedType.FeedSource.Sensor);
+                    brdrHuman.Tag = "false";
+                    brdrHuman.Background = GetColorFromHexa("#FF515B5B");
+                }
+                else
+                {
+                    ChangeFeedType(FeedType.FeedSource.None);
+                    brdrHuman.Tag = "false";
+                    brdrHuman.Background = GetColorFromHexa("#FF515B5B");
+                }
+            }
+            else //ticking human
+            {
+                if (brdrSensor.Tag.Equals("true")) //if sensor is ticked
+                {
+                    ChangeFeedType(FeedType.FeedSource.None);
+                    brdrHuman.Background = GetColorFromHexa("#FFB5BBBB");
+                    brdrHuman.Tag = "true";
+                }
+                else //if not sensor is ticked
+                {
+                    ChangeFeedType(FeedType.FeedSource.Human);
+                    brdrHuman.Background = GetColorFromHexa("#FFB5BBBB");
+                    brdrHuman.Tag = "true";
+                }
+            }
+            /*
+            brdrHuman.Background = GetColorFromHexa("#FFB5BBBB");
+            brdrSensor.Background = GetColorFromHexa("#FF515B5B");
+
+            ChangeFeedType(FeedType.FeedSource.Human);
+             */
+        }
+
+        private void brdrSensor_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            //unticking senosr         
+            if (brdrSensor.Tag.Equals("true"))
+            {
+                if (brdrHuman.Tag.Equals("true"))
+                {
+                    ChangeFeedType(FeedType.FeedSource.Human);
+                    brdrSensor.Tag = "false";
+                    brdrSensor.Background = GetColorFromHexa("#FF515B5B");
+                }
+                else
+                {
+                    ChangeFeedType(FeedType.FeedSource.None);
+                    brdrSensor.Tag = "false";
+                    brdrSensor.Background = GetColorFromHexa("#FF515B5B");
+                }
+            }
+            else //ticking sensor
+            {
+                if (brdrHuman.Tag.Equals("true")) //if human is ticked
+                {
+                    ChangeFeedType(FeedType.FeedSource.None);
+                    brdrSensor.Background = GetColorFromHexa("#FFB5BBBB");
+                    brdrSensor.Tag = "true";
+                }
+                else //if not human is ticked
+                {
+                    ChangeFeedType(FeedType.FeedSource.Sensor);
+                    brdrSensor.Background = GetColorFromHexa("#FFB5BBBB");
+                    brdrSensor.Tag = "true";
+                }
+            }
+
+            /*
+            brdrSensor.Background = GetColorFromHexa("#FFB5BBBB");
+            brdrHuman.Background = GetColorFromHexa("#FF515B5B");
+
+            ChangeFeedType(FeedType.FeedSource.Sensor);
+            */
+        }
+
+        private void ChangeFeedType(FeedType.FeedSource feedType)
+        {
+            if (!ini)
+            return;
+
+            //reset timer
+            timerNewFeed.Stop();
+            timerNewFeed.Start();
+
+            try
+            {
+                currentFeedType = feedType;
+
+                lstbFeeds.Items.Clear();
+                feeds.Clear();
+                LoadNewFeeds(NUMBEROFFEEDS);
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show(e.Message);
+            }
+
+        }
+   
+        private SolidColorBrush GetColorFromHexa(string hexaColor)
+        {
+            return new SolidColorBrush(
+                Color.FromArgb(
+                    Convert.ToByte(hexaColor.Substring(1, 2), 16),
+                    Convert.ToByte(hexaColor.Substring(3, 2), 16),
+                    Convert.ToByte(hexaColor.Substring(5, 2), 16),
+                    Convert.ToByte(hexaColor.Substring(7, 2), 16)
+                )
+            );
+        }
+
+        private void TagIcon_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/TagControl.xaml", UriKind.Relative));
+
+        }
+
+        private void GoToMyProfile(object sender, EventArgs e)
+        {
+            if (currentUser == null)
+                MessageBox.Show("Unable to redirect since no user is detected, please check your internet connection");
+            else
+                (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/ProfileFeed.xaml?userID=" + currentUser.ID, UriKind.Relative));
+        }
+
+        private void OnLogOut(object sender, EventArgs e)
+        {
+            MessageBox.Show("You will log out if you click here");
+            var settings = IsolatedStorageSettings.ApplicationSettings;
+            settings.Clear();
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/LogIn.xaml", UriKind.Relative));
+
+        }
+
+        private void OnSearchUser(object sender, EventArgs e)
+        {
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/SearchUser.xaml", UriKind.Relative));            
+        }
+
+        private void OnRefresh(object sender, EventArgs e)
+        {
+            if (!ini)
+                return;
+
+            pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
+            timerNewFeed.Stop();
+            CheckNewFeeds();
+            timerNewFeed.Start();
+            pgbLoadFeed.Visibility = System.Windows.Visibility.Collapsed;
+
+        }
+
+        private void txtbContent_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            txtbContent.Text = String.Empty;
+        }
+
+        private async void lstbSavedFilters_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lstbSavedFilters.SelectedIndex == -1) //invalid selection handled
+                return;
+
+            pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
+
+            timerNewFeed.Stop();
+
+            brdrHuman.Background = GetColorFromHexa("#FF515B5B");
+            brdrSensor.Background = GetColorFromHexa("#FF515B5B");
+
+            feeds = await fm.LoadFeedsFromSavedFilter(filters[ lstbSavedFilters.SelectedIndex], 10);
+
+            lstbFeeds.Items.Clear();
+            AddFeedsToList(feeds);
+
+
+            lstbSavedFilters.SelectedIndex = -1; //reset the selection to be able to click the same filtering again
+
+            pgbLoadFeed.Visibility = System.Windows.Visibility.Collapsed;
+        } 
     }
 }

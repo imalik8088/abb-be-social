@@ -78,6 +78,21 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="GetPriorityCategories_Result" nillable="true" type="tns:GetPriorityCategories_Result" />
+  <xs:complexType name="ArrayOfGetAllSensors_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="GetAllSensors_Result" nillable="true" type="tns:GetAllSensors_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfGetAllSensors_Result" nillable="true" type="tns:ArrayOfGetAllSensors_Result" />
+  <xs:complexType name="GetAllSensors_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="MAX_Critical" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="MIN_Critical" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetAllSensors_Result" nillable="true" type="tns:GetAllSensors_Result" />
   <xs:complexType name="ArrayOfGetFeedComments_Result">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="GetFeedComments_Result" nillable="true" type="tns:GetFeedComments_Result" />
@@ -241,6 +256,7 @@
       <xs:element minOccurs="0" name="MAX_Critical" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="MIN_Critical" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Unit" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="GetSensorInformation_Result" nillable="true" type="tns:GetSensorInformation_Result" />
@@ -299,4 +315,70 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="GetFeedsByFilter_Result" nillable="true" type="tns:GetFeedsByFilter_Result" />
+  <xs:complexType name="ArrayOfGetUserSavedFilters_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="GetUserSavedFilters_Result" nillable="true" type="tns:GetUserSavedFilters_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfGetUserSavedFilters_Result" nillable="true" type="tns:ArrayOfGetUserSavedFilters_Result" />
+  <xs:complexType name="GetUserSavedFilters_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FilterName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Location" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StartDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetUserSavedFilters_Result" nillable="true" type="tns:GetUserSavedFilters_Result" />
+  <xs:complexType name="ArrayOfGetUsersByName_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="GetUsersByName_Result" nillable="true" type="tns:GetUsersByName_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfGetUsersByName_Result" nillable="true" type="tns:ArrayOfGetUsersByName_Result" />
+  <xs:complexType name="GetUsersByName_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="isHuman" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetUsersByName_Result" nillable="true" type="tns:GetUsersByName_Result" />
+  <xs:complexType name="ArrayOfGetUserSavedFiltersTagedUsers_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="GetUserSavedFiltersTagedUsers_Result" nillable="true" type="tns:GetUserSavedFiltersTagedUsers_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfGetUserSavedFiltersTagedUsers_Result" nillable="true" type="tns:ArrayOfGetUserSavedFiltersTagedUsers_Result" />
+  <xs:complexType name="GetUserSavedFiltersTagedUsers_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetUserSavedFiltersTagedUsers_Result" nillable="true" type="tns:GetUserSavedFiltersTagedUsers_Result" />
+  <xs:complexType name="ArrayOfGetUserActivity_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="GetUserActivity_Result" nillable="true" type="tns:GetUserActivity_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfGetUserActivity_Result" nillable="true" type="tns:ArrayOfGetUserActivity_Result" />
+  <xs:complexType name="GetUserActivity_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FeedId" type="xs:int" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Timestamp" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetUserActivity_Result" nillable="true" type="tns:GetUserActivity_Result" />
 </xs:schema>

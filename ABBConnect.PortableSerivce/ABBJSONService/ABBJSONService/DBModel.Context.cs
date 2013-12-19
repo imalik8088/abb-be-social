@@ -93,7 +93,7 @@ namespace ABBJSONService
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddTagToFeed", feedIdParameter, usernameParameter);
         }
     
-        public virtual int AddUserSavedFilter(Nullable<int> userId, string filterName, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, string location, Nullable<int> tagUserId1, Nullable<int> tagUserId2, Nullable<int> tagUserId3, Nullable<int> tagUserId4, Nullable<int> tagUserId5)
+        public virtual int AddUserSavedFilter(Nullable<int> userId, string filterName, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, string location, string type)
         {
             var userIdParameter = userId.HasValue ?
                 new ObjectParameter("UserId", userId) :
@@ -115,27 +115,11 @@ namespace ABBJSONService
                 new ObjectParameter("Location", location) :
                 new ObjectParameter("Location", typeof(string));
     
-            var tagUserId1Parameter = tagUserId1.HasValue ?
-                new ObjectParameter("TagUserId1", tagUserId1) :
-                new ObjectParameter("TagUserId1", typeof(int));
+            var typeParameter = type != null ?
+                new ObjectParameter("Type", type) :
+                new ObjectParameter("Type", typeof(string));
     
-            var tagUserId2Parameter = tagUserId2.HasValue ?
-                new ObjectParameter("TagUserId2", tagUserId2) :
-                new ObjectParameter("TagUserId2", typeof(int));
-    
-            var tagUserId3Parameter = tagUserId3.HasValue ?
-                new ObjectParameter("TagUserId3", tagUserId3) :
-                new ObjectParameter("TagUserId3", typeof(int));
-    
-            var tagUserId4Parameter = tagUserId4.HasValue ?
-                new ObjectParameter("TagUserId4", tagUserId4) :
-                new ObjectParameter("TagUserId4", typeof(int));
-    
-            var tagUserId5Parameter = tagUserId5.HasValue ?
-                new ObjectParameter("TagUserId5", tagUserId5) :
-                new ObjectParameter("TagUserId5", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddUserSavedFilter", userIdParameter, filterNameParameter, startDateParameter, endDateParameter, locationParameter, tagUserId1Parameter, tagUserId2Parameter, tagUserId3Parameter, tagUserId4Parameter, tagUserId5Parameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddUserSavedFilter", userIdParameter, filterNameParameter, startDateParameter, endDateParameter, locationParameter, typeParameter);
         }
     
         public virtual ObjectResult<GetAllHumanFeeds_Result> GetAllHumanFeeds()
@@ -516,6 +500,114 @@ namespace ABBJSONService
         public virtual int sp_upgraddiagrams()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
+    
+        public virtual int AddFollowSensor(Nullable<int> humanUserId, Nullable<int> sensorUserId)
+        {
+            var humanUserIdParameter = humanUserId.HasValue ?
+                new ObjectParameter("HumanUserId", humanUserId) :
+                new ObjectParameter("HumanUserId", typeof(int));
+    
+            var sensorUserIdParameter = sensorUserId.HasValue ?
+                new ObjectParameter("SensorUserId", sensorUserId) :
+                new ObjectParameter("SensorUserId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddFollowSensor", humanUserIdParameter, sensorUserIdParameter);
+        }
+    
+        public virtual int AddUserToSavedFilter(Nullable<int> userId, Nullable<int> filterId)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            var filterIdParameter = filterId.HasValue ?
+                new ObjectParameter("FilterId", filterId) :
+                new ObjectParameter("FilterId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddUserToSavedFilter", userIdParameter, filterIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetFollowedSensors(Nullable<int> humanUserId)
+        {
+            var humanUserIdParameter = humanUserId.HasValue ?
+                new ObjectParameter("HumanUserId", humanUserId) :
+                new ObjectParameter("HumanUserId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetFollowedSensors", humanUserIdParameter);
+        }
+    
+        public virtual ObjectResult<GetUserSavedFiltersTagedUsers_Result> GetUserSavedFiltersTagedUsers(Nullable<int> filterId)
+        {
+            var filterIdParameter = filterId.HasValue ?
+                new ObjectParameter("FilterId", filterId) :
+                new ObjectParameter("FilterId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserSavedFiltersTagedUsers_Result>("GetUserSavedFiltersTagedUsers", filterIdParameter);
+        }
+    
+        public virtual ObjectResult<GetXFeedsByFilter_Result> GetXFeedsByFilter(Nullable<int> userId, string location, Nullable<System.DateTime> startTime, Nullable<System.DateTime> endTime, string feedType, Nullable<int> startingFeedId, Nullable<int> numOfFeeds)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            var locationParameter = location != null ?
+                new ObjectParameter("location", location) :
+                new ObjectParameter("location", typeof(string));
+    
+            var startTimeParameter = startTime.HasValue ?
+                new ObjectParameter("startTime", startTime) :
+                new ObjectParameter("startTime", typeof(System.DateTime));
+    
+            var endTimeParameter = endTime.HasValue ?
+                new ObjectParameter("endTime", endTime) :
+                new ObjectParameter("endTime", typeof(System.DateTime));
+    
+            var feedTypeParameter = feedType != null ?
+                new ObjectParameter("FeedType", feedType) :
+                new ObjectParameter("FeedType", typeof(string));
+    
+            var startingFeedIdParameter = startingFeedId.HasValue ?
+                new ObjectParameter("startingFeedId", startingFeedId) :
+                new ObjectParameter("startingFeedId", typeof(int));
+    
+            var numOfFeedsParameter = numOfFeeds.HasValue ?
+                new ObjectParameter("numOfFeeds", numOfFeeds) :
+                new ObjectParameter("numOfFeeds", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetXFeedsByFilter_Result>("GetXFeedsByFilter", userIdParameter, locationParameter, startTimeParameter, endTimeParameter, feedTypeParameter, startingFeedIdParameter, numOfFeedsParameter);
+        }
+    
+        public virtual int RemoveFollowSensor(Nullable<int> humanUserId, Nullable<int> sensorUserId)
+        {
+            var humanUserIdParameter = humanUserId.HasValue ?
+                new ObjectParameter("HumanUserId", humanUserId) :
+                new ObjectParameter("HumanUserId", typeof(int));
+    
+            var sensorUserIdParameter = sensorUserId.HasValue ?
+                new ObjectParameter("SensorUserId", sensorUserId) :
+                new ObjectParameter("SensorUserId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RemoveFollowSensor", humanUserIdParameter, sensorUserIdParameter);
+        }
+    
+        public virtual ObjectResult<GetFeedByFeedId_Result> GetFeedByFeedId(Nullable<int> feedId)
+        {
+            var feedIdParameter = feedId.HasValue ?
+                new ObjectParameter("feedId", feedId) :
+                new ObjectParameter("feedId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetFeedByFeedId_Result>("GetFeedByFeedId", feedIdParameter);
+        }
+    
+        public virtual ObjectResult<GetUserActivity_Result> GetUserActivity(Nullable<int> userId)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("userId", userId) :
+                new ObjectParameter("userId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserActivity_Result>("GetUserActivity", userIdParameter);
         }
     }
 }

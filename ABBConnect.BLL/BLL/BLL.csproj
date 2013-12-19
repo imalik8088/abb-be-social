@@ -36,8 +36,19 @@
     </StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DAL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ABBConnect.DAL\DAL\bin\Debug\DAL.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,32 +56,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activity.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="Comment.cs" />
     <Compile Include="CommonDataManager.cs" />
     <Compile Include="Feed.cs" />
     <Compile Include="FeedManager.cs" />
+    <Compile Include="FeedType.cs" />
+    <Compile Include="Filter.cs" />
+    <Compile Include="Human.cs" />
+    <Compile Include="HumanFeed.cs" />
     <Compile Include="ICommonDataManager.cs" />
-    <Compile Include="ISensorFeedManager.cs" />
-    <Compile Include="ISensorManager.cs" />
-    <Compile Include="IHumanFeedManager.cs" />
-    <Compile Include="IHumanManager.cs" />
+    <Compile Include="IUserManager.cs" />
     <Compile Include="lFeedManager.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sensor.cs" />
     <Compile Include="SensorFeed.cs" />
-    <Compile Include="SensorFeedManager.cs" />
     <Compile Include="SensorHistoryData.cs" />
-    <Compile Include="SensorManager.cs" />
     <Compile Include="SensorVTData.cs" />
-    <Compile Include="Human.cs" />
-    <Compile Include="HumanFeed.cs" />
-    <Compile Include="HumanFeedManager.cs" />
-    <Compile Include="HumanManager.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="UserManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

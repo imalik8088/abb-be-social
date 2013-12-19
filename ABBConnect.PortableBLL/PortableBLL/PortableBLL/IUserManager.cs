@@ -12,7 +12,19 @@ namespace PortableBLL
         Task<Human> LoadHumanInformation(int humandId);
         Task<Human> LoadHumanInformationByUsername(string username);
         Task<Sensor> LoadSensorInformation(int sensorID);
+        Task<User> LoadUserInformation(int userId);
         Task<SensorHistoryData> LoadHistoryValuesBySensor(int sensorID, DateTime startingTime, DateTime endingTime);
         Task<int> LoadCurrentValuesBySensor(int sensorID);
+        Task<List<User>> SearchUserByName(string query);
+        Task<List<Human>> GetAllHumanUsers();
+        Task<List<Sensor>> GetAllSensors();
+        Task<List<Filter>> GetUserSavedFilters(int userId);
+        Task<List<User>> GetFilterTaggedUsers(int filterId);
+        Task<int> AddFilter(int userId, Filter newFilter);
+        Task<bool> AddUserToFilter(int userId, int filterId);
+        Task<bool> FollowSensor(int humanUserId, int sensorUserId);
+        Task<bool> UnfollowSensor(int humanUserId, int sensorUserId);
+        Task<List<int>> GetFollowedSensors(int humanUserId);
+        Task<List<Activity>> GetUserActivity(int userId);
     }
 }

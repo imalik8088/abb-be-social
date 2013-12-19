@@ -33,12 +33,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Activity.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="Comment.cs" />
     <Compile Include="CommonDataManager.cs" />
     <Compile Include="Feed.cs" />
     <Compile Include="FeedManager.cs" />
-    <Compile Include="FeedManagerSync.cs" />
+    <Compile Include="FeedType.cs" />
+    <Compile Include="Filter.cs" />
     <Compile Include="Human.cs" />
     <Compile Include="HumanFeed.cs" />
     <Compile Include="ICommonDataManager.cs" />
@@ -56,6 +58,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="User.cs" />
     <Compile Include="UserManager.cs" />
   </ItemGroup>
   <ItemGroup>

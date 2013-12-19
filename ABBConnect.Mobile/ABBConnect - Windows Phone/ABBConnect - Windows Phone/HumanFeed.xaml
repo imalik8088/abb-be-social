@@ -17,39 +17,33 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
-        <controls:Pivot Title="Feed">
+        <Image Height="35" HorizontalAlignment="Left" Margin="10,15,0,0" Name="imgMsg" Stretch="Fill" VerticalAlignment="Top" Width="35" Source="Icons/icon-comment.png" />
+        <controls:Pivot Title="     Feed">
             <!--Pivot item one-->
             <controls:PivotItem Header="Feed" >
                 <Grid>
-                    <TextBlock x:Name="Author" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top"/>
-                    <TextBlock x:Name="Timestamp" HorizontalAlignment="Left" Margin="403,10,0,0" TextWrapping="Wrap" Text="Time" VerticalAlignment="Top"/>
-                    <Image x:Name="Image" HorizontalAlignment="Left" Height="357" Margin="10,42,0,0" VerticalAlignment="Top" Width="436" Grid.ColumnSpan="2"/>
-                    <TextBlock x:Name="Location" HorizontalAlignment="Left" Margin="10,399,0,0" TextWrapping="Wrap" Text="Location" VerticalAlignment="Top"/>
-                    <TextBlock x:Name="Content" HorizontalAlignment="Left" Margin="10,426,0,0" TextWrapping="Wrap" Text="Content" VerticalAlignment="Top" Height="103" Width="436"/>
+                    <Image Height="20" HorizontalAlignment="Left" Margin="12,9,0,0" Name="image1" Stretch="Fill" VerticalAlignment="Top" Width="20" Source="/Icons/icon-user-app-bar.png" />
+                    <Image x:Name="TimeSymbol" Source="/Icons/icon-timer.png" HorizontalAlignment="Left" Height="20" Margin="390,5,0,0" VerticalAlignment="Top" Width="20"/>
+                    <TextBlock x:Name="Author" HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="Timestamp" FontSize="18" HorizontalAlignment="Right" Margin="0,5,14,188" TextWrapping="Wrap" RenderTransformOrigin="2.341,6.889" TextAlignment="Right" Width="30" Foreground="#FF8A8A8A" Text="10h"/>
+                    <Image x:Name="Image" HorizontalAlignment="Left" Height="260" Margin="10,337,0,0" VerticalAlignment="Top" Width="436"/>
+                    <Image Source="/Icons/icon-location-just.png" HorizontalAlignment="Left" Height="18" Margin="33,28,0,0" VerticalAlignment="Top" Width="18" d:LayoutOverrides="VerticalAlignment"/>
+                    <TextBlock x:Name="Location" HorizontalAlignment="Left" Margin="53,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Foreground="#FF8A8A8A" d:LayoutOverrides="VerticalAlignment"><Run Text="Machine "/><Run Text="2"/></TextBlock>
+                    <TextBlock x:Name="Content" HorizontalAlignment="Left" Margin="10,51,0,0" TextWrapping="Wrap" Text="Content" VerticalAlignment="Top" Height="281" Width="436"/>
                 </Grid>
             </controls:PivotItem>
             <controls:PivotItem Header="Comments">
                 <Grid>
                     <ListBox x:Name="lstbComments"
                              HorizontalAlignment="Left"
-                             Height="587" Margin="10,10,0,0" 
+                             Height="587" 
                              VerticalAlignment="Top" 
-                             Width="436"
-                             ItemsSource="{Binding}" >
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" Margin="2">
-                                        <TextBlock Text="Author:" Margin="2" />
-                                        <TextBlock Text="{Binding Owner.UserName}" Margin="2" />
-                                        <TextBlock Text="Time:" Margin="10,2,0,2" />
-                                        <TextBlock Text="{Binding TimeStamp}" Margin="2" />
-                                        <TextBlock Text="Comment:" Margin="2,2,0,0" />
-                                        <TextBlock Text="{Binding Content}" Margin="2" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                    </ListBox>
+                             Width="456">
+                        <TextBlock TextWrapping="Wrap" Text="Enter Comment:" Margin="15,0,0,0" Foreground="#FF8A8A8A" />
+                        <TextBox x:Name="txtbComment" Margin="0,0,0,0" Height="126" TextWrapping="Wrap" Text="Enter comment here..." Width="456" MouseLeftButtonDown="txtbComment_MouseLeftButtonDown"/>
+                        <Button x:Name="btnPublish" Margin="100,0,0,0" Content="Publish" Width="250" Click="btnPublish_Click"/>
 
+                    </ListBox>
 
                 </Grid>
             </controls:PivotItem>
@@ -59,15 +53,16 @@
                              Height="587" Margin="10,10,0,0"
                              VerticalAlignment="Top" 
                              Width="436"
-                             ItemsSource="{Binding}" >
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" Margin="2">
-                                        <TextBlock Text="Name:" Margin="2" />
-                                        <TextBlock Text="{Binding UserName}" Margin="2" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
+                             ItemsSource="{Binding}" SelectionChanged="lstbTags_SelectionChanged" >
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Margin="2">
+                                    <Image HorizontalAlignment="Left" Source="Icons/symbol_tag.png" Height="26" Margin="2" VerticalAlignment="Top" Width="26"/>
+                                    <TextBlock Text="{Binding FirstName}" Margin="2" FontSize="32"/>
+                                    <TextBlock Text="{Binding LastName}" Margin="2" FontSize="32"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
                     </ListBox>
                 </Grid>
             </controls:PivotItem>

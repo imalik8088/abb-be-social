@@ -25,4 +25,8 @@ public class AjaxFeeds
 	{
         this._lastLoadedFeedID = lastLoadedFeedID;
 	}
+    public AjaxFeeds()
+    {
+        this._lastLoadedFeedID = 0;
+    }
 }
