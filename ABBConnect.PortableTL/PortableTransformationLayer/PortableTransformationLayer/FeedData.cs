@@ -46,24 +46,38 @@ namespace PortableTransformationLayer
         //    return int.Parse(obj);
         //}
 
-        //public async Task<int> PublishFeed(int usrId, string text, string filepath, int prioId)
-        //{
-        //    MemoryStream stream = new MemoryStream();
-        //    StreamWriter writer = new StreamWriter(stream);
-        //    writer.Write(filepath);
-        //    writer.Flush();
-        //    stream.Position = 0;
+        public async Task<int> PublishFeed(int usrId, string text, string filepath, int prioId)
+        {
+            
 
-        //    HttpContent httpContent = new StringContent(stream);
+            HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create("http://localhost:54961/ABBConnectWCF.svc/" + "PostFeed?id=" + usrId.ToString()
+                + "&text=" + text + "&priority=" + prioId.ToString());
+            req.Method = "POST";
+            req.ContentType = "text/plain";
+            Stream reqStream = await req.GetRequestStreamAsync();
+            
+            byte[] fileToSend = new byte[5];
+            for (int i = 0; i < fileToSend.Length; i++)
+            {
+                fileToSend[i] = (byte)('a' + (i % 26));
+            }
+            reqStream.Write(fileToSend, 0, fileToSend.Length);
+            reqStream.Dispose();          
+            
 
-        //    var client = new HttpClient();
-        //    client.GetStreamAsync();
-        //    client.BaseAddress = new Uri(urlServer.Url);
-        //    var response = await client.PostAsync("PostFeed?id=" + usrId.ToString()
-        //        + "&text=" + text + "&priority=" + prioId.ToString(), stream).ConfigureAwait(false);
-        //    var obj = JsonConvert.DeserializeObject<string>(response);
-        //    return int.Parse(obj);
-        //}
+            //byte[] fileToSend = new byte[12345];
+            //for (int i = 0; i < fileToSend.Length; i++)
+            //{
+            //    fileToSend[i] = (byte)('a' + (i % 26));
+            //}
+            //reqStream.Write(fileToSend, 0, fileToSend.Length);
+            //reqStream.Close();
+
+            //HttpWebResponse response = await (HttpWebResponse)req.GetResponseAsync();
+            //var obj = JsonConvert.DeserializeObject<string>(response);
+            //return int.Parse(obj);
+            return 1;
+        }
 
         public async Task<List<GetLatestXFeeds_Result>> GetFeedsByFilter(int userId, string location, DateTime startingTime, DateTime endingTime, string feedType, int startId, int numFeeds)
         {

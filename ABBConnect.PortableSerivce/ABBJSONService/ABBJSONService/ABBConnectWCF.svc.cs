@@ -231,7 +231,7 @@ namespace ABBJSONService
         //    return result;
         //}
 
-        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "PostFeed?id={id}&text={text}&priority={prioID}")]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "PostFeed?id={id}&text={text}&priority={prioID}")]
         public int PostFeed(string id, string text, string prioId, Stream imageContent)
         {
             int result = 0;
