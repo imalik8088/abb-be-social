@@ -95,6 +95,9 @@
     <None Include="Service References\ABBConnectServiceRef\ABBConnectWCF3.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\ABBConnectServiceRef\ABBConnectWCF4.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ABBConnectServiceRef\PortableTransformationLayer.ABBConnectServiceRef.GetAllHumanFeedsByFilter_Result.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

@@ -8,11 +8,17 @@ using System.Data.SqlClient;
 
 namespace DAL
 {
+    /// <summary>
+    /// Class that allow to make operation on the feeds like retrieve old feeds, or publish new feeds and comments
+    /// </summary>
     public class FeedData : Connection
     {
         private SqlConnection sqlConnection;
         private SqlCommand sqlCommand;
 
+        /// <summary>
+        /// Constructor that automatically instantiate the attribute of the class
+        /// </summary>
         public FeedData()
             : base()
         {
@@ -103,6 +109,14 @@ namespace DAL
             return feeds;
         }
 
+        /// <summary>
+        /// Method that store a feed from a human user
+        /// </summary>
+        /// <param name="usrId">Integer that represent the ID of a human user</param>
+        /// <param name="text">String that represent the content of the feed</param>
+        /// <param name="filepath">String that represent the the path </param>
+        /// <param name="prioId">Integer that represent the priority level of the feed</param>
+        /// <returns>Asynchronous operation that contain the ID of the feed</returns>
         public int PostFeed(int id, string text, string filepath, int prioId)
         {
             int result = 0;
@@ -133,6 +147,11 @@ namespace DAL
             return result;
         }
 
+        /// <summary>
+        /// Method that retrieve all the comments of a feed
+        /// </summary>
+        /// <param name="feedId">Integer representing the ID of the feed</param>
+        /// <returns>Asynchronous operation that contain the List of comments</returns>
         public List<GetFeedComments_Result> GetFeedComments(int feedId)
         {
             List<GetFeedComments_Result> comments = new List<GetFeedComments_Result>();
@@ -169,6 +188,11 @@ namespace DAL
             return comments;
         }
 
+        /// <summary>
+        /// Method that retrieve all human users referenced into a feed
+        /// </summary>
+        /// <param name="feedId">Integer representing the ID of the feed</param>
+        /// <returns>Asynchronous operation that contain the List of tags</returns>
         public List<GetFeedTags_Result> GetFeedTags(int feedId)
         {
             List<GetFeedTags_Result> tags = new List<GetFeedTags_Result>();
@@ -481,7 +505,13 @@ namespace DAL
             return feeds;
         }
 
-
+        /// <summary>
+        /// Method that store a comment made to a feed from a human user
+        /// </summary>
+        /// <param name="feedId">Integer that represent the ID of a feed</param>
+        /// <param name="username">String that represent the username of the human user</param>
+        /// <param name="comment">String that rapresent the content of the comment</param>
+        /// <returns>Asynchronous operation that contain a boolean that indicate if the operation succeed</returns>
         public bool PostComment(int feedId, string username, string text)
         {
             int iD = feedId;
@@ -511,6 +541,12 @@ namespace DAL
                 return false;
         }
 
+        /// <summary>
+        /// Method that the reference to a user into a feed
+        /// </summary>
+        /// <param name="feedId">ID of the feed where the reference should be added</param>
+        /// <param name="username">Username of the the user that should be reference in the feed</param>
+        /// <returns>Asynchronous operation that contain a boolean that indicate if the operation succeed</returns>
         public bool AddTag(int feedId, string username)
         {
             int iD = feedId;
@@ -646,6 +682,21 @@ namespace DAL
             return feeds;
         }
 
+        /// <summary>
+        /// Method that search and retrieve the feeds by all their attributes.
+        /// If an attribute of the feed is not needed in the search it can be leaved empty for strings, MinValue for DateTime objects, or -1 for integers.
+        /// </summary>
+        /// <param name="userId">Integer that represent the ID of the user, if not needed in the search put it -1</param>
+        /// <param name="location">String that represent the location of the feed, if not needed in the search leave it empty</param>
+        /// <param name="startingTime">Class that represent the date where the search begin, it must be older than the date where the search should stop;
+        /// if  not needed in the search put it like MinValue</param>
+        /// <param name="endingTime">Class that represent the date where the search end, it must be younger than the date where the search should start;
+        /// if  not needed in the search put it like MinValue</param>
+        /// <param name="feedType">String that represent the type of the feed: human or sensor;
+        /// if not needed in the search put it like empty string</param>
+        /// <param name="startId"></param>
+        /// <param name="numFeeds">Integer that represent the number of feeds that must be retrieved, if not needed in the search put it -1</param>
+        /// <returns>Asynchronous operation that contain the List of feeds required</returns>
         public List<GetLatestXFeeds_Result> GetXFeedsByFilter(int id, string location, DateTime startingTime, DateTime endingTime, string feedType, int startId, int numFeeds)
         {
             List<GetLatestXFeeds_Result> feeds = new List<GetLatestXFeeds_Result>();
@@ -732,6 +783,11 @@ namespace DAL
             return feeds;
         }
 
+        /// <summary>
+        /// Method that retrieve the feed with a specified ID
+        /// </summary>
+        /// <param name="feedId">ID of the feed where the reference should be added</param>
+        /// <returns>Asynchronous operation that contain the feed rewuired</returns>
         public GetLatestXFeeds_Result GetFeedByFeedId(int feedId)
         {
             GetLatestXFeeds_Result feed = new GetLatestXFeeds_Result();

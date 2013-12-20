@@ -19,11 +19,11 @@ namespace ABBJSONService
 
         [OperationContract]
         [WebInvoke]
-        GetHumanInformation_Result GetHumanInformation(string id);
+        DAL.GetHumanInformation_Result GetHumanInformation(string id);
 
         [OperationContract]
         [WebInvoke]
-        GetHumanInformationByUsername_Result GetHumanInformationByUsername(string username);
+        DAL.GetHumanInformationByUsername_Result GetHumanInformationByUsername(string username);
 
         [OperationContract]
         [WebInvoke]
@@ -33,52 +33,54 @@ namespace ABBJSONService
         [WebInvoke]
         List<GetLatestXFeedsFromId_Result> GetLatestXFeedsFromId(string X, string Id);
 
-        //[OperationContract]
-        //[WebInvoke]
-        //int PostFeed(string id, string text, string filepath, string prioId);
         [OperationContract]
         [WebInvoke]
-        int PostFeed(string id, string text, string prioId, Stream imageContent);
+        int PostTestFeed(string id, string text, string filepath, string prioId);
 
         [OperationContract]
         [WebInvoke]
-        List<GetPriorityCategories_Result> GetCategories();
+        int PostFeed(string id, string text, string prioId, string filepath);
+
 
         [OperationContract]
         [WebInvoke]
-        List<GetAllSensors_Result> GetAllSensors();
+        List<DAL.GetPriorityCategories_Result> GetCategories();
 
         [OperationContract]
         [WebInvoke]
-        List<GetFeedComments_Result> GetFeedComments(string feedId, string randomGuid);
+        List<DAL.GetAllSensors_Result> GetAllSensors();
 
         [OperationContract]
         [WebInvoke]
-        List<GetFeedTags_Result> GetFeedTags(string feedId);
+        List<DAL.GetFeedComments_Result> GetFeedComments(string feedId, string randomGuid);
 
         [OperationContract]
         [WebInvoke]
-        List<GetAllHumanFeeds_Result> GetHumanFeeds();
+        List<DAL.GetFeedTags_Result> GetFeedTags(string feedId);
 
         [OperationContract]
         [WebInvoke]
-        List<GetAllHumanFeedsByFilter_Result> GetHumanFeedsByFilter(string location, string startingTime, string endingTime);
+        List<DAL.GetAllHumanFeeds_Result> GetHumanFeeds();
 
         [OperationContract]
         [WebInvoke]
-        List<GetAllSensorFeeds_Result> GetSensorFeeds();
+        List<DAL.GetAllHumanFeedsByFilter_Result> GetHumanFeedsByFilter(string location, string startingTime, string endingTime);
 
         [OperationContract]
         [WebInvoke]
-        List<GetAllSensorFeedsByFilter_Result> GetSensorFeedsByFilter(string location, string startingTime, string endingTime);
+        List<DAL.GetAllSensorFeeds_Result> GetSensorFeeds();
 
         [OperationContract]
         [WebInvoke]
-        List<GetUserFeeds_Result> GetUserFeeds();
+        List<DAL.GetAllSensorFeedsByFilter_Result> GetSensorFeedsByFilter(string location, string startingTime, string endingTime);
 
         [OperationContract]
         [WebInvoke]
-        List<GetUserFeedsByFilter_Result> GetUserFeedsByFilter(string location, string startingTime, string endingTime);
+        List<DAL.GetUserFeeds_Result> GetUserFeeds();
+
+        [OperationContract]
+        [WebInvoke]
+        List<DAL.GetUserFeedsByFilter_Result> GetUserFeedsByFilter(string location, string startingTime, string endingTime);
 
         [OperationContract]
         [WebInvoke]
@@ -86,11 +88,11 @@ namespace ABBJSONService
 
         [OperationContract]
         [WebInvoke]
-        GetSensorInformation_Result GetSensorInformation(string id);
+        DAL.GetSensorInformation_Result GetSensorInformation(string id);
 
         [OperationContract]
         [WebInvoke]
-        List<GetHistoricalDataFromSensor_Result> GetHistoricalDataFromSensor(string id, string startingTime, string endingTime);
+        List<DAL.GetHistoricalDataFromSensor_Result> GetHistoricalDataFromSensor(string id, string startingTime, string endingTime);
 
         [OperationContract]
         [WebInvoke]
@@ -110,15 +112,15 @@ namespace ABBJSONService
 
         [OperationContract]
         [WebInvoke]
-        List<GetLatestFeedsByFilter_Result> GetLatestFeedsByFilter(string location, string startingTime, string endingTime);
+        List<DAL.GetLatestFeedsByFilter_Result> GetLatestFeedsByFilter(string location, string startingTime, string endingTime);
 
         [OperationContract]
         [WebInvoke]
-        List<GetFeedsByFilter_Result> GetFeedsByFilter(string name, string location, string startingTime, string endingTime, string feedType);
+        List<DAL.GetFeedsByFilter_Result> GetFeedsByFilter(string name, string location, string startingTime, string endingTime, string feedType);
         
         [OperationContract]
         [WebInvoke]
-        List<GetLatestXFeeds_Result> GetXFeedsByFilter(string id, string location, string startingTime, string endingTime, string feedType, string startId, string numFeeds, string randomGuid);
+        List<DAL.GetLatestXFeeds_Result> GetXFeedsByFilter(string id, string location, string startingTime, string endingTime, string feedType, string startId, string numFeeds, string randomGuid);
 
         [OperationContract]
         [WebInvoke]
@@ -130,19 +132,19 @@ namespace ABBJSONService
 
         [OperationContract]
         [WebInvoke]
-        List<GetUserSavedFilters_Result> GetSavedFilter(string userId);
+        List<DAL.GetUserSavedFilters_Result> GetSavedFilter(string userId);
 
         [OperationContract]
         [WebInvoke]
-        List<GetUsersByName_Result> SearchUsersByName(string query);
+        List<DAL.GetUsersByName_Result> SearchUsersByName(string query);
 
         [OperationContract]
         [WebInvoke]
-        List<GetUserSavedFiltersTagedUsers_Result> GetFilterTaggedUsers(string filterId);
+        List<DAL.GetUserSavedFiltersTagedUsers_Result> GetFilterTaggedUsers(string filterId);
 
         [OperationContract]
         [WebInvoke]
-        List<GetUserActivity_Result> GetUserActivity(string userId);
+        List<DAL.GetUserActivity_Result> GetUserActivity(string userId);
 
         [OperationContract]
         [WebInvoke]
@@ -154,7 +156,7 @@ namespace ABBJSONService
 
         [OperationContract]
         [WebInvoke]
-        GetLatestXFeeds_Result GetFeedByFeedId(string feedId, string randomGuid);
+        DAL.GetLatestXFeeds_Result GetFeedByFeedId(string feedId, string randomGuid);
     }
 
 }

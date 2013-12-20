@@ -14,6 +14,7 @@ namespace PortableTransformationLayer
         Task<bool> PublishComment(int feedId, string username, string comment);
         Task<bool> AddFeedTag(int feedId, string username);
         Task<int> PublishFeed(int usrId, string text, string filepath, int prioId);
+        Task<int> PublishTestFeed(int usrId, string text, byte[] fileArray, int prioId);
         Task<List<GetLatestXFeeds_Result>> GetFeedsByFilter(int userId, string location, DateTime startingTime, DateTime endingTime, string feedType, int startId, int numFeeds);
         Task<GetLatestXFeeds_Result> GetFeedByFeedId(int feedId);
     }

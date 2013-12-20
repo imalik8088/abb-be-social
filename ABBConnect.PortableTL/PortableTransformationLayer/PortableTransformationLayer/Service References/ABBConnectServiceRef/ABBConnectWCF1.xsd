@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://83.255.84.243:85/ServiceJSON/ABBConnectWCF.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ABBJSONService" />
-  <xs:import schemaLocation="http://83.255.84.243:85/ServiceJSON/ABBConnectWCF.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://83.255.84.243:85/ServiceJSON/ABBConnectWCF.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/DAL" />
+  <xs:import schemaLocation="http://83.255.84.243:85/ServiceJSON/ABBConnectWCF.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/ABBJSONService" />
+  <xs:import schemaLocation="http://83.255.84.243:85/ServiceJSON/ABBConnectWCF.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:element name="LogIn">
     <xs:complexType>
       <xs:sequence>
@@ -27,7 +28,7 @@
   <xs:element name="GetHumanInformationResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/ABBJSONService" minOccurs="0" name="GetHumanInformationResult" nillable="true" type="q1:GetHumanInformation_Result" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/DAL" minOccurs="0" name="GetHumanInformationResult" nillable="true" type="q1:GetHumanInformation_Result" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -41,7 +42,7 @@
   <xs:element name="GetHumanInformationByUsernameResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/ABBJSONService" minOccurs="0" name="GetHumanInformationByUsernameResult" nillable="true" type="q2:GetHumanInformationByUsername_Result" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/DAL" minOccurs="0" name="GetHumanInformationByUsernameResult" nillable="true" type="q2:GetHumanInformationByUsername_Result" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -74,13 +75,30 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="PostFeed">
+  <xs:element name="PostTestFeed">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="text" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="filepath" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="prioId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PostTestFeedResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PostTestFeedResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PostFeed">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="text" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="prioId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="filepath" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -99,7 +117,7 @@
   <xs:element name="GetCategoriesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/ABBJSONService" minOccurs="0" name="GetCategoriesResult" nillable="true" type="q5:ArrayOfGetPriorityCategories_Result" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/DAL" minOccurs="0" name="GetCategoriesResult" nillable="true" type="q5:ArrayOfGetPriorityCategories_Result" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -111,7 +129,7 @@
   <xs:element name="GetAllSensorsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/ABBJSONService" minOccurs="0" name="GetAllSensorsResult" nillable="true" type="q6:ArrayOfGetAllSensors_Result" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/DAL" minOccurs="0" name="GetAllSensorsResult" nillable="true" type="q6:ArrayOfGetAllSensors_Result" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -119,13 +137,14 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="feedId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="randomGuid" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetFeedCommentsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/ABBJSONService" minOccurs="0" name="GetFeedCommentsResult" nillable="true" type="q7:ArrayOfGetFeedComments_Result" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/DAL" minOccurs="0" name="GetFeedCommentsResult" nillable="true" type="q7:ArrayOfGetFeedComments_Result" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -139,7 +158,7 @@
   <xs:element name="GetFeedTagsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/ABBJSONService" minOccurs="0" name="GetFeedTagsResult" nillable="true" type="q8:ArrayOfGetFeedTags_Result" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/DAL" minOccurs="0" name="GetFeedTagsResult" nillable="true" type="q8:ArrayOfGetFeedTags_Result" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -151,7 +170,7 @@
   <xs:element name="GetHumanFeedsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/ABBJSONService" minOccurs="0" name="GetHumanFeedsResult" nillable="true" type="q9:ArrayOfGetAllHumanFeeds_Result" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/DAL" minOccurs="0" name="GetHumanFeedsResult" nillable="true" type="q9:ArrayOfGetAllHumanFeeds_Result" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -167,7 +186,7 @@
   <xs:element name="GetHumanFeedsByFilterResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/ABBJSONService" minOccurs="0" name="GetHumanFeedsByFilterResult" nillable="true" type="q10:ArrayOfGetAllHumanFeedsByFilter_Result" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/DAL" minOccurs="0" name="GetHumanFeedsByFilterResult" nillable="true" type="q10:ArrayOfGetAllHumanFeedsByFilter_Result" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -179,7 +198,7 @@
   <xs:element name="GetSensorFeedsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/ABBJSONService" minOccurs="0" name="GetSensorFeedsResult" nillable="true" type="q11:ArrayOfGetAllSensorFeeds_Result" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/DAL" minOccurs="0" name="GetSensorFeedsResult" nillable="true" type="q11:ArrayOfGetAllSensorFeeds_Result" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -195,7 +214,7 @@
   <xs:element name="GetSensorFeedsByFilterResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/ABBJSONService" minOccurs="0" name="GetSensorFeedsByFilterResult" nillable="true" type="q12:ArrayOfGetAllSensorFeedsByFilter_Result" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/DAL" minOccurs="0" name="GetSensorFeedsByFilterResult" nillable="true" type="q12:ArrayOfGetAllSensorFeedsByFilter_Result" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -207,7 +226,7 @@
   <xs:element name="GetUserFeedsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/ABBJSONService" minOccurs="0" name="GetUserFeedsResult" nillable="true" type="q13:ArrayOfGetUserFeeds_Result" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/DAL" minOccurs="0" name="GetUserFeedsResult" nillable="true" type="q13:ArrayOfGetUserFeeds_Result" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -223,7 +242,7 @@
   <xs:element name="GetUserFeedsByFilterResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/ABBJSONService" minOccurs="0" name="GetUserFeedsByFilterResult" nillable="true" type="q14:ArrayOfGetUserFeedsByFilter_Result" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/DAL" minOccurs="0" name="GetUserFeedsByFilterResult" nillable="true" type="q14:ArrayOfGetUserFeedsByFilter_Result" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -249,7 +268,7 @@
   <xs:element name="GetSensorInformationResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/ABBJSONService" minOccurs="0" name="GetSensorInformationResult" nillable="true" type="q16:GetSensorInformation_Result" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/DAL" minOccurs="0" name="GetSensorInformationResult" nillable="true" type="q16:GetSensorInformation_Result" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -265,7 +284,7 @@
   <xs:element name="GetHistoricalDataFromSensorResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/ABBJSONService" minOccurs="0" name="GetHistoricalDataFromSensorResult" nillable="true" type="q17:ArrayOfGetHistoricalDataFromSensor_Result" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/DAL" minOccurs="0" name="GetHistoricalDataFromSensorResult" nillable="true" type="q17:ArrayOfGetHistoricalDataFromSensor_Result" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -341,7 +360,7 @@
   <xs:element name="GetLatestFeedsByFilterResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/ABBJSONService" minOccurs="0" name="GetLatestFeedsByFilterResult" nillable="true" type="q18:ArrayOfGetLatestFeedsByFilter_Result" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/DAL" minOccurs="0" name="GetLatestFeedsByFilterResult" nillable="true" type="q18:ArrayOfGetLatestFeedsByFilter_Result" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -359,7 +378,7 @@
   <xs:element name="GetFeedsByFilterResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/ABBJSONService" minOccurs="0" name="GetFeedsByFilterResult" nillable="true" type="q19:ArrayOfGetFeedsByFilter_Result" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/DAL" minOccurs="0" name="GetFeedsByFilterResult" nillable="true" type="q19:ArrayOfGetFeedsByFilter_Result" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -373,13 +392,14 @@
         <xs:element minOccurs="0" name="feedType" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="startId" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="numFeeds" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="randomGuid" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetXFeedsByFilterResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/ABBJSONService" minOccurs="0" name="GetXFeedsByFilterResult" nillable="true" type="q20:ArrayOfGetLatestXFeeds_Result" />
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/DAL" minOccurs="0" name="GetXFeedsByFilterResult" nillable="true" type="q20:ArrayOfGetLatestXFeeds_Result" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -427,7 +447,7 @@
   <xs:element name="GetSavedFilterResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/ABBJSONService" minOccurs="0" name="GetSavedFilterResult" nillable="true" type="q21:ArrayOfGetUserSavedFilters_Result" />
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/DAL" minOccurs="0" name="GetSavedFilterResult" nillable="true" type="q21:ArrayOfGetUserSavedFilters_Result" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -441,7 +461,7 @@
   <xs:element name="SearchUsersByNameResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/ABBJSONService" minOccurs="0" name="SearchUsersByNameResult" nillable="true" type="q22:ArrayOfGetUsersByName_Result" />
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/DAL" minOccurs="0" name="SearchUsersByNameResult" nillable="true" type="q22:ArrayOfGetUsersByName_Result" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -455,7 +475,7 @@
   <xs:element name="GetFilterTaggedUsersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/ABBJSONService" minOccurs="0" name="GetFilterTaggedUsersResult" nillable="true" type="q23:ArrayOfGetUserSavedFiltersTagedUsers_Result" />
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/DAL" minOccurs="0" name="GetFilterTaggedUsersResult" nillable="true" type="q23:ArrayOfGetUserSavedFiltersTagedUsers_Result" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -469,7 +489,7 @@
   <xs:element name="GetUserActivityResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/ABBJSONService" minOccurs="0" name="GetUserActivityResult" nillable="true" type="q24:ArrayOfGetUserActivity_Result" />
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/DAL" minOccurs="0" name="GetUserActivityResult" nillable="true" type="q24:ArrayOfGetUserActivity_Result" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -506,13 +526,14 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="feedId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="randomGuid" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetFeedByFeedIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/ABBJSONService" minOccurs="0" name="GetFeedByFeedIdResult" nillable="true" type="q26:GetLatestXFeeds_Result" />
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/DAL" minOccurs="0" name="GetFeedByFeedIdResult" nillable="true" type="q26:GetLatestXFeeds_Result" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -14,7 +14,7 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GetHumanInformation_Result", Namespace="http://schemas.datacontract.org/2004/07/ABBJSONService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetHumanInformation_Result", Namespace="http://schemas.datacontract.org/2004/07/DAL")]
     public partial class GetHumanInformation_Result : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string EmailField;
@@ -119,7 +119,7 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GetHumanInformationByUsername_Result", Namespace="http://schemas.datacontract.org/2004/07/ABBJSONService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetHumanInformationByUsername_Result", Namespace="http://schemas.datacontract.org/2004/07/DAL")]
     public partial class GetHumanInformationByUsername_Result : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string EmailField;
@@ -569,7 +569,7 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GetPriorityCategories_Result", Namespace="http://schemas.datacontract.org/2004/07/ABBJSONService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetPriorityCategories_Result", Namespace="http://schemas.datacontract.org/2004/07/DAL")]
     public partial class GetPriorityCategories_Result : object, System.ComponentModel.INotifyPropertyChanged {
         
         private int IdField;
@@ -614,7 +614,7 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GetAllSensors_Result", Namespace="http://schemas.datacontract.org/2004/07/ABBJSONService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetAllSensors_Result", Namespace="http://schemas.datacontract.org/2004/07/DAL")]
     public partial class GetAllSensors_Result : object, System.ComponentModel.INotifyPropertyChanged {
         
         private int IdField;
@@ -689,7 +689,7 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GetFeedComments_Result", Namespace="http://schemas.datacontract.org/2004/07/ABBJSONService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetFeedComments_Result", Namespace="http://schemas.datacontract.org/2004/07/DAL")]
     public partial class GetFeedComments_Result : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string CommentTextField;
@@ -779,7 +779,7 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GetFeedTags_Result", Namespace="http://schemas.datacontract.org/2004/07/ABBJSONService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetFeedTags_Result", Namespace="http://schemas.datacontract.org/2004/07/DAL")]
     public partial class GetFeedTags_Result : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string FirstNameField;
@@ -854,7 +854,7 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GetAllHumanFeeds_Result", Namespace="http://schemas.datacontract.org/2004/07/ABBJSONService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetAllHumanFeeds_Result", Namespace="http://schemas.datacontract.org/2004/07/DAL")]
     public partial class GetAllHumanFeeds_Result : object, System.ComponentModel.INotifyPropertyChanged {
         
         private System.DateTime CreationTimeStampField;
@@ -1019,7 +1019,7 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GetAllHumanFeedsByFilter_Result", Namespace="http://schemas.datacontract.org/2004/07/ABBJSONService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetAllHumanFeedsByFilter_Result", Namespace="http://schemas.datacontract.org/2004/07/DAL")]
     public partial class GetAllHumanFeedsByFilter_Result : object, System.ComponentModel.INotifyPropertyChanged {
         
         private System.DateTime CreationTimeStampField;
@@ -1184,7 +1184,7 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GetAllSensorFeeds_Result", Namespace="http://schemas.datacontract.org/2004/07/ABBJSONService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetAllSensorFeeds_Result", Namespace="http://schemas.datacontract.org/2004/07/DAL")]
     public partial class GetAllSensorFeeds_Result : object, System.ComponentModel.INotifyPropertyChanged {
         
         private System.DateTime CreationTimeStampField;
@@ -1349,7 +1349,7 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GetAllSensorFeedsByFilter_Result", Namespace="http://schemas.datacontract.org/2004/07/ABBJSONService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetAllSensorFeedsByFilter_Result", Namespace="http://schemas.datacontract.org/2004/07/DAL")]
     public partial class GetAllSensorFeedsByFilter_Result : object, System.ComponentModel.INotifyPropertyChanged {
         
         private System.DateTime CreationTimeStampField;
@@ -1514,7 +1514,7 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GetUserFeeds_Result", Namespace="http://schemas.datacontract.org/2004/07/ABBJSONService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetUserFeeds_Result", Namespace="http://schemas.datacontract.org/2004/07/DAL")]
     public partial class GetUserFeeds_Result : object, System.ComponentModel.INotifyPropertyChanged {
         
         private System.DateTime CreationTimeStampField;
@@ -1679,7 +1679,7 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GetUserFeedsByFilter_Result", Namespace="http://schemas.datacontract.org/2004/07/ABBJSONService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetUserFeedsByFilter_Result", Namespace="http://schemas.datacontract.org/2004/07/DAL")]
     public partial class GetUserFeedsByFilter_Result : object, System.ComponentModel.INotifyPropertyChanged {
         
         private System.DateTime CreationTimeStampField;
@@ -1844,7 +1844,7 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GetSensorInformation_Result", Namespace="http://schemas.datacontract.org/2004/07/ABBJSONService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetSensorInformation_Result", Namespace="http://schemas.datacontract.org/2004/07/DAL")]
     public partial class GetSensorInformation_Result : object, System.ComponentModel.INotifyPropertyChanged {
         
         private int IdField;
@@ -1934,7 +1934,7 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GetHistoricalDataFromSensor_Result", Namespace="http://schemas.datacontract.org/2004/07/ABBJSONService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetHistoricalDataFromSensor_Result", Namespace="http://schemas.datacontract.org/2004/07/DAL")]
     public partial class GetHistoricalDataFromSensor_Result : object, System.ComponentModel.INotifyPropertyChanged {
         
         private System.Nullable<System.DateTime> CreationTimeStampField;
@@ -1979,7 +1979,7 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GetLatestFeedsByFilter_Result", Namespace="http://schemas.datacontract.org/2004/07/ABBJSONService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetLatestFeedsByFilter_Result", Namespace="http://schemas.datacontract.org/2004/07/DAL")]
     public partial class GetLatestFeedsByFilter_Result : object, System.ComponentModel.INotifyPropertyChanged {
         
         private System.DateTime CreationTimeStampField;
@@ -2144,7 +2144,7 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GetFeedsByFilter_Result", Namespace="http://schemas.datacontract.org/2004/07/ABBJSONService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetFeedsByFilter_Result", Namespace="http://schemas.datacontract.org/2004/07/DAL")]
     public partial class GetFeedsByFilter_Result : object, System.ComponentModel.INotifyPropertyChanged {
         
         private System.DateTime CreationTimeStampField;
@@ -2309,7 +2309,172 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GetUserSavedFilters_Result", Namespace="http://schemas.datacontract.org/2004/07/ABBJSONService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetLatestXFeeds_Result", Namespace="http://schemas.datacontract.org/2004/07/DAL")]
+    public partial class GetLatestXFeeds_Result1 : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private System.DateTime CreationTimeStampField;
+        
+        private int FeedIdField;
+        
+        private string FilePathField;
+        
+        private string LocationField;
+        
+        private string PrioCategoryField;
+        
+        private int PrioValueField;
+        
+        private string TextField;
+        
+        private string TypeField;
+        
+        private int UserIdField;
+        
+        private string UsernameField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreationTimeStamp {
+            get {
+                return this.CreationTimeStampField;
+            }
+            set {
+                if ((this.CreationTimeStampField.Equals(value) != true)) {
+                    this.CreationTimeStampField = value;
+                    this.RaisePropertyChanged("CreationTimeStamp");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int FeedId {
+            get {
+                return this.FeedIdField;
+            }
+            set {
+                if ((this.FeedIdField.Equals(value) != true)) {
+                    this.FeedIdField = value;
+                    this.RaisePropertyChanged("FeedId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FilePath {
+            get {
+                return this.FilePathField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FilePathField, value) != true)) {
+                    this.FilePathField = value;
+                    this.RaisePropertyChanged("FilePath");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Location {
+            get {
+                return this.LocationField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LocationField, value) != true)) {
+                    this.LocationField = value;
+                    this.RaisePropertyChanged("Location");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PrioCategory {
+            get {
+                return this.PrioCategoryField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PrioCategoryField, value) != true)) {
+                    this.PrioCategoryField = value;
+                    this.RaisePropertyChanged("PrioCategory");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int PrioValue {
+            get {
+                return this.PrioValueField;
+            }
+            set {
+                if ((this.PrioValueField.Equals(value) != true)) {
+                    this.PrioValueField = value;
+                    this.RaisePropertyChanged("PrioValue");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Text {
+            get {
+                return this.TextField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TextField, value) != true)) {
+                    this.TextField = value;
+                    this.RaisePropertyChanged("Text");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Type {
+            get {
+                return this.TypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TypeField, value) != true)) {
+                    this.TypeField = value;
+                    this.RaisePropertyChanged("Type");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int UserId {
+            get {
+                return this.UserIdField;
+            }
+            set {
+                if ((this.UserIdField.Equals(value) != true)) {
+                    this.UserIdField = value;
+                    this.RaisePropertyChanged("UserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Username {
+            get {
+                return this.UsernameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UsernameField, value) != true)) {
+                    this.UsernameField = value;
+                    this.RaisePropertyChanged("Username");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetUserSavedFilters_Result", Namespace="http://schemas.datacontract.org/2004/07/DAL")]
     public partial class GetUserSavedFilters_Result : object, System.ComponentModel.INotifyPropertyChanged {
         
         private System.Nullable<System.DateTime> EndDateField;
@@ -2429,7 +2594,7 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GetUsersByName_Result", Namespace="http://schemas.datacontract.org/2004/07/ABBJSONService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetUsersByName_Result", Namespace="http://schemas.datacontract.org/2004/07/DAL")]
     public partial class GetUsersByName_Result : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string FirstNameField;
@@ -2519,7 +2684,7 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GetUserSavedFiltersTagedUsers_Result", Namespace="http://schemas.datacontract.org/2004/07/ABBJSONService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetUserSavedFiltersTagedUsers_Result", Namespace="http://schemas.datacontract.org/2004/07/DAL")]
     public partial class GetUserSavedFiltersTagedUsers_Result : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string FirstNameField;
@@ -2594,7 +2759,7 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GetUserActivity_Result", Namespace="http://schemas.datacontract.org/2004/07/ABBJSONService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetUserActivity_Result", Namespace="http://schemas.datacontract.org/2004/07/DAL")]
     public partial class GetUserActivity_Result : object, System.ComponentModel.INotifyPropertyChanged {
         
         private int FeedIdField;
@@ -2726,8 +2891,13 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
         
         PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeedsFromId_Result[] EndGetLatestXFeedsFromId(System.IAsyncResult result);
         
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IABBConnectWCF/PostTestFeed", ReplyAction="http://tempuri.org/IABBConnectWCF/PostTestFeedResponse")]
+        System.IAsyncResult BeginPostTestFeed(string id, string text, string filepath, string prioId, System.AsyncCallback callback, object asyncState);
+        
+        int EndPostTestFeed(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IABBConnectWCF/PostFeed", ReplyAction="http://tempuri.org/IABBConnectWCF/PostFeedResponse")]
-        System.IAsyncResult BeginPostFeed(string id, string text, string filepath, string prioId, System.AsyncCallback callback, object asyncState);
+        System.IAsyncResult BeginPostFeed(string id, string text, string prioId, string filepath, System.AsyncCallback callback, object asyncState);
         
         int EndPostFeed(System.IAsyncResult result);
         
@@ -2742,7 +2912,7 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
         PortableTransformationLayer.ABBConnectServiceRef.GetAllSensors_Result[] EndGetAllSensors(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IABBConnectWCF/GetFeedComments", ReplyAction="http://tempuri.org/IABBConnectWCF/GetFeedCommentsResponse")]
-        System.IAsyncResult BeginGetFeedComments(string feedId, System.AsyncCallback callback, object asyncState);
+        System.IAsyncResult BeginGetFeedComments(string feedId, string randomGuid, System.AsyncCallback callback, object asyncState);
         
         PortableTransformationLayer.ABBConnectServiceRef.GetFeedComments_Result[] EndGetFeedComments(System.IAsyncResult result);
         
@@ -2827,9 +2997,9 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
         PortableTransformationLayer.ABBConnectServiceRef.GetFeedsByFilter_Result[] EndGetFeedsByFilter(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IABBConnectWCF/GetXFeedsByFilter", ReplyAction="http://tempuri.org/IABBConnectWCF/GetXFeedsByFilterResponse")]
-        System.IAsyncResult BeginGetXFeedsByFilter(string id, string location, string startingTime, string endingTime, string feedType, string startId, string numFeeds, System.AsyncCallback callback, object asyncState);
+        System.IAsyncResult BeginGetXFeedsByFilter(string id, string location, string startingTime, string endingTime, string feedType, string startId, string numFeeds, string randomGuid, System.AsyncCallback callback, object asyncState);
         
-        PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result[] EndGetXFeedsByFilter(System.IAsyncResult result);
+        PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result1[] EndGetXFeedsByFilter(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IABBConnectWCF/SaveFilter", ReplyAction="http://tempuri.org/IABBConnectWCF/SaveFilterResponse")]
         System.IAsyncResult BeginSaveFilter(string userId, string filterName, string startingTime, string endingTime, string location, string feedType, System.AsyncCallback callback, object asyncState);
@@ -2872,9 +3042,9 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
         int[] EndGetFollowedSensors(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IABBConnectWCF/GetFeedByFeedId", ReplyAction="http://tempuri.org/IABBConnectWCF/GetFeedByFeedIdResponse")]
-        System.IAsyncResult BeginGetFeedByFeedId(string feedId, System.AsyncCallback callback, object asyncState);
+        System.IAsyncResult BeginGetFeedByFeedId(string feedId, string randomGuid, System.AsyncCallback callback, object asyncState);
         
-        PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result EndGetFeedByFeedId(System.IAsyncResult result);
+        PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result1 EndGetFeedByFeedId(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2972,6 +3142,25 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
             get {
                 base.RaiseExceptionIfNecessary();
                 return ((PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeedsFromId_Result[])(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class PostTestFeedCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public PostTestFeedCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public int Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
             }
         }
     }
@@ -3367,10 +3556,10 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
             this.results = results;
         }
         
-        public PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result[] Result {
+        public PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result1[] Result {
             get {
                 base.RaiseExceptionIfNecessary();
-                return ((PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result[])(this.results[0]));
+                return ((PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result1[])(this.results[0]));
             }
         }
     }
@@ -3538,10 +3727,10 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
             this.results = results;
         }
         
-        public PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result Result {
+        public PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result1 Result {
             get {
                 base.RaiseExceptionIfNecessary();
-                return ((PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result)(this.results[0]));
+                return ((PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result1)(this.results[0]));
             }
         }
     }
@@ -3579,6 +3768,12 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
         private EndOperationDelegate onEndGetLatestXFeedsFromIdDelegate;
         
         private System.Threading.SendOrPostCallback onGetLatestXFeedsFromIdCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginPostTestFeedDelegate;
+        
+        private EndOperationDelegate onEndPostTestFeedDelegate;
+        
+        private System.Threading.SendOrPostCallback onPostTestFeedCompletedDelegate;
         
         private BeginOperationDelegate onBeginPostFeedDelegate;
         
@@ -3819,6 +4014,8 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
         public event System.EventHandler<GetLatestXFeedsCompletedEventArgs> GetLatestXFeedsCompleted;
         
         public event System.EventHandler<GetLatestXFeedsFromIdCompletedEventArgs> GetLatestXFeedsFromIdCompleted;
+        
+        public event System.EventHandler<PostTestFeedCompletedEventArgs> PostTestFeedCompleted;
         
         public event System.EventHandler<PostFeedCompletedEventArgs> PostFeedCompleted;
         
@@ -4119,8 +4316,60 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF.BeginPostFeed(string id, string text, string filepath, string prioId, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginPostFeed(id, text, filepath, prioId, callback, asyncState);
+        System.IAsyncResult PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF.BeginPostTestFeed(string id, string text, string filepath, string prioId, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginPostTestFeed(id, text, filepath, prioId, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        int PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF.EndPostTestFeed(System.IAsyncResult result) {
+            return base.Channel.EndPostTestFeed(result);
+        }
+        
+        private System.IAsyncResult OnBeginPostTestFeed(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string id = ((string)(inValues[0]));
+            string text = ((string)(inValues[1]));
+            string filepath = ((string)(inValues[2]));
+            string prioId = ((string)(inValues[3]));
+            return ((PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF)(this)).BeginPostTestFeed(id, text, filepath, prioId, callback, asyncState);
+        }
+        
+        private object[] OnEndPostTestFeed(System.IAsyncResult result) {
+            int retVal = ((PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF)(this)).EndPostTestFeed(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnPostTestFeedCompleted(object state) {
+            if ((this.PostTestFeedCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.PostTestFeedCompleted(this, new PostTestFeedCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void PostTestFeedAsync(string id, string text, string filepath, string prioId) {
+            this.PostTestFeedAsync(id, text, filepath, prioId, null);
+        }
+        
+        public void PostTestFeedAsync(string id, string text, string filepath, string prioId, object userState) {
+            if ((this.onBeginPostTestFeedDelegate == null)) {
+                this.onBeginPostTestFeedDelegate = new BeginOperationDelegate(this.OnBeginPostTestFeed);
+            }
+            if ((this.onEndPostTestFeedDelegate == null)) {
+                this.onEndPostTestFeedDelegate = new EndOperationDelegate(this.OnEndPostTestFeed);
+            }
+            if ((this.onPostTestFeedCompletedDelegate == null)) {
+                this.onPostTestFeedCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnPostTestFeedCompleted);
+            }
+            base.InvokeAsync(this.onBeginPostTestFeedDelegate, new object[] {
+                        id,
+                        text,
+                        filepath,
+                        prioId}, this.onEndPostTestFeedDelegate, this.onPostTestFeedCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF.BeginPostFeed(string id, string text, string prioId, string filepath, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginPostFeed(id, text, prioId, filepath, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -4131,9 +4380,9 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
         private System.IAsyncResult OnBeginPostFeed(object[] inValues, System.AsyncCallback callback, object asyncState) {
             string id = ((string)(inValues[0]));
             string text = ((string)(inValues[1]));
-            string filepath = ((string)(inValues[2]));
-            string prioId = ((string)(inValues[3]));
-            return ((PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF)(this)).BeginPostFeed(id, text, filepath, prioId, callback, asyncState);
+            string prioId = ((string)(inValues[2]));
+            string filepath = ((string)(inValues[3]));
+            return ((PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF)(this)).BeginPostFeed(id, text, prioId, filepath, callback, asyncState);
         }
         
         private object[] OnEndPostFeed(System.IAsyncResult result) {
@@ -4149,11 +4398,11 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
             }
         }
         
-        public void PostFeedAsync(string id, string text, string filepath, string prioId) {
-            this.PostFeedAsync(id, text, filepath, prioId, null);
+        public void PostFeedAsync(string id, string text, string prioId, string filepath) {
+            this.PostFeedAsync(id, text, prioId, filepath, null);
         }
         
-        public void PostFeedAsync(string id, string text, string filepath, string prioId, object userState) {
+        public void PostFeedAsync(string id, string text, string prioId, string filepath, object userState) {
             if ((this.onBeginPostFeedDelegate == null)) {
                 this.onBeginPostFeedDelegate = new BeginOperationDelegate(this.OnBeginPostFeed);
             }
@@ -4166,8 +4415,8 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
             base.InvokeAsync(this.onBeginPostFeedDelegate, new object[] {
                         id,
                         text,
-                        filepath,
-                        prioId}, this.onEndPostFeedDelegate, this.onPostFeedCompletedDelegate, userState);
+                        prioId,
+                        filepath}, this.onEndPostFeedDelegate, this.onPostFeedCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -4259,8 +4508,8 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF.BeginGetFeedComments(string feedId, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginGetFeedComments(feedId, callback, asyncState);
+        System.IAsyncResult PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF.BeginGetFeedComments(string feedId, string randomGuid, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetFeedComments(feedId, randomGuid, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -4270,7 +4519,8 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
         
         private System.IAsyncResult OnBeginGetFeedComments(object[] inValues, System.AsyncCallback callback, object asyncState) {
             string feedId = ((string)(inValues[0]));
-            return ((PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF)(this)).BeginGetFeedComments(feedId, callback, asyncState);
+            string randomGuid = ((string)(inValues[1]));
+            return ((PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF)(this)).BeginGetFeedComments(feedId, randomGuid, callback, asyncState);
         }
         
         private object[] OnEndGetFeedComments(System.IAsyncResult result) {
@@ -4286,11 +4536,11 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
             }
         }
         
-        public void GetFeedCommentsAsync(string feedId) {
-            this.GetFeedCommentsAsync(feedId, null);
+        public void GetFeedCommentsAsync(string feedId, string randomGuid) {
+            this.GetFeedCommentsAsync(feedId, randomGuid, null);
         }
         
-        public void GetFeedCommentsAsync(string feedId, object userState) {
+        public void GetFeedCommentsAsync(string feedId, string randomGuid, object userState) {
             if ((this.onBeginGetFeedCommentsDelegate == null)) {
                 this.onBeginGetFeedCommentsDelegate = new BeginOperationDelegate(this.OnBeginGetFeedComments);
             }
@@ -4301,7 +4551,8 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
                 this.onGetFeedCommentsCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetFeedCommentsCompleted);
             }
             base.InvokeAsync(this.onBeginGetFeedCommentsDelegate, new object[] {
-                        feedId}, this.onEndGetFeedCommentsDelegate, this.onGetFeedCommentsCompletedDelegate, userState);
+                        feedId,
+                        randomGuid}, this.onEndGetFeedCommentsDelegate, this.onGetFeedCommentsCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -5069,12 +5320,12 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF.BeginGetXFeedsByFilter(string id, string location, string startingTime, string endingTime, string feedType, string startId, string numFeeds, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginGetXFeedsByFilter(id, location, startingTime, endingTime, feedType, startId, numFeeds, callback, asyncState);
+        System.IAsyncResult PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF.BeginGetXFeedsByFilter(string id, string location, string startingTime, string endingTime, string feedType, string startId, string numFeeds, string randomGuid, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetXFeedsByFilter(id, location, startingTime, endingTime, feedType, startId, numFeeds, randomGuid, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result[] PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF.EndGetXFeedsByFilter(System.IAsyncResult result) {
+        PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result1[] PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF.EndGetXFeedsByFilter(System.IAsyncResult result) {
             return base.Channel.EndGetXFeedsByFilter(result);
         }
         
@@ -5086,11 +5337,12 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
             string feedType = ((string)(inValues[4]));
             string startId = ((string)(inValues[5]));
             string numFeeds = ((string)(inValues[6]));
-            return ((PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF)(this)).BeginGetXFeedsByFilter(id, location, startingTime, endingTime, feedType, startId, numFeeds, callback, asyncState);
+            string randomGuid = ((string)(inValues[7]));
+            return ((PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF)(this)).BeginGetXFeedsByFilter(id, location, startingTime, endingTime, feedType, startId, numFeeds, randomGuid, callback, asyncState);
         }
         
         private object[] OnEndGetXFeedsByFilter(System.IAsyncResult result) {
-            PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result[] retVal = ((PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF)(this)).EndGetXFeedsByFilter(result);
+            PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result1[] retVal = ((PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF)(this)).EndGetXFeedsByFilter(result);
             return new object[] {
                     retVal};
         }
@@ -5102,11 +5354,11 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
             }
         }
         
-        public void GetXFeedsByFilterAsync(string id, string location, string startingTime, string endingTime, string feedType, string startId, string numFeeds) {
-            this.GetXFeedsByFilterAsync(id, location, startingTime, endingTime, feedType, startId, numFeeds, null);
+        public void GetXFeedsByFilterAsync(string id, string location, string startingTime, string endingTime, string feedType, string startId, string numFeeds, string randomGuid) {
+            this.GetXFeedsByFilterAsync(id, location, startingTime, endingTime, feedType, startId, numFeeds, randomGuid, null);
         }
         
-        public void GetXFeedsByFilterAsync(string id, string location, string startingTime, string endingTime, string feedType, string startId, string numFeeds, object userState) {
+        public void GetXFeedsByFilterAsync(string id, string location, string startingTime, string endingTime, string feedType, string startId, string numFeeds, string randomGuid, object userState) {
             if ((this.onBeginGetXFeedsByFilterDelegate == null)) {
                 this.onBeginGetXFeedsByFilterDelegate = new BeginOperationDelegate(this.OnBeginGetXFeedsByFilter);
             }
@@ -5123,7 +5375,8 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
                         endingTime,
                         feedType,
                         startId,
-                        numFeeds}, this.onEndGetXFeedsByFilterDelegate, this.onGetXFeedsByFilterCompletedDelegate, userState);
+                        numFeeds,
+                        randomGuid}, this.onEndGetXFeedsByFilterDelegate, this.onGetXFeedsByFilterCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -5509,22 +5762,23 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF.BeginGetFeedByFeedId(string feedId, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginGetFeedByFeedId(feedId, callback, asyncState);
+        System.IAsyncResult PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF.BeginGetFeedByFeedId(string feedId, string randomGuid, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetFeedByFeedId(feedId, randomGuid, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF.EndGetFeedByFeedId(System.IAsyncResult result) {
+        PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result1 PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF.EndGetFeedByFeedId(System.IAsyncResult result) {
             return base.Channel.EndGetFeedByFeedId(result);
         }
         
         private System.IAsyncResult OnBeginGetFeedByFeedId(object[] inValues, System.AsyncCallback callback, object asyncState) {
             string feedId = ((string)(inValues[0]));
-            return ((PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF)(this)).BeginGetFeedByFeedId(feedId, callback, asyncState);
+            string randomGuid = ((string)(inValues[1]));
+            return ((PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF)(this)).BeginGetFeedByFeedId(feedId, randomGuid, callback, asyncState);
         }
         
         private object[] OnEndGetFeedByFeedId(System.IAsyncResult result) {
-            PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result retVal = ((PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF)(this)).EndGetFeedByFeedId(result);
+            PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result1 retVal = ((PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF)(this)).EndGetFeedByFeedId(result);
             return new object[] {
                     retVal};
         }
@@ -5536,11 +5790,11 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
             }
         }
         
-        public void GetFeedByFeedIdAsync(string feedId) {
-            this.GetFeedByFeedIdAsync(feedId, null);
+        public void GetFeedByFeedIdAsync(string feedId, string randomGuid) {
+            this.GetFeedByFeedIdAsync(feedId, randomGuid, null);
         }
         
-        public void GetFeedByFeedIdAsync(string feedId, object userState) {
+        public void GetFeedByFeedIdAsync(string feedId, string randomGuid, object userState) {
             if ((this.onBeginGetFeedByFeedIdDelegate == null)) {
                 this.onBeginGetFeedByFeedIdDelegate = new BeginOperationDelegate(this.OnBeginGetFeedByFeedId);
             }
@@ -5551,7 +5805,8 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
                 this.onGetFeedByFeedIdCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetFeedByFeedIdCompleted);
             }
             base.InvokeAsync(this.onBeginGetFeedByFeedIdDelegate, new object[] {
-                        feedId}, this.onEndGetFeedByFeedIdDelegate, this.onGetFeedByFeedIdCompletedDelegate, userState);
+                        feedId,
+                        randomGuid}, this.onEndGetFeedByFeedIdDelegate, this.onGetFeedByFeedIdCompletedDelegate, userState);
         }
         
         private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState) {
@@ -5705,12 +5960,28 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
                 return _result;
             }
             
-            public System.IAsyncResult BeginPostFeed(string id, string text, string filepath, string prioId, System.AsyncCallback callback, object asyncState) {
+            public System.IAsyncResult BeginPostTestFeed(string id, string text, string filepath, string prioId, System.AsyncCallback callback, object asyncState) {
                 object[] _args = new object[4];
                 _args[0] = id;
                 _args[1] = text;
                 _args[2] = filepath;
                 _args[3] = prioId;
+                System.IAsyncResult _result = base.BeginInvoke("PostTestFeed", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public int EndPostTestFeed(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                int _result = ((int)(base.EndInvoke("PostTestFeed", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginPostFeed(string id, string text, string prioId, string filepath, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[4];
+                _args[0] = id;
+                _args[1] = text;
+                _args[2] = prioId;
+                _args[3] = filepath;
                 System.IAsyncResult _result = base.BeginInvoke("PostFeed", _args, callback, asyncState);
                 return _result;
             }
@@ -5745,9 +6016,10 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
                 return _result;
             }
             
-            public System.IAsyncResult BeginGetFeedComments(string feedId, System.AsyncCallback callback, object asyncState) {
-                object[] _args = new object[1];
+            public System.IAsyncResult BeginGetFeedComments(string feedId, string randomGuid, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[2];
                 _args[0] = feedId;
+                _args[1] = randomGuid;
                 System.IAsyncResult _result = base.BeginInvoke("GetFeedComments", _args, callback, asyncState);
                 return _result;
             }
@@ -5980,8 +6252,8 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
                 return _result;
             }
             
-            public System.IAsyncResult BeginGetXFeedsByFilter(string id, string location, string startingTime, string endingTime, string feedType, string startId, string numFeeds, System.AsyncCallback callback, object asyncState) {
-                object[] _args = new object[7];
+            public System.IAsyncResult BeginGetXFeedsByFilter(string id, string location, string startingTime, string endingTime, string feedType, string startId, string numFeeds, string randomGuid, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[8];
                 _args[0] = id;
                 _args[1] = location;
                 _args[2] = startingTime;
@@ -5989,13 +6261,14 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
                 _args[4] = feedType;
                 _args[5] = startId;
                 _args[6] = numFeeds;
+                _args[7] = randomGuid;
                 System.IAsyncResult _result = base.BeginInvoke("GetXFeedsByFilter", _args, callback, asyncState);
                 return _result;
             }
             
-            public PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result[] EndGetXFeedsByFilter(System.IAsyncResult result) {
+            public PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result1[] EndGetXFeedsByFilter(System.IAsyncResult result) {
                 object[] _args = new object[0];
-                PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result[] _result = ((PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result[])(base.EndInvoke("GetXFeedsByFilter", _args, result)));
+                PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result1[] _result = ((PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result1[])(base.EndInvoke("GetXFeedsByFilter", _args, result)));
                 return _result;
             }
             
@@ -6110,16 +6383,17 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
                 return _result;
             }
             
-            public System.IAsyncResult BeginGetFeedByFeedId(string feedId, System.AsyncCallback callback, object asyncState) {
-                object[] _args = new object[1];
+            public System.IAsyncResult BeginGetFeedByFeedId(string feedId, string randomGuid, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[2];
                 _args[0] = feedId;
+                _args[1] = randomGuid;
                 System.IAsyncResult _result = base.BeginInvoke("GetFeedByFeedId", _args, callback, asyncState);
                 return _result;
             }
             
-            public PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result EndGetFeedByFeedId(System.IAsyncResult result) {
+            public PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result1 EndGetFeedByFeedId(System.IAsyncResult result) {
                 object[] _args = new object[0];
-                PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result _result = ((PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result)(base.EndInvoke("GetFeedByFeedId", _args, result)));
+                PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result1 _result = ((PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result1)(base.EndInvoke("GetFeedByFeedId", _args, result)));
                 return _result;
             }
         }

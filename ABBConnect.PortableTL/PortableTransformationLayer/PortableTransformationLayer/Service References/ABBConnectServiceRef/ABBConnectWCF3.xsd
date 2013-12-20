@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/ABBJSONService" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ABBJSONService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/DAL" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DAL" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:complexType name="GetHumanInformation_Result">
     <xs:sequence>
       <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
@@ -23,48 +23,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="GetHumanInformationByUsername_Result" nillable="true" type="tns:GetHumanInformationByUsername_Result" />
-  <xs:complexType name="ArrayOfGetLatestXFeeds_Result">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="GetLatestXFeeds_Result" nillable="true" type="tns:GetLatestXFeeds_Result" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfGetLatestXFeeds_Result" nillable="true" type="tns:ArrayOfGetLatestXFeeds_Result" />
-  <xs:complexType name="GetLatestXFeeds_Result">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="CreationTimeStamp" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="FeedId" type="xs:int" />
-      <xs:element minOccurs="0" name="FilePath" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Location" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="PrioCategory" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="PrioValue" type="xs:int" />
-      <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="UserId" type="xs:int" />
-      <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="GetLatestXFeeds_Result" nillable="true" type="tns:GetLatestXFeeds_Result" />
-  <xs:complexType name="ArrayOfGetLatestXFeedsFromId_Result">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="GetLatestXFeedsFromId_Result" nillable="true" type="tns:GetLatestXFeedsFromId_Result" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfGetLatestXFeedsFromId_Result" nillable="true" type="tns:ArrayOfGetLatestXFeedsFromId_Result" />
-  <xs:complexType name="GetLatestXFeedsFromId_Result">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="CreationTimeStamp" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="FeedId" type="xs:int" />
-      <xs:element minOccurs="0" name="FilePath" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Location" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="PrioCategory" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="PrioValue" type="xs:int" />
-      <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="UserId" type="xs:int" />
-      <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="GetLatestXFeedsFromId_Result" nillable="true" type="tns:GetLatestXFeedsFromId_Result" />
   <xs:complexType name="ArrayOfGetPriorityCategories_Result">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="GetPriorityCategories_Result" nillable="true" type="tns:GetPriorityCategories_Result" />
@@ -315,6 +273,27 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="GetFeedsByFilter_Result" nillable="true" type="tns:GetFeedsByFilter_Result" />
+  <xs:complexType name="ArrayOfGetLatestXFeeds_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="GetLatestXFeeds_Result" nillable="true" type="tns:GetLatestXFeeds_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfGetLatestXFeeds_Result" nillable="true" type="tns:ArrayOfGetLatestXFeeds_Result" />
+  <xs:complexType name="GetLatestXFeeds_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreationTimeStamp" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FeedId" type="xs:int" />
+      <xs:element minOccurs="0" name="FilePath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Location" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PrioCategory" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PrioValue" type="xs:int" />
+      <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserId" type="xs:int" />
+      <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetLatestXFeeds_Result" nillable="true" type="tns:GetLatestXFeeds_Result" />
   <xs:complexType name="ArrayOfGetUserSavedFilters_Result">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="GetUserSavedFilters_Result" nillable="true" type="tns:GetUserSavedFilters_Result" />
