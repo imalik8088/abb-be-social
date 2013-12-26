@@ -22,19 +22,19 @@
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
-                                <li >
+                                <li>
                                     <a href="#" data-stop-propagation="true">
-                                        <input type="checkbox" class="messagetype" data-label="Work post" />
+                                        <input id="chbWorkPost" type="checkbox" class="messagetype" data-label="Work post" />
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#" data-stop-propagation="true">
-                                        <input type="checkbox" class="messagetype" data-label="Sticky note" />
+                                        <input id="chbStickyNote" type="checkbox" class="messagetype" data-label="Sticky note" />
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#" data-stop-propagation="true">
-                                        <input type="checkbox" class="messagetype" data-label="Vacation post" />
+                                        <input id="chbVacationPost" type="checkbox" class="messagetype" data-label="Vacation post" />
                                     </a>
                                 </li>
                                 <li class="divider"></li>

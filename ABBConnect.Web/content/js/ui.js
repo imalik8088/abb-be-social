@@ -61,6 +61,8 @@ function AjaxLoadMoreRealTimeSensorFeeds(lastLoadedFeedId) {
         ajaxFeedFilter.location = $('#realTimeSensorFeedsFilterLocation').val();
     }
 
+    //TODO add filter check for human post types
+
     $("#loading_throbber_real_time_sensor_feeds").show();
     PageMethods.AjaxLoadMoreRealTimeSensorFeeds(lastLoadedFeedId, ajaxFeedFilter, AjaxLoadMoreRealTimeSensorsFeedsSuccess);
 }
@@ -168,6 +170,7 @@ function AjaxDisplayNewPublishedHumanFeedSuccess(result, userContext, methodName
 }
 
 function SaveHumanFeedsFilterData(refreshData) {
+    //TODO Fix filtering after disable
     if ($('#chbHumanFeedsFilterStartDate').is(':checked') == true) {
         $('#humanFeedsFilterStartDateIsChecked').val('true')
         var startDate = $('#datepickerStart input').datepicker('getUTCDate');
@@ -179,21 +182,32 @@ function SaveHumanFeedsFilterData(refreshData) {
         $('#humanFeedsFilterEndDateValue').val(endDate);
     }
 
+    //display active if the date filter is active
     if ($('#chbHumanFeedsFilterStartDate').is(':checked') == true ||
-        $('#chbHumanFeedsFilterEndDate').is(':checked') == true) {
+    $('#chbHumanFeedsFilterEndDate').is(':checked') == true)
         $('#humanFeedsDateFilterIsActive').fadeIn();
+    else
+        $('#humanFeedsDateFilterIsActive').hide();
+
+    //check if any checkbox is selected. if so, then highlight the selector buttons
+    if ($('#chbHumanFeedsFilterStartDate').is(':checked') == true ||
+        $('#chbHumanFeedsFilterEndDate').is(':checked') == true ||
+        $('#chbWorkPost').is(':checked') == true ||
+        $('#chbStickyNote').is(':checked') == true ||
+        $('#chbVacationPost').is(':checked') == true) {
+
         $('#human-feed-filter-selector-left').addClass("btn-success");
         $('#human-feed-filter-selector-left').removeClass("btn-info");
         $('#human-feed-filter-selector-right').addClass("btn-success");
         $('#human-feed-filter-selector-right').removeClass("btn-info");
     }
     else {
-        $('#humanFeedsDateFilterIsActive').hide();
         $('#human-feed-filter-selector-left').addClass("btn-info");
         $('#human-feed-filter-selector-left').removeClass("btn-success");
         $('#human-feed-filter-selector-right').addClass("btn-info");
         $('#human-feed-filter-selector-right').removeClass("btn-success");
     }
+
 
     //Clear HumanFeedsData
     if (refreshData == 1) {
@@ -276,7 +290,6 @@ function OnAjaxGetAvailableUsersToTagSuccess(result, userContext, methodName) {
     var selectizePicture = $selectPicture[0].selectize;
 
     //delegates for modals, so we can clear the data between the hides.
-    //at the moment, it has to be like this, i couldn't make it work with removeData
     $(document).delegate('#modalNote', 'hide.bs.modal', function (event) {
 
         $('#selectModalNoteMessage').html($('#selectModalNoteMessage').html());
@@ -341,6 +354,35 @@ function initUI() {
         }
     });
 
+    //3s wait until the filter is applied when checking boxes
+    //this will be used to invoke a delay, so nothing bugs out when clicking rapidly
+    var timeout = 3000;
+    var awaitingRefresh = false;
+
+    //whenever a checkbox is checked or unchecked, refresh the data
+    $('#chbWorkPost').change(function () {
+        reserveRefreshOfFilteredData();
+    });
+
+    $('#chbStickyNote').change(function () {
+        reserveRefreshOfFilteredData();
+    });
+
+    $('#chbVacationPost').change(function () {
+        reserveRefreshOfFilteredData();
+    });
+
+    function reserveRefreshOfFilteredData() {
+        if (!awaitingRefresh) {
+            awaitingRefresh = true;
+            setTimeout(delayedSaveHumanFeedsFilterData, timeout);
+        }
+    }
+
+    function delayedSaveHumanFeedsFilterData() {
+        SaveHumanFeedsFilterData(1);
+        awaitingRefresh = false;
+    }
 }
 
 function OnClickSignOut() {
