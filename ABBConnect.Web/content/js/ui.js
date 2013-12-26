@@ -167,36 +167,6 @@ function AjaxDisplayNewPublishedHumanFeedSuccess(result, userContext, methodName
     $('#feedsContainer').prepend(feedsRawData);
 }
 
-function PopulateSelectBoxPostType() {
-    PageMethods.AjaxGetPostTypes(OnPopulateSelectBoxPostType);
-}
-function OnPopulateSelectBoxPostType(result, userContext, methodName) {
-    //there are two attributes for each result item: CategoryName and Id
-    var typeArray = JSON.parse(result);
-    var obj = document.getElementById('selectModalNoteMessage');
-
-    //TODO search pattern for splitting strings by capital letters
-    //var stringList = typeArray[0].CategoryName.split(/(?=[A-Z])/);
-
-    for (var i = 0; i < typeArray.length; i++) {
-        opt = document.createElement("option");
-        opt.value = typeArray[i].CategoryName;
-        opt.text = typeArray[i].CategoryName;
-        obj.appendChild(opt);
-    }
-}
-
-function ClearModalBodyListener() {
-    ////delegates for modals, so we can clear the data between the hides.
-    ////at the moment, it has to be like this, i couldn't make it work with removeData
-    //$(document).delegate('#modalNote', 'hide.bs.modal', function (event) {
-    //    $(this).html($(this).html());
-    //});
-
-    //$(document).delegate('#modalPicture', 'hidden.bs.modal', function (event) {
-    //    $(this).html($(this).html());
-    //});
-}
 function SaveHumanFeedsFilterData(refreshData) {
     if ($('#chbHumanFeedsFilterStartDate').is(':checked') == true) {
         $('#humanFeedsFilterStartDateIsChecked').val('true')
@@ -325,6 +295,15 @@ function OnAjaxGetAvailableUsersToTagSuccess(result, userContext, methodName) {
 
 function initUI() {
     $('.dropdown-toggle').dropdown();
+
+    //stop propagation on dropdown menu for the filters, so we can select multiple checkboxes
+    //this enables the data-stop-propagation html attribute, so we can use it anywhere clickable
+    $(function () {
+        $("ul.dropdown-menu").on("click", "[data-stop-propagation]", function (e) {
+            e.stopPropagation();
+        });
+    });
+
     $('#datepickerStart input').datepicker({
         format: "dd.mm.yyyy",
         orientation: "top right",
@@ -336,6 +315,7 @@ function initUI() {
         todayHighlight: true
     });
 
+    //Date selector checkboxes
     $('input[type="checkbox"].bs').checkbox({
         buttonStyle: 'btn-danger',
         buttonStyleChecked: 'btn-success',
@@ -343,6 +323,12 @@ function initUI() {
         uncheckedClass: 'glyphicon glyphicon glyphicon-unchecked'
     });
 
+    //Message type checkboxes - work, vacation, sticky
+    $('input[type="checkbox"].messagetype').checkbox({
+        buttonStyleChecked: 'btn-success',
+        checkedClass: 'glyphicon glyphicon glyphicon-check',
+        uncheckedClass: 'glyphicon glyphicon glyphicon-unchecked'
+    });
 
     //Checkbox changes value
     $('input[type="checkbox"].bs').change(function () {

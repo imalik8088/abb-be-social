@@ -44,6 +44,7 @@ label.bootstrap-checkbox.disabled{
 
 .bootstrap-checkbox > .label-checkbox{
 	padding-left:4px;
+    font-weight:normal
 }
 
 .bootstrap-checkbox.disabled > [class^="label-"],

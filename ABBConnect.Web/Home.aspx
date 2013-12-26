@@ -22,9 +22,21 @@
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Work post </a></li>
-                                <li><a href="#">Sticky note</a></li>
-                                <li><a href="#">Vacation post</a></li>
+                                <li >
+                                    <a href="#" data-stop-propagation="true">
+                                        <input type="checkbox" class="messagetype" data-label="Work post" />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" data-stop-propagation="true">
+                                        <input type="checkbox" class="messagetype" data-label="Sticky note" />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" data-stop-propagation="true">
+                                        <input type="checkbox" class="messagetype" data-label="Vacation post" />
+                                    </a>
+                                </li>
                                 <li class="divider"></li>
                                 <li><a href="#" data-toggle="modal" data-target="#modalHumanFeedsAddDateFilter">Date <span id="humanFeedsDateFilterIsActive" class="label label-success dont-show">ACTIVE</span></a>
                                 </li>
@@ -167,22 +179,9 @@
                         <!-- File upload-->
                         <h5>Upload the file:</h5>
 
-                        <input id="filePicture" type="file"/>
-
-<%--                        <input id="filePicture" type="file" style="display: none" />
-                        <div class="input-append">
-                            <input id="inputPicturePath" class="input-large" type="text" style="width: 85%;" />
-                            <a class="btn" onclick="$('input[id=filePicture]').click();">Browse</a>
-                        </div>--%>
-
-                        <%--<input type='file' class="input-large" id="asd" />--%>
-                        <img id="modalImgFile" src="" hidden="hidden"/>
-                        <%--<div id="base"></div>--%>
-
+                        <input id="filePicture" type="file" />
+                        <img id="modalImgFile" src="" hidden="hidden" />
                         <script type="text/javascript">
-                            //$('input[id=filePicture]').change(function () {
-                            //    $('#inputPicturePath').val($(this).val());
-                            //});
 
                             function readImage(input) {
                                 if (input.files && input.files[0]) {
