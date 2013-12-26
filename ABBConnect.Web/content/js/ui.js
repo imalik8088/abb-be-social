@@ -72,7 +72,13 @@ function AjaxLoadMoreRealTimeSensorsFeedsSuccess(result, userContext, methodName
 
 function AjaxPostFeedComment(feedId) {
     var feedCommentData = $("#feed-post-comment-input-" + feedId).val();
-    PageMethods.AjaxPostFeedComment(feedId, feedCommentData, AjaxPostFeedCommentSuccess);
+
+    //check if it's empty
+    if (feedCommentData) {
+        PageMethods.AjaxPostFeedComment(feedId, feedCommentData, AjaxPostFeedCommentSuccess);
+    }
+    else
+        alert('Error: no comment inserted!');
 
     // Clear input text
     $("#feed-post-comment-input-" + feedId).val('');
@@ -103,7 +109,11 @@ function AjaxPublishHumanFeed() {
     var selectize = $('#input-tags-post-feed')[0].selectize;
     var tagfeedTaggedUsers = selectize.getValue();
 
-    PageMethods.AjaxPublishHumanFeed(feedContentData, feedType, tagfeedTaggedUsers, OnAjaxPublishHumanFeedSuccess);
+    //check if empty
+    if (feedContentData) {
+        PageMethods.AjaxPublishHumanFeed(feedContentData, feedType, tagfeedTaggedUsers, OnAjaxPublishHumanFeedSuccess);
+    } else
+        alert('Error: no message inserted!');
 }
 
 function AjaxPublishHumanPictureFeed() {
@@ -115,7 +125,10 @@ function AjaxPublishHumanPictureFeed() {
 
     var base64picture = $('#modalImgFile').attr('src');
 
-    PageMethods.AjaxPublishHumanPictureFeed(feedContentData, feedType, tagfeedTaggedUsers, base64picture, OnAjaxPublishHumanFeedSuccess);
+    if (feedContentData && base64picture) {
+        PageMethods.AjaxPublishHumanPictureFeed(feedContentData, feedType, tagfeedTaggedUsers, base64picture, OnAjaxPublishHumanFeedSuccess);
+    } else
+        alert('Error: no message or picture inserted!');
 }
 
 function OnAjaxPublishHumanFeedSuccess(result, userContext, methodName) {
