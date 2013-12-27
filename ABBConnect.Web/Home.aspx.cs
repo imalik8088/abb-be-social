@@ -129,6 +129,24 @@ public partial class _Home : System.Web.UI.Page
     }
 
     [System.Web.Services.WebMethod]
+    public static string AjaxGetQueriedUsers(string queriedName)
+    {
+        UserManager um = new UserManager();
+        List<User> approximateUserNames = um.SearchUserByName(queriedName);
+
+        //filter out the humans
+        List<Human> approximateHumans = new List<Human>();
+        //some casting magic from User to Human
+        approximateHumans.AddRange(approximateUserNames.Where(x => x is Human).Cast<Human>());
+
+        JavaScriptSerializer serializer = new JavaScriptSerializer();
+
+        string returnString = serializer.Serialize(approximateHumans);
+
+        return returnString;
+    }
+
+    [System.Web.Services.WebMethod]
     public static bool AjaxPublishHumanFeed(string feedContent,string feedType, string feedTaggedUserIds)
     {
         bool actionResult = false;

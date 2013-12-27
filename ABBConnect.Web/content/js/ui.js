@@ -309,6 +309,8 @@ function OnAjaxGetAvailableUsersToTagSuccess(result, userContext, methodName) {
 function initUI() {
     $('.dropdown-toggle').dropdown();
 
+    selectizeSearchBar();
+
     //stop propagation on dropdown menu for the filters, so we can select multiple checkboxes
     //this enables the data-stop-propagation html attribute, so we can use it anywhere clickable
     $(function () {
@@ -354,6 +356,100 @@ function initUI() {
         }
     });
 
+    setRefreshListeners();
+}
+
+function selectizeSearchBar() {
+    //initialization of the search bar, called once
+    var $select = $('#search-input-bar').selectize({
+        labelField: 'FirstName',
+        valueField: 'UserName',
+        searchField: ['FirstName', 'LastName'],
+        delimiter: ',',
+        create: false,
+        options: [],
+        load: function (query, callback) {
+            if (!query.length) return callback();
+
+            AjaxGetQueriedUsers(query);
+
+            function AjaxGetQueriedUsers(query) {
+                PageMethods.AjaxGetQueriedUsers(query, AjaxGetQueriedUsersSuccess);
+            }
+
+            function AjaxGetQueriedUsersSuccess(result, userContext, methodName) {
+                //the result is an array of User objects
+                var users = JSON.parse(result);
+                callback(users);
+            }
+        },
+        render: {
+            //rendering of the options in the dropdown menu
+            option: function (item, escape) {
+                return '<div>' +
+                    '<span class="humanName">' + escape(item.FirstName) + '</span>' +
+                    '<span class="space"> </span>' +
+                    '<span class="humanSurname">' + escape(item.LastName) + '</span>' +
+                '</div>';
+            },
+            //rendering of selected items
+            item: function (item, escape) {
+                return '<div>' +
+                    '<span class="humanName">' + escape(item.FirstName) + '</span>' +
+                    '<span class="space"> </span>' +
+                    '<span class="humanSurname">' + escape(item.LastName) + '</span>' +
+                '</div>';
+            }
+        },
+        onItemAdd: function (value, $item) {
+            //TODO add redirect to user page
+            alert(value);
+        }
+    });
+
+    setSearchBarCSS();
+}
+
+function setSearchBarCSS() {
+
+    //override the css for the searchbar
+    $("#search-input-container > .selectize-control > .search-container, .search-input").css(
+    {
+        "padding": "inherit",
+        "margin-bottom": "inherit",
+        "border": "inherit",
+        "border-radius": "inherit",
+        //"color": "inherit",
+        "background": "inherit",
+        "width": "370px"
+    });
+
+    $("#search-input-container > .selectize-control > .selectize-input.items").css(
+    {
+        "min-height": "0px",
+        "z-index": "inherit",
+        "display": "inherit",
+        "width": "inherit",
+        "padding": "1px 6px",
+        "overflow": "inherit",
+        "border": "1px solid rgb(81, 81, 81)",
+        "border-radius": "inherit",
+        "box-shadow": "inherit",
+        "-moz-box-sizing": "border-box",
+        "position": "inherit",
+        "background": "none repeat scroll 0% 0% rgb(55, 55, 55)",
+    });
+
+    $("#search-input-container > .selectize-control > .selectize-input.items > *").css(
+    {
+        "font": "12px/20px 'Open Sans',arial,sans-serif",
+        "color": "rgb(196, 196, 196)"
+    });
+
+
+}
+
+function setRefreshListeners() {
     //3s wait until the filter is applied when checking boxes
     //this will be used to invoke a delay, so nothing bugs out when clicking rapidly
     var timeout = 3000;
