@@ -7,6 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BLL;
 using System.Data;
+using System.Web.Script.Serialization;
 
 public partial class UserProfile : System.Web.UI.Page
 {
@@ -97,6 +98,24 @@ public partial class UserProfile : System.Web.UI.Page
         List<Human> approximateUserNames = userManager.GetAllHumanUsers();
 
         return approximateUserNames;
+    }
+
+    [System.Web.Services.WebMethod]
+    public static string AjaxGetQueriedUsers(string queriedName)
+    {
+        UserManager um = new UserManager();
+        List<User> approximateUserNames = um.SearchUserByName(queriedName);
+
+        //filter out the humans
+        List<Human> approximateHumans = new List<Human>();
+        //some casting magic from User to Human
+        approximateHumans.AddRange(approximateUserNames.Where(x => x is Human).Cast<Human>());
+
+        JavaScriptSerializer serializer = new JavaScriptSerializer();
+
+        string returnString = serializer.Serialize(approximateHumans);
+
+        return returnString;
     }
 
     [System.Web.Services.WebMethod]

@@ -1,4 +1,3 @@
-
 // Not the best solution cause every HTML element has ID of parent on itself, but its reliable one.
 function focusOnFeedCommentContainer(feedId) {
     $("#feed-post-comment-input-" + feedId.toString()).focus();
@@ -170,7 +169,6 @@ function AjaxDisplayNewPublishedHumanFeedSuccess(result, userContext, methodName
 }
 
 function SaveHumanFeedsFilterData(refreshData) {
-    //TODO Fix filtering after disable
     if ($('#chbHumanFeedsFilterStartDate').is(':checked') == true) {
         $('#humanFeedsFilterStartDateIsChecked').val('true')
         var startDate = $('#datepickerStart input').datepicker('getUTCDate');
@@ -277,10 +275,31 @@ function OnAjaxGetAvailableUsersToTagSuccess(result, userContext, methodName) {
         disabled: true,
         maxItems: null,
         valueField: 'ID',
-        labelField: 'UserName',
-        searchField: 'UserName',
+        searchField: ['FirstName', 'LastName', 'UserName'],
         options: availableUsers,
-        create: false
+        create: false,
+        render: {
+            //rendering of the options in the dropdown menu
+            option: function (item, escape) {
+                return '<div>' +
+                    '<span class="humanName">' + escape(item.FirstName) + '</span>' +
+                    '<span class="space"> </span>' +
+                    '<span class="humanSurname">' + escape(item.LastName) + '</span>' +
+                    '<span class="space"> </span>' +
+                    '<span class="humanUserName">  (' + item.UserName + ')</span>' +
+                '</div>';
+            },
+            //rendering of selected items
+            item: function (item, escape) {
+                return '<div>' +
+                    '<span class="humanName">' + escape(item.FirstName) + '</span>' +
+                    '<span class="space"> </span>' +
+                    '<span class="humanSurname">' + escape(item.LastName) + '</span>' +
+                    '<span class="space"> </span>' +
+                    '<span class="humanUserName">  (' + item.UserName + ')</span>' +
+                '</div>';
+            }
+        }
     };
 
     var $selectNote = $('#input-tags-post-feed').selectize(options);
@@ -362,10 +381,10 @@ function initUI() {
 function selectizeSearchBar() {
     //initialization of the search bar, called once
     var $select = $('#search-input-bar').selectize({
-        labelField: 'FirstName',
-        valueField: 'UserName',
-        searchField: ['FirstName', 'LastName'],
+        valueField: 'ID',
+        searchField: ['FirstName', 'LastName', 'UserName'],
         delimiter: ',',
+        //maxItems: 1,
         create: false,
         options: [],
         load: function (query, callback) {
@@ -390,6 +409,8 @@ function selectizeSearchBar() {
                     '<span class="humanName">' + escape(item.FirstName) + '</span>' +
                     '<span class="space"> </span>' +
                     '<span class="humanSurname">' + escape(item.LastName) + '</span>' +
+                    '<span class="space"> </span>' +
+                    '<span class="humanUserName">  (' + item.UserName + ')</span>' +
                 '</div>';
             },
             //rendering of selected items
@@ -398,12 +419,15 @@ function selectizeSearchBar() {
                     '<span class="humanName">' + escape(item.FirstName) + '</span>' +
                     '<span class="space"> </span>' +
                     '<span class="humanSurname">' + escape(item.LastName) + '</span>' +
+                    '<span class="space"> </span>' +
+                    '<span class="humanUserName">  (' + item.UserName + ')</span>' +
                 '</div>';
             }
         },
         onItemAdd: function (value, $item) {
-            //TODO add redirect to user page
-            alert(value);
+            //TODO freeze the screen until next load
+            //redirects to user page, determined by id
+            window.location = "userProfile.aspx?userId=" + value;
         }
     });
 
@@ -415,22 +439,16 @@ function setSearchBarCSS() {
     //override the css for the searchbar
     $("#search-input-container > .selectize-control > .search-container, .search-input").css(
     {
-        "padding": "inherit",
-        "margin-bottom": "inherit",
-        "border": "inherit",
-        "border-radius": "inherit",
-        //"color": "inherit",
-        "background": "inherit",
-        "width": "370px"
+        "border": "none"
     });
 
     $("#search-input-container > .selectize-control > .selectize-input.items").css(
     {
-        "min-height": "0px",
+        "min-height": "30px",
         "z-index": "inherit",
         "display": "inherit",
         "width": "inherit",
-        "padding": "1px 6px",
+        "padding": "2.5px 6px 0px",
         "overflow": "inherit",
         "border": "1px solid rgb(81, 81, 81)",
         "border-radius": "inherit",
