@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ABBJSONService.ABBConnectWCF" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAEAABBGLBBGCMAQEAAQQCQQAEBAAgCAEAAKAAgg=</HashCode>
+      <FileName>ABBConnectWCF.svc.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ABBJSONService.ABBConnectEntities" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>VMLAREALAAC/BEEAADQGcAAEUIgEBAAARAAQAAAAAgA=</HashCode>
+      <FileName>DBModel.Context.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBJSONService.GetAllHumanFeeds_Result" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEQAAAAgAAQIAAAgAAAAAAAAAAQBACEAAAAA=</HashCode>
+      <FileName>GetAllHumanFeeds_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBJSONService.GetAllHumanFeedsByFilter_Result" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEQAAAAgAAQIAAAgAAAAAAAAAAQBACEAAAAA=</HashCode>
+      <FileName>GetAllHumanFeedsByFilter_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBJSONService.GetAllSensorFeeds_Result" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEQAAAAgAAQIAAAgAAAAAAAAAAQBACEAAAAA=</HashCode>
+      <FileName>GetAllSensorFeeds_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBJSONService.GetAllSensorFeedsByFilter_Result" Collapsed="true">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEQAAAAgAAQIAAAgAAAAAAAAAAQBACEAAAAA=</HashCode>
+      <FileName>GetAllSensorFeedsByFilter_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBJSONService.GetAllSensors_Result" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAIAAAAAAAAAAAAQAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>GetAllSensors_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBJSONService.GetFeedByFeedId_Result" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEQAAAAgAAQIAAAgAAAAAAAAAAQBACEAAAAA=</HashCode>
+      <FileName>GetFeedByFeedId_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBJSONService.GetFeedComments_Result" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAABAAAAAgAAAAAAAAAAAAAAAAAAQAAAAAAAAg=</HashCode>
+      <FileName>GetFeedComments_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBJSONService.GetFeedsByFilter_Result" Collapsed="true">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEQAAAAgAAQIAAAgAAAAAAAAAAQBACEAAAAA=</HashCode>
+      <FileName>GetFeedsByFilter_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBJSONService.GetFeedTags_Result" Collapsed="true">
+    <Position X="7.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAgAAAAAAAAAAQAAAAAAAAg=</HashCode>
+      <FileName>GetFeedTags_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBJSONService.GetHistoricalDataFromSensor_Result" Collapsed="true">
+    <Position X="9.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GetHistoricalDataFromSensor_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBJSONService.GetHumanInformation_Result" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAACAAAAAAAAIAQAQAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>GetHumanInformation_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBJSONService.GetHumanInformationByUsername_Result" Collapsed="true">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAAACAAAAAAAAIAQAQAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>GetHumanInformationByUsername_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBJSONService.GetLatestFeeds_Result" Collapsed="true">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEQAAAAgAAQIAAAgAAAAAAAAAAQBACEAAAAA=</HashCode>
+      <FileName>GetLatestFeeds_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBJSONService.GetLatestFeedsByFilter_Result" Collapsed="true">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEQAAAAgAAQIAAAgAAAAAAAAAAQBACEAAAAA=</HashCode>
+      <FileName>GetLatestFeedsByFilter_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBJSONService.GetLatestXFeeds_Result" Collapsed="true">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEQAAAAgAAQIAAAgAAAAAAAAAAQBACEAAAAA=</HashCode>
+      <FileName>GetLatestXFeeds_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBJSONService.GetLatestXFeedsFromId_Result" Collapsed="true">
+    <Position X="9.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEQAAAAgAAQIAAAgAAAAAAAAAAQBACEAAAAA=</HashCode>
+      <FileName>GetLatestXFeedsFromId_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBJSONService.GetPriorityCategories_Result" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GetPriorityCategories_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBJSONService.GetSensorInformation_Result" Collapsed="true">
+    <Position X="2.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAIAAAAAAIAAAAAQAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>GetSensorInformation_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBJSONService.GetUserActivity_Result" Collapsed="true">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAEAAAAAAAAAACAAgAAAAAAAAAAQAACAAAAAA=</HashCode>
+      <FileName>GetUserActivity_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBJSONService.GetUserFeeds_Result" Collapsed="true">
+    <Position X="5.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEQAAAAgAAQIAAAgAAAAAAAAAAQBACEAAAAA=</HashCode>
+      <FileName>GetUserFeeds_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBJSONService.GetUserFeedsByFilter_Result" Collapsed="true">
+    <Position X="7.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEQAAAAgAAQIAAAgAAAAAAAAAAQBACEAAAAA=</HashCode>
+      <FileName>GetUserFeedsByFilter_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBJSONService.GetUserSavedFilters_Result" Collapsed="true">
+    <Position X="9.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAgAAAAAIAAAggAAAAAAAAAQAAAEAAAAA=</HashCode>
+      <FileName>GetUserSavedFilters_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBJSONService.GetUserSavedFiltersTagedUsers_Result" Collapsed="true">
+    <Position X="0.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>GetUserSavedFiltersTagedUsers_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBJSONService.GetUsersByName_Result" Collapsed="true">
+    <Position X="2.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAg=</HashCode>
+      <FileName>GetUsersByName_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBJSONService.GetXFeedsByFilter_Result" Collapsed="true">
+    <Position X="4" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEQAAAAgAAQIAAAgAAAAAAAAAAQBACEAAAAA=</HashCode>
+      <FileName>GetXFeedsByFilter_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBJSONService.Login_Result" Collapsed="true">
+    <Position X="5.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAACAAAAAAAAAAQAQAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Login_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBJSONService.sp_helpdiagramdefinition_Result" Collapsed="true">
+    <Position X="7.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>sp_helpdiagramdefinition_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBJSONService.sp_helpdiagrams_Result" Collapsed="true">
+    <Position X="9.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAEAAiAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>sp_helpdiagrams_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="ABBJSONService.IABBConnectWCF" Collapsed="true">
+    <Position X="0.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAEIKBAC6JFEAIAQEEAQUAQQAEBAAwAAQAAIAEgA=</HashCode>
+      <FileName>IABBConnectWCF.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -298,8 +298,34 @@ namespace ABBJSONService
         List<DAL.GetLatestXFeeds_Result> IABBConnectWCF.GetXFeedsByFilter(string id, string location, string startingTime, string endingTime, string feedType, string startId, string numFeeds, string randomGuid)
         {
             FeedData feedData = new FeedData();
-            return feedData.GetXFeedsByFilter(Int32.Parse(id), location, Convert.ToDateTime(startingTime),
-                                            Convert.ToDateTime(endingTime), feedType, Int32.Parse(startId), Int32.Parse(numFeeds));
+
+            DateTime startTime = DateTime.MinValue;
+
+            if (!startingTime.Equals(""))
+                startTime = Convert.ToDateTime(startingTime);
+
+            DateTime endTime = DateTime.MinValue;
+
+            if (!endingTime.Equals(""))
+                endTime = Convert.ToDateTime(endingTime);
+
+            int startingId = -1;
+
+            if (!startId.Equals(""))
+                startingId = Int32.Parse(startId);
+
+            int feedsNumber = -1;
+
+            if (!numFeeds.Equals(""))
+                feedsNumber = Int32.Parse(numFeeds);
+
+            int userId = -1;
+
+            if (!id.Equals(""))
+                userId = Int32.Parse(id);
+
+            return feedData.GetXFeedsByFilter(userId, location, startTime,
+                                            endTime, feedType, startingId, feedsNumber);
         }
 
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "SaveFilter?userId={userId}&name={filterName}&start={startingTime}&end={endingTime}&location={location}&feedType={feedType}")]
