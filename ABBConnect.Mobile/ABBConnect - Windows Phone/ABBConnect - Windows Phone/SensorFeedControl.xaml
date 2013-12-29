@@ -9,13 +9,19 @@
     Foreground="{StaticResource PhoneForegroundBrush}" Width="456"
     d:DesignHeight="200" d:DesignWidth="456">
 
-    <Grid x:Name="LayoutRoot" Width="456" Margin="0,0,0,10" Background="{StaticResource PhoneChromeBrush}">
-        <TextBlock x:Name="Author" MouseLeftButtonDown="Author_MouseLeftButtonDown" FontSize="20" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
-        <TextBlock x:Name="Text"  MouseLeftButtonDown="Content_MouseLeftButtonDown" FontSize="20"  HorizontalAlignment="Left" Margin="175,68,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
-        <TextBlock x:Name="Location"  MouseLeftButtonDown="Content_MouseLeftButtonDown" FontSize="18"  HorizontalAlignment="Left" Margin="175,113,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
-        <Image HorizontalAlignment="Left" Source="Icons/symbol_warning.png" MouseLeftButtonDown="Content_MouseLeftButtonDown" Height="84" Margin="37,53,0,0" VerticalAlignment="Top" Width="88"/>
-        <TextBlock x:Name="Timestamp" FontSize="18" HorizontalAlignment="Right" Margin="0,10,9,0" TextWrapping="Wrap" Text="10d" VerticalAlignment="Top" FlowDirection="RightToLeft"/>
-        <Image x:Name="TimeSymbol" Source="Icons/symbol_timer.png" HorizontalAlignment="Left" Height="24" Margin="395,13,0,0" VerticalAlignment="Top" Width="20"/>
+    <Grid x:Name="LayoutRoot" Width="456" Margin="0,0,0,10">
+        <!--<TextBlock x:Name="Location"  MouseLeftButtonDown="Content_MouseLeftButtonDown" FontSize="18"  HorizontalAlignment="Left" Margin="175,113,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>-->
+        <!--<TextBlock x:Name="Timestamp" FontSize="18" HorizontalAlignment="Right" Margin="0,10,9,0" TextWrapping="Wrap" Text="10d" VerticalAlignment="Top" FlowDirection="RightToLeft"/>-->
+        <!--<TextBlock x:Name="Author" MouseLeftButtonDown="Author_MouseLeftButtonDown" FontSize="20" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>-->
+
+        <TextBlock x:Name="Author" FontSize="18" HorizontalAlignment="Left" Margin="36,5,0,0" TextWrapping="Wrap" Text="Sensor XYZ" VerticalAlignment="Top" RenderTransformOrigin="2.341,6.889" MouseLeftButtonDown="Author_MouseLeftButtonDown" FontWeight="Bold" Height="24" Width="258"/>
+        <TextBlock x:Name="Text"  MouseLeftButtonDown="Content_MouseLeftButtonDown" FontSize="20"  HorizontalAlignment="Left" Margin="78,52,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+        <Image HorizontalAlignment="Left" Source="Icons/symbol_warning.png" MouseLeftButtonDown="Content_MouseLeftButtonDown" Height="60" Margin="12,68,0,0" VerticalAlignment="Top" Width="60"/>
+        <TextBlock x:Name="Timestamp" FontSize="18" HorizontalAlignment="Right" Margin="0,5,14,18" TextWrapping="Wrap" RenderTransformOrigin="2.341,6.889" TextAlignment="Right" Width="30" Foreground="#FF8A8A8A" Text="10h"/>
+        <Image x:Name="TimeSymbol" Source="/Icons/icon-timer.png" HorizontalAlignment="Left" Height="20" Margin="390,5,0,0" VerticalAlignment="Top" Width="20"/>
+        <Image Source="/Icons/icon-location-just.png" HorizontalAlignment="Left" Height="18" Margin="33,26,0,0" VerticalAlignment="Top" Width="18"/>
+        <TextBlock x:Name="Location" HorizontalAlignment="Left" Margin="53,27,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Foreground="#FF8A8A8A" Height="19" Width="184" MouseLeftButtonUp="Content_MouseLeftButtonDown"><Run Text="Machine "/><Run Text="2"/></TextBlock>
+        <Image Height="20" HorizontalAlignment="Left" Margin="10,5,0,0" Name="image1" Stretch="Fill" VerticalAlignment="Top" Width="20" Source="/Icons/icon-sensor.png" />
 
     </Grid>
 </UserControl>

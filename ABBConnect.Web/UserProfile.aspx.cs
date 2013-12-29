@@ -207,6 +207,11 @@ public partial class UserProfile : System.Web.UI.Page
         FeedPage.FilterUserId = userId;
         FeedPage.RenderFeedPage();
 
+        //HumanActivities
+        ActivityPage.LastFeedId = lastHumanFeed.First().ID + 1;
+        ActivityPage.FilterUserId = userId;
+        ActivityPage.RenderActivityPage();
+
         //Call JS Methods
         ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "populateFeedPostTypes", "<script type='text/javascript'>AjaxPopulateSelectBoxPostFeedType()</script>", false);
         ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "getAvailableUsersToTag", "<script type='text/javascript'>AjaxGetAvailableUsersToTag()</script>", false);

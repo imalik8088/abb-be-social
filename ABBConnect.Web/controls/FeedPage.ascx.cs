@@ -52,7 +52,8 @@ public partial class controls_FeedPage : System.Web.UI.UserControl
             HumanFeed currentHumanFeed = (HumanFeed)currentFeed;
 
             l = (Literal)e.Item.FindControl("litFeedPosterName");
-            l.Text = currentHumanFeed.Owner.UserName;     
+            //l.Text = currentHumanFeed.Owner.UserName;  
+            l.Text = currentHumanFeed.Owner.FirstName + " " + currentHumanFeed.Owner.LastName;
 
             l = (Literal)e.Item.FindControl("litFeedContent");
             l.Text = currentFeed.Content;
@@ -76,7 +77,8 @@ public partial class controls_FeedPage : System.Web.UI.UserControl
             {
                 foreach (Human tagedHuman in currentFeed.Tags)
                 {
-                    feedTags = feedTags + "," + tagedHuman.UserName;
+                    //feedTags = feedTags + "," + tagedHuman.UserName;
+                    feedTags = feedTags + "," + tagedHuman.FirstName + " " + tagedHuman.LastName;
                 }
                 // Quick fix for laziness
                 if (feedTags.Length > 0)

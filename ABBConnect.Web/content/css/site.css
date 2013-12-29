@@ -763,3 +763,88 @@ img.feed-avatar
 {
     padding:0px;
 }
+
+/* Activities */
+.activity-information
+{
+    float: left;
+    display: block;
+    width: 60px;
+}
+
+.activity-container
+{
+    margin-bottom: 10px;
+}
+
+.activity-inner-container
+{
+    padding: 10px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    border-left: 1px solid #e6e6e6;
+    border-right: 1px solid #e6e6e6;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.activity-inner-container-default
+{
+    border-top: 2px solid #5bc0de;
+}
+
+.activity-message
+{
+    text-align: left;
+    margin-left: 80px;
+    display: block;
+    /*padding: 5px 10px;*/
+    padding: 0px 10px;
+    position: relative;
+    /*min-height: 80px;*/
+}
+
+.activity-message-default
+{
+   border-left: 2px solid #5bc0de;
+}
+
+.activity-message .activity-arrow
+{
+    display: block;
+    position: absolute;
+    top: 7px;
+    left: -8px;
+    width: 0;
+    height: 0;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+}
+
+.activity-arrow-default
+{
+    border-right: 6px solid #5bc0de;
+}
+
+.activity-name
+{
+    font-size: 13px;
+}
+
+.activity-name-default
+{
+    color: #5bc0de;
+}
+
+.activity-message .activity-body
+{
+    display: block;
+    color: #333;
+    padding-top: 10px;
+}
+
+.activity-date-time
+{
+    color: #1a1a1a;
+    font-size: 11px;
+}
