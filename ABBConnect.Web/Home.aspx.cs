@@ -277,6 +277,5 @@ public partial class _Home : System.Web.UI.Page
         //Call JS Methods
         ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "populatFeedPostTypes", "<script type='text/javascript'>AjaxPopulateSelectBoxPostFeedType()</script>", false);
         ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "getAvailableUsersToTag", "<script type='text/javascript'>AjaxGetAvailableUsersToTag()</script>", false);
-    
     }
 }

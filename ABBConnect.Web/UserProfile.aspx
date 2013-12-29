@@ -2,6 +2,7 @@
 
 <%@ Register Src="controls/FeedPage.ascx" TagName="FeedPage" TagPrefix="abbConnect" %>
 <%@ Register Src="controls/FeedComments.ascx" TagName="FeedComments" TagPrefix="abbConnect" %>
+<%@ Register Src="controls/ActivityPage.ascx" TagName="ActivityPage" TagPrefix="abbConnect" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
@@ -85,6 +86,10 @@
                     </div>
                 </div>
             </div>
+            <div id="activitiesContainer">
+                <abbConnect:ActivityPage ID="ActivityPage" runat="server" />
+            </div>
+            <div id="loading_throbber_human_activities" class="loading-throbber" data-container="activitiesContainer"></div>
             <a href="#" class="thumbnail">
                 <asp:Chart ID="profilePostActivityChart" runat="server" Height="480" Width="640">
                     <Series>

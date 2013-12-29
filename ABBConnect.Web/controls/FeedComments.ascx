@@ -6,8 +6,11 @@
                 <img src="content/img/avatar-abb-small.png" alt="user-avatar">
             </div>
             <div class="feed-single-comment-data">
-                <div class="name">
-                    <a href="userProfile.aspx?userId=<%# DataBinder.Eval(Container.DataItem,"Owner.ID")%>"><%# DataBinder.Eval(Container.DataItem,"Owner.UserName")%></a>
+                <div class="name">                                          
+                     <a href="userProfile.aspx?userId=<%# DataBinder.Eval(Container.DataItem,"Owner.ID")%>">
+                         <%--<%# DataBinder.Eval(Container.DataItem,"Owner.UserName")%>--%>
+                         <%# DataBinder.Eval(Container.DataItem,"Owner.FirstName")%> <%# DataBinder.Eval(Container.DataItem,"Owner.LastName")%>
+                     </a>
                 </div>
                 <div class="time">
                     <i class="icon-time"></i>

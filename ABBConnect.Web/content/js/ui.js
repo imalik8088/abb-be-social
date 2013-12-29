@@ -217,7 +217,9 @@ function SaveHumanFeedsFilterData(refreshData) {
 }
 
 function initSelectize(elementPrefixName, elementId, isLocked) {
-    var $select = $('#' + elementPrefixName + "-" + elementId).find('.feed-input-tags').selectize({
+    var identifier = '#' + elementPrefixName + "-" + elementId;
+
+    var $select = $(identifier).find('.feed-input-tags').selectize({
         delimiter: ',',
         persist: false,
         createOnBlur: true,
@@ -227,9 +229,44 @@ function initSelectize(elementPrefixName, elementId, isLocked) {
                 value: input,
                 text: input
             }
+        },
+        render: {
+            //TODO add redirect to user page
+            //rendering of displayed tags
+            item: function (item, escape) {
+                return '<div>' +
+                    '<span class="HumanNameSurname">' + escape(item.value) + '</span>'
+                '</div>';
+            }
         }
     });
+
+    initSelectizeSetCSS(identifier);
+
     if (isLocked == true) $select[0].selectize.lock();
+}
+
+function initSelectizeSetCSS(identifier) {
+
+    //override the css for the tagging display
+
+    //removes the borders from the selectize box
+    //also disable all the visual elements that give out focus
+    $(identifier + " > div:nth-child(1) > div:nth-child(2) > span:nth-child(5) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1)").css(
+    {
+        "border": "none",
+        "font-size": "12px",
+        "width": "auto",
+        "box-shadow": "none"
+    });
+
+    //hides the input so it's unusable
+    $(identifier + " > div:nth-child(1) > div:nth-child(2) > span:nth-child(5) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > input:nth-child(2)").css(
+    {
+        "display": "none"
+    });
+
+
 }
 
 function AjaxPopulateSelectBoxPostFeedType() {
