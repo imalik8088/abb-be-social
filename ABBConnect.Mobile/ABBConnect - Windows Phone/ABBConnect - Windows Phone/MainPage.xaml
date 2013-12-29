@@ -102,7 +102,7 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" Margin="2">
-                                    <Image HorizontalAlignment="Left" Source="Icons/symbol_location.png" Height="26" Margin="2" VerticalAlignment="Top" Width="26"/>
+                                    <Image HorizontalAlignment="Left" Source="Icons/icon-location.png" Height="26" Margin="2" VerticalAlignment="Top" Width="26"/>
                                     <TextBlock Text="{Binding Name}" Margin="2" FontSize="32"/>
                                 </StackPanel>
                             </DataTemplate>
