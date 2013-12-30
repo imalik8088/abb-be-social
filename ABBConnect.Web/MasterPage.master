@@ -64,7 +64,7 @@
                 </ul>
             </div>
             <div id="search-input-container" class="search-container">
-                <input id="search-input-bar" type="text" class="search-input" placeholder="Search me.."/>
+                <input id="search-input-bar" type="text" class="search-input" placeholder="Search users..."/>
                 <button data-original-title=""></button>
             </div>
             <div id="header-menu-blocks-right">

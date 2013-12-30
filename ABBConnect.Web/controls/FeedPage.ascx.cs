@@ -78,7 +78,8 @@ public partial class controls_FeedPage : System.Web.UI.UserControl
                 foreach (Human tagedHuman in currentFeed.Tags)
                 {
                     //feedTags = feedTags + "," + tagedHuman.UserName;
-                    feedTags = feedTags + "," + tagedHuman.FirstName + " " + tagedHuman.LastName;
+                    //group the name_surname and the ID, which will be used in a text-value manner
+                    feedTags = feedTags + "," + tagedHuman.FirstName + " " + tagedHuman.LastName+"||"+tagedHuman.ID;
                 }
                 // Quick fix for laziness
                 if (feedTags.Length > 0)
@@ -87,10 +88,10 @@ public partial class controls_FeedPage : System.Web.UI.UserControl
                    // feedTags = feedTags.Remove(feedTags.LastIndexOf(","));
                 }
             }
-            else
-            {
-                feedTags = feedTags + "Unfortunately there are no tags available";
-            }
+            //else
+            //{
+            //    feedTags = feedTags + "Unfortunately there are no tags available";
+            //}
             hit.Attributes.Add("value", feedTags);
 
             // Render LoadMore Link

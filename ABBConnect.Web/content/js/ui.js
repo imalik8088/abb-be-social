@@ -222,51 +222,25 @@ function initSelectize(elementPrefixName, elementId, isLocked) {
     var $select = $(identifier).find('.feed-input-tags').selectize({
         delimiter: ',',
         persist: false,
-        createOnBlur: true,
-        disabled: true,
-        create: function (input) {
-            return {
-                value: input,
-                text: input
-            }
-        },
+        // disabled: true,
         render: {
-            //TODO add redirect to user page
             //rendering of displayed tags
             item: function (item, escape) {
-                return '<div>' +
-                    '<span class="HumanNameSurname">' + escape(item.value) + '</span>'
-                '</div>';
+
+                var name = item.value.split('||')[0];
+                var ID = item.value.split('||')[1];
+
+                return '<div class="tag-div">' +
+                            '<a class="tag-user-link" href="userProfile.aspx?userId=' + ID + '">' +
+                                '<span>#' + escape(name) +
+                                '</span>' +
+                            '</a>' +
+                     '</div>';
             }
         }
     });
 
-    initSelectizeSetCSS(identifier);
-
     if (isLocked == true) $select[0].selectize.lock();
-}
-
-function initSelectizeSetCSS(identifier) {
-
-    //override the css for the tagging display
-
-    //removes the borders from the selectize box
-    //also disable all the visual elements that give out focus
-    $(identifier + " > div:nth-child(1) > div:nth-child(2) > span:nth-child(5) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1)").css(
-    {
-        "border": "none",
-        "font-size": "12px",
-        "width": "auto",
-        "box-shadow": "none"
-    });
-
-    //hides the input so it's unusable
-    $(identifier + " > div:nth-child(1) > div:nth-child(2) > span:nth-child(5) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > input:nth-child(2)").css(
-    {
-        "display": "none"
-    });
-
-
 }
 
 function AjaxPopulateSelectBoxPostFeedType() {
@@ -421,7 +395,7 @@ function selectizeSearchBar() {
         valueField: 'ID',
         searchField: ['FirstName', 'LastName', 'UserName'],
         delimiter: ',',
-        //maxItems: 1,
+        maxItems: 1,
         create: false,
         options: [],
         load: function (query, callback) {
@@ -452,7 +426,7 @@ function selectizeSearchBar() {
             },
             //rendering of selected items
             item: function (item, escape) {
-                return '<div>' +
+                return '<div class="searched-user">' +
                     '<span class="humanName">' + escape(item.FirstName) + '</span>' +
                     '<span class="space"> </span>' +
                     '<span class="humanSurname">' + escape(item.LastName) + '</span>' +
@@ -467,41 +441,6 @@ function selectizeSearchBar() {
             window.location = "userProfile.aspx?userId=" + value;
         }
     });
-
-    setSearchBarCSS();
-}
-
-function setSearchBarCSS() {
-
-    //override the css for the searchbar
-    $("#search-input-container > .selectize-control > .search-container, .search-input").css(
-    {
-        "border": "none"
-    });
-
-    $("#search-input-container > .selectize-control > .selectize-input.items").css(
-    {
-        "min-height": "30px",
-        "z-index": "inherit",
-        "display": "inherit",
-        "width": "inherit",
-        "padding": "2.5px 6px 0px",
-        "overflow": "inherit",
-        "border": "1px solid rgb(81, 81, 81)",
-        "border-radius": "inherit",
-        "box-shadow": "inherit",
-        "-moz-box-sizing": "border-box",
-        "position": "inherit",
-        "background": "none repeat scroll 0% 0% rgb(55, 55, 55)",
-    });
-
-    $("#search-input-container > .selectize-control > .selectize-input.items > *").css(
-    {
-        "font": "12px/20px 'Open Sans',arial,sans-serif",
-        "color": "rgb(196, 196, 196)"
-    });
-
-
 }
 
 function setRefreshListeners() {
