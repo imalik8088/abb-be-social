@@ -219,28 +219,35 @@ function SaveHumanFeedsFilterData(refreshData) {
 function initSelectize(elementPrefixName, elementId, isLocked) {
     var identifier = '#' + elementPrefixName + "-" + elementId;
 
-    var $select = $(identifier).find('.feed-input-tags').selectize({
-        delimiter: ',',
-        persist: false,
-        // disabled: true,
-        render: {
-            //rendering of displayed tags
-            item: function (item, escape) {
+    //if the element doesn't have any tags, delete the additional body, so it doesn't clutter
+    if ($(identifier).find('.feed-input-tags')[0].value == "") {
+        var elem = $(identifier).find('.feed-body-addition')[0];
+        elem.parentNode.removeChild(elem);
+    }
+    else {
+        var $select = $(identifier).find('.feed-input-tags').selectize({
+            delimiter: ',',
+            persist: false,
+            disabled: true,
+            render: {
+                //rendering of displayed tags
+                item: function (item, escape) {
 
-                var name = item.value.split('||')[0];
-                var ID = item.value.split('||')[1];
+                    var name = item.value.split('||')[0];
+                    var ID = item.value.split('||')[1];
 
-                return '<div class="tag-div">' +
-                            '<a class="tag-user-link" href="userProfile.aspx?userId=' + ID + '">' +
-                                '<span>#' + escape(name) +
-                                '</span>' +
-                            '</a>' +
-                     '</div>';
+                    return '<div class="tag-div">' +
+                                '<a class="tag-user-link" href="userProfile.aspx?userId=' + ID + '">' +
+                                    '<span>#' + escape(name) +
+                                    '</span>' +
+                                '</a>' +
+                         '</div>';
+                }
             }
-        }
-    });
+        });
 
-    if (isLocked == true) $select[0].selectize.lock();
+        if (isLocked == true) $select[0].selectize.lock();
+    }
 }
 
 function AjaxPopulateSelectBoxPostFeedType() {

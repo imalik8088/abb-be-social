@@ -20,7 +20,7 @@
                     <span class="feed-body">
                         <asp:Literal runat="server" ID="litFeedContent"></asp:Literal>
                     </span>
-                    <span>
+                    <span class="feed-body-addition">
                         <div class="control-group">
                             <hr class="mXhr10">
                             <input runat="server" type="text" id="feed_input_tags" class="feed-input-tags locked">
