@@ -74,11 +74,18 @@
                             <span class="text-label">ABB Connect </span>
                         </a>
                     </li>
-                    <%--                    <li>
-                        <a href="Home.aspx" data-original-title="">
-                            <asp:Label ID="labelHuman" class="text-label" runat="server"></asp:Label>
-                        </a>
-                    </li>--%>
+                    <li>      
+                    <asp:Repeater id="Repeater1" runat="server">
+                        <ItemTemplate>                           
+                        <div class="name">
+                            <a href="userProfile.aspx?userId=<%# DataBinder.Eval(Container.DataItem,"ID")%>">
+                                <%# DataBinder.Eval(Container.DataItem, "FirstName") %>
+                                <%# DataBinder.Eval(Container.DataItem,"LastName")%>
+                            </a>
+                        </div>                                 
+    	                </ItemTemplate>
+                    </asp:Repeater>                     
+                    </li>
                     <li>
                         <a>
                             <span class="glyphicon glyphicon-lock" onclick="OnClickSignOut()"></span>
