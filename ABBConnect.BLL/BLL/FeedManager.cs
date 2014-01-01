@@ -429,5 +429,29 @@ namespace BLL
                                                 userInforMng.LoadSensorInformation(entityFeed.UserId));
 
             }
+
+
+            public List<Feed> LoadLastShiftFeeds(int numberOfFeeds)
+            {
+                List<GetLatestXFeeds_Result> list = feedData.GetFeedsFromLastShift(numberOfFeeds);
+
+                List<Feed> retList = new List<Feed>();
+
+                UserManager userInforMng = new UserManager();
+
+                foreach (GetLatestXFeeds_Result res in list)
+                {
+                    if (res.Type == "Human")
+                        retList.Add(new HumanFeed(res, LoadFeedComments(res.FeedId),
+                                                   LoadFeedTags(res.FeedId),
+                                                   userInforMng.LoadHumanInformation(res.UserId)));
+                    else
+                        retList.Add(new SensorFeed(res, LoadFeedComments(res.FeedId),
+                                                    LoadFeedTags(res.FeedId),
+                                                    userInforMng.LoadSensorInformation(res.UserId)));
+                }
+
+                return retList;
+            }
     }
 }

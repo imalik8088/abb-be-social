@@ -201,14 +201,25 @@ namespace BLL
             return usrData.UnfollowSensor(humanUserId, sensorUserId);
         }
 
-        public List<int> GetFollowedSensors(int humanUserId)
+        public List<Sensor> GetFollowedSensors(int humanUserId)
         {
             if (humanUserId < 0)
             {
                 return null;
             }
 
-            return usrData.GetFollowedSensors(humanUserId);
+            List<Sensor> sensorList = new List<Sensor>();
+
+            List<int> sensorIds = usrData.GetFollowedSensors(humanUserId);
+
+            foreach (int i in sensorIds)
+            {
+                Sensor tempSensor = new Sensor();
+                tempSensor.ID = i;
+                sensorList.Add(tempSensor);
+            }
+
+            return sensorList;
         }
 
         public  List<Activity> GetUserActivity(int userId)

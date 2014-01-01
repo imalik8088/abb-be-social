@@ -866,7 +866,61 @@ namespace DAL
             else
                 return false;
         }
-      
 
+        public List<GetLatestXFeeds_Result> GetFeedsFromLastShift(int numFeeds)
+        {
+            List<GetLatestXFeeds_Result> feeds = new List<GetLatestXFeeds_Result>();
+
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            {
+                sqlConn.Open();
+                string sqlQuery = "GetFeedsFromLastShift";
+
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    try
+                    {
+                        if (numFeeds == -1)
+                            cmd.Parameters.Add("@numOfFeeds", SqlDbType.Int).Value = DBNull.Value;
+                        else
+                            cmd.Parameters.Add("@numOfFeeds", SqlDbType.Int).Value = numFeeds;
+                    }
+
+                    catch (Exception)
+                    {
+                        cmd.Dispose();
+                        sqlConn.Close();
+                        return null;
+                    }
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        ;
+                        while (reader.Read())
+                        {
+                            GetLatestXFeeds_Result feed = new GetLatestXFeeds_Result();
+                            feed.Username = (string)reader[0];
+                            feed.UserId = (int)reader[1];
+                            feed.Type = (string)reader[2];
+                            feed.CreationTimeStamp = (DateTime)reader[3];
+                            feed.Text = (string)reader[4];
+                            object sqlCell = reader[5];
+                            feed.FilePath = (sqlCell == System.DBNull.Value)
+                                ? ""
+                                : (string)sqlCell;
+                            feed.PrioCategory = (string)reader[6];
+                            feed.PrioValue = (int)reader[7];
+                            feed.FeedId = (int)reader[8];
+                            feed.Location = (string)reader[9];
+
+                            feeds.Add(feed);
+                        }
+                    }
+                }
+                sqlConn.Close();
+            }
+            return feeds;
+        }
     }
 }
