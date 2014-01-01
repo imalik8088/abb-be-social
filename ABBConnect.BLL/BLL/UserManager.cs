@@ -164,27 +164,51 @@ namespace BLL
 
         public int AddFilter(int userId, Filter newFilter)
         {
-            throw new NotImplementedException();
+            if (userId < 0 || newFilter.Equals(null))
+            {
+                return -1;
+            }
+            return usrData.SaveFilter(userId, newFilter.Name, newFilter.StartDate, newFilter.EndDate, newFilter.Location, newFilter.TypeOfFeed.ToString());
         }
 
         public bool AddUserToFilter(int userId, int filterId)
         {
-            throw new NotImplementedException();
+            if (userId < 0 || filterId < 0)
+            {
+                return false;
+            }
+
+            return usrData.AddFilterUser(userId, filterId);
         }
 
         public bool FollowSensor(int humanUserId, int sensorUserId)
         {
-            throw new NotImplementedException();
+            if (humanUserId < 0 || sensorUserId < 0)
+            {
+                return false;
+            }
+
+            return usrData.FollowSensor(humanUserId, sensorUserId);
         }
 
         public bool UnfollowSensor(int humanUserId, int sensorUserId)
         {
-            throw new NotImplementedException();
+            if (humanUserId < 0 || sensorUserId < 0)
+            {
+                return false;
+            }
+
+            return usrData.UnfollowSensor(humanUserId, sensorUserId);
         }
 
         public List<int> GetFollowedSensors(int humanUserId)
         {
-            throw new NotImplementedException();
+            if (humanUserId < 0)
+            {
+                return null;
+            }
+
+            return usrData.GetFollowedSensors(humanUserId);
         }
 
         public  List<Activity> GetUserActivity(int userId)

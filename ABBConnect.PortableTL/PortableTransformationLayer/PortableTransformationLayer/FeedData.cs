@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Collections.Specialized;
 
 namespace PortableTransformationLayer
 {
@@ -70,6 +71,24 @@ namespace PortableTransformationLayer
             var response = await client.GetStringAsync("PostFeed?id=" + usrId.ToString()
                 + "&text=" + text + "&path=" + filepath + "&priority=" + prioId.ToString()).ConfigureAwait(false);
             var obj = JsonConvert.DeserializeObject<string>(response);
+            return int.Parse(obj);
+        }
+
+        public async Task<int> PublishTestFeed2(int usrId, string text, string filepath, int prioId)
+        {
+            using (WebClient client = new WebClient())
+            {
+                byte[] response = client.UploadValues("http://dork.com/service", new NameValueCollection()
+                {
+                    { "home", "Cosby" },
+                    { "favorite+flavor", "flies" }
+                });
+            }
+            //var client = new HttpClient();
+            //client.BaseAddress = new Uri(urlServer.Url);
+            //var response = await client.GetStringAsync("PostFeed?id=" + usrId.ToString()
+             //   + "&text=" + text + "&path=" + filepath + "&priority=" + prioId.ToString()).ConfigureAwait(false);
+            //var obj = JsonConvert.DeserializeObject<string>(response);
             return int.Parse(obj);
         }
 
