@@ -425,6 +425,28 @@ namespace PortableBLL
                 return retList.OrderByDescending(o => o.TimeStamp).ToList().GetRange(0, numFeed-1);
             }
 
+            public async Task<List<Feed>> LoadFeedsFromLastShift(int numFeed)
+            {
+                List<GetLatestXFeeds_Result> list = await feedData.GetFeedsFromLastShift(numFeed);
+
+                List<Feed> retList = new List<Feed>();
+
+                UserManager userInforMng = new UserManager();
+
+                foreach (GetLatestXFeeds_Result res in list)
+                {
+                    if (res.Type == "Human")
+                        retList.Add(new HumanFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false),
+                                                  await LoadFeedTags(res.FeedId).ConfigureAwait(false),
+                                                  await userInforMng.LoadHumanInformation(res.UserId)));
+                    else
+                        retList.Add(new SensorFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false),
+                                                   await LoadFeedTags(res.FeedId).ConfigureAwait(false),
+                                                   await userInforMng.LoadSensorInformation(res.UserId)));
+                }
+
+                return retList;
+            }
 
             public async Task<Feed> GetFeedByFeedId(int feedId)
             {

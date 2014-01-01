@@ -17,5 +17,6 @@ namespace PortableTransformationLayer
         Task<int> PublishTestFeed(int usrId, string text, byte[] fileArray, int prioId);
         Task<List<GetLatestXFeeds_Result>> GetFeedsByFilter(int userId, string location, DateTime startingTime, DateTime endingTime, string feedType, int startId, int numFeeds);
         Task<GetLatestXFeeds_Result> GetFeedByFeedId(int feedId);
+        Task<List<GetLatestXFeeds_Result>> GetFeedsFromLastShift(int numFeeds);
     }
 }

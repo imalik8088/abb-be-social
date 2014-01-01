@@ -76,20 +76,21 @@ namespace PortableTransformationLayer
 
         public async Task<int> PublishTestFeed2(int usrId, string text, string filepath, int prioId)
         {
-            using (WebClient client = new WebClient())
-            {
-                byte[] response = client.UploadValues("http://dork.com/service", new NameValueCollection()
-                {
-                    { "home", "Cosby" },
-                    { "favorite+flavor", "flies" }
-                });
-            }
+            //using (WebClient client = new WebClient())
+            //{
+              //  byte[] response = client.UploadValues("http://dork.com/service", new NameValueCollection()
+                //{
+                  //  { "home", "Cosby" },
+                    //{ "favorite+flavor", "flies" }
+                //});
+            //}
             //var client = new HttpClient();
             //client.BaseAddress = new Uri(urlServer.Url);
             //var response = await client.GetStringAsync("PostFeed?id=" + usrId.ToString()
              //   + "&text=" + text + "&path=" + filepath + "&priority=" + prioId.ToString()).ConfigureAwait(false);
             //var obj = JsonConvert.DeserializeObject<string>(response);
-            return int.Parse(obj);
+            //return int.Parse(obj);
+            return -1;
         }
 
         public async Task<int> PublishTestFeed(int usrId, string text, byte[] fileArray, int prioId)
@@ -228,6 +229,15 @@ namespace PortableTransformationLayer
             client.BaseAddress = new Uri(urlServer.Url);
             var response = await client.GetStringAsync("GetFeedByFeedId?feedId=" + feedId + "&guid=" + Guid.NewGuid()).ConfigureAwait(false);
             return JsonConvert.DeserializeObject<GetLatestXFeeds_Result>(response); ;
+        }
+
+
+        public async Task<List<GetLatestXFeeds_Result>> GetFeedsFromLastShift(int numFeeds)
+        {
+            var client = new HttpClient();
+            client.BaseAddress = new Uri(urlServer.Url);
+            var response = await client.GetStringAsync("GetFeedsFromLastShift?numFeeds=" + numFeeds + "&guid=" + Guid.NewGuid()).ConfigureAwait(false);
+            return JsonConvert.DeserializeObject<List<GetLatestXFeeds_Result>>(response);
         }
     }
 }

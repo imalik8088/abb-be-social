@@ -157,6 +157,10 @@ namespace ABBJSONService
         [OperationContract]
         [WebInvoke]
         DAL.GetLatestXFeeds_Result GetFeedByFeedId(string feedId, string randomGuid);
+
+        [OperationContract]
+        [WebInvoke]
+        List<DAL.GetLatestXFeeds_Result> GetFeedsFromLastShift(string numFeeds, string randomGuid);
     }
 
 }

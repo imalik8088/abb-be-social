@@ -390,6 +390,19 @@ namespace ABBJSONService
             FeedData feedData = new FeedData();
             return feedData.GetFeedByFeedId(Int32.Parse(feedId));
         }
+
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetFeedsFromLastShift?numFeeds={numFeeds}&guid={randomGuid}")]
+        public List<DAL.GetLatestXFeeds_Result> GetFeedsFromLastShift(string numFeeds, string randomGuid)
+        {
+            FeedData feedData = new FeedData();
+
+            int feedsNumber = -1;
+
+            if (!numFeeds.Equals(""))
+                feedsNumber = Int32.Parse(numFeeds);
+
+            return feedData.GetFeedsFromLastShift(feedsNumber);
+        }
     }
 }
 

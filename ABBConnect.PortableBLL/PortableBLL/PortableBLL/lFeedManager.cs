@@ -26,5 +26,6 @@ namespace PortableBLL
         Task<List<Feed>> LoadFeedsFromSavedFilter(Filter savedFilter, int numFeed);
         Task<List<Feed>> LoadFeedsFromSavedFilter(Filter savedFilter, int numFeed, int startId);
         Task<Feed> GetFeedByFeedId(int feedId);
+        Task<List<Feed>> LoadFeedsFromLastShift(int numFeed);
     }
 }
