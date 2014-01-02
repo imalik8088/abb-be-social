@@ -26,8 +26,17 @@ using System.Windows.Navigation;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 
+/*
+ * Written by: Robert Gustavsson
+ * Project: Social Media in the Process Automation Industry (ABB Connect)
+ */
+
+
 namespace ABBConnect___Windows_Phone
 {
+    /// <summary>
+    /// This class is the main page that handles the most of the loading of feeds and filter handling, also the application bar is visible inside of this page
+    /// </summary>
     public partial class MainPage : PhoneApplicationPage
     {
         // Constructor
@@ -84,7 +93,10 @@ namespace ABBConnect___Windows_Phone
             ini = true;
         }
 
-
+        /// <summary>
+        /// An event that is triggered when a user get redirected to the main page (right now only on login)
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             
@@ -95,7 +107,9 @@ namespace ABBConnect___Windows_Phone
 
         }
 
-
+        /// <summary>
+        /// Reads the saved filters that the logged in user has saved
+        /// </summary>
         private async void GetSavedFilters()
         {
             UserManager um = new UserManager();
@@ -133,6 +147,10 @@ namespace ABBConnect___Windows_Phone
             }
         }
 
+        /// <summary>
+        /// Updates the feeds, both comments and time since they were posted
+        /// </summary>
+        /// <returns></returns>
         private async Task UpdateComments()
         {
             FeedManager fmm = new FeedManager();
@@ -149,6 +167,10 @@ namespace ABBConnect___Windows_Phone
             }
         }
 
+        /// <summary>
+        /// A method that check wheter new feeds is available in the DB to read to the system. 
+        /// If there are feeds available, they are loaded into the application
+        /// </summary>
         private async void CheckNewFeeds()
         {
             //if no feeds has been added yet
@@ -524,7 +546,11 @@ namespace ABBConnect___Windows_Phone
                 MessageBox.Show("Something went wrong");
         }
 
-
+        /// <summary>
+        /// An event that hanldes when the user is clicking the Human-square in the filter Pivot
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void brdrHuman_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             //unticking human         
@@ -566,6 +592,11 @@ namespace ABBConnect___Windows_Phone
              */
         }
 
+        /// <summary>
+        /// An event that hanldes when the user is clicking the Sensor-square in the filter Pivot
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void brdrSensor_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             //unticking senosr         
@@ -608,6 +639,10 @@ namespace ABBConnect___Windows_Phone
             */
         }
 
+        /// <summary>
+        /// This method is setting the type of feeds that should be loaded in to the system (human, sensor or both)
+        /// </summary>
+        /// <param name="feedType"></param>
         private void ChangeFeedType(FeedType.FeedSource feedType)
         {
             if (!ini)
@@ -633,6 +668,11 @@ namespace ABBConnect___Windows_Phone
 
         }
    
+        /// <summary>
+        /// Converst a hex color code into a brush
+        /// </summary>
+        /// <param name="hexaColor"></param>
+        /// <returns></returns>
         private SolidColorBrush GetColorFromHexa(string hexaColor)
         {
             return new SolidColorBrush(
@@ -645,12 +685,22 @@ namespace ABBConnect___Windows_Phone
             );
         }
 
+        /// <summary>
+        /// This is a event that occurs when the user wants to tag users to a feed and its redirect the user to the tagging page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TagIcon_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/TagControl.xaml", UriKind.Relative));
 
         }
 
+        /// <summary>
+        /// This event occers when the user is clicking the applicationbar "my profile" button and is redirecting the user to his profile
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GoToMyProfile(object sender, EventArgs e)
         {
             if (currentUser == null)
@@ -659,6 +709,11 @@ namespace ABBConnect___Windows_Phone
                 (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/ProfileFeed.xaml?userID=" + currentUser.ID, UriKind.Relative));
         }
 
+        /// <summary>
+        /// This event occers when the user is clicking the applicationbar "log out" button and is logging the user out of the application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnLogOut(object sender, EventArgs e)
         {
             MessageBox.Show("You will log out if you click here");
@@ -667,12 +722,22 @@ namespace ABBConnect___Windows_Phone
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/LogIn.xaml", UriKind.Relative));
 
         }
-
+      
+        /// <summary>
+        /// This event occers when the user is clicking the applicationbar "search user" button and is redirecting the user to the searching page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnSearchUser(object sender, EventArgs e)
         {
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/SearchUser.xaml", UriKind.Relative));            
         }
 
+        /// <summary>
+        /// This event occers when the user is clicking the applicationbar "refresh" button and is forcing the system to check for new feeds and update the previous feeds
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnRefresh(object sender, EventArgs e)
         {
             if (!ini)
@@ -686,11 +751,21 @@ namespace ABBConnect___Windows_Phone
 
         }
 
+        /// <summary>
+        /// This event occurs when the user clicks the textbox for inserting feed text, the method deletes the predefined text
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtbContent_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             txtbContent.Text = String.Empty;
         }
 
+        /// <summary>
+        /// This event is handling when the user is clicking any of his saved filters that are available in the filter pivot
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void lstbSavedFilters_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (lstbSavedFilters.SelectedIndex == -1) //invalid selection handled

@@ -66,7 +66,6 @@ namespace ABBConnect___Windows_Phone
             lstbFeeds.Items.Add(fc);
         }
 
-
         /// <summary>
         /// When the user get redirected here, add feeds, userinfo and activity
         /// </summary>
