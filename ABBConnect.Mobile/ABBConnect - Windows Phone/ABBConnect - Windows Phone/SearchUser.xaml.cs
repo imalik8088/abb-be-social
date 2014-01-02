@@ -61,7 +61,17 @@ namespace ABBConnect___Windows_Phone
         /// <param name="e"></param>
         private async void txtbSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            List<User> users = await um.SearchUserByName(txtbSearch.Text);
+            List<User> users;
+            try
+            {
+                users = await um.SearchUserByName(txtbSearch.Text);
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Cannot connect to the server, please check you internet connection");
+                return;
+            }
 
             lstbSearchResult.Items.Clear();
 

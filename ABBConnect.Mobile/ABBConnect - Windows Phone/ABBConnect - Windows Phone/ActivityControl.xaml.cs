@@ -77,11 +77,19 @@ namespace ABBConnect___Windows_Phone
         /// <param name="e"></param>
         private async void LayoutRoot_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            FeedManager fm = new FeedManager();
-            Feed f =  await fm.GetFeedByFeedId(activitiy.FeedId);
+            try
+            {
+                FeedManager fm = new FeedManager();
+                Feed f = await fm.GetFeedByFeedId(activitiy.FeedId);
 
-            App.HFeed = f as PortableBLL.HumanFeed;
-            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/HumanFeed.xaml", UriKind.Relative));
+                App.HFeed = f as PortableBLL.HumanFeed;
+                (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/HumanFeed.xaml", UriKind.Relative));
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error while loading Feed, please try again...");
+            }
+
         }
 
     }

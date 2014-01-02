@@ -112,11 +112,18 @@ namespace ABBConnect___Windows_Phone
         /// </summary>
         private async void GetSavedFilters()
         {
-            UserManager um = new UserManager();
+            try
+            {
+                UserManager um = new UserManager();
+                this.filters = await um.GetUserSavedFilters(currentUser.ID);
 
-            this.filters = await um.GetUserSavedFilters(currentUser.ID);
-
-            lstbSavedFilters.ItemsSource = filters;     
+                lstbSavedFilters.ItemsSource = filters; 
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Couldn't load the saved filters, please restart the application to access them");
+            }
+    
         }
 
 
@@ -140,10 +147,18 @@ namespace ABBConnect___Windows_Phone
         {
             if (timerReady)
             {
-                timerReady = false;
-                await UpdateComments();
-                CheckNewFeeds();
-                timerReady = true;
+                try
+                {
+                    timerReady = false;
+                    await UpdateComments();
+                    CheckNewFeeds();
+                    timerReady = true;
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Couldn't update the comments, please check your connection");
+                }
+
             }
         }
 
@@ -173,35 +188,43 @@ namespace ABBConnect___Windows_Phone
         /// </summary>
         private async void CheckNewFeeds()
         {
-            //if no feeds has been added yet
-            if (feeds.Count == 0)
-                return;
-
-            FeedManager fml = new FeedManager();
-            
-            
-            //load the newest feed
-            List<PortableBLL.Feed> latestFeed = await fml.LoadFeedsByType(currentFeedType, NoCache);
-
-            //get the latest ID and the amount between the last newest ID and this
-            int id = latestFeed[0].ID;
-            int amount = id - this.feeds[0].ID;
-
-            if (amount > 0) //add new feeds if the id differs
+            try
             {
-                lblNewFeeds.Text = "New feeds has been loaded (+" + amount + ")";
+                //if no feeds has been added yet
+                if (feeds.Count == 0)
+                    return;
 
-                //Start timer to just show the label for 10 secs
-                timerLabel.Start();
+                FeedManager fml = new FeedManager();
 
-                //call all feeeds between them and add them first in the list
-                LoadNewFeedsFromId(amount, id);
+
+                //load the newest feed
+                List<PortableBLL.Feed> latestFeed = await fml.LoadFeedsByType(currentFeedType, NoCache);
+
+                //get the latest ID and the amount between the last newest ID and this
+                int id = latestFeed[0].ID;
+                int amount = id - this.feeds[0].ID;
+
+                if (amount > 0) //add new feeds if the id differs
+                {
+                    lblNewFeeds.Text = "New feeds has been loaded (+" + amount + ")";
+
+                    //Start timer to just show the label for 10 secs
+                    timerLabel.Start();
+
+                    //call all feeeds between them and add them first in the list
+                    LoadNewFeedsFromId(amount, id);
+                }
+
+                NoCache++;
+
+                if (NoCache > 5)
+                    NoCache = 1;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Couldn't load new feeds, please check you connection");
             }
 
-            NoCache++;
-
-            if (NoCache > 5)
-                NoCache = 1;
         }
 
         /// <summary>
@@ -268,23 +291,31 @@ namespace ABBConnect___Windows_Phone
         /// <param name="id"></param>
         private async void LoadMoreFeedsFromId(int amount, int id)
         {
-            pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
+            try
+            {
+                pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
 
 
-            List<PortableBLL.Feed> newFeeds = await fm.LoadFeedsByType(currentFeedType, amount, id);
+                List<PortableBLL.Feed> newFeeds = await fm.LoadFeedsByType(currentFeedType, amount, id);
 
-            //List<Feed> newFeeds = await fm.LoadLatestXFeedsFromId(id, amount);
+                //List<Feed> newFeeds = await fm.LoadLatestXFeedsFromId(id, amount);
 
-            //remove button
-            lstbFeeds.Items.RemoveAt(lstbFeeds.Items.Count - 1);
+                //remove button
+                lstbFeeds.Items.RemoveAt(lstbFeeds.Items.Count - 1);
 
-            AddFeedsToList(newFeeds);
+                AddFeedsToList(newFeeds);
 
-            //add the new feeds to the common list
-            feeds.AddRange(newFeeds);
-            CreateButton(feeds[feeds.Count - 1].ID);
+                //add the new feeds to the common list
+                feeds.AddRange(newFeeds);
+                CreateButton(feeds[feeds.Count - 1].ID);
 
-            pgbLoadFeed.Visibility = System.Windows.Visibility.Collapsed;
+                pgbLoadFeed.Visibility = System.Windows.Visibility.Collapsed;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Couldn't load more feeds, please check you connection");
+            }
+
         }
 
         /// <summary>
@@ -294,18 +325,26 @@ namespace ABBConnect___Windows_Phone
         /// <param name="id"></param>
         private async void LoadNewFeedsFromId(int amount, int id)
         {
-            pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
+            try
+            {
+                pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
 
-            List<PortableBLL.Feed> newFeeds = await fm.LoadFeedsByType(currentFeedType, amount, id + 1);
-            //  List<PortableBLL.Feed> newFeeds = await fm.LoadLatestXFeedsFromId(id + 1, amount);
+                List<PortableBLL.Feed> newFeeds = await fm.LoadFeedsByType(currentFeedType, amount, id + 1);
+                //  List<PortableBLL.Feed> newFeeds = await fm.LoadLatestXFeedsFromId(id + 1, amount);
 
-            for (int i = 0; i < newFeeds.Count; i++)
-                feeds.Insert(i, newFeeds[i]);
+                for (int i = 0; i < newFeeds.Count; i++)
+                    feeds.Insert(i, newFeeds[i]);
 
 
-            InsertFeedsToList(newFeeds);
-             
-            pgbLoadFeed.Visibility = System.Windows.Visibility.Collapsed;
+                InsertFeedsToList(newFeeds);
+
+                pgbLoadFeed.Visibility = System.Windows.Visibility.Collapsed;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Couldn't load new feeds, please check your connection");
+            }
+
         }
 
         /// <summary>
@@ -534,16 +573,25 @@ namespace ABBConnect___Windows_Phone
 
             //DEBUG STUFF
            // lblTags.Text = hf.MediaFilePath;
-
-            bool res = await fm.PublishFeed(hf);
-
-            if (res)
+            try
             {
-                txtbContent.Text = "";
-                MessageBox.Show("Feed Published");
+                bool res = await fm.PublishFeed(hf);
+
+                if (res)
+                {
+                    txtbContent.Text = "";
+                    MessageBox.Show("Feed Published");
+                }
+                else
+                    MessageBox.Show("Something went wrong");
             }
-            else
-                MessageBox.Show("Something went wrong");
+            catch (Exception)
+            {
+                
+                MessageBox.Show("Couldn't publish the new feed, please check your connection");
+
+            }
+
         }
 
         /// <summary>
@@ -771,22 +819,31 @@ namespace ABBConnect___Windows_Phone
             if (lstbSavedFilters.SelectedIndex == -1) //invalid selection handled
                 return;
 
-            pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
+            try
+            {
+                pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
 
-            timerNewFeed.Stop();
+                timerNewFeed.Stop();
 
-            brdrHuman.Background = GetColorFromHexa("#FF515B5B");
-            brdrSensor.Background = GetColorFromHexa("#FF515B5B");
+                brdrHuman.Background = GetColorFromHexa("#FF515B5B");
+                brdrSensor.Background = GetColorFromHexa("#FF515B5B");
 
-            feeds = await fm.LoadFeedsFromSavedFilter(filters[ lstbSavedFilters.SelectedIndex], 10);
+                feeds = await fm.LoadFeedsFromSavedFilter(filters[lstbSavedFilters.SelectedIndex], 10);
 
-            lstbFeeds.Items.Clear();
-            AddFeedsToList(feeds);
+                lstbFeeds.Items.Clear();
+                AddFeedsToList(feeds);
 
 
-            lstbSavedFilters.SelectedIndex = -1; //reset the selection to be able to click the same filtering again
+                lstbSavedFilters.SelectedIndex = -1; //reset the selection to be able to click the same filtering again
 
-            pgbLoadFeed.Visibility = System.Windows.Visibility.Collapsed;
+                pgbLoadFeed.Visibility = System.Windows.Visibility.Collapsed;
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Cannot load the feeds from the saved filters, please check your connection!");
+            }
+
         }
 
         /// <summary>
@@ -796,15 +853,24 @@ namespace ABBConnect___Windows_Phone
         /// <param name="e"></param>
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
+            try
+            {
+                pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
 
-            feeds = await fm.LoadFeedsFromLastShift(40);
+                feeds = await fm.LoadFeedsFromLastShift(40);
 
-            lstbFeeds.Items.Clear();
-            AddFeedsToList(feeds);
-            CreateButton(feeds[feeds.Count - 1].ID);
+                lstbFeeds.Items.Clear();
+                AddFeedsToList(feeds);
+                CreateButton(feeds[feeds.Count - 1].ID);
 
-            pgbLoadFeed.Visibility = System.Windows.Visibility.Collapsed;
+                pgbLoadFeed.Visibility = System.Windows.Visibility.Collapsed;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Cannot load the feeds from the previous shift, please check your connection!");
+                
+            }
+ 
 
 
         } 

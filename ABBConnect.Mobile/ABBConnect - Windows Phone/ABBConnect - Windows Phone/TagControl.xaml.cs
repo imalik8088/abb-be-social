@@ -53,7 +53,16 @@ namespace ABBConnect___Windows_Phone
         /// <param name="query"></param>
         private async void FillList(string query)
         {
-            users = await um.SearchUserByName(query);
+            try
+            {
+                users = await um.SearchUserByName(query);
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Cannot connect to the server, please check your connections");
+                return;
+            }
 
             lstbSearchResult.Items.Clear();
 

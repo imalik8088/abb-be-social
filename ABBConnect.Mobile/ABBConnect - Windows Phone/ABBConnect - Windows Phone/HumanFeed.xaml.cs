@@ -131,22 +131,30 @@ namespace ABBConnect___Windows_Phone
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Something went wrong when publishing the comment, try again later!");
                 btnPublish.IsEnabled = true;
                 return;
             }
            
 
             if (!result)
-                MessageBox.Show("Something went wrong, try again later!");
+                MessageBox.Show("Something went wrong when publishing the comment, try again later!");
             else
             {
-                List<Comment> comments = await fm.LoadFeedComments(hf.ID);
-                lstbComments.Items.Insert(3, new CommentControl(comments[0]));
-                lstbComments.UpdateLayout();
+                try
+                {
+                    List<Comment> comments = await fm.LoadFeedComments(hf.ID);
+                    lstbComments.Items.Insert(3, new CommentControl(comments[0]));
+                    lstbComments.UpdateLayout();
 
-                txtbComment.Text = String.Empty;
-                MessageBox.Show("Comment published");
+                    txtbComment.Text = String.Empty;
+                    MessageBox.Show("Comment published");
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Something went wrong when loading the comments, try again later!");
+                }
+
             }
             btnPublish.IsEnabled = true;
 
