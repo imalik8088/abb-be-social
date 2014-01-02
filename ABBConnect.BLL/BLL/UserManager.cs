@@ -214,8 +214,7 @@ namespace BLL
 
             foreach (int i in sensorIds)
             {
-                Sensor tempSensor = new Sensor();
-                tempSensor.ID = i;
+                Sensor tempSensor = this.LoadSensorInformation(i);
                 sensorList.Add(tempSensor);
             }
 
@@ -225,6 +224,20 @@ namespace BLL
         public  List<Activity> GetUserActivity(int userId)
         {
             List<GetUserActivity_Result> list =  usrData.GetUserActivity(userId);
+
+            List<Activity> activityList = new List<Activity>();
+
+            foreach (GetUserActivity_Result entityActivity in list)
+            {
+                activityList.Add(new Activity(entityActivity));
+            }
+
+            return activityList;
+        }
+
+        public List<Activity> GetUserActivity(int userId, int activitiesNumber, int startId)
+        {
+            List<GetUserActivity_Result> list = usrData.GetUserActivityFromId(userId, activitiesNumber, startId);
 
             List<Activity> activityList = new List<Activity>();
 

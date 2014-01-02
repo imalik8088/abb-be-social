@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ABBConnectModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ABBConnectModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="ABBConnectModelStoreContainer" />
         <Function Name="AddCommentToFeed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="feedId" Type="int" Mode="In" />
@@ -68,6 +68,9 @@
           <Parameter Name="startTime" Type="datetime" Mode="In" />
           <Parameter Name="endTime" Type="datetime" Mode="In" />
           <Parameter Name="FeedType" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetFeedsFromLastShift" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="numOfFeeds" Type="int" Mode="In" />
         </Function>
         <Function Name="GetFeedTags" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="feedId" Type="int" Mode="In" />
@@ -137,6 +140,11 @@
           <Parameter Name="startingFeedId" Type="int" Mode="In" />
           <Parameter Name="numOfFeeds" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetXUserActivities" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="int" Mode="In" />
+          <Parameter Name="numOfActivites" Type="int" Mode="In" />
+          <Parameter Name="startingId" Type="int" Mode="In" />
+        </Function>
         <Function Name="Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="username" Type="nvarchar" Mode="In" />
           <Parameter Name="password" Type="nvarchar" Mode="In" />
@@ -181,8 +189,7 @@
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ABBConnectModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -237,10 +244,10 @@
           </FunctionImport>
           <FunctionImport Name="GetAllSensors" ReturnType="Collection(ABBConnectModel.GetAllSensors_Result)" />
           <FunctionImport Name="GetFeedByFeedId" ReturnType="Collection(ABBConnectModel.GetFeedByFeedId_Result)">
-            <Parameter Name="feedId" Mode="In" Type="Int32" />
+          <Parameter Name="feedId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetFeedComments" ReturnType="Collection(ABBConnectModel.GetFeedComments_Result)">
-            <Parameter Name="feedId" Mode="In" Type="Int32" />
+          <Parameter Name="feedId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetFeedsByFilter" ReturnType="Collection(ABBConnectModel.GetFeedsByFilter_Result)">
             <Parameter Name="Name" Mode="In" Type="String" />
@@ -250,10 +257,10 @@
             <Parameter Name="FeedType" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetFeedTags" ReturnType="Collection(ABBConnectModel.GetFeedTags_Result)">
-            <Parameter Name="feedId" Mode="In" Type="Int32" />
+          <Parameter Name="feedId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetFollowedSensors" ReturnType="Collection(Int32)">
-            <Parameter Name="HumanUserId" Mode="In" Type="Int32" />
+          <Parameter Name="HumanUserId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetHistoricalDataFromSensor" ReturnType="Collection(ABBConnectModel.GetHistoricalDataFromSensor_Result)">
             <Parameter Name="sensorID" Mode="In" Type="Int32" />
@@ -261,10 +268,10 @@
             <Parameter Name="to" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="GetHumanInformation" ReturnType="Collection(ABBConnectModel.GetHumanInformation_Result)">
-            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          <Parameter Name="UserId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetHumanInformationByUsername" ReturnType="Collection(ABBConnectModel.GetHumanInformationByUsername_Result)">
-            <Parameter Name="UserName" Mode="In" Type="String" />
+          <Parameter Name="UserName" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetLatestFeeds" ReturnType="Collection(ABBConnectModel.GetLatestFeeds_Result)" />
           <FunctionImport Name="GetLatestFeedsByFilter" ReturnType="Collection(ABBConnectModel.GetLatestFeedsByFilter_Result)">
@@ -273,10 +280,10 @@
             <Parameter Name="endTime" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="GetLatestSensorValue" ReturnType="Collection(String)">
-            <Parameter Name="sensorID" Mode="In" Type="Int32" />
+          <Parameter Name="sensorID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetLatestXFeeds" ReturnType="Collection(ABBConnectModel.GetLatestXFeeds_Result)">
-            <Parameter Name="X" Mode="In" Type="Int32" />
+          <Parameter Name="X" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetLatestXFeedsFromId" ReturnType="Collection(ABBConnectModel.GetLatestXFeedsFromId_Result)">
             <Parameter Name="feedID" Mode="In" Type="Int32" />
@@ -285,13 +292,13 @@
           <FunctionImport Name="GetLocations" ReturnType="Collection(String)" />
           <FunctionImport Name="GetPriorityCategories" ReturnType="Collection(ABBConnectModel.GetPriorityCategories_Result)" />
           <FunctionImport Name="GetSensorInformation" ReturnType="Collection(ABBConnectModel.GetSensorInformation_Result)">
-            <Parameter Name="sensorID" Mode="In" Type="Int32" />
+          <Parameter Name="sensorID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetUserActivity" ReturnType="Collection(ABBConnectModel.GetUserActivity_Result)">
-            <Parameter Name="userId" Mode="In" Type="Int32" />
+          <Parameter Name="userId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetUserFeeds" ReturnType="Collection(ABBConnectModel.GetUserFeeds_Result)">
-            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          <Parameter Name="UserId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetUserFeedsByFilter" ReturnType="Collection(ABBConnectModel.GetUserFeedsByFilter_Result)">
             <Parameter Name="UserId" Mode="In" Type="Int32" />
@@ -300,13 +307,13 @@
             <Parameter Name="endTime" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="GetUserSavedFilters" ReturnType="Collection(ABBConnectModel.GetUserSavedFilters_Result)">
-            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          <Parameter Name="UserId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetUserSavedFiltersTagedUsers" ReturnType="Collection(ABBConnectModel.GetUserSavedFiltersTagedUsers_Result)">
-            <Parameter Name="FilterId" Mode="In" Type="Int32" />
+          <Parameter Name="FilterId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetUsersByName" ReturnType="Collection(ABBConnectModel.GetUsersByName_Result)">
-            <Parameter Name="query" Mode="In" Type="String" />
+          <Parameter Name="query" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetXFeedsByFilter" ReturnType="Collection(ABBConnectModel.GetXFeedsByFilter_Result)">
             <Parameter Name="UserId" Mode="In" Type="Int32" />
@@ -361,6 +368,14 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="GetFeedsFromLastShift" ReturnType="Collection(ABBConnectModel.GetFeedsFromLastShift_Result)">
+          <Parameter Name="numOfFeeds" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetXUserActivities" ReturnType="Collection(ABBConnectModel.GetXUserActivities_Result)">
+            <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="numOfActivites" Mode="In" Type="Int32" />
+            <Parameter Name="startingId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetAllHumanFeeds_Result">
           <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
@@ -532,6 +547,7 @@
           <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
           <Property Type="Decimal" Name="MIN_Critical" Nullable="true" Precision="18" Scale="2" />
           <Property Type="Decimal" Name="MAX_Critical" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="Location" Nullable="false" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="GetUserActivity_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -616,6 +632,26 @@
           <Property Type="Int32" Name="ID" Nullable="false" />
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetFeedsFromLastShift_Result">
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="Type" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="CreationTimeStamp" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Text" Nullable="true" />
+          <Property Type="String" Name="FilePath" Nullable="true" />
+          <Property Type="String" Name="PrioCategory" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="PrioValue" Nullable="false" />
+          <Property Type="Int32" Name="FeedId" Nullable="false" />
+          <Property Type="String" Name="Location" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetXUserActivities_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="Int32" Name="FeedId" Nullable="false" />
+          <Property Type="String" Name="Type" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Text" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Timestamp" Nullable="false" Precision="23" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -873,6 +909,7 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="MIN_Critical" ColumnName="MIN_Critical" />
                 <ScalarProperty Name="MAX_Critical" ColumnName="MAX_Critical" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -1007,6 +1044,34 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="ABBConnectModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ABBConnectModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="GetFeedsFromLastShift" FunctionName="ABBConnectModel.Store.GetFeedsFromLastShift">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ABBConnectModel.GetFeedsFromLastShift_Result">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CreationTimeStamp" ColumnName="CreationTimeStamp" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="PrioCategory" ColumnName="PrioCategory" />
+                <ScalarProperty Name="PrioValue" ColumnName="PrioValue" />
+                <ScalarProperty Name="FeedId" ColumnName="FeedId" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetXUserActivities" FunctionName="ABBConnectModel.Store.GetXUserActivities">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ABBConnectModel.GetXUserActivities_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FeedId" ColumnName="FeedId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

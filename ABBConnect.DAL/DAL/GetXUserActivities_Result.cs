@@ -11,13 +11,13 @@ namespace DAL
 {
     using System;
     
-    public partial class GetSensorInformation_Result
+    public partial class GetXUserActivities_Result
     {
         public int Id { get; set; }
-        public string Unit { get; set; }
-        public string Name { get; set; }
-        public Nullable<decimal> MIN_Critical { get; set; }
-        public Nullable<decimal> MAX_Critical { get; set; }
-        public string Location { get; set; }
+        public int UserId { get; set; }
+        public int FeedId { get; set; }
+        public string Type { get; set; }
+        public string Text { get; set; }
+        public System.DateTime Timestamp { get; set; }
     }
 }

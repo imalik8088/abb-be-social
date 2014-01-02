@@ -609,5 +609,31 @@ namespace DAL
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
+    
+        public virtual ObjectResult<GetFeedsFromLastShift_Result> GetFeedsFromLastShift(Nullable<int> numOfFeeds)
+        {
+            var numOfFeedsParameter = numOfFeeds.HasValue ?
+                new ObjectParameter("numOfFeeds", numOfFeeds) :
+                new ObjectParameter("numOfFeeds", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetFeedsFromLastShift_Result>("GetFeedsFromLastShift", numOfFeedsParameter);
+        }
+    
+        public virtual ObjectResult<GetXUserActivities_Result> GetXUserActivities(Nullable<int> userId, Nullable<int> numOfActivites, Nullable<int> startingId)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("userId", userId) :
+                new ObjectParameter("userId", typeof(int));
+    
+            var numOfActivitesParameter = numOfActivites.HasValue ?
+                new ObjectParameter("numOfActivites", numOfActivites) :
+                new ObjectParameter("numOfActivites", typeof(int));
+    
+            var startingIdParameter = startingId.HasValue ?
+                new ObjectParameter("startingId", startingId) :
+                new ObjectParameter("startingId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetXUserActivities_Result>("GetXUserActivities", userIdParameter, numOfActivitesParameter, startingIdParameter);
+        }
     }
 }
