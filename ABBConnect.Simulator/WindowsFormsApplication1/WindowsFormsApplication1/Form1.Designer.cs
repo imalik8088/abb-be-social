@@ -205,7 +205,7 @@
             this.txtbTime.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.txtbTime.Size = new System.Drawing.Size(84, 20);
             this.txtbTime.TabIndex = 10;
-            this.txtbTime.Text = "2";
+            this.txtbTime.Text = "1000";
             // 
             // button1
             // 
