@@ -52,12 +52,18 @@ public partial class controls_FeedPage : System.Web.UI.UserControl
             HumanFeed currentHumanFeed = (HumanFeed)currentFeed;
 
             l = (Literal)e.Item.FindControl("litFeedPosterName");
-            //l.Text = currentHumanFeed.Owner.UserName;  
             l.Text = currentHumanFeed.Owner.FirstName + " " + currentHumanFeed.Owner.LastName;
 
+            // Render Content 
             l = (Literal)e.Item.FindControl("litFeedContent");
-            l.Text = currentFeed.Content;
-
+            l.Text = l.Text + currentFeed.Content;
+            if(currentHumanFeed.MediaFilePath != String.Empty)
+            {
+                //Generate thumbnail container
+                string thumbnailHTML = "<a href='' class='thumbnail'><img src='" + currentHumanFeed.MediaFilePath +  "'></a>";
+                l.Text = l.Text + "<hr>" + thumbnailHTML;
+            }
+          
             // Render Comments
             Repeater feedCommentsRepeater = (Repeater)e.Item.FindControl("feedCommentsRepeater");
             
@@ -77,7 +83,6 @@ public partial class controls_FeedPage : System.Web.UI.UserControl
             {
                 foreach (Human tagedHuman in currentFeed.Tags)
                 {
-                    //feedTags = feedTags + "," + tagedHuman.UserName;
                     //group the name_surname and the ID, which will be used in a text-value manner
                     feedTags = feedTags + "," + tagedHuman.FirstName + " " + tagedHuman.LastName+"||"+tagedHuman.ID;
                 }
@@ -85,7 +90,6 @@ public partial class controls_FeedPage : System.Web.UI.UserControl
                 if (feedTags.Length > 0)
                 {
                     feedTags = feedTags.Remove(0, 1);
-                   // feedTags = feedTags.Remove(feedTags.LastIndexOf(","));
                 }
             }
             //else

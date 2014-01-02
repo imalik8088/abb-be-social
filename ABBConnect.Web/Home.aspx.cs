@@ -253,6 +253,17 @@ public partial class _Home : System.Web.UI.Page
         ajaxFeedsHTML.FeedsRawData = textWriter.ToString();
         return ajaxFeedsHTML;
     }
+    
+    [System.Web.Services.WebMethod]
+    public static int AjaxUserUnFollowSensor(int sensorId)
+    {
+        bool returnValue = false;
+        UserManager userManager = new UserManager();
+        int userId = int.Parse(HttpContext.Current.Session["humanID"].ToString());
+        returnValue = userManager.UnfollowSensor(userId, sensorId);
+        if (returnValue == true) return sensorId;
+        else return 0;           
+    }
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -260,6 +271,7 @@ public partial class _Home : System.Web.UI.Page
 
         // HumanFeeds
         var lastHumanFeed = (List<Feed>)null;
+
         // Get last Feed so we can get Id of it
         DateTime filterStartTime = DateTime.MinValue;
         DateTime filterEndTime = DateTime.MaxValue;            
@@ -273,6 +285,11 @@ public partial class _Home : System.Web.UI.Page
         lastSensorFeed = feedManager.LoadFeedsByType(FeedType.FeedSource.Sensor,1);
         RealTimeSensorFeedPage.LastFeedId = lastSensorFeed.First().ID + 1;
         RealTimeSensorFeedPage.RenderFeedPage();
+
+        // User followed RealTime Sensors
+        UserFollowedRealTimeSensorPage.ContainerPrefix = "user";
+        UserFollowedRealTimeSensorPage.IsFilteredByUser = true;
+        UserFollowedRealTimeSensorPage.RenderSensorPage();
 
         //Call JS Methods
         ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "populatFeedPostTypes", "<script type='text/javascript'>AjaxPopulateSelectBoxPostFeedType()</script>", false);

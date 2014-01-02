@@ -3,6 +3,7 @@
 <%@ Register Src="controls/FeedPage.ascx" TagName="FeedPage" TagPrefix="abbConnect" %>
 <%@ Register Src="controls/FeedComments.ascx" TagName="FeedComments" TagPrefix="abbConnect" %>
 <%@ Register Src="controls/RealTimeSensorFeedPage.ascx" TagName="RealTimeSensorFeedPage" TagPrefix="abbConnect" %>
+<%@ Register Src="controls/RealTimeSensorPage.ascx" TagName="RealTimeSensorPage" TagPrefix="abbConnect" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
@@ -62,6 +63,16 @@
             <div id="loading_throbber_human_feeds" class="loading-throbber" data-container="feedsContainer"></div>
         </div>
         <div class="col-md-6">
+             <div class="feed-header">
+                <div class="form-inline">
+                    <div class="form-group">
+                        <h3><span class="glyphicon glyphicon-flash"></span>Followed sensors <small>User followed sensors</small></h3>
+                    </div>
+                </div>
+            </div>
+               <div id="userFollowedSensorsContainer">
+                <abbConnect:RealTimeSensorPage ID="UserFollowedRealTimeSensorPage" runat="server" />
+            </div>
             <div class="feed-header">
                 <div class="form-inline">
                     <div class="form-group">
