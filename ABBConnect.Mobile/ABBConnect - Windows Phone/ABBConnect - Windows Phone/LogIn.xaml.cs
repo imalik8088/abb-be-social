@@ -125,7 +125,6 @@ namespace ABBConnect___Windows_Phone
 
         }
 
-
         /// <summary>
         /// Saves the credentails to the local DB
         /// </summary>

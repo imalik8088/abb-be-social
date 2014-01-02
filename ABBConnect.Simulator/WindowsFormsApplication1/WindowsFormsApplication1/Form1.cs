@@ -92,7 +92,11 @@ namespace WindowsFormsApplication1
 
         private void btnPublish_Click(object sender, EventArgs e)
         {
-            sensorManager.PublishSensorValues();
+            int time = 1000;
+            if (int.TryParse(txtbTime.Text, out time))
+                sensorManager.PublishSensorValues(time);
+            else
+                MessageBox.Show("Invalid time intervall specified");
         }
 
         private void btnLoad_Click(object sender, EventArgs e)
@@ -117,5 +121,6 @@ namespace WindowsFormsApplication1
                 }
             }
         }
+
     }
 }

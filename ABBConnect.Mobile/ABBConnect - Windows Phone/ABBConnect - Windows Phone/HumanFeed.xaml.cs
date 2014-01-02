@@ -28,7 +28,9 @@ namespace ABBConnect___Windows_Phone
 
         PortableBLL.HumanFeed hf;
       
-        //Constructor
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public HumanFeed()
         {
             InitializeComponent();
