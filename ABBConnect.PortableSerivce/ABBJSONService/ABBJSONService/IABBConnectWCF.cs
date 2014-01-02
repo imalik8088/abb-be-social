@@ -161,6 +161,10 @@ namespace ABBJSONService
         [OperationContract]
         [WebInvoke]
         List<DAL.GetLatestXFeeds_Result> GetFeedsFromLastShift(string numFeeds, string randomGuid);
+
+        [OperationContract]
+        [WebInvoke]
+        List<DAL.GetUserActivity_Result> GetUserActivityFromId(string userId, string numberOfActivities, string startId);
     }
 
 }

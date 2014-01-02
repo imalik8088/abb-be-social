@@ -537,4 +537,35 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetFeedsFromLastShift">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="numFeeds" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="randomGuid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFeedsFromLastShiftResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/DAL" minOccurs="0" name="GetFeedsFromLastShiftResult" nillable="true" type="q27:ArrayOfGetLatestXFeeds_Result" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserActivityFromId">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="numberOfActivities" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="startId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserActivityFromIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/DAL" minOccurs="0" name="GetUserActivityFromIdResult" nillable="true" type="q28:ArrayOfGetUserActivity_Result" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

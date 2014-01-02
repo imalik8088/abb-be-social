@@ -403,6 +403,24 @@ namespace ABBJSONService
 
             return feedData.GetFeedsFromLastShift(feedsNumber);
         }
+
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetUserActivityFromId?userId={userId}&numberOfActivities={numberOfActivities}&startId={startId}")]
+        public List<DAL.GetUserActivity_Result> GetUserActivityFromId(string userId, string numberOfActivities, string startId)
+        {
+            UserData userData = new UserData();
+
+            int activitiesNumber = -1;
+
+            if (!numberOfActivities.Equals(""))
+                activitiesNumber = Int32.Parse(numberOfActivities);
+
+            int startingId = -1;
+
+            if (!startId.Equals(""))
+                startingId = Int32.Parse(startId);
+
+            return userData.GetUserActivityFromId(Int32.Parse(userId), activitiesNumber, startingId);
+        }
     }
 }
 

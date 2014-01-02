@@ -211,6 +211,7 @@
   <xs:complexType name="GetSensorInformation_Result">
     <xs:sequence>
       <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Location" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="MAX_Critical" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="MIN_Critical" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />

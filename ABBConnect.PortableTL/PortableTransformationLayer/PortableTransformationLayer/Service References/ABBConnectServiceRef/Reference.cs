@@ -1849,6 +1849,8 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
         
         private int IdField;
         
+        private string LocationField;
+        
         private System.Nullable<decimal> MAX_CriticalField;
         
         private System.Nullable<decimal> MIN_CriticalField;
@@ -1866,6 +1868,19 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
                 if ((this.IdField.Equals(value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Location {
+            get {
+                return this.LocationField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LocationField, value) != true)) {
+                    this.LocationField = value;
+                    this.RaisePropertyChanged("Location");
                 }
             }
         }
@@ -3045,6 +3060,16 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
         System.IAsyncResult BeginGetFeedByFeedId(string feedId, string randomGuid, System.AsyncCallback callback, object asyncState);
         
         PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result1 EndGetFeedByFeedId(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IABBConnectWCF/GetFeedsFromLastShift", ReplyAction="http://tempuri.org/IABBConnectWCF/GetFeedsFromLastShiftResponse")]
+        System.IAsyncResult BeginGetFeedsFromLastShift(string numFeeds, string randomGuid, System.AsyncCallback callback, object asyncState);
+        
+        PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result1[] EndGetFeedsFromLastShift(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IABBConnectWCF/GetUserActivityFromId", ReplyAction="http://tempuri.org/IABBConnectWCF/GetUserActivityFromIdResponse")]
+        System.IAsyncResult BeginGetUserActivityFromId(string userId, string numberOfActivities, string startId, System.AsyncCallback callback, object asyncState);
+        
+        PortableTransformationLayer.ABBConnectServiceRef.GetUserActivity_Result[] EndGetUserActivityFromId(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -3737,6 +3762,44 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetFeedsFromLastShiftCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetFeedsFromLastShiftCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result1[] Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result1[])(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetUserActivityFromIdCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetUserActivityFromIdCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public PortableTransformationLayer.ABBConnectServiceRef.GetUserActivity_Result[] Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((PortableTransformationLayer.ABBConnectServiceRef.GetUserActivity_Result[])(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class ABBConnectWCFClient : System.ServiceModel.ClientBase<PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF>, PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF {
         
         private BeginOperationDelegate onBeginLogInDelegate;
@@ -3955,6 +4018,18 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
         
         private System.Threading.SendOrPostCallback onGetFeedByFeedIdCompletedDelegate;
         
+        private BeginOperationDelegate onBeginGetFeedsFromLastShiftDelegate;
+        
+        private EndOperationDelegate onEndGetFeedsFromLastShiftDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetFeedsFromLastShiftCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetUserActivityFromIdDelegate;
+        
+        private EndOperationDelegate onEndGetUserActivityFromIdDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetUserActivityFromIdCompletedDelegate;
+        
         private BeginOperationDelegate onBeginOpenDelegate;
         
         private EndOperationDelegate onEndOpenDelegate;
@@ -4076,6 +4151,10 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
         public event System.EventHandler<GetFollowedSensorsCompletedEventArgs> GetFollowedSensorsCompleted;
         
         public event System.EventHandler<GetFeedByFeedIdCompletedEventArgs> GetFeedByFeedIdCompleted;
+        
+        public event System.EventHandler<GetFeedsFromLastShiftCompletedEventArgs> GetFeedsFromLastShiftCompleted;
+        
+        public event System.EventHandler<GetUserActivityFromIdCompletedEventArgs> GetUserActivityFromIdCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
@@ -5809,6 +5888,104 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
                         randomGuid}, this.onEndGetFeedByFeedIdDelegate, this.onGetFeedByFeedIdCompletedDelegate, userState);
         }
         
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF.BeginGetFeedsFromLastShift(string numFeeds, string randomGuid, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetFeedsFromLastShift(numFeeds, randomGuid, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result1[] PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF.EndGetFeedsFromLastShift(System.IAsyncResult result) {
+            return base.Channel.EndGetFeedsFromLastShift(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetFeedsFromLastShift(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string numFeeds = ((string)(inValues[0]));
+            string randomGuid = ((string)(inValues[1]));
+            return ((PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF)(this)).BeginGetFeedsFromLastShift(numFeeds, randomGuid, callback, asyncState);
+        }
+        
+        private object[] OnEndGetFeedsFromLastShift(System.IAsyncResult result) {
+            PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result1[] retVal = ((PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF)(this)).EndGetFeedsFromLastShift(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetFeedsFromLastShiftCompleted(object state) {
+            if ((this.GetFeedsFromLastShiftCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetFeedsFromLastShiftCompleted(this, new GetFeedsFromLastShiftCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetFeedsFromLastShiftAsync(string numFeeds, string randomGuid) {
+            this.GetFeedsFromLastShiftAsync(numFeeds, randomGuid, null);
+        }
+        
+        public void GetFeedsFromLastShiftAsync(string numFeeds, string randomGuid, object userState) {
+            if ((this.onBeginGetFeedsFromLastShiftDelegate == null)) {
+                this.onBeginGetFeedsFromLastShiftDelegate = new BeginOperationDelegate(this.OnBeginGetFeedsFromLastShift);
+            }
+            if ((this.onEndGetFeedsFromLastShiftDelegate == null)) {
+                this.onEndGetFeedsFromLastShiftDelegate = new EndOperationDelegate(this.OnEndGetFeedsFromLastShift);
+            }
+            if ((this.onGetFeedsFromLastShiftCompletedDelegate == null)) {
+                this.onGetFeedsFromLastShiftCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetFeedsFromLastShiftCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetFeedsFromLastShiftDelegate, new object[] {
+                        numFeeds,
+                        randomGuid}, this.onEndGetFeedsFromLastShiftDelegate, this.onGetFeedsFromLastShiftCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF.BeginGetUserActivityFromId(string userId, string numberOfActivities, string startId, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetUserActivityFromId(userId, numberOfActivities, startId, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        PortableTransformationLayer.ABBConnectServiceRef.GetUserActivity_Result[] PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF.EndGetUserActivityFromId(System.IAsyncResult result) {
+            return base.Channel.EndGetUserActivityFromId(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetUserActivityFromId(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string userId = ((string)(inValues[0]));
+            string numberOfActivities = ((string)(inValues[1]));
+            string startId = ((string)(inValues[2]));
+            return ((PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF)(this)).BeginGetUserActivityFromId(userId, numberOfActivities, startId, callback, asyncState);
+        }
+        
+        private object[] OnEndGetUserActivityFromId(System.IAsyncResult result) {
+            PortableTransformationLayer.ABBConnectServiceRef.GetUserActivity_Result[] retVal = ((PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF)(this)).EndGetUserActivityFromId(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetUserActivityFromIdCompleted(object state) {
+            if ((this.GetUserActivityFromIdCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetUserActivityFromIdCompleted(this, new GetUserActivityFromIdCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetUserActivityFromIdAsync(string userId, string numberOfActivities, string startId) {
+            this.GetUserActivityFromIdAsync(userId, numberOfActivities, startId, null);
+        }
+        
+        public void GetUserActivityFromIdAsync(string userId, string numberOfActivities, string startId, object userState) {
+            if ((this.onBeginGetUserActivityFromIdDelegate == null)) {
+                this.onBeginGetUserActivityFromIdDelegate = new BeginOperationDelegate(this.OnBeginGetUserActivityFromId);
+            }
+            if ((this.onEndGetUserActivityFromIdDelegate == null)) {
+                this.onEndGetUserActivityFromIdDelegate = new EndOperationDelegate(this.OnEndGetUserActivityFromId);
+            }
+            if ((this.onGetUserActivityFromIdCompletedDelegate == null)) {
+                this.onGetUserActivityFromIdCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetUserActivityFromIdCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetUserActivityFromIdDelegate, new object[] {
+                        userId,
+                        numberOfActivities,
+                        startId}, this.onEndGetUserActivityFromIdDelegate, this.onGetUserActivityFromIdCompletedDelegate, userState);
+        }
+        
         private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState) {
             return ((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(callback, asyncState);
         }
@@ -6394,6 +6571,35 @@ namespace PortableTransformationLayer.ABBConnectServiceRef {
             public PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result1 EndGetFeedByFeedId(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result1 _result = ((PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result1)(base.EndInvoke("GetFeedByFeedId", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginGetFeedsFromLastShift(string numFeeds, string randomGuid, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[2];
+                _args[0] = numFeeds;
+                _args[1] = randomGuid;
+                System.IAsyncResult _result = base.BeginInvoke("GetFeedsFromLastShift", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result1[] EndGetFeedsFromLastShift(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result1[] _result = ((PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result1[])(base.EndInvoke("GetFeedsFromLastShift", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginGetUserActivityFromId(string userId, string numberOfActivities, string startId, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[3];
+                _args[0] = userId;
+                _args[1] = numberOfActivities;
+                _args[2] = startId;
+                System.IAsyncResult _result = base.BeginInvoke("GetUserActivityFromId", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public PortableTransformationLayer.ABBConnectServiceRef.GetUserActivity_Result[] EndGetUserActivityFromId(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                PortableTransformationLayer.ABBConnectServiceRef.GetUserActivity_Result[] _result = ((PortableTransformationLayer.ABBConnectServiceRef.GetUserActivity_Result[])(base.EndInvoke("GetUserActivityFromId", _args, result)));
                 return _result;
             }
         }

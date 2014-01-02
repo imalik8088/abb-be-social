@@ -225,6 +225,18 @@
   <wsdl:message name="IABBConnectWCF_GetFeedByFeedId_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetFeedByFeedIdResponse" />
   </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetFeedsFromLastShift_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFeedsFromLastShift" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetFeedsFromLastShift_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFeedsFromLastShiftResponse" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetUserActivityFromId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserActivityFromId" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetUserActivityFromId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserActivityFromIdResponse" />
+  </wsdl:message>
   <wsdl:portType name="IABBConnectWCF">
     <wsdl:operation name="LogIn">
       <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/LogIn" message="tns:IABBConnectWCF_LogIn_InputMessage" />
@@ -369,6 +381,14 @@
     <wsdl:operation name="GetFeedByFeedId">
       <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/GetFeedByFeedId" message="tns:IABBConnectWCF_GetFeedByFeedId_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/GetFeedByFeedIdResponse" message="tns:IABBConnectWCF_GetFeedByFeedId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFeedsFromLastShift">
+      <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/GetFeedsFromLastShift" message="tns:IABBConnectWCF_GetFeedsFromLastShift_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/GetFeedsFromLastShiftResponse" message="tns:IABBConnectWCF_GetFeedsFromLastShift_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserActivityFromId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/GetUserActivityFromId" message="tns:IABBConnectWCF_GetUserActivityFromId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/GetUserActivityFromIdResponse" message="tns:IABBConnectWCF_GetUserActivityFromId_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:service name="ABBConnectWCF" />
