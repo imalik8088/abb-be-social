@@ -91,10 +91,25 @@
             -->
             <controls:PivotItem Header="Filters" Margin="10,0,10,28">
                 <Grid>
+                    <toolkit:WrapPanel HorizontalAlignment="Left" Height="131" VerticalAlignment="Top" Width="456">
+                        <Border Tag="true"  x:Name="brdrSensor" BorderBrush="Gray" Background="#FF515B5B" BorderThickness="3" Margin="123,20,-231,-42" MouseLeftButtonUp="brdrSensor_MouseLeftButtonUp">
+                            <TextBlock Text="Sensor" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <Border Tag="true" x:Name="brdrHuman"  BorderBrush="Gray" Background="#FF515B5B" BorderThickness="3" Margin="10,20,-118,-42" MouseLeftButtonUp="brdrHuman_MouseLeftButtonUp">
+                            <TextBlock Text="Human" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <Button Content="Previous Shift"  HorizontalAlignment="Left"  Height="115" VerticalAlignment="Top" Width="131" Margin="315,10,-333,-53" FontSize="20" Click="Button_Click">
+                            <Button.ContentTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}" TextWrapping="Wrap" TextAlignment="Center"/>
+                                </DataTemplate>
+                            </Button.ContentTemplate>
+                        </Button>
 
+                    </toolkit:WrapPanel>
                     <!--Triple line list no text wrapping-->
                     <ListBox x:Name="lstbSavedFilters" HorizontalAlignment="Left"
-                             Height="439" Margin="10,158,0,0"
+                             Height="426" Margin="10,171,0,0"
                              VerticalAlignment="Top" 
                              Width="436"
                              ItemsSource="{Binding}" SelectionChanged="lstbSavedFilters_SelectionChanged"
@@ -108,17 +123,11 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                    <toolkit:WrapPanel HorizontalAlignment="Left" Height="158" VerticalAlignment="Top" Width="456">
-                        <Border Tag="true"  x:Name="brdrSensor" BorderBrush="Gray" Background="#FFB5BBBB" BorderThickness="3" Margin="219,13,-370,-149" MouseLeftButtonUp="brdrSensor_MouseLeftButtonUp">
-                            <TextBlock Text="Sensor" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                        <Border Tag="true" x:Name="brdrHuman"  BorderBrush="Gray" Background="#FFB5BBBB" BorderThickness="3" Margin="63,13,-214,-149" MouseLeftButtonUp="brdrHuman_MouseLeftButtonUp">
-                            <TextBlock Text="Human" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </toolkit:WrapPanel>
+                    <TextBlock HorizontalAlignment="Left" Margin="10,144,0,0" TextWrapping="Wrap" Text="Saved Filters:" VerticalAlignment="Top"/>
+
                 </Grid>
             </controls:PivotItem>
         </controls:Pivot>
-        </Grid>
+    </Grid>
 
 </phone:PhoneApplicationPage>

@@ -13,6 +13,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
 using System.Windows.Navigation;
 using PortableBLL;
+using System.Windows.Media.Imaging;
 
 /*
  * Written by: Robert Gustavsson
@@ -180,22 +181,26 @@ namespace ABBConnect___Windows_Phone
                 lblNameClick.Text = ((Human)currentUser).FirstName + " " + ((Human)currentUser).LastName;
                 lblPhoneClick.Text = ((Human)currentUser).PhoneNumber;
 
-                imgSensor.Visibility = Visibility.Collapsed;  // hide the sensor icon
                 imgUser.Visibility = Visibility.Visible;    // show the user icon
 
             }
             else if (currentUser is Sensor)
             {
-                lblNameClick.Text = currentUser.UserName + " Unit ( " + ((Sensor)currentUser).UnitMetric + " )";
+                lblNameClick.Text = currentUser.UserName + " Unit (" + ((Sensor)currentUser).UnitMetric + ")";
                 lblEmail.Text = "Lower Boundery";
                 lblEmailClick.Text = ((Sensor)currentUser).LowerBoundary.ToString();
+                imgMail.Source = new BitmapImage(new Uri("/Icons/icon-sensor.png", UriKind.Relative)); //TODO: add image for upper and lower boundery
 
                 lblPhone.Text = "UpperBoundery";
                 lblPhoneClick.Text = ((Sensor)currentUser).UpperBoundary.ToString();
+                imgPhone.Source = new BitmapImage(new Uri("/Icons/icon-sensor.png", UriKind.Relative)); //TODO: add image for upper and lower boundery
+                
 
-                // throws a error in runtime.....
-                //imgSensor.Visibility = Visibility.Visible; // show the sensor icon
-                //imgUser.Visibility = Visibility.Collapsed;  // hide the user icon
+                pivHead.Items.Remove(pivotActivity);
+                pivotActivity.Visibility = Visibility.Collapsed;
+
+                imgUser.Visibility = Visibility.Visible;    // show the user icon
+                imgUser.Source = new BitmapImage(new Uri("/Icons/icon-sensor.png", UriKind.Relative));
 
                 //disable clicking
                 lblPhoneClick.MouseLeftButtonDown -= lblPhoneClick_MouseLeftButtonUp;

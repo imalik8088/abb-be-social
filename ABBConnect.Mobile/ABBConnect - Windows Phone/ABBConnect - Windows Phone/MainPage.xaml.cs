@@ -787,6 +787,26 @@ namespace ABBConnect___Windows_Phone
             lstbSavedFilters.SelectedIndex = -1; //reset the selection to be able to click the same filtering again
 
             pgbLoadFeed.Visibility = System.Windows.Visibility.Collapsed;
+        }
+
+        /// <summary>
+        /// Loads all the feeds from the previous shift
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
+
+            feeds = await fm.LoadFeedsFromLastShift(40);
+
+            lstbFeeds.Items.Clear();
+            AddFeedsToList(feeds);
+            CreateButton(feeds[feeds.Count - 1].ID);
+
+            pgbLoadFeed.Visibility = System.Windows.Visibility.Collapsed;
+
+
         } 
     }
 }

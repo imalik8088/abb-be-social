@@ -18,7 +18,8 @@
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
         <Image Height="35" HorizontalAlignment="Left" Margin="10,15,0,0" x:Name="imgUser" Stretch="Fill" VerticalAlignment="Top" Width="35" Source="/Icons/icon-user-app-bar.png" />
-        <Image Height="35" HorizontalAlignment="Left" Margin="10,15,0,0" x:Name="imgSensor" Stretch="Fill" VerticalAlignment="Top" Width="35" Source="/Icons/icon-sensor.png" />
+       <!-- <Image Height="35" HorizontalAlignment="Left" Margin="10,15,0,0" x:Name="imgSensor" Stretch="Fill" VerticalAlignment="Top" Width="35" Source="/Icons/icon-sensor.png" />
+      -->
         <controls:Pivot Title="" x:Name="pivHead">
 
             <!--Pivot item two-->
@@ -53,7 +54,7 @@
                 </Grid>
             </controls:PivotItem>
 
-            <controls:PivotItem Header="Activity">
+            <controls:PivotItem Header="Activity" x:Name="pivotActivity">
                 <Grid HorizontalAlignment="Left" Height="607" VerticalAlignment="Top" Width="456">
                     <ListBox x:Name="lstbActivities" HorizontalAlignment="Left" Height="607" VerticalAlignment="Top" Width="456"/>
 
