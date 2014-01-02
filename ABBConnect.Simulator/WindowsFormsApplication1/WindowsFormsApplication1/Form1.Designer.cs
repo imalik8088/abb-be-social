@@ -40,9 +40,15 @@
             this.lstbSensors = new System.Windows.Forms.ListBox();
             this.grpbAddValues = new System.Windows.Forms.GroupBox();
             this.btnLoad = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblSetTime = new System.Windows.Forms.Label();
+            this.txtbTime = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.grpbChangeBoundery.SuspendLayout();
             this.grpbSensors.SuspendLayout();
             this.grpbAddValues.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpbChangeBoundery
@@ -161,11 +167,61 @@
             this.btnLoad.UseVisualStyleBackColor = true;
             this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.lblSetTime);
+            this.groupBox1.Controls.Add(this.txtbTime);
+            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Location = new System.Drawing.Point(200, 187);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(111, 59);
+            this.groupBox1.TabIndex = 11;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Time intervall";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(90, 37);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(20, 13);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "ms";
+            // 
+            // lblSetTime
+            // 
+            this.lblSetTime.AutoSize = true;
+            this.lblSetTime.Location = new System.Drawing.Point(6, 17);
+            this.lblSetTime.Name = "lblSetTime";
+            this.lblSetTime.Size = new System.Drawing.Size(48, 13);
+            this.lblSetTime.TabIndex = 10;
+            this.lblSetTime.Text = "Set time:";
+            // 
+            // txtbTime
+            // 
+            this.txtbTime.Location = new System.Drawing.Point(6, 33);
+            this.txtbTime.Name = "txtbTime";
+            this.txtbTime.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.txtbTime.Size = new System.Drawing.Size(84, 20);
+            this.txtbTime.TabIndex = 10;
+            this.txtbTime.Text = "2";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(6, 87);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(99, 35);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Load";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(460, 339);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.grpbAddValues);
             this.Controls.Add(this.btnPublish);
             this.Controls.Add(this.grpbSensors);
@@ -178,6 +234,8 @@
             this.grpbChangeBoundery.PerformLayout();
             this.grpbSensors.ResumeLayout(false);
             this.grpbAddValues.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -196,6 +254,11 @@
         private System.Windows.Forms.GroupBox grpbAddValues;
         private System.Windows.Forms.Button btnLoad;
         private System.Windows.Forms.ListBox lstbSensors;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblSetTime;
+        private System.Windows.Forms.TextBox txtbTime;
     }
 }
 
