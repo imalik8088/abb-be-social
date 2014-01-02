@@ -29,7 +29,7 @@
                     <Image x:Name="Image" HorizontalAlignment="Left" Height="260" Margin="10,337,0,0" VerticalAlignment="Top" Width="436"/>
                     <Image Source="/Icons/icon-location-just.png" HorizontalAlignment="Left" Height="18" Margin="33,28,0,0" VerticalAlignment="Top" Width="18" d:LayoutOverrides="VerticalAlignment"/>
                     <TextBlock x:Name="Location" HorizontalAlignment="Left" Margin="53,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Foreground="#FF8A8A8A" d:LayoutOverrides="VerticalAlignment"><Run Text="Machine "/><Run Text="2"/></TextBlock>
-                    <TextBlock x:Name="Content" HorizontalAlignment="Left" Margin="10,51,0,0" TextWrapping="Wrap" Text="Content" VerticalAlignment="Top" Height="281" Width="436"/>
+                    <TextBlock x:Name="lblContent" HorizontalAlignment="Left" Margin="10,51,0,0" TextWrapping="Wrap" Text="Content" VerticalAlignment="Top" Height="281" Width="436"/>
                 </Grid>
             </controls:PivotItem>
             <controls:PivotItem Header="Comments">

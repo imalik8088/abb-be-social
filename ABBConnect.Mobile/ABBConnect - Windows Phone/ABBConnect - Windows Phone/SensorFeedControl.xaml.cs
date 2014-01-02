@@ -54,6 +54,7 @@ namespace ABBConnect___Windows_Phone
             SetContent(sf.Content);
             SetLocation(sf.Location);
             SetTimeStamp(sf.TimeStamp);
+            this.sf = sf;
         }
       
         /// <summary>

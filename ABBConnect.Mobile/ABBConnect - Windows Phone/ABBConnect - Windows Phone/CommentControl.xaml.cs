@@ -20,7 +20,6 @@ namespace ABBConnect___Windows_Phone
     /// </summary>
     public partial class CommentControl : UserControl
     {
-        private PortableBLL.Comment comment;
 
         /// <summary>
         /// Defualt constructor

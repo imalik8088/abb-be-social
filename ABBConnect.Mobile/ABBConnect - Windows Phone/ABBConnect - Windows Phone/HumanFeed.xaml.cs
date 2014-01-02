@@ -68,7 +68,7 @@ namespace ABBConnect___Windows_Phone
 
             //Image.Source = hf.MediaFilePath;
             Location.Text = hf.Location;
-            Content.Text = hf.Content;
+            lblContent.Text = hf.Content;
         }
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace ABBConnect___Windows_Phone
             {
                  result = await fm.PublishComment(hf.ID, c);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Something went wrong when publishing the comment, try again later!");
                 btnPublish.IsEnabled = true;
