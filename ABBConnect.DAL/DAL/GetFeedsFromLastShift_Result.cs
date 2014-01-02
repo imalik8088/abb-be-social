@@ -11,13 +11,17 @@ namespace DAL
 {
     using System;
     
-    public partial class GetSensorInformation_Result
+    public partial class GetFeedsFromLastShift_Result
     {
-        public int Id { get; set; }
-        public string Unit { get; set; }
-        public string Name { get; set; }
-        public Nullable<decimal> MIN_Critical { get; set; }
-        public Nullable<decimal> MAX_Critical { get; set; }
+        public string Username { get; set; }
+        public int UserId { get; set; }
+        public string Type { get; set; }
+        public System.DateTime CreationTimeStamp { get; set; }
+        public string Text { get; set; }
+        public string FilePath { get; set; }
+        public string PrioCategory { get; set; }
+        public int PrioValue { get; set; }
+        public int FeedId { get; set; }
         public string Location { get; set; }
     }
 }

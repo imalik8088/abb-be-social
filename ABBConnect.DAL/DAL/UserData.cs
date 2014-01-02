@@ -214,6 +214,7 @@ namespace DAL
                             s.Name = (string)reader[2];
                             s.MIN_Critical = (decimal)reader[3];
                             s.MAX_Critical = (decimal)reader[4];
+                            s.Location = (string)reader[5];
                         }
                     }
                 }
@@ -711,6 +712,63 @@ namespace DAL
 
 
             return numValue;
+        }
+
+
+        public List<GetUserActivity_Result> GetUserActivityFromId(int userId, int activityNumber, int startId)
+        {
+            List<GetUserActivity_Result> activityList = new List<GetUserActivity_Result>();
+
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            {
+                sqlConn.Open();
+                string sqlQuery = "GetXUserActivities";
+
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    try
+                    {
+                        cmd.Parameters.Add("@userId", SqlDbType.Int).Value = userId;
+
+                        if (activityNumber == -1)
+                            cmd.Parameters.Add("@numOfActivites", SqlDbType.Int).Value = DBNull.Value;
+                        else
+                            cmd.Parameters.Add("@numOfActivites", SqlDbType.Int).Value = activityNumber;
+
+                        if (startId == -1)
+                            cmd.Parameters.Add("@startingId", SqlDbType.Int).Value = DBNull.Value;
+                        else
+                            cmd.Parameters.Add("@startingId", SqlDbType.Int).Value = startId;
+                    }
+
+                    catch (Exception)
+                    {
+                        cmd.Dispose();
+                        sqlConn.Close();
+                        return null;
+                    }
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        ;
+                        while (reader.Read())
+                        {
+                            GetUserActivity_Result userActivity = new GetUserActivity_Result();
+                            userActivity.Id = (int)reader[0];
+                            userActivity.UserId = (int)reader[1];
+                            userActivity.FeedId = (int)reader[2];
+                            userActivity.Type = (string)reader[3];
+                            userActivity.Text = (string)reader[4];
+                            userActivity.Timestamp = (DateTime)reader[5];
+
+                            activityList.Add(userActivity);
+                        }
+                    }
+                }
+                sqlConn.Close();
+            }
+            return activityList;
         }
 
     }

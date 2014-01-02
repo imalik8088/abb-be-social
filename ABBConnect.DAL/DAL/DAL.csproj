@@ -88,6 +88,9 @@
     <Compile Include="GetFeedsByFilter_Result.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetFeedsFromLastShift_Result.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetFeedTags_Result.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -137,6 +140,9 @@
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="GetXFeedsByFilter_Result.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetXUserActivities_Result.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="IConnection.cs" />

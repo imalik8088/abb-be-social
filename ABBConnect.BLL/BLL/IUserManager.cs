@@ -26,5 +26,6 @@ namespace BLL
         bool UnfollowSensor(int humanUserId, int sensorUserId);
         List<Sensor> GetFollowedSensors(int humanUserId);
         List<Activity> GetUserActivity(int userId);
+        List<Activity> GetUserActivity(int userId, int activitiesNumber, int startId);
     }
 }
