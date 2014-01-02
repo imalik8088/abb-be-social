@@ -26,6 +26,8 @@ namespace ABBConnect___Windows_Phone
     {
         private PortableBLL.HumanFeed hFeed;
 
+        #region Constructors
+
         /// <summary>
         /// Default constructor
         /// </summary>
@@ -74,6 +76,8 @@ namespace ABBConnect___Windows_Phone
             hFeed = hf;
         }
 
+        #endregion
+
         /// <summary>
         /// update the number of comments regarding the feed
         /// </summary>
@@ -82,22 +86,6 @@ namespace ABBConnect___Windows_Phone
         {
             hFeed.Comments = comments;
             SetNumberOfComments(comments.Count);
-        }
-
-        /// <summary>
-        /// Not in used ATM
-        /// </summary>
-        /// <param name="filePath"></param>
-        private void SetImage(string filePath)
-        {
-            /*
-            Byte[] imageBytes = Convert.FromBase64String(filePath);
-            MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
-            ms.Write(imageBytes, 0, imageBytes.Length);
-            BitmapImage bmp = new BitmapImage();
-            bmp.SetSource(ms);
-            imgImage.Source = bmp;
-             */
         }
 
         /// <summary>
@@ -119,6 +107,24 @@ namespace ABBConnect___Windows_Phone
         private void Content_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Feed.xaml", UriKind.Relative));
+        }
+
+        #region Setters
+
+        /// <summary>
+        /// Not in used ATM
+        /// </summary>
+        /// <param name="filePath"></param>
+        private void SetImage(string filePath)
+        {
+            /*
+            Byte[] imageBytes = Convert.FromBase64String(filePath);
+            MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
+            ms.Write(imageBytes, 0, imageBytes.Length);
+            BitmapImage bmp = new BitmapImage();
+            bmp.SetSource(ms);
+            imgImage.Source = bmp;
+             */
         }
 
         /// <summary>
@@ -185,5 +191,8 @@ namespace ABBConnect___Windows_Phone
         {
             Location.Text = p;
         }
+
+        #endregion
+
     }
 }

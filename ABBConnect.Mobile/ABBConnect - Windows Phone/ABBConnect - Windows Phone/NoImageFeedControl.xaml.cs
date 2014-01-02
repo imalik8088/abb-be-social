@@ -74,6 +74,18 @@ namespace ABBConnect___Windows_Phone
         }
 
         /// <summary>
+        ///update the feed, in sense of number of comments and how long it has passed since it was published
+        /// </summary>
+        /// <param name="comments"></param>
+        internal void UpdateFeed(List<Comment> comments)
+        {
+            hFeed.Comments = comments;
+            SetNumberOfComments(comments.Count);
+            SetTimeStamp(hFeed.TimeStamp);
+        }
+
+        #region Setters
+        /// <summary>
         /// sets the author name
         /// </summary>
         /// <param name="h"></param>
@@ -110,16 +122,6 @@ namespace ABBConnect___Windows_Phone
             Tags.Text = p.ToString();
         }
  
-        /// <summary>
-        ///update the feed, in sense of number of comments and how long it has passed since it was published
-        /// </summary>
-        /// <param name="comments"></param>
-        internal void UpdateFeed(List<Comment> comments)
-        {
-            hFeed.Comments = comments;
-            SetNumberOfComments(comments.Count);
-            SetTimeStamp(hFeed.TimeStamp);
-        }
 
         /// <summary>
         /// Sets the number of comments of the feed
@@ -156,5 +158,6 @@ namespace ABBConnect___Windows_Phone
         {
             Location.Text = p;
         }
+        #endregion
     }
 }

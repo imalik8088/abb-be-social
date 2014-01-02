@@ -20,6 +20,8 @@ namespace ABBConnect___Windows_Phone
     /// </summary>
     public partial class SearchResultControl : UserControl
     {
+        #region Field and Properties
+
         int userID;
         bool redirect;
         string userName;
@@ -41,6 +43,8 @@ namespace ABBConnect___Windows_Phone
             get { return userID; }
             set { userID = value; }
         }
+
+        #endregion
 
         /// <summary>
         /// Constructor

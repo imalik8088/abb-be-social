@@ -22,6 +22,8 @@ namespace ABBConnect___Windows_Phone
     {
         private PortableBLL.SensorFeed sf;
 
+        #region Constructors
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -56,7 +58,9 @@ namespace ABBConnect___Windows_Phone
             SetTimeStamp(sf.TimeStamp);
             this.sf = sf;
         }
-      
+
+        #endregion
+
         /// <summary>
         /// If the author name is clicked, redirect to the sensors profile page
         /// </summary>
@@ -79,6 +83,18 @@ namespace ABBConnect___Windows_Phone
         }
 
         /// <summary>
+        /// update the comments and time since the feed was posted
+        /// </summary>
+        /// <param name="comments"></param>
+        internal void UpdateComments(List<PortableBLL.Comment> comments)
+        {
+            sf.Comments = comments;
+            //TODO: ADD COMMENTS TO SENSOR CONTROL  SetNumberOfComments(comments.Count);
+        }
+
+        #region Setters
+
+        /// <summary>
         /// set the author of the feed
         /// </summary>
         /// <param name="id"></param>
@@ -89,16 +105,6 @@ namespace ABBConnect___Windows_Phone
             Author.Tag = id;
         }
       
-        /// <summary>
-        /// update the comments and time since the feed was posted
-        /// </summary>
-        /// <param name="comments"></param>
-        internal void UpdateComments(List<PortableBLL.Comment> comments)
-        {
-            sf.Comments = comments;
-          //TODO: ADD COMMENTS TO SENSOR CONTROL  SetNumberOfComments(comments.Count);
-        }
-
         /// <summary>
         /// Set the content to the feed
         /// </summary>
@@ -134,5 +140,7 @@ namespace ABBConnect___Windows_Phone
         {
             Location.Text = p;
         }
+
+        #endregion
     }
 }

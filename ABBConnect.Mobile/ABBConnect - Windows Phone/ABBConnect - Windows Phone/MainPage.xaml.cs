@@ -39,20 +39,23 @@ namespace ABBConnect___Windows_Phone
     /// </summary>
     public partial class MainPage : PhoneApplicationPage
     {
-        // Constructor
+        #region Field
         PortableBLL.Human currentUser;
         PortableBLL.FeedManager fm;
-        const int UPDATETIME = 30, SHOWLABELTIME = 4;
-        const int NUMBEROFFEEDS = 15;
+
         DispatcherTimer timerNewFeed, timerLabel;
         List<PortableBLL.Feed> feeds;
         List<Filter> filters;
-        bool ini;
-        bool timerReady;
-        int NoCache;
         FeedType.FeedSource currentFeedType;
 
+        bool ini, timerReady;
+        int NoCache;
+        const int UPDATETIME = 30, SHOWLABELTIME = 4, NUMBEROFFEEDS = 15;
         string chosenImg;
+
+        #endregion
+
+        #region General
 
         /// <summary>
         /// Constructot
@@ -69,7 +72,7 @@ namespace ABBConnect___Windows_Phone
             feeds = new List<Feed>();
             filters = new List<Filter>();
 
-            timerNewFeed = new DispatcherTimer { Interval = new TimeSpan(0,0,UPDATETIME) };
+            timerNewFeed = new DispatcherTimer { Interval = new TimeSpan(0, 0, UPDATETIME) };
             timerNewFeed.Tick += new EventHandler(timerNewFeed_tick);
             timerNewFeed.Start();
             timerLabel = new DispatcherTimer { Interval = new TimeSpan(0, 0, SHOWLABELTIME) };
@@ -87,7 +90,7 @@ namespace ABBConnect___Windows_Phone
 
 
             this.ApplicationBar = this.Resources["appBar"] as ApplicationBar;
-           // CreateControlsUsingObjects();
+            // CreateControlsUsingObjects();
 
 
             ini = true;
@@ -99,7 +102,7 @@ namespace ABBConnect___Windows_Phone
         /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            
+
             string userName = NavigationContext.QueryString["userName"];
             LoadUser(userName);
 
@@ -108,24 +111,26 @@ namespace ABBConnect___Windows_Phone
         }
 
         /// <summary>
-        /// Reads the saved filters that the logged in user has saved
+        /// When the main page is loading
         /// </summary>
-        private async void GetSavedFilters()
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            try
+            if (!App.ViewModel.IsDataLoaded)
             {
-                UserManager um = new UserManager();
-                this.filters = await um.GetUserSavedFilters(currentUser.ID);
+                App.ViewModel.LoadData();
+            }
 
-                lstbSavedFilters.ItemsSource = filters; 
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Couldn't load the saved filters, please restart the application to access them");
-            }
-    
+            //reset timer
+            timerNewFeed.Stop();
+            timerNewFeed.Start();
+
         }
 
+        #endregion
+
+        #region Feed page
 
         /// <summary>
         /// Hides the label showing that new feeds has been added
@@ -137,7 +142,7 @@ namespace ABBConnect___Windows_Phone
             lblNewFeeds.Text = "";
             timerLabel.Stop();
         }
-       
+
         /// <summary>
         /// Ticks every UPDATETIME second and adds all new added feeds to the application
         /// </summary>
@@ -361,11 +366,11 @@ namespace ABBConnect___Windows_Phone
                     FillFeedList((PortableBLL.SensorFeed)feeds[i], -1);
             }
         }
-        
+
         /// <summary>
-      /// Inserts feeds in the beginning of the list that is shown
-      /// </summary>
-      /// <param name="feeds"></param>
+        /// Inserts feeds in the beginning of the list that is shown
+        /// </summary>
+        /// <param name="feeds"></param>
         private void InsertFeedsToList(List<PortableBLL.Feed> feeds)
         {
             for (int i = 0; i < feeds.Count; i++)
@@ -393,93 +398,6 @@ namespace ABBConnect___Windows_Phone
             lstbFeeds.Items.Add(b);
         }
 
-        /// <summary>
-        /// When the main page is loading
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MainPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (!App.ViewModel.IsDataLoaded)
-            {
-                App.ViewModel.LoadData();
-            }
-
-            //reset timer
-            timerNewFeed.Stop();
-            timerNewFeed.Start();
-
-        }
-  
-        /// <summary>
-        /// When the user has finished taken a photo
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void CameraCapture_Completed(object sender, PhotoResult e)
-        {
-            if (e.TaskResult == TaskResult.OK)
-            {
-             //   MessageBox.Show(e.ChosenPhoto.Length.ToString());
-                lbl_TapToTakePhoto.Text = "";
-                //Code to display the photo on the page in an image control named myImage.
-                System.Windows.Media.Imaging.BitmapImage bmp = new System.Windows.Media.Imaging.BitmapImage();
-                bmp.SetSource(e.ChosenPhoto);
-                imgCapture.Source = bmp;
-
-                //Convert the photo to bytes
-                Byte[] photoBytes = new byte[e.ChosenPhoto.Length];
-
-                // rewind first
-                e.ChosenPhoto.Position = 0;
-
-                // now succeeds
-                e.ChosenPhoto.Read(photoBytes, 0, photoBytes.Length);
-
-                
-                //UNCOMMENT TO ENABLE SENDING IMAGE TO DB
-
-               // chosenImg = Convert.ToBase64String(photoBytes);
-
-               // MessageBox.Show(chosenImg.Length.ToString());
-                //chosenImg = "";
-
-                //TESTING
-                /*
-                BLL.HumanFeed hf = new BLL.HumanFeed();
-                hf.MediaFilePath = chosenImg;
-                hf.ID = 190;
-                hf.Location = "hej";
-                hf.TimeStamp = new DateTime();
-                hf.Owner.ID = 1;
-                hf.Owner.UserName = "rgn09003";
-                hf.Comments = new List<Comment>();
-                hf.Tags = new List<Human>();
-
-                FeedControl fc = new FeedControl(hf);
-
-
-                IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
-                appSettings.Add("img", chosenImg);
-
-                lstbFeeds.Items.Add(fc);
-                   
-
-                int hej = 10;
-                 */
-            }
-        }
-
-        /// <summary>
-        /// NOT USED?!
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void lblClickalbe_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/ProfileFeed.xaml", UriKind.Relative));
-        }
-      
         /// <summary>
         /// Fill the list with human feeds, send -1 as index if it should be added in the end
         /// </summary>
@@ -519,77 +437,30 @@ namespace ABBConnect___Windows_Phone
         private void FillFeedList(SensorFeed t, int index)
         {
 
-            SensorFeedControl sfc = new SensorFeedControl(t.Owner.ID, t.Owner.UserName, t.Content,  t.Location, t.TimeStamp);
+            SensorFeedControl sfc = new SensorFeedControl(t.Owner.ID, t.Owner.UserName, t.Content, t.Location, t.TimeStamp);
             lstbFeeds.Items.Add(sfc);
         }
 
+
+        #endregion
+
+        #region Filter page
+
         /// <summary>
-        /// Starts the camera application of the phone when user clicks the image 
+        /// Reads the saved filters that the logged in user has saved
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void imgCapture_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private async void GetSavedFilters()
         {
             try
             {
-                CameraCaptureTask cameraCapture = new CameraCaptureTask();
-                cameraCapture.Completed += CameraCapture_Completed;
+                UserManager um = new UserManager();
+                this.filters = await um.GetUserSavedFilters(currentUser.ID);
 
-                cameraCapture.Show();
+                lstbSavedFilters.ItemsSource = filters;
             }
             catch (Exception)
             {
-                MessageBox.Show("Error occured");
-            }
-
-        }
-
-        /// <summary>
-        /// Publih the feed to the DB, occours when user is clicking publish button
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private async void btnPublish_MouseLeftButtonUp(object sender, RoutedEventArgs e)
-        {
-            PortableBLL.FeedManager fm = new FeedManager();
-
-            PortableBLL.HumanFeed hf = new PortableBLL.HumanFeed();
-
-            //feed.Owner.ID, feed.Content, feed.MediaFilePath, feed.Category.Id
-            if (txtbContent.Text == "" || currentUser.ID == -1)
-                return;
-
-
-            if (App.Tags != null)
-                foreach (string s in App.Tags)
-                    hf.Tags.Add(new Human() { UserName = s });
-
-            chosenImg = ""; //REMOVE WHÈN SENDING IMG SHALL BE ENABLED!!!
-
-            hf.Owner.ID = currentUser.ID;
-            hf.Content = txtbContent.Text;
-            hf.MediaFilePath = (String.IsNullOrEmpty(chosenImg) ? "none" : chosenImg);
-            hf.Category.Id = 2;
-
-            //DEBUG STUFF
-           // lblTags.Text = hf.MediaFilePath;
-            try
-            {
-                bool res = await fm.PublishFeed(hf);
-
-                if (res)
-                {
-                    txtbContent.Text = "";
-                    MessageBox.Show("Feed Published");
-                }
-                else
-                    MessageBox.Show("Something went wrong");
-            }
-            catch (Exception)
-            {
-                
-                MessageBox.Show("Couldn't publish the new feed, please check your connection");
-
+                MessageBox.Show("Couldn't load the saved filters, please restart the application to access them");
             }
 
         }
@@ -694,7 +565,7 @@ namespace ABBConnect___Windows_Phone
         private void ChangeFeedType(FeedType.FeedSource feedType)
         {
             if (!ini)
-            return;
+                return;
 
             //reset timer
             timerNewFeed.Stop();
@@ -715,7 +586,7 @@ namespace ABBConnect___Windows_Phone
             }
 
         }
-   
+
         /// <summary>
         /// Converst a hex color code into a brush
         /// </summary>
@@ -731,82 +602,6 @@ namespace ABBConnect___Windows_Phone
                     Convert.ToByte(hexaColor.Substring(7, 2), 16)
                 )
             );
-        }
-
-        /// <summary>
-        /// This is a event that occurs when the user wants to tag users to a feed and its redirect the user to the tagging page
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void TagIcon_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/TagControl.xaml", UriKind.Relative));
-
-        }
-
-        /// <summary>
-        /// This event occers when the user is clicking the applicationbar "my profile" button and is redirecting the user to his profile
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void GoToMyProfile(object sender, EventArgs e)
-        {
-            if (currentUser == null)
-                MessageBox.Show("Unable to redirect since no user is detected, please check your internet connection");
-            else
-                (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/ProfileFeed.xaml?userID=" + currentUser.ID, UriKind.Relative));
-        }
-
-        /// <summary>
-        /// This event occers when the user is clicking the applicationbar "log out" button and is logging the user out of the application
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void OnLogOut(object sender, EventArgs e)
-        {
-            MessageBox.Show("You will log out if you click here");
-            var settings = IsolatedStorageSettings.ApplicationSettings;
-            settings.Clear();
-            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/LogIn.xaml", UriKind.Relative));
-
-        }
-      
-        /// <summary>
-        /// This event occers when the user is clicking the applicationbar "search user" button and is redirecting the user to the searching page
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void OnSearchUser(object sender, EventArgs e)
-        {
-            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/SearchUser.xaml", UriKind.Relative));            
-        }
-
-        /// <summary>
-        /// This event occers when the user is clicking the applicationbar "refresh" button and is forcing the system to check for new feeds and update the previous feeds
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void OnRefresh(object sender, EventArgs e)
-        {
-            if (!ini)
-                return;
-
-            pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
-            timerNewFeed.Stop();
-            CheckNewFeeds();
-            timerNewFeed.Start();
-            pgbLoadFeed.Visibility = System.Windows.Visibility.Collapsed;
-
-        }
-
-        /// <summary>
-        /// This event occurs when the user clicks the textbox for inserting feed text, the method deletes the predefined text
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void txtbContent_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            txtbContent.Text = String.Empty;
         }
 
         /// <summary>
@@ -857,22 +652,257 @@ namespace ABBConnect___Windows_Phone
             {
                 pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
 
-                feeds = await fm.LoadFeedsFromLastShift(40);
-
-                lstbFeeds.Items.Clear();
-                AddFeedsToList(feeds);
-                CreateButton(feeds[feeds.Count - 1].ID);
+                feeds = await fm.LoadFeedsFromLastShift(10);
+   
+                if (feeds.Count > 0)
+                {
+                    lstbFeeds.Items.Clear();
+                    AddFeedsToList(feeds);
+                    CreateButton(feeds[feeds.Count - 1].ID);
+                }
+                else
+                    MessageBox.Show("No feeds was published in the previous shift");
 
                 pgbLoadFeed.Visibility = System.Windows.Visibility.Collapsed;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 MessageBox.Show("Cannot load the feeds from the previous shift, please check your connection!");
-                
+
             }
- 
+
 
 
         } 
+
+        #endregion
+
+        #region Post page
+
+        /// <summary>
+        /// This is a event that occurs when the user wants to tag users to a feed and its redirect the user to the tagging page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TagIcon_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/TagControl.xaml", UriKind.Relative));
+
+        }
+
+        /// <summary>
+        /// This event occurs when the user clicks the textbox for inserting feed text, the method deletes the predefined text
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtbContent_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            txtbContent.Text = String.Empty;
+        }
+
+        /// <summary>
+        /// Starts the camera application of the phone when user clicks the image 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void imgCapture_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                CameraCaptureTask cameraCapture = new CameraCaptureTask();
+                cameraCapture.Completed += CameraCapture_Completed;
+
+                cameraCapture.Show();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error occured");
+            }
+
+        }
+
+        /// <summary>
+        /// Publih the feed to the DB, occours when user is clicking publish button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void btnPublish_MouseLeftButtonUp(object sender, RoutedEventArgs e)
+        {
+            PortableBLL.FeedManager fm = new FeedManager();
+
+            PortableBLL.HumanFeed hf = new PortableBLL.HumanFeed();
+
+            //feed.Owner.ID, feed.Content, feed.MediaFilePath, feed.Category.Id
+            if (txtbContent.Text == "" || currentUser.ID == -1)
+                return;
+
+
+            if (App.Tags != null)
+                foreach (string s in App.Tags)
+                    hf.Tags.Add(new Human() { UserName = s });
+
+            chosenImg = ""; //REMOVE WHÈN SENDING IMG SHALL BE ENABLED!!!
+
+            hf.Owner.ID = currentUser.ID;
+            hf.Content = txtbContent.Text;
+            hf.MediaFilePath = (String.IsNullOrEmpty(chosenImg) ? "none" : chosenImg);
+            hf.Category.Id = 2;
+
+            //DEBUG STUFF
+            // lblTags.Text = hf.MediaFilePath;
+            try
+            {
+                bool res = await fm.PublishFeed(hf);
+
+                if (res)
+                {
+                    txtbContent.Text = "";
+                    MessageBox.Show("Feed Published");
+                }
+                else
+                    MessageBox.Show("Something went wrong");
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Couldn't publish the new feed, please check your connection");
+
+            }
+
+        }
+
+        /// <summary>
+        /// When the user has finished taken a photo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void CameraCapture_Completed(object sender, PhotoResult e)
+        {
+            if (e.TaskResult == TaskResult.OK)
+            {
+                //   MessageBox.Show(e.ChosenPhoto.Length.ToString());
+                lbl_TapToTakePhoto.Text = "";
+                //Code to display the photo on the page in an image control named myImage.
+                System.Windows.Media.Imaging.BitmapImage bmp = new System.Windows.Media.Imaging.BitmapImage();
+                bmp.SetSource(e.ChosenPhoto);
+                imgCapture.Source = bmp;
+
+                //Convert the photo to bytes
+                Byte[] photoBytes = new byte[e.ChosenPhoto.Length];
+
+                // rewind first
+                e.ChosenPhoto.Position = 0;
+
+                // now succeeds
+                e.ChosenPhoto.Read(photoBytes, 0, photoBytes.Length);
+
+
+                //UNCOMMENT TO ENABLE SENDING IMAGE TO DB
+
+                // chosenImg = Convert.ToBase64String(photoBytes);
+
+                // MessageBox.Show(chosenImg.Length.ToString());
+                //chosenImg = "";
+
+                //TESTING
+                /*
+                BLL.HumanFeed hf = new BLL.HumanFeed();
+                hf.MediaFilePath = chosenImg;
+                hf.ID = 190;
+                hf.Location = "hej";
+                hf.TimeStamp = new DateTime();
+                hf.Owner.ID = 1;
+                hf.Owner.UserName = "rgn09003";
+                hf.Comments = new List<Comment>();
+                hf.Tags = new List<Human>();
+
+                FeedControl fc = new FeedControl(hf);
+
+
+                IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
+                appSettings.Add("img", chosenImg);
+
+                lstbFeeds.Items.Add(fc);
+                   
+
+                int hej = 10;
+                 */
+            }
+        }
+
+        #endregion
+
+        #region Applicationbar
+
+        /// <summary>
+        /// This event occers when the user is clicking the applicationbar "my profile" button and is redirecting the user to his profile
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void GoToMyProfile(object sender, EventArgs e)
+        {
+            if (currentUser == null)
+                MessageBox.Show("Unable to redirect since no user is detected, please check your internet connection");
+            else
+                (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/ProfileFeed.xaml?userID=" + currentUser.ID, UriKind.Relative));
+        }
+
+        /// <summary>
+        /// This event occers when the user is clicking the applicationbar "log out" button and is logging the user out of the application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnLogOut(object sender, EventArgs e)
+        {
+            MessageBox.Show("You will log out if you click here");
+            var settings = IsolatedStorageSettings.ApplicationSettings;
+            settings.Clear();
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/LogIn.xaml", UriKind.Relative));
+
+        }
+
+        /// <summary>
+        /// This event occers when the user is clicking the applicationbar "search user" button and is redirecting the user to the searching page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnSearchUser(object sender, EventArgs e)
+        {
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/SearchUser.xaml", UriKind.Relative));
+        }
+
+        /// <summary>
+        /// This event occers when the user is clicking the applicationbar "refresh" button and is forcing the system to check for new feeds and update the previous feeds
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnRefresh(object sender, EventArgs e)
+        {
+            if (!ini)
+                return;
+
+            pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
+            timerNewFeed.Stop();
+            CheckNewFeeds();
+            timerNewFeed.Start();
+            pgbLoadFeed.Visibility = System.Windows.Visibility.Collapsed;
+
+        }
+
+        #endregion
+
+
+        /// <summary>
+        /// NOT USED?!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lblClickalbe_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/ProfileFeed.xaml", UriKind.Relative));
+        }
+
+
     }
 }
