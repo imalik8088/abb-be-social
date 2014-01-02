@@ -136,12 +136,13 @@ header .logo {
     }
 
 .search-container {
+    
+    padding: 2px 6px;
     margin: 8px 0 0 0;
     float: left;
 }
 
     .search-container .search-input {
-        padding: 4px 6px;
         margin-bottom: 0;
         -webkit-border-radius: 2px;
         -moz-border-radius: 2px;
@@ -307,6 +308,10 @@ header .logo {
     position: relative;
     min-height: 80px;
 }
+.feed-message-gauge {
+    text-align: left;
+    margin-left: 210px;
+}
 
 .feed-message-default {
     border-left: 2px solid #5bc0de;
@@ -405,7 +410,11 @@ header .logo {
 .feed-name-sticky {
     color: #d9984f;
 }
-
+.feed-gauge {
+    float: left;
+    display: block;
+    width: 200px;
+}
 .feed-information {
     float: left;
     display: block;

@@ -30,7 +30,7 @@ public partial class controls_ActivityPage : System.Web.UI.UserControl
         List<Activity> activities = new List<Activity>();
 
         activities = um.GetUserActivity(FilterUserId);
-        ActivityRepeater.DataSource = activities;
+        ActivityRepeater.DataSource = activities.Take(PageSize);
         ActivityRepeater.DataBind();
 
     }

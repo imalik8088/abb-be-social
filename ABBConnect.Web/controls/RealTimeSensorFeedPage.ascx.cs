@@ -10,7 +10,7 @@ using BLL;
 public partial class controls_RealTimeSensorFeedPage : System.Web.UI.UserControl
 {
     // Default Feed Settings
-    public int PageSize = 10;
+    public int PageSize = 5;
     public int LastFeedId = 0;
     public bool IsLoadMoreVisible = true;
 
@@ -25,8 +25,8 @@ public partial class controls_RealTimeSensorFeedPage : System.Web.UI.UserControl
     }
     public void RenderFeedPage()
     {        
-        FeedManager feedManager = new FeedManager();       
-       
+        FeedManager feedManager = new FeedManager();
+
         List<Feed> singlePageFeeds = new List<Feed>();
         singlePageFeeds = feedManager.LoadFeedsByFilter(this.FilterUserId, this.FilterLocation, this.FilterStartDateValue, this.FilterEndDateValue, FeedType.FeedSource.Sensor, LastFeedId, this.PageSize);
       

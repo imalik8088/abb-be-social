@@ -103,8 +103,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="Home.aspx">
-                            <span class="glyphicon glyphicon-stats"></span>Stats
+                        <a href="AllSensors.aspx">
+                            <span class="glyphicon glyphicon-flash"></span>Sensors
                         </a>
                     </li>
                     <li>

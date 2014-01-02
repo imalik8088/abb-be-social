@@ -16,7 +16,35 @@ function hideFullFeedCommentContainer(feedId) {
     $("#feed-post-comment-additional-settings-" + feedId.toString()).hide();
     $("#feed-post-comment-input-" + feedId.toString()).val('Write comment...');
 }
-
+function AjaxUserFollowSensor(sensorId) {
+    PageMethods.AjaxUserFollowSensor(sensorId, AjaxUserFollowSensorSuccess);
+}
+function AjaxUserFollowSensorSuccess(result, userContext, methodName) {
+    $("#allSensorsContainer #real-time-sensor-feed-container-" + result + " .btn-success").addClass("disabled");
+    AjaxGetAllUserFollowedSensors();
+}
+function AjaxUserUnFollowSensor(sensorId) {
+    PageMethods.AjaxUserUnFollowSensor(sensorId, AjaxUserUnFollowSensorSuccess);
+}
+function AjaxUserUnFollowSensorSuccess(result, userContext, methodName) {
+    $("#userFollowedSensorsContainer #real-time-sensor-feed-container-" + result).fadeOut("fast");
+    var followSensorButton = $("#allSensorsContainer #real-time-sensor-feed-container-" + result + " .btn-success");
+    if (followSensorButton != null) {
+        followSensorButton.removeClass("disabled");
+    }
+}
+function AjaxGetAllUserFollowedSensors()
+{
+    $("#userFollowedSensorsContainer").html('');
+    $("#loading_throbber_user_followed_sensors").show();
+    PageMethods.AjaxGetAllUserFollowedSensors(AjaxGetAllUserFollowedSensorsSuccess);
+}
+function AjaxGetAllUserFollowedSensorsSuccess(result, userContext, methodName) {
+    $("#loading_throbber_user_followed_sensors").hide();
+    var userFollowedSensorsRawData = $(result.SensorsRawData).hide().fadeIn("fast");
+    $("#userFollowedSensorsContainer").html(userFollowedSensorsRawData);
+    InitAllUserFollowedSensorGauges();
+}
 function AjaxLoadMoreHumanFeeds(lastLoadedFeedId) {
     var ajaxFeedFilter = new Object();
     ajaxFeedFilter.startDate = null;
@@ -394,6 +422,21 @@ function initUI() {
     });
 
     setRefreshListeners();
+}
+function InitAllUserFollowedSensorGauges()
+{
+    $(".feed-gauge").each(function (index) {
+        if ($(this).data("containerprefix") == "user") {
+            var g = new JustGage({
+                id: "real-time-sensor-user-" + $(this).data("sensorid"),
+                value: $(this).data("currentsensorvalue"),
+                min: $(this).data("minsensorvalue"),
+                max: $(this).data("maxsensorvalue"),
+                title: $(this).data("sensortitle"),
+                label: $(this).data("sensorunit")
+            });
+        }
+    });
 }
 
 function selectizeSearchBar() {
