@@ -14,10 +14,7 @@ public partial class controls_ActivityPage : System.Web.UI.UserControl
     public int LastFeedId = 0;
     public bool IsLoadMoreVisible = true;
 
-    public DateTime FilterStartDateValue;
-    public DateTime FilterEndDateValue;
-    public int FilterUserId = -1;
-    public string FilterLocation = null;
+    public int UserId = -1;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -29,8 +26,8 @@ public partial class controls_ActivityPage : System.Web.UI.UserControl
         UserManager um = new UserManager();
         List<Activity> activities = new List<Activity>();
 
-        activities = um.GetUserActivity(FilterUserId);
-        ActivityRepeater.DataSource = activities.Take(PageSize);
+        activities = um.GetUserActivity(UserId, PageSize, LastFeedId);
+        ActivityRepeater.DataSource = activities;
         ActivityRepeater.DataBind();
 
     }
@@ -48,29 +45,26 @@ public partial class controls_ActivityPage : System.Web.UI.UserControl
 
             Activity currentActivity = ((Activity)e.Item.DataItem);
 
-            //l = (Literal)e.Item.FindControl("litFeedPosterName");
-            //l.Text = currentActivity.UserId.UserName;
-
             l = (Literal)e.Item.FindControl("litFeedContent");
             l.Text = currentActivity.Text;
 
 
-            //// Render LoadMore Link
-            //a = (HtmlAnchor)this.FindControl("load_more");
-            //a.Attributes.Add("onclick", "$(this).fadeOut(300); AjaxLoadMoreHumanFeeds(" + currentActivity.ID + ")");
+            // Render LoadMore Link
+            a = (HtmlAnchor)this.FindControl("load_more");
+            a.Attributes.Add("onclick", "$(this).fadeOut(300); AjaxLoadMoreHumanActivities(" + currentActivity.ID + ")");
         }
     }
     protected override void Render(HtmlTextWriter writer)
     {
-        //if (ActivityRepeater.Items.Count >= this.PageSize)
-        //{
-        //    activity_page_load_more_container.Visible = true;
-        //}
-        //else
-        //{
-        //    activity_page_load_more_container.Visible = false;
-        //}
-        //if (IsLoadMoreVisible == false) activity_page_load_more_container.Visible = false;
+        if (ActivityRepeater.Items.Count >= this.PageSize)
+        {
+            activity_page_load_more_container.Visible = true;
+        }
+        else
+        {
+            activity_page_load_more_container.Visible = false;
+        }
+        if (IsLoadMoreVisible == false) activity_page_load_more_container.Visible = false;
         RenderChildren(writer);
     }
 }

@@ -54,11 +54,40 @@ public partial class UserProfile : System.Web.UI.Page
         return ajaxFeedsHTML;
     }
 
+<<<<<<< HEAD
     /// <summary>
     /// Publishing user comments.
     /// </summary>
     /// <param name="feedId"></param>
     /// <param name="feedCommentData"></param>
+=======
+    [System.Web.Services.WebMethod]
+    public static AjaxFeeds AjaxLoadMoreHumanActivities(int lastLoadedActivityId)
+    {
+        //return the HTML for the activities that are going to be appended
+        if (lastLoadedActivityId == -1) lastLoadedActivityId = int.MaxValue;
+
+        AjaxFeeds ajaxActivitiesHTML = new AjaxFeeds(lastLoadedActivityId);
+        Page page = new Page();
+        page.ClientIDMode = ClientIDMode.Static;
+
+        controls_ActivityPage activityPageContainer = (controls_ActivityPage)page.LoadControl("controls/ActivityPage.ascx");
+        page.Controls.Add(activityPageContainer);
+        activityPageContainer.EnableViewState = false;
+        activityPageContainer.LastFeedId = lastLoadedActivityId;
+
+        activityPageContainer.UserId = int.Parse(HttpContext.Current.Session["humanID"].ToString());
+
+        activityPageContainer.RenderActivityPage();
+
+        StringWriter textWriter = new StringWriter();
+        HttpContext.Current.Server.Execute(page, textWriter, false);
+
+        ajaxActivitiesHTML.FeedsRawData = textWriter.ToString();
+        return ajaxActivitiesHTML;
+    }
+
+>>>>>>> 306c6c38a818f20b75ef222f9f80c758e9036862
     [System.Web.Services.WebMethod]
     public static int AjaxPostFeedComment(int feedId, string feedCommentData)
     {
@@ -237,6 +266,9 @@ public partial class UserProfile : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        //check if user is logged in
+        CheckUserLogin();
+
         FeedManager feedManager = new FeedManager();
         int userId = int.Parse(Request.QueryString["userId"].ToString());
         LoadUserProfileData(userId);
@@ -254,7 +286,7 @@ public partial class UserProfile : System.Web.UI.Page
 
         //HumanActivities
         ActivityPage.LastFeedId = lastHumanFeed.First().ID + 1;
-        ActivityPage.FilterUserId = userId;
+        ActivityPage.UserId = userId;
         ActivityPage.RenderActivityPage();
 
         //Call JS Methods
@@ -262,11 +294,14 @@ public partial class UserProfile : System.Web.UI.Page
         ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "getAvailableUsersToTag", "<script type='text/javascript'>AjaxGetAvailableUsersToTag()</script>", false);
     }
 
+<<<<<<< HEAD
     #region User information
     /// <summary>
     /// Filling the user information labels.
     /// </summary>
     /// <param name="userId"></param>
+=======
+>>>>>>> 306c6c38a818f20b75ef222f9f80c758e9036862
     private void LoadUserProfileData(int userId)
     {       
         humanFeedsFilterUserId.Value = userId.ToString();
@@ -283,6 +318,7 @@ public partial class UserProfile : System.Web.UI.Page
         litUserLocation.Text = user.Location;
         litUserEmail.Text = user.Email;
     }
+<<<<<<< HEAD
     #endregion
 
     #region User activity
@@ -290,6 +326,9 @@ public partial class UserProfile : System.Web.UI.Page
     /// Loading the users activity and producing charts.
     /// </summary>
     /// <param name="userId"></param>
+=======
+
+>>>>>>> 306c6c38a818f20b75ef222f9f80c758e9036862
     private void LoadProfileActivity(int userId)
     {
         FeedManager feedManager = new FeedManager();
@@ -323,5 +362,17 @@ public partial class UserProfile : System.Web.UI.Page
             profilePostByFeedTypeChart.Series[0].Points.AddXY(category, categoryPostCount);
         }
     }
+<<<<<<< HEAD
     #endregion
+=======
+
+    private void CheckUserLogin()
+    {
+        //If a login is not present, redirect to the signin page
+        if (Session["humanID"] == null)
+        {
+            Response.Redirect("~/SignIn.aspx");
+        }
+    }
+>>>>>>> 306c6c38a818f20b75ef222f9f80c758e9036862
 }

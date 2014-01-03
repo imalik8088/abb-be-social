@@ -33,8 +33,7 @@ function AjaxUserUnFollowSensorSuccess(result, userContext, methodName) {
         followSensorButton.removeClass("disabled");
     }
 }
-function AjaxGetAllUserFollowedSensors()
-{
+function AjaxGetAllUserFollowedSensors() {
     $("#userFollowedSensorsContainer").html('');
     $("#loading_throbber_user_followed_sensors").show();
     PageMethods.AjaxGetAllUserFollowedSensors(AjaxGetAllUserFollowedSensorsSuccess);
@@ -97,6 +96,15 @@ function AjaxLoadMoreRealTimeSensorsFeedsSuccess(result, userContext, methodName
     $("#loading_throbber_real_time_sensor_feeds").hide();
     var feedsRawData = $(result.FeedsRawData).hide().fadeIn("fast");
     $('#real-time-sensor-feedsContainer').append(feedsRawData);
+}
+function AjaxLoadMoreHumanActivities(lastLoadedActivityId) {
+    $("#loading_throbber_human_activities").show();
+    PageMethods.AjaxLoadMoreHumanActivities(lastLoadedActivityId, AjaxLoadMoreHumanActivitiesSuccess);
+}
+function AjaxLoadMoreHumanActivitiesSuccess(result, userContext, methodName) {
+    $("#loading_throbber_human_activities").hide();
+    var activitiesRawData = $(result.FeedsRawData).hide().fadeIn("fast");
+    $('#activitiesContainer').append(activitiesRawData);
 }
 
 function AjaxPostFeedComment(feedId) {
@@ -248,7 +256,8 @@ function initSelectize(elementPrefixName, elementId, isLocked) {
     var identifier = '#' + elementPrefixName + "-" + elementId;
 
     //if the element doesn't have any tags, delete the additional body, so it doesn't clutter
-    if ($(identifier).find('.feed-input-tags')[0].value == "") {
+    if ($(identifier).find('.feed-input-tags').length > 0 &&
+        $(identifier).find('.feed-input-tags')[0].value == "") {
         var elem = $(identifier).find('.feed-body-addition')[0];
         elem.parentNode.removeChild(elem);
     }
@@ -423,8 +432,7 @@ function initUI() {
 
     setRefreshListeners();
 }
-function InitAllUserFollowedSensorGauges()
-{
+function InitAllUserFollowedSensorGauges() {
     $(".feed-gauge").each(function (index) {
         if ($(this).data("containerprefix") == "user") {
             var g = new JustGage({

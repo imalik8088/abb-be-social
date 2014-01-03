@@ -98,7 +98,7 @@
                     </div>
                 </div>
             </div>
-            <div id="activitiesContainer">
+            <div id="activitiesContainer" class="activity-container">
                 <abbConnect:ActivityPage ID="ActivityPage" runat="server" />
             </div>
             <div id="loading_throbber_human_activities" class="loading-throbber" data-container="activitiesContainer"></div>

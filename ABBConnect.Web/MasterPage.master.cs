@@ -19,9 +19,10 @@ public partial class MasterPage : System.Web.UI.MasterPage
         UserManager userManager = new UserManager();
         Human human = new Human();
         ArrayList values = new ArrayList();
-
+        
+        //If a login is present, display the name and surname of the user
         if (Session["humanID"] != null)
-        {
+        {  
             human = userManager.LoadHumanInformation(int.Parse(HttpContext.Current.Session["humanID"].ToString()));
             values.Add(new LogedUserInfo(human.ID, human.FirstName, human.LastName));
 
