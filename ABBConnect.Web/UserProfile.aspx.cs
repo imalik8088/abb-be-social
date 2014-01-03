@@ -218,6 +218,9 @@ public partial class UserProfile : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        //check if user is logged in
+        CheckUserLogin();
+
         FeedManager feedManager = new FeedManager();
         int userId = int.Parse(Request.QueryString["userId"].ToString());
         LoadUserProfileData(userId);
@@ -242,6 +245,7 @@ public partial class UserProfile : System.Web.UI.Page
         ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "populateFeedPostTypes", "<script type='text/javascript'>AjaxPopulateSelectBoxPostFeedType()</script>", false);
         ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "getAvailableUsersToTag", "<script type='text/javascript'>AjaxGetAvailableUsersToTag()</script>", false);
     }
+
     private void LoadUserProfileData(int userId)
     {       
         humanFeedsFilterUserId.Value = userId.ToString();
@@ -258,6 +262,7 @@ public partial class UserProfile : System.Web.UI.Page
         litUserLocation.Text = user.Location;
         litUserEmail.Text = user.Email;
     }
+
     private void LoadProfileActivity(int userId)
     {
         FeedManager feedManager = new FeedManager();
@@ -289,6 +294,15 @@ public partial class UserProfile : System.Web.UI.Page
 
             categoryPostCount = allFeeds.Where(f => ((HumanFeed)f).Category.CategoryName.ToString() == categoryWithoutSpace).Count();
             profilePostByFeedTypeChart.Series[0].Points.AddXY(category, categoryPostCount);
+        }
+    }
+
+    private void CheckUserLogin()
+    {
+        //If a login is not present, redirect to the signin page
+        if (Session["humanID"] == null)
+        {
+            Response.Redirect("~/SignIn.aspx");
         }
     }
 }

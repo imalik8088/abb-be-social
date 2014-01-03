@@ -26,10 +26,10 @@ public partial class _Home : System.Web.UI.Page
         feedPageContainer.EnableViewState = false;
         feedPageContainer.LastFeedId = lastLoadedFeedId;
 
-        if (filter.StartDate != null)   feedPageContainer.FilterStartDateValue = (DateTime)filter.StartDate;
-        if (filter.EndDate != null)     feedPageContainer.FilterEndDateValue = (DateTime)filter.EndDate;
-        if (filter.UserId != null)      feedPageContainer.FilterUserId = (int)filter.UserId;
-        if (filter.Location != null)    feedPageContainer.FilterLocation = (string)filter.Location;
+        if (filter.StartDate != null) feedPageContainer.FilterStartDateValue = (DateTime)filter.StartDate;
+        if (filter.EndDate != null) feedPageContainer.FilterEndDateValue = (DateTime)filter.EndDate;
+        if (filter.UserId != null) feedPageContainer.FilterUserId = (int)filter.UserId;
+        if (filter.Location != null) feedPageContainer.FilterLocation = (string)filter.Location;
         feedPageContainer.RenderFeedPage();
 
         StringWriter textWriter = new StringWriter();
@@ -65,7 +65,7 @@ public partial class _Home : System.Web.UI.Page
 
         ajaxFeedsHTML.FeedsRawData = textWriter.ToString();
         return ajaxFeedsHTML;
-    } 
+    }
 
     [System.Web.Services.WebMethod]
     public static int AjaxPostFeedComment(int feedId, string feedCommentData)
@@ -76,7 +76,7 @@ public partial class _Home : System.Web.UI.Page
         UserManager userManager = new UserManager();
 
         Human commentOwner = new Human();
-        commentOwner =  userManager.LoadHumanInformation(int.Parse(HttpContext.Current.Session["humanID"].ToString()));
+        commentOwner = userManager.LoadHumanInformation(int.Parse(HttpContext.Current.Session["humanID"].ToString()));
 
         Comment feedComment = new Comment();
         feedComment.Content = feedCommentData;
@@ -90,12 +90,12 @@ public partial class _Home : System.Web.UI.Page
     public static AjaxFeedComments AjaxGetAllFeedComments(int feedId)
     {
         // Check if user is loged, if not, return null, since we cannot do redirect from WebMethod
-        
+
         FeedManager feedManager = new FeedManager();
         Page page = new Page();
         page.ClientIDMode = ClientIDMode.Static;
 
-        controls_FeedComments feedCommentsContainer = (controls_FeedComments)page.LoadControl("controls/FeedComments.ascx");      
+        controls_FeedComments feedCommentsContainer = (controls_FeedComments)page.LoadControl("controls/FeedComments.ascx");
         page.Controls.Add(feedCommentsContainer);
         feedCommentsContainer.EnableViewState = false;
         feedCommentsContainer.FeedId = feedId;
@@ -115,7 +115,7 @@ public partial class _Home : System.Web.UI.Page
     {
         CommonDataManager commonDataManager = new CommonDataManager();
         List<Category> categories = commonDataManager.GetFeedCategories();
-        
+
         return categories;
     }
 
@@ -147,7 +147,7 @@ public partial class _Home : System.Web.UI.Page
     }
 
     [System.Web.Services.WebMethod]
-    public static bool AjaxPublishHumanFeed(string feedContent,string feedType, string feedTaggedUserIds)
+    public static bool AjaxPublishHumanFeed(string feedContent, string feedType, string feedTaggedUserIds)
     {
         bool actionResult = false;
         UserManager userManager = new UserManager();
@@ -160,7 +160,7 @@ public partial class _Home : System.Web.UI.Page
         List<Human> taggedUsers = new List<Human>();
         if (feedTaggedUserIds.Length > 0)
         {
-            string[] feedTaggedUserIdsList = feedTaggedUserIds.Split(',');          
+            string[] feedTaggedUserIdsList = feedTaggedUserIds.Split(',');
             foreach (string taggedUserId in feedTaggedUserIdsList)
             {
                 Human fetchedUser = userManager.LoadHumanInformation(int.Parse(taggedUserId));
@@ -168,7 +168,7 @@ public partial class _Home : System.Web.UI.Page
             }
         }
 
-        HumanFeed newHumanFeed = new HumanFeed();       
+        HumanFeed newHumanFeed = new HumanFeed();
         newHumanFeed.FeedType = feedType;
         newHumanFeed.Content = feedContent;
         newHumanFeed.Location = "Madagascar";
@@ -229,7 +229,7 @@ public partial class _Home : System.Web.UI.Page
 
         int loggedUserLastPostedHumanFeedId = -1;
         loggedUserLastPostedHumanFeedId = feedManager.LoadFeedsByFilter(loggedUser.ID, null, DateTime.MinValue, DateTime.MaxValue, FeedType.FeedSource.Human, 1).FirstOrDefault().ID;
-        
+
         AjaxFeeds ajaxFeedsHTML = new AjaxFeeds(loggedUserLastPostedHumanFeedId);
         Page page = new Page();
         page.ClientIDMode = ClientIDMode.Static;
@@ -253,7 +253,7 @@ public partial class _Home : System.Web.UI.Page
         ajaxFeedsHTML.FeedsRawData = textWriter.ToString();
         return ajaxFeedsHTML;
     }
-    
+
     [System.Web.Services.WebMethod]
     public static int AjaxUserUnFollowSensor(int sensorId)
     {
@@ -262,11 +262,14 @@ public partial class _Home : System.Web.UI.Page
         int userId = int.Parse(HttpContext.Current.Session["humanID"].ToString());
         returnValue = userManager.UnfollowSensor(userId, sensorId);
         if (returnValue == true) return sensorId;
-        else return 0;           
+        else return 0;
     }
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        //check if user is logged in
+        CheckUserLogin();
+
         FeedManager feedManager = new FeedManager();
 
         // HumanFeeds
@@ -274,7 +277,7 @@ public partial class _Home : System.Web.UI.Page
 
         // Get last Feed so we can get Id of it
         DateTime filterStartTime = DateTime.MinValue;
-        DateTime filterEndTime = DateTime.MaxValue;            
+        DateTime filterEndTime = DateTime.MaxValue;
         lastHumanFeed = feedManager.LoadFeedsByFilter(-1, null, filterStartTime, filterEndTime, FeedType.FeedSource.Human, 1);
         FeedPage.LastFeedId = lastHumanFeed.First().ID + 1;
         FeedPage.RenderFeedPage();
@@ -282,7 +285,7 @@ public partial class _Home : System.Web.UI.Page
         // SensorFeeds
         var lastSensorFeed = (List<Feed>)null;
         // Get last Feed so we can get Id of it
-        lastSensorFeed = feedManager.LoadFeedsByType(FeedType.FeedSource.Sensor,1);
+        lastSensorFeed = feedManager.LoadFeedsByType(FeedType.FeedSource.Sensor, 1);
         RealTimeSensorFeedPage.LastFeedId = lastSensorFeed.First().ID + 1;
         RealTimeSensorFeedPage.RenderFeedPage();
 
@@ -294,5 +297,14 @@ public partial class _Home : System.Web.UI.Page
         //Call JS Methods
         ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "populatFeedPostTypes", "<script type='text/javascript'>AjaxPopulateSelectBoxPostFeedType()</script>", false);
         ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "getAvailableUsersToTag", "<script type='text/javascript'>AjaxGetAvailableUsersToTag()</script>", false);
+    }
+
+    private void CheckUserLogin()
+    {
+        //If a login is not present, redirect to the signin page
+        if (Session["humanID"] == null)
+        {
+            Response.Redirect("~/SignIn.aspx");
+        }
     }
 }

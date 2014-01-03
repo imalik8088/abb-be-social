@@ -55,6 +55,9 @@ public partial class AllSensors : System.Web.UI.Page
     }
     protected void Page_Load(object sender, EventArgs e)
     {
+        //check if user is logged in
+        CheckUserLogin();
+
         AllRealTimeSensorPage.ContainerPrefix = "all";
         AllRealTimeSensorPage.IsFilteredByUser = false;
         AllRealTimeSensorPage.RenderSensorPage();
@@ -62,5 +65,14 @@ public partial class AllSensors : System.Web.UI.Page
         UserFollowedRealTimeSensorPage.ContainerPrefix = "user";
         UserFollowedRealTimeSensorPage.IsFilteredByUser = true;
         UserFollowedRealTimeSensorPage.RenderSensorPage();
+    }
+
+    private void CheckUserLogin()
+    {
+        //If a login is not present, redirect to the signin page
+        if (Session["humanID"] == null)
+        {
+            Response.Redirect("~/SignIn.aspx");
+        }
     }
 }
