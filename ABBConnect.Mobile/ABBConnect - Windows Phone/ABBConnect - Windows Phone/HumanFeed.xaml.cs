@@ -12,6 +12,8 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using System.Windows.Navigation;
 using PortableBLL;
+using System.Windows.Media.Imaging;
+using System.IO;
 
 /*
  * Written by: Robert Gustavsson
@@ -44,12 +46,43 @@ namespace ABBConnect___Windows_Phone
         {
             hf = App.HFeed;
 
+            lstbContent.Items.Clear();
+
             //set the content of the feed
             SetLabels();
             AddTags();
             AddComments(hf.Comments);
             AddTime();
+            SetImage();
+            
      
+        }
+
+        private void SetImage()
+        {
+            if (!String.IsNullOrEmpty(hf.MediaFilePath))
+            {
+
+                BitmapImage bmp = new BitmapImage();
+
+                string[] type = hf.MediaFilePath.Split(',');
+                Byte[] imageBytes = Convert.FromBase64String(type[1]);
+                MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
+                ms.Write(imageBytes, 0, imageBytes.Length);
+
+                if (type[0].Contains("gif"))
+                {
+                    return;
+                }
+                bmp.SetSource(ms);
+
+                Image i = new Image();
+                i.Height = 530;
+                i.Width = 430;
+                i.Source = bmp;
+
+                lstbContent.Items.Add(i);
+            }
         }
 
         /// <summary>
@@ -65,11 +98,18 @@ namespace ABBConnect___Windows_Phone
         /// </summary>
         private void SetLabels()
         {
+            TextBlock t = new TextBlock();
+
+
+            t.Text = hf.Content;
+
+            lstbContent.Items.Add(t);
+
             Author.Text = hf.Owner.FirstName + " " + hf.Owner.LastName;
 
             //Image.Source = hf.MediaFilePath;
             Location.Text = hf.Location;
-            lblContent.Text = hf.Content;
+           // lblContent.Text = hf.Content;
         }
 
         /// <summary>

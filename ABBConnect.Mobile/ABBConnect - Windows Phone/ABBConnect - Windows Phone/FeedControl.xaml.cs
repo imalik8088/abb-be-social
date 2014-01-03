@@ -65,7 +65,7 @@ namespace ABBConnect___Windows_Phone
         public FeedControl(PortableBLL.HumanFeed hf)
         {
             InitializeComponent();
-            SetAuthor(hf.Owner.ID, hf.Owner.UserName);
+            SetAuthor(hf.Owner.ID, hf.Owner.FirstName + " " + hf.Owner.LastName);
             SetContent(hf.Content);
             SetNumberOfTags(hf.Tags.Count);
             SetNumberOfComments(hf.Comments.Count);
@@ -109,7 +109,8 @@ namespace ABBConnect___Windows_Phone
         private void Content_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             //redirect to the feed page
-            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Feed.xaml", UriKind.Relative));
+            App.HFeed = hFeed;
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/HumanFeed.xaml", UriKind.Relative));
         }
 
         #region Setters
@@ -120,14 +121,28 @@ namespace ABBConnect___Windows_Phone
         /// <param name="filePath"></param>
         private void SetImage(string filePath)
         {
-            /*
-            Byte[] imageBytes = Convert.FromBase64String(filePath);
-            MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
-            ms.Write(imageBytes, 0, imageBytes.Length);
-            BitmapImage bmp = new BitmapImage();
-            bmp.SetSource(ms);
-            imgImage.Source = bmp;
-             */
+
+            try
+            {
+                string[] type = filePath.Split(',');
+                Byte[] imageBytes = Convert.FromBase64String(type[1]);
+                MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
+                ms.Write(imageBytes, 0, imageBytes.Length);
+                BitmapImage bmp = new BitmapImage();
+
+                if (type[0].Contains("gif"))
+                {
+                    return;
+                }
+                bmp.SetSource(ms);
+                imgImage.Source = bmp;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+             
         }
 
         /// <summary>
@@ -147,7 +162,14 @@ namespace ABBConnect___Windows_Phone
         /// <param name="p"></param>
         internal void SetContent(string p)
         {
-            Text.Text = p;
+            if (p.Length > 80)
+            {
+                string tmp = p.Substring(0, 80);
+
+                Text.Text =  tmp.TrimEnd() + "...";
+            }
+            else
+                Text.Text = p;
         }
 
         /// <summary>
@@ -198,6 +220,7 @@ namespace ABBConnect___Windows_Phone
         }
 
         #endregion
+
 
     }
 }

@@ -814,6 +814,8 @@ namespace ABBConnect___Windows_Phone
                 // now succeeds
                 e.ChosenPhoto.Read(photoBytes, 0, photoBytes.Length);
 
+                MessageBox.Show(photoBytes.Length.ToString());
+
 
                 //UNCOMMENT TO ENABLE SENDING IMAGE TO DB
 

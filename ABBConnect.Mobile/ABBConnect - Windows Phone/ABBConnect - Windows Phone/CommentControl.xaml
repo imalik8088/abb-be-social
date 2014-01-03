@@ -9,7 +9,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="160" d:DesignWidth="456">
 
-    <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}" Margin="0,0,0,10">
+    <Grid x:Name="LayoutRoot" Background="Black" Margin="0,0,0,10">
         <TextBlock x:Name="lblUserName" Height="30" HorizontalAlignment="Left" Margin="34,1,0,0"  Text="Username" VerticalAlignment="Top" MouseLeftButtonUp="lblUserName_MouseLeftButtonUp" FontWeight="SemiBold" />
         <TextBlock  x:Name="lblText" HorizontalAlignment="Left" Margin="10,31,0,0" TextWrapping="Wrap" Text="Hello, this is a comment on a little post, mihihihihihi" VerticalAlignment="Top" Height="118" Width="436"/>
         <TextBlock x:Name="lblTime" Height="30" HorizontalAlignment="Left" Margin="410,1,0,0"  Text="1d" VerticalAlignment="Top" Width="36" Foreground="#FF8A8A8A" />
