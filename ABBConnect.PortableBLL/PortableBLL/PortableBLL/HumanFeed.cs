@@ -30,8 +30,8 @@ namespace PortableBLL
 
             this.owner = owner;
             this.owner.ID = res.UserId;
-            
-            mediaFilePath = "";
+
+            this.mediaFilePath = res.FilePath;
 
         }
 

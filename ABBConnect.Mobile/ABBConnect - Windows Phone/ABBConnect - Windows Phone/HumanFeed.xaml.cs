@@ -12,6 +12,8 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using System.Windows.Navigation;
 using PortableBLL;
+using System.Windows.Media.Imaging;
+using System.IO;
 
 /*
  * Written by: Robert Gustavsson
@@ -44,11 +46,43 @@ namespace ABBConnect___Windows_Phone
         {
             hf = App.HFeed;
 
+            lstbContent.Items.Clear();
+
+            //set the content of the feed
             SetLabels();
             AddTags();
             AddComments(hf.Comments);
             AddTime();
+            SetImage();
+            
      
+        }
+
+        private void SetImage()
+        {
+            if (!String.IsNullOrEmpty(hf.MediaFilePath))
+            {
+
+                BitmapImage bmp = new BitmapImage();
+
+                string[] type = hf.MediaFilePath.Split(',');
+                Byte[] imageBytes = Convert.FromBase64String(type[1]);
+                MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
+                ms.Write(imageBytes, 0, imageBytes.Length);
+
+                if (type[0].Contains("gif"))
+                {
+                    return;
+                }
+                bmp.SetSource(ms);
+
+                Image i = new Image();
+                i.Height = 530;
+                i.Width = 430;
+                i.Source = bmp;
+
+                lstbContent.Items.Add(i);
+            }
         }
 
         /// <summary>
@@ -64,11 +98,18 @@ namespace ABBConnect___Windows_Phone
         /// </summary>
         private void SetLabels()
         {
+            TextBlock t = new TextBlock();
+
+
+            t.Text = hf.Content;
+
+            lstbContent.Items.Add(t);
+
             Author.Text = hf.Owner.FirstName + " " + hf.Owner.LastName;
 
             //Image.Source = hf.MediaFilePath;
             Location.Text = hf.Location;
-            lblContent.Text = hf.Content;
+           // lblContent.Text = hf.Content;
         }
 
         /// <summary>
@@ -79,8 +120,10 @@ namespace ABBConnect___Windows_Phone
             DateTime dateTime = hf.TimeStamp;
             DateTime now = DateTime.Now;
 
+            //get the hours that has passed since the feed was posted
             double hours = (now - dateTime).TotalHours;
 
+            //check if it should be displayed as min, hours or days
             if (hours < 1)
                 Timestamp.Text = Math.Round((now - dateTime).TotalMinutes).ToString() + "m";
             else if (hours > 24)
@@ -111,22 +154,26 @@ namespace ABBConnect___Windows_Phone
         /// <param name="e"></param>
         private async void btnPublish_Click(object sender, RoutedEventArgs e)
         {
-            if (String.IsNullOrEmpty(txtbComment.Text) || String.IsNullOrWhiteSpace(txtbComment.Text))
+            if (String.IsNullOrEmpty(txtbComment.Text) || String.IsNullOrWhiteSpace(txtbComment.Text)) //no content added
             {
                 MessageBox.Show("No comment attached");
                 return;
             }
+            //disable button
             btnPublish.IsEnabled = false;
 
             FeedManager fm = new FeedManager();
             Comment c = new Comment();
 
+            //set owner
             c.Owner = App.CurrentUser;
+            //set content
             c.Content = txtbComment.Text;
             bool result;
 
             try
             {
+                //push the Comment to the DB
                  result = await fm.PublishComment(hf.ID, c);
             }
             catch (Exception)
@@ -143,7 +190,10 @@ namespace ABBConnect___Windows_Phone
             {
                 try
                 {
+                    //load the comments to display the newly added ones
                     List<Comment> comments = await fm.LoadFeedComments(hf.ID);
+
+                    //insert it on the top
                     lstbComments.Items.Insert(3, new CommentControl(comments[0]));
                     lstbComments.UpdateLayout();
 
@@ -179,6 +229,7 @@ namespace ABBConnect___Windows_Phone
         {
             try
             {
+                //redirect to profile page
                 (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/ProfileFeed.xaml?userID=" + hf.Tags[lstbTags.SelectedIndex].ID, UriKind.Relative));
             }
             catch (Exception ex)

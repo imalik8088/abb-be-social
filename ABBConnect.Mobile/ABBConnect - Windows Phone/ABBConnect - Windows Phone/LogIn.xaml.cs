@@ -43,17 +43,17 @@ namespace ABBConnect___Windows_Phone
 
             var settings = IsolatedStorageSettings.ApplicationSettings;
 
-            if (settings.TryGetValue<string>("userName", out username))
+            if (settings.TryGetValue<string>("userName", out username)) //check if user is saved in local DB
             {
                 txtUsername.Text = username;
-                if (settings.TryGetValue<string>("password", out pw))
+                if (settings.TryGetValue<string>("password", out pw)) //check if password is stored
                 {
-
+                    //Set username and password in the textboxes
                     txtPassword.Password = pw;
                     txtUsername.Text = username;
                 }
             }
-            else
+            else //display empty
             {
                 txtPassword.Password = "";
                 txtUsername.Text = "";
@@ -69,16 +69,17 @@ namespace ABBConnect___Windows_Phone
             var settings = IsolatedStorageSettings.ApplicationSettings;
             string username, pw;
 
-            if (settings.TryGetValue<string>("userName", out username))
+            if (settings.TryGetValue<string>("userName", out username))//check if stored in local DB
             {
-                txtUsername.Text = username;
-                if (settings.TryGetValue<string>("password", out pw))
+                txtUsername.Text = username; 
+                if (settings.TryGetValue<string>("password", out pw)) //check if stored in local DB
                 {
                     txtPassword.Password = pw;
 
                     try
                     {
-                        if (await um.Login(username, pw))
+                        if (await um.Login(username, pw)) //try to log in
+                            //redirect to homepage on success
                             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/MainPage.xaml?userName=" + txtUsername.Text, UriKind.Relative));
                 
                     }
@@ -109,13 +110,16 @@ namespace ABBConnect___Windows_Phone
 
             try
             {
-                if (await um.Login(txtUsername.Text, txtPassword.Password))
+                if (await um.Login(txtUsername.Text, txtPassword.Password)) //check if tthe user inserted valid information
                 {
-                    if (chbRemeber.IsChecked == true)
+                    if (chbRemeber.IsChecked == true) //if the user wants to be remebered
                     {
+
+                        //save information in the local DB
                         SaveStringObject(txtUsername.Text, txtPassword.Password);
                     }
 
+                    //redirect to homepage
                     (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/MainPage.xaml?userName=" + txtUsername.Text, UriKind.Relative));
                 }
                 else
@@ -138,6 +142,7 @@ namespace ABBConnect___Windows_Phone
         /// <param name="pw"></param>
         public void SaveStringObject(string username, string pw)
         {
+            //save to the local memory
             var settings = IsolatedStorageSettings.ApplicationSettings;
             settings.Add("userName", username);
             settings.Add("password", pw);

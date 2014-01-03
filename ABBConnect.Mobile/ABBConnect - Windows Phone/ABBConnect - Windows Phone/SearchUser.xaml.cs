@@ -64,6 +64,7 @@ namespace ABBConnect___Windows_Phone
             List<User> users;
             try
             {
+                //get the users matching the query
                 users = await um.SearchUserByName(txtbSearch.Text);
 
             }
@@ -73,9 +74,10 @@ namespace ABBConnect___Windows_Phone
                 return;
             }
 
+            //reset the last search results
             lstbSearchResult.Items.Clear();
 
-            foreach (User u in users)
+            foreach (User u in users) //add all the users to the result list
             {
                 if (u is Human)
                     lstbSearchResult.Items.Add(new SearchResultControl(((Human)u).FirstName, ((Human)u).LastName, ((Human)u).UserName, ((Human)u).ID, true));

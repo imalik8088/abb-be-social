@@ -44,10 +44,10 @@ namespace ABBConnect___Windows_Phone
             try
             {
                 UserManager um = new UserManager();
-
+                //get user activity
                 List<Activity> activities = await um.GetUserActivity(currentUser.ID);
 
-                foreach (Activity a in activities)
+                foreach (Activity a in activities) //add all the activites to the activity list
                     lstbActivities.Items.Add(new ActivityControl(a));
             }
             catch (Exception)
@@ -105,18 +105,25 @@ namespace ABBConnect___Windows_Phone
             LoadFeeds();
         }
 
+        /// <summary>
+        /// Sets the information of a sensor
+        /// </summary>
         private void SetSensorInfo()
         {
+            //Set name
             lblNameClick.Text = currentUser.UserName + " Unit (" + ((Sensor)currentUser).UnitMetric + ")";
+
+            //set lower boundery
             lblEmail.Text = "Lower Boundery";
             lblEmailClick.Text = ((Sensor)currentUser).LowerBoundary.ToString();
             imgMail.Source = new BitmapImage(new Uri("/Icons/icon-sensor.png", UriKind.Relative)); //TODO: add image for upper and lower boundery
 
+            //set upper boundery
             lblPhone.Text = "UpperBoundery";
             lblPhoneClick.Text = ((Sensor)currentUser).UpperBoundary.ToString();
             imgPhone.Source = new BitmapImage(new Uri("/Icons/icon-sensor.png", UriKind.Relative)); //TODO: add image for upper and lower boundery
 
-
+            //hide the Activty pivot (sensors doesn't have avtivity)
             pivHead.Items.Remove(pivotActivity);
             pivotActivity.Visibility = Visibility.Collapsed;
 
@@ -128,8 +135,12 @@ namespace ABBConnect___Windows_Phone
             lblEmailClick.MouseLeftButtonDown -= lblEmailClick_MouseLeftButtonDown;
         }
 
+        /// <summary>
+        /// Sets the information od a human
+        /// </summary>
         private void SetHumanInfo()
         {
+            //set info
             lblEmailClick.Text = ((Human)currentUser).Email;
             lblNameClick.Text = ((Human)currentUser).FirstName + " " + ((Human)currentUser).LastName;
             lblPhoneClick.Text = ((Human)currentUser).PhoneNumber;
@@ -144,6 +155,7 @@ namespace ABBConnect___Windows_Phone
         /// <param name="e"></param>
         private void lblEmailClick_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            //Start the build-in email application
             EmailComposeTask emailComposer = new EmailComposeTask();
             emailComposer.To = lblEmailClick.Text;
             emailComposer.Show();
@@ -156,6 +168,7 @@ namespace ABBConnect___Windows_Phone
         /// <param name="e"></param>
         private void lblPhoneClick_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            //Start the build-in calling application
             PhoneCallTask phonecall = new PhoneCallTask();
             phonecall.PhoneNumber = lblPhoneClick.Text;
             phonecall.Show();
@@ -190,7 +203,6 @@ namespace ABBConnect___Windows_Phone
         /// <param name="hf"></param>
         private void FillFeedList(PortableBLL.HumanFeed hf)
         {
-            // NoImageFeedControl nfc = new NoImageFeedControl(t.Author, "rgn09003", t.Content, t.Tags.Count, t.Comments.Count, t.Location, t.Timestamp);
             NoImageFeedControl fc = new NoImageFeedControl(hf);
 
             lstbFeeds.Items.Add(fc);
@@ -202,7 +214,6 @@ namespace ABBConnect___Windows_Phone
         /// <param name="sf"></param>
         private void FillFeedList(PortableBLL.SensorFeed sf)
         {
-            // NoImageFeedControl nfc = new NoImageFeedControl(t.Author, "rgn09003", t.Content, t.Tags.Count, t.Comments.Count, t.Location, t.Timestamp);
             SensorFeedControl fc = new SensorFeedControl(sf);
 
             lstbFeeds.Items.Add(fc);
@@ -216,10 +227,13 @@ namespace ABBConnect___Windows_Phone
             try
             {
                 pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
+
+                //load new feeds from the user
                 feeds = await fm.LoadFeedsByUser(currentUser.ID, NUMOFFEEDS);
 
-                if (feeds.Count > 0)
+                if (feeds.Count > 0) //if feeds was fetched
                 {
+                    //add them to the feed list
                     AddFeedToList(feeds);
                     CreateButton(feeds[feeds.Count - 1].ID);
                 }
@@ -257,6 +271,7 @@ namespace ABBConnect___Windows_Phone
             List<PortableBLL.Feed> newFeeds;
             try
             {
+                //load more feeds
                 newFeeds = await fm.LoadFeedsByUser(currentUser.ID, numOfFeeds, id);
             }
             catch (Exception)
@@ -289,6 +304,7 @@ namespace ABBConnect___Windows_Phone
             b.Height = 80;
             b.Content = "Load more feeds";
 
+            //Set the event to load more feeds when clicked
             b.Click += (s, e) => { LoadMoreFeedsFromId(NUMOFFEEDS, id); };
             lstbFeeds.Items.Add(b);
         }

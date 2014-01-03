@@ -55,6 +55,7 @@ namespace ABBConnect___Windows_Phone
         {
             try
             {
+                //get the users matching the user input
                 users = await um.SearchUserByName(query);
 
             }
@@ -64,11 +65,12 @@ namespace ABBConnect___Windows_Phone
                 return;
             }
 
+            //restet previous results
             lstbSearchResult.Items.Clear();
 
             foreach (User u in users)
             {
-                if (chosenUsers.Contains(u.UserName))
+                if (chosenUsers.Contains(u.UserName)) //if the user is already tagged, don't show him
                     continue;
 
                 if (u is Human)
@@ -89,18 +91,22 @@ namespace ABBConnect___Windows_Phone
         /// <param name="e"></param>
         private void lstbSearchResult_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //get the control that was clicked
             SearchResultControl u = lstbSearchResult.SelectedValue as SearchResultControl;
 
             if (u == null)
                 return;
 
-            if (chosenUsers.Contains(u.UserName))
+            if (chosenUsers.Contains(u.UserName)) //if it was already choosed
             {
-                chosenUsers.Remove(u.UserName);            
+                chosenUsers.Remove(u.UserName);   //remove ir          
             }
             else
             {
+                //add it to the chosen users
                 chosenUsers.Add(u.UserName);
+
+                //make it disables to search for that user again
                 lstbSearchResult.Items.Remove(u);
                 lstbTagedUsers.Items.Add(u);
             }
@@ -114,14 +120,18 @@ namespace ABBConnect___Windows_Phone
         /// <param name="e"></param>
         private void lstbTagedUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //get the clicked control
             SearchResultControl u = lstbTagedUsers.SelectedValue as SearchResultControl;
 
             if (u == null)
                 return;
 
-            if (chosenUsers.Contains(u.UserName))
+            if (chosenUsers.Contains(u.UserName)) //if the user was already tagged
             {
+                //Untag him
                 chosenUsers.Remove(u.UserName);
+
+                //enalble searching that user again
                 lstbTagedUsers.Items.Remove(u);
                 lstbSearchResult.Items.Add(u);
             }
@@ -139,7 +149,9 @@ namespace ABBConnect___Windows_Phone
         /// <param name="e"></param>
         private void btnDone_Click(object sender, RoutedEventArgs e)
         {
+            //set the tags 
             App.Tags = chosenUsers;
+            //go back to the publish page
             NavigationService.GoBack();
         }
 

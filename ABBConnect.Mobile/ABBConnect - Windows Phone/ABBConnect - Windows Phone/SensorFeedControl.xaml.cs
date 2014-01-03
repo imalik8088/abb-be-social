@@ -68,6 +68,7 @@ namespace ABBConnect___Windows_Phone
         /// <param name="e"></param>
         private void Author_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            //redirect to sensor profile page
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/ProfileFeed.xaml?userID=" + Author.Tag, UriKind.Relative));
 
         }
@@ -79,6 +80,7 @@ namespace ABBConnect___Windows_Phone
         /// <param name="e"></param>
         private void Content_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            //Redirect to the feed page
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/HumanFeed.xaml", UriKind.Relative));
         }
 
@@ -88,6 +90,7 @@ namespace ABBConnect___Windows_Phone
         /// <param name="comments"></param>
         internal void UpdateComments(List<PortableBLL.Comment> comments)
         {
+            //udpate the feed
             sf.Comments = comments;
             //TODO: ADD COMMENTS TO SENSOR CONTROL  SetNumberOfComments(comments.Count);
         }

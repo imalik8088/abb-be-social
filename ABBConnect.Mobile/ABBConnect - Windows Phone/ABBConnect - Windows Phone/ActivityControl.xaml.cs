@@ -33,6 +33,7 @@ namespace ABBConnect___Windows_Phone
             InitializeComponent();
             activitiy = a;
 
+            //set the content of the activity
             lblText.Text = activitiy.Text;
             SetImage(activitiy.Type);
             SetTime(activitiy.Timestamp);
@@ -44,10 +45,11 @@ namespace ABBConnect___Windows_Phone
         /// <param name="type"></param>
         private void SetImage(string type)
         {
+            //check whatever type the activity has, and depending on that select the image to show
             if (type == "Comment")
-                imgType.Source = new BitmapImage(new Uri("/Icons/symbol_comment.png", UriKind.Relative));
+                imgType.Source = new BitmapImage(new Uri("/Icons/icon-comment.png", UriKind.Relative));
             else if (type == "Tag")
-                imgType.Source = new BitmapImage(new Uri("/Icons/symbol_tag.png", UriKind.Relative));
+                imgType.Source = new BitmapImage(new Uri("/Icons/icon-tag.png", UriKind.Relative));
             else
                 imgType.Source = new BitmapImage(new Uri("/Icons/symbol_location.png", UriKind.Relative));
         }
@@ -62,12 +64,13 @@ namespace ABBConnect___Windows_Phone
 
             double hours = (now - dateTime).TotalHours;
 
+            //check if the time should be written as minutes, hours or days
             if (hours < 1)
-                lblTime.Text = Math.Round((now - dateTime).TotalMinutes).ToString() + "m";
+                lblTime.Text = Math.Round((now - dateTime).TotalMinutes).ToString() + "m"; //minutes
             else if (hours > 24)
-                lblTime.Text = Math.Round((now - dateTime).TotalDays).ToString() + "d";
+                lblTime.Text = Math.Round((now - dateTime).TotalDays).ToString() + "d"; //days
             else
-                lblTime.Text = Math.Round(hours).ToString() + "h";
+                lblTime.Text = Math.Round(hours).ToString() + "h"; //hours
         }
 
         /// <summary>
@@ -79,10 +82,15 @@ namespace ABBConnect___Windows_Phone
         {
             try
             {
+                
                 FeedManager fm = new FeedManager();
+                //get the feed of the activity
                 Feed f = await fm.GetFeedByFeedId(activitiy.FeedId);
 
+                //save that feed
                 App.HFeed = f as PortableBLL.HumanFeed;
+
+                //redirect to the feed page
                 (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/HumanFeed.xaml", UriKind.Relative));
             }
             catch (Exception)
