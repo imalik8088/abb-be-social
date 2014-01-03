@@ -54,13 +54,11 @@ public partial class UserProfile : System.Web.UI.Page
         return ajaxFeedsHTML;
     }
 
-<<<<<<< HEAD
     /// <summary>
     /// Publishing user comments.
     /// </summary>
     /// <param name="feedId"></param>
     /// <param name="feedCommentData"></param>
-=======
     [System.Web.Services.WebMethod]
     public static AjaxFeeds AjaxLoadMoreHumanActivities(int lastLoadedActivityId)
     {
@@ -87,7 +85,6 @@ public partial class UserProfile : System.Web.UI.Page
         return ajaxActivitiesHTML;
     }
 
->>>>>>> 306c6c38a818f20b75ef222f9f80c758e9036862
     [System.Web.Services.WebMethod]
     public static int AjaxPostFeedComment(int feedId, string feedCommentData)
     {
@@ -294,14 +291,11 @@ public partial class UserProfile : System.Web.UI.Page
         ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "getAvailableUsersToTag", "<script type='text/javascript'>AjaxGetAvailableUsersToTag()</script>", false);
     }
 
-<<<<<<< HEAD
     #region User information
     /// <summary>
     /// Filling the user information labels.
     /// </summary>
     /// <param name="userId"></param>
-=======
->>>>>>> 306c6c38a818f20b75ef222f9f80c758e9036862
     private void LoadUserProfileData(int userId)
     {       
         humanFeedsFilterUserId.Value = userId.ToString();
@@ -318,7 +312,6 @@ public partial class UserProfile : System.Web.UI.Page
         litUserLocation.Text = user.Location;
         litUserEmail.Text = user.Email;
     }
-<<<<<<< HEAD
     #endregion
 
     #region User activity
@@ -326,9 +319,6 @@ public partial class UserProfile : System.Web.UI.Page
     /// Loading the users activity and producing charts.
     /// </summary>
     /// <param name="userId"></param>
-=======
-
->>>>>>> 306c6c38a818f20b75ef222f9f80c758e9036862
     private void LoadProfileActivity(int userId)
     {
         FeedManager feedManager = new FeedManager();
@@ -362,9 +352,7 @@ public partial class UserProfile : System.Web.UI.Page
             profilePostByFeedTypeChart.Series[0].Points.AddXY(category, categoryPostCount);
         }
     }
-<<<<<<< HEAD
     #endregion
-=======
 
     private void CheckUserLogin()
     {
@@ -374,5 +362,4 @@ public partial class UserProfile : System.Web.UI.Page
             Response.Redirect("~/SignIn.aspx");
         }
     }
->>>>>>> 306c6c38a818f20b75ef222f9f80c758e9036862
 }
