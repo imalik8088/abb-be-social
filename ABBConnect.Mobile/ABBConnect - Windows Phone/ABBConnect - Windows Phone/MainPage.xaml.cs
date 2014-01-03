@@ -65,35 +65,46 @@ namespace ABBConnect___Windows_Phone
 
             InitializeComponent();
             ini = false;
-            // Set the data context of the listbox control to the sample data
+
             DataContext = App.ViewModel;
             this.Loaded += new RoutedEventHandler(MainPage_Loaded);
+
+            //ini object
             fm = new FeedManager();
             feeds = new List<Feed>();
             filters = new List<Filter>();
 
-            timerNewFeed = new DispatcherTimer { Interval = new TimeSpan(0, 0, UPDATETIME) };
-            timerNewFeed.Tick += new EventHandler(timerNewFeed_tick);
-            timerNewFeed.Start();
-            timerLabel = new DispatcherTimer { Interval = new TimeSpan(0, 0, SHOWLABELTIME) };
-            timerNewFeed.Tick += new EventHandler(timerLabel_tick);
+            InitializeTimers();
 
+            //set current feed type to retreive feeds from both sensors and humans
             currentFeedType = new FeedType.FeedSource();
             currentFeedType = FeedType.FeedSource.None;
-            timerReady = true;
-
+            
             LoadNewFeeds(NUMBEROFFEEDS);
 
             lblNewFeeds.Text = "";
             NoCache = 1;
 
 
-
+            //add application bar
             this.ApplicationBar = this.Resources["appBar"] as ApplicationBar;
-            // CreateControlsUsingObjects();
 
-
+            //Initilaztation is ready
             ini = true;
+        }
+
+        /// <summary>
+        /// Initilizes the timers
+        /// </summary>
+        private void InitializeTimers()
+        {
+            timerNewFeed = new DispatcherTimer { Interval = new TimeSpan(0, 0, UPDATETIME) };
+            timerNewFeed.Tick += new EventHandler(timerNewFeed_tick);
+            timerNewFeed.Start();
+
+            timerLabel = new DispatcherTimer { Interval = new TimeSpan(0, 0, SHOWLABELTIME) };
+            timerLabel.Tick += new EventHandler(timerLabel_tick);
+            timerReady = true;
         }
 
         /// <summary>
@@ -102,10 +113,11 @@ namespace ABBConnect___Windows_Phone
         /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-
+            //get the username from the query
             string userName = NavigationContext.QueryString["userName"];
             LoadUser(userName);
 
+            //remove so the user can not go back to log in page by clicking "back"
             NavigationService.RemoveBackEntry();
 
         }
@@ -155,8 +167,12 @@ namespace ABBConnect___Windows_Phone
                 try
                 {
                     timerReady = false;
+
+                    //update the comments for all feeds
                     await UpdateComments();
+                    
                     CheckNewFeeds();
+
                     timerReady = true;
                 }
                 catch (Exception)
@@ -174,9 +190,10 @@ namespace ABBConnect___Windows_Phone
         private async Task UpdateComments()
         {
             FeedManager fmm = new FeedManager();
-            for (int i = 0; i < feeds.Count; i++)
+
+            for (int i = 0; i < feeds.Count; i++) //for all the feeds in the feedlist
             {
-                feeds[i].Comments = await fmm.LoadFeedComments(feeds[i].ID);
+                feeds[i].Comments = await fmm.LoadFeedComments(feeds[i].ID); //load the comments for that feed
 
                 if (lstbFeeds.Items[i] is FeedControl)
                     (lstbFeeds.Items[i] as FeedControl).UpdateComments(feeds[i].Comments);
@@ -240,22 +257,18 @@ namespace ABBConnect___Windows_Phone
             try
             {
                 PortableBLL.UserManager um = new PortableBLL.UserManager();
+                //get the user info
                 currentUser = await um.LoadHumanInformationByUsername(userName);
 
+                //set the current user
                 App.CurrentUser = currentUser;
+
                 GetSavedFilters();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
-            /*
-            lblEmailClick.Text = currentUser.Email;
-            lblPhoneClick.Text = currentUser.PhoneNumber;
-            lblNameClick.Text = currentUser.FirstName + " " + currentUser.LastName;
-            lblLocationClick.Text = currentUser.WorkRoom;
-             * */
 
         }
 
@@ -269,14 +282,18 @@ namespace ABBConnect___Windows_Phone
 
             try
             {
+                //get the feeds
                 feeds = await fm.LoadFeedsByType(currentFeedType, amount);
 
-                if (feeds.Count == 0)
+                if (feeds.Count == 0) //if no feeds was fetched
                 {
                     MessageBox.Show("No feeds loaded");
                     return;
                 }
+                //clear feed-page
                 lstbFeeds.Items.Clear();
+
+                //add the new feeds with a button in the end
                 AddFeedsToList(feeds);
                 CreateButton(feeds[feeds.Count - 1].ID);
             }
@@ -300,17 +317,16 @@ namespace ABBConnect___Windows_Phone
             {
                 pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
 
-
+                //get new feeds
                 List<PortableBLL.Feed> newFeeds = await fm.LoadFeedsByType(currentFeedType, amount, id);
 
-                //List<Feed> newFeeds = await fm.LoadLatestXFeedsFromId(id, amount);
 
                 //remove button
                 lstbFeeds.Items.RemoveAt(lstbFeeds.Items.Count - 1);
 
                 AddFeedsToList(newFeeds);
 
-                //add the new feeds to the common list
+                //add the new feeds to the common list and a button in the end
                 feeds.AddRange(newFeeds);
                 CreateButton(feeds[feeds.Count - 1].ID);
 
@@ -334,13 +350,13 @@ namespace ABBConnect___Windows_Phone
             {
                 pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
 
+                //load up new feeds
                 List<PortableBLL.Feed> newFeeds = await fm.LoadFeedsByType(currentFeedType, amount, id + 1);
-                //  List<PortableBLL.Feed> newFeeds = await fm.LoadLatestXFeedsFromId(id + 1, amount);
 
-                for (int i = 0; i < newFeeds.Count; i++)
+                for (int i = 0; i < newFeeds.Count; i++) //add them to the current list
                     feeds.Insert(i, newFeeds[i]);
 
-
+                //insert the feeds on top
                 InsertFeedsToList(newFeeds);
 
                 pgbLoadFeed.Visibility = System.Windows.Visibility.Collapsed;
@@ -361,7 +377,7 @@ namespace ABBConnect___Windows_Phone
             for (int i = 0; i < feeds.Count; i++)
             {
                 if (feeds[i] is PortableBLL.HumanFeed)
-                    FillFeedList((PortableBLL.HumanFeed)feeds[i], -1);
+                    FillFeedList((PortableBLL.HumanFeed)feeds[i], -1); //-1 so they are inserted last
                 else
                     FillFeedList((PortableBLL.SensorFeed)feeds[i], -1);
             }
@@ -388,13 +404,17 @@ namespace ABBConnect___Windows_Phone
         /// <param name="id"></param>
         private void CreateButton(int id)
         {
+            //create a new button
             Button b = new Button();
             b.Name = "btnLoadNewFeeds";
             b.Width = 456;
             b.Height = 80;
             b.Content = "Load more feeds";
 
+            //add an event to the button
             b.Click += (s, e) => { LoadMoreFeedsFromId(NUMBEROFFEEDS, id); };
+
+            //add the button the to feed page
             lstbFeeds.Items.Add(b);
         }
 
@@ -407,19 +427,22 @@ namespace ABBConnect___Windows_Phone
         {
             //CHECK IF THE FEED CONTATINS A PICTURE!!
 
-            if (hf.MediaFilePath == "none" || hf.MediaFilePath == "")
+            if (hf.MediaFilePath == "none" || hf.MediaFilePath == "") //if no image is present
             {
+                //create a feed with no image
                 NoImageFeedControl nfc = new NoImageFeedControl(hf);
 
+                //add it to the feed page
                 if (index == -1)
                     lstbFeeds.Items.Add(nfc);
                 else
                     lstbFeeds.Items.Insert(index, nfc);
             }
-            else
+            else //if feed has image
             {
                 FeedControl fc = new FeedControl(hf);
 
+                //add it to the feed page
                 if (index == -1)
                     lstbFeeds.Items.Add(fc);
                 else
@@ -436,11 +459,10 @@ namespace ABBConnect___Windows_Phone
         /// <param name="index"></param>
         private void FillFeedList(SensorFeed t, int index)
         {
-
+            //add a sensor control to the feedpage
             SensorFeedControl sfc = new SensorFeedControl(t.Owner.ID, t.Owner.UserName, t.Content, t.Location, t.TimeStamp);
             lstbFeeds.Items.Add(sfc);
         }
-
 
         #endregion
 
@@ -456,6 +478,7 @@ namespace ABBConnect___Windows_Phone
                 UserManager um = new UserManager();
                 this.filters = await um.GetUserSavedFilters(currentUser.ID);
 
+                //add the filters to the filter page
                 lstbSavedFilters.ItemsSource = filters;
             }
             catch (Exception)
@@ -503,12 +526,7 @@ namespace ABBConnect___Windows_Phone
                     brdrHuman.Tag = "true";
                 }
             }
-            /*
-            brdrHuman.Background = GetColorFromHexa("#FFB5BBBB");
-            brdrSensor.Background = GetColorFromHexa("#FF515B5B");
-
-            ChangeFeedType(FeedType.FeedSource.Human);
-             */
+            
         }
 
         /// <summary>
@@ -549,13 +567,6 @@ namespace ABBConnect___Windows_Phone
                     brdrSensor.Tag = "true";
                 }
             }
-
-            /*
-            brdrSensor.Background = GetColorFromHexa("#FFB5BBBB");
-            brdrHuman.Background = GetColorFromHexa("#FF515B5B");
-
-            ChangeFeedType(FeedType.FeedSource.Sensor);
-            */
         }
 
         /// <summary>
@@ -573,8 +584,10 @@ namespace ABBConnect___Windows_Phone
 
             try
             {
+                //Set the new feed type
                 currentFeedType = feedType;
 
+                //load the new feeds dependent on the new feed type
                 lstbFeeds.Items.Clear();
                 feeds.Clear();
                 LoadNewFeeds(NUMBEROFFEEDS);
@@ -594,6 +607,7 @@ namespace ABBConnect___Windows_Phone
         /// <returns></returns>
         private SolidColorBrush GetColorFromHexa(string hexaColor)
         {
+            //convert hexa colors to a brush
             return new SolidColorBrush(
                 Color.FromArgb(
                     Convert.ToByte(hexaColor.Substring(1, 2), 16),
@@ -620,11 +634,14 @@ namespace ABBConnect___Windows_Phone
 
                 timerNewFeed.Stop();
 
-                brdrHuman.Background = GetColorFromHexa("#FF515B5B");
-                brdrSensor.Background = GetColorFromHexa("#FF515B5B");
+                //Deselect the human / filter
+                brdrHuman.Background = GetColorFromHexa("#FF51BBBB");
+                brdrSensor.Background = GetColorFromHexa("#FF51BBBB");
 
+                //load the feeds from the saved filter
                 feeds = await fm.LoadFeedsFromSavedFilter(filters[lstbSavedFilters.SelectedIndex], 10);
 
+                //reset the feed page and add the new feeds
                 lstbFeeds.Items.Clear();
                 AddFeedsToList(feeds);
 
@@ -652,10 +669,12 @@ namespace ABBConnect___Windows_Phone
             {
                 pgbLoadFeed.Visibility = System.Windows.Visibility.Visible;
 
-                feeds = await fm.LoadFeedsFromLastShift(10);
+                //get the feeds from last shofr
+                feeds = await fm.LoadFeedsFromLastShift(NUMBEROFFEEDS);
    
-                if (feeds.Count > 0)
+                if (feeds.Count > 0) //if there were feeds
                 {
+                    //reset the feed page and add the new feeds
                     lstbFeeds.Items.Clear();
                     AddFeedsToList(feeds);
                     CreateButton(feeds[feeds.Count - 1].ID);
@@ -687,6 +706,7 @@ namespace ABBConnect___Windows_Phone
         /// <param name="e"></param>
         private void TagIcon_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            //redirect to the tagging page
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/TagControl.xaml", UriKind.Relative));
 
         }
@@ -710,9 +730,9 @@ namespace ABBConnect___Windows_Phone
         {
             try
             {
+                //Start the build-in camera application and show it
                 CameraCaptureTask cameraCapture = new CameraCaptureTask();
                 cameraCapture.Completed += CameraCapture_Completed;
-
                 cameraCapture.Show();
             }
             catch (Exception)
@@ -730,29 +750,26 @@ namespace ABBConnect___Windows_Phone
         private async void btnPublish_MouseLeftButtonUp(object sender, RoutedEventArgs e)
         {
             PortableBLL.FeedManager fm = new FeedManager();
-
             PortableBLL.HumanFeed hf = new PortableBLL.HumanFeed();
 
-            //feed.Owner.ID, feed.Content, feed.MediaFilePath, feed.Category.Id
             if (txtbContent.Text == "" || currentUser.ID == -1)
                 return;
 
-
-            if (App.Tags != null)
+            if (App.Tags != null) //if there are tags, add them to the list
                 foreach (string s in App.Tags)
                     hf.Tags.Add(new Human() { UserName = s });
 
             chosenImg = ""; //REMOVE WHÈN SENDING IMG SHALL BE ENABLED!!!
 
+            //Set the content of the feed
             hf.Owner.ID = currentUser.ID;
             hf.Content = txtbContent.Text;
             hf.MediaFilePath = (String.IsNullOrEmpty(chosenImg) ? "none" : chosenImg);
             hf.Category.Id = 2;
 
-            //DEBUG STUFF
-            // lblTags.Text = hf.MediaFilePath;
             try
             {
+                //plublish it
                 bool res = await fm.PublishFeed(hf);
 
                 if (res)
@@ -781,8 +798,8 @@ namespace ABBConnect___Windows_Phone
         {
             if (e.TaskResult == TaskResult.OK)
             {
-                //   MessageBox.Show(e.ChosenPhoto.Length.ToString());
                 lbl_TapToTakePhoto.Text = "";
+
                 //Code to display the photo on the page in an image control named myImage.
                 System.Windows.Media.Imaging.BitmapImage bmp = new System.Windows.Media.Imaging.BitmapImage();
                 bmp.SetSource(e.ChosenPhoto);
@@ -893,6 +910,11 @@ namespace ABBConnect___Windows_Phone
         #endregion
 
 
+
+
+
+
+        //NOT USED I THINK? NEED TO CHECK IT WHEN I HAVE TIME!!
         /// <summary>
         /// NOT USED?!
         /// </summary>

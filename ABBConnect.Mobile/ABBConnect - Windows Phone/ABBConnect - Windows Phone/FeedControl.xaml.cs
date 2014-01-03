@@ -84,6 +84,7 @@ namespace ABBConnect___Windows_Phone
         /// <param name="comments"></param>
         internal void UpdateComments(List<PortableBLL.Comment> comments)
         {
+            //set the new comments
             hFeed.Comments = comments;
             SetNumberOfComments(comments.Count);
         }
@@ -95,6 +96,7 @@ namespace ABBConnect___Windows_Phone
         /// <param name="e"></param>
         private void Author_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            //redirect to the profile page
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/ProfileFeed.xaml?username=" + Author.Tag, UriKind.Relative));
 
         }
@@ -106,6 +108,7 @@ namespace ABBConnect___Windows_Phone
         /// <param name="e"></param>
         private void Content_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            //redirect to the feed page
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Feed.xaml", UriKind.Relative));
         }
 
@@ -173,8 +176,10 @@ namespace ABBConnect___Windows_Phone
         {
             DateTime now = DateTime.Now;
 
+            //get the hours that has passed since the feed was posted
             double hours = (now - dateTime).TotalHours;
 
+            //check if it should be represented as min, hours or days
             if (hours < 1)
                 Timestamp.Text = Math.Round((now - dateTime).TotalMinutes).ToString() + "m";
             else if (hours > 24)

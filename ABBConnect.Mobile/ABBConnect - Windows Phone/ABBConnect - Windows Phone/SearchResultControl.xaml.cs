@@ -74,7 +74,7 @@ namespace ABBConnect___Windows_Phone
         /// <param name="e"></param>
         private void lblUserName_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if(redirect)
+            if(redirect) //if the user should be redirect, redirect to the profile
                 (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/ProfileFeed.xaml?userID=" + userID, UriKind.Relative));
         }
 

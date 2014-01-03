@@ -40,6 +40,7 @@ namespace ABBConnect___Windows_Phone
         {
             InitializeComponent();
 
+            // set the content of the comment
             lblUserName.Text = fullName;
             lblUserName.Tag = userId;
             lblText.Text = text;
@@ -54,6 +55,7 @@ namespace ABBConnect___Windows_Phone
         {
             InitializeComponent();
 
+            //Set the content of the comment
             lblUserName.Text = comment.Owner.FirstName + " " + comment.Owner.LastName;
             lblUserName.Tag =  comment.Owner.UserName;
             lblText.Text = comment.Content;
@@ -69,8 +71,10 @@ namespace ABBConnect___Windows_Phone
 
             DateTime now = DateTime.Now;
 
+            //get number of hours since the feed was posted
             double hours = (now - dateTime).TotalHours;
 
+            //check if the time should be displayed as minutes, hours or days
             if (hours < 1)
                 lblTime.Text = Math.Round((now - dateTime).TotalMinutes).ToString() + "m";
             else if (hours > 24)
