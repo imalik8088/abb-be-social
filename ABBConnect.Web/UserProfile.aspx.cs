@@ -38,7 +38,33 @@ public partial class UserProfile : System.Web.UI.Page
         ajaxFeedsHTML.FeedsRawData = textWriter.ToString();
         return ajaxFeedsHTML;
     }
-    
+
+    [System.Web.Services.WebMethod]
+    public static AjaxFeeds AjaxLoadMoreHumanActivities(int lastLoadedActivityId)
+    {
+        //return the HTML for the activities that are going to be appended
+        if (lastLoadedActivityId == -1) lastLoadedActivityId = int.MaxValue;
+
+        AjaxFeeds ajaxActivitiesHTML = new AjaxFeeds(lastLoadedActivityId);
+        Page page = new Page();
+        page.ClientIDMode = ClientIDMode.Static;
+
+        controls_ActivityPage activityPageContainer = (controls_ActivityPage)page.LoadControl("controls/ActivityPage.ascx");
+        page.Controls.Add(activityPageContainer);
+        activityPageContainer.EnableViewState = false;
+        activityPageContainer.LastFeedId = lastLoadedActivityId;
+
+        activityPageContainer.UserId = int.Parse(HttpContext.Current.Session["humanID"].ToString());
+
+        activityPageContainer.RenderActivityPage();
+
+        StringWriter textWriter = new StringWriter();
+        HttpContext.Current.Server.Execute(page, textWriter, false);
+
+        ajaxActivitiesHTML.FeedsRawData = textWriter.ToString();
+        return ajaxActivitiesHTML;
+    }
+
     [System.Web.Services.WebMethod]
     public static int AjaxPostFeedComment(int feedId, string feedCommentData)
     {
@@ -209,7 +235,7 @@ public partial class UserProfile : System.Web.UI.Page
 
         //HumanActivities
         ActivityPage.LastFeedId = lastHumanFeed.First().ID + 1;
-        ActivityPage.FilterUserId = userId;
+        ActivityPage.UserId = userId;
         ActivityPage.RenderActivityPage();
 
         //Call JS Methods

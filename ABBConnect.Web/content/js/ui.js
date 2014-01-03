@@ -97,6 +97,15 @@ function AjaxLoadMoreRealTimeSensorsFeedsSuccess(result, userContext, methodName
     var feedsRawData = $(result.FeedsRawData).hide().fadeIn("fast");
     $('#real-time-sensor-feedsContainer').append(feedsRawData);
 }
+function AjaxLoadMoreHumanActivities(lastLoadedActivityId) {
+    $("#loading_throbber_human_activities").show();
+    PageMethods.AjaxLoadMoreHumanActivities(lastLoadedActivityId, AjaxLoadMoreHumanActivitiesSuccess);
+}
+function AjaxLoadMoreHumanActivitiesSuccess(result, userContext, methodName) {
+    $("#loading_throbber_human_activities").hide();
+    var activitiesRawData = $(result.FeedsRawData).hide().fadeIn("fast");
+    $('#activitiesContainer').append(activitiesRawData);
+}
 
 function AjaxPostFeedComment(feedId) {
     var feedCommentData = $("#feed-post-comment-input-" + feedId).val();
