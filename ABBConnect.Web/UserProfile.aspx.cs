@@ -9,12 +9,27 @@ using BLL;
 using System.Data;
 using System.Web.Script.Serialization;
 
+/*
+ * Written by: 
+ * Project: Social Media in the Process Automation Industry (ABB Connect)
+ */
+
+/// <summary>
+/// Logic of the User Profile page which represents user information, user feeds, activity and activity charts.
+/// Logic for the filter handling, feed posting and commenting.
+/// </summary>
 public partial class UserProfile : System.Web.UI.Page
 {
+    #region User feed page
+    /// <summary>
+    /// Retrieving latest user feeds and rendering HTML of the user feed page
+    /// </summary>
+    /// <param name="lastLoadedFeedId"></param>
+    /// <param name="filter"></param>
     [System.Web.Services.WebMethod]
     public static AjaxFeeds AjaxLoadMoreHumanFeeds(int lastLoadedFeedId, AjaxFeedFilter filter)
     {
-        //NOTE: ajaxFeedsHTML is rendered FeedPage, so we return HTML thats going to be appended
+        //NOTE: ajaxFeedsHTML is rendered FeedPage, so we return HTML thats going to be appended.
         if (lastLoadedFeedId == -1) lastLoadedFeedId = int.MaxValue;
 
         AjaxFeeds ajaxFeedsHTML = new AjaxFeeds(lastLoadedFeedId);
@@ -38,7 +53,12 @@ public partial class UserProfile : System.Web.UI.Page
         ajaxFeedsHTML.FeedsRawData = textWriter.ToString();
         return ajaxFeedsHTML;
     }
-    
+
+    /// <summary>
+    /// Publishing user comments.
+    /// </summary>
+    /// <param name="feedId"></param>
+    /// <param name="feedCommentData"></param>
     [System.Web.Services.WebMethod]
     public static int AjaxPostFeedComment(int feedId, string feedCommentData)
     {
@@ -58,6 +78,10 @@ public partial class UserProfile : System.Web.UI.Page
         return feedId;
     }
 
+    /// <summary>
+    /// Retrieving feed comments and rendering HTML with the content of the comments.
+    /// </summary>
+    /// <param name="feedId"></param>
     [System.Web.Services.WebMethod]
     public static AjaxFeedComments AjaxGetAllFeedComments(int feedId)
     {
@@ -82,6 +106,9 @@ public partial class UserProfile : System.Web.UI.Page
         return ajaxFeedCommentsHTML;
     }
 
+    /// <summary>
+    /// Retrieving feed categories.
+    /// </summary>
     [System.Web.Services.WebMethod]
     public static List<Category> AjaxGetPostFeedTypes()
     {
@@ -91,6 +118,9 @@ public partial class UserProfile : System.Web.UI.Page
         return categories;
     }
 
+    /// <summary>
+    /// Retrieving all the users for tagging.
+    /// </summary>
     [System.Web.Services.WebMethod]
     public static List<Human> AjaxGetAvailableUsersToTag()
     {
@@ -100,6 +130,10 @@ public partial class UserProfile : System.Web.UI.Page
         return approximateUserNames;
     }
 
+    /// <summary>
+    /// Getting the queried users. 
+    /// </summary>
+    /// <param name="queriedName"></param>
     [System.Web.Services.WebMethod]
     public static string AjaxGetQueriedUsers(string queriedName)
     {
@@ -118,6 +152,12 @@ public partial class UserProfile : System.Web.UI.Page
         return returnString;
     }
 
+    /// <summary>
+    /// Getting all the data of a new feed and publishing it. 
+    /// </summary>
+    /// <param name="feedContent"></param>
+    /// <param name="feedType"></param>
+    /// <param name="feedTaggedUserIds"></param>
     [System.Web.Services.WebMethod]
     public static bool AjaxPublishHumanFeed(string feedContent, string feedType, string feedTaggedUserIds)
     {
@@ -152,6 +192,10 @@ public partial class UserProfile : System.Web.UI.Page
         return actionResult;
     }
 
+    /// <summary>
+    /// Retrieving a new feed and producing HTML with the feed contents.
+    /// </summary>
+    /// <param name="filter"></param>
     [System.Web.Services.WebMethod]
     public static AjaxFeeds AjaxDisplayNewPublishedHumanFeed(AjaxFeedFilter filter)
     {
@@ -189,6 +233,7 @@ public partial class UserProfile : System.Web.UI.Page
         ajaxFeedsHTML.FeedsRawData = textWriter.ToString();
         return ajaxFeedsHTML;
     }
+    #endregion
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -216,6 +261,12 @@ public partial class UserProfile : System.Web.UI.Page
         ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "populateFeedPostTypes", "<script type='text/javascript'>AjaxPopulateSelectBoxPostFeedType()</script>", false);
         ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "getAvailableUsersToTag", "<script type='text/javascript'>AjaxGetAvailableUsersToTag()</script>", false);
     }
+
+    #region User information
+    /// <summary>
+    /// Filling the user information labels.
+    /// </summary>
+    /// <param name="userId"></param>
     private void LoadUserProfileData(int userId)
     {       
         humanFeedsFilterUserId.Value = userId.ToString();
@@ -232,6 +283,13 @@ public partial class UserProfile : System.Web.UI.Page
         litUserLocation.Text = user.Location;
         litUserEmail.Text = user.Email;
     }
+    #endregion
+
+    #region User activity
+    /// <summary>
+    /// Loading the users activity and producing charts.
+    /// </summary>
+    /// <param name="userId"></param>
     private void LoadProfileActivity(int userId)
     {
         FeedManager feedManager = new FeedManager();
@@ -265,4 +323,5 @@ public partial class UserProfile : System.Web.UI.Page
             profilePostByFeedTypeChart.Series[0].Points.AddXY(category, categoryPostCount);
         }
     }
+    #endregion
 }

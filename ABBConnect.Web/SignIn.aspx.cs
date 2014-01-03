@@ -7,8 +7,19 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BLL;
 
+/*
+ * Written by: 
+ * Project: Social Media in the Process Automation Industry (ABB Connect)
+ */
+
+/// <summary>
+/// Logic of the Login session
+/// </summary>
 public partial class SignIn : System.Web.UI.Page
 {
+    /// <summary>
+    // On user Login button click authenticate the user information and make a user session.
+    /// </summary>
     public void LoginButtonClick(Object sender, EventArgs e)
     {
         UserManager userManager = new UserManager();
@@ -18,6 +29,7 @@ public partial class SignIn : System.Web.UI.Page
 
         human = userManager.LoadHumanInformationByUsername(userName);
 
+        // Check the user credentials by username and password
         bool serviceResult = userManager.Login(userName, password);
         if (serviceResult == true)
         {
