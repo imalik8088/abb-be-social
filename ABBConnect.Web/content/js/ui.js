@@ -385,6 +385,8 @@ function initUI() {
 
     selectizeSearchBar();
 
+    registerImageUploadInput();
+
     //stop propagation on dropdown menu for the filters, so we can select multiple checkboxes
     //this enables the data-stop-propagation html attribute, so we can use it anywhere clickable
     $(function () {
@@ -531,6 +533,79 @@ function setRefreshListeners() {
         SaveHumanFeedsFilterData(1);
         awaitingRefresh = false;
     }
+}
+
+function registerImageUploadInput() {
+    var reader;
+    var progress = document.getElementById('fileProgressBar');
+
+    $('input[id=filePicture]').change(function () {
+        $('#mockFilePicture').val($(this).val());
+    });
+
+    function abortRead() {
+        if (reader != null)
+            reader.abort();
+    }
+
+    $('#fileUploadCancelButton').click(abortRead);
+
+    function errorHandler(evt) {
+        switch (evt.target.error.code) {
+            case evt.target.error.NOT_FOUND_ERR:
+                alert('File Not Found!');
+                break;
+            case evt.target.error.NOT_READABLE_ERR:
+                alert('File is not readable');
+                break;
+            case evt.target.error.ABORT_ERR:
+                break; // noop
+            default:
+                alert('An error occurred reading this file.');
+        };
+    }
+
+    function updateProgress(evt) {
+        // evt is an ProgressEvent.
+        if (evt.lengthComputable) {
+            var percentLoaded = Math.round((evt.loaded / evt.total) * 100);
+            // Increase the progress bar length.
+            if (percentLoaded < 100) {
+                progress.style.width = percentLoaded + '%';
+            }
+        }
+    }
+
+    function handleFileSelect(evt) {
+        // Reset progress indicator on new file selection.
+        progress.style.width = '0%';
+
+        reader = new FileReader();
+        reader.onerror = errorHandler;
+        reader.onprogress = updateProgress;
+        reader.onabort = function (e) {
+            alert('File read cancelled');
+            setTimeout("document.getElementById('fileProgressDiv').className='';", 2000);
+            $('input[id = filePicture]').val('');
+            $('#mockFilePicture').val('');
+        };
+        reader.onloadstart = function (e) {
+            document.getElementById('fileProgressBar').className = 'progress-bar progress-bar-success';
+            document.getElementById('fileProgressDiv').className = 'progress';
+        };
+        reader.onload = function (e) {
+            // Ensure that the progress bar displays 100% at the end.
+            progress.style.width = '100%';
+            setTimeout("document.getElementById('fileProgressBar').className='';", 2000);
+            setTimeout("document.getElementById('fileProgressDiv').className='';", 2000);
+            $('#modalImgFile').attr("src", e.target.result);
+        }
+
+        // Read in the image file as a binary string.
+        reader.readAsDataURL(evt.target.files[0]);
+    }
+
+    document.getElementById('filePicture').addEventListener('change', handleFileSelect, false);
 }
 
 function OnClickSignOut() {

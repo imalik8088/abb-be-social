@@ -63,14 +63,14 @@
             <div id="loading_throbber_human_feeds" class="loading-throbber" data-container="feedsContainer"></div>
         </div>
         <div class="col-md-6">
-             <div class="feed-header">
+            <div class="feed-header">
                 <div class="form-inline">
                     <div class="form-group">
                         <h3><span class="glyphicon glyphicon-flash"></span>Followed sensors <small>User followed sensors</small></h3>
                     </div>
                 </div>
             </div>
-               <div id="userFollowedSensorsContainer">
+            <div id="userFollowedSensorsContainer">
                 <abbConnect:RealTimeSensorPage ID="UserFollowedRealTimeSensorPage" runat="server" />
             </div>
             <div class="feed-header">
@@ -189,26 +189,23 @@
                         <br />
                         <!-- File upload-->
                         <h5>Upload the file:</h5>
+                        <div>
+                            <input id="filePicture" type="file" style="display: none" />
+                            <div class="input-group">
+                                <input id="mockFilePicture" class="form-control" type="text" />
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default" onclick="$('input[id=filePicture]').click();">Browse</button>
+                                </div>
+                            </div>
 
-                        <input id="filePicture" type="file" />
-                        <img id="modalImgFile" src="" hidden="hidden" />
-                        <script type="text/javascript">
+                            <img id="modalImgFile" src="" hidden="hidden" />
 
-                            function readImage(input) {
-                                if (input.files && input.files[0]) {
-                                    var FR = new FileReader();
-                                    FR.onload = function (e) {
-                                        $('#modalImgFile').attr("src", e.target.result);
-                                        //$('#base').text(e.target.result);
-                                    };
-                                    FR.readAsDataURL(input.files[0]);
-                                }
-                            }
-
-                            $("#filePicture").change(function () {
-                                readImage(this);
-                            });
-                        </script>
+                            <div id="fileProgressDiv" class="">
+                                <div id="fileProgressBar" class="" role="progressbar" style="width: 0%">
+                                </div>
+                            </div>
+                            <button type="button" id="fileUploadCancelButton" class="btn btn-default">Cancel read</button>
+                        </div>
                         <!--Tagging-->
                         <h5>Tag users:</h5>
                         <div id="input-tags-div-picture">

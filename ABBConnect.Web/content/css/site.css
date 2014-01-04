@@ -136,7 +136,6 @@ header .logo {
     }
 
 .search-container {
-    
     padding: 2px 6px;
     margin: 8px 0 0 0;
     float: left;
@@ -308,6 +307,7 @@ header .logo {
     position: relative;
     min-height: 80px;
 }
+
 .feed-message-gauge {
     text-align: left;
     margin-left: 210px;
@@ -410,11 +410,13 @@ header .logo {
 .feed-name-sticky {
     color: #d9984f;
 }
+
 .feed-gauge {
     float: left;
     display: block;
     width: 200px;
 }
+
 .feed-information {
     float: left;
     display: block;
@@ -803,3 +805,4 @@ img.feed-avatar {
         position: inherit;
         background: none repeat scroll 0% 0% rgb(55, 55, 55);
     }
+
