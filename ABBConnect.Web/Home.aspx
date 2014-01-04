@@ -200,8 +200,8 @@
 
                             <img id="modalImgFile" src="" hidden="hidden" />
 
-                            <div id="fileProgressDiv" class="">
-                                <div id="fileProgressBar" class="" role="progressbar" style="width: 0%">
+                            <div id="fileProgressDiv" class="progress" style="display: none;">
+                                <div id="fileProgressBar" class="progress-bar progress-bar-success" role="progressbar" style="width: 0%">
                                 </div>
                             </div>
                             <button type="button" id="fileUploadCancelButton" class="btn btn-default">Cancel read</button>
@@ -214,7 +214,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="AjaxPublishHumanPictureFeed()">Post new picture note</button>
+                        <button id="postPictureModalButton" type="button" class="btn btn-primary" data-dismiss="modal" onclick="AjaxPublishHumanPictureFeed()">Post new picture note</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->

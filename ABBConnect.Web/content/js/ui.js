@@ -537,8 +537,10 @@ function setRefreshListeners() {
 
 function registerImageUploadInput() {
     var reader;
+    var SIZE_LIMIT = 5242880; //5MB
     var progress = document.getElementById('fileProgressBar');
 
+    //bind the mock input to the real input
     $('input[id=filePicture]').change(function () {
         $('#mockFilePicture').val($(this).val());
     });
@@ -584,27 +586,64 @@ function registerImageUploadInput() {
         reader.onerror = errorHandler;
         reader.onprogress = updateProgress;
         reader.onabort = function (e) {
-            alert('File read cancelled');
-            setTimeout("document.getElementById('fileProgressDiv').className='';", 2000);
+            var uploadedFile = document.getElementById("filePicture").files[0];
+            var size = uploadedFile.size;
+
+            if (!uploadedFile.type.match('image.*')) {
+                alert('Unable to upload, file not a picture!');
+            }
+            else if (size > SIZE_LIMIT)
+                alert('Unable to upload, file larger than 5 MB!');
+            else
+                alert('File read cancelled by user.');
+
+
+            $('#fileProgressDiv').fadeOut();
+            //clear out the input
             $('input[id = filePicture]').val('');
             $('#mockFilePicture').val('');
+
+            //enable the post button
+            $('#postPictureModalButton').removeAttr("disabled");
         };
         reader.onloadstart = function (e) {
-            document.getElementById('fileProgressBar').className = 'progress-bar progress-bar-success';
-            document.getElementById('fileProgressDiv').className = 'progress';
+            var uploadedFile = document.getElementById("filePicture").files[0];
+            var size = uploadedFile.size;
+
+            //check if the uploaded file is a picture
+            if (!uploadedFile.type.match('image.*')) {
+                reader.abort();
+            }
+            else if (size > SIZE_LIMIT) {
+                //check the picture size. if it's over the size limit, abort the upload
+                reader.abort();
+            }
+            else {
+                //display the progress bar
+                $('#fileProgressDiv').fadeIn();
+
+                //disable the post button
+                $('#postPictureModalButton').attr("disabled", true);
+            }
         };
         reader.onload = function (e) {
             // Ensure that the progress bar displays 100% at the end.
             progress.style.width = '100%';
-            setTimeout("document.getElementById('fileProgressBar').className='';", 2000);
-            setTimeout("document.getElementById('fileProgressDiv').className='';", 2000);
+
+            //fade out the progress bar and store the string
+            $('#fileProgressDiv').fadeOut();
+
             $('#modalImgFile').attr("src", e.target.result);
+
+            //enable the post button
+            $('#postPictureModalButton').removeAttr("disabled");
         }
 
         // Read in the image file as a binary string.
         reader.readAsDataURL(evt.target.files[0]);
     }
 
+    //add the event listener for the file selection event on the filepicture input
     document.getElementById('filePicture').addEventListener('change', handleFileSelect, false);
 }
 
