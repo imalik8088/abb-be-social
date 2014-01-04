@@ -1,10 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ABBConnect.Web(1)", ".", "{2D361295-B70C-4F35-83AB-99DADC08DBCE}"
+# Visual Studio 2012
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ABBConnect.Web", "http://localhost:50333", "{2D361295-B70C-4F35-83AB-99DADC08DBCE}"
 	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
 		Debug.AspNetCompiler.VirtualPath = "/ABBConnect.Web"
 		Debug.AspNetCompiler.PhysicalPath = "..\ABBConnect.Web\"
@@ -20,7 +19,6 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ABBConnect.Web(1)", ".", "{
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "50333"
 		SlnRelativePath = "..\ABBConnect.Web\"
 	EndProjectSection
 EndProject

@@ -44,6 +44,19 @@ public partial class SignIn : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+    }
 
+    protected override void OnInit(EventArgs e)
+    {
+        if (!Request.IsSecureConnection)
+        {
+            UriBuilder builder = new UriBuilder(Request.Url)
+            {
+                Scheme = Uri.UriSchemeHttps,
+                Port = 44300
+            };
+            Response.Redirect(builder.Uri.ToString());
+        }
+        base.OnInit(e);
     }
 }
