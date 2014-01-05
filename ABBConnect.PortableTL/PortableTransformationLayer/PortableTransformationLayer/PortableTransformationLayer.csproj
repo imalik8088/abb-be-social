@@ -47,6 +47,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\ABBConnectStreamServiceRef\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="SyncAccesser.cs" />
     <Compile Include="UserData.cs" />
   </ItemGroup>
@@ -155,12 +160,20 @@
     <None Include="Service References\ABBConnectServiceRef\PortableTransformationLayer.ABBConnectServiceRef.GetUsersByName_Result.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\ABBConnectStreamServiceRef\ABBConnectStreamWCF.wsdl" />
+    <None Include="Service References\ABBConnectStreamServiceRef\ABBConnectStreamWCF.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ABBConnectStreamServiceRef\ABBConnectStreamWCF1.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\ABBConnectServiceRef\" />
+    <WCFMetadataStorage Include="Service References\ABBConnectStreamServiceRef\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\ABBConnectServiceRef\ABBConnectWCF.disco" />
@@ -173,6 +186,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\ABBConnectServiceRef\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ABBConnectStreamServiceRef\ABBConnectStreamWCF.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ABBConnectStreamServiceRef\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ABBConnectStreamServiceRef\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ABBConnectStreamServiceRef\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
