@@ -94,6 +94,7 @@ namespace PortableTransformationLayer
             Stream reqStream = await req.GetRequestStreamAsync().ConfigureAwait(false);
             reqStream.Write(filebytes, 0, filebytes.Length);
             reqStream.Dispose();
+            await req.GetResponseAsync();
         }
 
         public async Task<int> PublishTestFeed2(int usrId, string text, string filepath, int prioId)
