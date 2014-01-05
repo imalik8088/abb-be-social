@@ -64,11 +64,11 @@ namespace PortableBLL
 
             }
 
-            public async Task<bool> PublishFeed(HumanFeed feed)
+            public async Task<bool> PublishFeed(HumanFeed feed, byte[] image)
             {
                 try
                 {
-                    int feedID = await feedData.PublishFeed(feed.Owner.ID, feed.Content, feed.MediaFilePath, feed.Category.Id).ConfigureAwait(false);
+                    int feedID = await feedData.PublishFeed(feed.Owner.ID, feed.Content, feed.MediaFilePath, feed.Category.Id, image).ConfigureAwait(false);
 
                     bool success = true;
                     foreach(Human tempHuman in feed.Tags)

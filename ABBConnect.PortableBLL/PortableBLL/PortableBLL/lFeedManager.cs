@@ -8,7 +8,7 @@ namespace PortableBLL
 {
     interface IFeedManager
     {
-        Task<bool> PublishFeed(HumanFeed feed);
+        Task<bool> PublishFeed(HumanFeed feed, byte[] image);
         Task<bool> PublishComment(int feedID, Comment comment);
         Task<bool> AddTagToFeed(int feedId, string username);
         Task<List<Human>> LoadFeedTags(int feedId);

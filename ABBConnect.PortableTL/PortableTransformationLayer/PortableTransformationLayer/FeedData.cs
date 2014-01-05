@@ -64,14 +64,36 @@ namespace PortableTransformationLayer
         /// <param name="filepath">String that represent the the path </param>
         /// <param name="prioId">Integer that represent the priority level of the feed</param>
         /// <returns>Asynchronous operation that contain the ID of the feed</returns>
-        public async Task<int> PublishFeed(int usrId, string text, string filepath, int prioId)
+        public async Task<int> PublishFeed(int usrId, string text, string filepath, int prioId, byte[] image)
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(urlServer.Url);
             var response = await client.GetStringAsync("PostFeed?id=" + usrId.ToString()
                 + "&text=" + text + "&path=" + filepath + "&priority=" + prioId.ToString()).ConfigureAwait(false);
             var obj = JsonConvert.DeserializeObject<string>(response);
+
+            if (image.Length != 0 || image != null)
+            {
+                await AddImageToFeed(image, obj);
+            }
+            //HttpWebResponse resp = await (HttpWebResponse)req.GetResponseAsync().ConfigureAwait(false);
+
             return int.Parse(obj);
+        }
+
+        private async Task AddImageToFeed(byte[] image, string obj)
+        {
+            string feedId = (int.Parse(obj)).ToString() + ";";
+            byte[] filebytes = new byte[image.Length + feedId.Length * sizeof(char)];
+            System.Buffer.BlockCopy(feedId.ToCharArray(), 0, filebytes, 0, feedId.Length * sizeof(char));
+            System.Buffer.BlockCopy(image, 0, filebytes, feedId.Length * sizeof(char), image.Length);
+
+            HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create(urlServer.UrlStream + "/SaveImage");
+            req.Method = "POST";
+            req.ContentType = "text/plain";
+            Stream reqStream = await req.GetRequestStreamAsync().ConfigureAwait(false);
+            reqStream.Write(filebytes, 0, filebytes.Length);
+            reqStream.Dispose();
         }
 
         public async Task<int> PublishTestFeed2(int usrId, string text, string filepath, int prioId)
