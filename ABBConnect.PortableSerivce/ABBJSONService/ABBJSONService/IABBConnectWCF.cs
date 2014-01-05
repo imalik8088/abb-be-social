@@ -39,7 +39,7 @@ namespace ABBJSONService
 
         [OperationContract]
         [WebInvoke]
-        int PostFeed(string id, string text, string prioId, string filepath);
+        int PostFeed(string id, string text, string filepath, string prioId);
 
 
         [OperationContract]
