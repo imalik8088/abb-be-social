@@ -121,7 +121,7 @@ public partial class _Home : System.Web.UI.Page
         loggedUser = userManager.LoadHumanInformation(int.Parse(HttpContext.Current.Session["humanID"].ToString()));
 
         int loggedUserLastPostedHumanFeedId = -1;
-        loggedUserLastPostedHumanFeedId = feedManager.LoadFeedsByFilter(loggedUser.ID, null, DateTime.MinValue, DateTime.MaxValue, FeedType.FeedSource.Human, 1).FirstOrDefault().ID;
+        loggedUserLastPostedHumanFeedId = feedManager.LoadFeedsByFilter(loggedUser.ID, null, DateTime.MinValue, DateTime.MaxValue, FeedType.FeedSource.Human, null, 1).FirstOrDefault().ID;
 
         AjaxFeeds ajaxFeedsHTML = new AjaxFeeds(loggedUserLastPostedHumanFeedId);
         Page page = new Page();
@@ -361,7 +361,7 @@ public partial class _Home : System.Web.UI.Page
         // Get last Feed so we can get Id of it
         DateTime filterStartTime = DateTime.MinValue;
         DateTime filterEndTime = DateTime.MaxValue;
-        lastHumanFeed = feedManager.LoadFeedsByFilter(-1, null, filterStartTime, filterEndTime, FeedType.FeedSource.Human, 1);
+        lastHumanFeed = feedManager.LoadFeedsByFilter(-1, null, filterStartTime, filterEndTime, FeedType.FeedSource.Human, null, 1);
         FeedPage.LastFeedId = lastHumanFeed.First().ID + 1;
         FeedPage.RenderFeedPage();
 

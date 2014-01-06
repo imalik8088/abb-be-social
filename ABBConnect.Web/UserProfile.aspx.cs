@@ -122,7 +122,7 @@ public partial class UserProfile : System.Web.UI.Page
         loggedUser = userManager.LoadHumanInformation(int.Parse(HttpContext.Current.Session["humanID"].ToString()));
 
         int loggedUserLastPostedHumanFeedId = -1;
-        loggedUserLastPostedHumanFeedId = feedManager.LoadFeedsByFilter(loggedUser.ID, null, DateTime.MinValue, DateTime.MaxValue, FeedType.FeedSource.Human, 1).FirstOrDefault().ID;
+        loggedUserLastPostedHumanFeedId = feedManager.LoadFeedsByFilter(loggedUser.ID, null, DateTime.MinValue, DateTime.MaxValue, FeedType.FeedSource.Human, null, 1).FirstOrDefault().ID;
 
         AjaxFeeds ajaxFeedsHTML = new AjaxFeeds(loggedUserLastPostedHumanFeedId);
         Page page = new Page();
@@ -157,7 +157,7 @@ public partial class UserProfile : System.Web.UI.Page
     private void LoadProfileActivity(int userId)
     {
         FeedManager feedManager = new FeedManager();
-        List<Feed> allFeeds = feedManager.LoadFeedsByFilter(userId, null, DateTime.Today.AddDays(-30), DateTime.Today, FeedType.FeedSource.Human, 100);
+        List<Feed> allFeeds = feedManager.LoadFeedsByFilter(userId, null, DateTime.Today.AddDays(-30), DateTime.Today, FeedType.FeedSource.Human, null, 100);
 
         List<string> distinctDates = allFeeds.OrderBy(i => i.TimeStamp).Select(f => f.TimeStamp.ToShortDateString()).Distinct().ToList();
         foreach (string dateTime in distinctDates)
@@ -363,7 +363,7 @@ public partial class UserProfile : System.Web.UI.Page
         // Get last Feed so we can get Id of it
         DateTime filterStartTime = DateTime.MinValue;
         DateTime filterEndTime = DateTime.MaxValue;
-        lastHumanFeed = feedManager.LoadFeedsByFilter(-1, null, filterStartTime, filterEndTime, FeedType.FeedSource.Human, 1);
+        lastHumanFeed = feedManager.LoadFeedsByFilter(-1, null, filterStartTime, filterEndTime, FeedType.FeedSource.Human, null, 1);
         FeedPage.LastFeedId = lastHumanFeed.First().ID + 1;
         FeedPage.FilterUserId = userId;
         FeedPage.RenderFeedPage();

@@ -40,7 +40,7 @@ public partial class controls_RealTimeSensorFeedPage : System.Web.UI.UserControl
         FeedManager feedManager = new FeedManager();
 
         List<Feed> singlePageFeeds = new List<Feed>();
-        singlePageFeeds = feedManager.LoadFeedsByFilter(this.FilterUserId, this.FilterLocation, this.FilterStartDateValue, this.FilterEndDateValue, FeedType.FeedSource.Sensor, LastFeedId, this.PageSize);
+        singlePageFeeds = feedManager.LoadFeedsByFilter(this.FilterUserId, this.FilterLocation, this.FilterStartDateValue, this.FilterEndDateValue, FeedType.FeedSource.Sensor, null, LastFeedId, this.PageSize);
       
         RealTimeSensorFeedRepeater.DataSource = singlePageFeeds;
         RealTimeSensorFeedRepeater.DataBind();
