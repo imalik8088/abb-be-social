@@ -7,6 +7,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <script src="<%=ResolveUrl("~/content/js/userprofile.js")%>" type="text/javascript"></script>
     <div class="row">
         <div class="col-md-6">
             <div class="feed-header">
@@ -74,7 +75,13 @@
             <div id="feed-profile-container" class="feed-container">
                 <div class="feed-inner-container feed-inner-container-default">
                     <div class="feed-information">
-                        <img class="feed-avatar" alt="" src="content/img/avatar-abb.png">
+                        <asp:Literal runat="server" ID="litAvatar"></asp:Literal><br />
+                        <input id="fileAvatar" type="file" style="display: none" />
+                        <div class="input-group">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default update-avatar-button" onclick="$('input[id=fileAvatar]').click();">Update Avatar</button>
+                            </div>
+                        </div>
                     </div>
                     <div class="feed-message feed-message-default">
                         <a class="user-info feed-name-default">Username:</a>

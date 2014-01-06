@@ -5,7 +5,7 @@
         <div id="feed-container-<%# DataBinder.Eval(Container.DataItem,"ID")%>" class="feed-container">
             <div class="feed-inner-container feed-inner-container-<%# Core.GetPriorityCssClass(DataBinder.Eval(((BLL.Feed)Container.DataItem).Category,"Priority").ToString())%>">
                 <div class="feed-information">
-                    <img class="feed-avatar" alt="" src="content/img/avatar-abb-2.png">
+                    <asp:Literal runat="server" ID="litFeedAvatar"></asp:Literal>
                     <span class="label label-<%# Core.GetPriorityCssClass(DataBinder.Eval(((BLL.Feed)Container.DataItem).Category,"Priority").ToString())%> label-feed-information-<%# Core.GetPriorityCssClass(DataBinder.Eval(((BLL.Feed)Container.DataItem).Category,"Priority").ToString())%>">
                         <%# Core.ConvertStringToUppercaseFirst(Core.GetPriorityCssClass(DataBinder.Eval(((BLL.Feed)Container.DataItem).Category,"Priority").ToString()))%>
                     </span>
@@ -37,12 +37,11 @@
                         <ItemTemplate>
                             <div id="feed-single-comment-container-<%# DataBinder.Eval(Container.DataItem,"ID")%>" class="feed-single-comment-container">
                                 <div class="feed-single-comment-info pull-left">
-                                    <img src="content/img/avatar-abb-small.png" alt="user-avatar">
+                                    <img src="<%# (((String)DataBinder.Eval(Container.DataItem,"Owner.Avatar")) == "")? "content/img/avatar-abb-small.png": ((String)DataBinder.Eval(Container.DataItem,"Owner.Avatar")) %>" alt="user-avatar">
                                 </div>
                                 <div class="feed-single-comment-data">
                                     <div class="name">
                                         <a href="userProfile.aspx?userId=<%# DataBinder.Eval(Container.DataItem,"Owner.ID")%>">
-                                            <%--<%# DataBinder.Eval(Container.DataItem,"Owner.UserName")%>--%>
                                             <%# DataBinder.Eval(Container.DataItem,"Owner.FirstName")%> <%# DataBinder.Eval(Container.DataItem,"Owner.LastName")%>
                                         </a>
                                     </div>
