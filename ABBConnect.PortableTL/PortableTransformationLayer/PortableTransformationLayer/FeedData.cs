@@ -83,10 +83,11 @@ namespace PortableTransformationLayer
 
         private async Task AddImageToFeed(byte[] image, string obj)
         {
-            string feedId = (int.Parse(obj)).ToString() + ";";
-            byte[] filebytes = new byte[image.Length + feedId.Length * sizeof(char)];
-            System.Buffer.BlockCopy(feedId.ToCharArray(), 0, filebytes, 0, feedId.Length * sizeof(char));
-            System.Buffer.BlockCopy(image, 0, filebytes, feedId.Length * sizeof(char), image.Length);
+            string firstPackageDetails = image.Length.ToString() + ";" + (int.Parse(obj)).ToString() + ";";
+
+            byte[] filebytes = new byte[image.Length + firstPackageDetails.Length * sizeof(char)];
+            System.Buffer.BlockCopy(firstPackageDetails.ToCharArray(), 0, filebytes, 0, firstPackageDetails.Length * sizeof(char));
+            System.Buffer.BlockCopy(image, 0, filebytes, firstPackageDetails.Length * sizeof(char), image.Length);
 
             HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create(urlServer.UrlStream + "/SaveImage");
             req.Method = "POST";
