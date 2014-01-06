@@ -60,7 +60,7 @@ namespace ABBConnect___Windows_Phone
 
         private void SetImage()
         {
-            if (!String.IsNullOrEmpty(hf.MediaFilePath))
+            if (!String.IsNullOrEmpty(hf.MediaFilePath) || hf.MediaFilePath == "none" || hf.MediaFilePath.Length > 20) //if there is a image, add it else don't
             {
 
                 BitmapImage bmp = new BitmapImage();

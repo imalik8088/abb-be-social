@@ -36,7 +36,7 @@
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
         <Image Height="35" HorizontalAlignment="Left" Margin="10,15,0,0" Name="image1" Stretch="Fill" VerticalAlignment="Top" Width="35" Source="/ABBConnect%20-%20Windows%20Phone;component/Icons/favicon.png" />
-        <controls:Pivot Title="     ABB Connect">
+        <controls:Pivot Title="     ABB Connect" Margin="0,-2,0,2">
             <!--Pivot item one-->
             <controls:PivotItem Header="Feeds" x:Name="piFeed" Width="456" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                 <Grid HorizontalAlignment="Left" Height="574" VerticalAlignment="Top" Width="456">
@@ -55,19 +55,26 @@
             <!--Pivot item two-->
             <controls:PivotItem Header="Post" x:Name="piPost">
                 <!--Triple line list no text wrapping-->
-                <Grid>
+                <Grid x:Name="gridPost">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="75*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
                     <TextBlock x:Name="lblContent" HorizontalAlignment="Left" Margin="42,11,0,0" TextWrapping="Wrap" Text="Message" VerticalAlignment="Top" RenderTransformOrigin="0.165,0.648" Foreground="#FF8A8A8A" />
-                    <TextBox x:Name="txtbContent" HorizontalAlignment="Left" Height="212" Margin="0,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="456" VerticalScrollBarVisibility="Auto" Text="Insert feed content here..." InputScope="Text" MouseLeftButtonDown="txtbContent_MouseLeftButtonDown"/>
+                    <TextBox x:Name="txtbContent" HorizontalAlignment="Left" Height="171" Margin="0,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="456" VerticalScrollBarVisibility="Auto" Text="Insert feed content here..." InputScope="Text" MouseLeftButtonDown="txtbContent_MouseLeftButtonDown" Grid.ColumnSpan="2"/>
 
                     <Button x:Name="btnPublish" Content="Publish" HorizontalAlignment="Left" Margin="10,468,0,0" VerticalAlignment="Top" Width="436" Height="75" Click="btnPublish_MouseLeftButtonUp"/>
-                    <Image x:Name="imgCapture" HorizontalAlignment="Left" Height="100" Margin="136,346,0,0" VerticalAlignment="Top" Width="107" MouseLeftButtonUp="imgCapture_MouseLeftButtonUp" />
-                    <Image x:Name="CameraIcon" Height="100" HorizontalAlignment="Left" MouseLeftButtonUp="imgCapture_MouseLeftButtonUp" Margin="20,344,0,0" Stretch="Fill" VerticalAlignment="Top" Width="100" Source="Icons/camera.png" />
-                    <TextBlock x:Name="lbl_TapToTakePhoto" MouseLeftButtonUp="imgCapture_MouseLeftButtonUp" HorizontalAlignment="Left" Margin="141,379,0,0" TextWrapping="Wrap" Text="Take a picture" VerticalAlignment="Top" RenderTransformOrigin="0.165,0.648" Foreground="White" />
-                    <Image x:Name="TagIcon" Height="56" HorizontalAlignment="Left" Margin="93,250,0,0" Stretch="Fill" VerticalAlignment="Top" Width="56" Source="Icons/symbol_tag.png" MouseLeftButtonUp="TagIcon_MouseLeftButtonUp" />
+                    <Image x:Name="imgCapture" HorizontalAlignment="Left" Height="127" Margin="297,324,0,0" VerticalAlignment="Top" Width="149" MouseLeftButtonUp="imgCapture_MouseLeftButtonUp" />
+                    <Image x:Name="CameraIcon" Height="86" HorizontalAlignment="Left" MouseLeftButtonUp="imgCapture_MouseLeftButtonUp" Margin="179,333,0,0" Stretch="Fill" VerticalAlignment="Top" Width="86" Source="Icons/camera.png" />
+                    <TextBlock x:Name="lbl_TapToTakePhoto" MouseLeftButtonUp="imgCapture_MouseLeftButtonUp" HorizontalAlignment="Left" Margin="160,424,0,0" TextWrapping="Wrap" Text="Take a picture" VerticalAlignment="Top" RenderTransformOrigin="0.165,0.648" Foreground="White" />
+                    <Image x:Name="TagIcon" Height="75" HorizontalAlignment="Left" Margin="21,340,0,0" Stretch="Fill" VerticalAlignment="Top" Width="91" Source="Icons/symbol_tag.png" MouseLeftButtonUp="TagIcon_MouseLeftButtonUp" />
                     <!--<TextBlock x:Name="lbl_TapToTag" HorizontalAlignment="Left" Margin="227,263,0,0" TextWrapping="Wrap" Text="Add Tag" VerticalAlignment="Top" RenderTransformOrigin="0.165,0.648"/>-->
                     <Image Height="20" HorizontalAlignment="Left" Margin="15,15,0,0" Name="imaged" Stretch="Fill" VerticalAlignment="Top" Width="20" Source="/Icons/icon-comment.png" />
-                    <TextBlock x:Name="lblTag" HorizontalAlignment="Left" Margin="43,239,0,0" TextWrapping="Wrap" Text="Tag" VerticalAlignment="Top" RenderTransformOrigin="0.165,0.648" Foreground="#FF8A8A8A" />
-                    <Image Height="20" HorizontalAlignment="Left" Margin="15,242,0,0" Name="image2" Stretch="Fill" VerticalAlignment="Top" Width="20" Source="/Icons/icon-tag.png" />
+                    <TextBlock x:Name="lblTag" HorizontalAlignment="Left" Margin="27,424,0,0" TextWrapping="Wrap" Text="Add Tags" VerticalAlignment="Top" RenderTransformOrigin="0.165,0.648" Foreground="White" Width="125" />
+                    <TextBlock x:Name="lblCategory"  HorizontalAlignment="Left" Margin="15,208,0,0" TextWrapping="Wrap" Text="Category" VerticalAlignment="Top" RenderTransformOrigin="0.165,0.648" Foreground="#FF8A8A8A" />
+                    <RadioButton Content="Sticky Note" Tag="2" IsChecked="True" FontSize="18" HorizontalAlignment="Left" Margin="0,227,0,0" VerticalAlignment="Top" Width="186"/>
+                    <RadioButton Content="Work Post" Tag="3" FontSize="18" HorizontalAlignment="Left" Margin="144,227,0,0" VerticalAlignment="Top"/>
+                    <RadioButton Content="Vacation Post" Tag="4" FontSize="18" HorizontalAlignment="Left" Margin="281,227,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
                 </Grid>
             </controls:PivotItem>
             <!--

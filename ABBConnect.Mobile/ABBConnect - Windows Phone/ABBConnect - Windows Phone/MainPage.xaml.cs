@@ -53,6 +53,8 @@ namespace ABBConnect___Windows_Phone
         const int UPDATETIME = 30, SHOWLABELTIME = 4, NUMBEROFFEEDS = 15;
         string chosenImg;
 
+        byte[] image;
+
         #endregion
 
         #region General
@@ -84,7 +86,6 @@ namespace ABBConnect___Windows_Phone
 
             lblNewFeeds.Text = "";
             NoCache = 1;
-
 
             //add application bar
             this.ApplicationBar = this.Resources["appBar"] as ApplicationBar;
@@ -759,22 +760,31 @@ namespace ABBConnect___Windows_Phone
                 foreach (string s in App.Tags)
                     hf.Tags.Add(new Human() { UserName = s });
 
-            chosenImg = ""; //REMOVE WHÈN SENDING IMG SHALL BE ENABLED!!!
 
             //Set the content of the feed
             hf.Owner.ID = currentUser.ID;
             hf.Content = txtbContent.Text;
-            hf.MediaFilePath = (String.IsNullOrEmpty(chosenImg) ? "none" : chosenImg);
-            hf.Category.Id = 2;
+            hf.Category.Id = GetPostCategory();
+
+            /* If an image is added it is saved in this.image as a byte[], it is set in CameraCapture_Completed */
+            hf.MediaFilePath = "";
+
+            //DEBUG
+            if(image != null)
+                 MessageBox.Show(image.Count().ToString());
 
             try
             {
-                //plublish it
-                bool res = await fm.PublishFeed(hf);
+                //publish it
+                bool res = await fm.PublishFeed(hf, this.image);
 
-                if (res)
+                if (res) //if the result was OK
                 {
+                    //reset the post page
                     txtbContent.Text = "";
+                    this.image = null;
+                    imgCapture.Source = null;
+
                     MessageBox.Show("Feed Published");
                 }
                 else
@@ -782,11 +792,27 @@ namespace ABBConnect___Windows_Phone
             }
             catch (Exception)
             {
-
                 MessageBox.Show("Couldn't publish the new feed, please check your connection");
-
             }
 
+        }
+
+        /// <summary>
+        /// Gets the tag from the radio button that have been selected (category ID)
+        /// </summary>
+        /// <returns></returns>
+        private int GetPostCategory()
+        {
+            for (int i = 0; i < this.gridPost.Children.Count; i++)
+                if (this.gridPost.Children[i].GetType().Name == "RadioButton")
+                {
+                    RadioButton radio = (RadioButton)this.gridPost.Children[i];
+                    if ((bool)radio.IsChecked)
+                        return int.Parse(radio.Tag.ToString());
+                }
+
+            //error, return standard ID
+            return 3;
         }
 
         /// <summary>
@@ -806,47 +832,13 @@ namespace ABBConnect___Windows_Phone
                 imgCapture.Source = bmp;
 
                 //Convert the photo to bytes
-                Byte[] photoBytes = new byte[e.ChosenPhoto.Length];
+                this.image = new byte[e.ChosenPhoto.Length];
 
                 // rewind first
                 e.ChosenPhoto.Position = 0;
 
-                // now succeeds
-                e.ChosenPhoto.Read(photoBytes, 0, photoBytes.Length);
-
-                MessageBox.Show(photoBytes.Length.ToString());
-
-
-                //UNCOMMENT TO ENABLE SENDING IMAGE TO DB
-
-                // chosenImg = Convert.ToBase64String(photoBytes);
-
-                // MessageBox.Show(chosenImg.Length.ToString());
-                //chosenImg = "";
-
-                //TESTING
-                /*
-                BLL.HumanFeed hf = new BLL.HumanFeed();
-                hf.MediaFilePath = chosenImg;
-                hf.ID = 190;
-                hf.Location = "hej";
-                hf.TimeStamp = new DateTime();
-                hf.Owner.ID = 1;
-                hf.Owner.UserName = "rgn09003";
-                hf.Comments = new List<Comment>();
-                hf.Tags = new List<Human>();
-
-                FeedControl fc = new FeedControl(hf);
-
-
-                IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
-                appSettings.Add("img", chosenImg);
-
-                lstbFeeds.Items.Add(fc);
-                   
-
-                int hej = 10;
-                 */
+                // now succeeds 
+                e.ChosenPhoto.Read(this.image, 0, this.image.Length);
             }
         }
 

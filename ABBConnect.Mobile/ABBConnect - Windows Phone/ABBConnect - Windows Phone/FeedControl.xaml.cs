@@ -125,7 +125,7 @@ namespace ABBConnect___Windows_Phone
             try
             {
                 string[] type = filePath.Split(',');
-                Byte[] imageBytes = Convert.FromBase64String(type[1]);
+                byte[] imageBytes = Convert.FromBase64String(type[1]);
                 MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
                 ms.Write(imageBytes, 0, imageBytes.Length);
                 BitmapImage bmp = new BitmapImage();

@@ -51,7 +51,7 @@ namespace ABBConnect___Windows_Phone
             else if (type == "Tag")
                 imgType.Source = new BitmapImage(new Uri("/Icons/icon-tag.png", UriKind.Relative));
             else
-                imgType.Source = new BitmapImage(new Uri("/Icons/symbol_location.png", UriKind.Relative));
+                imgType.Source = new BitmapImage(new Uri("/Icons/icon-comment.png", UriKind.Relative));
         }
 
         /// <summary>
