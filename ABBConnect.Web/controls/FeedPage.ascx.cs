@@ -42,7 +42,7 @@ public partial class controls_FeedPage : System.Web.UI.UserControl
     {        
         FeedManager feedManager = new FeedManager();
         List<Feed> singlePageFeeds = new List<Feed>();
-        
+
         singlePageFeeds = feedManager.LoadFeedsByFilter(this.FilterUserId, this.FilterLocation, this.FilterStartDateValue, this.FilterEndDateValue, FeedType.FeedSource.Human, null, LastFeedId, this.PageSize);
         FeedRepeater.DataSource = singlePageFeeds;
         FeedRepeater.DataBind();      

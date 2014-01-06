@@ -215,7 +215,7 @@ namespace DAL
                             s.MIN_Critical = (decimal)reader[3];
                             s.MAX_Critical = (decimal)reader[4];
                             s.Location = (string)reader[5];
-                            s.Image = (string)reader[6];
+                            s.Image = (reader[6] == DBNull.Value) ? string.Empty : (string)reader[6];
                         }
                     }
                 }
