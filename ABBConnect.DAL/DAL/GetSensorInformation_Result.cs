@@ -19,5 +19,6 @@ namespace DAL
         public Nullable<decimal> MIN_Critical { get; set; }
         public Nullable<decimal> MAX_Critical { get; set; }
         public string Location { get; set; }
+        public string Image { get; set; }
     }
 }

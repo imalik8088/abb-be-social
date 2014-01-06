@@ -26,6 +26,8 @@ namespace BLL
         List<Feed> LoadFeedsByUser(int userId, int numFeeds, int startId);
         List<Feed> LoadFeedsFromSavedFilter(Filter savedFilter, int numFeed);
         List<Feed> LoadFeedsFromSavedFilter(Filter savedFilter, int numFeed, int startId);
+        List<Feed> LoadFeedsByCategoryName(string categoryName, int numFeeds);
+        List<Feed> LoadFeedsByCategoryName(string categoryName, int numFeeds, int startId);
         Feed GetFeedByFeedId(int feedId);
     }
 }

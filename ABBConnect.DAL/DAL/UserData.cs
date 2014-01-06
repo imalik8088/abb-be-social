@@ -215,6 +215,7 @@ namespace DAL
                             s.MIN_Critical = (decimal)reader[3];
                             s.MAX_Critical = (decimal)reader[4];
                             s.Location = (string)reader[5];
+                            s.Image = (string)reader[6];
                         }
                     }
                 }
@@ -593,6 +594,7 @@ namespace DAL
                             h.PhoneNumber = (string)reader[3];
                             h.Email = (string)reader[4];
                             h.Location = (string)reader[5];
+                            h.Image = (string)reader[6];
                         }
                     }
                 }
@@ -632,6 +634,7 @@ namespace DAL
                             h.PhoneNumber = (string)reader[4];
                             h.Email = (string)reader[5];
                             h.Location = (string)reader[6];
+                            h.Image = (string)reader[7];
                         }
                     }
                 }
@@ -769,6 +772,31 @@ namespace DAL
                 sqlConn.Close();
             }
             return activityList;
+        }
+
+        public bool AddUserAvatar(int userId, string image)
+        {
+            int rowsAffected = 0;
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            {
+                sqlConn.Open();
+                string sqlQuery = "AddUserAvatar";
+
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@userID", SqlDbType.Int).Value = userId;
+                    cmd.Parameters.Add("@image", SqlDbType.NVarChar).Value = image;
+
+                    rowsAffected = cmd.ExecuteNonQuery();
+                }
+                sqlConn.Close();
+            }
+
+            if (rowsAffected > 0)
+                return true;
+            else
+                return false;
         }
 
     }

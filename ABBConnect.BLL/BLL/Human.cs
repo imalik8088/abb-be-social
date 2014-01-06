@@ -41,7 +41,8 @@ namespace BLL
             this.phoneNumber = result.PhoneNumber;
             email = result.Email;
             base.Location = result.Location;
-            companyTitle = ""; 
+            companyTitle = "";
+            base.Avatar = result.Image;
         }
         public Human(GetHumanInformationByUsername_Result result)
         {
@@ -52,6 +53,7 @@ namespace BLL
             this.phoneNumber = result.PhoneNumber;
             email = result.Email;
             base.Location = result.Location;
+            base.Avatar = result.Image;
             companyTitle = "";
         }
 

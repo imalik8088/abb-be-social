@@ -27,5 +27,6 @@ namespace BLL
         List<Sensor> GetFollowedSensors(int humanUserId);
         List<Activity> GetUserActivity(int userId);
         List<Activity> GetUserActivity(int userId, int activitiesNumber, int startId);
+        bool AddUserAvatar(int userId, string image);
     }
 }

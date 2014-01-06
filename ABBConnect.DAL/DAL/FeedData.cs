@@ -697,7 +697,7 @@ namespace DAL
         /// <param name="startId"></param>
         /// <param name="numFeeds">Integer that represent the number of feeds that must be retrieved, if not needed in the search put it -1</param>
         /// <returns>Asynchronous operation that contain the List of feeds required</returns>
-        public List<GetLatestXFeeds_Result> GetXFeedsByFilter(int id, string location, DateTime startingTime, DateTime endingTime, string feedType, int startId, int numFeeds)
+        public List<GetLatestXFeeds_Result> GetXFeedsByFilter(int id, string location, DateTime startingTime, DateTime endingTime, string feedType, string feedCategoryName, int startId, int numFeeds)
         {
             List<GetLatestXFeeds_Result> feeds = new List<GetLatestXFeeds_Result>();
 
@@ -736,6 +736,11 @@ namespace DAL
                             cmd.Parameters.Add("@FeedType", SqlDbType.NVarChar, 50).Value = DBNull.Value;
                         else
                             cmd.Parameters.Add("@FeedType", SqlDbType.NVarChar, 50).Value = feedType;
+
+                        if (feedCategoryName.Equals(""))
+                            cmd.Parameters.Add("@feedCategoryName", SqlDbType.NVarChar, 50).Value = DBNull.Value;
+                        else
+                            cmd.Parameters.Add("@feedCategoryName", SqlDbType.NVarChar, 50).Value = feedCategoryName;
 
                         if (startId == -1)
                             cmd.Parameters.Add("@startingFeedId", SqlDbType.Int).Value = DBNull.Value;

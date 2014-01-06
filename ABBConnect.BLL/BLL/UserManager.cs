@@ -248,5 +248,15 @@ namespace BLL
 
             return activityList;
         }
+
+        public bool AddUserAvatar(int userId, string image)
+        {
+            if (userId < 0)
+            {
+                return false;
+            }
+
+            return usrData.AddUserAvatar(userId, image);
+        }
     }
 }
