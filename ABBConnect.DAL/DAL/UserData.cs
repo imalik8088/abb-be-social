@@ -594,7 +594,7 @@ namespace DAL
                             h.PhoneNumber = (string)reader[3];
                             h.Email = (string)reader[4];
                             h.Location = (string)reader[5];
-                            h.Image = (string)reader[6];
+                            h.Image = (reader[6] == DBNull.Value) ? string.Empty : (string)reader[6];
                         }
                     }
                 }
@@ -634,7 +634,7 @@ namespace DAL
                             h.PhoneNumber = (string)reader[4];
                             h.Email = (string)reader[5];
                             h.Location = (string)reader[6];
-                            h.Image = (string)reader[7];
+                            h.Image = (reader[7] == DBNull.Value) ? string.Empty : (string)reader[7];
                         }
                     }
                 }
