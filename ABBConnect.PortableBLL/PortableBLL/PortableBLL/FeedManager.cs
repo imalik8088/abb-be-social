@@ -20,7 +20,7 @@ namespace PortableBLL
 
             public async Task<List<Feed>> LoadLatestXFeeds(int feedNum)
             {
-                List<GetLatestXFeeds_Result> list = await feedData.GetFeedsByFilter(-1, "", DateTime.MinValue, DateTime.MinValue, "", -1, feedNum).ConfigureAwait(false);
+                List<GetLatestXFeeds_Result> list = await feedData.GetFeedsByFilter(-1, "", DateTime.MinValue, DateTime.MinValue, "", "", -1, feedNum).ConfigureAwait(false);
 
                 List<Feed> retList = new List<Feed>();
 
@@ -42,7 +42,7 @@ namespace PortableBLL
 
             public async Task<List<Feed>> LoadLatestXFeedsFromId(int startingId, int numberOfFeeds)
             {
-                List<GetLatestXFeeds_Result> list = await feedData.GetFeedsByFilter(-1, "", DateTime.MinValue, DateTime.MinValue, "", startingId, numberOfFeeds);
+                List<GetLatestXFeeds_Result> list = await feedData.GetFeedsByFilter(-1, "", DateTime.MinValue, DateTime.MinValue, "", "", startingId, numberOfFeeds);
 
                 List<Feed> retList = new List<Feed>();
 
@@ -126,7 +126,7 @@ namespace PortableBLL
             {
                 string typeOfFeed = Getfeedtype(feedType);
 
-                List<GetLatestXFeeds_Result> list = await feedData.GetFeedsByFilter(-1, "", DateTime.MinValue, DateTime.MinValue, typeOfFeed, -1, numFeeds);
+                List<GetLatestXFeeds_Result> list = await feedData.GetFeedsByFilter(-1, "", DateTime.MinValue, DateTime.MinValue, typeOfFeed, "", -1, numFeeds);
 
                 List<Feed> retList = new List<Feed>();
 
@@ -161,7 +161,7 @@ namespace PortableBLL
             {
                 string typeOfFeed = Getfeedtype(feedType);
 
-                List<GetLatestXFeeds_Result> list = await feedData.GetFeedsByFilter(-1, "", DateTime.MinValue, DateTime.MinValue, typeOfFeed, startId, numFeeds);
+                List<GetLatestXFeeds_Result> list = await feedData.GetFeedsByFilter(-1, "", DateTime.MinValue, DateTime.MinValue, typeOfFeed, "", startId, numFeeds);
 
                 List<Feed> retList = new List<Feed>();
 
@@ -184,7 +184,7 @@ namespace PortableBLL
 
             public async Task<List<Feed>> LoadFeedsByDate(DateTime feedStartTime, DateTime feedEndTime, int numFeeds)
             {
-                List<GetLatestXFeeds_Result> list = await feedData.GetFeedsByFilter(-1, "", feedStartTime, feedEndTime, "", -1, numFeeds);
+                List<GetLatestXFeeds_Result> list = await feedData.GetFeedsByFilter(-1, "", feedStartTime, feedEndTime, "", "", -1, numFeeds);
 
                 List<Feed> retList = new List<Feed>();
 
@@ -207,7 +207,7 @@ namespace PortableBLL
 
             public async Task<List<Feed>> LoadFeedsByDate(DateTime feedStartTime, DateTime feedEndTime, int numFeeds, int startId)
             {
-                List<GetLatestXFeeds_Result> list = await feedData.GetFeedsByFilter(-1, "", feedStartTime, feedEndTime, "", startId, numFeeds);
+                List<GetLatestXFeeds_Result> list = await feedData.GetFeedsByFilter(-1, "", feedStartTime, feedEndTime, "", "", startId, numFeeds);
 
                 List<Feed> retList = new List<Feed>();
 
@@ -230,7 +230,7 @@ namespace PortableBLL
 
             public async Task<List<Feed>> LoadFeedsByLocation(string location, int numFeeds)
             {
-                List<GetLatestXFeeds_Result> list = await feedData.GetFeedsByFilter(-1, location, DateTime.MinValue, DateTime.MinValue, "", -1, numFeeds);
+                List<GetLatestXFeeds_Result> list = await feedData.GetFeedsByFilter(-1, location, DateTime.MinValue, DateTime.MinValue, "", "", -1, numFeeds);
 
                 List<Feed> retList = new List<Feed>();
 
@@ -253,7 +253,7 @@ namespace PortableBLL
 
             public async Task<List<Feed>> LoadFeedsByLocation(string location, int numFeeds, int startId)
             {
-                List<GetLatestXFeeds_Result> list = await feedData.GetFeedsByFilter(-1, location, DateTime.MinValue, DateTime.MinValue, "", startId, numFeeds);
+                List<GetLatestXFeeds_Result> list = await feedData.GetFeedsByFilter(-1, location, DateTime.MinValue, DateTime.MinValue, "", "", startId, numFeeds);
 
                 List<Feed> retList = new List<Feed>();
 
@@ -276,7 +276,7 @@ namespace PortableBLL
 
             public async Task<List<Feed>> LoadFeedsByUser(int userId, int numFeeds)
             {
-                List<GetLatestXFeeds_Result> list = await feedData.GetFeedsByFilter(userId, "", DateTime.MinValue, DateTime.MinValue, "", -1, numFeeds);
+                List<GetLatestXFeeds_Result> list = await feedData.GetFeedsByFilter(userId, "", DateTime.MinValue, DateTime.MinValue, "", "", -1, numFeeds);
 
                 List<Feed> retList = new List<Feed>();
 
@@ -299,7 +299,7 @@ namespace PortableBLL
 
             public async Task<List<Feed>> LoadFeedsByUser(int userId, int numFeeds, int startId)
             {
-                List<GetLatestXFeeds_Result> list = await feedData.GetFeedsByFilter(userId, "", DateTime.MinValue, DateTime.MinValue, "", startId, numFeeds);
+                List<GetLatestXFeeds_Result> list = await feedData.GetFeedsByFilter(userId, "", DateTime.MinValue, DateTime.MinValue, "", "", startId, numFeeds);
 
                 List<Feed> retList = new List<Feed>();
 
@@ -320,7 +320,7 @@ namespace PortableBLL
                 return retList;
             }
 
-            public async Task<List<Feed>> LoadFeedsByFilter(int userId, string location, DateTime startingTime, DateTime endingTime, FeedType.FeedSource feedType, int numFeeds)
+            public async Task<List<Feed>> LoadFeedsByFilter(int userId, string location, DateTime startingTime, DateTime endingTime, FeedType.FeedSource feedType, string categoryName, int numFeeds)
             {
                 string typeOfFeed;
                 if (feedType == FeedType.FeedSource.None)
@@ -332,6 +332,7 @@ namespace PortableBLL
                                                                                      startingTime,
                                                                                      endingTime,
                                                                                      typeOfFeed,
+                                                                                     String.IsNullOrEmpty(categoryName) ? "" : categoryName,
                                                                                      -1,
                                                                                      numFeeds < 0 ? -1 : numFeeds
                                                                                      );
@@ -355,7 +356,7 @@ namespace PortableBLL
                 return retList;
             }
 
-            public async Task<List<Feed>> LoadFeedsByFilter(int userId, string location, DateTime startingTime, DateTime endingTime, FeedType.FeedSource feedType, int startId, int numFeeds)
+            public async Task<List<Feed>> LoadFeedsByFilter(int userId, string location, DateTime startingTime, DateTime endingTime, FeedType.FeedSource feedType, string categoryName, int startId, int numFeeds)
             {
                 string typeOfFeed;
                 if (feedType == FeedType.FeedSource.None)
@@ -367,6 +368,7 @@ namespace PortableBLL
                                                                                        startingTime,
                                                                                        endingTime,
                                                                                        typeOfFeed,
+                                                                                       String.IsNullOrEmpty(categoryName) ? "" : categoryName,
                                                                                        startId < 0 ? -1 : startId,
                                                                                        numFeeds < 0 ? -1 : numFeeds
                                                                                        );
@@ -400,10 +402,10 @@ namespace PortableBLL
                 if (savedFilter.UsersOnFilter.Count > 0)
                     foreach (User filteredUser in savedFilter.UsersOnFilter)
                     {
-                        retList.AddRange(await LoadFeedsByFilter(filteredUser.ID, savedFilter.Location, savedFilter.StartDate, savedFilter.EndDate, savedFilter.TypeOfFeed, numFeed).ConfigureAwait(false));
+                        retList.AddRange(await LoadFeedsByFilter(filteredUser.ID, savedFilter.Location, savedFilter.StartDate, savedFilter.EndDate, savedFilter.TypeOfFeed, savedFilter.CategoryName, numFeed).ConfigureAwait(false));
                     }
                 else
-                    await LoadFeedsByFilter(-1, savedFilter.Location, savedFilter.StartDate, savedFilter.EndDate, savedFilter.TypeOfFeed, numFeed).ConfigureAwait(false);
+                    await LoadFeedsByFilter(-1, savedFilter.Location, savedFilter.StartDate, savedFilter.EndDate, savedFilter.TypeOfFeed, savedFilter.CategoryName, numFeed).ConfigureAwait(false);
                 
                 return retList.OrderByDescending(o => o.TimeStamp).ToList().GetRange(0, numFeed-1);
             }
@@ -417,10 +419,10 @@ namespace PortableBLL
                 if (savedFilter.UsersOnFilter.Count > 0)
                     foreach (User filteredUser in savedFilter.UsersOnFilter)
                     {
-                        retList.AddRange(await LoadFeedsByFilter(filteredUser.ID, savedFilter.Location, savedFilter.StartDate, savedFilter.EndDate, savedFilter.TypeOfFeed, startId, numFeed).ConfigureAwait(false));
+                        retList.AddRange(await LoadFeedsByFilter(filteredUser.ID, savedFilter.Location, savedFilter.StartDate, savedFilter.EndDate, savedFilter.TypeOfFeed, savedFilter.CategoryName, startId, numFeed).ConfigureAwait(false));
                     }
                 else
-                    await LoadFeedsByFilter(-1, savedFilter.Location, savedFilter.StartDate, savedFilter.EndDate, savedFilter.TypeOfFeed, startId, numFeed).ConfigureAwait(false);
+                    await LoadFeedsByFilter(-1, savedFilter.Location, savedFilter.StartDate, savedFilter.EndDate, savedFilter.TypeOfFeed, savedFilter.CategoryName, startId, numFeed).ConfigureAwait(false);
 
                 return retList.OrderByDescending(o => o.TimeStamp).ToList().GetRange(0, numFeed-1);
             }
@@ -463,6 +465,53 @@ namespace PortableBLL
                                                await LoadFeedTags(entityFeed.FeedId).ConfigureAwait(false),
                                                await userInforMng.LoadSensorInformation(entityFeed.UserId));
 
+            }
+
+
+            public async Task<List<Feed>> LoadFeedsByCategoryName(string categoryName, int numFeeds)
+            {
+                List<GetLatestXFeeds_Result> list = await feedData.GetFeedsByFilter(-1, "", DateTime.MinValue, DateTime.MinValue, "", categoryName, -1, numFeeds);
+
+                List<Feed> retList = new List<Feed>();
+
+                UserManager userInforMng = new UserManager();
+
+                foreach (GetLatestXFeeds_Result res in list)
+                {
+                    if (res.Type == "Human")
+                        retList.Add(new HumanFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false),
+                                                  await LoadFeedTags(res.FeedId).ConfigureAwait(false),
+                                                  await userInforMng.LoadHumanInformation(res.UserId)));
+                    else
+                        retList.Add(new SensorFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false),
+                                                   await LoadFeedTags(res.FeedId).ConfigureAwait(false),
+                                                   await userInforMng.LoadSensorInformation(res.UserId)));
+                }
+
+                return retList;
+            }
+
+            public async Task<List<Feed>> LoadFeedsByCategoryName(string categoryName, int numFeeds, int startId)
+            {
+                List<GetLatestXFeeds_Result> list = await feedData.GetFeedsByFilter(-1, "", DateTime.MinValue, DateTime.MinValue, "", categoryName, startId, numFeeds);
+
+                List<Feed> retList = new List<Feed>();
+
+                UserManager userInforMng = new UserManager();
+
+                foreach (GetLatestXFeeds_Result res in list)
+                {
+                    if (res.Type == "Human")
+                        retList.Add(new HumanFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false),
+                                                  await LoadFeedTags(res.FeedId).ConfigureAwait(false),
+                                                  await userInforMng.LoadHumanInformation(res.UserId)));
+                    else
+                        retList.Add(new SensorFeed(res, await LoadFeedComments(res.FeedId).ConfigureAwait(false),
+                                                   await LoadFeedTags(res.FeedId).ConfigureAwait(false),
+                                                   await userInforMng.LoadSensorInformation(res.UserId)));
+                }
+
+                return retList;
             }
     }
 }

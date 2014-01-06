@@ -25,6 +25,8 @@ namespace PortableBLL
         Task<List<Feed>> LoadFeedsByUser(int userId, int numFeeds, int startId);
         Task<List<Feed>> LoadFeedsFromSavedFilter(Filter savedFilter, int numFeed);
         Task<List<Feed>> LoadFeedsFromSavedFilter(Filter savedFilter, int numFeed, int startId);
+        Task<List<Feed>> LoadFeedsByCategoryName(string categoryName, int numFeeds);
+        Task<List<Feed>> LoadFeedsByCategoryName(string categoryName, int numFeeds, int startId);
         Task<Feed> GetFeedByFeedId(int feedId);
         Task<List<Feed>> LoadFeedsFromLastShift(int numFeed);
     }

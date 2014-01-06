@@ -83,10 +83,11 @@ namespace PortableTransformationLayer
 
         private async Task AddImageToFeed(byte[] image, string obj)
         {
-            string feedId = (int.Parse(obj)).ToString() + ";";
-            byte[] filebytes = new byte[image.Length + feedId.Length * sizeof(char)];
-            System.Buffer.BlockCopy(feedId.ToCharArray(), 0, filebytes, 0, feedId.Length * sizeof(char));
-            System.Buffer.BlockCopy(image, 0, filebytes, feedId.Length * sizeof(char), image.Length);
+            string firstPackageDetails = image.Length.ToString() + ";" + (int.Parse(obj)).ToString() + ";";
+
+            byte[] filebytes = new byte[image.Length + firstPackageDetails.Length * sizeof(char)];
+            System.Buffer.BlockCopy(firstPackageDetails.ToCharArray(), 0, filebytes, 0, firstPackageDetails.Length * sizeof(char));
+            System.Buffer.BlockCopy(image, 0, filebytes, firstPackageDetails.Length * sizeof(char), image.Length);
 
             HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create(urlServer.UrlStream + "/SaveImage");
             req.Method = "POST";
@@ -186,15 +187,16 @@ namespace PortableTransformationLayer
         /// <param name="startId"></param>
         /// <param name="numFeeds">Integer that represent the number of feeds that must be retrieved, if not needed in the search put it -1</param>
         /// <returns>Asynchronous operation that contain the List of feeds required</returns>
-        public async Task<List<GetLatestXFeeds_Result>> GetFeedsByFilter(int userId, string location, DateTime startingTime, DateTime endingTime, string feedType, int startId, int numFeeds)
+        public async Task<List<GetLatestXFeeds_Result>> GetFeedsByFilter(int userId, string location, DateTime startingTime, DateTime endingTime, string feedType, string categoryName, int startId, int numFeeds)
         {
             string dateTimePattern = "yy-MM-dd H:mm:ss";
-            string url = String.Format("FilterFeedsByFilter?userId={0}&location={1}&start={2}&end={3}&type={4}&feedId={5}&numFeeds={6}&guid={7}",
+            string url = String.Format("FilterFeedsByFilter?userId={0}&location={1}&start={2}&end={3}&type={4}&category={5}&feedId={6}&numFeeds={7}&guid={8}",
                                         userId == -1 ? "" : userId.ToString(),
                                         location,
                                         startingTime == DateTime.MinValue ? "" : startingTime.ToString(dateTimePattern),
                                         endingTime == DateTime.MinValue ? "" : endingTime.ToString(dateTimePattern),
                                         feedType,
+                                        categoryName,
                                         startId == -1 ? "" : startId.ToString(),
                                         numFeeds == -1 ? "" : numFeeds.ToString(),
                                         Guid.NewGuid());

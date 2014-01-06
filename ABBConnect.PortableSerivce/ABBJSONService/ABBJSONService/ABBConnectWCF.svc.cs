@@ -294,8 +294,8 @@ namespace ABBJSONService
             return feedData.GetFeedsByFilter(name, location, Convert.ToDateTime(startingTime), Convert.ToDateTime(endingTime), feedType);
         }
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "FilterFeedsByFilter?userId={id}&location={location}&start={startingTime}&end={endingTime}&type={feedType}&feedId={startId}&numFeeds={numFeeds}&guid={randomGuid}")]
-        List<DAL.GetLatestXFeeds_Result> IABBConnectWCF.GetXFeedsByFilter(string id, string location, string startingTime, string endingTime, string feedType, string startId, string numFeeds, string randomGuid)
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "FilterFeedsByFilter?userId={id}&location={location}&start={startingTime}&end={endingTime}&type={feedType}&category={categoryName}&feedId={startId}&numFeeds={numFeeds}&guid={randomGuid}")]
+        List<DAL.GetLatestXFeeds_Result> IABBConnectWCF.GetXFeedsByFilter(string id, string location, string startingTime, string endingTime, string feedType, string categoryName, string startId, string numFeeds, string randomGuid)
         {
             FeedData feedData = new FeedData();
 
@@ -325,7 +325,7 @@ namespace ABBJSONService
                 userId = Int32.Parse(id);
 
             return feedData.GetXFeedsByFilter(userId, location, startTime,
-                                            endTime, feedType, startingId, feedsNumber);
+                                            endTime, feedType, categoryName, startingId, feedsNumber);
         }
 
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "SaveFilter?userId={userId}&name={filterName}&start={startingTime}&end={endingTime}&location={location}&feedType={feedType}")]

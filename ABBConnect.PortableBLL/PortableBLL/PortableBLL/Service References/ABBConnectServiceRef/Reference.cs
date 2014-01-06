@@ -46,7 +46,7 @@ namespace PortableBLL.ABBConnectServiceRef {
         int EndPostTestFeed(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IABBConnectWCF/PostFeed", ReplyAction="http://tempuri.org/IABBConnectWCF/PostFeedResponse")]
-        System.IAsyncResult BeginPostFeed(string id, string text, string prioId, string filepath, System.AsyncCallback callback, object asyncState);
+        System.IAsyncResult BeginPostFeed(string id, string text, string filepath, string prioId, System.AsyncCallback callback, object asyncState);
         
         int EndPostFeed(System.IAsyncResult result);
         
@@ -146,7 +146,7 @@ namespace PortableBLL.ABBConnectServiceRef {
         PortableTransformationLayer.ABBConnectServiceRef.GetFeedsByFilter_Result[] EndGetFeedsByFilter(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IABBConnectWCF/GetXFeedsByFilter", ReplyAction="http://tempuri.org/IABBConnectWCF/GetXFeedsByFilterResponse")]
-        System.IAsyncResult BeginGetXFeedsByFilter(string id, string location, string startingTime, string endingTime, string feedType, string startId, string numFeeds, string randomGuid, System.AsyncCallback callback, object asyncState);
+        System.IAsyncResult BeginGetXFeedsByFilter(string id, string location, string startingTime, string endingTime, string feedType, string categoryName, string startId, string numFeeds, string randomGuid, System.AsyncCallback callback, object asyncState);
         
         PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result1[] EndGetXFeedsByFilter(System.IAsyncResult result);
         
@@ -1581,8 +1581,8 @@ namespace PortableBLL.ABBConnectServiceRef {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult PortableBLL.ABBConnectServiceRef.IABBConnectWCF.BeginPostFeed(string id, string text, string prioId, string filepath, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginPostFeed(id, text, prioId, filepath, callback, asyncState);
+        System.IAsyncResult PortableBLL.ABBConnectServiceRef.IABBConnectWCF.BeginPostFeed(string id, string text, string filepath, string prioId, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginPostFeed(id, text, filepath, prioId, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -1593,9 +1593,9 @@ namespace PortableBLL.ABBConnectServiceRef {
         private System.IAsyncResult OnBeginPostFeed(object[] inValues, System.AsyncCallback callback, object asyncState) {
             string id = ((string)(inValues[0]));
             string text = ((string)(inValues[1]));
-            string prioId = ((string)(inValues[2]));
-            string filepath = ((string)(inValues[3]));
-            return ((PortableBLL.ABBConnectServiceRef.IABBConnectWCF)(this)).BeginPostFeed(id, text, prioId, filepath, callback, asyncState);
+            string filepath = ((string)(inValues[2]));
+            string prioId = ((string)(inValues[3]));
+            return ((PortableBLL.ABBConnectServiceRef.IABBConnectWCF)(this)).BeginPostFeed(id, text, filepath, prioId, callback, asyncState);
         }
         
         private object[] OnEndPostFeed(System.IAsyncResult result) {
@@ -1611,11 +1611,11 @@ namespace PortableBLL.ABBConnectServiceRef {
             }
         }
         
-        public void PostFeedAsync(string id, string text, string prioId, string filepath) {
-            this.PostFeedAsync(id, text, prioId, filepath, null);
+        public void PostFeedAsync(string id, string text, string filepath, string prioId) {
+            this.PostFeedAsync(id, text, filepath, prioId, null);
         }
         
-        public void PostFeedAsync(string id, string text, string prioId, string filepath, object userState) {
+        public void PostFeedAsync(string id, string text, string filepath, string prioId, object userState) {
             if ((this.onBeginPostFeedDelegate == null)) {
                 this.onBeginPostFeedDelegate = new BeginOperationDelegate(this.OnBeginPostFeed);
             }
@@ -1628,8 +1628,8 @@ namespace PortableBLL.ABBConnectServiceRef {
             base.InvokeAsync(this.onBeginPostFeedDelegate, new object[] {
                         id,
                         text,
-                        prioId,
-                        filepath}, this.onEndPostFeedDelegate, this.onPostFeedCompletedDelegate, userState);
+                        filepath,
+                        prioId}, this.onEndPostFeedDelegate, this.onPostFeedCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -2533,8 +2533,8 @@ namespace PortableBLL.ABBConnectServiceRef {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult PortableBLL.ABBConnectServiceRef.IABBConnectWCF.BeginGetXFeedsByFilter(string id, string location, string startingTime, string endingTime, string feedType, string startId, string numFeeds, string randomGuid, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginGetXFeedsByFilter(id, location, startingTime, endingTime, feedType, startId, numFeeds, randomGuid, callback, asyncState);
+        System.IAsyncResult PortableBLL.ABBConnectServiceRef.IABBConnectWCF.BeginGetXFeedsByFilter(string id, string location, string startingTime, string endingTime, string feedType, string categoryName, string startId, string numFeeds, string randomGuid, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetXFeedsByFilter(id, location, startingTime, endingTime, feedType, categoryName, startId, numFeeds, randomGuid, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -2548,10 +2548,11 @@ namespace PortableBLL.ABBConnectServiceRef {
             string startingTime = ((string)(inValues[2]));
             string endingTime = ((string)(inValues[3]));
             string feedType = ((string)(inValues[4]));
-            string startId = ((string)(inValues[5]));
-            string numFeeds = ((string)(inValues[6]));
-            string randomGuid = ((string)(inValues[7]));
-            return ((PortableBLL.ABBConnectServiceRef.IABBConnectWCF)(this)).BeginGetXFeedsByFilter(id, location, startingTime, endingTime, feedType, startId, numFeeds, randomGuid, callback, asyncState);
+            string categoryName = ((string)(inValues[5]));
+            string startId = ((string)(inValues[6]));
+            string numFeeds = ((string)(inValues[7]));
+            string randomGuid = ((string)(inValues[8]));
+            return ((PortableBLL.ABBConnectServiceRef.IABBConnectWCF)(this)).BeginGetXFeedsByFilter(id, location, startingTime, endingTime, feedType, categoryName, startId, numFeeds, randomGuid, callback, asyncState);
         }
         
         private object[] OnEndGetXFeedsByFilter(System.IAsyncResult result) {
@@ -2567,11 +2568,11 @@ namespace PortableBLL.ABBConnectServiceRef {
             }
         }
         
-        public void GetXFeedsByFilterAsync(string id, string location, string startingTime, string endingTime, string feedType, string startId, string numFeeds, string randomGuid) {
-            this.GetXFeedsByFilterAsync(id, location, startingTime, endingTime, feedType, startId, numFeeds, randomGuid, null);
+        public void GetXFeedsByFilterAsync(string id, string location, string startingTime, string endingTime, string feedType, string categoryName, string startId, string numFeeds, string randomGuid) {
+            this.GetXFeedsByFilterAsync(id, location, startingTime, endingTime, feedType, categoryName, startId, numFeeds, randomGuid, null);
         }
         
-        public void GetXFeedsByFilterAsync(string id, string location, string startingTime, string endingTime, string feedType, string startId, string numFeeds, string randomGuid, object userState) {
+        public void GetXFeedsByFilterAsync(string id, string location, string startingTime, string endingTime, string feedType, string categoryName, string startId, string numFeeds, string randomGuid, object userState) {
             if ((this.onBeginGetXFeedsByFilterDelegate == null)) {
                 this.onBeginGetXFeedsByFilterDelegate = new BeginOperationDelegate(this.OnBeginGetXFeedsByFilter);
             }
@@ -2587,6 +2588,7 @@ namespace PortableBLL.ABBConnectServiceRef {
                         startingTime,
                         endingTime,
                         feedType,
+                        categoryName,
                         startId,
                         numFeeds,
                         randomGuid}, this.onEndGetXFeedsByFilterDelegate, this.onGetXFeedsByFilterCompletedDelegate, userState);
@@ -3287,12 +3289,12 @@ namespace PortableBLL.ABBConnectServiceRef {
                 return _result;
             }
             
-            public System.IAsyncResult BeginPostFeed(string id, string text, string prioId, string filepath, System.AsyncCallback callback, object asyncState) {
+            public System.IAsyncResult BeginPostFeed(string id, string text, string filepath, string prioId, System.AsyncCallback callback, object asyncState) {
                 object[] _args = new object[4];
                 _args[0] = id;
                 _args[1] = text;
-                _args[2] = prioId;
-                _args[3] = filepath;
+                _args[2] = filepath;
+                _args[3] = prioId;
                 System.IAsyncResult _result = base.BeginInvoke("PostFeed", _args, callback, asyncState);
                 return _result;
             }
@@ -3563,16 +3565,17 @@ namespace PortableBLL.ABBConnectServiceRef {
                 return _result;
             }
             
-            public System.IAsyncResult BeginGetXFeedsByFilter(string id, string location, string startingTime, string endingTime, string feedType, string startId, string numFeeds, string randomGuid, System.AsyncCallback callback, object asyncState) {
-                object[] _args = new object[8];
+            public System.IAsyncResult BeginGetXFeedsByFilter(string id, string location, string startingTime, string endingTime, string feedType, string categoryName, string startId, string numFeeds, string randomGuid, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[9];
                 _args[0] = id;
                 _args[1] = location;
                 _args[2] = startingTime;
                 _args[3] = endingTime;
                 _args[4] = feedType;
-                _args[5] = startId;
-                _args[6] = numFeeds;
-                _args[7] = randomGuid;
+                _args[5] = categoryName;
+                _args[6] = startId;
+                _args[7] = numFeeds;
+                _args[8] = randomGuid;
                 System.IAsyncResult _result = base.BeginInvoke("GetXFeedsByFilter", _args, callback, asyncState);
                 return _result;
             }

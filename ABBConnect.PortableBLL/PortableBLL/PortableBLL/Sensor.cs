@@ -25,6 +25,7 @@ namespace PortableBLL
             this.lowerBoundary = entitySensor.MIN_Critical.GetValueOrDefault();
             base.Location = entitySensor.Location;
             this.unitMetric = entitySensor.Unit;
+            base.Avatar = entitySensor.Image;
         }
 
         private List<SensorVTData> sensorValues;

@@ -97,8 +97,8 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="text" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="prioId" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="filepath" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="prioId" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -390,6 +390,7 @@
         <xs:element minOccurs="0" name="startingTime" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="endingTime" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="feedType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="categoryName" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="startId" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="numFeeds" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="randomGuid" nillable="true" type="xs:string" />
