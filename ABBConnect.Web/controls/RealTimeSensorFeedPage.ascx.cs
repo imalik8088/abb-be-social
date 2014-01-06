@@ -7,6 +7,14 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using BLL;
 
+/*
+ * Written by: 
+ * Project: Social Media in the Process Automation Industry (ABB Connect)
+ */
+
+/// <summary>
+/// Logic for rendering sensor feed page.
+/// </summary>
 public partial class controls_RealTimeSensorFeedPage : System.Web.UI.UserControl
 {
     // Default Feed Settings
@@ -23,6 +31,10 @@ public partial class controls_RealTimeSensorFeedPage : System.Web.UI.UserControl
     {
 
     }
+
+    /// <summary>
+    /// Loading and rendering sensor feeds for the page.
+    /// </summary>
     public void RenderFeedPage()
     {        
         FeedManager feedManager = new FeedManager();
@@ -34,6 +46,9 @@ public partial class controls_RealTimeSensorFeedPage : System.Web.UI.UserControl
         RealTimeSensorFeedRepeater.DataBind();
     }
 
+    /// <summary>
+    /// Rendering feed content and load more link.
+    /// </summary>
     protected void RealTimeSensorFeedRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
     {
         Literal l = new Literal();  
@@ -58,6 +73,10 @@ public partial class controls_RealTimeSensorFeedPage : System.Web.UI.UserControl
             a.Attributes.Add("onclick", "$(this).fadeOut(300); AjaxLoadMoreRealTimeSensorFeeds(" + currentFeed.ID + ")");
         }
     }
+
+    /// <summary>
+    /// Determining the state of Load more container and rendering data.
+    /// </summary>
     protected override void Render(HtmlTextWriter writer)
     {
         if (RealTimeSensorFeedRepeater.Items.Count >= this.PageSize)
