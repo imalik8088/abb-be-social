@@ -26,5 +26,6 @@ namespace PortableBLL
         Task<bool> UnfollowSensor(int humanUserId, int sensorUserId);
         Task<List<int>> GetFollowedSensors(int humanUserId);
         Task<List<Activity>> GetUserActivity(int userId);
+        Task<List<Activity>> GetUserActivity(int userId, int activitiesNumber, int startId);
     }
 }

@@ -240,5 +240,16 @@ namespace PortableTransformationLayer
                                                         + "&sensorUserId=" + sensorUserId.ToString()).ConfigureAwait(false);
             return JsonConvert.DeserializeObject<bool>(response);
         }
+
+
+        public async Task<List<GetUserActivity_Result>> GetUserActivityFromId(int userId, int numActivities, int startId)
+        {
+            var client = new HttpClient();
+            client.BaseAddress = new Uri(urlServer.Url); 
+            var response = await client.GetStringAsync("GetUserActivityFromId?userId=" + userId.ToString()
+                                                        + "&numberOfActivities=" + numActivities.ToString()
+                                                        + "&startId=" + startId.ToString()).ConfigureAwait(false);
+            return JsonConvert.DeserializeObject<List<GetUserActivity_Result>>(response);
+        }
     }
 }

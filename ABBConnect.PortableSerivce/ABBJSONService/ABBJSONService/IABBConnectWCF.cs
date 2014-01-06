@@ -120,7 +120,7 @@ namespace ABBJSONService
         
         [OperationContract]
         [WebInvoke]
-        List<DAL.GetLatestXFeeds_Result> GetXFeedsByFilter(string id, string location, string startingTime, string endingTime, string feedType, string startId, string numFeeds, string randomGuid);
+        List<DAL.GetLatestXFeeds_Result> GetXFeedsByFilter(string id, string location, string startingTime, string endingTime, string feedType, string categoryName, string startId, string numFeeds, string randomGuid);
 
         [OperationContract]
         [WebInvoke]

@@ -254,5 +254,20 @@ namespace PortableBLL
 
             return activityList;
         }
+
+
+        public async Task<List<Activity>> GetUserActivity(int userId, int activitiesNumber, int startId)
+        {
+            List<GetUserActivity_Result> list = await usrData.GetUserActivityFromId(userId, activitiesNumber, startId).ConfigureAwait(false);
+
+            List<Activity> activityList = new List<Activity>();
+
+            foreach (GetUserActivity_Result entityActivity in list)
+            {
+                activityList.Add(new Activity(entityActivity));
+            }
+
+            return activityList;
+        }
     }
 }
