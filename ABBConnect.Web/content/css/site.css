@@ -819,3 +819,9 @@ img.feed-avatar {
     border-radius: 0.25em !important;
     margin-left: -6px !important;
 }
+
+/* Post modals */
+.textarea-post-modal {
+    width: 100%;
+    resize: vertical;
+}

@@ -157,7 +157,7 @@
                         <hr>
                         <!-- Textbox -->
                         <h5>Please insert new note text:</h5>
-                        <textarea id="textareaNote" class="input col-md-12" placeholder="Insert your note text here..." rows="5"></textarea>
+                        <textarea id="textareaNote" class="input col-md-12 textarea-post-modal" placeholder="Insert your note text here..." rows="5"></textarea>
                         <br />
                         <!--Tagging-->
                         <h5>Tag users:</h5>
@@ -190,7 +190,7 @@
                         <br />
                         <!-- Textbox -->
                         <h5>Please insert picture description:</h5>
-                        <textarea id="textAreaPicture" class="input col-md-12" placeholder="Insert your note text here..." rows="5"></textarea>
+                        <textarea id="textAreaPicture" class="input col-md-12 textarea-post-modal" placeholder="Insert your note text here..." rows="5"></textarea>
                         <br />
                         <!-- File upload-->
                         <h5>Upload the file:</h5>
