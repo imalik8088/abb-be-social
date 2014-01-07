@@ -267,7 +267,7 @@ namespace DAL
                         else
                             cmd.Parameters.Add("@EndDate", SqlDbType.DateTime).Value = endingTime;
 
-                        if (feedType.Equals(""))
+                        if (feedType.Equals("None"))
                             cmd.Parameters.Add("@Type", SqlDbType.NVarChar, 50).Value = DBNull.Value;
                         else
                             cmd.Parameters.Add("@Type", SqlDbType.NVarChar, 50).Value = feedType;

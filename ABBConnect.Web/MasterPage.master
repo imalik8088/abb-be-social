@@ -38,29 +38,19 @@
                 <ul>
                     <li>
                         <a href="Home.aspx" data-original-title="">
-                            <span class="glyphicon glyphicon-envelope"></span>
+                            <span class="glyphicon glyphicon-phone"></span>
                         </a>
                     </li>
                     <li>
-                        <a href="Home.aspx" data-original-title="">
-                            <span class="glyphicon glyphicon-comment"></span>
+                        <a href="LastShift.aspx" data-original-title="">
+                            <span class="glyphicon glyphicon-retweet"></span>
                         </a>
-                    </li>
+                    </li>                   
                     <li>
-                        <a href="Home.aspx" data-original-title="">
+                        <a href="AllSensors.aspx" data-original-title="">
                             <span class="glyphicon glyphicon-flash"></span>
                         </a>
-                    </li>
-                    <li>
-                        <a href="Home.aspx" data-original-title="">
-                            <span class="glyphicon glyphicon-cog"></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="Home.aspx" data-original-title="">
-                            <span class="glyphicon glyphicon-cloud-upload"></span>
-                        </a>
-                    </li>
+                    </li>                  
                 </ul>
             </div>
             <div id="search-input-container" class="search-container">
@@ -109,19 +99,9 @@
                     </li>
                     <li>
                         <a href="LastShift.aspx">
-                            <span class="glyphicon glyphicon-envelope"></span>Shift
+                            <span class="glyphicon glyphicon-retweet"></span>Shift
                         </a>
-                    </li>
-                    <li>
-                        <a href="Home.aspx">
-                            <span class="glyphicon glyphicon-plus"></span>Publish
-                        </a>
-                    </li>
-                    <li>
-                        <a href="Home.aspx">
-                            <span class="glyphicon glyphicon-cog"></span>Settings
-                        </a>
-                    </li>
+                    </li>                  
                     <li>
                         <a>
                             <span class="glyphicon glyphicon-log-out" onclick="OnClickSignOut()"></span>Sign out
