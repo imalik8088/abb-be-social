@@ -16,6 +16,39 @@ function hideFullFeedCommentContainer(feedId) {
     $("#feed-post-comment-additional-settings-" + feedId.toString()).hide();
     $("#feed-post-comment-input-" + feedId.toString()).val('Write comment...');
 }
+function AjaxSaveUserFilter() {
+    var ajaxFeedFilter = new Object();
+    ajaxFeedFilter.startDate = null;
+    ajaxFeedFilter.endDate = null;
+    ajaxFeedFilter.location = null;
+    ajaxFeedFilter.userId = $('#humanFeedsFilterUserId').val();
+
+    if ($('#humanFeedsFilterStartDateIsChecked').val() == 'true') {
+        ajaxFeedFilter.startDate = new Date($('#humanFeedsFilterStartDateValue').val());
+    }
+    if ($('#humanFeedsFilterEndDateIsChecked').val() == 'true') {
+        ajaxFeedFilter.endDate = new Date($('#humanFeedsFilterEndDateValue').val());
+    }
+    if ($('#humanFeedsFilterLocationIsChecked').val() == 'true') {
+        ajaxFeedFilter.location = $('#humanFeedsFilterLocation').val();
+    }
+    PageMethods.AjaxSaveUserFilter(ajaxFeedFilter, AjaxSaveUserFilterSuccess);
+}
+function AjaxSaveUserFilterSuccess(result, userContext, methodName) {
+   alert("Save")
+}
+function AjaxLoadUserFilter() {
+    PageMethods.AjaxLoadUserFilter(ajaxFeedFilter, AjaxLoadUserFilterSuccess);
+}
+function AjaxLoadUserFilterSuccess(result, userContext, methodName) {
+    alert("Load all feeds")
+    //Clear HumanFeedsData
+    if (refreshData == 1) {
+        $('#feedsContainer').html('');
+    }
+    //Load HumanFeeds with that filter
+    AjaxLoadMoreHumanFeeds(-1);
+}
 function AjaxUserFollowSensor(sensorId) {
     PageMethods.AjaxUserFollowSensor(sensorId, AjaxUserFollowSensorSuccess);
 }

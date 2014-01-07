@@ -40,7 +40,12 @@
                                 </li>
                                 <li class="divider"></li>
                                 <li><a href="#" data-toggle="modal" data-target="#modalHumanFeedsAddDateFilter">Date <span id="humanFeedsDateFilterIsActive" class="label label-success dont-show">ACTIVE</span></a>
-                                </li>
+                                </li>          
+                                <li class="divider"></li> 
+                                <li><a href="#" onclick="AjaxLoadUserFilter()">Load</a>
+                                </li>  
+                                <li><a href="#" onclick="AjaxSaveUserFilter()">Save</a>
+                                </li>                     
                             </ul>
                         </div>
                         <div class="btn-group">
