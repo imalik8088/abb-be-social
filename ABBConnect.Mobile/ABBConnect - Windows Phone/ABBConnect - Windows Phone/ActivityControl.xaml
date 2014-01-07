@@ -9,14 +9,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="80" d:DesignWidth="456">
 
-    <Grid x:Name="LayoutRoot" Margin="0,0,0,10" MouseLeftButtonUp="LayoutRoot_MouseLeftButtonUp">
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0,0" StartPoint="0.3,0">
-                <GradientStop Color="Black" Offset="0"/>
-                <GradientStop Color="DarkGray" Offset="4"/>
-            </LinearGradientBrush>
-        </Grid.Background>
-
+    <Grid x:Name="LayoutRoot" Margin="0,0,0,10" Background="Black" MouseLeftButtonUp="LayoutRoot_MouseLeftButtonUp">
         <TextBlock x:Name="lblText" HorizontalAlignment="Right" Margin="0,35,28,0" TextWrapping="Wrap" Text="Added a comment to a feed by Dimitrios Gustavsson" VerticalAlignment="Top" Height="30" Width="360"/>
         <TextBlock  x:Name="lblTime" HorizontalAlignment="Left" Margin="411,5,-78,0" TextWrapping="Wrap" Text="00d" VerticalAlignment="Top" Height="30" Width="123" RenderTransformOrigin="1.471,0.467"/>
         <Image  Source="/Icons/icon-comment.png" x:Name="imgType" HorizontalAlignment="Left" Height="50" Margin="10,10,0,0" VerticalAlignment="Top" Width="53" RenderTransformOrigin="16.1,0.25"/>

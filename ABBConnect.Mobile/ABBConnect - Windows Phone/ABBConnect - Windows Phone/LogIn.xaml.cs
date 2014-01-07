@@ -88,7 +88,7 @@ namespace ABBConnect___Windows_Phone
                         MessageBox.Show("To use this application internet connection is needed!");
                         return;
                     }
-}
+                }
             }
         }
 

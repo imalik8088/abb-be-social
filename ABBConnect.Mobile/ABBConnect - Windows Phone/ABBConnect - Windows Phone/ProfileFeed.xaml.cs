@@ -14,6 +14,7 @@ using Microsoft.Phone.Tasks;
 using System.Windows.Navigation;
 using PortableBLL;
 using System.Windows.Media.Imaging;
+using System.IO;
 
 /*
  * Written by: Robert Gustavsson
@@ -106,6 +107,38 @@ namespace ABBConnect___Windows_Phone
         }
 
         /// <summary>
+        /// Set the avatar belonning to the user
+        /// </summary>
+        /// <param name="filePath"></param>
+        private void SetImage(string filePath)
+        {
+            try
+            {
+                if (filePath.Length > 20 || !string.IsNullOrEmpty(filePath))
+                {
+
+                    string[] type = filePath.Split(',');
+                    byte[] imageBytes = Convert.FromBase64String(type[1]);
+                    MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
+                    ms.Write(imageBytes, 0, imageBytes.Length);
+                    BitmapImage bmp = new BitmapImage();
+
+                    if (type[0].Contains("gif"))
+                    {
+                        return;
+                    }
+                    bmp.SetSource(ms);
+                    imgAvatar.Source = bmp;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        
+        }
+
+        /// <summary>
         /// Sets the information of a sensor
         /// </summary>
         private void SetSensorInfo()
@@ -133,6 +166,8 @@ namespace ABBConnect___Windows_Phone
             //disable clicking
             lblPhoneClick.MouseLeftButtonDown -= lblPhoneClick_MouseLeftButtonUp;
             lblEmailClick.MouseLeftButtonDown -= lblEmailClick_MouseLeftButtonDown;
+
+            SetImage(((Sensor)currentUser).Avatar);
         }
 
         /// <summary>
@@ -146,6 +181,8 @@ namespace ABBConnect___Windows_Phone
             lblPhoneClick.Text = ((Human)currentUser).PhoneNumber;
 
             imgUser.Visibility = Visibility.Visible;    // show the user icon
+
+            SetImage(((Human)currentUser).Avatar);
         }
 
         /// <summary>
