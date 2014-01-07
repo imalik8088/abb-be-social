@@ -35,7 +35,7 @@ function AjaxSaveUserFilter() {
     PageMethods.AjaxSaveUserFilter(ajaxFeedFilter, AjaxSaveUserFilterSuccess);
 }
 function AjaxSaveUserFilterSuccess(result, userContext, methodName) {
-   alert("Save")
+    alert("Save")
 }
 function AjaxLoadUserFilter() {
     PageMethods.AjaxLoadUserFilter(ajaxFeedFilter, AjaxLoadUserFilterSuccess);
@@ -410,6 +410,11 @@ function OnAjaxGetAvailableUsersToTagSuccess(result, userContext, methodName) {
         $('#selectModalPictureMessage').html($('#selectModalPictureMessage').html());
         $('#textAreaPicture').val('').blur();
         selectizePicture.clear();
+
+        //clear the file input
+        $('#modalImgFile').val('');
+        $('#mockFilePicture').val('');
+        $('#filePicture').val('');
     });
 }
 
@@ -570,7 +575,7 @@ function setRefreshListeners() {
 
 function registerImageUploadInput() {
     var reader;
-    var SIZE_LIMIT = 5242880; //5MB
+    var SIZE_LIMIT = 204800; //200kb
     var progress = document.getElementById('fileProgressBar');
 
     //bind the mock input to the real input
@@ -623,13 +628,21 @@ function registerImageUploadInput() {
             var size = uploadedFile.size;
 
             if (!uploadedFile.type.match('image.*')) {
-                alert('Unable to upload, file not a picture!');
+                $('#fileAlertDiv').text('Unable to upload, file not a picture!');
             }
-            else if (size > SIZE_LIMIT)
-                alert('Unable to upload, file larger than 5 MB!');
-            else
-                alert('File read cancelled by user.');
+            else if (size > SIZE_LIMIT) {
+                $('#fileAlertDiv').text('Unable to upload, file larger than 200KB!');
+            }
+            else {
+                $('#fileAlertDiv').text('File read cancelled by user.');
+            }
 
+            //hide the cancel button
+            $('#fileUploadCancelButton').css("display", "none");
+
+            //show and hide the alert after 3 seconds
+            $('#fileAlertDiv').fadeIn();
+            $('#fileAlertDiv').delay(3000).fadeOut();
 
             $('#fileProgressDiv').fadeOut();
             //clear out the input
@@ -652,8 +665,14 @@ function registerImageUploadInput() {
                 reader.abort();
             }
             else {
+                //hide the alert div instantly
+                $("#fileAlertDiv").css("display", "none");
+
                 //display the progress bar
                 $('#fileProgressDiv').fadeIn();
+
+                //hide the cancel button
+                $('#fileUploadCancelButton').fadeIn();
 
                 //disable the post button
                 $('#postPictureModalButton').attr("disabled", true);
@@ -662,6 +681,9 @@ function registerImageUploadInput() {
         reader.onload = function (e) {
             // Ensure that the progress bar displays 100% at the end.
             progress.style.width = '100%';
+
+            //hide the cancel button
+            $('#fileUploadCancelButton').fadeOut();
 
             //fade out the progress bar and store the string
             $('#fileProgressDiv').fadeOut();

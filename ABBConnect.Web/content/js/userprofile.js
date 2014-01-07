@@ -1,6 +1,6 @@
 ﻿function registerAvatarUpload(userId) {
     var reader;
-    var SIZE_LIMIT = 5242880; //5MB
+    var SIZE_LIMIT = 204800; //200kB
 
     function errorHandler(evt) {
         switch (evt.target.error.code) {
@@ -29,7 +29,7 @@
                 alert('Unable to upload, file not a picture!');
             }
             else if (size > SIZE_LIMIT)
-                alert('Unable to upload, file larger than 5 MB!');
+                alert('Unable to upload, file larger than 200KB!');
         };
 
         reader.onloadstart = function (e) {

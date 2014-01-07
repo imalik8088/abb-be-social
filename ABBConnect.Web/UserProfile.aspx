@@ -251,31 +251,46 @@
                         <h4 class="modal-title" id="H1">Add a new picture note</h4>
                     </div>
                     <div class="modal-body">
-                        <!-- File upload-->
-                        <input id="filePicture" type="file" style="display: none" />
-                        <div class="input-append">
-                            <input id="inputPicturePath" class="input-large" type="text" style="width: 85%;" />
-                            <a class="btn" onclick="$('input[id=filePicture]').click();">Browse</a>
-                        </div>
-
-                        <script type="text/javascript">
-                            $('input[id=filePicture]').change(function () {
-                                $('#inputPicturePath').val($(this).val());
-                            });
-                        </script>
-
+                        <h5>Please select the picture note type:</h5>
+                        <!--SelectBox for post body-->
+                        <select class="form-control" id="selectModalPictureMessage">
+                        </select>
                         <br />
-                        <h5>Please insert the description of the picture:</h5>
-
                         <!-- Textbox -->
-                        <div class="input-group">
-                            <span class="input-group-addon"></span>
-                            <textarea class="input" placeholder="Insert your note text here..." style="width: 100%; resize: vertical"></textarea>
+                        <h5>Please insert picture description:</h5>
+                        <textarea id="textAreaPicture" class="input col-md-12" placeholder="Insert your note text here..." rows="5"></textarea>
+                        <br />
+                        <!-- File upload-->
+                        <h5>Upload the file:</h5>
+                        <div>
+                            <input id="filePicture" type="file" style="display: none" />
+                            <div class="input-group">
+                                <input id="mockFilePicture" class="form-control" type="text" disabled="disabled" style="cursor: default;" />
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default" onclick="$('input[id=filePicture]').click();">Browse</button>
+                                </div>
+                            </div>
+
+                            <img id="modalImgFile" src="" hidden="hidden" />
+
+                            <div id="fileProgressDiv" class="progress" style="display: none;">
+                                <div id="fileProgressBar" class="progress-bar progress-bar-success" role="progressbar" style="width: 0%">
+                                </div>
+                            </div>
+                            <div id="fileAlertDiv" class="alert alert-danger" style="display: none;">
+                            </div>
+
+                            <button type="button" id="fileUploadCancelButton" class="btn btn-default" style="display: none;">Cancel read</button>
+                        </div>
+                        <!--Tagging-->
+                        <h5>Tag users:</h5>
+                        <div id="input-tags-div-picture">
+                            <input id="input-tags-post-picture" class="selectized" type="text" tabindex="-1" style="display: none;" />
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="ClearModal()">Close</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="ClearModal()">Post new picture note</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button id="postPictureModalButton" type="button" class="btn btn-primary" data-dismiss="modal" onclick="AjaxPublishHumanPictureFeed()">Post new picture note</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->
