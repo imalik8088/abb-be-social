@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -53,7 +55,7 @@ public partial class UserProfile : System.Web.UI.Page
         ajaxFeedsHTML.FeedsRawData = textWriter.ToString();
         return ajaxFeedsHTML;
     }
-    
+
     /// <summary>
     /// Retrieving feed categories.
     /// </summary>
@@ -65,7 +67,7 @@ public partial class UserProfile : System.Web.UI.Page
 
         return categories;
     }
-    
+
     /// <summary>
     /// Getting all the data of a new feed and publishing it. 
     /// </summary>
@@ -105,8 +107,8 @@ public partial class UserProfile : System.Web.UI.Page
         actionResult = feedManager.PublishFeed(newHumanFeed);
         return actionResult;
     }
-    
-     /// <summary>
+
+    /// <summary>
     /// Retrieving a new feed and producing HTML with the feed contents.
     /// </summary>
     /// <param name="filter"></param>
@@ -319,7 +321,7 @@ public partial class UserProfile : System.Web.UI.Page
     /// </summary>
     /// <param name="userId"></param>
     private void LoadUserProfileData(int userId)
-    {       
+    {
         humanFeedsFilterUserId.Value = userId.ToString();
 
         UserManager userManager = new UserManager();
@@ -328,11 +330,25 @@ public partial class UserProfile : System.Web.UI.Page
 
         litFeedsUserName.Text = "Feeds published by " + user.FirstName + "," + user.LastName;
         litProfileUserName.Text = "Contact information for " + user.FirstName + "," + user.LastName;
-        litActivityUserName.Text = user.FirstName +"'s recent activity";
+        litActivityUserName.Text = user.FirstName + "'s recent activity";
         litUserName.Text = user.UserName;
         litUserPhoneNumber.Text = user.PhoneNumber;
         litUserLocation.Text = user.Location;
         litUserEmail.Text = user.Email;
+        if (user.Avatar == "")
+            litAvatar.Text = "<img id='feedAvatar' class='feed-avatar' alt='' src='content/img/avatar-abb.png'>";
+        else
+            litAvatar.Text = "<img id='feedAvatar' class='feed-avatar' alt='' src='" + user.Avatar + "'>";
+
+        //if the user is checking his profile, enable the avatar upload
+        if (int.Parse(HttpContext.Current.Session["humanID"].ToString()) == userId)
+            litChangeAvatar.Text = "<input id='fileAvatar' type='file' style='display: none' />" +
+                                        "<div class='input-group'>" +
+                                            "<div class='input-group-btn'>" +
+                                                 "<button type='button' class='btn btn-default update-avatar-button' onclick='$('input[id=fileAvatar]').click();'>Update Avatar</button>" +
+                                            "</div>" +
+                                         "</div>";
+
     }
 
     /// <summary>
@@ -345,6 +361,17 @@ public partial class UserProfile : System.Web.UI.Page
         {
             Response.Redirect("~/SignIn.aspx");
         }
+    }
+
+    /// <summary>
+    /// Changing user picture.
+    /// </summary>
+    [System.Web.Services.WebMethod]
+    public static void AjaxChangeAvatar(int userId, String pictureBase64)
+    {
+        UserManager userManager = new UserManager();
+
+        userManager.AddUserAvatar(userId, pictureBase64);
     }
     #endregion
 
@@ -374,6 +401,7 @@ public partial class UserProfile : System.Web.UI.Page
         ActivityPage.RenderActivityPage();
 
         //Call JS Methods
+        ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "registerAvatarUpload", "<script type='text/javascript'>registerAvatarUpload(" + userId + ")</script>", false);
         ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "populateFeedPostTypes", "<script type='text/javascript'>AjaxPopulateSelectBoxPostFeedType()</script>", false);
         ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "getAvailableUsersToTag", "<script type='text/javascript'>AjaxGetAvailableUsersToTag()</script>", false);
     }

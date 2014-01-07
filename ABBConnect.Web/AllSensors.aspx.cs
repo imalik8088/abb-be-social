@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -53,6 +54,32 @@ public partial class AllSensors : System.Web.UI.Page
 
         return ajaxUserFollowedSensorsHTML;
     }
+
+    #region Search bar
+    /// <summary>
+    /// Logic for the Search bar.
+    /// Getting the queried users. 
+    /// </summary>
+    /// <param name="queriedName"></param>
+    [System.Web.Services.WebMethod]
+    public static string AjaxGetQueriedUsers(string queriedName)
+    {
+        UserManager um = new UserManager();
+        List<User> approximateUserNames = um.SearchUserByName(queriedName);
+
+        //filter out the humans
+        List<Human> approximateHumans = new List<Human>();
+        //some casting magic from User to Human
+        approximateHumans.AddRange(approximateUserNames.Where(x => x is Human).Cast<Human>());
+
+        JavaScriptSerializer serializer = new JavaScriptSerializer();
+
+        string returnString = serializer.Serialize(approximateHumans);
+
+        return returnString;
+    }
+    #endregion
+
     protected void Page_Load(object sender, EventArgs e)
     {
         //check if user is logged in

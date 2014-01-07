@@ -40,12 +40,12 @@
                                 </li>
                                 <li class="divider"></li>
                                 <li><a href="#" data-toggle="modal" data-target="#modalHumanFeedsAddDateFilter">Date <span id="humanFeedsDateFilterIsActive" class="label label-success dont-show">ACTIVE</span></a>
-                                </li>          
-                                <li class="divider"></li> 
+                                </li>
+                                <li class="divider"></li>
                                 <li><a href="#" onclick="AjaxLoadUserFilter()">Load</a>
-                                </li>  
+                                </li>
                                 <li><a href="#" onclick="AjaxSaveUserFilter()">Save</a>
-                                </li>                     
+                                </li>
                             </ul>
                         </div>
                         <div class="btn-group">
@@ -197,7 +197,7 @@
                         <div>
                             <input id="filePicture" type="file" style="display: none" />
                             <div class="input-group">
-                                <input id="mockFilePicture" class="form-control" type="text" />
+                                <input id="mockFilePicture" class="form-control" type="text" disabled="disabled" style="cursor: default;" />
                                 <div class="input-group-btn">
                                     <button type="button" class="btn btn-default" onclick="$('input[id=filePicture]').click();">Browse</button>
                                 </div>
@@ -209,7 +209,10 @@
                                 <div id="fileProgressBar" class="progress-bar progress-bar-success" role="progressbar" style="width: 0%">
                                 </div>
                             </div>
-                            <button type="button" id="fileUploadCancelButton" class="btn btn-default">Cancel read</button>
+                            <div id="fileAlertDiv" class="alert alert-danger" style="display: none;">
+                            </div>
+
+                            <button type="button" id="fileUploadCancelButton" class="btn btn-default" style="display: none;">Cancel read</button>
                         </div>
                         <!--Tagging-->
                         <h5>Tag users:</h5>
