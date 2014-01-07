@@ -72,7 +72,7 @@ namespace PortableTransformationLayer
                 + "&text=" + text + "&path=" + filepath + "&priority=" + prioId.ToString()).ConfigureAwait(false);
             var obj = JsonConvert.DeserializeObject<string>(response);
 
-            if (image.Length != 0 || image != null)
+            if (image != null && image.Length > 0)
             {
                 await AddImageToFeed(image, obj);
             }

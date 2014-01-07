@@ -34,7 +34,7 @@ namespace PortableTransformationLayer
         /// </summary>
         /// <param name="id">ID of the sensor that have to be retrieved</param>
         /// <returns>Asynchronous operation that contain the information about the sensor</returns>
-        public async Task<ABBConnectServiceRef.GetSensorInformation_Result> GetSensorInformation(int id)
+        public async Task<GetSensorInformation_Result> GetSensorInformation(int id)
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(urlServer.Url);
