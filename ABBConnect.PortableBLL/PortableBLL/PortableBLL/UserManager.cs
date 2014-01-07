@@ -133,7 +133,7 @@ namespace PortableBLL
                 }
                 else
                 {
-                    retList.Add(await LoadSensorInformation(res.Id));
+                    retList.Add(new Sensor(res));
                 }
 
             return retList;

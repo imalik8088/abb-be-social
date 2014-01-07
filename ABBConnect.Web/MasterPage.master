@@ -108,8 +108,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="Home.aspx">
-                            <span class="glyphicon glyphicon-envelope"></span>Inbox
+                        <a href="LastShift.aspx">
+                            <span class="glyphicon glyphicon-envelope"></span>Shift
                         </a>
                     </li>
                     <li>

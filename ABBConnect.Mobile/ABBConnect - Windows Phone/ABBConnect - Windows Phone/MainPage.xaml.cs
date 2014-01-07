@@ -826,6 +826,7 @@ namespace ABBConnect___Windows_Phone
             {
                 lbl_TapToTakePhoto.Text = "";
 
+                /*
                 //Code to display the photo on the page in an image control named myImage.
                 System.Windows.Media.Imaging.BitmapImage bmp = new System.Windows.Media.Imaging.BitmapImage();
                 bmp.SetSource(e.ChosenPhoto);
@@ -839,6 +840,47 @@ namespace ABBConnect___Windows_Phone
 
                 // now succeeds 
                 e.ChosenPhoto.Read(this.image, 0, this.image.Length);
+                */
+
+                
+                //get taken photo
+                BitmapImage bmi = new BitmapImage();
+                bmi.SetSource(e.ChosenPhoto);
+
+                //display taken photo
+                imgCapture.Source = bmi;
+
+                //resize the photo and add to a stream
+                WriteableBitmap wb = new WriteableBitmap(bmi);
+                Stream stream = new MemoryStream();
+                wb.SaveJpeg(stream, 640, 480, 0, 100);
+                stream.Seek(0, SeekOrigin.Begin);
+
+                //set the byte[] containing the image
+                this.image = ConvertStreamToByteArray(stream);
+
+                MessageBox.Show(image.Count().ToString());
+                
+
+            }
+        }
+
+        /// <summary>
+        /// Converts a stream to a byte array
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public byte[] ConvertStreamToByteArray(Stream input)
+        {
+            byte[] buffer = new byte[16 * 1024];
+            using (MemoryStream ms = new MemoryStream())
+            {
+                int read;
+                while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    ms.Write(buffer, 0, read);
+                }
+                return ms.ToArray();
             }
         }
 

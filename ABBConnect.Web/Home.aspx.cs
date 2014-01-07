@@ -189,6 +189,38 @@ public partial class _Home : System.Web.UI.Page
         actionResult = feedManager.PublishFeed(newHumanFeed);
         return actionResult;
     }
+    [System.Web.Services.WebMethod]
+    public static void AjaxSaveUserFilter(AjaxFeedFilter filter)
+    {
+        UserManager userManager = new UserManager();
+        int userId = int.Parse(HttpContext.Current.Session["humanID"].ToString());
+        Filter userFilter = new Filter();
+  
+        if (filter.StartDate != null) filter.StartDate = (DateTime)filter.StartDate;
+        if (filter.EndDate != null) filter.EndDate = (DateTime)filter.EndDate;
+        if (filter.UserId != null) filter.UserId = (int)filter.UserId;
+        if (filter.Location != null) filter.Location = (string)filter.Location;
+
+        userManager.AddFilter(userId,userFilter);
+    }
+    [System.Web.Services.WebMethod]
+    public static AjaxFeedFilter AjaxLoadUserFilter()
+    {
+        UserManager userManager = new UserManager();
+        int userId = int.Parse(HttpContext.Current.Session["humanID"].ToString());
+        List<Filter> userFilters = new List<Filter>();
+        Filter userFilter = new Filter();
+        AjaxFeedFilter ajaxFilter = new AjaxFeedFilter();
+
+        userFilters = userManager.GetUserSavedFilters(userId);
+        if (userFilters.Count > 0) userFilter = userFilters.Last();
+
+        if (userFilter.StartDate != null) ajaxFilter.StartDate = (DateTime)userFilter.StartDate;
+        if (userFilter.EndDate != null) ajaxFilter.EndDate = (DateTime)userFilter.EndDate;
+        if (userFilter.Location != null) ajaxFilter.Location = (string)userFilter.Location;
+
+        return ajaxFilter;
+    }
     #endregion
 
     #region Sesnor page
