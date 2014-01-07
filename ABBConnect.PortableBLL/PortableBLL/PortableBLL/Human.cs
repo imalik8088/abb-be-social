@@ -30,6 +30,7 @@ namespace PortableBLL
             this.companyTitle = "";
             this.email = "";
             this.phoneNumber = "";
+            base.Avatar = "";
         }
 
         public Human(GetHumanInformation_Result result, int humanId)

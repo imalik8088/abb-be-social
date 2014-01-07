@@ -16,6 +16,15 @@ namespace PortableBLL
             this.unitMetric = "";
         }
 
+        public Sensor(GetUsersByName_Result result)
+        {
+            base.ID = result.Id;
+            base.UserName = result.Name;
+            base.Location = "";
+            this.unitMetric = "";
+            base.Avatar = "";
+        }
+
         public Sensor(GetSensorInformation_Result entitySensor)
         {
             base.ID = entitySensor.Id;
