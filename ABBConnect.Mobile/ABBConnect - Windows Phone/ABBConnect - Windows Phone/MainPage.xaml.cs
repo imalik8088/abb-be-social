@@ -769,9 +769,6 @@ namespace ABBConnect___Windows_Phone
             /* If an image is added it is saved in this.image as a byte[], it is set in CameraCapture_Completed */
             hf.MediaFilePath = "";
 
-            //DEBUG
-            if(image != null)
-                 MessageBox.Show(image.Count().ToString());
 
             try
             {
@@ -859,7 +856,6 @@ namespace ABBConnect___Windows_Phone
                 //set the byte[] containing the image
                 this.image = ConvertStreamToByteArray(stream);
 
-                MessageBox.Show(image.Count().ToString());
                 
 
             }
