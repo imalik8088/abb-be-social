@@ -195,11 +195,11 @@ public partial class _Home : System.Web.UI.Page
         UserManager userManager = new UserManager();
         int userId = int.Parse(HttpContext.Current.Session["humanID"].ToString());
         Filter userFilter = new Filter();
-  
-        if (filter.StartDate != null) filter.StartDate = (DateTime)filter.StartDate;
-        if (filter.EndDate != null) filter.EndDate = (DateTime)filter.EndDate;
-        if (filter.UserId != null) filter.UserId = (int)filter.UserId;
-        if (filter.Location != null) filter.Location = (string)filter.Location;
+
+        if (filter.StartDate != null) userFilter.StartDate = (DateTime)filter.StartDate;
+        if (filter.EndDate != null) userFilter.EndDate = (DateTime)filter.EndDate;
+        if (filter.UserId != null && filter.UserId != -1) userFilter.UsersOnFilter.Add(userManager.LoadUserInformation((int)filter.UserId));
+        if (filter.Location != null) userFilter.Location = (string)filter.Location;
 
         userManager.AddFilter(userId,userFilter);
     }
