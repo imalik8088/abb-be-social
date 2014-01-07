@@ -22,9 +22,6 @@ using System.Web.Script.Serialization;
 /// </summary>
 public partial class UserProfile : System.Web.UI.Page
 {
-    //the userId loaded for this page
-    private int userId;
-
     #region User feed page
     /// <summary>
     /// Retrieving latest user feeds and producing HTML of the user feed page.
@@ -342,6 +339,16 @@ public partial class UserProfile : System.Web.UI.Page
             litAvatar.Text = "<img id='feedAvatar' class='feed-avatar' alt='' src='content/img/avatar-abb.png'>";
         else
             litAvatar.Text = "<img id='feedAvatar' class='feed-avatar' alt='' src='" + user.Avatar + "'>";
+
+        //if the user is checking his profile, enable the avatar upload
+        if (int.Parse(HttpContext.Current.Session["humanID"].ToString()) == userId)
+            litChangeAvatar.Text = "<input id='fileAvatar' type='file' style='display: none' />" +
+                                        "<div class='input-group'>" +
+                                            "<div class='input-group-btn'>" +
+                                                 "<button type='button' class='btn btn-default update-avatar-button' onclick='$('input[id=fileAvatar]').click();'>Update Avatar</button>" +
+                                            "</div>" +
+                                         "</div>";
+
     }
 
     /// <summary>
@@ -364,7 +371,7 @@ public partial class UserProfile : System.Web.UI.Page
     {
         UserManager userManager = new UserManager();
 
-        userManager.AddUserAvatar(userId,pictureBase64);
+        userManager.AddUserAvatar(userId, pictureBase64);
     }
     #endregion
 
@@ -390,11 +397,11 @@ public partial class UserProfile : System.Web.UI.Page
 
         //HumanActivities
         ActivityPage.LastFeedId = lastHumanFeed.First().ID + 1;
-        ActivityPage.UserId = this.userId;
+        ActivityPage.UserId = userId;
         ActivityPage.RenderActivityPage();
 
         //Call JS Methods
-        ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "registerAvatarUpload", "<script type='text/javascript'>registerAvatarUpload(" + userId + ")</script>", false); 
+        ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "registerAvatarUpload", "<script type='text/javascript'>registerAvatarUpload(" + userId + ")</script>", false);
         ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "populateFeedPostTypes", "<script type='text/javascript'>AjaxPopulateSelectBoxPostFeedType()</script>", false);
         ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "getAvailableUsersToTag", "<script type='text/javascript'>AjaxGetAvailableUsersToTag()</script>", false);
     }

@@ -76,12 +76,7 @@
                 <div class="feed-inner-container feed-inner-container-default">
                     <div class="feed-information">
                         <asp:Literal runat="server" ID="litAvatar"></asp:Literal><br />
-                        <input id="fileAvatar" type="file" style="display: none" />
-                        <div class="input-group">
-                            <div class="input-group-btn">
-                                <button type="button" class="btn btn-default update-avatar-button" onclick="$('input[id=fileAvatar]').click();">Update Avatar</button>
-                            </div>
-                        </div>
+                        <asp:Literal runat="server" ID="litChangeAvatar"></asp:Literal>
                     </div>
                     <div class="feed-message feed-message-default">
                         <a class="user-info feed-name-default">Username:</a>
