@@ -69,9 +69,20 @@ namespace TestBLL
         [Test]
         public void feedTest()
         {
-            Feed f1 = new Feed();
-            f1.Content = "asfasf";
-            Assert.AreEqual(f1.ID, 154);
+            //needs some correcting, because it needs to addtagto existing feed?
+
+            FeedManager feedManager = new FeedManager();
+            HumanFeed newHumanFeed = new HumanFeed();
+            CommonDataManager commonDataManager = new CommonDataManager();
+
+            newHumanFeed.FeedType = "Human";
+            newHumanFeed.Content = "feedTest()";
+            newHumanFeed.Location = "Madagascar";
+            newHumanFeed.TimeStamp = DateTime.Now;
+            newHumanFeed.Category = commonDataManager.GetFeedCategories().Where(c => c.CategoryName == "WorkPost").FirstOrDefault();
+            newHumanFeed.Owner = loggedInUser;
+
+            Assert.IsTrue(feedManager.PublishFeed(newHumanFeed));
         }
 
 
@@ -118,17 +129,23 @@ namespace TestBLL
 
         }*/
 
-        [Test]
-        public void feedTest2()
-        {
-            FeedManager h = new FeedManager();
-            GetLatestXFeeds_Result feed = new GetLatestXFeeds_Result();
-            // List<Feed> loadedFeeds = h.LoadLatestXFeeds(2);
-            feed.FeedId = 1;
-            string actual = feed.Username;
-            string expected = "Rob";
-            Assert.AreEqual(actual, expected);
-        }
+        //TODO check usage of this test
+        //[Test]
+        //public void feedTest2()
+        //{
+        //    FeedManager feedManager = new FeedManager();
+        //    HumanFeed newHumanFeed = new HumanFeed();
+        //    CommonDataManager commonDataManager = new CommonDataManager();
+
+        //    newHumanFeed.FeedType = "Human";
+        //    newHumanFeed.Content = "feedTest()";
+        //    newHumanFeed.Location = "Madagascar";
+        //    newHumanFeed.TimeStamp = DateTime.Now;
+        //    newHumanFeed.Category = commonDataManager.GetFeedCategories().Where(c => c.CategoryName == "WorkPost").FirstOrDefault();
+        //    newHumanFeed.Owner = loggedInUser;
+
+        //    Assert.IsTrue(feedManager.PublishFeed(newHumanFeed));
+        //}
 
         [Test]
         public void sensorInformationTest()
@@ -170,9 +187,9 @@ namespace TestBLL
         public void loadCurrentValuesBySensorTest()
         {
             UserManager h = new UserManager();
-            int actual = h.LoadCurrentValuesBySensor(8);
-            int expected = -666;
-            Assert.AreEqual(actual, expected);
+            int? actual = null;
+            actual = h.LoadCurrentValuesBySensor(8);
+            Assert.IsNotNull(actual);
         }
 
         //Test case for boolean Method "Login" in UserManager class
@@ -223,15 +240,44 @@ namespace TestBLL
 
         //Test case for Method "GetFeedByFeedId" in FeedManager class
         //It tests if the right ... is returned when the FeedId is given
-        //not working...
-        [Test]
-        public void getFeedByFeedIdTest()
+        [TestFixture]
+        public class FeedIdFetchingTestBLL
         {
-            FeedManager h = new FeedManager();
-            Feed loadedFeed = h.GetFeedByFeedId(85);
-            string actual = loadedFeed.FeedType;
-            string expected = "Sen";
-            Assert.AreEqual(actual, expected);
+            int feedId = 1;
+            Human loggedInUser;
+
+            [SetUp]
+            public void InitFeed()
+            {
+                UserManager userManager = new UserManager();
+
+                loggedInUser = userManager.LoadHumanInformationByUsername("mario");
+
+                FeedManager feedManager = new FeedManager();
+                HumanFeed newHumanFeed = new HumanFeed();
+                CommonDataManager commonDataManager = new CommonDataManager();
+
+                newHumanFeed.FeedType = "Human";
+                newHumanFeed.Content = "feedTest()";
+                newHumanFeed.Location = "Madagascar";
+                newHumanFeed.TimeStamp = DateTime.Now;
+                newHumanFeed.Category = commonDataManager.GetFeedCategories().Where(c => c.CategoryName == "WorkPost").FirstOrDefault();
+                newHumanFeed.Owner = loggedInUser;
+
+                feedManager.PublishFeed(newHumanFeed);
+
+                feedId = feedManager.LoadFeedsByFilter(loggedInUser.ID, null, DateTime.MinValue, DateTime.MaxValue, FeedType.FeedSource.Human, null, 1).Single().ID;
+            }
+
+            [Test]
+            public void getFeedByFeedIdTest()
+            {
+                FeedManager feedManager = new FeedManager();
+                Feed loadedFeed = feedManager.GetFeedByFeedId(feedId);
+                string actualContent = loadedFeed.Content;
+                string expectedContent = "feedTest()";
+                Assert.AreEqual(actualContent, expectedContent);
+            }
         }
 
         //Test case for Method "LoadLatestXFeedsTest" in FeedManager class
@@ -391,7 +437,7 @@ namespace TestBLL
         {
             //needs some correcting, because it needs to addtagto existing feed?
 
-            FeedManager h = new FeedManager();
+            FeedManager feedManager = new FeedManager();
             HumanFeed newHumanFeed = new HumanFeed();
             CommonDataManager commonDataManager = new CommonDataManager();
 
@@ -403,51 +449,83 @@ namespace TestBLL
             newHumanFeed.Tags = new List<Human>() { loggedInUser };
             newHumanFeed.Owner = loggedInUser;
 
-            Assert.IsTrue(h.PublishFeed(newHumanFeed));
+            Assert.IsTrue(feedManager.PublishFeed(newHumanFeed));
         }
 
         //Test case for Method "LoadFeedsByType" in FeedManager class
         //It tests if a string is contained in the collection feed list that is loaded by the method
         //Currently not working: problems with loading the content of the feeds
-        [TestFixture]
-        public class TestLoadFeedsByType
+        [Test]
+        public void loadFeedsByTypeTest()
         {
-            [Test]
-            public void loadFeedsByTypeTest()
-            {
-                FeedManager h = new FeedManager();
-                List<Feed> loadedHuman = h.LoadFeedsByType(FeedType.FeedSource.Human, 1, 1);
-                var list = new List<String>() { "hej" };
-                CollectionAssert.Contains(loadedHuman, list);
-            }
+            FeedManager feedManager = new FeedManager();
+            List<Feed> loadedList = feedManager.LoadFeedsByType(FeedType.FeedSource.Human, 5);
+            //List<Feed> filteredList = loadedList.Where(x => x.FeedType == FeedType.FeedSource.Human.ToString()).ToList();
+            List<Feed> filteredList = loadedList.Where(x => x.GetType() == typeof(HumanFeed)).ToList();
 
+            //the loaded list must contain all the posts of selected type
+            CollectionAssert.AreEqual(loadedList, filteredList);
         }
 
         //Test case for Method "LoadFeedsByDate" in FeedManager class
-        //It tests if a string is contained in the collection feed list that is loaded by the method
-        //Currently not working:
-        [Test]
-        public void loadFeedsByDateTest()
+        [TestFixture]
+        public class LoadByDateTest
         {
-            FeedManager h = new FeedManager();
-            DateTime d1 = new DateTime(2013, 11, 20, 11, 11, 11);
-            DateTime d2 = new DateTime(2013, 11, 20, 11, 11, 13);
-            List<Feed> loadedHuman = h.LoadFeedsByDate(DateTime.MinValue, DateTime.MinValue, 1, 4);
+            Feed feed;
+            Human loggedInUser;
 
-            List<String> list = new List<String>() { "hej" };
-            CollectionAssert.AreEqual(loadedHuman, list);
+            [SetUp]
+            public void InitFeed()
+            {
+                UserManager userManager = new UserManager();
+
+                loggedInUser = userManager.LoadHumanInformationByUsername("mario");
+
+                FeedManager feedManager = new FeedManager();
+                HumanFeed newHumanFeed = new HumanFeed();
+                CommonDataManager commonDataManager = new CommonDataManager();
+
+                newHumanFeed.FeedType = "Human";
+                newHumanFeed.Content = "loadByDateTest()";
+                newHumanFeed.Location = "Madagascar";
+                newHumanFeed.TimeStamp = DateTime.Now;
+                newHumanFeed.Category = commonDataManager.GetFeedCategories().Where(c => c.CategoryName == "WorkPost").FirstOrDefault();
+                newHumanFeed.Owner = loggedInUser;
+
+                feedManager.PublishFeed(newHumanFeed);
+
+                feed = feedManager.LoadFeedsByFilter(loggedInUser.ID, null, DateTime.MinValue, DateTime.MaxValue, FeedType.FeedSource.Human, null, 1).Single();
+            }
+
+            //let's load a single feed, at the least 
+            [Test]
+            public void loadFeedsByDateTest()
+            {
+                FeedManager feedManager = new FeedManager();
+                List<Feed> loadedFeeds = feedManager.LoadFeedsByDate(DateTime.MinValue, DateTime.Now, 1, -1);
+
+                CollectionAssert.IsNotEmpty(loadedFeeds);
+            }
+
+            //Test case for Method "LoadFeedsByDate" in FeedManager class
+            [Test]
+            public void loadFeedsByDateTest2()
+            {
+                FeedManager feedManager = new FeedManager();
+                List<Feed> loadedFeeds = feedManager.LoadFeedsByDate(feed.TimeStamp, DateTime.MaxValue, 1, -1);
+
+                Assert.AreEqual(loadedFeeds.Single().ID, feed.ID);
+            }
         }
 
         //Test case for Method "LoadFeedsByLocation" in FeedManager class
         //It tests if a string is contained in the collection feed list that is loaded by the method
-        //Same problem as two previous methods
         [Test]
         public void loadFeedsByLocationTest()
         {
-            FeedManager h = new FeedManager();
-            List<Feed> loadedHuman = h.LoadFeedsByLocation("ControlRoom 1A", 1, 9);
-            List<String> list = new List<String>() { "hej" };
-            CollectionAssert.Contains(loadedHuman, list);
+            FeedManager feedManager = new FeedManager();
+            List<Feed> loadedFeeds = feedManager.LoadFeedsByLocation("Madagascar", 50);
+            CollectionAssert.IsNotEmpty(loadedFeeds);
         }
 
         //Test case for Method "LoadFeedsByUser" in FeedManager class
