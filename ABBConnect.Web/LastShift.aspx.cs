@@ -165,8 +165,13 @@ public partial class _LastShift : System.Web.UI.Page
         // HumanFeeds
         var lastHumanFeed = (List<Feed>)null;
 
-        lastHumanFeed = feedManager.LoadLastShiftFeeds(1);
-        LastShiftFeedPage.LastFeedId = lastHumanFeed.First().ID + 1;
+        try
+        {
+            lastHumanFeed = feedManager.LoadLastShiftFeeds(1);
+            LastShiftFeedPage.LastFeedId = lastHumanFeed.First().ID + 1;
+        }
+        catch
+        {}
         LastShiftFeedPage.RenderFeedPage();
     }
 }
