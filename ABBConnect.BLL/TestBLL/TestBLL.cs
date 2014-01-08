@@ -278,112 +278,228 @@ namespace TestBLL
                 string expectedContent = "feedTest()";
                 Assert.AreEqual(actualContent, expectedContent);
             }
-        }
 
-        //Test case for Method "LoadLatestXFeedsTest" in FeedManager class
-        //It tests if the right string is contained in the latest feeds
-        //not working...??
-        [Test]
-        public void loadLatestXFeedsTest()
-        {
-            FeedManager h = new FeedManager();
-            List<Feed> loadedFeed = h.LoadLatestXFeeds(1);
-            string expected = "lorem";
-            Assert.Contains(expected, loadedFeed);
-        }
+            //Test case for Method "LoadLatestXFeedsTest" in FeedManager class
+            //It tests if the right string is contained in the latest feeds
+            //not working...??
+            [Test]
+            public void loadLatestFeedTest()
+            {
+                FeedManager h = new FeedManager();
+                List<Feed> loadedFeed = h.LoadLatestXFeeds(1);
+                string expectedContent = "feedTest()";
+                Assert.AreEqual(expectedContent, loadedFeed[0].Content);
+            }
 
-        //Test case for Method "LoadLatestXFeedsTest" in FeedManager class
-        //It tests if the the latest loaded feeds are not empty 
-        [Test]
-        public void loadLatestXFeedsTest2()
-        {
-            FeedManager h = new FeedManager();
-            List<Feed> loadedFeed = h.LoadLatestXFeeds(1);
-            Assert.IsNotEmpty(loadedFeed);
-        }
-
-        //Test case for Method "LoadLatestXFeedsTestFromId" in FeedManager class
-        //It tests if the right string is contained in the latest feeds
-        //not working...??
-        [Test]
-        public void loadLatestXFeedsFromIdTest()
-        {
-            FeedManager h = new FeedManager();
-            List<Feed> loadedFeed = h.LoadLatestXFeedsFromId(230, 3);
-
-            string expected = "Work";
-            Assert.Contains(expected, loadedFeed);
+            //Test case for Method "LoadLatestXFeedsTest" in FeedManager class
+            //It tests if the the latest loaded feeds are not empty 
+            [Test]
+            public void loadLatestFeedNotEmptyTest()
+            {
+                FeedManager h = new FeedManager();
+                List<Feed> loadedFeed = h.LoadLatestXFeeds(1);
+                Assert.IsNotEmpty(loadedFeed);
+            }
         }
 
         //Test case for Method "LoadLatestXFeedsTestFromId" in FeedManager class
-        //It tests if the right string is contained in the latest feeds
-        //not working...??
-        [Test]
-        public void loadLatestXFeedsFromIdTest2()
+        [TestFixture]
+        public class loadLatestXFeedsFromId
         {
-            FeedManager h = new FeedManager();
-            List<Feed> loadedFeed = h.LoadLatestXFeedsFromId(230, 3);
-            CollectionAssert.AllItemsAreNotNull(loadedFeed);
-        }
+            Human loggedInUser;
+            int feedId;
 
+            [SetUp]
+            public void InitFeed()
+            {
+                FeedManager feedManager = new FeedManager();
+                UserManager userManager = new UserManager();
+                HumanFeed newHumanFeed = new HumanFeed();
+                CommonDataManager commonDataManager = new CommonDataManager();
 
-        //Test case for Method "LoadLatestXFeedsTestFromId" in FeedManager class
-        //It tests if the the loaded feed comment is not empty
-        //The test passes only for feeds with comments in the DB e.g., feedID = 85 etc.
-        [Test]
-        public void loadLatestXFeedsFromIdTest3()
-        {
-            FeedManager h = new FeedManager();
-            List<Comment> loadedFeed = h.LoadFeedComments(85);
-            CollectionAssert.IsNotEmpty(loadedFeed);
-        }
+                loggedInUser = userManager.LoadHumanInformationByUsername("mario");
 
-        //Test case for Method "LoadLatestXFeedsTestFromId" in FeedManager class
-        //It tests if the the loaded feed comments contain a certain string
-        //PROBLEM: Test passes with wrong values
-        [Test]
-        public void loadLatestXFeedsFromIdTest4()
-        {
-            FeedManager h = new FeedManager();
-            List<Comment> loadedFeed = h.LoadFeedComments(2);
-            string expected = "let us see";
-            Assert.Contains(expected, loadedFeed);
-        }
+                newHumanFeed.FeedType = "Human";
+                newHumanFeed.Content = "Testing tagging";
+                newHumanFeed.Location = "Machu Picchu";
+                newHumanFeed.TimeStamp = DateTime.Now;
+                newHumanFeed.Category = commonDataManager.GetFeedCategories().Where(c => c.CategoryName == "WorkPost").FirstOrDefault();
+                newHumanFeed.Tags = new List<Human>() { loggedInUser };
+                newHumanFeed.Owner = loggedInUser;
 
-        //Test case for Method "LoadLatestXFeedsTestFromId" in FeedManager class
-        //It tests if the the loaded feed tag is not empty
-        //The test passes only for feeds with tags in the DB e.g., feedID = 1 etc.
-        [Test]
-        public void loadLatestXFeedsFromIdTest5()
-        {
-            FeedManager h = new FeedManager();
-            List<Human> loadedFeed = h.LoadFeedTags(1);
-            CollectionAssert.IsNotEmpty(loadedFeed);
-        }
+                feedId = feedManager.LoadFeedsByFilter(loggedInUser.ID, null, DateTime.MinValue, DateTime.MaxValue, FeedType.FeedSource.Human, null, 1).Single().ID;
 
-        //Test case for Method "LoadLatestXFeedsTestFromId" in FeedManager class
-        //It tests if the the loaded feed tag contains an object e.g., 1 (userId)
-        //not working
-        [Test]
-        public void loadLatestXFeedsFromIdTest6()
-        {
-            FeedManager h = new FeedManager();
-            List<Human> loadedFeed = h.LoadFeedTags(4);
-            int expected = 1;
-            CollectionAssert.Contains(loadedFeed, expected);
+                feedManager.PublishFeed(newHumanFeed);
+
+                List<Human> taggedHuman = new List<Human>();
+                taggedHuman = feedManager.LoadFeedTags(feedId);
+            }
+
+            //It tests if the right string is contained in the latest feeds
+            //
+            [Test]
+            public void loadFeedContentsTest()
+            {
+                FeedManager feedManager = new FeedManager();
+                List<Feed> loadedFeed = feedManager.LoadLatestXFeedsFromId(feedId, 1);
+
+                string expected = "Testing tagging";
+                Assert.AreEqual(expected, loadedFeed[0].Content);
+            }
+
+            //It tests if the right string is contained in the latest feeds
+            [Test]
+            public void latestFeedsNotNullTest()
+            {
+                FeedManager feedManager = new FeedManager();
+                List<Feed> loadedFeed = feedManager.LoadLatestXFeedsFromId(feedId, 3);
+
+                CollectionAssert.AllItemsAreNotNull(loadedFeed);
+            }
         }
 
         //Test case for Method "LoadLatestXFeedsTestFromId" in FeedManager class
-        //It tests if the the loaded feed tag contains a list of user IDs
-        //not working
-        [Test]
-        public void loadLatestXFeedsFromIdTest7()
+        [TestFixture]
+        public class loadFeedTag
         {
-            FeedManager h = new FeedManager();
-            List<Human> loadedFeed = h.LoadFeedTags(2);
-            var list = new List<int>() { 1, 3, 4 };
-            CollectionAssert.IsSubsetOf(list, loadedFeed);
+            Human loggedInUser;
+            int feedId;
+            List<Human> taggedHumanList = new List<Human>();
+
+            [SetUp]
+            public void InitFeed()
+            {
+                FeedManager feedManager = new FeedManager();
+                UserManager userManager = new UserManager();
+                HumanFeed newHumanFeed = new HumanFeed();
+                CommonDataManager commonDataManager = new CommonDataManager();
+
+                List<Human> humanList = new List<Human>();
+                humanList = userManager.GetAllHumanUsers();
+                taggedHumanList.Add(humanList[0]);
+                taggedHumanList.Add(humanList[4]);
+
+                loggedInUser = userManager.LoadHumanInformationByUsername("mario");
+
+                newHumanFeed.FeedType = "Human";
+                newHumanFeed.Content = "Testing tagging";
+                newHumanFeed.Location = "Machu Picchu";
+                newHumanFeed.TimeStamp = DateTime.Now;
+                newHumanFeed.Category = commonDataManager.GetFeedCategories().Where(c => c.CategoryName == "WorkPost").FirstOrDefault();
+                newHumanFeed.Tags = taggedHumanList;
+                newHumanFeed.Owner = loggedInUser;
+
+                feedId = feedManager.LoadFeedsByFilter(loggedInUser.ID, null, DateTime.MinValue, DateTime.MaxValue, FeedType.FeedSource.Human, null, 1).Single().ID;
+
+                feedManager.PublishFeed(newHumanFeed);
+
+                List<Human> taggedHuman = new List<Human>();
+                taggedHuman = feedManager.LoadFeedTags(feedId);
+            }
+
+            //It tests if the the loaded feed tag is not empty
+            //The test passes only for feeds with tags in the DB e.g., feedID = 1 etc.
+            [Test]
+            public void loadFeedTagNotEmptyTest()
+            {
+                FeedManager feedManager = new FeedManager();
+                List<Human> loadedFeed = feedManager.LoadFeedTags(feedId);
+                CollectionAssert.IsNotEmpty(loadedFeed);
+            }
+
+            //It tests if the the loaded feed tag contains users which have been tagged
+            //
+            [Test]
+            public void loadFeedTagValueTest()
+            {
+                FeedManager feedManager = new FeedManager();
+                List<Human> loadedTags = feedManager.LoadFeedTags(feedId);
+                CollectionAssert.AreEqual(taggedHumanList, loadedTags);
+            }
+
+            //It tests if the loaded feed tag contains a list of user IDs
+            //not working
+            [Test]
+            public void loadFeedTagUserIDsTest()
+            {
+                FeedManager h = new FeedManager();
+                List<Human> loadedFeed = h.LoadFeedTags(feedId);
+
+                var list = new List<int>() { taggedHumanList[0].ID, taggedHumanList[1].ID };
+                CollectionAssert.IsSubsetOf(list, loadedFeed);
+            }
         }
+
+        //Test case for Method "LoadLatestXFeedsTestFromId" in FeedManager class
+        [TestFixture]
+        public class LoadFeedComments
+        {
+            Human loggedInUser;
+            int feedId;
+            List<Human> taggedHumanList = new List<Human>();
+
+            [SetUp]
+            public void InitFeed()
+            {
+                FeedManager feedManager = new FeedManager();
+                UserManager userManager = new UserManager();
+                HumanFeed newHumanFeed = new HumanFeed();
+                CommonDataManager commonDataManager = new CommonDataManager();
+
+                List<Human> humanList = new List<Human>();
+                humanList = userManager.GetAllHumanUsers();
+                taggedHumanList.Add(humanList[0]);
+                taggedHumanList.Add(humanList[4]);
+
+                loggedInUser = userManager.LoadHumanInformationByUsername("mario");
+
+                Comment comment = new Comment();
+                List<Comment> commentList = new List<Comment>();
+                comment.Content = "Hello, I am testing.";
+                comment.ID = 1;
+                comment.Owner = loggedInUser;
+                comment.TimeStamp = DateTime.Now;
+
+                newHumanFeed.FeedType = "Human";
+                newHumanFeed.Content = "Testing tagging";
+                newHumanFeed.Location = "Machu Picchu";
+                newHumanFeed.TimeStamp = DateTime.Now;
+                newHumanFeed.Category = commonDataManager.GetFeedCategories().Where(c => c.CategoryName == "WorkPost").FirstOrDefault();
+                newHumanFeed.Tags = taggedHumanList;
+                newHumanFeed.Owner = loggedInUser;
+                //newHumanFeed.Comments = commentList;
+
+                feedId = feedManager.LoadFeedsByFilter(loggedInUser.ID, null, DateTime.MinValue, DateTime.MaxValue, FeedType.FeedSource.Human, null, 1).Single().ID;
+
+                feedManager.PublishFeed(newHumanFeed);
+                feedManager.PublishComment(feedId, comment);
+
+                List<Human> taggedHuman = new List<Human>();
+                taggedHuman = feedManager.LoadFeedTags(feedId);
+            }
+
+            //It tests if the loaded feed comment is not empty
+            [Test]
+            public void loadFeedCommentTest()
+            {
+                FeedManager feedManager = new FeedManager();
+                List<Comment> loadedFeed = feedManager.LoadFeedComments(feedId);
+                CollectionAssert.IsNotEmpty(loadedFeed);
+            }
+
+            //It tests if the loaded feed comments contain a certain string
+            //PROBLEM: Test passes with wrong values
+            [Test]
+            public void loadFeedCommentContentsTests()
+            {
+                FeedManager feedManager = new FeedManager();
+                List<Comment> loadedFeed = feedManager.LoadFeedComments(feedId);
+                string expected = "Hello, I am testing.";
+                Assert.AreEqual(expected, loadedFeed[0].Content);
+            }
+        }
+
+
 
         //Test case for Method "LoadLatestXFeedsTestFromId" in FeedManager class
         //It tests if the the loaded feed comment contains a list of user IDs
@@ -411,14 +527,6 @@ namespace TestBLL
               { contents.Add(hf.Content);
              AssertEquals(MyString, contents);  }*/
 
-        [Test]
-        public void loadLatestXFeedsFromIdTest8()
-        {
-            FeedManager h = new FeedManager();
-            List<Comment> loadedFeed = h.LoadFeedComments(2);
-            var list = new List<String>() { "let us see" };
-            CollectionAssert.IsSubsetOf(list, loadedFeed);
-        }
 
         //Test case for boolean Method "Publish" in FeedManager class
         //It tests if the tests fails (passes for Assert.IsFalse) when no feed is entered
@@ -529,16 +637,46 @@ namespace TestBLL
         }
 
         //Test case for Method "LoadFeedsByUser" in FeedManager class
-        //It tests if a string is contained in the collection feed list that is loaded by the method
-        //Same problem as previous methods
-        [Test]
-        public void loadFeedsByUserTest()
+        [TestFixture]
+        public class loadFeedsByUser
         {
-            FeedManager h = new FeedManager();
-            List<Feed> loadedHuman = h.LoadFeedsByUser(2, 1, 9);
-            List<String> list = new List<String>() { "hej" };
-            CollectionAssert.Contains(loadedHuman, list);
-        }
+            Human loggedInUser;
+            int feedId;
 
+            [SetUp]
+            public void InitFeed()
+            {
+                FeedManager feedManager = new FeedManager();
+                UserManager userManager = new UserManager();
+                HumanFeed newHumanFeed = new HumanFeed();
+                CommonDataManager commonDataManager = new CommonDataManager();
+
+                loggedInUser = userManager.LoadHumanInformationByUsername("mario");
+
+                newHumanFeed.FeedType = "Human";
+                newHumanFeed.Content = "Testing tagging";
+                newHumanFeed.Location = "Machu Picchu";
+                newHumanFeed.TimeStamp = DateTime.Now;
+                newHumanFeed.Category = commonDataManager.GetFeedCategories().Where(c => c.CategoryName == "WorkPost").FirstOrDefault();
+                newHumanFeed.Tags = new List<Human>() { loggedInUser };
+                newHumanFeed.Owner = loggedInUser;
+                //newHumanFeed.Comments = commentList;
+
+                feedId = feedManager.LoadFeedsByFilter(loggedInUser.ID, null, DateTime.MinValue, DateTime.MaxValue, FeedType.FeedSource.Human, null, 1).Single().ID;
+
+                feedManager.PublishFeed(newHumanFeed);
+            }
+
+            //It tests if a string is contained in the collection feed list that is loaded by the method
+            //Same problem as previous methods
+            [Test]
+            public void loadFeedsByUserTest()
+            {
+                FeedManager h = new FeedManager();
+                List<Feed> loadedHuman = h.LoadFeedsByUser(loggedInUser.ID, 1, feedId);
+                String expected = "Testing tagging";
+                Assert.AreEqual(loadedHuman[0].Content, expected);
+            }
+        }
     }
 }
