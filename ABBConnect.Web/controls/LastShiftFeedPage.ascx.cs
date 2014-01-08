@@ -115,10 +115,6 @@ public partial class controls_LastShiftFeedPage : System.Web.UI.UserControl
             //    feedTags = feedTags + "Unfortunately there are no tags available";
             //}
             hit.Attributes.Add("value", feedTags);
-
-            // Render LoadMore Link
-            a = (HtmlAnchor)this.FindControl("load_more");
-            a.Attributes.Add("onclick", "$(this).fadeOut(300); AjaxLoadMoreHumanFeeds(" + currentFeed.ID +  ")");
         }
     }
 
@@ -127,15 +123,6 @@ public partial class controls_LastShiftFeedPage : System.Web.UI.UserControl
     /// </summary>
     protected override void Render(HtmlTextWriter writer)
     {
-        if (FeedRepeater.Items.Count >= this.PageSize)
-        {
-            feed_page_load_more_container.Visible = true;
-        }
-        else
-        {
-            feed_page_load_more_container.Visible = false;
-        }
-        if (IsLoadMoreVisible == false) feed_page_load_more_container.Visible = false;
         RenderChildren(writer);
     }
 }

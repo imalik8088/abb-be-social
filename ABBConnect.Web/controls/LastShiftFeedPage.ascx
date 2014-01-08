@@ -75,6 +75,3 @@
         </div>
     </ItemTemplate>
 </asp:Repeater>
-<div runat="server" id="feed_page_load_more_container" class="row feed-page-load-more-container">
-    <a id="load_more" runat="server" class="btn btn-danger feed-page-load-more-anchor">Load more</a>
-</div>
