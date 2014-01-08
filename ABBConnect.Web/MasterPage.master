@@ -88,17 +88,17 @@
             <div id="main-navigation">
                 <ul>
                     <li>
-                        <a class="active" href="Home.aspx">
+                        <a href="Home.aspx" id="FeedsIcon">
                             <span class="glyphicon glyphicon-phone"></span>Feeds
                         </a>
                     </li>
                     <li>
-                        <a href="AllSensors.aspx">
+                        <a href="AllSensors.aspx" id="AllSensorsIcon">
                             <span class="glyphicon glyphicon-flash"></span>Sensors
                         </a>
                     </li>
                     <li>
-                        <a href="LastShift.aspx">
+                        <a href="LastShift.aspx" id="LastShiftIcon">
                             <span class="glyphicon glyphicon-retweet"></span>Shift
                         </a>
                     </li>                  

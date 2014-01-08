@@ -8,6 +8,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <script>$("#FeedsIcon").addClass("active"); type="text/javascript"</script>
     <div class="row">
         <div class="col-md-6">
             <div class="feed-header">

@@ -41,7 +41,7 @@ public partial class controls_LastShiftFeedPage : System.Web.UI.UserControl
         FeedManager feedManager = new FeedManager();
         List<Feed> singlePageFeeds = new List<Feed>();
 
-        singlePageFeeds = feedManager.LoadLastShiftFeeds(10);
+        singlePageFeeds = feedManager.LoadLastShiftFeeds(-1);
         FeedRepeater.DataSource = singlePageFeeds;
         FeedRepeater.DataBind();      
 
