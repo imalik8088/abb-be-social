@@ -7,52 +7,53 @@ using System.Collections.Generic;
 
 namespace TestBLL
 {
-    /*[TestFixture]
-       public class TestCategory
-       {
-           [Test]
-           public void categoryTest()
-           {
-               Category c1 = new Category();
-               GetPriorityCategories_Result loadedCategory = c1.Category("results");
-               string categoryName = result.Name;
-               int id = 1;
-               string actual = c1.CategoryName;
-               string expected = "SensorAlarm";
-               Assert.AreEqual(actual, expected);
-           }
-
-       }*/
-
-    /* [TestFixture]
-     public class TestComment
-     {
-         [Test]
-         public void commentTest()
-         {
-             Comment comment1 = new Comment();
-             comment1.Content = "New comment";
-             Assert.AreEqual(comment1.ID, 9);
-         }
-
-     }
-
-     [TestFixture]
-     public class TestCommonDataManager
-     {
-         [Test]
-         public void commentDbDataTest()
-         {
-             Comment comment1 = new Comment();
-             comment1.Content = "New comment";
-             Assert.AreEqual(comment1.ID, 1);
-         }
-
-     }
-     */
     [TestFixture]
-    public class TestFeed1
+    public class TestBLL
     {
+        /*[TestFixture]
+           public class TestCategory
+           {
+               [Test]
+               public void categoryTest()
+               {
+                   Category c1 = new Category();
+                   GetPriorityCategories_Result loadedCategory = c1.Category("results");
+                   string categoryName = result.Name;
+                   int id = 1;
+                   string actual = c1.CategoryName;
+                   string expected = "SensorAlarm";
+                   Assert.AreEqual(actual, expected);
+               }
+
+           }*/
+
+        /* [TestFixture]
+         public class TestComment
+         {
+             [Test]
+             public void commentTest()
+             {
+                 Comment comment1 = new Comment();
+                 comment1.Content = "New comment";
+                 Assert.AreEqual(comment1.ID, 9);
+             }
+
+         }
+
+         [TestFixture]
+         public class TestCommonDataManager
+         {
+             [Test]
+             public void commentDbDataTest()
+             {
+                 Comment comment1 = new Comment();
+                 comment1.Content = "New comment";
+                 Assert.AreEqual(comment1.ID, 1);
+             }
+
+         }
+         */
+
         [Test]
         public void feedTest()
         {
@@ -61,56 +62,52 @@ namespace TestBLL
             Assert.AreEqual(f1.ID, 154);
         }
 
-    }
 
-    /*  [TestFixture]
-      public class TestFeedManager
-      {
-          [Test]
-          public void feedTest()
+        /*  [TestFixture]
+          public class TestFeedManager
           {
-              FeedManager fm = new FeedManager();
-              fm.LoadNewFeeds().Owner.UserName = "rgn09003";
-              Assert.AreEqual(fm.ID, 154);
+              [Test]
+              public void feedTest()
+              {
+                  FeedManager fm = new FeedManager();
+                  fm.LoadNewFeeds().Owner.UserName = "rgn09003";
+                  Assert.AreEqual(fm.ID, 154);
+              }
+
           }
 
-      }
-
-      [TestFixture]
-      public class TestHumanFeed
-      {
-          [Test]
-          public void humanFeedTest()
+          [TestFixture]
+          public class TestHumanFeed
           {
-              HumanFeed hf = new HumanFeed();
-              hf.Owner="dpa12001";
+              [Test]
+              public void humanFeedTest()
+              {
+                  HumanFeed hf = new HumanFeed();
+                  hf.Owner="dpa12001";
 
-              Assert.AreEqual(hf.MediaFilePath, "hej");
-          }
+                  Assert.AreEqual(hf.MediaFilePath, "hej");
+              }
 
-      } 
-    [TestFixture]
-    public class TestFeed
-    {
-        [Test]
-        public void feedTest()
+          } 
+        [TestFixture]
+        public class TestFeed
         {
-            FeedManager h = new FeedManager();
-            GetLatestXFeeds_Result feed = new GetLatestXFeeds_Result();
-           // List<Feed> loadedFeeds = h.LoadLatestXFeeds(2);
-            feed.FeedId = 1;
-            string actual = feed.Username;
-            string expected = "Rob";
-            Assert.AreEqual(actual, expected);
-        }
+            [Test]
+            public void feedTest()
+            {
+                FeedManager h = new FeedManager();
+                GetLatestXFeeds_Result feed = new GetLatestXFeeds_Result();
+               // List<Feed> loadedFeeds = h.LoadLatestXFeeds(2);
+                feed.FeedId = 1;
+                string actual = feed.Username;
+                string expected = "Rob";
+                Assert.AreEqual(actual, expected);
+            }
 
-    }*/
+        }*/
 
-    [TestFixture]
-    public class TestFeed
-    {
         [Test]
-        public void feedTest()
+        public void feedTest2()
         {
             FeedManager h = new FeedManager();
             GetLatestXFeeds_Result feed = new GetLatestXFeeds_Result();
@@ -121,11 +118,6 @@ namespace TestBLL
             Assert.AreEqual(actual, expected);
         }
 
-    }
-
-    [TestFixture]
-    public class TestSensorInformation
-    {
         [Test]
         public void sensorInformationTest()
         {
@@ -136,13 +128,8 @@ namespace TestBLL
             Assert.AreEqual(actual, expected);
         }
 
-    }
-
-    //Test case for Method "LoadHistoryValuesBySensor" in UserManager class
-    //It tests if the right username is returned
-    [TestFixture]
-    public class TestLoadHistoryValuesBySensor
-    {
+        //Test case for Method "LoadHistoryValuesBySensor" in UserManager class
+        //It tests if the right username is returned
         [Test]
         public void loadHistoryValuesBySensorTest()
         {
@@ -153,13 +140,8 @@ namespace TestBLL
             Assert.AreEqual(actual, expected);
         }
 
-    }
-
-    //Test case for Method "LoadHistoryValuesBySensor" in UserManager class
-    //It tests if the right Upper Boundary value is returned
-    [TestFixture]
-    public class TestLoadHistoryValuesBySensor2
-    {
+        //Test case for Method "LoadHistoryValuesBySensor" in UserManager class
+        //It tests if the right Upper Boundary value is returned
         [Test]
         public void loadHistoryValuesBySensorTest2()
         {
@@ -170,13 +152,8 @@ namespace TestBLL
             Assert.AreEqual(actual, expected);
         }
 
-    }
-
-    //Test case for Method "LoadCurrentValuesBySensor" in UserManager class
-    //It tests if the right current value is returned from a sensor
-    [TestFixture]
-    public class TestLoadCurrentValuesBySensor
-    {
+        //Test case for Method "LoadCurrentValuesBySensor" in UserManager class
+        //It tests if the right current value is returned from a sensor
         [Test]
         public void loadCurrentValuesBySensorTest()
         {
@@ -186,13 +163,8 @@ namespace TestBLL
             Assert.AreEqual(actual, expected);
         }
 
-    }
-
-    //Test case for boolean Method "Login" in UserManager class
-    //It tests if the right credentials are entered
-    [TestFixture]
-    public class TestLogin
-    {
+        //Test case for boolean Method "Login" in UserManager class
+        //It tests if the right credentials are entered
         [Test]
         public void loginTest()
         {
@@ -201,13 +173,8 @@ namespace TestBLL
             Assert.IsTrue(loadedHuman);
         }
 
-    }
-
-    //Test case for Method "LoadHumanInformation" in UserManager class
-    //It tests if the right username is returned when the user ID is given
-    [TestFixture]
-    public class TestLoadHumanInformation
-    {
+        //Test case for Method "LoadHumanInformation" in UserManager class
+        //It tests if the right username is returned when the user ID is given
         [Test]
         public void loadHumanInformationTest()
         {
@@ -218,13 +185,8 @@ namespace TestBLL
             Assert.AreEqual(actual, expected);
         }
 
-    }
-
-    //Test case for Method "LoadHumanInformation" in UserManager class
-    //It tests if the right email is returned when the user ID is given
-    [TestFixture]
-    public class TestLoadHumanInformation2
-    {
+        //Test case for Method "LoadHumanInformation" in UserManager class
+        //It tests if the right email is returned when the user ID is given
         [Test]
         public void loadHumanInformationTest2()
         {
@@ -235,13 +197,8 @@ namespace TestBLL
             Assert.AreEqual(actual, expected);
         }
 
-    }
-
-    //Test case for Method "LoadHumanInformationByUsername" in UserManager class
-    //It tests if the right firstname is returned when the username is given
-    [TestFixture]
-    public class TestLoadHumanInformationByUsername
-    {
+        //Test case for Method "LoadHumanInformationByUsername" in UserManager class
+        //It tests if the right firstname is returned when the username is given
         [Test]
         public void loadHumanInformationByUsernameTest()
         {
@@ -252,14 +209,9 @@ namespace TestBLL
             Assert.AreEqual(actual, expected);
         }
 
-    }
-
-    //Test case for Method "GetFeedByFeedId" in FeedManager class
-    //It tests if the right ... is returned when the FeedId is given
-    //not working...
-    [TestFixture]
-    public class TestGetFeedByFeedId
-    {
+        //Test case for Method "GetFeedByFeedId" in FeedManager class
+        //It tests if the right ... is returned when the FeedId is given
+        //not working...
         [Test]
         public void getFeedByFeedIdTest()
         {
@@ -270,14 +222,9 @@ namespace TestBLL
             Assert.AreEqual(actual, expected);
         }
 
-    }
-
-    //Test case for Method "LoadLatestXFeedsTest" in FeedManager class
-    //It tests if the right string is contained in the latest feeds
-    //not working...??
-    [TestFixture]
-    public class TestLoadLatestXFeeds
-    {
+        //Test case for Method "LoadLatestXFeedsTest" in FeedManager class
+        //It tests if the right string is contained in the latest feeds
+        //not working...??
         [Test]
         public void loadLatestXFeedsTest()
         {
@@ -287,13 +234,8 @@ namespace TestBLL
             Assert.Contains(expected, loadedFeed);
         }
 
-    }
-
-    //Test case for Method "LoadLatestXFeedsTest" in FeedManager class
-    //It tests if the the latest loaded feeds are not empty 
-    [TestFixture]
-    public class TestLoadLatestXFeeds2
-    {
+        //Test case for Method "LoadLatestXFeedsTest" in FeedManager class
+        //It tests if the the latest loaded feeds are not empty 
         [Test]
         public void loadLatestXFeedsTest2()
         {
@@ -302,14 +244,9 @@ namespace TestBLL
             Assert.IsNotEmpty(loadedFeed);
         }
 
-    }
-
-    //Test case for Method "LoadLatestXFeedsTestFromId" in FeedManager class
-    //It tests if the right string is contained in the latest feeds
-    //not working...??
-    [TestFixture]
-    public class TestLoadLatestXFeedsFromId
-    {
+        //Test case for Method "LoadLatestXFeedsTestFromId" in FeedManager class
+        //It tests if the right string is contained in the latest feeds
+        //not working...??
         [Test]
         public void loadLatestXFeedsFromIdTest()
         {
@@ -320,14 +257,9 @@ namespace TestBLL
             Assert.Contains(expected, loadedFeed);
         }
 
-    }
-
-    //Test case for Method "LoadLatestXFeedsTestFromId" in FeedManager class
-    //It tests if the right string is contained in the latest feeds
-    //not working...??
-    [TestFixture]
-    public class TestLoadLatestXFeedsFromId2
-    {
+        //Test case for Method "LoadLatestXFeedsTestFromId" in FeedManager class
+        //It tests if the right string is contained in the latest feeds
+        //not working...??
         [Test]
         public void loadLatestXFeedsFromIdTest2()
         {
@@ -336,14 +268,10 @@ namespace TestBLL
             CollectionAssert.AllItemsAreNotNull(loadedFeed);
         }
 
-    }
 
-    //Test case for Method "LoadLatestXFeedsTestFromId" in FeedManager class
-    //It tests if the the loaded feed comment is not empty
-    //The test passes only for feeds with comments in the DB e.g., feedID = 85 etc.
-    [TestFixture]
-    public class TestLoadLatestXFeedsFromId3
-    {
+        //Test case for Method "LoadLatestXFeedsTestFromId" in FeedManager class
+        //It tests if the the loaded feed comment is not empty
+        //The test passes only for feeds with comments in the DB e.g., feedID = 85 etc.
         [Test]
         public void loadLatestXFeedsFromIdTest3()
         {
@@ -352,14 +280,9 @@ namespace TestBLL
             CollectionAssert.IsNotEmpty(loadedFeed);
         }
 
-    }
-
-    //Test case for Method "LoadLatestXFeedsTestFromId" in FeedManager class
-    //It tests if the the loaded feed comments contain a certain string
-    //PROBLEM: Test passes with wrong values
-    [TestFixture]
-    public class TestLoadLatestXFeedsFromId4
-    {
+        //Test case for Method "LoadLatestXFeedsTestFromId" in FeedManager class
+        //It tests if the the loaded feed comments contain a certain string
+        //PROBLEM: Test passes with wrong values
         [Test]
         public void loadLatestXFeedsFromIdTest4()
         {
@@ -369,14 +292,9 @@ namespace TestBLL
             Assert.Contains(expected, loadedFeed);
         }
 
-    }
-
-    //Test case for Method "LoadLatestXFeedsTestFromId" in FeedManager class
-    //It tests if the the loaded feed tag is not empty
-    //The test passes only for feeds with tags in the DB e.g., feedID = 1 etc.
-    [TestFixture]
-    public class TestLoadLatestXFeedsFromId5
-    {
+        //Test case for Method "LoadLatestXFeedsTestFromId" in FeedManager class
+        //It tests if the the loaded feed tag is not empty
+        //The test passes only for feeds with tags in the DB e.g., feedID = 1 etc.
         [Test]
         public void loadLatestXFeedsFromIdTest5()
         {
@@ -385,14 +303,9 @@ namespace TestBLL
             CollectionAssert.IsNotEmpty(loadedFeed);
         }
 
-    }
-
-    //Test case for Method "LoadLatestXFeedsTestFromId" in FeedManager class
-    //It tests if the the loaded feed tag contains an object e.g., 1 (userId)
-    //not working
-    [TestFixture]
-    public class TestLoadLatestXFeedsFromId6
-    {
+        //Test case for Method "LoadLatestXFeedsTestFromId" in FeedManager class
+        //It tests if the the loaded feed tag contains an object e.g., 1 (userId)
+        //not working
         [Test]
         public void loadLatestXFeedsFromIdTest6()
         {
@@ -402,14 +315,9 @@ namespace TestBLL
             CollectionAssert.Contains(loadedFeed, expected);
         }
 
-    }
-
-    //Test case for Method "LoadLatestXFeedsTestFromId" in FeedManager class
-    //It tests if the the loaded feed tag contains a list of user IDs
-    //not working
-    [TestFixture]
-    public class TestLoadLatestXFeedsFromId7
-    {
+        //Test case for Method "LoadLatestXFeedsTestFromId" in FeedManager class
+        //It tests if the the loaded feed tag contains a list of user IDs
+        //not working
         [Test]
         public void loadLatestXFeedsFromIdTest7()
         {
@@ -419,37 +327,32 @@ namespace TestBLL
             CollectionAssert.IsSubsetOf(list, loadedFeed);
         }
 
-    }
+        //Test case for Method "LoadLatestXFeedsTestFromId" in FeedManager class
+        //It tests if the the loaded feed comment contains a list of user IDs
+        //not working
 
-    //Test case for Method "LoadLatestXFeedsTestFromId" in FeedManager class
-    //It tests if the the loaded feed comment contains a list of user IDs
-    //not working
-
-    /* [TestFixture]
-     public class TestLoadLatestXFeedsFromId8
-     {
-         [Test]
-         public void loadLatestXFeedsFromIdTest8()
+        /* [TestFixture]
+         public class TestLoadLatestXFeedsFromId8
          {
-         int hej = 0;
-         foreach HumanFeed hf in myHumanFeedList
+             [Test]
+             public void loadLatestXFeedsFromIdTest8()
              {
-             if(hf.Content.Equals(myString)
-                  hej = 1;
-                  AssertTrue();
-                                 }
+             int hej = 0;
+             foreach HumanFeed hf in myHumanFeedList
+                 {
+                 if(hf.Content.Equals(myString)
+                      hej = 1;
+                      AssertTrue();
+                                     }
 
-                 if(hej != 1)
-                 AssertFalse();
-         list<string> contents = new list<string> ();
+                     if(hej != 1)
+                     AssertFalse();
+             list<string> contents = new list<string> ();
 
-         foreach HumanFeed hf in myHumanFeedList
-          { contents.Add(hf.Content);
-         AssertEquals(MyString, contents);  }*/
+             foreach HumanFeed hf in myHumanFeedList
+              { contents.Add(hf.Content);
+             AssertEquals(MyString, contents);  }*/
 
-    [TestFixture]
-    public class TestLoadLatestXFeedsFromId8
-    {
         [Test]
         public void loadLatestXFeedsFromIdTest8()
         {
@@ -459,13 +362,8 @@ namespace TestBLL
             CollectionAssert.IsSubsetOf(list, loadedFeed);
         }
 
-    }
-
-    //Test case for boolean Method "Publish" in FeedManager class
-    //It tests if the tests fails (passes for Assert.IsFalse) when no feed is entered
-    [TestFixture]
-    public class TestPublishFeed
-    {
+        //Test case for boolean Method "Publish" in FeedManager class
+        //It tests if the tests fails (passes for Assert.IsFalse) when no feed is entered
         [Test]
         public void publishFeedTest()
         {
@@ -474,13 +372,8 @@ namespace TestBLL
             Assert.IsFalse(loadedHuman);
         }
 
-    }
-
-    //Test case for boolean Method "AddTagToFeed" in FeedManager class
-    //It tests if the tests fails when no tag is entered
-    [TestFixture]
-    public class TestAddTagToFeed
-    {
+        //Test case for boolean Method "AddTagToFeed" in FeedManager class
+        //It tests if the tests fails when no tag is entered
         [Test]
         public void addTagToFeedTest()
         {
@@ -489,31 +382,26 @@ namespace TestBLL
             Assert.IsTrue(loadedHuman);
         }
 
-    }
-
-    //Test case for Method "LoadFeedsByType" in FeedManager class
-    //It tests if a string is contained in the collection feed list that is loaded by the method
-    //Currently not working: problems with loading the content of the feeds
-    [TestFixture]
-    public class TestLoadFeedsByType
-    {
-        [Test]
-        public void loadFeedsByTypeTest()
+        //Test case for Method "LoadFeedsByType" in FeedManager class
+        //It tests if a string is contained in the collection feed list that is loaded by the method
+        //Currently not working: problems with loading the content of the feeds
+        [TestFixture]
+        public class TestLoadFeedsByType
         {
-            FeedManager h = new FeedManager();
-            List<Feed> loadedHuman = h.LoadFeedsByType(FeedType.FeedSource.Human, 1, 1);
-            var list = new List<String>() { "hej" };
-            CollectionAssert.Contains(loadedHuman, list);
+            [Test]
+            public void loadFeedsByTypeTest()
+            {
+                FeedManager h = new FeedManager();
+                List<Feed> loadedHuman = h.LoadFeedsByType(FeedType.FeedSource.Human, 1, 1);
+                var list = new List<String>() { "hej" };
+                CollectionAssert.Contains(loadedHuman, list);
+            }
+
         }
 
-    }
-
-    //Test case for Method "LoadFeedsByDate" in FeedManager class
-    //It tests if a string is contained in the collection feed list that is loaded by the method
-    //Currently not working:
-    [TestFixture]
-    public class TestLoadFeedsByDate
-    {
+        //Test case for Method "LoadFeedsByDate" in FeedManager class
+        //It tests if a string is contained in the collection feed list that is loaded by the method
+        //Currently not working:
         [Test]
         public void loadFeedsByDateTest()
         {
@@ -526,14 +414,9 @@ namespace TestBLL
             CollectionAssert.AreEqual(loadedHuman, list);
         }
 
-    }
-
-    //Test case for Method "LoadFeedsByLocation" in FeedManager class
-    //It tests if a string is contained in the collection feed list that is loaded by the method
-    //Same problem as two previous methods
-    [TestFixture]
-    public class TestLoadFeedsByLocation
-    {
+        //Test case for Method "LoadFeedsByLocation" in FeedManager class
+        //It tests if a string is contained in the collection feed list that is loaded by the method
+        //Same problem as two previous methods
         [Test]
         public void loadFeedsByLocationTest()
         {
@@ -543,14 +426,9 @@ namespace TestBLL
             CollectionAssert.Contains(loadedHuman, list);
         }
 
-    }
-
-    //Test case for Method "LoadFeedsByUser" in FeedManager class
-    //It tests if a string is contained in the collection feed list that is loaded by the method
-    //Same problem as previous methods
-    [TestFixture]
-    public class TestLoadFeedsByUser
-    {
+        //Test case for Method "LoadFeedsByUser" in FeedManager class
+        //It tests if a string is contained in the collection feed list that is loaded by the method
+        //Same problem as previous methods
         [Test]
         public void loadFeedsByUserTest()
         {
