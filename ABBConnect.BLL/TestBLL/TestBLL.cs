@@ -3,6 +3,7 @@ using NUnit;
 using NUnit.Framework;
 using BLL;
 using DAL;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace TestBLL
@@ -10,6 +11,17 @@ namespace TestBLL
     [TestFixture]
     public class TestBLL
     {
+        Human loggedInUser;
+
+        [SetUp]
+        public void InitLogin()
+        {
+            UserManager userManager = new UserManager();
+
+            loggedInUser = userManager.LoadHumanInformationByUsername("mario");
+        }
+
+
         /*[TestFixture]
            public class TestCategory
            {
@@ -377,9 +389,21 @@ namespace TestBLL
         [Test]
         public void addTagToFeedTest()
         {
+            //needs some correcting, because it needs to addtagto existing feed?
+
             FeedManager h = new FeedManager();
-            bool loadedHuman = h.AddTagToFeed(1, "dks12001");
-            Assert.IsTrue(loadedHuman);
+            HumanFeed newHumanFeed = new HumanFeed();
+            CommonDataManager commonDataManager = new CommonDataManager();
+
+            newHumanFeed.FeedType = "Human";
+            newHumanFeed.Content = "addTagToFeedTest()";
+            newHumanFeed.Location = "Madagascar";
+            newHumanFeed.TimeStamp = DateTime.Now;
+            newHumanFeed.Category = commonDataManager.GetFeedCategories().Where(c => c.CategoryName == "WorkPost").FirstOrDefault();
+            newHumanFeed.Tags = new List<Human>() { loggedInUser };
+            newHumanFeed.Owner = loggedInUser;
+
+            Assert.IsTrue(h.PublishFeed(newHumanFeed));
         }
 
         //Test case for Method "LoadFeedsByType" in FeedManager class
