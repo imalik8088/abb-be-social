@@ -36,7 +36,7 @@ public partial class _LastShift : System.Web.UI.Page
         Page page = new Page();
         page.ClientIDMode = ClientIDMode.Static;
 
-        controls_LastShiftFeedPage feedPageContainer = (controls_LastShiftFeedPage)page.LoadControl("controls/LastShiftFeedPage.ascx");
+        ASP.controls_lastshiftfeedpage_ascx feedPageContainer = (ASP.controls_lastshiftfeedpage_ascx)page.LoadControl("controls/LastShiftFeedPage.ascx");
         page.Controls.Add(feedPageContainer);
         feedPageContainer.EnableViewState = false;
         feedPageContainer.LastFeedId = lastLoadedFeedId;
@@ -100,7 +100,7 @@ public partial class _LastShift : System.Web.UI.Page
         Page page = new Page();
         page.ClientIDMode = ClientIDMode.Static;
 
-        controls_FeedComments feedCommentsContainer = (controls_FeedComments)page.LoadControl("controls/FeedComments.ascx");
+        ASP.controls_feedcomments_ascx feedCommentsContainer = (ASP.controls_feedcomments_ascx)page.LoadControl("controls/FeedComments.ascx");
         page.Controls.Add(feedCommentsContainer);
         feedCommentsContainer.EnableViewState = false;
         feedCommentsContainer.FeedId = feedId;

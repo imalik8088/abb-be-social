@@ -38,7 +38,7 @@ public partial class UserProfile : System.Web.UI.Page
         Page page = new Page();
         page.ClientIDMode = ClientIDMode.Static;
 
-        controls_FeedPage feedPageContainer = (controls_FeedPage)page.LoadControl("controls/FeedPage.ascx");
+        ASP.controls_feedpage_ascx feedPageContainer = (ASP.controls_feedpage_ascx)page.LoadControl("controls/FeedPage.ascx");
         page.Controls.Add(feedPageContainer);
         feedPageContainer.EnableViewState = false;
         feedPageContainer.LastFeedId = lastLoadedFeedId;
@@ -130,7 +130,7 @@ public partial class UserProfile : System.Web.UI.Page
         Page page = new Page();
         page.ClientIDMode = ClientIDMode.Static;
 
-        controls_FeedPage feedPageContainer = (controls_FeedPage)page.LoadControl("controls/FeedPage.ascx");
+        ASP.controls_feedpage_ascx feedPageContainer = (ASP.controls_feedpage_ascx)page.LoadControl("controls/FeedPage.ascx");
         page.Controls.Add(feedPageContainer);
         feedPageContainer.EnableViewState = false;
         feedPageContainer.LastFeedId = loggedUserLastPostedHumanFeedId + 1;
@@ -205,7 +205,7 @@ public partial class UserProfile : System.Web.UI.Page
         Page page = new Page();
         page.ClientIDMode = ClientIDMode.Static;
 
-        controls_ActivityPage activityPageContainer = (controls_ActivityPage)page.LoadControl("controls/ActivityPage.ascx");
+        ASP.controls_activitypage_ascx activityPageContainer = (ASP.controls_activitypage_ascx)page.LoadControl("controls/ActivityPage.ascx");
         page.Controls.Add(activityPageContainer);
         activityPageContainer.EnableViewState = false;
         activityPageContainer.LastFeedId = lastLoadedActivityId;
@@ -260,7 +260,7 @@ public partial class UserProfile : System.Web.UI.Page
         Page page = new Page();
         page.ClientIDMode = ClientIDMode.Static;
 
-        controls_FeedComments feedCommentsContainer = (controls_FeedComments)page.LoadControl("controls/FeedComments.ascx");
+        ASP.controls_feedcomments_ascx feedCommentsContainer = (ASP.controls_feedcomments_ascx)page.LoadControl("controls/FeedComments.ascx");
         page.Controls.Add(feedCommentsContainer);
         feedCommentsContainer.EnableViewState = false;
         feedCommentsContainer.FeedId = feedId;

@@ -20,7 +20,7 @@ function AjaxSaveUserFilter() {
     var ajaxFeedFilter = new Object();
     ajaxFeedFilter.startDate = null;
     ajaxFeedFilter.endDate = null;
-    ajaxFeedFilter.location = null;
+    //ajaxFeedFilter.location = null;
     ajaxFeedFilter.userId = $('#humanFeedsFilterUserId').val();
 
     if ($('#humanFeedsFilterStartDateIsChecked').val() == 'true') {
@@ -29,9 +29,10 @@ function AjaxSaveUserFilter() {
     if ($('#humanFeedsFilterEndDateIsChecked').val() == 'true') {
         ajaxFeedFilter.endDate = new Date($('#humanFeedsFilterEndDateValue').val());
     }
-    if ($('#humanFeedsFilterLocationIsChecked').val() == 'true') {
-        ajaxFeedFilter.location = $('#humanFeedsFilterLocation').val();
-    }
+
+    //if ($('#humanFeedsFilterLocationIsChecked').val() == 'true') {
+    //    ajaxFeedFilter.location = $('#humanFeedsFilterLocation').val();
+    //}
     PageMethods.AjaxSaveUserFilter(ajaxFeedFilter, AjaxSaveUserFilterSuccess);
 }
 function AjaxSaveUserFilterSuccess(result, userContext, methodName) {
@@ -41,29 +42,50 @@ function AjaxLoadUserFilter() {
     PageMethods.AjaxLoadUserFilter(AjaxLoadUserFilterSuccess);
 }
 function AjaxLoadUserFilterSuccess(result, userContext, methodName) {
-    alert(result.StartDate);
-    alert(result.EndDate);
     if (result.StartDate != null) {
         $('#humanFeedsFilterStartDateIsChecked').val('true')
         var startDate = result.StartDate;
         $('#humanFeedsFilterStartDateValue').val(startDate);
-        $('#chbHumanFeedsFilterStartDate').attr("checked", true);
+
+        //$('#datepickerStart input').datepicker('setValue', startDate);
+        $('#inputStartDate').val(startDate);
+        //$('#chbHumanFeedsFilterStartDate').attr("checked", true);
+        if ($('#chbHumanFeedsFilterStartDate').is(':checked') != true) {
+            $('#chbHumanFeedsFilterStartDate').click();
+        }
     }
-    if (result.StartDate != null) {
+    if (result.EndDate != null) {
         $('#humanFeedsFilterEndDateIsChecked').val('true')
         var endDate = result.EndDate;
         $('#humanFeedsFilterEndDateValue').val(endDate);
-        $('#chbHumanFeedsFilterEndDate').attr("checked", true);
+
+       // $('#datepickerEnd input').datepicker('setValue', endDate);
+        $('#inputEndDate').val(endDate);
+        //$('#chbHumanFeedsFilterEndDate').attr("checked", true);
+        if ($('#chbHumanFeedsFilterEndDate').is(':checked') != true) {
+            $('#chbHumanFeedsFilterEndDate').click();
+        }
     }
 
     //display active if the date filter is active
     if ($('#chbHumanFeedsFilterStartDate').is(':checked') == true ||
-    $('#chbHumanFeedsFilterEndDate').is(':checked') == true)
+    $('#chbHumanFeedsFilterEndDate').is(':checked') == true) {
         $('#humanFeedsDateFilterIsActive').fadeIn();
-    else
+
+        $('#human-feed-filter-selector-left').addClass("btn-success");
+        $('#human-feed-filter-selector-left').removeClass("btn-info");
+        $('#human-feed-filter-selector-right').addClass("btn-success");
+        $('#human-feed-filter-selector-right').removeClass("btn-info");
+    }
+    else {
         $('#humanFeedsDateFilterIsActive').hide();
 
-    alert("Load all feeds")
+        $('#human-feed-filter-selector-left').addClass("btn-info");
+        $('#human-feed-filter-selector-left').removeClass("btn-success");
+        $('#human-feed-filter-selector-right').addClass("btn-info");
+        $('#human-feed-filter-selector-right').removeClass("btn-success");
+    }
+
     //Clear HumanFeedsData
     $('#feedsContainer').html('');
     //Load HumanFeeds with that filter
@@ -101,18 +123,22 @@ function AjaxLoadMoreHumanFeeds(lastLoadedFeedId) {
     var ajaxFeedFilter = new Object();
     ajaxFeedFilter.startDate = null;
     ajaxFeedFilter.endDate = null;
-    ajaxFeedFilter.location = null;
+    //ajaxFeedFilter.location = null;
     ajaxFeedFilter.userId = $('#humanFeedsFilterUserId').val();
 
-    if ($('#humanFeedsFilterStartDateIsChecked').val() == 'true') {
+    if ($('#chbHumanFeedsFilterStartDate').is(':checked') == true) {
+        //if ($('#humanFeedsFilterStartDateIsChecked').val() == 'true') {
         ajaxFeedFilter.startDate = new Date($('#humanFeedsFilterStartDateValue').val());
     }
-    if ($('#humanFeedsFilterEndDateIsChecked').val() == 'true') {
+    else
+        ajaxFeedFilter.startDate = new Date(1);
+    if ($('#chbHumanFeedsFilterEndDate').is(':checked') == true) {
+        //if ($('#humanFeedsFilterEndDateIsChecked').val() == 'true') {
         ajaxFeedFilter.endDate = new Date($('#humanFeedsFilterEndDateValue').val());
     }
-    if ($('#humanFeedsFilterLocationIsChecked').val() == 'true') {
-        ajaxFeedFilter.location = $('#humanFeedsFilterLocation').val();
-    }
+    //if ($('#humanFeedsFilterLocationIsChecked').val() == 'true') {
+    //    ajaxFeedFilter.location = $('#humanFeedsFilterLocation').val();
+    //}
 
     $("#loading_throbber_human_feeds").show();
     PageMethods.AjaxLoadMoreHumanFeeds(lastLoadedFeedId, ajaxFeedFilter, AjaxLoadMoreHumanFeedsSuccess);

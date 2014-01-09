@@ -35,7 +35,7 @@ public partial class _Home : System.Web.UI.Page
         Page page = new Page();
         page.ClientIDMode = ClientIDMode.Static;
 
-        controls_FeedPage feedPageContainer = (controls_FeedPage)page.LoadControl("controls/FeedPage.ascx");
+        ASP.controls_feedpage_ascx feedPageContainer = (ASP.controls_feedpage_ascx)page.LoadControl("controls/FeedPage.ascx");
         page.Controls.Add(feedPageContainer);
         feedPageContainer.EnableViewState = false;
         feedPageContainer.LastFeedId = lastLoadedFeedId;
@@ -43,7 +43,7 @@ public partial class _Home : System.Web.UI.Page
         if (filter.StartDate != null) feedPageContainer.FilterStartDateValue = (DateTime)filter.StartDate;
         if (filter.EndDate != null) feedPageContainer.FilterEndDateValue = (DateTime)filter.EndDate;
         if (filter.UserId != null) feedPageContainer.FilterUserId = (int)filter.UserId;
-        if (filter.Location != null) feedPageContainer.FilterLocation = (string)filter.Location;
+        //if (filter.Location != null) feedPageContainer.FilterLocation = (string)filter.Location;
         feedPageContainer.RenderFeedPage();
 
         StringWriter textWriter = new StringWriter();
@@ -127,7 +127,7 @@ public partial class _Home : System.Web.UI.Page
         Page page = new Page();
         page.ClientIDMode = ClientIDMode.Static;
 
-        controls_FeedPage feedPageContainer = (controls_FeedPage)page.LoadControl("controls/FeedPage.ascx");
+        ASP.controls_feedpage_ascx feedPageContainer = (ASP.controls_feedpage_ascx)page.LoadControl("controls/FeedPage.ascx");
         page.Controls.Add(feedPageContainer);
         feedPageContainer.EnableViewState = false;
         feedPageContainer.LastFeedId = loggedUserLastPostedHumanFeedId + 1;
@@ -197,11 +197,13 @@ public partial class _Home : System.Web.UI.Page
         Filter userFilter = new Filter();
 
         if (filter.StartDate != null) userFilter.StartDate = (DateTime)filter.StartDate;
+        else userFilter.StartDate = new DateTime(1970, 12, 12);
         if (filter.EndDate != null) userFilter.EndDate = (DateTime)filter.EndDate;
-        if (filter.UserId != null && filter.UserId != -1) userFilter.UsersOnFilter.Add(userManager.LoadUserInformation((int)filter.UserId));
+        else userFilter.EndDate = DateTime.MaxValue;
+        if (filter.UserId != null) userFilter.UsersOnFilter.Add(userManager.LoadUserInformation((int)filter.UserId));
         if (filter.Location != null) userFilter.Location = (string)filter.Location;
 
-        userManager.AddFilter(userId,userFilter);
+        userManager.AddFilter(userId, userFilter);
     }
     [System.Web.Services.WebMethod]
     public static AjaxFeedFilter AjaxLoadUserFilter()
@@ -216,7 +218,9 @@ public partial class _Home : System.Web.UI.Page
         if (userFilters.Count > 0) userFilter = userFilters.Last();
 
         if (userFilter.StartDate != null) ajaxFilter.StartDate = (DateTime)userFilter.StartDate;
+        //else ajaxFilter.StartDate = new DateTime(1970, 12, 12);
         if (userFilter.EndDate != null) ajaxFilter.EndDate = (DateTime)userFilter.EndDate;
+        //else ajaxFilter.EndDate = DateTime.MaxValue;
         if (userFilter.Location != null) ajaxFilter.Location = (string)userFilter.Location;
 
         return ajaxFilter;
@@ -239,7 +243,7 @@ public partial class _Home : System.Web.UI.Page
         Page page = new Page();
         page.ClientIDMode = ClientIDMode.Static;
 
-        controls_RealTimeSensorFeedPage feedPageContainer = (controls_RealTimeSensorFeedPage)page.LoadControl("controls/RealTimeSensorFeedPage.ascx");
+        ASP.controls_realtimesensorfeedpage_ascx feedPageContainer = (ASP.controls_realtimesensorfeedpage_ascx)page.LoadControl("controls/RealTimeSensorFeedPage.ascx");
         page.Controls.Add(feedPageContainer);
         feedPageContainer.EnableViewState = false;
         feedPageContainer.LastFeedId = lastLoadedFeedId;
@@ -311,7 +315,7 @@ public partial class _Home : System.Web.UI.Page
         Page page = new Page();
         page.ClientIDMode = ClientIDMode.Static;
 
-        controls_FeedComments feedCommentsContainer = (controls_FeedComments)page.LoadControl("controls/FeedComments.ascx");
+        ASP.controls_feedcomments_ascx feedCommentsContainer = (ASP.controls_feedcomments_ascx)page.LoadControl("controls/FeedComments.ascx");
         page.Controls.Add(feedCommentsContainer);
         feedCommentsContainer.EnableViewState = false;
         feedCommentsContainer.FeedId = feedId;

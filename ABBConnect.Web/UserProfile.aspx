@@ -24,7 +24,7 @@
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
-                                <li>
+<%--                                <li>
                                     <a href="#" data-stop-propagation="true">
                                         <input id="chbWorkPost" type="checkbox" class="messagetype" data-label="Work post" />
                                     </a>
@@ -38,7 +38,7 @@
                                     <a href="#" data-stop-propagation="true">
                                         <input id="chbVacationPost" type="checkbox" class="messagetype" data-label="Vacation post" />
                                     </a>
-                                </li>
+                                </li>--%>
                                 <li class="divider"></li>
                                 <li><a href="#" data-toggle="modal" data-target="#modalHumanFeedsAddDateFilter">Date <span id="humanFeedsDateFilterIsActive" class="label label-success dont-show">ACTIVE</span></a>
                                 </li>

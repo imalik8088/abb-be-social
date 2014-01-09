@@ -8,7 +8,7 @@ using System.Web;
 /// </summary>
 public class AjaxFeedFilter
 {
-	private DateTime? _startDate;
+    private DateTime? _startDate;
     private DateTime? _endDate;
     private int? _userId;
     private string _location;
@@ -38,8 +38,8 @@ public class AjaxFeedFilter
     {
     }
     public AjaxFeedFilter(DateTime? startDate, DateTime? endDate, int? userId, string location)
-	{
+    {
         this.StartDate = startDate;
         this.EndDate = endDate;
-	}
+    }
 }
