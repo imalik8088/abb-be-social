@@ -164,6 +164,7 @@
       <LastGenOutput>DBModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include="App.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="DBModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DBModel.edmx</DependentUpon>

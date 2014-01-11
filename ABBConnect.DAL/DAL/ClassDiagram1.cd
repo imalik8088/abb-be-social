@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="DAL.CommonData">
+    <Position X="10.25" Y="8.25" Width="3.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAAAAAAAAQAAEAAAAAAAAAQAAAA=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.Connection">
+    <Position X="9.75" Y="2" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAABAAAQAAEAAAAAAAABAAAAA=</HashCode>
+      <FileName>Connection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DAL.GetAllHumanFeeds_Result" Collapsed="true">
+    <Position X="18" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEQAAAAgAAQIAAAgAAAAAAAAAAQBACEAAAAA=</HashCode>
+      <FileName>GetAllHumanFeeds_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.GetAllHumanFeedsByFilter_Result" Collapsed="true">
+    <Position X="12.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEQAAAAgAAQIAAAgAAAAAAAAAAQBACEAAAAA=</HashCode>
+      <FileName>GetAllHumanFeedsByFilter_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.GetAllSensorFeeds_Result" Collapsed="true">
+    <Position X="18" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEQAAAAgAAQIAAAgAAAAAAAAAAQBACEAAAAA=</HashCode>
+      <FileName>GetAllSensorFeeds_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.GetAllSensorFeedsByFilter_Result" Collapsed="true">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEQAAAAgAAQIAAAgAAAAAAAAAAQBACEAAAAA=</HashCode>
+      <FileName>GetAllSensorFeedsByFilter_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.GetAllSensors_Result" Collapsed="true">
+    <Position X="14.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAIAAAAAAAAAAAAQAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>GetAllSensors_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.GetFeedByFeedId_Result" Collapsed="true">
+    <Position X="16.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEQAAAAgAAQIAAAgAAAAAAAAAAQBACEAAAAA=</HashCode>
+      <FileName>GetFeedByFeedId_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.GetFeedComments_Result" Collapsed="true">
+    <Position X="18" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAABAAAAAgAAAAAAAAAAAAAAAAAAQAAAAAAAAg=</HashCode>
+      <FileName>GetFeedComments_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.GetFeedsByFilter_Result" Collapsed="true">
+    <Position X="14.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEQAAAAgAAQIAAAgAAAAAAAAAAQBACEAAAAA=</HashCode>
+      <FileName>GetFeedsByFilter_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.GetFeedsFromLastShift_Result" Collapsed="true">
+    <Position X="18" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEQAAAAgAAQIAAAgAAAAAAAAAAQBACEAAAAA=</HashCode>
+      <FileName>GetFeedsFromLastShift_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.GetFeedTags_Result" Collapsed="true">
+    <Position X="12.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAgAAAAAAAAAAQAAAAAAAAg=</HashCode>
+      <FileName>GetFeedTags_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.GetHistoricalDataFromSensor_Result" Collapsed="true">
+    <Position X="14.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GetHistoricalDataFromSensor_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.GetHumanInformation_Result" Collapsed="true">
+    <Position X="16.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAACAAAAAAAAIAQAQAAAAAABAAAAAAAAAAAAg=</HashCode>
+      <FileName>GetHumanInformation_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.GetHumanInformationByUsername_Result" Collapsed="true">
+    <Position X="12.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAAACAAAAAAAAIAQAQAAAAAABAAAAAAAAAAAAg=</HashCode>
+      <FileName>GetHumanInformationByUsername_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.GetLatestFeeds_Result" Collapsed="true">
+    <Position X="16.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEQAAAAgAAQIAAAgAAAAAAAAAAQBACEAAAAA=</HashCode>
+      <FileName>GetLatestFeeds_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.GetLatestFeedsByFilter_Result" Collapsed="true">
+    <Position X="18" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEQAAAAgAAQIAAAgAAAAAAAAAAQBACEAAAAA=</HashCode>
+      <FileName>GetLatestFeedsByFilter_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.GetLatestXFeeds_Result" Collapsed="true">
+    <Position X="12.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEQAAAAgAAQIAAAgAAAAAAAAAAQBACEAAAAA=</HashCode>
+      <FileName>GetLatestXFeeds_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.GetLatestXFeedsFromId_Result" Collapsed="true">
+    <Position X="14.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEQAAAAgAAQIAAAgAAAAAAAAAAQBACEAAAAA=</HashCode>
+      <FileName>GetLatestXFeedsFromId_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.GetPriorityCategories_Result" Collapsed="true">
+    <Position X="16.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GetPriorityCategories_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.GetSensorInformation_Result" Collapsed="true">
+    <Position X="14.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAIAAAAAAIAIAAAQAAAAAABAAAAAAAAACAAA=</HashCode>
+      <FileName>GetSensorInformation_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.GetUserActivity_Result" Collapsed="true">
+    <Position X="16.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAEAAAAAAAAAACAAgAAAAAAAAAAQAACAAAAAA=</HashCode>
+      <FileName>GetUserActivity_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.GetUserFeeds_Result" Collapsed="true">
+    <Position X="18" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEQAAAAgAAQIAAAgAAAAAAAAAAQBACEAAAAA=</HashCode>
+      <FileName>GetUserFeeds_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.GetUserFeedsByFilter_Result" Collapsed="true">
+    <Position X="12.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEQAAAAgAAQIAAAgAAAAAAAAAAQBACEAAAAA=</HashCode>
+      <FileName>GetUserFeedsByFilter_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.GetUserSavedFilters_Result" Collapsed="true">
+    <Position X="14.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAgAAAAAIAAAggAAAAAAAAAQAAAEAAAAA=</HashCode>
+      <FileName>GetUserSavedFilters_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.GetUserSavedFiltersTagedUsers_Result" Collapsed="true">
+    <Position X="16.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>GetUserSavedFiltersTagedUsers_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.GetUsersByName_Result" Collapsed="true">
+    <Position X="12.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAg=</HashCode>
+      <FileName>GetUsersByName_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.GetXFeedsByFilter_Result" Collapsed="true">
+    <Position X="16.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEQAAAAgAAQIAAAgAAAAAAAAAAQBACEAAAAA=</HashCode>
+      <FileName>GetXFeedsByFilter_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.GetXUserActivities_Result" Collapsed="true">
+    <Position X="18" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAEAAAAAAAAAACAAgAAAAAAAAAAQAACAAAAAA=</HashCode>
+      <FileName>GetXUserActivities_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.Login_Result" Collapsed="true">
+    <Position X="12.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAACAAAAAAAAAAQAQAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Login_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.sp_helpdiagramdefinition_Result" Collapsed="true">
+    <Position X="14.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>sp_helpdiagramdefinition_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.sp_helpdiagrams_Result" Collapsed="true">
+    <Position X="16.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAEAAiAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>sp_helpdiagrams_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.FeedData">
+    <Position X="0.5" Y="6.5" Width="9" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>BAAAAAIIBACwIBEAAAAAEBAEAAQAEAAAQAAQAAQAEgA=</HashCode>
+      <FileName>FeedData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.UserData">
+    <Position X="0.5" Y="0.75" Width="8" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAIAAEAAAAAKBEAAIAQEAAAQCAQAEBAAgAAAAAYAAAA=</HashCode>
+      <FileName>UserData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="DAL.IConnection" Collapsed="true">
+    <Position X="14.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAABAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IConnection.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

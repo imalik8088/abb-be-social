@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="ABBConnect___Windows_Phone.ActivityControl">
+    <Position X="16" Y="8.25" Width="5.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>ActivityControl.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBConnect___Windows_Phone.App">
+    <Position X="8.5" Y="8.5" Width="6.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AQAgAQAIQIAAjECAAAgQAAAAEAAAEUAAAABAAIIAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBConnect___Windows_Phone.CommentControl">
+    <Position X="9" Y="0.5" Width="5.25" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CommentControl.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBConnect___Windows_Phone.FeedControl">
+    <Position X="7.75" Y="13.75" Width="8.75" />
+    <TypeIdentifier>
+      <HashCode>AACAIAAAAAIAACAAAAgCAIEAAAACAAAgAAAAAAAIAAA=</HashCode>
+      <FileName>FeedControl.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBConnect___Windows_Phone.HumanFeed">
+    <Position X="0.5" Y="5" Width="5.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>KAAIAAAgACAQAAAAAAAAAAUAAAABAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>HumanFeed.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBConnect___Windows_Phone.LogIn">
+    <Position X="20.5" Y="0.75" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAEAQAAAAACAAAAAAAAAAAABA=</HashCode>
+      <FileName>LogIn.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBConnect___Windows_Phone.MainPage">
+    <Position X="0.5" Y="9.75" Width="5.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AIIAKAIBAEAQMGCIAUBFFAWAGAC4QSGBAAIEQEIAAAg=</HashCode>
+      <FileName>MainPage.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBConnect___Windows_Phone.NoImageFeedControl">
+    <Position X="18.25" Y="14" Width="5.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAIAACAAAAgCAoAAAAACAAAgAAAAAAAIAAA=</HashCode>
+      <FileName>NoImageFeedControl.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBConnect___Windows_Phone.ProfileFeed">
+    <Position X="9" Y="3.25" Width="5.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAgAAACAAAAQECGgAAAAAAUAAAAERAgAoACAQEAAAAA=</HashCode>
+      <FileName>ProfileFeed.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBConnect___Windows_Phone.SearchResultControl">
+    <Position X="17.75" Y="11" Width="5.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAACAEAAAgAAAAAAAAAAQAAAAEAAAA=</HashCode>
+      <FileName>SearchResultControl.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBConnect___Windows_Phone.SearchUser">
+    <Position X="21" Y="4.5" Width="5.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAQAAAAAAAIQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SearchUser.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBConnect___Windows_Phone.SensorFeedControl">
+    <Position X="0.5" Y="0.5" Width="6" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAoAACAAAAACAIAAAAACAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>SensorFeedControl.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBConnect___Windows_Phone.TagControl">
+    <Position X="22" Y="7.75" Width="5.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>IAIARAAAAAAAAQAAAAAAAAAAAAAAAAAAAQAQAAAAAAQ=</HashCode>
+      <FileName>TagControl.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABBConnect___Windows_Phone.ItemViewModel" BaseTypeListCollapsed="true">
+    <Position X="16" Y="0.75" Width="3.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>IIACAIAAAAAAAYAAAAAAAAAAgAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\ItemViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ABBConnect___Windows_Phone.MainViewModel" BaseTypeListCollapsed="true">
+    <Position X="16.25" Y="4.25" Width="4" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQCIEAAAIAAAAAgAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>ViewModels\MainViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
