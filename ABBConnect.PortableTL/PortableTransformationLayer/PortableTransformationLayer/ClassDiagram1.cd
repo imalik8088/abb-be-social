@@ -1,0 +1,562 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="PortableTransformationLayer.CommonData" BaseTypeListCollapsed="true">
+    <Position X="9" Y="2.25" Width="3" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAAAAAABAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PortableTransformationLayer.Connection">
+    <Position X="4.75" Y="6" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABAAAAAQAIAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Connection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.FeedData" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="5.25" Width="4" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAACgAIAAAAAAABABAAgCAAAAAIAAAAAAAgA=</HashCode>
+      <FileName>FeedData.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PortableTransformationLayer.UserData" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="0.5" Width="4.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAJAAEAAAAAKBEAAAAYAAAARAIQAEBAAAAAAAAgAAAA=</HashCode>
+      <FileName>UserData.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetHumanInformation_Result" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="25.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAECiACAAggAAAAIAQAQAgAABABAAAAAAAABAAAg=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetHumanInformationByUsername_Result" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="27.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAKAECiACAAggAAAAIAQAQAgAABABAAAAAgAABAAAg=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAIAAICEwAAAAgCAQIABAgAgAAAAAAAAxBACEQAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeedsFromId_Result" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="27.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAIAAICEwAAAAgCAQIABAgAgAAAAAAAAxBACEQAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetPriorityCategories_Result" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="32.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAACAAAAgAAAAAAAAAQAgAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetAllSensors_Result" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="27.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAACAIAAgAAAAABAAAQAgAAAAAQAAAAgAAACAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetFeedComments_Result" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAECiBAAAAAgAAAIAAAAAgAAAAAAAAQAAFAAAAAg=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetFeedTags_Result" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="27.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAECiAAAAAAAAAAAAAAgAgAAAAAAAAQAABAQAAAg=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetAllHumanFeeds_Result" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="20.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAIAAICEwAAAAgCAQIABAgAgAAAAAAAAxBACEQAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetAllHumanFeedsByFilter_Result" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAIAAICEwAAAAgCAQIABAgAgAAAAAAAAxBACEQAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetAllSensorFeeds_Result" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="23.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAIAAICEwAAAAgCAQIABAgAgAAAAAAAAxBACEQAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetAllSensorFeedsByFilter_Result" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="25.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAIAAICEwAAAAgCAQIABAgAgAAAAAAAAxBACEQAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetUserFeeds_Result" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="32.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAIAAICEwAAAAgCAQIABAgAgAAAAAAAAxBACEQAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetUserFeedsByFilter_Result" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAIAAICEwAAAAgCAQIABAgAgAAAAAAAAxBACEQAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetSensorInformation_Result" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="23.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAKAAACAIAAgAAAIAJAAAQAgABAABQAAAAgAABCAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetHistoricalDataFromSensor_Result" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAACAAAAAAgAAAIAAABAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetLatestFeedsByFilter_Result" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAIAAICEwAAAAgCAQIABAgAgAAAAAAAAxBACEQAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetFeedsByFilter_Result" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAIAAICEwAAAAgCAQIABAgAgAAAAAAAAxBACEQAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result1" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="23.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAIAAICEwAAAAgCAQIABAgAgAAAAAAAAxBACEQAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetUserSavedFilters_Result" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="23.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIEAICIAAAgAAQAAIACAgggAAAAAAAAQAAAEQAACA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetUsersByName_Result" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="27.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAECiAAAAgAAAAAAAAAQAgAAAAAAABAAgAIAAAAg=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetUserSavedFiltersTagedUsers_Result" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="25.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAECiAAAAgAAAAAAAAAQAgAAAAAAAAAAgAAAAAAg=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetUserActivity_Result" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="27.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEACAAICEAAAAAAAAAACAAgAgAAAAAAAQwAgCAQAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.LogInCompletedEventArgs" Collapsed="true">
+    <Position X="30.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetHumanInformationCompletedEventArgs" Collapsed="true">
+    <Position X="30.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetHumanInformationByUsernameCompletedEventArgs" Collapsed="true">
+    <Position X="29" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeedsCompletedEventArgs" Collapsed="true">
+    <Position X="25.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeedsFromIdCompletedEventArgs" Collapsed="true">
+    <Position X="29" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.PostTestFeedCompletedEventArgs" Collapsed="true">
+    <Position X="20.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.PostFeedCompletedEventArgs" Collapsed="true">
+    <Position X="18.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetCategoriesCompletedEventArgs" Collapsed="true">
+    <Position X="30.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetAllSensorsCompletedEventArgs" Collapsed="true">
+    <Position X="29" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetFeedCommentsCompletedEventArgs" Collapsed="true">
+    <Position X="20.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetFeedTagsCompletedEventArgs" Collapsed="true">
+    <Position X="29" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetHumanFeedsCompletedEventArgs" Collapsed="true">
+    <Position X="23.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetHumanFeedsByFilterCompletedEventArgs" Collapsed="true">
+    <Position X="22" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetSensorFeedsCompletedEventArgs" Collapsed="true">
+    <Position X="22" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetSensorFeedsByFilterCompletedEventArgs" Collapsed="true">
+    <Position X="20.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetUserFeedsCompletedEventArgs" Collapsed="true">
+    <Position X="22" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetUserFeedsByFilterCompletedEventArgs" Collapsed="true">
+    <Position X="20.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetLocationsCompletedEventArgs" Collapsed="true">
+    <Position X="30.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetSensorInformationCompletedEventArgs" Collapsed="true">
+    <Position X="25.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetHistoricalDataFromSensorCompletedEventArgs" Collapsed="true">
+    <Position X="20.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetLastSensorValueCompletedEventArgs" Collapsed="true">
+    <Position X="32.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.PostCommentCompletedEventArgs" Collapsed="true">
+    <Position X="32.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.AddTagCompletedEventArgs" Collapsed="true">
+    <Position X="25.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.FollowSensorCompletedEventArgs" Collapsed="true">
+    <Position X="18.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetLatestFeedsByFilterCompletedEventArgs" Collapsed="true">
+    <Position X="20.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetFeedsByFilterCompletedEventArgs" Collapsed="true">
+    <Position X="23.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetXFeedsByFilterCompletedEventArgs" Collapsed="true">
+    <Position X="29" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.SaveFilterCompletedEventArgs" Collapsed="true">
+    <Position X="22" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.AddFilterUserCompletedEventArgs" Collapsed="true">
+    <Position X="23.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetSavedFilterCompletedEventArgs" Collapsed="true">
+    <Position X="18.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.SearchUsersByNameCompletedEventArgs" Collapsed="true">
+    <Position X="23.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetFilterTaggedUsersCompletedEventArgs" Collapsed="true">
+    <Position X="30.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetUserActivityCompletedEventArgs" Collapsed="true">
+    <Position X="29" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.UnfollowSensorCompletedEventArgs" Collapsed="true">
+    <Position X="27.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetFollowedSensorsCompletedEventArgs" Collapsed="true">
+    <Position X="32.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetFeedByFeedIdCompletedEventArgs" Collapsed="true">
+    <Position X="32.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetFeedsFromLastShiftCompletedEventArgs" Collapsed="true">
+    <Position X="25.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.GetUserActivityFromIdCompletedEventArgs" Collapsed="true">
+    <Position X="30.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectServiceRef.ABBConnectWCFClient" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="20.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>v+f7z3/7W9/d/Pfbv/H9v/8bzdj7vf7J+/7tf3/7/+8=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PortableTransformationLayer.ABBConnectStreamServiceRef.ABBConnectStreamWCFClient" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BSAABQMAAAAEIAIZACCIAAQAAYhAAQCAAEAIIAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectStreamServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="PortableTransformationLayer.ICommonData">
+    <Position X="9" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ICommonData.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PortableTransformationLayer.IFeedData">
+    <Position X="5.5" Y="0.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAACgAAgAAAAAABAAAAgCAAAAAIAAAAAAAgA=</HashCode>
+      <FileName>IFeedData.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PortableTransformationLayer.IUserData">
+    <Position X="7" Y="4.25" Width="4.5" />
+    <TypeIdentifier>
+      <HashCode>AAJAAEAAAAAKBEAAAAYAAAAQAIQAEBAAAAAAAAgAAAA=</HashCode>
+      <FileName>IUserData.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCF" Collapsed="true">
+    <Position X="32" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ByOSBBADRQYIOgQ9C0SACBCaAjAPAAUgaCgACAa4CLE=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PortableTransformationLayer.ABBConnectServiceRef.IABBConnectWCFChannel" Collapsed="true">
+    <Position X="32" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PortableTransformationLayer.ABBConnectStreamServiceRef.IABBConnectStreamWCF" Collapsed="true">
+    <Position X="29.25" Y="7.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectStreamServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PortableTransformationLayer.ABBConnectStreamServiceRef.IABBConnectStreamWCFChannel" Collapsed="true">
+    <Position X="29" Y="8.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\ABBConnectStreamServiceRef\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
