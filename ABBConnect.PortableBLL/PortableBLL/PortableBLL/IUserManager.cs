@@ -20,11 +20,6 @@ namespace PortableBLL
         Task<List<Sensor>> GetAllSensors();
         Task<List<Filter>> GetUserSavedFilters(int userId);
         Task<List<User>> GetFilterTaggedUsers(int filterId);
-        Task<int> AddFilter(int userId, Filter newFilter);
-        Task<bool> AddUserToFilter(int userId, int filterId);
-        Task<bool> FollowSensor(int humanUserId, int sensorUserId);
-        Task<bool> UnfollowSensor(int humanUserId, int sensorUserId);
-        Task<List<int>> GetFollowedSensors(int humanUserId);
         Task<List<Activity>> GetUserActivity(int userId);
         Task<List<Activity>> GetUserActivity(int userId, int activitiesNumber, int startId);
     }

@@ -44,7 +44,6 @@
     <Compile Include="Human.cs" />
     <Compile Include="HumanFeed.cs" />
     <Compile Include="ICommonDataManager.cs" />
-    <Compile Include="ISyncFeedManager.cs" />
     <Compile Include="IUserManager.cs" />
     <Compile Include="lFeedManager.cs" />
     <Compile Include="Program.cs" />
@@ -82,6 +81,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\PortableTransformationLayer.ABBConnectServiceRef.GetAllHumanFeedsByFilter_Result1.datasource" />
     <None Include="Properties\DataSources\PortableTransformationLayer.ABBConnectServiceRef.GetAllHumanFeeds_Result1.datasource" />

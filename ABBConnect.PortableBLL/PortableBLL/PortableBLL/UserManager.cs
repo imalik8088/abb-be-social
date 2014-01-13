@@ -215,32 +215,6 @@ namespace PortableBLL
             return userList;
         }
 
-
-        public Task<int> AddFilter(int userId, Filter newFilter)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> AddUserToFilter(int userId, int filterId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> FollowSensor(int humanUserId, int sensorUserId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> UnfollowSensor(int humanUserId, int sensorUserId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<int>> GetFollowedSensors(int humanUserId)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<List<Activity>> GetUserActivity(int userId)
         {
             List<GetUserActivity_Result> list = await usrData.GetUserActivity(userId).ConfigureAwait(false);
@@ -254,7 +228,6 @@ namespace PortableBLL
 
             return activityList;
         }
-
 
         public async Task<List<Activity>> GetUserActivity(int userId, int activitiesNumber, int startId)
         {
