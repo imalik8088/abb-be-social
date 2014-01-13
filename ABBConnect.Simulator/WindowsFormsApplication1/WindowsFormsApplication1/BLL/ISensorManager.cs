@@ -43,7 +43,7 @@ namespace ABBConnectSimulator.BLL
         /// <summary>
         /// Insert all the sensors values to the database
         /// </summary>
-        void PublishSensorValues();
+        void PublishSensorValues(int timeIntervall);
         /// <summary>
         /// Get all the stored sensors
         /// </summary>

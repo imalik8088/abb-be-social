@@ -20,7 +20,7 @@ namespace BLL
             public  List<Feed> LoadLatestXFeeds(int feedNum)
             {
                 
-                List<GetLatestXFeeds_Result> list =  feedData.GetXFeedsByFilter(-1, "", DateTime.MinValue, DateTime.MinValue, "", -1, feedNum);
+                List<GetLatestXFeeds_Result> list =  feedData.GetXFeedsByFilter(-1, "", DateTime.MinValue, DateTime.MinValue, "", "", -1, feedNum);
 
                 List<Feed> retList = new List<Feed>();
 
@@ -42,7 +42,7 @@ namespace BLL
 
             public  List<Feed> LoadLatestXFeedsFromId(int startingId, int numberOfFeeds)
             {
-                List<GetLatestXFeeds_Result> list = feedData.GetXFeedsByFilter(-1, "", DateTime.MinValue, DateTime.MinValue, "", startingId, numberOfFeeds);
+                List<GetLatestXFeeds_Result> list = feedData.GetXFeedsByFilter(-1, "", DateTime.MinValue, DateTime.MinValue, "", "", startingId, numberOfFeeds);
 
                 List<Feed> retList = new List<Feed>();
 
@@ -125,7 +125,7 @@ namespace BLL
 
             public  List<Feed> LoadFeedsByType(FeedType.FeedSource feedType, int numFeeds)
             {
-                List<GetLatestXFeeds_Result> list = feedData.GetXFeedsByFilter(-1, "", DateTime.MinValue, DateTime.MinValue, feedType.ToString(), -1, numFeeds);
+                List<GetLatestXFeeds_Result> list = feedData.GetXFeedsByFilter(-1, "", DateTime.MinValue, DateTime.MinValue, feedType.ToString(), "", -1, numFeeds);
 
                 List<Feed> retList = new List<Feed>();
 
@@ -148,7 +148,7 @@ namespace BLL
 
             public  List<Feed> LoadFeedsByType(FeedType.FeedSource feedType, int numFeeds, int startId)
             {
-                List<GetLatestXFeeds_Result> list = feedData.GetXFeedsByFilter(-1, "", DateTime.MinValue, DateTime.MinValue, feedType.ToString(), startId, numFeeds);
+                List<GetLatestXFeeds_Result> list = feedData.GetXFeedsByFilter(-1, "", DateTime.MinValue, DateTime.MinValue, feedType.ToString(), "", startId, numFeeds);
 
                 List<Feed> retList = new List<Feed>();
 
@@ -171,7 +171,7 @@ namespace BLL
 
             public  List<Feed> LoadFeedsByDate(DateTime feedStartTime, DateTime feedEndTime, int numFeeds)
             {
-                List<GetLatestXFeeds_Result> list = feedData.GetXFeedsByFilter(-1, "", feedStartTime, feedEndTime, "", -1, numFeeds);
+                List<GetLatestXFeeds_Result> list = feedData.GetXFeedsByFilter(-1, "", feedStartTime, feedEndTime, "", "", -1, numFeeds);
 
                 List<Feed> retList = new List<Feed>();
 
@@ -194,7 +194,7 @@ namespace BLL
 
             public  List<Feed> LoadFeedsByDate(DateTime feedStartTime, DateTime feedEndTime, int numFeeds, int startId)
             {
-                List<GetLatestXFeeds_Result> list = feedData.GetXFeedsByFilter(-1, "", feedStartTime, feedEndTime, "", startId, numFeeds);
+                List<GetLatestXFeeds_Result> list = feedData.GetXFeedsByFilter(-1, "", feedStartTime, feedEndTime, "", "", startId, numFeeds);
 
                 List<Feed> retList = new List<Feed>();
 
@@ -217,7 +217,7 @@ namespace BLL
 
             public  List<Feed> LoadFeedsByLocation(string location, int numFeeds)
             {
-                List<GetLatestXFeeds_Result> list = feedData.GetXFeedsByFilter(-1, location, DateTime.MinValue, DateTime.MinValue, "", -1, numFeeds);
+                List<GetLatestXFeeds_Result> list = feedData.GetXFeedsByFilter(-1, location, DateTime.MinValue, DateTime.MinValue, "", "", -1, numFeeds);
 
                 List<Feed> retList = new List<Feed>();
 
@@ -240,7 +240,7 @@ namespace BLL
 
             public  List<Feed> LoadFeedsByLocation(string location, int numFeeds, int startId)
             {
-                List<GetLatestXFeeds_Result> list = feedData.GetXFeedsByFilter(-1, location, DateTime.MinValue, DateTime.MinValue, "", startId, numFeeds);
+                List<GetLatestXFeeds_Result> list = feedData.GetXFeedsByFilter(-1, location, DateTime.MinValue, DateTime.MinValue, "", "", startId, numFeeds);
 
                 List<Feed> retList = new List<Feed>();
 
@@ -263,7 +263,7 @@ namespace BLL
 
             public  List<Feed> LoadFeedsByUser(int userId, int numFeeds)
             {
-                List<GetLatestXFeeds_Result> list = feedData.GetXFeedsByFilter(userId, "", DateTime.MinValue, DateTime.MinValue, "", -1, numFeeds);
+                List<GetLatestXFeeds_Result> list = feedData.GetXFeedsByFilter(userId, "", DateTime.MinValue, DateTime.MinValue, "", "", -1, numFeeds);
 
                 List<Feed> retList = new List<Feed>();
 
@@ -286,7 +286,7 @@ namespace BLL
 
             public  List<Feed> LoadFeedsByUser(int userId, int numFeeds, int startId)
             {
-                List<GetLatestXFeeds_Result> list = feedData.GetXFeedsByFilter(userId, "", DateTime.MinValue, DateTime.MinValue, "", startId, numFeeds);
+                List<GetLatestXFeeds_Result> list = feedData.GetXFeedsByFilter(userId, "", DateTime.MinValue, DateTime.MinValue, "", "", startId, numFeeds);
 
                 List<Feed> retList = new List<Feed>();
 
@@ -307,7 +307,7 @@ namespace BLL
                 return retList;
             }
 
-            public  List<Feed> LoadFeedsByFilter(int userId, string location, DateTime startingTime, DateTime endingTime, FeedType.FeedSource feedType, int numFeeds)
+            public  List<Feed> LoadFeedsByFilter(int userId, string location, DateTime startingTime, DateTime endingTime, FeedType.FeedSource feedType, string categoryName, int numFeeds)
             {
                 string typeOfFeed;
                 if (feedType == FeedType.FeedSource.None)
@@ -319,6 +319,7 @@ namespace BLL
                                                                                      startingTime,
                                                                                      endingTime,
                                                                                      typeOfFeed,
+                                                                                     System.String.IsNullOrEmpty(categoryName) ? "" : categoryName,
                                                                                      -1,
                                                                                      numFeeds < 0 ? -1 : numFeeds
                                                                                      );
@@ -342,7 +343,7 @@ namespace BLL
                 return retList;
             }
 
-            public  List<Feed> LoadFeedsByFilter(int userId, string location, DateTime startingTime, DateTime endingTime, FeedType.FeedSource feedType, int startId, int numFeeds)
+            public  List<Feed> LoadFeedsByFilter(int userId, string location, DateTime startingTime, DateTime endingTime, FeedType.FeedSource feedType, string categoryName, int startId, int numFeeds)
             {
                 string typeOfFeed;
                 if (feedType == FeedType.FeedSource.None)
@@ -354,6 +355,7 @@ namespace BLL
                                                                                        startingTime,
                                                                                        endingTime,
                                                                                        typeOfFeed,
+                                                                                       String.IsNullOrEmpty(categoryName) ? "" : categoryName,
                                                                                        startId < 0 ? -1 : startId,
                                                                                        numFeeds < 0 ? -1 : numFeeds
                                                                                        );
@@ -387,10 +389,10 @@ namespace BLL
                 if (savedFilter.UsersOnFilter.Count > 0)
                     foreach (User filteredUser in savedFilter.UsersOnFilter)
                     {
-                        retList.AddRange( LoadFeedsByFilter(filteredUser.ID, savedFilter.Location, savedFilter.StartDate, savedFilter.EndDate, savedFilter.TypeOfFeed, numFeed));
+                        retList.AddRange( LoadFeedsByFilter(filteredUser.ID, savedFilter.Location, savedFilter.StartDate, savedFilter.EndDate, savedFilter.TypeOfFeed, savedFilter.CategoryName, numFeed));
                     }
                 else
-                     LoadFeedsByFilter(-1, savedFilter.Location, savedFilter.StartDate, savedFilter.EndDate, savedFilter.TypeOfFeed, numFeed);
+                    LoadFeedsByFilter(-1, savedFilter.Location, savedFilter.StartDate, savedFilter.EndDate, savedFilter.TypeOfFeed, savedFilter.CategoryName, numFeed);
                 
                 return retList.OrderByDescending(o => o.TimeStamp).ToList().GetRange(0, numFeed-1);
             }
@@ -404,10 +406,10 @@ namespace BLL
                 if (savedFilter.UsersOnFilter.Count > 0)
                     foreach (User filteredUser in savedFilter.UsersOnFilter)
                     {
-                        retList.AddRange( LoadFeedsByFilter(filteredUser.ID, savedFilter.Location, savedFilter.StartDate, savedFilter.EndDate, savedFilter.TypeOfFeed, startId, numFeed));
+                        retList.AddRange( LoadFeedsByFilter(filteredUser.ID, savedFilter.Location, savedFilter.StartDate, savedFilter.EndDate, savedFilter.TypeOfFeed, savedFilter.CategoryName, startId, numFeed));
                     }
                 else
-                     LoadFeedsByFilter(-1, savedFilter.Location, savedFilter.StartDate, savedFilter.EndDate, savedFilter.TypeOfFeed, startId, numFeed);
+                    LoadFeedsByFilter(-1, savedFilter.Location, savedFilter.StartDate, savedFilter.EndDate, savedFilter.TypeOfFeed, savedFilter.CategoryName, startId, numFeed);
 
                 return retList.OrderByDescending(o => o.TimeStamp).ToList().GetRange(0, numFeed-1);
             }
@@ -428,6 +430,77 @@ namespace BLL
                                                 LoadFeedTags(entityFeed.FeedId),
                                                 userInforMng.LoadSensorInformation(entityFeed.UserId));
 
+            }
+
+
+            public List<Feed> LoadLastShiftFeeds(int numberOfFeeds)
+            {
+                List<GetLatestXFeeds_Result> list = feedData.GetFeedsFromLastShift(numberOfFeeds);
+
+                List<Feed> retList = new List<Feed>();
+
+                UserManager userInforMng = new UserManager();
+
+                foreach (GetLatestXFeeds_Result res in list)
+                {
+                    if (res.Type == "Human")
+                        retList.Add(new HumanFeed(res, LoadFeedComments(res.FeedId),
+                                                   LoadFeedTags(res.FeedId),
+                                                   userInforMng.LoadHumanInformation(res.UserId)));
+                    else
+                        retList.Add(new SensorFeed(res, LoadFeedComments(res.FeedId),
+                                                    LoadFeedTags(res.FeedId),
+                                                    userInforMng.LoadSensorInformation(res.UserId)));
+                }
+
+                return retList;
+            }
+
+
+            public List<Feed> LoadFeedsByCategoryName(string categoryName, int numFeeds)
+            {
+                List<GetLatestXFeeds_Result> list = feedData.GetXFeedsByFilter(-1, "", DateTime.MinValue, DateTime.MinValue, "", categoryName, -1, numFeeds);
+
+                List<Feed> retList = new List<Feed>();
+
+                UserManager userInforMng = new UserManager();
+
+                foreach (GetLatestXFeeds_Result res in list)
+                {
+                    if (res.Type == "Human")
+                        retList.Add(new HumanFeed(res, LoadFeedComments(res.FeedId),
+                                                   LoadFeedTags(res.FeedId),
+                                                   userInforMng.LoadHumanInformation(res.UserId)));
+                    else
+                        retList.Add(new SensorFeed(res, LoadFeedComments(res.FeedId),
+                                                    LoadFeedTags(res.FeedId),
+                                                    userInforMng.LoadSensorInformation(res.UserId)));
+                }
+
+                return retList;
+            }
+
+            public List<Feed> LoadFeedsByCategoryName(string categoryName, int numFeeds, int startId)
+            {
+                List<GetLatestXFeeds_Result> list = feedData.GetXFeedsByFilter(-1, "", DateTime.MinValue, DateTime.MinValue, "", categoryName, startId, numFeeds);
+
+                List<Feed> retList = new List<Feed>();
+
+                UserManager userInforMng = new UserManager();
+
+                foreach (GetLatestXFeeds_Result res in list)
+                {
+                    if (res.Type == "Human")
+                        retList.Add(new HumanFeed(res, LoadFeedComments(res.FeedId),
+                                                   LoadFeedTags(res.FeedId),
+                                                   userInforMng.LoadHumanInformation(res.UserId)));
+                    else
+                        retList.Add(new SensorFeed(res, LoadFeedComments(res.FeedId),
+                                                    LoadFeedTags(res.FeedId),
+                                                    userInforMng.LoadSensorInformation(res.UserId)));
+                }
+
+                return retList;
             }
     }
 }

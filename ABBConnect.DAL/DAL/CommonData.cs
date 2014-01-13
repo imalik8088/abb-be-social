@@ -9,18 +9,29 @@ using System.Data.SqlClient;
 
 namespace DAL
 {
+    /// <summary>
+    /// Class that allow to retrieve additional information shared by the feeds
+    /// </summary>
     public class CommonData : Connection
     {
         private SqlConnection sqlConnection;
         private SqlCommand sqlCommand;
 
+        
+        /// <summary>
+        /// Constructor that automatically instantiate the attribute of the class
+        /// </summary>
         public CommonData()
             : base()
         {
             this.sqlConnection = base.GetConnection();
             this.sqlCommand = this.sqlConnection.CreateCommand();
         }
- 
+
+        /// <summary>
+        /// This method  get the categories of the feeds rappresented by the priority
+        /// </summary>
+        /// <returns>Asynchronous operation that contain the List of catetegories</returns>
         public List<GetPriorityCategories_Result> GetCategories()
         {
             List<GetPriorityCategories_Result> cats = new List<GetPriorityCategories_Result>();
@@ -54,6 +65,10 @@ namespace DAL
             return cats;
         }
 
+        /// <summary>
+        /// This method get all locations that compose a specific workspace
+        /// </summary>
+        /// <returns>Asynchronous operation that contain the List of Locations</returns>
         public List<string> GetLocations()
         {
             List<string> locations = new List<string>();

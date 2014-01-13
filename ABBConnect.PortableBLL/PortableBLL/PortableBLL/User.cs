@@ -60,5 +60,18 @@ namespace PortableBLL
                 username = value;
             }
         }
+
+        private string avatar;
+        public string Avatar
+        {
+            get
+            {
+                return avatar;
+            }
+            set
+            {
+                avatar = value;
+            }
+        }
     }
 }

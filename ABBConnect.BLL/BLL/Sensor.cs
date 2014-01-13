@@ -23,8 +23,9 @@ namespace BLL
             base.UserName = entitySensor.Name;
             this.upperBoundary = entitySensor.MAX_Critical.GetValueOrDefault();
             this.lowerBoundary = entitySensor.MIN_Critical.GetValueOrDefault();
-            base.Location = "";
+            base.Location = entitySensor.Location;
             this.unitMetric = entitySensor.Unit;
+            base.Avatar = entitySensor.Image;
         }
 
         private List<SensorVTData> sensorValues;

@@ -1,0 +1,38 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="648" measuredH="593" mockupW="282" mockupH="573">
+  <controls>
+    <control controlID="68" controlTypeID="__group__" x="366" y="20" w="282" h="573" measuredW="614" measuredH="573" zOrder="0" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::iPhone" x="0" y="0" w="-1" h="-1" measuredW="282" measuredH="573" zOrder="0" locked="false" isInGroup="68">
+          <controlProperties>
+            <bgPattern>allWhite</bgPattern>
+            <model>IPhone5</model>
+          </controlProperties>
+        </control>
+        <control controlID="23" controlTypeID="com.balsamiq.mockups::IconLabel" x="37" y="109" w="-1" h="-1" measuredW="145" measuredH="21" zOrder="1" locked="false" isInGroup="68">
+          <controlProperties>
+            <bold>true</bold>
+            <href>saved-feeds%26bm%3Bsaved-feeds.bmml%26bm%3Bsaved-feeds.bmml%26bm%3Bsaved-feeds.bmml</href>
+            <icon>SimpleArrowIcon%7Cxsmall</icon>
+            <labelPosition>right</labelPosition>
+            <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2237%2C109%2C182%2C130%22%20href%3D%22saved-feeds.bmml%22%20alt%3D%22saved-feeds%22%20id%3D%2223%22/%3E</map>
+            <rotation>180</rotation>
+            <text>%20%20%20%20%20%20%20%20%20%20%20%20%20saved%20feeds</text>
+          </controlProperties>
+        </control>
+        <control controlID="33" controlTypeID="com.balsamiq.mockups::iPhoneMenu" x="34" y="156" w="-1" h="-1" measuredW="215" measuredH="126" zOrder="2" locked="false" isInGroup="68">
+          <controlProperties>
+            <text>Name%3A%20%7C%0A+%20shift%2C%20%3E%0A+%20date%20range%2C%20%3E%0A+%20user%2C%20%3E</text>
+          </controlProperties>
+        </control>
+        <control controlID="34" controlTypeID="com.balsamiq.mockups::Button" x="180" y="293" w="-1" h="-1" measuredW="69" measuredH="27" zOrder="3" locked="false" isInGroup="68">
+          <controlProperties>
+            <icon>SaveIcon%7Cxsmall</icon>
+            <menuIcon>false</menuIcon>
+            <text>save</text>
+          </controlProperties>
+        </control>
+        <control controlID="39" controlTypeID="com.balsamiq.mockups::iPhoneKeyboard" x="26" y="330" w="-1" h="-1" measuredW="227" measuredH="160" zOrder="4" locked="false" isInGroup="68"/>
+      </groupChildrenDescriptors>
+    </control>
+  </controls>
+</mockup>

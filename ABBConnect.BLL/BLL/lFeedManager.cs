@@ -13,6 +13,7 @@ namespace BLL
         bool AddTagToFeed(int feedId, string username);
         List<Human> LoadFeedTags(int feedId);
         List<Comment> LoadFeedComments(int feedId);
+        List<Feed> LoadLastShiftFeeds(int numberOfFeeds);
         List<Feed> LoadLatestXFeeds(int numberOfFeeds);
         List<Feed> LoadLatestXFeedsFromId(int startingId, int numberOfFeeds);
         List<Feed> LoadFeedsByType(FeedType.FeedSource feedType, int numFeeds);
@@ -25,6 +26,8 @@ namespace BLL
         List<Feed> LoadFeedsByUser(int userId, int numFeeds, int startId);
         List<Feed> LoadFeedsFromSavedFilter(Filter savedFilter, int numFeed);
         List<Feed> LoadFeedsFromSavedFilter(Filter savedFilter, int numFeed, int startId);
+        List<Feed> LoadFeedsByCategoryName(string categoryName, int numFeeds);
+        List<Feed> LoadFeedsByCategoryName(string categoryName, int numFeeds, int startId);
         Feed GetFeedByFeedId(int feedId);
     }
 }

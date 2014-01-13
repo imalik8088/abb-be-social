@@ -30,6 +30,7 @@ namespace PortableBLL
             this.companyTitle = "";
             this.email = "";
             this.phoneNumber = "";
+            base.Avatar = "";
         }
 
         public Human(GetHumanInformation_Result result, int humanId)
@@ -41,6 +42,7 @@ namespace PortableBLL
             this.phoneNumber = result.PhoneNumber;
             email = result.Email;
             base.Location = result.Location;
+            base.Avatar = result.Image;
             companyTitle = ""; 
         }
         public Human(GetHumanInformationByUsername_Result result)
@@ -52,6 +54,7 @@ namespace PortableBLL
             this.phoneNumber = result.PhoneNumber;
             email = result.Email;
             base.Location = result.Location;
+            base.Avatar = result.Image;
             companyTitle = "";
         }
 

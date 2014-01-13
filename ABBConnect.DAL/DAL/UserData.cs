@@ -8,11 +8,17 @@ using System.Data.SqlClient;
 
 namespace DAL
 {
+    /// <summary>
+    /// Class that allow to retrieve and store informations about users, distinguishing between human users and sensors
+    /// </summary>
     public class UserData : Connection
     {
         private SqlConnection sqlConnection;
         private SqlCommand sqlCommand;
 
+        /// <summary>
+        /// Constructor that automatically instantiate the attribute of the class
+        /// </summary>
         public UserData()
             : base()
         {
@@ -66,6 +72,47 @@ namespace DAL
             return histData;
         }
 
+        /// <summary>
+        /// Method that save the reference between a sensor and a human user
+        /// </summary>
+        /// <param name="humanUserId">String that rappresent the ID of the human user</param>
+        /// <param name="sensorUserId">String that rappresent the ID of the sensor</param>
+        /// <returns>Asynchronous operation containing a boolean that represent the outcome of the operation</returns>
+        public bool FollowSensor(int humanUserId, int sensorUserId)
+        {
+            int humanIntId = humanUserId;
+            int sensorIntId = sensorUserId;
+            int rowsAffected = 0;
+
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            {
+
+                sqlConn.Open();
+                string sqlQuery = "AddFollowSensor";
+
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@HumanUserId", SqlDbType.Int).Value = humanIntId;
+                    cmd.Parameters.Add("@SensorUserId", SqlDbType.Int).Value = sensorIntId;
+
+                    rowsAffected = cmd.ExecuteNonQuery();
+                }
+                sqlConn.Close();
+            }
+
+            if (rowsAffected > 0)
+                return true;
+            else
+                return false;
+        }
+
+        /// <summary>
+        /// Method that delete the reference between a sensor and a human user
+        /// </summary>
+        /// <param name="humanUserId">String that rappresent the ID of the human user</param>
+        /// <param name="sensorUserId">String that rappresent the ID of the sensor user</param>
+        /// <returns>Asynchronous operation containing a boolean that represent the outcome of the operation</returns>
         public bool UnfollowSensor(int humanUserId, int sensorUserId)
         {
             int humanIntId = humanUserId;
@@ -95,6 +142,11 @@ namespace DAL
                 return false;
         }
 
+        /// <summary>
+        /// Method that retrieve the ID of the sensors referenced by a human user
+        /// </summary>
+        /// <param name="humanUserId">String that rappresent the ID of the human user</param>
+        /// <returns>Asynchronous operation containing a List of all the sensors followed by the human user</returns>
         public List<int> GetFollowedSensors(int humanUserId)
         {
             List<int> sensorIdList = new List<int>();
@@ -133,6 +185,11 @@ namespace DAL
             return sensorIdList;
         }
 
+        /// <summary>
+        /// Method that retrieve the information of a sensor with a specified ID
+        /// </summary>
+        /// <param name="id">ID of the sensor that have to be retrieved</param>
+        /// <returns>Asynchronous operation that contain the information about the sensor</returns>
         public GetSensorInformation_Result GetSensorInformation(int id)
         {
             GetSensorInformation_Result s = new GetSensorInformation_Result();
@@ -157,6 +214,8 @@ namespace DAL
                             s.Name = (string)reader[2];
                             s.MIN_Critical = (decimal)reader[3];
                             s.MAX_Critical = (decimal)reader[4];
+                            s.Location = (string)reader[5];
+                            s.Image = (reader[6] == DBNull.Value) ? string.Empty : (string)reader[6];
                         }
                     }
                 }
@@ -165,6 +224,16 @@ namespace DAL
             return s;
         }
 
+        /// <summary>
+        /// Method that save a filter option
+        /// </summary>
+        /// <param name="userId">String that rappresent the ID of the user that set the filter option</param>
+        /// <param name="filterName">String that rappresent the name of the filter</param>
+        /// <param name="startingTime">Class DateTime that rappresent the starting date where the filter option start</param>
+        /// <param name="endingTime">Class DateTime that rappresent the ending date where the filter option end</param>
+        /// <param name="location">String that rappresent the location where the filtering option is applied</param>
+        /// <param name="feedType">String that rappresent the type of the feed that could be human or sensor</param>
+        /// <returns>Asynchronous operation that contain the ID of the filter</returns>
         public int SaveFilter(int userId, string filterName, DateTime startingTime, DateTime endingTime, string location, string feedType)
         {
             int retValue = -1;
@@ -198,7 +267,7 @@ namespace DAL
                         else
                             cmd.Parameters.Add("@EndDate", SqlDbType.DateTime).Value = endingTime;
 
-                        if (feedType.Equals(""))
+                        if (feedType.Equals("None"))
                             cmd.Parameters.Add("@Type", SqlDbType.NVarChar, 50).Value = DBNull.Value;
                         else
                             cmd.Parameters.Add("@Type", SqlDbType.NVarChar, 50).Value = feedType;
@@ -228,6 +297,11 @@ namespace DAL
             return retValue;
         }
 
+        /// <summary>
+        /// Method that retrieve all the saved filters option on the feeds of a specific user
+        /// </summary>
+        /// <param name="userId">String that rappresent the ID of the user</param>
+        /// <returns>Asynchronous operation that contain the List with all the saved filters of a specific user</returns>
         public List<GetUserSavedFilters_Result> GetSavedFilter(int userId)
         {
             List<GetUserSavedFilters_Result> savedFilters = new List<GetUserSavedFilters_Result>();
@@ -278,6 +352,11 @@ namespace DAL
             return savedFilters;
         }
 
+        /// <summary>
+        /// Method that retrieve all the information of a user, human or sensor
+        /// </summary>
+        /// <param name="query">String that rappresent the name of the user</param>
+        /// <returns>Asynchronous operation that contain a List with the user informations</returns>
         public List<GetUsersByName_Result> SearchUsersByName(string query)
         {
             List<GetUsersByName_Result> users = new List<GetUsersByName_Result>();
@@ -320,6 +399,11 @@ namespace DAL
             return users;
         }
 
+        /// <summary>
+        /// Method that retrieve all the users referenced in a specific filter
+        /// </summary>
+        /// <param name="filterId">String that rappresent the ID of the filter</param>
+        /// <returns>Asynchronous operation that contain the List referenced in the filter</returns>
         public List<GetUserSavedFiltersTagedUsers_Result> GetFilterTaggedUsers(int filterId)
         {
             List<GetUserSavedFiltersTagedUsers_Result> taggedUsers = new List<GetUserSavedFiltersTagedUsers_Result>();
@@ -359,6 +443,12 @@ namespace DAL
             return taggedUsers;
         }
 
+        /// <summary>
+        /// Method that retrieve the activities of a specific user.
+        /// The activity could be like make a comment, or a feed, or a reference to another user
+        /// </summary>
+        /// <param name="userId">String that rappresent the ID of the human user</param>
+        /// <returns>Asynchronous operation containing a List of activities</returns>
         public List<GetUserActivity_Result> GetUserActivity(int userId)
         {
             List<GetUserActivity_Result> activityList = new List<GetUserActivity_Result>();
@@ -405,6 +495,12 @@ namespace DAL
             return activityList;
         }
 
+        /// <summary>
+        /// Method that save the reference to a user in a specific filter
+        /// </summary>
+        /// <param name="userId">String that rappresent the ID of the user that will be referenced in the filter option</param>
+        /// <param name="filterId">String that rappresent the ID of the filter option</param>
+        /// <returns>Asynchronous operation containing the outcome of the operation</returns>
         public bool AddFilterUser(int userId, int filterId)
         {
             int rowsAffected = 0;
@@ -467,6 +563,11 @@ namespace DAL
             return sensors;
         }
 
+        /// <summary>
+        /// Method that retrieve all the information of a human user
+        /// </summary>
+        /// <param name="Id">ID of the human user that have to be retrieved</param>
+        /// <returns>Asynchronous operation that contain the human user information</returns>
         public GetHumanInformation_Result GetHumanInformation(int id)
         {
 
@@ -493,6 +594,7 @@ namespace DAL
                             h.PhoneNumber = (string)reader[3];
                             h.Email = (string)reader[4];
                             h.Location = (string)reader[5];
+                            h.Image = (reader[6] == DBNull.Value) ? string.Empty : (string)reader[6];
                         }
                     }
                 }
@@ -501,6 +603,11 @@ namespace DAL
             return h;
         }
 
+        /// <summary>
+        /// Method that retrieve all the information of a human user
+        /// </summary>
+        /// <param name="username">String that rappresent the username of the human user</param>
+        /// <returns>Asynchronous operation that contain the human user informations</returns>
         public GetHumanInformationByUsername_Result GetHumanInformationByUsername(string username)
         {
             GetHumanInformationByUsername_Result h = new GetHumanInformationByUsername_Result();
@@ -527,6 +634,7 @@ namespace DAL
                             h.PhoneNumber = (string)reader[4];
                             h.Email = (string)reader[5];
                             h.Location = (string)reader[6];
+                            h.Image = (reader[7] == DBNull.Value) ? string.Empty : (string)reader[7];
                         }
                     }
                 }
@@ -535,6 +643,12 @@ namespace DAL
             return h;
         }
 
+        /// <summary>
+        /// Method that check the credentials of a human user
+        /// </summary>
+        /// <param name="usrName">String that rappresent the username of a human user</param>
+        /// <param name="pw">String that rappresent the password of a human user</param>
+        /// <returns>Asynchronous operation that contain a boolean value representing the outcome of the operation</returns>
         public bool LogIn(string username, string password)
         {
             int result = 0;
@@ -563,6 +677,11 @@ namespace DAL
             return (result == 1 ? true : false);
         }
 
+        /// <summary>
+        /// Method that retrieve the last value register from a sensor
+        /// </summary>
+        /// <param name="id">ID of the sensor that have to be retrieved</param>
+        /// <returns>Asynchronous operation that contain the last value of the sensor</returns>
         public int GetLastSensorValue(int id)
         {
             int iD = id;
@@ -596,6 +715,88 @@ namespace DAL
 
 
             return numValue;
+        }
+
+
+        public List<GetUserActivity_Result> GetUserActivityFromId(int userId, int activityNumber, int startId)
+        {
+            List<GetUserActivity_Result> activityList = new List<GetUserActivity_Result>();
+
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            {
+                sqlConn.Open();
+                string sqlQuery = "GetXUserActivities";
+
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    try
+                    {
+                        cmd.Parameters.Add("@userId", SqlDbType.Int).Value = userId;
+
+                        if (activityNumber == -1)
+                            cmd.Parameters.Add("@numOfActivites", SqlDbType.Int).Value = DBNull.Value;
+                        else
+                            cmd.Parameters.Add("@numOfActivites", SqlDbType.Int).Value = activityNumber;
+
+                        if (startId == -1)
+                            cmd.Parameters.Add("@startingId", SqlDbType.Int).Value = DBNull.Value;
+                        else
+                            cmd.Parameters.Add("@startingId", SqlDbType.Int).Value = startId;
+                    }
+
+                    catch (Exception)
+                    {
+                        cmd.Dispose();
+                        sqlConn.Close();
+                        return null;
+                    }
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        ;
+                        while (reader.Read())
+                        {
+                            GetUserActivity_Result userActivity = new GetUserActivity_Result();
+                            userActivity.Id = (int)reader[0];
+                            userActivity.UserId = (int)reader[1];
+                            userActivity.FeedId = (int)reader[2];
+                            userActivity.Type = (string)reader[3];
+                            userActivity.Text = (string)reader[4];
+                            userActivity.Timestamp = (DateTime)reader[5];
+
+                            activityList.Add(userActivity);
+                        }
+                    }
+                }
+                sqlConn.Close();
+            }
+            return activityList;
+        }
+
+        public bool AddUserAvatar(int userId, string image)
+        {
+            int rowsAffected = 0;
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            {
+                sqlConn.Open();
+                string sqlQuery = "AddUserAvatar";
+
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@userID", SqlDbType.Int).Value = userId;
+                    cmd.Parameters.Add("@image", SqlDbType.NVarChar).Value = image;
+
+                    rowsAffected = cmd.ExecuteNonQuery();
+                }
+                sqlConn.Close();
+            }
+
+            if (rowsAffected > 0)
+                return true;
+            else
+                return false;
         }
 
     }

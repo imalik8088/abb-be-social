@@ -24,7 +24,9 @@ namespace BLL
         bool AddUserToFilter(int userId, int filterId);
         bool FollowSensor(int humanUserId, int sensorUserId);
         bool UnfollowSensor(int humanUserId, int sensorUserId);
-        List<int> GetFollowedSensors(int humanUserId);
+        List<Sensor> GetFollowedSensors(int humanUserId);
         List<Activity> GetUserActivity(int userId);
+        List<Activity> GetUserActivity(int userId, int activitiesNumber, int startId);
+        bool AddUserAvatar(int userId, string image);
     }
 }

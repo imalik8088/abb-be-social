@@ -88,6 +88,9 @@
     <Compile Include="GetFeedsByFilter_Result.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetFeedsFromLastShift_Result.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetFeedTags_Result.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -139,6 +142,9 @@
     <Compile Include="GetXFeedsByFilter_Result.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetXUserActivities_Result.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="IConnection.cs" />
     <Compile Include="Login_Result.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
@@ -158,6 +164,7 @@
       <LastGenOutput>DBModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include="App.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="DBModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DBModel.edmx</DependentUpon>

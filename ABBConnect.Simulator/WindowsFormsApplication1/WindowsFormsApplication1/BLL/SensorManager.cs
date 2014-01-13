@@ -122,7 +122,7 @@ namespace ABBConnectSimulator.BLL
         /// <summary>
         /// Publish the values from each sensor to the DB with a timing on 2sec
         /// </summary>
-        public void PublishSensorValues()
+        public void PublishSensorValues(int timeIntervall)
         {
             for (int j = 0; j < maxValues; j++)
             {
@@ -138,8 +138,8 @@ namespace ABBConnectSimulator.BLL
                         continue;
                     }
                 }
-                //sleep for 2sec, so sensors are providing sensor data every 2 seconds.
-                Thread.Sleep(100);
+                //sleep for X sec, so sensors are providing sensor data every x seconds.
+                Thread.Sleep(timeIntervall);
             }          
         }
 

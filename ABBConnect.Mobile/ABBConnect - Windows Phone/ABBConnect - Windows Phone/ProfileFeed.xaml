@@ -18,7 +18,8 @@
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
         <Image Height="35" HorizontalAlignment="Left" Margin="10,15,0,0" x:Name="imgUser" Stretch="Fill" VerticalAlignment="Top" Width="35" Source="/Icons/icon-user-app-bar.png" />
-        <Image Height="35" HorizontalAlignment="Left" Margin="10,15,0,0" x:Name="imgSensor" Stretch="Fill" VerticalAlignment="Top" Width="35" Source="/Icons/icon-sensor.png" />
+        <!-- <Image Height="35" HorizontalAlignment="Left" Margin="10,15,0,0" x:Name="imgSensor" Stretch="Fill" VerticalAlignment="Top" Width="35" Source="/Icons/icon-sensor.png" />
+      -->
         <controls:Pivot Title="" x:Name="pivHead">
 
             <!--Pivot item two-->
@@ -35,31 +36,32 @@
 
             <controls:PivotItem Header="Profile">
                 <Grid>
-                    <Image Height="23" Width="23" HorizontalAlignment="Left" Margin="13,25,0,0" Name="imgName" Stretch="Fill" VerticalAlignment="Top" Source="Icons/icon-user-app-bar.png" />
-                    <TextBlock x:Name="lblName" HorizontalAlignment="Left" Margin="42,20,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Foreground="#FF8A8A8A" />
-                    <TextBlock x:Name="lblNameClick" HorizontalAlignment="Left" Margin="13,42,0,0" TextWrapping="Wrap" Text="Robert Gustavsson" VerticalAlignment="Top" FontSize="32" RenderTransformOrigin="0.513,-0.111" MouseLeftButtonDown="lblNameClick_MouseLeftButtonDown"/>
+                    <Image Height="23" Width="23" HorizontalAlignment="Left" Margin="13,147,0,0" Name="imgName" Stretch="Fill" VerticalAlignment="Top" Source="Icons/icon-user-app-bar.png" />
+                    <TextBlock x:Name="lblName" HorizontalAlignment="Left" Margin="42,142,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Foreground="#FF8A8A8A" />
+                    <TextBlock x:Name="lblNameClick" HorizontalAlignment="Left" Margin="13,164,0,0" TextWrapping="Wrap" Text="Robert Gustavsson" VerticalAlignment="Top" FontSize="32" RenderTransformOrigin="0.513,-0.111" MouseLeftButtonDown="lblNameClick_MouseLeftButtonDown"/>
 
-                    <Image Height="23" Width="23" HorizontalAlignment="Left" Margin="13,125,0,0" Name="imgMail" Stretch="Fill" VerticalAlignment="Top" Source="Icons/icon-email.png" />
-                    <TextBlock x:Name="lblEmail" HorizontalAlignment="Left" Margin="42,120,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Foreground="#FF8A8A8A" />
-                    <TextBlock x:Name="lblEmailClick" HorizontalAlignment="Left" Margin="13,152,0,0" TextWrapping="Wrap" Text="rgn09003@student.mdh.se" VerticalAlignment="Top" FontSize="32" MouseLeftButtonDown="lblEmailClick_MouseLeftButtonDown"/>
+                    <Image Height="23" Width="23" HorizontalAlignment="Left" Margin="13,247,0,0" Name="imgMail" Stretch="Fill" VerticalAlignment="Top" Source="Icons/icon-email.png" />
+                    <TextBlock x:Name="lblEmail" HorizontalAlignment="Left" Margin="42,242,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Foreground="#FF8A8A8A" />
+                    <TextBlock x:Name="lblEmailClick" HorizontalAlignment="Left" Margin="13,274,0,0" TextWrapping="Wrap" Text="rgn09003@student.mdh.se" VerticalAlignment="Top" FontSize="32" MouseLeftButtonDown="lblEmailClick_MouseLeftButtonDown"/>
 
-                    <Image Height="23" Width="23" HorizontalAlignment="Left" Margin="13,235,0,0" Name="imgPhone" Stretch="Fill" VerticalAlignment="Top" Source="Icons/icon-telephone.png" />
-                    <TextBlock x:Name="lblPhone" HorizontalAlignment="Left" Margin="42,230,0,0" TextWrapping="Wrap" Text="Telephone" VerticalAlignment="Top" Foreground="#FF8A8A8A" />
-                    <TextBlock x:Name="lblPhoneClick" HorizontalAlignment="Left" Margin="13,262,0,0" TextWrapping="Wrap" Text="0723065596" VerticalAlignment="Top" FontSize="32" MouseLeftButtonUp="lblPhoneClick_MouseLeftButtonUp"/>
+                    <Image Height="23" Width="23" HorizontalAlignment="Left" Margin="13,357,0,0" Name="imgPhone" Stretch="Fill" VerticalAlignment="Top" Source="Icons/icon-telephone.png" />
+                    <TextBlock x:Name="lblPhone" HorizontalAlignment="Left" Margin="42,352,0,0" TextWrapping="Wrap" Text="Telephone" VerticalAlignment="Top" Foreground="#FF8A8A8A" />
+                    <TextBlock x:Name="lblPhoneClick" HorizontalAlignment="Left" Margin="13,384,0,0" TextWrapping="Wrap" Text="0723065596" VerticalAlignment="Top" FontSize="32" MouseLeftButtonUp="lblPhoneClick_MouseLeftButtonUp"/>
 
-                    <Image Height="23" Width="23" HorizontalAlignment="Left" Margin="13,345,0,0" Name="imgLocation" Stretch="Fill" VerticalAlignment="Top" Source="Icons/icon-location.png" />
-                    <TextBlock x:Name="lblLocatio" HorizontalAlignment="Left" Margin="42,340,0,0" TextWrapping="Wrap" Text="Location" VerticalAlignment="Top" Foreground="#FF8A8A8A" />
-                    <TextBlock x:Name="lblLocationClick" HorizontalAlignment="Left" Margin="13,367,0,0" TextWrapping="Wrap" Text="Control Room 1A" VerticalAlignment="Top" FontSize="32" MouseLeftButtonDown="lblLocationClick_MouseLeftButtonDown"/>
+                    <Image Height="23" Width="23" HorizontalAlignment="Left" Margin="13,467,0,0" Name="imgLocation" Stretch="Fill" VerticalAlignment="Top" Source="Icons/icon-location.png" />
+                    <TextBlock x:Name="lblLocatio" HorizontalAlignment="Left" Margin="42,462,0,0" TextWrapping="Wrap" Text="Location" VerticalAlignment="Top" Foreground="#FF8A8A8A" />
+                    <TextBlock x:Name="lblLocationClick" HorizontalAlignment="Left" Margin="13,489,0,0" TextWrapping="Wrap" Text="Control Room 1A" VerticalAlignment="Top" FontSize="32" MouseLeftButtonDown="lblLocationClick_MouseLeftButtonDown"/>
+                    <Image x:Name="imgAvatar" HorizontalAlignment="Left" Height="159" Margin="13,-17,0,0" VerticalAlignment="Top" Width="135"/>
                 </Grid>
             </controls:PivotItem>
 
-            <controls:PivotItem Header="Activity">
+            <controls:PivotItem Header="Activity" x:Name="pivotActivity">
                 <Grid HorizontalAlignment="Left" Height="607" VerticalAlignment="Top" Width="456">
                     <ListBox x:Name="lstbActivities" HorizontalAlignment="Left" Height="607" VerticalAlignment="Top" Width="456"/>
 
                 </Grid>
             </controls:PivotItem>
         </controls:Pivot>
-       </Grid>
+    </Grid>
 
 </phone:PhoneApplicationPage>

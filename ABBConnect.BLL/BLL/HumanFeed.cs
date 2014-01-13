@@ -31,7 +31,7 @@ namespace BLL
             this.owner = owner;
             this.owner.ID = res.UserId;
             
-            mediaFilePath = "";
+            mediaFilePath = res.FilePath;
 
         }
 

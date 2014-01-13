@@ -113,5 +113,18 @@ namespace BLL
         {
             get { return usersOnFilter;}
         }
+
+        private string categoryName;
+        public string CategoryName
+        {
+            get
+            {
+                return categoryName;
+            }
+            set
+            {
+                categoryName = value;
+            }
+        }
     }
 }

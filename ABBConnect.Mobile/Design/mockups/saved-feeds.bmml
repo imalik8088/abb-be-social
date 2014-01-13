@@ -1,0 +1,31 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="648" measuredH="593" mockupW="282" mockupH="573">
+  <controls>
+    <control controlID="68" controlTypeID="__group__" x="366" y="20" w="282" h="573" measuredW="282" measuredH="573" zOrder="0" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::iPhone" x="0" y="0" w="-1" h="-1" measuredW="282" measuredH="573" zOrder="0" locked="false" isInGroup="68">
+          <controlProperties>
+            <bgPattern>allWhite</bgPattern>
+            <model>IPhone5</model>
+          </controlProperties>
+        </control>
+        <control controlID="23" controlTypeID="com.balsamiq.mockups::IconLabel" x="37" y="109" w="-1" h="-1" measuredW="145" measuredH="21" zOrder="1" locked="false" isInGroup="68">
+          <controlProperties>
+            <bold>true</bold>
+            <href>menu%26bm%3Bmenu.bmml%26bm%3Bmenu.bmml%26bm%3Bmenu.bmml</href>
+            <icon>HLinesIcon%7Cxsmall</icon>
+            <labelPosition>right</labelPosition>
+            <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2237%2C109%2C182%2C130%22%20href%3D%22menu.bmml%22%20alt%3D%22menu%22%20id%3D%2223%22/%3E</map>
+            <text>%20%20%20%20%20%20%20%20%20%20%20%20%20saved%20feeds</text>
+          </controlProperties>
+        </control>
+        <control controlID="33" controlTypeID="com.balsamiq.mockups::iPhoneMenu" x="34" y="156" w="-1" h="-1" measuredW="215" measuredH="184" zOrder="2" locked="false" isInGroup="68">
+          <controlProperties>
+            <hrefs>new-query%26bm%3Bnew-query.bmml%26bm%3Bnew-query.bmml%26bm%3Bnew-query.bmml%2Clast-shift%26bm%3Blast-shift.bmml%26bm%3Blast-shift.bmml%26bm%3Blast-shift.bmml%2C%2C%2C%2C</hrefs>
+            <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2234%2C161%2C249%2C190%22%20href%3D%22new-query.bmml%22%20alt%3D%22new-query%22%20id%3D%2233%22/%3E%3Carea%20shape%3D%22rect%22%20coords%3D%2234%2C190%2C249%2C219%22%20href%3D%22last-shift.bmml%22%20alt%3D%22last-shift%22%20id%3D%2233%22/%3E</map>
+            <text>+%20Add%20a%20new%20query%2C%20%3E%0AShift%20B%20of%20section%20F%2C%20%28%3E%29%0AShift%20C%20of%20section%20A%2C%20%28%3E%29%0AShift%20A%20of%20section%20A%2C%20%28%3E%29%0AShift%20C%20of%20section%20D%2C%20%28%3E%29%0ASensor%20F%20of%20section%20E%2C%20%28%3E%29</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+  </controls>
+</mockup>

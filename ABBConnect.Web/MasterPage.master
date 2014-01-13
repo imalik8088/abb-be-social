@@ -38,33 +38,23 @@
                 <ul>
                     <li>
                         <a href="Home.aspx" data-original-title="">
-                            <span class="glyphicon glyphicon-envelope"></span>
+                            <span class="glyphicon glyphicon-phone"></span>
                         </a>
                     </li>
                     <li>
-                        <a href="Home.aspx" data-original-title="">
-                            <span class="glyphicon glyphicon-comment"></span>
+                        <a href="LastShift.aspx" data-original-title="">
+                            <span class="glyphicon glyphicon-retweet"></span>
                         </a>
-                    </li>
+                    </li>                   
                     <li>
-                        <a href="Home.aspx" data-original-title="">
+                        <a href="AllSensors.aspx" data-original-title="">
                             <span class="glyphicon glyphicon-flash"></span>
                         </a>
-                    </li>
-                    <li>
-                        <a href="Home.aspx" data-original-title="">
-                            <span class="glyphicon glyphicon-cog"></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="Home.aspx" data-original-title="">
-                            <span class="glyphicon glyphicon-cloud-upload"></span>
-                        </a>
-                    </li>
+                    </li>                  
                 </ul>
             </div>
-            <div class="search-container">
-                <input type="text" class="search-input" value="Search me..">
+            <div id="search-input-container" class="search-container">
+                <input id="search-input-bar" type="text" class="search-input" placeholder="Search users..."/>
                 <button data-original-title=""></button>
             </div>
             <div id="header-menu-blocks-right">
@@ -74,11 +64,18 @@
                             <span class="text-label">ABB Connect </span>
                         </a>
                     </li>
-                    <%--                    <li>
-                        <a href="Home.aspx" data-original-title="">
-                            <asp:Label ID="labelHuman" class="text-label" runat="server"></asp:Label>
-                        </a>
-                    </li>--%>
+                    <li>      
+                    <asp:Repeater id="Repeater1" runat="server">
+                        <ItemTemplate>                           
+                        <div class="name">
+                            <a href="userProfile.aspx?userId=<%# DataBinder.Eval(Container.DataItem,"ID")%>">
+                                <%# DataBinder.Eval(Container.DataItem, "FirstName") %>
+                                <%# DataBinder.Eval(Container.DataItem,"LastName")%>
+                            </a>
+                        </div>                                 
+    	                </ItemTemplate>
+                    </asp:Repeater>                     
+                    </li>
                     <li>
                         <a>
                             <span class="glyphicon glyphicon-lock" onclick="OnClickSignOut()"></span>
@@ -91,30 +88,20 @@
             <div id="main-navigation">
                 <ul>
                     <li>
-                        <a class="active" href="Home.aspx">
+                        <a href="Home.aspx" id="FeedsIcon">
                             <span class="glyphicon glyphicon-phone"></span>Feeds
                         </a>
                     </li>
                     <li>
-                        <a href="Home.aspx">
-                            <span class="glyphicon glyphicon-stats"></span>Stats
+                        <a href="AllSensors.aspx" id="AllSensorsIcon">
+                            <span class="glyphicon glyphicon-flash"></span>Sensors
                         </a>
                     </li>
                     <li>
-                        <a href="Home.aspx">
-                            <span class="glyphicon glyphicon-envelope"></span>Inbox
+                        <a href="LastShift.aspx" id="LastShiftIcon">
+                            <span class="glyphicon glyphicon-retweet"></span>Shift
                         </a>
-                    </li>
-                    <li>
-                        <a href="Home.aspx">
-                            <span class="glyphicon glyphicon-plus"></span>Publish
-                        </a>
-                    </li>
-                    <li>
-                        <a href="Home.aspx">
-                            <span class="glyphicon glyphicon-cog"></span>Settings
-                        </a>
-                    </li>
+                    </li>                  
                     <li>
                         <a>
                             <span class="glyphicon glyphicon-log-out" onclick="OnClickSignOut()"></span>Sign out

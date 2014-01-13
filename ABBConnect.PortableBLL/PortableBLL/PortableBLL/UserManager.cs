@@ -8,15 +8,29 @@ using System.Threading.Tasks;
 
 namespace PortableBLL
 {
+    /// <summary>
+    /// Class that allow to retrieve informations about users, distinguishing between human users and sensors
+    /// </summary>
     public class UserManager : IUserManager
     {
+        /// <summary>
+        /// attribute that allow to retrieve informations about human users and sensors
+        /// </summary>
         private UserData usrData;
 
+        /// <summary>
+        /// Constructor that instantiate the attribute of the class
+        /// </summary>
         public UserManager()
         {
             usrData = new UserData();
         }
 
+        /// <summary>
+        /// This method take the information of a specific sensor
+        /// </summary>
+        /// <param name="sensorID">integer that identify the sensor</param>
+        /// <returns>all the informations about a sensor</returns>
         public async Task<Sensor> LoadSensorInformation(int sensorID)
         {
             GetSensorInformation_Result tempSensor = await usrData.GetSensorInformation(sensorID).ConfigureAwait(false);
@@ -24,6 +38,13 @@ namespace PortableBLL
             return responseSensor;
         }
 
+        /// <summary>
+        /// This method take the historical information of a specific sensor in a specific period
+        /// </summary>
+        /// <param name="sensorID">integer that identify the sensor</param>
+        /// <param name="startingTime">starting time of the requested history</param>
+        /// <param name="endingTime">ending time of the requested history</param>
+        /// <returns></returns>
         public async Task<SensorHistoryData> LoadHistoryValuesBySensor(int sensorID, DateTime startingTime, DateTime endingTime)
         {
             List<GetHistoricalDataFromSensor_Result> listHistData = await usrData.GetHistoricalDataFromSensor(sensorID, startingTime, endingTime);
@@ -52,27 +73,53 @@ namespace PortableBLL
             return senHistData;
         }
 
+        /// <summary>
+        /// This method get the last value of a specific sensor
+        /// </summary>
+        /// <param name="sensorID">integer that identify the sensor</param>
+        /// <returns>integer that rappresent the last sensor value</returns>
         public async Task<int> LoadCurrentValuesBySensor(int sensorID)
         {
             return await usrData.GetLastSensorValue(sensorID).ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// This method allow to log into the system, if the credential of a registered user are right
+        /// </summary>
+        /// <param name="userName">string that rappresent the username of the user</param>
+        /// <param name="password">string that rappresent the password of the user</param>
+        /// <returns>A boolean value that comunicate if the login succeded or fail</returns>
         public async Task<bool> Login(string userName, string password)
         {
             return await usrData.LogIn(userName, password).ConfigureAwait(false); ;
 
         }
 
+        /// <summary>
+        /// This method take the information of a specific user 
+        /// </summary>
+        /// <param name="humandId">integer that identify the user</param>
+        /// <returns>all the informations about a user</returns>
         public async Task<Human> LoadHumanInformation(int humanId)
         {
             return new Human(await usrData.GetHumanInformation(humanId).ConfigureAwait(false), humanId);
         }
 
+        /// <summary>
+        /// This method take the information of a specific user 
+        /// </summary>
+        /// <param name="username">string that rappresent the username used by the user</param>
+        /// <returns>all the informations about a user</returns>
         public async Task<Human> LoadHumanInformationByUsername(string username)
         {
             return new Human(await usrData.GetHumanInformationByUserName(username).ConfigureAwait(false));
         }
 
+        /// <summary>
+        /// This method search all the users with the name given in input
+        /// </summary>
+        /// <param name="query">name of the user that should be searched</param>
+        /// <returns>list of users with that name</returns>
         public async Task<List<User>> SearchUserByName(string query)
         {
             List<GetUsersByName_Result> list = await usrData.SearchUsersByName(query).ConfigureAwait(false);
@@ -86,13 +133,17 @@ namespace PortableBLL
                 }
                 else
                 {
-                    retList.Add(await LoadSensorInformation(res.Id));
+                    retList.Add(new Sensor(res));
                 }
 
             return retList;
         }
 
 
+        /// <summary>
+        /// This method rietreve all the human users 
+        /// </summary>
+        /// <returns>a list with all the human users</returns>
         public async Task<List<Human>> GetAllHumanUsers()
         {
             List<GetUsersByName_Result> list = await usrData.SearchUsersByName("").ConfigureAwait(false);
@@ -108,6 +159,10 @@ namespace PortableBLL
             return retList;
         }
 
+        /// <summary>
+        /// This method rietreve all the sensors
+        /// </summary>
+        /// <returns>a list with all the sensors</returns>
         public async Task<List<Sensor>> GetAllSensors()
         {
             List<GetUsersByName_Result> list = await usrData.SearchUsersByName("").ConfigureAwait(false);
@@ -160,35 +215,23 @@ namespace PortableBLL
             return userList;
         }
 
-
-        public Task<int> AddFilter(int userId, Filter newFilter)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> AddUserToFilter(int userId, int filterId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> FollowSensor(int humanUserId, int sensorUserId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> UnfollowSensor(int humanUserId, int sensorUserId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<int>> GetFollowedSensors(int humanUserId)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<List<Activity>> GetUserActivity(int userId)
         {
             List<GetUserActivity_Result> list = await usrData.GetUserActivity(userId).ConfigureAwait(false);
+
+            List<Activity> activityList = new List<Activity>();
+
+            foreach (GetUserActivity_Result entityActivity in list)
+            {
+                activityList.Add(new Activity(entityActivity));
+            }
+
+            return activityList;
+        }
+
+        public async Task<List<Activity>> GetUserActivity(int userId, int activitiesNumber, int startId)
+        {
+            List<GetUserActivity_Result> list = await usrData.GetUserActivityFromId(userId, activitiesNumber, startId).ConfigureAwait(false);
 
             List<Activity> activityList = new List<Activity>();
 

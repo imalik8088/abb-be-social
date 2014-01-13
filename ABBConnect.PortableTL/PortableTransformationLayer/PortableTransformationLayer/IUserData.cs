@@ -24,6 +24,6 @@ namespace PortableTransformationLayer
         Task<bool> UnfollowSensor(int humanUserId, int sensorUserId);
         Task<List<int>> GetFollowedSensors(int humanUserId);
         Task<List<GetUserActivity_Result>> GetUserActivity(int userId);
-
+        Task<List<GetUserActivity_Result>> GetUserActivityFromId(int userId, int numActivities, int startId);
     }
 }

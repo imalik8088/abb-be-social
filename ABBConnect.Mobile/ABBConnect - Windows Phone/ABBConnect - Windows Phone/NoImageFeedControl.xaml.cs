@@ -39,6 +39,9 @@ namespace ABBConnect___Windows_Phone
         public NoImageFeedControl(PortableBLL.HumanFeed hf)
         {
             InitializeComponent();
+
+
+            //set the content
             SetAuthor(hf.Owner);
             SetContent(hf.Content);
             SetNumberOfTags(hf.Tags.Count);
@@ -57,7 +60,7 @@ namespace ABBConnect___Windows_Phone
         /// <param name="e"></param>
         private void Author_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-           
+            //redirect to the profile page
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/ProfileFeed.xaml?userID=" + Author.Tag, UriKind.Relative));
 
         }
@@ -69,10 +72,24 @@ namespace ABBConnect___Windows_Phone
         /// <param name="e"></param>
         private void Content_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            //set this feed to the current feed and redirect to its feed page
             App.HFeed = hFeed;   
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/HumanFeed.xaml", UriKind.Relative));
         }
 
+        /// <summary>
+        ///update the feed, in sense of number of comments and how long it has passed since it was published
+        /// </summary>
+        /// <param name="comments"></param>
+        internal void UpdateFeed(List<Comment> comments)
+        {
+            //update the feed comments and time
+            hFeed.Comments = comments;
+            SetNumberOfComments(comments.Count);
+            SetTimeStamp(hFeed.TimeStamp);
+        }
+
+        #region Setters
         /// <summary>
         /// sets the author name
         /// </summary>
@@ -110,16 +127,6 @@ namespace ABBConnect___Windows_Phone
             Tags.Text = p.ToString();
         }
  
-        /// <summary>
-        ///update the feed, in sense of number of comments and how long it has passed since it was published
-        /// </summary>
-        /// <param name="comments"></param>
-        internal void UpdateFeed(List<Comment> comments)
-        {
-            hFeed.Comments = comments;
-            SetNumberOfComments(comments.Count);
-            SetTimeStamp(hFeed.TimeStamp);
-        }
 
         /// <summary>
         /// Sets the number of comments of the feed
@@ -156,5 +163,6 @@ namespace ABBConnect___Windows_Phone
         {
             Location.Text = p;
         }
+        #endregion
     }
 }

@@ -13,5 +13,12 @@ namespace PortableTransformationLayer
         {
             get { return url; }
         }
+
+        private readonly string urlStream = "http://83.255.84.243:85/Service/ABBConnectStreamWCF.svc/";
+
+        public string UrlStream
+        {
+            get { return urlStream; }
+        }
     }
 }

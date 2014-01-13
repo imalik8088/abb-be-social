@@ -3,10 +3,12 @@
 <%@ Register Src="controls/FeedPage.ascx" TagName="FeedPage" TagPrefix="abbConnect" %>
 <%@ Register Src="controls/FeedComments.ascx" TagName="FeedComments" TagPrefix="abbConnect" %>
 <%@ Register Src="controls/RealTimeSensorFeedPage.ascx" TagName="RealTimeSensorFeedPage" TagPrefix="abbConnect" %>
+<%@ Register Src="controls/RealTimeSensorPage.ascx" TagName="RealTimeSensorPage" TagPrefix="abbConnect" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <script>$("#FeedsIcon").addClass("active"); type="text/javascript"</script>
     <div class="row">
         <div class="col-md-6">
             <div class="feed-header">
@@ -22,11 +24,28 @@
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Work post </a></li>
-                                <li><a href="#">Sticky note</a></li>
-                                <li><a href="#">Vacation post</a></li>
+<%--                                <li>
+                                    <a href="#" data-stop-propagation="true">
+                                        <input id="chbWorkPost" type="checkbox" class="messagetype" data-label="Work post" />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" data-stop-propagation="true">
+                                        <input id="chbStickyNote" type="checkbox" class="messagetype" data-label="Sticky note" />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" data-stop-propagation="true">
+                                        <input id="chbVacationPost" type="checkbox" class="messagetype" data-label="Vacation post" />
+                                    </a>
+                                </li>--%>
                                 <li class="divider"></li>
                                 <li><a href="#" data-toggle="modal" data-target="#modalHumanFeedsAddDateFilter">Date <span id="humanFeedsDateFilterIsActive" class="label label-success dont-show">ACTIVE</span></a>
+                                </li>
+                                <li class="divider"></li>
+                                <li><a href="#" onclick="AjaxLoadUserFilter()">Load</a>
+                                </li>
+                                <li><a href="#" onclick="AjaxSaveUserFilter()">Save</a>
                                 </li>
                             </ul>
                         </div>
@@ -50,6 +69,16 @@
             <div id="loading_throbber_human_feeds" class="loading-throbber" data-container="feedsContainer"></div>
         </div>
         <div class="col-md-6">
+            <div class="feed-header">
+                <div class="form-inline">
+                    <div class="form-group">
+                        <h3><span class="glyphicon glyphicon-flash"></span>Followed sensors <small>User followed sensors</small></h3>
+                    </div>
+                </div>
+            </div>
+            <div id="userFollowedSensorsContainer">
+                <abbConnect:RealTimeSensorPage ID="UserFollowedRealTimeSensorPage" runat="server" />
+            </div>
             <div class="feed-header">
                 <div class="form-inline">
                     <div class="form-group">
@@ -82,7 +111,7 @@
                                     <td>
                                         <div id="datepickerStart">
                                             <div class="input-group date">
-                                                <input type="text" class="form-control" />
+                                                <input id="inputStartDate" type="text" class="form-control" />
                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                             </div>
                                         </div>
@@ -95,7 +124,7 @@
                                     <td>
                                         <div id="datepickerEnd">
                                             <div class="input-group date">
-                                                <input type="text" class="form-control">
+                                                <input id="inputEndDate" type="text" class="form-control">
                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                             </div>
                                         </div>
@@ -129,7 +158,7 @@
                         <hr>
                         <!-- Textbox -->
                         <h5>Please insert new note text:</h5>
-                        <textarea id="textareaNote" class="input col-md-12" placeholder="Insert your note text here..." rows="5"></textarea>
+                        <textarea id="textareaNote" class="input col-md-12 textarea-post-modal" placeholder="Insert your note text here..." rows="5"></textarea>
                         <br />
                         <!--Tagging-->
                         <h5>Tag users:</h5>
@@ -162,43 +191,30 @@
                         <br />
                         <!-- Textbox -->
                         <h5>Please insert picture description:</h5>
-                        <textarea id="textAreaPicture" class="input col-md-12" placeholder="Insert your note text here..." rows="5"></textarea>
+                        <textarea id="textAreaPicture" class="input col-md-12 textarea-post-modal" placeholder="Insert your note text here..." rows="5"></textarea>
                         <br />
                         <!-- File upload-->
                         <h5>Upload the file:</h5>
+                        <div>
+                            <input id="filePicture" type="file" style="display: none" />
+                            <div class="input-group">
+                                <input id="mockFilePicture" class="form-control" type="text" disabled="disabled" style="cursor: default;" />
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default" onclick="$('input[id=filePicture]').click();">Browse</button>
+                                </div>
+                            </div>
 
-                        <input id="filePicture" type="file"/>
+                            <img id="modalImgFile" src="" hidden="hidden" />
 
-<%--                        <input id="filePicture" type="file" style="display: none" />
-                        <div class="input-append">
-                            <input id="inputPicturePath" class="input-large" type="text" style="width: 85%;" />
-                            <a class="btn" onclick="$('input[id=filePicture]').click();">Browse</a>
-                        </div>--%>
+                            <div id="fileProgressDiv" class="progress" style="display: none;">
+                                <div id="fileProgressBar" class="progress-bar progress-bar-success" role="progressbar" style="width: 0%">
+                                </div>
+                            </div>
+                            <div id="fileAlertDiv" class="alert alert-danger" style="display: none;">
+                            </div>
 
-                        <%--<input type='file' class="input-large" id="asd" />--%>
-                        <img id="modalImgFile" src="" hidden="hidden"/>
-                        <%--<div id="base"></div>--%>
-
-                        <script type="text/javascript">
-                            //$('input[id=filePicture]').change(function () {
-                            //    $('#inputPicturePath').val($(this).val());
-                            //});
-
-                            function readImage(input) {
-                                if (input.files && input.files[0]) {
-                                    var FR = new FileReader();
-                                    FR.onload = function (e) {
-                                        $('#modalImgFile').attr("src", e.target.result);
-                                        //$('#base').text(e.target.result);
-                                    };
-                                    FR.readAsDataURL(input.files[0]);
-                                }
-                            }
-
-                            $("#filePicture").change(function () {
-                                readImage(this);
-                            });
-                        </script>
+                            <button type="button" id="fileUploadCancelButton" class="btn btn-default" style="display: none;">Cancel read</button>
+                        </div>
                         <!--Tagging-->
                         <h5>Tag users:</h5>
                         <div id="input-tags-div-picture">
@@ -207,7 +223,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="AjaxPublishHumanPictureFeed()">Post new picture note</button>
+                        <button id="postPictureModalButton" type="button" class="btn btn-primary" data-dismiss="modal" onclick="AjaxPublishHumanPictureFeed()">Post new picture note</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->

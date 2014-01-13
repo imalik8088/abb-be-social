@@ -13,8 +13,10 @@ namespace PortableTransformationLayer
         Task<List<GetFeedTags_Result>> GetFeedTags(int feedId);
         Task<bool> PublishComment(int feedId, string username, string comment);
         Task<bool> AddFeedTag(int feedId, string username);
-        Task<int> PublishFeed(int usrId, string text, string filepath, int prioId);
-        Task<List<GetLatestXFeeds_Result>> GetFeedsByFilter(int userId, string location, DateTime startingTime, DateTime endingTime, string feedType, int startId, int numFeeds);
+        Task<int> PublishFeed(int usrId, string text, string filepath, int prioId, byte[] image);
+        Task<int> PublishTestFeed(int usrId, string text, byte[] fileArray, int prioId);
+        Task<List<GetLatestXFeeds_Result>> GetFeedsByFilter(int userId, string location, DateTime startingTime, DateTime endingTime, string feedType, string categoryName, int startId, int numFeeds);
         Task<GetLatestXFeeds_Result> GetFeedByFeedId(int feedId);
+        Task<List<GetLatestXFeeds_Result>> GetFeedsFromLastShift(int numFeeds);
     }
 }

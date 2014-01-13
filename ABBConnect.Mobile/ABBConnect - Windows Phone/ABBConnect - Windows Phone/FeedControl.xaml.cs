@@ -26,6 +26,8 @@ namespace ABBConnect___Windows_Phone
     {
         private PortableBLL.HumanFeed hFeed;
 
+        #region Constructors
+
         /// <summary>
         /// Default constructor
         /// </summary>
@@ -63,7 +65,7 @@ namespace ABBConnect___Windows_Phone
         public FeedControl(PortableBLL.HumanFeed hf)
         {
             InitializeComponent();
-            SetAuthor(hf.Owner.ID, hf.Owner.UserName);
+            SetAuthor(hf.Owner.ID, hf.Owner.FirstName + " " + hf.Owner.LastName);
             SetContent(hf.Content);
             SetNumberOfTags(hf.Tags.Count);
             SetNumberOfComments(hf.Comments.Count);
@@ -74,30 +76,17 @@ namespace ABBConnect___Windows_Phone
             hFeed = hf;
         }
 
+        #endregion
+
         /// <summary>
         /// update the number of comments regarding the feed
         /// </summary>
         /// <param name="comments"></param>
         internal void UpdateComments(List<PortableBLL.Comment> comments)
         {
+            //set the new comments
             hFeed.Comments = comments;
             SetNumberOfComments(comments.Count);
-        }
-
-        /// <summary>
-        /// Not in used ATM
-        /// </summary>
-        /// <param name="filePath"></param>
-        private void SetImage(string filePath)
-        {
-            /*
-            Byte[] imageBytes = Convert.FromBase64String(filePath);
-            MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
-            ms.Write(imageBytes, 0, imageBytes.Length);
-            BitmapImage bmp = new BitmapImage();
-            bmp.SetSource(ms);
-            imgImage.Source = bmp;
-             */
         }
 
         /// <summary>
@@ -107,6 +96,7 @@ namespace ABBConnect___Windows_Phone
         /// <param name="e"></param>
         private void Author_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            //redirect to the profile page
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/ProfileFeed.xaml?username=" + Author.Tag, UriKind.Relative));
 
         }
@@ -118,7 +108,41 @@ namespace ABBConnect___Windows_Phone
         /// <param name="e"></param>
         private void Content_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Feed.xaml", UriKind.Relative));
+            //redirect to the feed page
+            App.HFeed = hFeed;
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/HumanFeed.xaml", UriKind.Relative));
+        }
+
+        #region Setters
+
+        /// <summary>
+        /// Not in used ATM
+        /// </summary>
+        /// <param name="filePath"></param>
+        private void SetImage(string filePath)
+        {
+
+            try
+            {
+                string[] type = filePath.Split(',');
+                byte[] imageBytes = Convert.FromBase64String(type[1]);
+                MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
+                ms.Write(imageBytes, 0, imageBytes.Length);
+                BitmapImage bmp = new BitmapImage();
+
+                if (type[0].Contains("gif"))
+                {
+                    return;
+                }
+                bmp.SetSource(ms);
+                imgImage.Source = bmp;
+            }
+            catch (Exception ex)
+            {
+               //  MessageBox.Show(ex.Message);
+            }
+
+             
         }
 
         /// <summary>
@@ -138,7 +162,14 @@ namespace ABBConnect___Windows_Phone
         /// <param name="p"></param>
         internal void SetContent(string p)
         {
-            Text.Text = p;
+            if (p.Length > 80)
+            {
+                string tmp = p.Substring(0, 80);
+
+                Text.Text =  tmp.TrimEnd() + "...";
+            }
+            else
+                Text.Text = p;
         }
 
         /// <summary>
@@ -167,8 +198,10 @@ namespace ABBConnect___Windows_Phone
         {
             DateTime now = DateTime.Now;
 
+            //get the hours that has passed since the feed was posted
             double hours = (now - dateTime).TotalHours;
 
+            //check if it should be represented as min, hours or days
             if (hours < 1)
                 Timestamp.Text = Math.Round((now - dateTime).TotalMinutes).ToString() + "m";
             else if (hours > 24)
@@ -185,5 +218,9 @@ namespace ABBConnect___Windows_Phone
         {
             Location.Text = p;
         }
+
+        #endregion
+
+
     }
 }

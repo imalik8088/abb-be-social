@@ -25,6 +25,7 @@
   <Metadata>
     <MetadataFile FileName="ABBConnectWCF.disco" MetadataType="Disco" ID="c1ee6300-18d0-4391-9c46-e37526b8379b" SourceId="1" SourceUrl="http://83.255.84.243:85/ServiceJSON/ABBConnectWCF.svc?disco" />
     <MetadataFile FileName="ABBConnectWCF.wsdl" MetadataType="Wsdl" ID="926cf82c-343d-435c-b2bc-e7ab73449293" SourceId="1" SourceUrl="http://83.255.84.243:85/ServiceJSON/ABBConnectWCF.svc?wsdl" />
+    <MetadataFile FileName="ABBConnectWCF4.xsd" MetadataType="Schema" ID="23a3bccd-2b15-4ece-b0a9-97a60f678c31" SourceId="1" SourceUrl="http://83.255.84.243:85/ServiceJSON/ABBConnectWCF.svc?xsd=xsd4" />
     <MetadataFile FileName="ABBConnectWCF.xsd" MetadataType="Schema" ID="12729ef8-7df1-4a0e-b9c0-4adb8f001572" SourceId="1" SourceUrl="http://83.255.84.243:85/ServiceJSON/ABBConnectWCF.svc?xsd=xsd1" />
     <MetadataFile FileName="ABBConnectWCF1.xsd" MetadataType="Schema" ID="aa798985-0196-4f91-815b-8a475f4ccd4a" SourceId="1" SourceUrl="http://83.255.84.243:85/ServiceJSON/ABBConnectWCF.svc?xsd=xsd0" />
     <MetadataFile FileName="ABBConnectWCF2.xsd" MetadataType="Schema" ID="e211fa67-1e30-46af-a247-a4d5506795d0" SourceId="1" SourceUrl="http://83.255.84.243:85/ServiceJSON/ABBConnectWCF.svc?xsd=xsd3" />

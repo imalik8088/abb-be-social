@@ -164,27 +164,61 @@ namespace BLL
 
         public int AddFilter(int userId, Filter newFilter)
         {
-            throw new NotImplementedException();
+            if (userId < 0 || newFilter.Equals(null))
+            {
+                return -1;
+            }
+            return usrData.SaveFilter(userId, newFilter.Name, newFilter.StartDate, newFilter.EndDate, newFilter.Location, newFilter.TypeOfFeed.ToString());
         }
 
         public bool AddUserToFilter(int userId, int filterId)
         {
-            throw new NotImplementedException();
+            if (userId < 0 || filterId < 0)
+            {
+                return false;
+            }
+
+            return usrData.AddFilterUser(userId, filterId);
         }
 
         public bool FollowSensor(int humanUserId, int sensorUserId)
         {
-            throw new NotImplementedException();
+            if (humanUserId < 0 || sensorUserId < 0)
+            {
+                return false;
+            }
+
+            return usrData.FollowSensor(humanUserId, sensorUserId);
         }
 
         public bool UnfollowSensor(int humanUserId, int sensorUserId)
         {
-            throw new NotImplementedException();
+            if (humanUserId < 0 || sensorUserId < 0)
+            {
+                return false;
+            }
+
+            return usrData.UnfollowSensor(humanUserId, sensorUserId);
         }
 
-        public List<int> GetFollowedSensors(int humanUserId)
+        public List<Sensor> GetFollowedSensors(int humanUserId)
         {
-            throw new NotImplementedException();
+            if (humanUserId < 0)
+            {
+                return null;
+            }
+
+            List<Sensor> sensorList = new List<Sensor>();
+
+            List<int> sensorIds = usrData.GetFollowedSensors(humanUserId);
+
+            foreach (int i in sensorIds)
+            {
+                Sensor tempSensor = this.LoadSensorInformation(i);
+                sensorList.Add(tempSensor);
+            }
+
+            return sensorList;
         }
 
         public  List<Activity> GetUserActivity(int userId)
@@ -199,6 +233,30 @@ namespace BLL
             }
 
             return activityList;
+        }
+
+        public List<Activity> GetUserActivity(int userId, int activitiesNumber, int startId)
+        {
+            List<GetUserActivity_Result> list = usrData.GetUserActivityFromId(userId, activitiesNumber, startId);
+
+            List<Activity> activityList = new List<Activity>();
+
+            foreach (GetUserActivity_Result entityActivity in list)
+            {
+                activityList.Add(new Activity(entityActivity));
+            }
+
+            return activityList;
+        }
+
+        public bool AddUserAvatar(int userId, string image)
+        {
+            if (userId < 0)
+            {
+                return false;
+            }
+
+            return usrData.AddUserAvatar(userId, image);
         }
     }
 }

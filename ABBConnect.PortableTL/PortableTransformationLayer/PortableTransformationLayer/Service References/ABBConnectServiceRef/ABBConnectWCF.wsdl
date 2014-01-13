@@ -4,8 +4,9 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://83.255.84.243:85/ServiceJSON/ABBConnectWCF.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://83.255.84.243:85/ServiceJSON/ABBConnectWCF.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://83.255.84.243:85/ServiceJSON/ABBConnectWCF.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ABBJSONService" />
-      <xsd:import schemaLocation="http://83.255.84.243:85/ServiceJSON/ABBConnectWCF.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://83.255.84.243:85/ServiceJSON/ABBConnectWCF.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/DAL" />
+      <xsd:import schemaLocation="http://83.255.84.243:85/ServiceJSON/ABBConnectWCF.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/ABBJSONService" />
+      <xsd:import schemaLocation="http://83.255.84.243:85/ServiceJSON/ABBConnectWCF.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IABBConnectWCF_LogIn_InputMessage">
@@ -37,6 +38,12 @@
   </wsdl:message>
   <wsdl:message name="IABBConnectWCF_GetLatestXFeedsFromId_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetLatestXFeedsFromIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_PostTestFeed_InputMessage">
+    <wsdl:part name="parameters" element="tns:PostTestFeed" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_PostTestFeed_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PostTestFeedResponse" />
   </wsdl:message>
   <wsdl:message name="IABBConnectWCF_PostFeed_InputMessage">
     <wsdl:part name="parameters" element="tns:PostFeed" />
@@ -218,6 +225,18 @@
   <wsdl:message name="IABBConnectWCF_GetFeedByFeedId_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetFeedByFeedIdResponse" />
   </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetFeedsFromLastShift_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFeedsFromLastShift" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetFeedsFromLastShift_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFeedsFromLastShiftResponse" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetUserActivityFromId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserActivityFromId" />
+  </wsdl:message>
+  <wsdl:message name="IABBConnectWCF_GetUserActivityFromId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserActivityFromIdResponse" />
+  </wsdl:message>
   <wsdl:portType name="IABBConnectWCF">
     <wsdl:operation name="LogIn">
       <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/LogIn" message="tns:IABBConnectWCF_LogIn_InputMessage" />
@@ -238,6 +257,10 @@
     <wsdl:operation name="GetLatestXFeedsFromId">
       <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/GetLatestXFeedsFromId" message="tns:IABBConnectWCF_GetLatestXFeedsFromId_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/GetLatestXFeedsFromIdResponse" message="tns:IABBConnectWCF_GetLatestXFeedsFromId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PostTestFeed">
+      <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/PostTestFeed" message="tns:IABBConnectWCF_PostTestFeed_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/PostTestFeedResponse" message="tns:IABBConnectWCF_PostTestFeed_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="PostFeed">
       <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/PostFeed" message="tns:IABBConnectWCF_PostFeed_InputMessage" />
@@ -358,6 +381,14 @@
     <wsdl:operation name="GetFeedByFeedId">
       <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/GetFeedByFeedId" message="tns:IABBConnectWCF_GetFeedByFeedId_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/GetFeedByFeedIdResponse" message="tns:IABBConnectWCF_GetFeedByFeedId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFeedsFromLastShift">
+      <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/GetFeedsFromLastShift" message="tns:IABBConnectWCF_GetFeedsFromLastShift_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/GetFeedsFromLastShiftResponse" message="tns:IABBConnectWCF_GetFeedsFromLastShift_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserActivityFromId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IABBConnectWCF/GetUserActivityFromId" message="tns:IABBConnectWCF_GetUserActivityFromId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IABBConnectWCF/GetUserActivityFromIdResponse" message="tns:IABBConnectWCF_GetUserActivityFromId_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:service name="ABBConnectWCF" />

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,12 +16,56 @@ public partial class MasterPage : System.Web.UI.MasterPage
     }
     protected  void Page_Load(object sender, EventArgs e)
     {
-    //    UserManager userManager = new UserManager();
-    //    Human human = new Human();
-    //    if (Session["humanID"] != null)
-    //    {
-    //        human = await userManager.LoadHumanInformation(int.Parse(HttpContext.Current.Session["humanID"].ToString()));
-    //        labelHuman.Text = human.FirstName + " " + human.LastName;
-    //    }
+        UserManager userManager = new UserManager();
+        Human human = new Human();
+        ArrayList values = new ArrayList();
+        
+        //If a login is present, display the name and surname of the user
+        if (Session["humanID"] != null)
+        {  
+            human = userManager.LoadHumanInformation(int.Parse(HttpContext.Current.Session["humanID"].ToString()));
+            values.Add(new LogedUserInfo(human.ID, human.FirstName, human.LastName));
+
+            Repeater1.DataSource = values;
+            Repeater1.DataBind();
+        }
+    }
+}
+
+public class LogedUserInfo
+{
+    private int id;
+    private string firstName;
+    private string lastName;
+
+    public LogedUserInfo(int id, string name, string surname)
+    {
+        this.id = id;
+        this.firstName = name;
+        this.lastName = surname;
+    }
+
+    public int ID
+    {
+        get
+        {
+            return id;
+        }
+    }
+
+    public string FirstName
+    {
+        get
+        {
+            return firstName;
+        }
+    }
+
+    public string LastName
+    {
+        get
+        {
+            return lastName;
+        }
     }
 }

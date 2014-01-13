@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="BLL.Activity">
+    <Position X="0.5" Y="9" Width="3.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAgBAACIACAAgAAgABAAAIAQAACAAAAAA=</HashCode>
+      <FileName>Activity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.Category">
+    <Position X="7" Y="9" Width="3.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAQAAAAEAAAAIAAAACAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Category.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.Comment">
+    <Position X="0.5" Y="12.75" Width="3.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AIACAACAAgAAgAAAAIAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Comment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.CommonDataManager" BaseTypeListCollapsed="true">
+    <Position X="32.25" Y="5.5" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>CommonDataManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BLL.Feed">
+    <Position X="11.75" Y="0.5" Width="5.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AJAiAACAAgAAgAAAAIIAAAACAAAAAEAAAABIAAAQKAA=</HashCode>
+      <FileName>Feed.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.FeedManager" BaseTypeListCollapsed="true">
+    <Position X="36.5" Y="5.75" Width="10.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>CAEAAAAQAACAEAAAQCAAEAgAAAoCAAAAAIAAAAAAAgM=</HashCode>
+      <FileName>FeedManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BLL.FeedType">
+    <Position X="4.5" Y="9" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="BLL.FeedType.FeedSource" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>FeedType.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FeedType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.Filter">
+    <Position X="14.5" Y="9" Width="4.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAQgAAAAKIAKAQiACgUAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Filter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.Human">
+    <Position X="0.5" Y="5" Width="4.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAACRAAAAkAAAAQAAAAEAAAAAAAAAACAAAAAg=</HashCode>
+      <FileName>Human.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.HumanFeed">
+    <Position X="9.75" Y="5" Width="6.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>HumanFeed.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.Sensor">
+    <Position X="5.5" Y="5" Width="3.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <InheritanceLine Type="BLL.User" ManuallyRouted="true">
+      <Path>
+        <Point X="4.875" Y="3.084" />
+        <Point X="4.875" Y="4.573" />
+        <Point X="7.375" Y="4.573" />
+        <Point X="7.375" Y="5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgQAAAAEAAAAQAAgAEAAIAAAAAACA=</HashCode>
+      <FileName>Sensor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.SensorFeed">
+    <Position X="16.75" Y="5" Width="6.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SensorFeed.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.SensorHistoryData">
+    <Position X="19.5" Y="9" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAACAEAAAwAAAAEAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SensorHistoryData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.SensorVTData">
+    <Position X="11" Y="9" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAAAAAACAAAgAgAAAAAA=</HashCode>
+      <FileName>SensorVTData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.User">
+    <Position X="2.75" Y="0.5" Width="4.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAIYAAAEGAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.UserManager" BaseTypeListCollapsed="true">
+    <Position X="24.75" Y="5.5" Width="6.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAbBAAAgQIEIAAACIQCEAACAAAQAAgBAAA=</HashCode>
+      <FileName>UserManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="BLL.ICommonDataManager">
+    <Position X="32" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ICommonDataManager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BLL.IUserManager">
+    <Position X="24.75" Y="0.5" Width="6.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAbBAAAgQIEIAAACIQCEAACAAAQAAgAAAA=</HashCode>
+      <FileName>IUserManager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BLL.IFeedManager">
+    <Position X="36.5" Y="0.5" Width="6.75" />
+    <TypeIdentifier>
+      <HashCode>CAEAAAAAAACAEAAAQCAAEAgAAAoCAAAAAAAAAAAAAgM=</HashCode>
+      <FileName>lFeedManager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -44,7 +44,6 @@
     <Compile Include="Human.cs" />
     <Compile Include="HumanFeed.cs" />
     <Compile Include="ICommonDataManager.cs" />
-    <Compile Include="ISyncFeedManager.cs" />
     <Compile Include="IUserManager.cs" />
     <Compile Include="lFeedManager.cs" />
     <Compile Include="Program.cs" />
@@ -82,14 +81,31 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\PortableTransformationLayer.ABBConnectServiceRef.GetAllHumanFeedsByFilter_Result1.datasource" />
+    <None Include="Properties\DataSources\PortableTransformationLayer.ABBConnectServiceRef.GetAllHumanFeeds_Result1.datasource" />
+    <None Include="Properties\DataSources\PortableTransformationLayer.ABBConnectServiceRef.GetAllSensorFeedsByFilter_Result1.datasource" />
+    <None Include="Properties\DataSources\PortableTransformationLayer.ABBConnectServiceRef.GetAllSensorFeeds_Result1.datasource" />
+    <None Include="Properties\DataSources\PortableTransformationLayer.ABBConnectServiceRef.GetAllSensors_Result1.datasource" />
     <None Include="Properties\DataSources\PortableTransformationLayer.ABBConnectServiceRef.GetFeedComments_Result.datasource" />
+    <None Include="Properties\DataSources\PortableTransformationLayer.ABBConnectServiceRef.GetFeedsByFilter_Result1.datasource" />
     <None Include="Properties\DataSources\PortableTransformationLayer.ABBConnectServiceRef.GetFeedTags_Result.datasource" />
+    <None Include="Properties\DataSources\PortableTransformationLayer.ABBConnectServiceRef.GetHistoricalDataFromSensor_Result1.datasource" />
     <None Include="Properties\DataSources\PortableTransformationLayer.ABBConnectServiceRef.GetHumanInformationByUsername_Result.datasource" />
     <None Include="Properties\DataSources\PortableTransformationLayer.ABBConnectServiceRef.GetHumanInformation_Result.datasource" />
+    <None Include="Properties\DataSources\PortableTransformationLayer.ABBConnectServiceRef.GetLatestFeedsByFilter_Result1.datasource" />
     <None Include="Properties\DataSources\PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeedsFromId_Result.datasource" />
     <None Include="Properties\DataSources\PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result.datasource" />
+    <None Include="Properties\DataSources\PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result11.datasource" />
     <None Include="Properties\DataSources\PortableTransformationLayer.ABBConnectServiceRef.GetPriorityCategories_Result.datasource" />
+    <None Include="Properties\DataSources\PortableTransformationLayer.ABBConnectServiceRef.GetSensorInformation_Result1.datasource" />
+    <None Include="Properties\DataSources\PortableTransformationLayer.ABBConnectServiceRef.GetUserActivity_Result1.datasource" />
+    <None Include="Properties\DataSources\PortableTransformationLayer.ABBConnectServiceRef.GetUserFeedsByFilter_Result1.datasource" />
+    <None Include="Properties\DataSources\PortableTransformationLayer.ABBConnectServiceRef.GetUserFeeds_Result1.datasource" />
+    <None Include="Properties\DataSources\PortableTransformationLayer.ABBConnectServiceRef.GetUserSavedFiltersTagedUsers_Result1.datasource" />
+    <None Include="Properties\DataSources\PortableTransformationLayer.ABBConnectServiceRef.GetUserSavedFilters_Result1.datasource" />
+    <None Include="Properties\DataSources\PortableTransformationLayer.ABBConnectServiceRef.GetUsersByName_Result1.datasource" />
     <None Include="Properties\ServiceReferences.Designer.ClientConfig" />
     <None Include="Service References\ABBConnectServiceRef\ABBConnectWCF.wsdl" />
   </ItemGroup>
