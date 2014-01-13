@@ -139,7 +139,7 @@ namespace ABBConnect___Windows_Phone
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+               //  MessageBox.Show(ex.Message);
             }
 
              
