@@ -48,7 +48,7 @@ namespace ABBConnect___Windows_Phone
         List<Filter> filters;
         FeedType.FeedSource currentFeedType;
 
-        bool ini, timerReady;
+        bool ini, timerReady, firstClick;
         int NoCache;
         const int UPDATETIME = 30, SHOWLABELTIME = 4, NUMBEROFFEEDS = 15;
         string chosenImg;
@@ -92,6 +92,7 @@ namespace ABBConnect___Windows_Phone
 
             //Initilaztation is ready
             ini = true;
+            firstClick = true;
         }
 
         /// <summary>
@@ -719,7 +720,11 @@ namespace ABBConnect___Windows_Phone
         /// <param name="e"></param>
         private void txtbContent_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            txtbContent.Text = String.Empty;
+            if (firstClick)
+            {
+                txtbContent.Text = String.Empty;
+                firstClick = false;
+            }
         }
 
         /// <summary>

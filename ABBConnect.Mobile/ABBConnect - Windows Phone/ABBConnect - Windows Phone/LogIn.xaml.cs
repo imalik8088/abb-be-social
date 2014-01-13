@@ -102,12 +102,6 @@ namespace ABBConnect___Windows_Phone
         {
             UserManager um = new UserManager();
 
-            if (1 == 1) //TODO: DELETE WHEN REALESE
-            {
-                (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/MainPage.xaml?userName=" + "rgn09003", UriKind.Relative));
-                return;
-            }
-
             try
             {
                 if (await um.Login(txtUsername.Text, txtPassword.Password)) //check if tthe user inserted valid information
