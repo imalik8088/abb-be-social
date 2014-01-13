@@ -48,3 +48,4 @@ C:\Users\Robert\Documents\GitHub\abb-be-social\ABBConnect.PortableBLL\PortableBL
 C:\Users\Robert\Documents\GitHub\abb-be-social\ABBConnect.PortableBLL\PortableBLL\PortableBLL\obj\Debug\PortableBLL.csprojResolveAssemblyReference.cache
 C:\Users\Robert\Documents\GitHub\abb-be-social\ABBConnect.PortableBLL\PortableBLL\PortableBLL\obj\Debug\PortableBLL.dll
 C:\Users\Robert\Documents\GitHub\abb-be-social\ABBConnect.PortableBLL\PortableBLL\PortableBLL\obj\Debug\PortableBLL.pdb
+C:\Users\Dimitrios\Documents\GitHub\abb-be-social\ABBConnect.PortableBLL\PortableBLL\PortableBLL\bin\Debug\PortableBLL.XML

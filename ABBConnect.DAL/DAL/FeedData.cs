@@ -383,6 +383,12 @@ namespace DAL
             return feed;
         }
 
+        /// <summary>
+        /// Method that updates the following state of a human user to a sensor
+        /// </summary>
+        /// <param name="humanId">the identifier of the human user</param>
+        /// <param name="sensorId">the identifier of the sensor user</param>
+        /// <returns></returns>
         public bool FollowSensor(int humanId, int sensorId)
         {
             int humanIntId = humanId;
@@ -412,6 +418,11 @@ namespace DAL
                 return false;
         }
 
+        /// <summary>
+        /// Method that returns a specific amount of feeds from the last shift
+        /// </summary>
+        /// <param name="numFeeds">the number of feeds to be returned</param>
+        /// <returns></returns>
         public List<GetLatestXFeeds_Result> GetFeedsFromLastShift(int numFeeds)
         {
             List<GetLatestXFeeds_Result> feeds = new List<GetLatestXFeeds_Result>();

@@ -1,0 +1,1101 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PortableBLL</name>
+    </assembly>
+    <members>
+        <member name="T:PortableBLL.Activity">
+            <summary>
+            Class that represent activity of a specific user.
+            The activity could be like make a comment, or a feed, or a reference to another user.
+            </summary>
+        </member>
+        <member name="M:PortableBLL.Activity.#ctor">
+            <summary>
+            Constructor that instatiate automatically the attributes of the class with empty values
+            </summary>
+        </member>
+        <member name="M:PortableBLL.Activity.#ctor(PortableTransformationLayer.ABBConnectServiceRef.GetUserActivity_Result)">
+            <summary>
+            Constructor of the class that instantiate the attributes of the class with the given data
+            </summary>
+            <param name="entityActivity">Class that contain the informations about the user and the activity</param>
+        </member>
+        <member name="F:PortableBLL.Activity.iD">
+            <summary>
+            Attribute that rappresent the unique identificator of the activity
+            </summary>
+        </member>
+        <member name="F:PortableBLL.Activity.userId">
+            <summary>
+            Attribute that rappresent the unique identificator of the user that make the activity
+            </summary>
+        </member>
+        <member name="F:PortableBLL.Activity.feedId">
+            <summary>
+            Attribute that rappresent the unique identificator of the feed
+            </summary>
+        </member>
+        <member name="F:PortableBLL.Activity.type">
+            <summary>
+            Attribute that rappresent the type of the activity
+            </summary>
+        </member>
+        <member name="F:PortableBLL.Activity.text">
+            <summary>
+            Attribute that rappresent the content of the activity
+            </summary>
+        </member>
+        <member name="F:PortableBLL.Activity.timestamp">
+            <summary>
+            Attribute that rappresent the time of creation of the activity
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Activity.ID">
+            <summary>
+            Properties that allow to modify or take the value of the ID of the activity
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Activity.UserId">
+            <summary>
+            Properties that allow to modify or take the identificator of the user that make the activity
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Activity.FeedId">
+            <summary>
+            Properties that allow to modify or take the identificator of the feed
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Activity.Type">
+            <summary>
+            Properties that allow to modify or take the type of the activity
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Activity.Text">
+            <summary>
+            Properties that allow to modify or take the content of the activity
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Activity.Timestamp">
+            <summary>
+            Properties that allow to modify or take the time of creation of the activity
+            </summary>
+        </member>
+        <member name="T:PortableBLL.Category">
+            <summary>
+            This class rappresent the category of a feed reporting its main informations
+            </summary>
+        </member>
+        <member name="M:PortableBLL.Category.#ctor(PortableTransformationLayer.ABBConnectServiceRef.GetPriorityCategories_Result)">
+            <summary>
+            Constructor of the class that instantiate the attributes with the values given in input
+            </summary>
+            <param name="result">Class that rapresent the category of the feed</param>
+        </member>
+        <member name="F:PortableBLL.Category.categoryName">
+            <summary>
+            attribute of the class that rappresent the name of the category
+            </summary>
+        </member>
+        <member name="F:PortableBLL.Category.id">
+            <summary>
+            Attribute of the class that rappresent the identifier of the category
+            </summary>
+        </member>
+        <member name="F:PortableBLL.Category.priority">
+            <summary>
+            Attribute of the class that rappresent priority of the feed
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Category.CategoryName">
+            <summary>
+            Properties that allow to modify or take the value of the attribute categoryName
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Category.Id">
+            <summary>
+            Properties that allow to modify or take the value of the ID of the category
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Category.Priority">
+            <summary>
+            Properties that allow to modify or take the value of the priority of the feed
+            </summary>
+        </member>
+        <member name="T:PortableBLL.Comment">
+            <summary>
+            Class that rappresent the comment to a post, reporting its content and all the attached informations
+            </summary>
+        </member>
+        <member name="M:PortableBLL.Comment.#ctor">
+            <summary>
+            Constructor of the class that instantiate the attributes with standard values
+            </summary>
+        </member>
+        <member name="M:PortableBLL.Comment.#ctor(PortableTransformationLayer.ABBConnectServiceRef.GetFeedComments_Result,PortableBLL.Human)">
+            <summary>
+            Constructor of the class that instantiate the attributes with the given values
+            </summary>
+            <param name="res">Class that rapresent the comment of a feed</param>
+        </member>
+        <member name="F:PortableBLL.Comment.iD">
+            <summary>
+            Attribute that rappresent the  identifier of a comment
+            </summary>
+        </member>
+        <member name="F:PortableBLL.Comment.owner">
+            <summary>
+            Attribute rappresenting the human user that made the current comment
+            </summary>
+        </member>
+        <member name="F:PortableBLL.Comment.timeStamp">
+            <summary>
+            Attribute that rappresent the time when the comment was made
+            </summary>
+        </member>
+        <member name="F:PortableBLL.Comment.content">
+            <summary>
+            Attribute that rappresent the text contained in a comment
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Comment.ID">
+            <summary>
+            Properties that allow to modify or take the value of the ID of a comment
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Comment.Owner">
+            <summary>
+            properties that allow to modify or take the human user that made the comment
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Comment.TimeStamp">
+            <summary>
+            Properties that allow to modify or take the time when the comment was made
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Comment.Content">
+            <summary>
+            Properties that allow to modify or take the textual content of a comment
+            </summary>
+        </member>
+        <member name="T:PortableBLL.CommonDataManager">
+            <summary>
+            Class that allow to retrieve additional information shared by the feeds
+            </summary>
+        </member>
+        <member name="M:PortableBLL.CommonDataManager.#ctor">
+            <summary>
+            Constructor of the class that instantiate the attribute
+            </summary>
+        </member>
+        <member name="M:PortableBLL.CommonDataManager.GetLocations">
+            <summary>
+            This method get all locations that compose a specific workspace, like control rooms or offices
+            </summary>
+            <returns>return a List of string rappresenting the name of the locations</returns>
+        </member>
+        <member name="M:PortableBLL.CommonDataManager.GetFeedCategories">
+            <summary>
+            This method  get the category of the feed rappresented by the priority 
+            
+            </summary>
+            <returns>return List of categories</returns>
+        </member>
+        <member name="T:PortableBLL.Feed">
+            <summary>
+            Class that rappresent a general feed including all the informations about it
+            </summary>
+        </member>
+        <member name="M:PortableBLL.Feed.#ctor">
+            <summary>
+            Constructor that instatiate automatically the attributes of the class with empty values
+            </summary>
+        </member>
+        <member name="M:PortableBLL.Feed.#ctor(PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result,System.Collections.Generic.List{PortableBLL.Comment},System.Collections.Generic.List{PortableBLL.Human})">
+            <summary>
+            Constructor of the class that instantiate the attributes of the class with the given data
+            </summary>
+            <param name="res">Class that contain the creation date, the location, the contet, the category, and the priority of feed</param>
+            <param name="listCom">List of the comments related with the feed</param>
+            <param name="listTag">List of users tagged on the feed</param>
+        </member>
+        <member name="F:PortableBLL.Feed.iD">
+            <summary>
+            Attribute that rappresent the unique identificator of the post
+            </summary>
+        </member>
+        <member name="F:PortableBLL.Feed.timeStamp">
+            <summary>
+            attribute that rappresent the date of creation of the feed
+            </summary>
+        </member>
+        <member name="F:PortableBLL.Feed.tags">
+            <summary>
+            attribute that rappresent the list of users tagged in the feed
+            </summary>
+        </member>
+        <member name="F:PortableBLL.Feed.location">
+            <summary>
+            Attribute that rappresent the location of the feed
+            </summary>
+        </member>
+        <member name="F:PortableBLL.Feed.content">
+            <summary>
+            Attribute that rappresent the content of the feed
+            </summary>
+        </member>
+        <member name="F:PortableBLL.Feed.category">
+            <summary>
+            Attribute that rappresent the category of the feed
+            </summary>
+        </member>
+        <member name="F:PortableBLL.Feed.comments">
+            <summary>
+            Attribute that rappresent the List of comments of the current feed
+            </summary>
+        </member>
+        <member name="F:PortableBLL.Feed.feedType">
+            <summary>
+            Attribute that communicate if the author of the feed is a human user or a sensor
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Feed.ID">
+            <summary>
+            properties that allow to modify or take the value of the ID of a feed
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Feed.TimeStamp">
+            <summary>
+            properties that allow to modify or take the value of the time of creation of the feed
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Feed.Tags">
+            <summary>
+            properties that allow to modify or take the list of users tagged in the feed
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Feed.Location">
+            <summary>
+            properties that allow to modify or take the location of the current feed
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Feed.Content">
+            <summary>
+            properties that allow to modify or take the content of the current feed
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Feed.Category">
+            <summary>
+            properties that allow to modify or take the category of the current feed
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Feed.Comments">
+            <summary>
+            properties that allow to modify or take the list of comments related with the current feed
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Feed.FeedType">
+            <summary>
+            properties that allow to modify or take the type of the author, that could be human or sensor
+            </summary>
+        </member>
+        <member name="T:PortableBLL.FeedManager">
+            <summary>
+            Class that allow to make operation on the feeds like retrieve old feeds, or publish new feeds and comments
+            </summary>
+        </member>
+        <member name="F:PortableBLL.FeedManager.feedData">
+            <summary>
+            Class that allow to make operation  on the feeds
+            </summary>
+        </member>
+        <member name="M:PortableBLL.FeedManager.#ctor">
+            <summary>
+            Constructor that authomaticaly instanciate the attributes of the class
+            </summary>
+        </member>
+        <member name="M:PortableBLL.FeedManager.LoadLatestXFeeds(System.Int32)">
+            <summary>
+            Method that load the specified number of latest feed
+            </summary>
+            <param name="feedNum">number of feeds that want to be retrieved</param>
+            <returns>List of feeds retrieved</returns>
+        </member>
+        <member name="M:PortableBLL.FeedManager.LoadLatestXFeedsFromId(System.Int32,System.Int32)">
+            <summary>
+            Method that load the feed with a specified ID, and a specified number of feeds with a bigger ID number
+            </summary>
+            <param name="startingId">ID of the feed, where the retrieve start</param>
+            <param name="numberOfFeeds">Number of feeds to retrieve</param>
+            <returns></returns>
+        </member>
+        <member name="M:PortableBLL.FeedManager.PublishFeed(PortableBLL.HumanFeed,System.Byte[])">
+            <summary>
+            Method that store a feed from a human user
+            </summary>
+            <param name="feed">Class that rappresent the feed from the human user that has to be stored</param>
+            <param name="image">parameter storing the byte array of the image that will be included in the feed</param>
+            <returns>boolean that inform if the storage of the feed succeed</returns>
+        </member>
+        <member name="M:PortableBLL.FeedManager.AddTagToFeed(System.Int32,System.String)">
+            <summary>
+            Method that the reference to a user into a feed
+            </summary>
+            <param name="feedId">ID of the feed where the reference should be added</param>
+            <param name="username">Username of the the user that should be reference in the feed</param>
+            <returns>boolean that inform if the reference of the feed has succeeded</returns>
+        </member>
+        <member name="M:PortableBLL.FeedManager.LoadFeedComments(System.Int32)">
+            <summary>
+            Method that retrieve all the comments made to a feed
+            </summary>
+            <param name="feedId">ID of the feed that own the comments</param>
+            <returns>List of comments made to a feed</returns>
+        </member>
+        <member name="M:PortableBLL.FeedManager.LoadFeedTags(System.Int32)">
+            <summary>
+            Method that retrieve all human users referenced into a feed
+            </summary>
+            <param name="feedId">ID of the feed, where the human users are referenced </param>
+            <returns>List of human users referenced into the feed</returns>
+        </member>
+        <member name="M:PortableBLL.FeedManager.PublishComment(System.Int32,PortableBLL.Comment)">
+            <summary>
+            Method that store a comment made to a feed from a human user
+            </summary>
+            <param name="feedID"> ID of the feed that is commented</param>
+            <param name="comment"> Object that reppresent the comment</param>
+            <returns>boolean that inform if the storage of the comment has succeeded</returns>
+        </member>
+        <member name="M:PortableBLL.FeedManager.LoadFeedsByType(PortableBLL.FeedType.FeedSource,System.Int32)">
+            <summary>
+            Method that retrieve a specified number of feeds that are of a spcified type.
+            The type of the feed could be human or sensor
+            </summary>
+            <param name="feedType">Class with an enumerative attribute that reppresent the type of the feed: human or sensor</param>
+            <param name="numFeeds">Number of feeds that have to be retrieved</param>
+            <returns>List of feeds retrieved</returns>
+        </member>
+        <member name="M:PortableBLL.FeedManager.LoadFeedsByType(PortableBLL.FeedType.FeedSource,System.Int32,System.Int32)">
+            <summary>
+            Method that retrieve a specified number of feeds that are of a spcified type.
+            The feeds retrieved have an ID equal or bigger to the ID given in input.
+            The type of the feed could be human or sensor.
+            </summary>
+            <param name="feedType">Class with an enumerative attribute that reppresent the type of the feed: human or sensor</param>
+            <param name="numFeeds">Number of feeds that have to be retrieved</param>
+            <param name="startId">ID of the feed, where the retrieve start </param>
+            <returns>List of retrieved feeds</returns>
+        </member>
+        <member name="M:PortableBLL.FeedManager.LoadFeedsByDate(System.DateTime,System.DateTime,System.Int32)">
+            <summary>
+            Method that retrieve a specified number of feeds included between two dates.
+            </summary>
+            <param name="feedStartTime">Class that represent the date where the search begin, it must be older than the date where the search have to stop</param>
+            <param name="feedEndTime">Class that represent the date where the search end, it must be younger than the date where the search have to start</param>
+            <param name="numFeeds">numeber of feeds that must be retrieved</param>
+            <returns>List of feeds retrieved</returns>
+        </member>
+        <member name="M:PortableBLL.FeedManager.LoadFeedsByDate(System.DateTime,System.DateTime,System.Int32,System.Int32)">
+            <summary>
+            Method that retrieve a specified number of feeds included between two dates.
+            The feeds retrieved have an ID equal or bigger to the ID given in input.
+            </summary>
+            <param name="feedStartTime">Class that represent the date where the search begin, it must be older than the date where the search should stop</param>
+            <param name="feedEndTime">Class that represent the date where the search end, it must be younger than the date where the search should start</param>
+            <param name="numFeeds">numeber of feeds that must be retrieved</param>
+            <param name="startId">ID of the feed, where the retrieve start</param>
+            <returns>List of feeds retrieved</returns>
+        </member>
+        <member name="M:PortableBLL.FeedManager.LoadFeedsByLocation(System.String,System.Int32)">
+            <summary>
+            Method that retrieve a specified number of feeds by thier location.
+            </summary>
+            <param name="location">Location of the feed that must be retrieved</param>
+            <param name="numFeeds">numeber of feeds that must be retrieved</param>
+            <returns>List of feeds retrieved</returns>
+        </member>
+        <member name="M:PortableBLL.FeedManager.LoadFeedsByLocation(System.String,System.Int32,System.Int32)">
+            <summary>
+            Method that retrieve a specified number of feeds by thier location.
+            The feeds retrieved have an ID equal or bigger to the ID given in input.
+            </summary>
+            <param name="location">Location of the feed that must be retrieved</param>
+            <param name="numFeeds">numeber of feeds that must be retrieved</param>
+            <param name="startId">ID of the feed, where the retrieve start</param>
+            <returns>List of feeds retrieved</returns>
+        </member>
+        <member name="M:PortableBLL.FeedManager.LoadFeedsByUser(System.Int32,System.Int32)">
+            <summary>
+            Method that retrieve a specified number of feeds by the user that have made tem. 
+            </summary>
+            <param name="userId">ID of the user that have made the comment</param>
+            <param name="numFeeds">numeber of feeds that must be retrieved</param>
+            <returns>List of feeds retrieved</returns>
+        </member>
+        <member name="M:PortableBLL.FeedManager.LoadFeedsByUser(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Method that retrieve a specified number of feeds by the user that have made tem. 
+            The feeds retrieved have an ID equal or bigger to the ID given in input.
+            </summary>
+            <param name="userId">ID of the user that have made the comment</param>
+            <param name="numFeeds">Numeber of feeds that must be retrieved</param>
+            <param name="startId">ID of the feed, where the retrieve start</param>
+            <returns>List of feeds retrieved</returns>
+        </member>
+        <member name="M:PortableBLL.FeedManager.LoadFeedsByFilter(System.Int32,System.String,System.DateTime,System.DateTime,PortableBLL.FeedType.FeedSource,System.String,System.Int32)">
+            <summary>
+            Method that search and retrieve the feeds by all their attributes.
+            If an attribute of the feed is not needed in the search it can be leaved null for string and object, or minor than zero for integers.
+            </summary>
+            <param name="userId">ID of the user that have made the comment</param>
+            <param name="location">Location of the feed that must be retrieved</param>
+            <param name="feedStartTime">Class that represent the date where the search begin, it must be older than the date where the search should stop</param>
+            <param name="feedEndTime">Class that represent the date where the search end, it must be younger than the date where the search should start</param>
+            <param name="feedType">Class with an enumerative attribute that reppresent the type of the feed: human or sensor</param>
+            <param name="numFeeds">Number of feeds that must be retrieved</param>
+            <returns>List of feeds retrieved</returns>
+        </member>
+        <member name="M:PortableBLL.FeedManager.LoadFeedsByFilter(System.Int32,System.String,System.DateTime,System.DateTime,PortableBLL.FeedType.FeedSource,System.String,System.Int32,System.Int32)">
+            <summary>
+            Method that retrieve the feeds by all their attributes.
+            If an attribute of the feed is not needed in the search, it can be lived null for string and object, or minor than zero for integers.
+            </summary>
+            <param name="userId">ID of the user that have made the comment</param>
+            <param name="location">Location of the feed that must be retrieved</param>
+            <param name="feedStartTime">Class that represent the date where the search begin, it must be older than the date where the search should stop</param>
+            <param name="feedEndTime">Class that represent the date where the search end, it must be younger than the date where the search should start</param>
+            <param name="feedType">Class with an enumerative attribute that reppresent the type of the feed: human or sensor</param>
+            <param name="startId">ID of the feed, where the retrieve start</param>
+            <returns>List of feeds retrieved</returns>
+        </member>
+        <member name="M:PortableBLL.FeedManager.LoadFeedsFromSavedFilter(PortableBLL.Filter,System.Int32)">
+            <summary>
+            Method that retrieves a specific number of feeds, filtered by some attributes specified in the Filter object
+            </summary>
+            <param name="savedFilter">The Filter object containing filter information</param>
+            <param name="numFeed">Number of feeds that must be retrieved</param>
+            <returns></returns>
+        </member>
+        <member name="M:PortableBLL.FeedManager.LoadFeedsFromSavedFilter(PortableBLL.Filter,System.Int32,System.Int32)">
+            <summary>
+            Method that retrieves a specific number of feeds starting from a specific feed id. The feeds are 
+            filtered by some attributes specified in the Filter object
+            </summary>
+            <param name="savedFilter">The Filter object containing filter information</param>
+            <param name="numFeed">Number of feeds that must be retrieved</param>
+            <param name="startId">ID of the feed, where the retrieve start</param>
+            <returns></returns>
+        </member>
+        <member name="M:PortableBLL.FeedManager.LoadFeedsFromLastShift(System.Int32)">
+            <summary>
+            Method that returns all the feeds that were posted during the last shift
+            </summary>
+            <param name="numFeed">Number of feeds that must be retrieved</param>
+            <returns></returns>
+        </member>
+        <member name="M:PortableBLL.FeedManager.GetFeedByFeedId(System.Int32)">
+            <summary>
+            MEthod that returns one feed identified by its id
+            </summary>
+            <param name="feedId">The id of a feed</param>
+            <returns></returns>
+        </member>
+        <member name="M:PortableBLL.FeedManager.LoadFeedsByCategoryName(System.String,System.Int32)">
+            <summary>
+            Method that retrieves a specified number of feeds, filtered by category name
+            </summary>
+            <param name="categoryName">The category name</param>
+            <param name="numFeeds">Number of feeds that must be retrieved</param>
+            <returns></returns>
+        </member>
+        <member name="M:PortableBLL.FeedManager.LoadFeedsByCategoryName(System.String,System.Int32,System.Int32)">
+            <summary>
+            Method that retrieves a specified number of feeds starting on a specific id.
+            The feeds are filtered by category name.
+            </summary>
+            <param name="categoryName"></param>
+            <param name="numFeeds">Number of feeds that must be retrieved</param>
+            <param name="startId">ID of the feed, where the retrieve start</param>
+            <returns></returns>
+        </member>
+        <member name="T:PortableBLL.FeedType">
+            <summary>
+            Class that rappresent the type of the user that made the feed.
+            It could be a human user, a sensor, or None like null value.
+            </summary>
+        </member>
+        <member name="T:PortableBLL.FeedType.FeedSource">
+            <summary>
+            Enumerative that rappresent the type of the user that made the feed.
+            </summary>
+        </member>
+        <member name="F:PortableBLL.FeedType.FeedSource.None">
+            <summary>
+            This is used like null value
+            </summary>
+        </member>
+        <member name="F:PortableBLL.FeedType.FeedSource.Human">
+            <summary>
+            This type means that the feeds is made by a human user
+            </summary>
+        </member>
+        <member name="F:PortableBLL.FeedType.FeedSource.Sensor">
+            <summary>
+            This type means that the feeds is made by a sensor
+            </summary>
+        </member>
+        <member name="T:PortableBLL.Filter">
+            <summary>
+            Class that represent a filtering option
+            </summary>
+        </member>
+        <member name="M:PortableBLL.Filter.#ctor">
+            <summary>
+            Constructor that authomaticaly instanciate the attributes of the class with null values
+            </summary>
+        </member>
+        <member name="M:PortableBLL.Filter.#ctor(PortableTransformationLayer.ABBConnectServiceRef.GetUserSavedFilters_Result,System.Collections.Generic.List{PortableBLL.User})">
+            <summary>
+            Constructor that instantiate the attributes with the given values
+            </summary>
+            <param name="entityFilter">Class containing all the information about a user saved filter</param>
+            <param name="taggedUsers"></param>
+        </member>
+        <member name="F:PortableBLL.Filter.iD">
+            <summary>
+            Attribute that represent  the identificator of the  filter option
+            </summary>
+        </member>
+        <member name="F:PortableBLL.Filter.location">
+            <summary>
+             Attribute that represent  the location of the filter option
+            </summary>
+        </member>
+        <member name="F:PortableBLL.Filter.name">
+            <summary>
+             Attribute that represent  the name of the filter option
+            </summary>
+        </member>
+        <member name="F:PortableBLL.Filter.startDate">
+            <summary>
+             Attribute that represent  the date when filter option begin
+            </summary>
+        </member>
+        <member name="F:PortableBLL.Filter.endDate">
+            <summary>
+             Attribute that represent  the date when filter option end
+            </summary>
+        </member>
+        <member name="F:PortableBLL.Filter.typeOfFeed">
+            <summary>
+             Attribute that rappresent the type of the user that made the feed
+            </summary>
+        </member>
+        <member name="F:PortableBLL.Filter.usersOnFilter">
+            <summary>
+             Attribute that list all the users (sensor and human) refered into the filter
+            </summary>
+        </member>
+        <member name="F:PortableBLL.Filter.categoryName">
+            <summary>
+            Attribute for relating the category name.
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Filter.ID">
+            <summary>
+            Properties that allow to modify or take the identificator of the  filter option
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Filter.Location">
+            <summary>
+            Properties that allow to modify or take the location of the filter option
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Filter.Name">
+            <summary>
+            Properties that allow to modify or take the name of the filter option
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Filter.StartDate">
+            <summary>
+            Properties that allow to modify or take the date when filter option begin
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Filter.EndDate">
+            <summary>
+            Properties that allow to modify or take the date when filter option end
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Filter.TypeOfFeed">
+            <summary>
+            Properties that allow to modify or take the type of the user that made the feed
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Filter.UsersOnFilter">
+            <summary>
+            Properties that allow to modify or take the list of all the users (sensor and human) refered into the filter
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Filter.CategoryName">
+            <summary>
+            Property for relating the category name.
+            </summary>
+        </member>
+        <member name="T:PortableBLL.Human">
+            <summary>
+            Class that rappresent a human user allowing to use its data
+            </summary>
+        </member>
+        <member name="T:PortableBLL.User">
+            <summary>
+            Class that rappresent a general user, without distinctions of the kind of user
+            </summary>
+        </member>
+        <member name="M:PortableBLL.User.#ctor">
+            <summary>
+            Constructor that automatically instantiate the attributes of the class
+            </summary>
+        </member>
+        <member name="M:PortableBLL.User.#ctor(PortableTransformationLayer.ABBConnectServiceRef.GetUserSavedFiltersTagedUsers_Result)">
+            <summary>
+            Constructor that instantiate tha attributes of the class to the values given in input
+            </summary>
+            <param name="entityUser">Class that contains all the informations about the user</param>
+        </member>
+        <member name="F:PortableBLL.User.iD">
+            <summary>
+            Attribute that rappresent the ID of the user
+            </summary>
+        </member>
+        <member name="F:PortableBLL.User.location">
+            <summary>
+            Attribute that rappresent the location of the user
+            </summary>
+        </member>
+        <member name="F:PortableBLL.User.username">
+            <summary>
+            Attribute that rappresent the username of the user
+            </summary>
+        </member>
+        <member name="F:PortableBLL.User.avatar">
+            <summary>
+            Attribute representing the avatar image of a user
+            </summary>
+        </member>
+        <member name="P:PortableBLL.User.ID">
+            <summary>
+            Properties that allow to modify or take the ID of a user
+            </summary>
+        </member>
+        <member name="P:PortableBLL.User.Location">
+            <summary>
+            Properties that allow to modify or take the location of a user
+            </summary>
+        </member>
+        <member name="P:PortableBLL.User.UserName">
+            <summary>
+            Properties that allow to modify or take the username of a user
+            </summary>
+        </member>
+        <member name="P:PortableBLL.User.Avatar">
+            <summary>
+            Properties that allow to modify or receive the base64 string representation of the avatar image
+            </summary>
+        </member>
+        <member name="M:PortableBLL.Human.#ctor">
+            <summary>
+            Constructor that authomaticaly instantiate the attributes of the class to empty values
+            </summary>
+        </member>
+        <member name="M:PortableBLL.Human.#ctor(PortableTransformationLayer.ABBConnectServiceRef.GetUsersByName_Result)">
+            <summary>
+            Constructor that instatiate the attributes of the class to the data given in input
+            </summary>
+            <param name="result">Class that contain all the informations about a user, used to instatiate the attribute of the class</param>
+        </member>
+        <member name="M:PortableBLL.Human.#ctor(PortableTransformationLayer.ABBConnectServiceRef.GetHumanInformation_Result,System.Int32)">
+            <summary>
+            Constructor that instatiate the attributes of the class to the data given in input
+            </summary>
+            <param name="result">Class that contain some of the informations about a user, used to instatiate the attribute of the class</param>
+            <param name="humanId">Integer that rappresent the ID of the human user</param>
+        </member>
+        <member name="M:PortableBLL.Human.#ctor(PortableTransformationLayer.ABBConnectServiceRef.GetHumanInformationByUsername_Result)">
+            <summary>
+            Constructor that instatiate the attributes of the class to the data given in input
+            </summary>
+            <param name="result">Class that contain all the informations about a user, used to instatiate the attribute of the class</param>
+        </member>
+        <member name="M:PortableBLL.Human.#ctor(PortableTransformationLayer.ABBConnectServiceRef.GetFeedTags_Result)">
+            <summary>
+            Constructor that instatiate the attributes of the class to the data given in input
+            </summary>
+            <param name="result">Class that contain all the informations about a user, used to instatiate the attribute of the class</param>
+        </member>
+        <member name="F:PortableBLL.Human.phoneNumber">
+            <summary>
+            Attribute that rappresent the telephone or mobile number of the user
+            </summary>
+        </member>
+        <member name="F:PortableBLL.Human.email">
+            <summary>
+            Attribute that rappresent the e-mail address of the user
+            </summary>
+        </member>
+        <member name="F:PortableBLL.Human.companyTitle">
+            <summary>
+            Attribute that represents the name of the company for which the user is working
+            </summary>
+        </member>
+        <member name="F:PortableBLL.Human.firstName">
+            <summary>
+            Attribute that rappresent the first name of the user
+            </summary>
+        </member>
+        <member name="F:PortableBLL.Human.lastName">
+            <summary>
+            Attribute that rappresent the last name of the user
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Human.PhoneNumber">
+            <summary>
+            Properties that allow to retrieve or change the telephone or mobile number of the user
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Human.Email">
+            <summary>
+            Properties that allow to retrieve or change the e-mail address of the user
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Human.CompanyTitle">
+            <summary>
+            Properties that allow to retrieve or change the name of the company for which the user is working
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Human.FirstName">
+            <summary>
+            Properties that allow to retrieve or change the first name of the user
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Human.LastName">
+            <summary>
+            Properties that allow to retrieve or change the last name of the user
+            </summary>
+        </member>
+        <member name="T:PortableBLL.HumanFeed">
+            <summary>
+            Class that rapprent the feed made by a human user
+            </summary>
+        </member>
+        <member name="M:PortableBLL.HumanFeed.#ctor">
+            <summary>
+            Constructor of the class that automatically instantiate the attribute of the class
+            </summary>
+        </member>
+        <member name="M:PortableBLL.HumanFeed.#ctor(PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result,System.Collections.Generic.List{PortableBLL.Comment},System.Collections.Generic.List{PortableBLL.Human},PortableBLL.Human)">
+            <summary>
+            Costructor of the class that instantiate the attribute of the class with the parameter in input
+            </summary>
+            <param name="res">Object containing all the information about the feed</param>
+            <param name="listCom">List of comments made to the feed</param>
+            <param name="listTag">List of human users that are referenced into the feed</param>
+            <param name="owner">Class that rappresent the human user that made the feed</param>
+        </member>
+        <member name="F:PortableBLL.HumanFeed.owner">
+            <summary>
+            Attribute that rappresent the human user that made the comment
+            </summary>
+        </member>
+        <member name="F:PortableBLL.HumanFeed.mediaFilePath">
+            <summary>
+            Attribute that the path where is stored the media file attached to the feed
+            </summary>
+        </member>
+        <member name="P:PortableBLL.HumanFeed.Owner">
+            <summary>
+            Properties that allow to change or retrieve the class that represent the human user that made the comment
+            </summary>
+        </member>
+        <member name="P:PortableBLL.HumanFeed.MediaFilePath">
+            <summary>
+            Properties that allow to change or retrieve the path where is stored the media file attached to the feed
+            </summary>
+        </member>
+        <member name="T:PortableBLL.Sensor">
+            <summary>
+            Class that rappresent a sensor
+            </summary>
+        </member>
+        <member name="M:PortableBLL.Sensor.#ctor">
+            <summary>
+            Constructor that automatically instatiate the attributes of the class
+            </summary>
+        </member>
+        <member name="M:PortableBLL.Sensor.#ctor(PortableTransformationLayer.ABBConnectServiceRef.GetUsersByName_Result)">
+            <summary>
+            Constructor that instantiate the attributes to the values given in input
+            </summary>
+            <param name="result">Class containing all the information of the sensor (generated from the entity framework)</param>
+        </member>
+        <member name="M:PortableBLL.Sensor.#ctor(PortableTransformationLayer.ABBConnectServiceRef.GetSensorInformation_Result)">
+            <summary>
+            Constructor that instantiate the attributes to the values given in input
+            </summary>
+            <param name="entitySensor">Class containing all the information of the sensor, except for the location</param>
+        </member>
+        <member name="F:PortableBLL.Sensor.sensorValues">
+            <summary>
+            Attribute that represent the list of values that the sensor had
+            </summary>
+        </member>
+        <member name="F:PortableBLL.Sensor.lowerBoundary">
+            <summary>
+            Attribute that represent the lowest value that the sensor can register 
+            </summary>
+        </member>
+        <member name="F:PortableBLL.Sensor.upperBoundary">
+            <summary>
+            Attribute that represent the maximum value that the sensor can register 
+            </summary>
+        </member>
+        <member name="F:PortableBLL.Sensor.unitMetric">
+            <summary>
+            Attribute that represent the metric system used by the sensor 
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Sensor.SensorValues">
+            <summary>
+            Properties that allow to modify or take the valuues that the sensor had
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Sensor.LowerBoundary">
+            <summary>
+             Properties that allow to modify or take the lowest value that the sensor can register
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Sensor.UpperBoundary">
+            <summary>
+             Properties that allow to modify or take the maximum value that the sensor can register 
+            </summary>
+        </member>
+        <member name="P:PortableBLL.Sensor.UnitMetric">
+            <summary>
+             Properties that allow to modify or take the metric system used by the sensor 
+            </summary>
+        </member>
+        <member name="T:PortableBLL.SensorFeed">
+            <summary>
+            Class that rappresent the feed made by a sensor
+            </summary>
+        </member>
+        <member name="M:PortableBLL.SensorFeed.#ctor(PortableTransformationLayer.ABBConnectServiceRef.GetLatestXFeeds_Result,System.Collections.Generic.List{PortableBLL.Comment},System.Collections.Generic.List{PortableBLL.Human},PortableBLL.Sensor)">
+            <summary>
+            Constructor that instantiate the attributes of the class with the values given in input
+            </summary>
+            <param name="res">Object containing all the information about the feed</param>
+            <param name="listCom">List of comments made to the feed</param>
+            <param name="listTag">List of human users that are referenced into the feed</param>
+            <param name="owner">Class that rappresent the sensor that made the feed</param>
+        </member>
+        <member name="F:PortableBLL.SensorFeed.owner">
+            <summary>
+            Attribute that rappresent the sensor that made the comment
+            </summary>
+        </member>
+        <member name="P:PortableBLL.SensorFeed.Owner">
+            <summary>
+            Properties that allow to change or retrieve the class that represent the sensor that made the comment
+            </summary>
+        </member>
+        <member name="T:PortableBLL.SensorHistoryData">
+            <summary>
+            Class that represent a time period of a specific sensor
+            </summary>
+        </member>
+        <member name="M:PortableBLL.SensorHistoryData.#ctor(PortableBLL.Sensor)">
+            <summary>
+            Constructor that instanciate the attribute of the class with a specific sensor
+            </summary>
+            <param name="owner">Class that represent the sensor</param>
+        </member>
+        <member name="F:PortableBLL.SensorHistoryData.owner">
+            <summary>
+            Attribute that represent the sensor
+            </summary>
+        </member>
+        <member name="F:PortableBLL.SensorHistoryData.startingTime">
+            <summary>
+            Attribute that represent the starting time when the sensor values are considered
+            </summary>
+        </member>
+        <member name="F:PortableBLL.SensorHistoryData.endingTime">
+            <summary>
+            Attribute that represent the ending time when the sensor values are considered
+            </summary>
+        </member>
+        <member name="P:PortableBLL.SensorHistoryData.Owner">
+            <summary>
+            Properties that allow to modify or take the sensor
+            </summary>
+        </member>
+        <member name="P:PortableBLL.SensorHistoryData.StartingTime">
+            <summary>
+            Properties that allow to modify or take the starting time when the sensor values are considered
+            </summary>
+        </member>
+        <member name="P:PortableBLL.SensorHistoryData.EndingTime">
+            <summary>
+            Properties that allow to modify or take the ending time when the sensor values are considered
+            </summary>
+        </member>
+        <member name="T:PortableBLL.SensorVTData">
+            <summary>
+            Class that represent a value regestired from a sensor
+            </summary>
+        </member>
+        <member name="M:PortableBLL.SensorVTData.#ctor">
+            <summary>
+            Constructor that instatiate automatically the attributes of the class with empty values
+            </summary>
+        </member>
+        <member name="F:PortableBLL.SensorVTData.creationTime">
+            <summary>
+            Attribute that rappresent the date of creation of the sensor value
+            </summary>
+        </member>
+        <member name="F:PortableBLL.SensorVTData.rawData">
+            <summary>
+            Attribute that rappresent the value regestered by the sensor
+            </summary>
+        </member>
+        <member name="P:PortableBLL.SensorVTData.CreationTime">
+            <summary>
+            properties that allow to modify or take the date of creation of the sensor value
+            </summary>
+        </member>
+        <member name="P:PortableBLL.SensorVTData.RawData">
+            <summary>
+            properties that allow to modify or take the value regestered by the sensor
+            </summary>
+        </member>
+        <member name="T:PortableBLL.UserManager">
+            <summary>
+            Class that allow to retrieve informations about users, distinguishing between human users and sensors
+            </summary>
+        </member>
+        <member name="F:PortableBLL.UserManager.usrData">
+            <summary>
+            attribute that allow to retrieve informations about human users and sensors
+            </summary>
+        </member>
+        <member name="M:PortableBLL.UserManager.#ctor">
+            <summary>
+            Constructor that instantiate the attribute of the class
+            </summary>
+        </member>
+        <member name="M:PortableBLL.UserManager.LoadSensorInformation(System.Int32)">
+            <summary>
+            This method take the information of a specific sensor
+            </summary>
+            <param name="sensorID">integer that identify the sensor</param>
+            <returns>all the informations about a sensor</returns>
+        </member>
+        <member name="M:PortableBLL.UserManager.LoadHistoryValuesBySensor(System.Int32,System.DateTime,System.DateTime)">
+            <summary>
+            This method take the historical information of a specific sensor in a specific period
+            </summary>
+            <param name="sensorID">integer that identify the sensor</param>
+            <param name="startingTime">starting time of the requested history</param>
+            <param name="endingTime">ending time of the requested history</param>
+            <returns></returns>
+        </member>
+        <member name="M:PortableBLL.UserManager.LoadCurrentValuesBySensor(System.Int32)">
+            <summary>
+            This method get the last value of a specific sensor
+            </summary>
+            <param name="sensorID">integer that identify the sensor</param>
+            <returns>integer that rappresent the last sensor value</returns>
+        </member>
+        <member name="M:PortableBLL.UserManager.Login(System.String,System.String)">
+            <summary>
+            This method allow to log into the system, if the credential of a registered user are right
+            </summary>
+            <param name="userName">string that rappresent the username of the user</param>
+            <param name="password">string that rappresent the password of the user</param>
+            <returns>A boolean value that comunicate if the login succeded or fail</returns>
+        </member>
+        <member name="M:PortableBLL.UserManager.LoadHumanInformation(System.Int32)">
+            <summary>
+            This method take the information of a specific user 
+            </summary>
+            <param name="humandId">integer that identify the user</param>
+            <returns>all the informations about a user</returns>
+        </member>
+        <member name="M:PortableBLL.UserManager.LoadHumanInformationByUsername(System.String)">
+            <summary>
+            This method take the information of a specific user 
+            </summary>
+            <param name="username">string that rappresent the username used by the user</param>
+            <returns>all the informations about a user</returns>
+        </member>
+        <member name="M:PortableBLL.UserManager.SearchUserByName(System.String)">
+            <summary>
+            This method search all the users with the name given in input
+            </summary>
+            <param name="query">name of the user that should be searched</param>
+            <returns>list of users with that name</returns>
+        </member>
+        <member name="M:PortableBLL.UserManager.GetAllHumanUsers">
+            <summary>
+            This method rietreve all the human users 
+            </summary>
+            <returns>a list with all the human users</returns>
+        </member>
+        <member name="M:PortableBLL.UserManager.GetAllSensors">
+            <summary>
+            This method rietreve all the sensors
+            </summary>
+            <returns>a list with all the sensors</returns>
+        </member>
+        <member name="M:PortableBLL.UserManager.LoadUserInformation(System.Int32)">
+            <summary>
+            Method that rietreve the informations of a specific user
+            </summary>
+            <param name="userId">Integer that represent the ID of the user</param>
+            <returns>Asynchronous operation that contain the informations about the user</returns>
+        </member>
+        <member name="M:PortableBLL.UserManager.GetUserSavedFilters(System.Int32)">
+            <summary>
+            Method that retrieve all the saved filters option on the feeds of a specific user
+            </summary>
+            <param name="userId">String that rappresent the ID of the user</param>
+            <returns>Asynchronous operation that contain the List with all the saved filters of a specific user</returns>
+        </member>
+        <member name="M:PortableBLL.UserManager.GetFilterTaggedUsers(System.Int32)">
+            <summary>
+            Method that retrieve all the users referenced in a specific filter
+            </summary>
+            <param name="filterId">String that rappresent the ID of the filter</param>
+            <returns>Asynchronous operation that contain the List referenced in the filter</returns>
+        </member>
+        <member name="M:PortableBLL.UserManager.GetUserActivity(System.Int32)">
+            <summary>
+            Method that retrieve the activities of a specific user.
+            The activity could be like make a comment, or a feed, or a reference to another user
+            </summary>
+            <param name="userId">String that rappresent the ID of the human user</param>
+            <returns>Asynchronous operation containing a List of activities</returns>
+        </member>
+        <member name="M:PortableBLL.UserManager.GetUserActivity(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Method that retrieve the activities of a specific user.
+            The activity could be like make a comment, or a feed, or a reference to another user
+            </summary>
+            <param name="userId">String that rappresent the ID of the human user</param>
+            <param name="activitiesNumber">The number of the Activities to return</param>
+            <param name="startId">The starting identifier of an activity in the database</param>
+            <returns>Asynchronous operation containing a List of activities</returns>
+        </member>
+    </members>
+</doc>

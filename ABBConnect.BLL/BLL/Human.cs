@@ -6,8 +6,14 @@ using DAL;
 
 namespace BLL
 {
+    /// <summary>
+    /// Class that rappresent a human user allowing to use its data
+    /// </summary>
     public class Human: User
     {
+        /// <summary>
+        /// Constructor that authomaticaly instantiate the attributes of the class to empty values
+        /// </summary>
         public Human()
         {
             base.UserName = "";
@@ -20,6 +26,10 @@ namespace BLL
             base.ID = -1;
         }
 
+        /// <summary>
+        /// Constructor that instatiate the attributes of the class to the data given in input
+        /// </summary>
+        /// <param name="result">Class that contain all the informations about a user, used to instatiate the attribute of the class</param>
         public Human(GetUsersByName_Result result)
         {
             base.ID = result.Id;
@@ -32,6 +42,11 @@ namespace BLL
             this.phoneNumber = "";
         }
 
+        /// <summary>
+        /// Constructor that instatiate the attributes of the class to the data given in input
+        /// </summary>
+        /// <param name="result">Class that contain some of the informations about a user, used to instatiate the attribute of the class</param>
+        /// <param name="humanId">Integer that rappresent the ID of the human user</param>
         public Human(GetHumanInformation_Result result, int humanId)
         {
             base.ID = humanId;
@@ -44,6 +59,11 @@ namespace BLL
             companyTitle = "";
             base.Avatar = result.Image;
         }
+
+        /// <summary>
+        /// Constructor that instatiate the attributes of the class to the data given in input
+        /// </summary>
+        /// <param name="result">Class that contain all the informations about a user, used to instatiate the attribute of the class</param>
         public Human(GetHumanInformationByUsername_Result result)
         {
             base.ID = result.Id;
@@ -57,6 +77,10 @@ namespace BLL
             companyTitle = "";
         }
 
+        /// <summary>
+        /// Constructor that instatiate the attributes of the class to the data given in input
+        /// </summary>
+        /// <param name="result">Class that contain all the informations about a user, used to instatiate the attribute of the class</param>
         public Human(GetFeedTags_Result res)
         {
             base.ID = res.UserId;
@@ -70,7 +94,13 @@ namespace BLL
             
         }
 
+        /// <summary>
+        /// Attribute that rappresent the telephone or mobile number of the user
+        /// </summary>
         private string phoneNumber;
+        /// <summary>
+        /// Properties that allow to retrieve or change the telephone or mobile number of the user
+        /// </summary>
         public string PhoneNumber
         {
             get
@@ -83,7 +113,13 @@ namespace BLL
             }
         }
 
+        /// <summary>
+        /// Attribute that rappresent the e-mail address of the user
+        /// </summary>
         private string email;
+        /// <summary>
+        /// Properties that allow to retrieve or change the e-mail address of the user
+        /// </summary>
         public string Email
         {
             get
@@ -96,7 +132,13 @@ namespace BLL
             }
         }
 
+        /// <summary>
+        /// Attribute that represents the name of the company for which the user is working
+        /// </summary>
         private string companyTitle;
+        /// <summary>
+        /// Properties that allow to retrieve or change the name of the company for which the user is working
+        /// </summary>
         public string CompanyTitle
         {
             get
@@ -109,7 +151,13 @@ namespace BLL
             }
         }
 
+        /// <summary>
+        /// Attribute that rappresent the first name of the user
+        /// </summary>
         private string firstName;
+        /// <summary>
+        /// Properties that allow to retrieve or change the first name of the user
+        /// </summary>
         public string FirstName
         {
             get
@@ -122,7 +170,13 @@ namespace BLL
             }
         }
 
+        /// <summary>
+        /// Attribute that rappresent the last name of the user
+        /// </summary>
         private string lastName;
+        /// <summary>
+        /// Properties that allow to retrieve or change the last name of the user
+        /// </summary>
         public string LastName
         {
             get

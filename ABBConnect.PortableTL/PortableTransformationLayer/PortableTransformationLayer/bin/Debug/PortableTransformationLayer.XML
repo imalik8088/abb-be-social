@@ -1,0 +1,298 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PortableTransformationLayer</name>
+    </assembly>
+    <members>
+        <member name="T:PortableTransformationLayer.CommonData">
+            <summary>
+            Class that allow to retrieve additional information shared by the feeds
+            </summary>
+        </member>
+        <member name="F:PortableTransformationLayer.CommonData.urlServer">
+            <summary>
+            Attribute that provide the connection to the server
+            </summary>
+        </member>
+        <member name="M:PortableTransformationLayer.CommonData.#ctor">
+            <summary>
+            Constructor that automatically instantiate the attribute of the class
+            </summary>
+        </member>
+        <member name="M:PortableTransformationLayer.CommonData.GetCategories">
+            <summary>
+            This method  get the categories of the feeds rappresented by the priority
+            </summary>
+            <returns>Asynchronous operation that contain the List of catetegories</returns>
+        </member>
+        <member name="M:PortableTransformationLayer.CommonData.GetLocations">
+            <summary>
+            This method get all locations that compose a specific workspace
+            </summary>
+            <returns>Asynchronous operation that contain the List of Locations</returns>
+        </member>
+        <member name="T:PortableTransformationLayer.FeedData">
+            <summary>
+            Class that allow to make operation on the feeds like retrieve old feeds, or publish new feeds and comments
+            </summary>
+        </member>
+        <member name="F:PortableTransformationLayer.FeedData.urlServer">
+            <summary>
+            Attribute that provide the connection to the server
+            </summary>
+        </member>
+        <member name="M:PortableTransformationLayer.FeedData.#ctor">
+            <summary>
+            Constructor that automatically instantiate the attribute of the class
+            </summary>
+        </member>
+        <member name="M:PortableTransformationLayer.FeedData.GetFeedComments(System.Int32)">
+            <summary>
+            Method that retrieve all the comments of a feed
+            </summary>
+            <param name="feedId">Integer representing the ID of the feed</param>
+            <returns>Asynchronous operation that contain the List of comments</returns>
+        </member>
+        <member name="M:PortableTransformationLayer.FeedData.GetFeedTags(System.Int32)">
+            <summary>
+            Method that retrieve all human users referenced into a feed
+            </summary>
+            <param name="feedId">Integer representing the ID of the feed</param>
+            <returns>Asynchronous operation that contain the List of tags</returns>
+        </member>
+        <member name="M:PortableTransformationLayer.FeedData.PublishFeed(System.Int32,System.String,System.String,System.Int32,System.Byte[])">
+            <summary>
+            Method that store a feed from a human user
+            </summary>
+            <param name="usrId">Integer that represent the ID of a human user</param>
+            <param name="text">String that represent the content of the feed</param>
+            <param name="filepath">String that represent the the path </param>
+            <param name="prioId">Integer that represent the priority level of the feed</param>
+            <returns>Asynchronous operation that contain the ID of the feed</returns>
+        </member>
+        <member name="M:PortableTransformationLayer.FeedData.AddImageToFeed(System.Byte[],System.String)">
+            <summary>
+            Method that sends a byte array representing the image to the service through a POST request and
+            its Stream.
+            </summary>
+            <param name="image">the byte array of an image</param>
+            <param name="obj">the id of the feed that this image should be added</param>
+            <returns></returns>
+        </member>
+        <member name="M:PortableTransformationLayer.FeedData.GetFeedsByFilter(System.Int32,System.String,System.DateTime,System.DateTime,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Method that search and retrieve the feeds by all their attributes.
+            If an attribute of the feed is not needed in the search it can be leaved empty for strings, MinValue for DateTime objects, or -1 for integers.
+            </summary>
+            <param name="userId">Integer that represent the ID of the user, if not needed in the search put it -1</param>
+            <param name="location">String that represent the location of the feed, if not needed in the search leave it empty</param>
+            <param name="startingTime">Class that represent the date where the search begin, it must be older than the date where the search should stop;
+            if  not needed in the search put it like MinValue</param>
+            <param name="endingTime">Class that represent the date where the search end, it must be younger than the date where the search should start;
+            if  not needed in the search put it like MinValue</param>
+            <param name="feedType">String that represent the type of the feed: human or sensor;
+            if not needed in the search put it like empty string</param>
+            <param name="startId"></param>
+            <param name="numFeeds">Integer that represent the number of feeds that must be retrieved, if not needed in the search put it -1</param>
+            <returns>Asynchronous operation that contain the List of feeds required</returns>
+        </member>
+        <member name="M:PortableTransformationLayer.FeedData.PublishComment(System.Int32,System.String,System.String)">
+            <summary>
+            Method that store a comment made to a feed from a human user
+            </summary>
+            <param name="feedId">Integer that represent the ID of a feed</param>
+            <param name="username">String that represent the username of the human user</param>
+            <param name="comment">String that rapresent the content of the comment</param>
+            <returns>Asynchronous operation that contain a boolean that indicate if the operation succeed</returns>
+        </member>
+        <member name="M:PortableTransformationLayer.FeedData.AddFeedTag(System.Int32,System.String)">
+            <summary>
+            Method that the reference to a user into a feed
+            </summary>
+            <param name="feedId">ID of the feed where the reference should be added</param>
+            <param name="username">Username of the the user that should be reference in the feed</param>
+            <returns>Asynchronous operation that contain a boolean that indicate if the operation succeed</returns>
+        </member>
+        <member name="M:PortableTransformationLayer.FeedData.GetFeedByFeedId(System.Int32)">
+            <summary>
+            Method that retrieve the feed with a specified ID
+            </summary>
+            <param name="feedId">ID of the feed where the reference should be added</param>
+            <returns>Asynchronous operation that contain the feed rewuired</returns>
+        </member>
+        <member name="M:PortableTransformationLayer.FeedData.GetFeedsFromLastShift(System.Int32)">
+            <summary>
+            Method that returns a specific amount of feeds from the last shift
+            </summary>
+            <param name="numFeeds">the number of feeds to be returned</param>
+            <returns></returns>
+        </member>
+        <member name="T:PortableTransformationLayer.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:PortableTransformationLayer.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:PortableTransformationLayer.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:PortableTransformationLayer.Properties.Resources.url">
+            <summary>
+              Looks up a localized string similar to http://83.255.84.243:85/ServiceJSON/ABBConnectWCF.svc/.
+            </summary>
+        </member>
+        <member name="P:PortableTransformationLayer.Properties.Resources.urlStream">
+            <summary>
+              Looks up a localized string similar to http://83.255.84.243:85/Service/ABBConnectStreamWCF.svc/.
+            </summary>
+        </member>
+        <member name="T:PortableTransformationLayer.UserData">
+            <summary>
+            Class that allow to retrieve and store informations about users, distinguishing between human users and sensors
+            </summary>
+        </member>
+        <member name="F:PortableTransformationLayer.UserData.urlServer">
+            <summary>
+            Attribute that provide the connection to the server
+            </summary>
+        </member>
+        <member name="M:PortableTransformationLayer.UserData.#ctor">
+            <summary>
+            Constructor that automatically instantiate the attribute of the class
+            </summary>
+        </member>
+        <member name="M:PortableTransformationLayer.UserData.GetSensorInformation(System.Int32)">
+            <summary>
+            Method that retrieve the information of a sensor with a specified ID
+            </summary>
+            <param name="id">ID of the sensor that have to be retrieved</param>
+            <returns>Asynchronous operation that contain the information about the sensor</returns>
+        </member>
+        <member name="M:PortableTransformationLayer.UserData.GetHistoricalDataFromSensor(System.Int32,System.DateTime,System.DateTime)">
+            <summary>
+            Method that returns all the previous data of a sensor specified by the date time period
+            </summary>
+            <param name="id">the identifier of the sensor</param>
+            <param name="startingTime">the starting time of the time period</param>
+            <param name="endingTime">the ending time of the time period</param>
+            <returns></returns>
+        </member>
+        <member name="M:PortableTransformationLayer.UserData.GetLastSensorValue(System.Int32)">
+            <summary>
+            Method that retrieve the last value register from a sensor
+            </summary>
+            <param name="id">ID of the sensor that have to be retrieved</param>
+            <returns>Asynchronous operation that contain the last value of the sensor</returns>
+        </member>
+        <member name="M:PortableTransformationLayer.UserData.LogIn(System.String,System.String)">
+            <summary>
+            Method that check the credentials of a human user
+            </summary>
+            <param name="usrName">String that rappresent the username of a human user</param>
+            <param name="pw">String that rappresent the password of a human user</param>
+            <returns>Asynchronous operation that contain a boolean value representing the outcome of the operation</returns>
+        </member>
+        <member name="M:PortableTransformationLayer.UserData.GetHumanInformation(System.Int32)">
+            <summary>
+            Method that retrieve all the information of a human user
+            </summary>
+            <param name="Id">ID of the human user that have to be retrieved</param>
+            <returns>Asynchronous operation that contain the human user information</returns>
+        </member>
+        <member name="M:PortableTransformationLayer.UserData.GetHumanInformationByUserName(System.String)">
+            <summary>
+            Method that retrieve all the information of a human user
+            </summary>
+            <param name="username">String that rappresent the username of the human user</param>
+            <returns>Asynchronous operation that contain the human user informations</returns>
+        </member>
+        <member name="M:PortableTransformationLayer.UserData.SearchUsersByName(System.String)">
+            <summary>
+            Method that retrieve all the information of a user, human or sensor
+            </summary>
+            <param name="query">String that rappresent the name of the user</param>
+            <returns>Asynchronous operation that contain a List with the user informations</returns>
+        </member>
+        <member name="M:PortableTransformationLayer.UserData.GetUserSavedFilters(System.Int32)">
+            <summary>
+            Method that retrieve all the saved filters option on the feeds of a specific user
+            </summary>
+            <param name="userId">String that rappresent the ID of the user</param>
+            <returns>Asynchronous operation that contain the List with all the saved filters of a specific user</returns>
+        </member>
+        <member name="M:PortableTransformationLayer.UserData.GetFilterTaggedUsers(System.Int32)">
+            <summary>
+            Method that retrieve all the users referenced in a specific filter
+            </summary>
+            <param name="filterId">String that rappresent the ID of the filter</param>
+            <returns>Asynchronous operation that contain the List referenced in the filter</returns>
+        </member>
+        <member name="M:PortableTransformationLayer.UserData.AddFilter(System.Int32,System.String,System.DateTime,System.DateTime,System.String,System.String)">
+            <summary>
+            Method that save a filter option
+            </summary>
+            <param name="userId">String that rappresent the ID of the user that set the filter option</param>
+            <param name="filterName">String that rappresent the name of the filter</param>
+            <param name="startingTime">Class DateTime that rappresent the starting date where the filter option start</param>
+            <param name="endingTime">Class DateTime that rappresent the ending date where the filter option end</param>
+            <param name="location">String that rappresent the location where the filtering option is applied</param>
+            <param name="feedType">String that rappresent the type of the feed that could be human or sensor</param>
+            <returns>Asynchronous operation that contain the ID of the filter</returns>
+        </member>
+        <member name="M:PortableTransformationLayer.UserData.AddUserToFilter(System.Int32,System.Int32)">
+            <summary>
+            Method that save the reference to a user in a specific filter
+            </summary>
+            <param name="userId">String that rappresent the ID of the user that will be referenced in the filter option</param>
+            <param name="filterId">String that rappresent the ID of the filter option</param>
+            <returns>Asynchronous operation containing the outcome of the operation</returns>
+        </member>
+        <member name="M:PortableTransformationLayer.UserData.FollowSensor(System.Int32,System.Int32)">
+            <summary>
+            Method that save the reference between a sensor and a human user
+            </summary>
+            <param name="humanUserId">String that rappresent the ID of the human user</param>
+            <param name="sensorUserId">String that rappresent the ID of the sensor</param>
+            <returns>Asynchronous operation containing a boolean that represent the outcome of the operation</returns>
+        </member>
+        <member name="M:PortableTransformationLayer.UserData.GetFollowedSensors(System.Int32)">
+            <summary>
+            Method that retrieve the ID of the sensors referenced by a human user
+            </summary>
+            <param name="humanUserId">String that rappresent the ID of the human user</param>
+            <returns>Asynchronous operation containing a List of all the sensors followed by the human user</returns>
+        </member>
+        <member name="M:PortableTransformationLayer.UserData.GetUserActivity(System.Int32)">
+            <summary>
+            Method that retrieve the activities of a specific user.
+            The activity could be like make a comment, or a feed, or a reference to another user
+            </summary>
+            <param name="userId">String that rappresent the ID of the human user</param>
+            <returns>Asynchronous operation containing a List of activities</returns>
+        </member>
+        <member name="M:PortableTransformationLayer.UserData.UnfollowSensor(System.Int32,System.Int32)">
+            <summary>
+            Method that delete the reference between a sensor and a human user
+            </summary>
+            <param name="humanUserId">String that rappresent the ID of the human user</param>
+            <param name="sensorUserId">String that rappresent the ID of the sensor user</param>
+            <returns>Asynchronous operation containing a boolean that represent the outcome of the operation</returns>
+        </member>
+        <member name="M:PortableTransformationLayer.UserData.GetUserActivityFromId(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Method that returns a list (with specified size) of GetUserActivity_Result objects, which start from a specific id.
+            </summary>
+            <param name="userId">the user identifier of the user, whose activity is requested</param>
+            <param name="activityNumber">the number defining the list size</param>
+            <param name="startId">the starting id of an GetUserActivity_Result object</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

@@ -26,6 +26,13 @@ namespace DAL
             this.sqlCommand = this.sqlConnection.CreateCommand();
         }
 
+        /// <summary>
+        /// Method that returns all the previous data of a sensor specified by the date time period
+        /// </summary>
+        /// <param name="id">the identifier of the sensor</param>
+        /// <param name="startingTime">the starting time of the time period</param>
+        /// <param name="endingTime">the ending time of the time period</param>
+        /// <returns></returns>
         public List<GetHistoricalDataFromSensor_Result> GetHistoricalDataFromSensor(int id, DateTime startingTime, DateTime endingTime)
         {
             List<GetHistoricalDataFromSensor_Result> histData = new List<GetHistoricalDataFromSensor_Result>();
@@ -717,7 +724,13 @@ namespace DAL
             return numValue;
         }
 
-
+        /// <summary>
+        /// Method that returns a list (with specified size) of GetUserActivity_Result objects, which start from a specific id.
+        /// </summary>
+        /// <param name="userId">the user identifier of the user, whose activity is requested</param>
+        /// <param name="activityNumber">the number defining the list size</param>
+        /// <param name="startId">the starting id of an GetUserActivity_Result object</param>
+        /// <returns></returns>
         public List<GetUserActivity_Result> GetUserActivityFromId(int userId, int activityNumber, int startId)
         {
             List<GetUserActivity_Result> activityList = new List<GetUserActivity_Result>();
@@ -774,6 +787,12 @@ namespace DAL
             return activityList;
         }
 
+        /// <summary>
+        /// Method that updates the string representation of a user's avatar in the database
+        /// </summary>
+        /// <param name="userId">the user identifier of the user, whose avatar is updated</param>
+        /// <param name="image"></param>
+        /// <returns></returns>
         public bool AddUserAvatar(int userId, string image)
         {
             int rowsAffected = 0;

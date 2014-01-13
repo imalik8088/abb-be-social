@@ -6,8 +6,14 @@ using PortableTransformationLayer.ABBConnectServiceRef;
 
 namespace PortableBLL
 {
+    /// <summary>
+    /// Class that rappresent a sensor
+    /// </summary>
     public class Sensor: User
     {
+        /// <summary>
+        /// Constructor that automatically instatiate the attributes of the class
+        /// </summary>
         public Sensor()
         {
             this.sensorValues = new List<SensorVTData>();
@@ -16,6 +22,10 @@ namespace PortableBLL
             this.unitMetric = "";
         }
 
+        /// <summary>
+        /// Constructor that instantiate the attributes to the values given in input
+        /// </summary>
+        /// <param name="result">Class containing all the information of the sensor (generated from the entity framework)</param>
         public Sensor(GetUsersByName_Result result)
         {
             base.ID = result.Id;
@@ -25,6 +35,10 @@ namespace PortableBLL
             base.Avatar = "";
         }
 
+        /// <summary>
+        /// Constructor that instantiate the attributes to the values given in input
+        /// </summary>
+        /// <param name="entitySensor">Class containing all the information of the sensor, except for the location</param>
         public Sensor(GetSensorInformation_Result entitySensor)
         {
             base.ID = entitySensor.Id;
@@ -37,7 +51,13 @@ namespace PortableBLL
             base.Avatar = entitySensor.Image;
         }
 
+        /// <summary>
+        /// Attribute that represent the list of values that the sensor had
+        /// </summary>
         private List<SensorVTData> sensorValues;
+        /// <summary>
+        /// Properties that allow to modify or take the valuues that the sensor had
+        /// </summary>
         public List<SensorVTData> SensorValues
         {
             get
@@ -50,7 +70,13 @@ namespace PortableBLL
             }
         }
 
+        /// <summary>
+        /// Attribute that represent the lowest value that the sensor can register 
+        /// </summary>
         private decimal lowerBoundary;
+        /// <summary>
+        ///  Properties that allow to modify or take the lowest value that the sensor can register
+        /// </summary>
         public decimal LowerBoundary
         {
             get
@@ -63,7 +89,13 @@ namespace PortableBLL
             }
         }
 
+        /// <summary>
+        /// Attribute that represent the maximum value that the sensor can register 
+        /// </summary>
         private decimal upperBoundary;
+        /// <summary>
+        ///  Properties that allow to modify or take the maximum value that the sensor can register 
+        /// </summary>
         public decimal UpperBoundary
         {
             get
@@ -76,7 +108,13 @@ namespace PortableBLL
             }
         }
 
+        /// <summary>
+        /// Attribute that represent the metric system used by the sensor 
+        /// </summary>
         private string unitMetric;
+        /// <summary>
+        ///  Properties that allow to modify or take the metric system used by the sensor 
+        /// </summary>
         public string UnitMetric
         {
             get
