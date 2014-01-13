@@ -27,11 +27,11 @@ namespace ABBJSONService
 
         [OperationContract]
         [WebInvoke]
-        List<GetLatestXFeeds_Result> GetLatestXFeeds(string X);
+        List<DAL.GetLatestXFeeds_Result> GetLatestXFeeds(string X);
 
         [OperationContract]
         [WebInvoke]
-        List<GetLatestXFeedsFromId_Result> GetLatestXFeedsFromId(string X, string Id);
+        List<DAL.GetLatestXFeedsFromId_Result> GetLatestXFeedsFromId(string X, string Id);
 
         [OperationContract]
         [WebInvoke]
@@ -60,30 +60,6 @@ namespace ABBJSONService
 
         [OperationContract]
         [WebInvoke]
-        List<DAL.GetAllHumanFeeds_Result> GetHumanFeeds();
-
-        [OperationContract]
-        [WebInvoke]
-        List<DAL.GetAllHumanFeedsByFilter_Result> GetHumanFeedsByFilter(string location, string startingTime, string endingTime);
-
-        [OperationContract]
-        [WebInvoke]
-        List<DAL.GetAllSensorFeeds_Result> GetSensorFeeds();
-
-        [OperationContract]
-        [WebInvoke]
-        List<DAL.GetAllSensorFeedsByFilter_Result> GetSensorFeedsByFilter(string location, string startingTime, string endingTime);
-
-        [OperationContract]
-        [WebInvoke]
-        List<DAL.GetUserFeeds_Result> GetUserFeeds();
-
-        [OperationContract]
-        [WebInvoke]
-        List<DAL.GetUserFeedsByFilter_Result> GetUserFeedsByFilter(string location, string startingTime, string endingTime);
-
-        [OperationContract]
-        [WebInvoke]
         List<string> GetLocations();
 
         [OperationContract]
@@ -109,14 +85,6 @@ namespace ABBJSONService
         [OperationContract]
         [WebInvoke]
         bool FollowSensor(string humanId, string sensorId);
-
-        [OperationContract]
-        [WebInvoke]
-        List<DAL.GetLatestFeedsByFilter_Result> GetLatestFeedsByFilter(string location, string startingTime, string endingTime);
-
-        [OperationContract]
-        [WebInvoke]
-        List<DAL.GetFeedsByFilter_Result> GetFeedsByFilter(string name, string location, string startingTime, string endingTime, string feedType);
         
         [OperationContract]
         [WebInvoke]

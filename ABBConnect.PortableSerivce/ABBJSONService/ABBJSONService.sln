@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ABBJSONService", "ABBJSONService\ABBJSONService.csproj", "{7B2D4E56-597E-4D43-8719-D29803F9F972}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ABBStreamService", "..\..\..\..\Visual Studio 2012\Projects\ABBStreamService\ABBStreamService\ABBStreamService.csproj", "{719B5C04-7032-41D4-B67C-5194FEC7337B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ABBStreamService", "ABBStreamService\ABBStreamService.csproj", "{719B5C04-7032-41D4-B67C-5194FEC7337B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

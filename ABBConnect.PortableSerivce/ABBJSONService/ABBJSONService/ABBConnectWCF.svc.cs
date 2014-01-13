@@ -189,48 +189,6 @@ namespace ABBJSONService
             return feedData.GetFeedTags(Int32.Parse(feedId));
         }
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetHumanFeeds")]
-        List<DAL.GetAllHumanFeeds_Result> IABBConnectWCF.GetHumanFeeds()
-        {
-            FeedData feedData = new FeedData();
-            return feedData.GetHumanFeeds();
-        }
-
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetHumanFeedsByFilter?location={location}&start={startingTime}&end={endingTime}")]
-        List<DAL.GetAllHumanFeedsByFilter_Result> IABBConnectWCF.GetHumanFeedsByFilter(string location, string startingTime, string endingTime)
-        {
-            FeedData feedData = new FeedData();
-            return feedData.GetHumanFeedsByFilter(location, Convert.ToDateTime(startingTime), Convert.ToDateTime(endingTime));
-        }
-
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetSensorFeeds")]
-        List<DAL.GetAllSensorFeeds_Result> IABBConnectWCF.GetSensorFeeds()
-        {
-            FeedData feedData = new FeedData();
-            return feedData.GetSensorFeeds();
-        }
-
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetSensorFeedsByFilter?location={location}&start={startingTime}&end={endingTime}")]
-        List<DAL.GetAllSensorFeedsByFilter_Result> IABBConnectWCF.GetSensorFeedsByFilter(string location, string startingTime, string endingTime)
-        {
-            FeedData feedData = new FeedData();
-            return feedData.GetSensorFeedsByFilter(location, Convert.ToDateTime(startingTime), Convert.ToDateTime(endingTime));
-        }
-
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetUserFeeds")]
-        List<DAL.GetUserFeeds_Result> IABBConnectWCF.GetUserFeeds()
-        {
-            FeedData feedData = new FeedData();
-            return feedData.GetUserFeeds();
-        }
-
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetUserFeedsByFilter?location={location}&start={startingTime}&end={endingTime}")]
-        List<DAL.GetUserFeedsByFilter_Result> IABBConnectWCF.GetUserFeedsByFilter(string location, string startingTime, string endingTime)
-        {
-            FeedData feedData = new FeedData();
-            return feedData.GetUserFeedsByFilter(location, Convert.ToDateTime(startingTime), Convert.ToDateTime(endingTime));
-        }
-
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetLocations")]
         List<string> IABBConnectWCF.GetLocations()
         {
@@ -278,20 +236,6 @@ namespace ABBJSONService
         {
             UserData userData = new UserData();
             return userData.FollowSensor(Int32.Parse(humanId), Int32.Parse(sensorId));
-        }
-
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "FilterLatestFeeds?location={location}&start={startingTime}&end={endingTime}")]
-        List<DAL.GetLatestFeedsByFilter_Result> IABBConnectWCF.GetLatestFeedsByFilter(string location, string startingTime, string endingTime)
-        {
-            FeedData feedData = new FeedData();
-            return feedData.GetLatestFeedsByFilter(location, Convert.ToDateTime(startingTime), Convert.ToDateTime(endingTime));
-        }
-
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "FilterFeeds?name={name}&location={location}&start={startingTime}&end={endingTime}&type={feedType}")]
-        List<DAL.GetFeedsByFilter_Result> IABBConnectWCF.GetFeedsByFilter(string name, string location, string startingTime, string endingTime, string feedType)
-        {
-            FeedData feedData = new FeedData();
-            return feedData.GetFeedsByFilter(name, location, Convert.ToDateTime(startingTime), Convert.ToDateTime(endingTime), feedType);
         }
 
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "FilterFeedsByFilter?userId={id}&location={location}&start={startingTime}&end={endingTime}&type={feedType}&category={categoryName}&feedId={startId}&numFeeds={numFeeds}&guid={randomGuid}")]
