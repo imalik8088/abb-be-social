@@ -27,20 +27,7 @@ namespace ABBJSONService
 
         [OperationContract]
         [WebInvoke]
-        List<DAL.GetLatestXFeeds_Result> GetLatestXFeeds(string X);
-
-        [OperationContract]
-        [WebInvoke]
-        List<DAL.GetLatestXFeedsFromId_Result> GetLatestXFeedsFromId(string X, string Id);
-
-        [OperationContract]
-        [WebInvoke]
-        int PostTestFeed(string id, string text, string filepath, string prioId);
-
-        [OperationContract]
-        [WebInvoke]
         int PostFeed(string id, string text, string filepath, string prioId);
-
 
         [OperationContract]
         [WebInvoke]

@@ -37,7 +37,7 @@ namespace DAL
         {
             List<GetHistoricalDataFromSensor_Result> histData = new List<GetHistoricalDataFromSensor_Result>();
 
-            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=" + Properties.Resources.Data_Source + "Initial Catalog=" + Properties.Resources.Initial_Catalog + "User id=" + Properties.Resources.User_id + "Password=" + Properties.Resources.Password))
             {
 
                 sqlConn.Open();
@@ -84,14 +84,14 @@ namespace DAL
         /// </summary>
         /// <param name="humanUserId">String that rappresent the ID of the human user</param>
         /// <param name="sensorUserId">String that rappresent the ID of the sensor</param>
-        /// <returns>Asynchronous operation containing a boolean that represent the outcome of the operation</returns>
+        /// <returns>operation containing a boolean that represent the outcome of the operation</returns>
         public bool FollowSensor(int humanUserId, int sensorUserId)
         {
             int humanIntId = humanUserId;
             int sensorIntId = sensorUserId;
             int rowsAffected = 0;
 
-            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=" + Properties.Resources.Data_Source + "Initial Catalog=" + Properties.Resources.Initial_Catalog + "User id=" + Properties.Resources.User_id + "Password=" + Properties.Resources.Password))
             {
 
                 sqlConn.Open();
@@ -119,14 +119,14 @@ namespace DAL
         /// </summary>
         /// <param name="humanUserId">String that rappresent the ID of the human user</param>
         /// <param name="sensorUserId">String that rappresent the ID of the sensor user</param>
-        /// <returns>Asynchronous operation containing a boolean that represent the outcome of the operation</returns>
+        /// <returns>operation containing a boolean that represent the outcome of the operation</returns>
         public bool UnfollowSensor(int humanUserId, int sensorUserId)
         {
             int humanIntId = humanUserId;
             int sensorIntId = sensorUserId;
             int rowsAffected = 0;
 
-            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=" + Properties.Resources.Data_Source + "Initial Catalog=" + Properties.Resources.Initial_Catalog + "User id=" + Properties.Resources.User_id + "Password=" + Properties.Resources.Password))
             {
 
                 sqlConn.Open();
@@ -153,12 +153,12 @@ namespace DAL
         /// Method that retrieve the ID of the sensors referenced by a human user
         /// </summary>
         /// <param name="humanUserId">String that rappresent the ID of the human user</param>
-        /// <returns>Asynchronous operation containing a List of all the sensors followed by the human user</returns>
+        /// <returns>operation containing a List of all the sensors followed by the human user</returns>
         public List<int> GetFollowedSensors(int humanUserId)
         {
             List<int> sensorIdList = new List<int>();
 
-            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=" + Properties.Resources.Data_Source + "Initial Catalog=" + Properties.Resources.Initial_Catalog + "User id=" + Properties.Resources.User_id + "Password=" + Properties.Resources.Password))
             {
                 sqlConn.Open();
                 string sqlQuery = "GetFollowedSensors";
@@ -196,12 +196,12 @@ namespace DAL
         /// Method that retrieve the information of a sensor with a specified ID
         /// </summary>
         /// <param name="id">ID of the sensor that have to be retrieved</param>
-        /// <returns>Asynchronous operation that contain the information about the sensor</returns>
+        /// <returns>operation that contain the information about the sensor</returns>
         public GetSensorInformation_Result GetSensorInformation(int id)
         {
             GetSensorInformation_Result s = new GetSensorInformation_Result();
 
-            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=" + Properties.Resources.Data_Source + "Initial Catalog=" + Properties.Resources.Initial_Catalog + "User id=" + Properties.Resources.User_id + "Password=" + Properties.Resources.Password))
             {
 
                 sqlConn.Open();
@@ -240,12 +240,12 @@ namespace DAL
         /// <param name="endingTime">Class DateTime that rappresent the ending date where the filter option end</param>
         /// <param name="location">String that rappresent the location where the filtering option is applied</param>
         /// <param name="feedType">String that rappresent the type of the feed that could be human or sensor</param>
-        /// <returns>Asynchronous operation that contain the ID of the filter</returns>
+        /// <returns>operation that contain the ID of the filter</returns>
         public int SaveFilter(int userId, string filterName, DateTime startingTime, DateTime endingTime, string location, string feedType)
         {
             int retValue = -1;
 
-            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=" + Properties.Resources.Data_Source + "Initial Catalog=" + Properties.Resources.Initial_Catalog + "User id=" + Properties.Resources.User_id + "Password=" + Properties.Resources.Password))
             {
 
                 sqlConn.Open();
@@ -308,12 +308,12 @@ namespace DAL
         /// Method that retrieve all the saved filters option on the feeds of a specific user
         /// </summary>
         /// <param name="userId">String that rappresent the ID of the user</param>
-        /// <returns>Asynchronous operation that contain the List with all the saved filters of a specific user</returns>
+        /// <returns>operation that contain the List with all the saved filters of a specific user</returns>
         public List<GetUserSavedFilters_Result> GetSavedFilter(int userId)
         {
             List<GetUserSavedFilters_Result> savedFilters = new List<GetUserSavedFilters_Result>();
 
-            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=" + Properties.Resources.Data_Source + "Initial Catalog=" + Properties.Resources.Initial_Catalog + "User id=" + Properties.Resources.User_id + "Password=" + Properties.Resources.Password))
             {
 
                 sqlConn.Open();
@@ -363,12 +363,12 @@ namespace DAL
         /// Method that retrieve all the information of a user, human or sensor
         /// </summary>
         /// <param name="query">String that rappresent the name of the user</param>
-        /// <returns>Asynchronous operation that contain a List with the user informations</returns>
+        /// <returns>operation that contain a List with the user informations</returns>
         public List<GetUsersByName_Result> SearchUsersByName(string query)
         {
             List<GetUsersByName_Result> users = new List<GetUsersByName_Result>();
 
-            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=" + Properties.Resources.Data_Source + "Initial Catalog=" + Properties.Resources.Initial_Catalog + "User id=" + Properties.Resources.User_id + "Password=" + Properties.Resources.Password))
             {
 
                 sqlConn.Open();
@@ -410,12 +410,12 @@ namespace DAL
         /// Method that retrieve all the users referenced in a specific filter
         /// </summary>
         /// <param name="filterId">String that rappresent the ID of the filter</param>
-        /// <returns>Asynchronous operation that contain the List referenced in the filter</returns>
+        /// <returns>operation that contain the List referenced in the filter</returns>
         public List<GetUserSavedFiltersTagedUsers_Result> GetFilterTaggedUsers(int filterId)
         {
             List<GetUserSavedFiltersTagedUsers_Result> taggedUsers = new List<GetUserSavedFiltersTagedUsers_Result>();
 
-            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=" + Properties.Resources.Data_Source + "Initial Catalog=" + Properties.Resources.Initial_Catalog + "User id=" + Properties.Resources.User_id + "Password=" + Properties.Resources.Password))
             {
 
                 sqlConn.Open();
@@ -455,12 +455,12 @@ namespace DAL
         /// The activity could be like make a comment, or a feed, or a reference to another user
         /// </summary>
         /// <param name="userId">String that rappresent the ID of the human user</param>
-        /// <returns>Asynchronous operation containing a List of activities</returns>
+        /// <returns>operation containing a List of activities</returns>
         public List<GetUserActivity_Result> GetUserActivity(int userId)
         {
             List<GetUserActivity_Result> activityList = new List<GetUserActivity_Result>();
 
-            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=" + Properties.Resources.Data_Source + "Initial Catalog=" + Properties.Resources.Initial_Catalog + "User id=" + Properties.Resources.User_id + "Password=" + Properties.Resources.Password))
             {
                 sqlConn.Open();
                 string sqlQuery = "GetUserActivity";
@@ -507,12 +507,12 @@ namespace DAL
         /// </summary>
         /// <param name="userId">String that rappresent the ID of the user that will be referenced in the filter option</param>
         /// <param name="filterId">String that rappresent the ID of the filter option</param>
-        /// <returns>Asynchronous operation containing the outcome of the operation</returns>
+        /// <returns>operation containing the outcome of the operation</returns>
         public bool AddFilterUser(int userId, int filterId)
         {
             int rowsAffected = 0;
 
-            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=" + Properties.Resources.Data_Source + "Initial Catalog=" + Properties.Resources.Initial_Catalog + "User id=" + Properties.Resources.User_id + "Password=" + Properties.Resources.Password))
             {
 
                 sqlConn.Open();
@@ -535,11 +535,15 @@ namespace DAL
                 return false;
         }
 
+        /// <summary>
+        /// Method that is used to retrieve all the sensors installed on the system.
+        /// </summary>
+        /// <returns></returns>
         public List<GetAllSensors_Result> GetAllSensors()
         {
             List<GetAllSensors_Result> sensors = new List<GetAllSensors_Result>();
 
-            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=" + Properties.Resources.Data_Source + "Initial Catalog=" + Properties.Resources.Initial_Catalog + "User id=" + Properties.Resources.User_id + "Password=" + Properties.Resources.Password))
             {
 
                 sqlConn.Open();
@@ -573,14 +577,14 @@ namespace DAL
         /// <summary>
         /// Method that retrieve all the information of a human user
         /// </summary>
-        /// <param name="Id">ID of the human user that have to be retrieved</param>
-        /// <returns>Asynchronous operation that contain the human user information</returns>
+        /// <param name="id">ID of the human user that have to be retrieved</param>
+        /// <returns>operation that contain the human user information</returns>
         public GetHumanInformation_Result GetHumanInformation(int id)
         {
 
             GetHumanInformation_Result h = new GetHumanInformation_Result();
 
-            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=" + Properties.Resources.Data_Source + "Initial Catalog=" + Properties.Resources.Initial_Catalog + "User id=" + Properties.Resources.User_id + "Password=" + Properties.Resources.Password))
             {
 
                 sqlConn.Open();
@@ -614,12 +618,12 @@ namespace DAL
         /// Method that retrieve all the information of a human user
         /// </summary>
         /// <param name="username">String that rappresent the username of the human user</param>
-        /// <returns>Asynchronous operation that contain the human user informations</returns>
+        /// <returns>operation that contain the human user informations</returns>
         public GetHumanInformationByUsername_Result GetHumanInformationByUsername(string username)
         {
             GetHumanInformationByUsername_Result h = new GetHumanInformationByUsername_Result();
 
-            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=" + Properties.Resources.Data_Source + "Initial Catalog=" + Properties.Resources.Initial_Catalog + "User id=" + Properties.Resources.User_id + "Password=" + Properties.Resources.Password))
             {
 
                 sqlConn.Open();
@@ -653,14 +657,14 @@ namespace DAL
         /// <summary>
         /// Method that check the credentials of a human user
         /// </summary>
-        /// <param name="usrName">String that rappresent the username of a human user</param>
-        /// <param name="pw">String that rappresent the password of a human user</param>
-        /// <returns>Asynchronous operation that contain a boolean value representing the outcome of the operation</returns>
+        /// <param name="username">String that rappresent the username of a human user</param>
+        /// <param name="password">String that rappresent the password of a human user</param>
+        /// <returns>operation that contain a boolean value representing the outcome of the operation</returns>
         public bool LogIn(string username, string password)
         {
             int result = 0;
 
-            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=" + Properties.Resources.Data_Source + "Initial Catalog=" + Properties.Resources.Initial_Catalog + "User id=" + Properties.Resources.User_id + "Password=" + Properties.Resources.Password))
             {
 
                 sqlConn.Open();
@@ -688,13 +692,13 @@ namespace DAL
         /// Method that retrieve the last value register from a sensor
         /// </summary>
         /// <param name="id">ID of the sensor that have to be retrieved</param>
-        /// <returns>Asynchronous operation that contain the last value of the sensor</returns>
+        /// <returns>operation that contain the last value of the sensor</returns>
         public int GetLastSensorValue(int id)
         {
             int iD = id;
             string value = "";
 
-            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=" + Properties.Resources.Data_Source + "Initial Catalog=" + Properties.Resources.Initial_Catalog + "User id=" + Properties.Resources.User_id + "Password=" + Properties.Resources.Password))
             {
 
                 sqlConn.Open();
@@ -735,7 +739,7 @@ namespace DAL
         {
             List<GetUserActivity_Result> activityList = new List<GetUserActivity_Result>();
 
-            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=" + Properties.Resources.Data_Source + "Initial Catalog=" + Properties.Resources.Initial_Catalog + "User id=" + Properties.Resources.User_id + "Password=" + Properties.Resources.Password))
             {
                 sqlConn.Open();
                 string sqlQuery = "GetXUserActivities";
@@ -796,7 +800,7 @@ namespace DAL
         public bool AddUserAvatar(int userId, string image)
         {
             int rowsAffected = 0;
-            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=" + Properties.Resources.Data_Source + "Initial Catalog=" + Properties.Resources.Initial_Catalog + "User id=" + Properties.Resources.User_id + "Password=" + Properties.Resources.Password))
             {
                 sqlConn.Open();
                 string sqlQuery = "AddUserAvatar";
