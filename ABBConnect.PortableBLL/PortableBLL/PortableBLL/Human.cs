@@ -6,8 +6,14 @@ using PortableTransformationLayer.ABBConnectServiceRef;
 
 namespace PortableBLL
 {
+    /// <summary>
+    /// Class that rappresent a human user allowing to use its data
+    /// </summary>
     public class Human: User
     {
+        /// <summary>
+        /// Constructor that authomaticaly instantiate the attributes of the class to empty values
+        /// </summary>
         public Human()
         {
             base.UserName = "";
@@ -20,6 +26,10 @@ namespace PortableBLL
             base.ID = -1;
         }
 
+        /// <summary>
+        /// Constructor that instatiate the attributes of the class to the data given in input
+        /// </summary>
+        /// <param name="result">Class that contain all the informations about a user, used to instatiate the attribute of the class</param>
         public Human(GetUsersByName_Result result)
         {
             base.ID = result.Id;
@@ -33,6 +43,11 @@ namespace PortableBLL
             base.Avatar = "";
         }
 
+        /// <summary>
+        /// Constructor that instatiate the attributes of the class to the data given in input
+        /// </summary>
+        /// <param name="result">Class that contain some of the informations about a user, used to instatiate the attribute of the class</param>
+        /// <param name="humanId">Integer that rappresent the ID of the human user</param>
         public Human(GetHumanInformation_Result result, int humanId)
         {
             base.ID = humanId;
@@ -45,6 +60,11 @@ namespace PortableBLL
             base.Avatar = result.Image;
             companyTitle = ""; 
         }
+
+        /// <summary>
+        /// Constructor that instatiate the attributes of the class to the data given in input
+        /// </summary>
+        /// <param name="result">Class that contain all the informations about a user, used to instatiate the attribute of the class</param>
         public Human(GetHumanInformationByUsername_Result result)
         {
             base.ID = result.Id;
@@ -58,6 +78,10 @@ namespace PortableBLL
             companyTitle = "";
         }
 
+        /// <summary>
+        /// Constructor that instatiate the attributes of the class to the data given in input
+        /// </summary>
+        /// <param name="result">Class that contain all the informations about a user, used to instatiate the attribute of the class</param>
         public Human(GetFeedTags_Result res)
         {
             base.ID = res.UserId;
@@ -71,7 +95,13 @@ namespace PortableBLL
             
         }
 
+        /// <summary>
+        /// Attribute that rappresent the telephone or mobile number of the user
+        /// </summary>
         private string phoneNumber;
+        /// <summary>
+        /// Properties that allow to retrieve or change the telephone or mobile number of the user
+        /// </summary>
         public string PhoneNumber
         {
             get
@@ -84,7 +114,13 @@ namespace PortableBLL
             }
         }
 
+        /// <summary>
+        /// Attribute that rappresent the e-mail address of the user
+        /// </summary>
         private string email;
+        /// <summary>
+        /// Properties that allow to retrieve or change the e-mail address of the user
+        /// </summary>
         public string Email
         {
             get
@@ -97,7 +133,13 @@ namespace PortableBLL
             }
         }
 
+        /// <summary>
+        /// Attribute that represents the name of the company for which the user is working
+        /// </summary>
         private string companyTitle;
+        /// <summary>
+        /// Properties that allow to retrieve or change the name of the company for which the user is working
+        /// </summary>
         public string CompanyTitle
         {
             get
@@ -110,7 +152,13 @@ namespace PortableBLL
             }
         }
 
+        /// <summary>
+        /// Attribute that rappresent the first name of the user
+        /// </summary>
         private string firstName;
+        /// <summary>
+        /// Properties that allow to retrieve or change the first name of the user
+        /// </summary>
         public string FirstName
         {
             get
@@ -123,7 +171,13 @@ namespace PortableBLL
             }
         }
 
+        /// <summary>
+        /// Attribute that rappresent the last name of the user
+        /// </summary>
         private string lastName;
+        /// <summary>
+        /// Properties that allow to retrieve or change the last name of the user
+        /// </summary>
         public string LastName
         {
             get

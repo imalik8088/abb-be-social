@@ -36,7 +36,7 @@ namespace DAL
         {
             List<GetPriorityCategories_Result> cats = new List<GetPriorityCategories_Result>();
 
-            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=" + Properties.Resources.Data_Source + "Initial Catalog=" + Properties.Resources.Initial_Catalog + "User id=" + Properties.Resources.User_id + "Password=" + Properties.Resources.Password))
             {
 
                 sqlConn.Open();
@@ -73,7 +73,7 @@ namespace DAL
         {
             List<string> locations = new List<string>();
 
-            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=" + Properties.Resources.Data_Source + "Initial Catalog=" + Properties.Resources.Initial_Catalog + "User id=" + Properties.Resources.User_id + "Password=" + Properties.Resources.Password)) //here goes connStrng or the variable of it
             {
 
                 sqlConn.Open();

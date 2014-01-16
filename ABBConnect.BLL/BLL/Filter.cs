@@ -6,9 +6,14 @@ using DAL;
 
 namespace BLL
 {
+    /// <summary>
+    /// Class that represent a filtering option
+    /// </summary>
     public class Filter
     {
-
+        /// <summary>
+        /// Constructor that authomaticaly instanciate the attributes of the class with null values
+        /// </summary>
         public Filter()
         {
             this.iD = -1;
@@ -19,6 +24,11 @@ namespace BLL
             this.usersOnFilter = new List<User>();
         }
 
+        /// <summary>
+        /// Constructor that instantiate the attributes with the given values
+        /// </summary>
+        /// <param name="entityFilter">Class containing all the information about a user saved filter</param>
+        /// <param name="taggedUsers"></param>
         public Filter(GetUserSavedFilters_Result entityFilter, List<User> taggedUsers)
         {
             this.iD = entityFilter.ID;
@@ -36,7 +46,13 @@ namespace BLL
             this.usersOnFilter = taggedUsers;
         }
 
+        /// <summary>
+        /// Attribute that represent  the identificator of the  filter option
+        /// </summary>
         private int iD;
+        /// <summary>
+        /// Properties that allow to modify or take the identificator of the  filter option
+        /// </summary>
         public int ID
         {
             get
@@ -49,7 +65,13 @@ namespace BLL
             }
         }
 
+        /// <summary>
+        ///  Attribute that represent  the location of the filter option
+        /// </summary>
         private string location;
+        /// <summary>
+        /// Properties that allow to modify or take the location of the filter option
+        /// </summary>
         public string Location
         {
             get
@@ -62,7 +84,13 @@ namespace BLL
             }
         }
 
+        /// <summary>
+        ///  Attribute that represent  the name of the filter option
+        /// </summary>
         private string name;
+        /// <summary>
+        /// Properties that allow to modify or take the name of the filter option
+        /// </summary>
         public string Name
         {
             get
@@ -75,7 +103,13 @@ namespace BLL
             }
         }
 
+        /// <summary>
+        ///  Attribute that represent  the date when filter option begin
+        /// </summary>
         private DateTime startDate;
+        /// <summary>
+        /// Properties that allow to modify or take the date when filter option begin
+        /// </summary>
         public DateTime StartDate
         {
             get
@@ -88,7 +122,13 @@ namespace BLL
             }
         }
 
+        /// <summary>
+        ///  Attribute that represent  the date when filter option end
+        /// </summary>
         private DateTime endDate;
+        /// <summary>
+        /// Properties that allow to modify or take the date when filter option end
+        /// </summary>
         public DateTime EndDate
         {
             get
@@ -101,20 +141,38 @@ namespace BLL
             }
         }
 
+        /// <summary>
+        ///  Attribute that rappresent the type of the user that made the feed
+        /// </summary>
         private FeedType.FeedSource typeOfFeed;
+        /// <summary>
+        /// Properties that allow to modify or take the type of the user that made the feed
+        /// </summary>
         public FeedType.FeedSource TypeOfFeed
         {
             get { return typeOfFeed; }
             set { typeOfFeed = value; }
         }
 
+        /// <summary>
+        ///  Attribute that list all the users (sensor and human) refered into the filter
+        /// </summary>
         private List<User> usersOnFilter;
+        /// <summary>
+        /// Properties that allow to modify or take the list of all the users (sensor and human) refered into the filter
+        /// </summary>
         public List<User> UsersOnFilter
         {
             get { return usersOnFilter;}
         }
 
+        /// <summary>
+        /// Attribute for relating the category name.
+        /// </summary>
         private string categoryName;
+        /// <summary>
+        /// Property for relating the category name.
+        /// </summary>
         public string CategoryName
         {
             get

@@ -81,6 +81,13 @@ namespace PortableTransformationLayer
             return int.Parse(obj);
         }
 
+        /// <summary>
+        /// Method that sends a byte array representing the image to the service through a POST request and
+        /// its Stream.
+        /// </summary>
+        /// <param name="image">the byte array of an image</param>
+        /// <param name="obj">the id of the feed that this image should be added</param>
+        /// <returns></returns>
         private async Task AddImageToFeed(byte[] image, string obj)
         {
             string firstPackageDetails = image.Length.ToString() + ";" + (int.Parse(obj)).ToString() + ";";
@@ -182,7 +189,11 @@ namespace PortableTransformationLayer
             return JsonConvert.DeserializeObject<GetLatestXFeeds_Result>(response); ;
         }
 
-
+        /// <summary>
+        /// Method that returns a specific amount of feeds from the last shift
+        /// </summary>
+        /// <param name="numFeeds">the number of feeds to be returned</param>
+        /// <returns></returns>
         public async Task<List<GetLatestXFeeds_Result>> GetFeedsFromLastShift(int numFeeds)
         {
             var client = new HttpClient();

@@ -178,7 +178,11 @@ namespace PortableBLL
             return retList;
         }
 
-
+        /// <summary>
+        /// Method that rietreve the informations of a specific user
+        /// </summary>
+        /// <param name="userId">Integer that represent the ID of the user</param>
+        /// <returns>Asynchronous operation that contain the informations about the user</returns>
         public async Task<User> LoadUserInformation(int userId)
         {
             Sensor tempSensor = await LoadSensorInformation(userId).ConfigureAwait(false);
@@ -188,7 +192,11 @@ namespace PortableBLL
                 return tempSensor;
         }
 
-
+        /// <summary>
+        /// Method that retrieve all the saved filters option on the feeds of a specific user
+        /// </summary>
+        /// <param name="userId">String that rappresent the ID of the user</param>
+        /// <returns>Asynchronous operation that contain the List with all the saved filters of a specific user</returns>
         public async Task<List<Filter>> GetUserSavedFilters(int userId)
         {
             List<GetUserSavedFilters_Result> list = await usrData.GetUserSavedFilters(userId).ConfigureAwait(false);
@@ -201,6 +209,11 @@ namespace PortableBLL
             return filterList;
         }
 
+        /// <summary>
+        /// Method that retrieve all the users referenced in a specific filter
+        /// </summary>
+        /// <param name="filterId">String that rappresent the ID of the filter</param>
+        /// <returns>Asynchronous operation that contain the List referenced in the filter</returns>
         public async Task<List<User>> GetFilterTaggedUsers(int filterId)
         {
             List<GetUserSavedFiltersTagedUsers_Result> list = await usrData.GetFilterTaggedUsers(filterId).ConfigureAwait(false);
@@ -215,6 +228,12 @@ namespace PortableBLL
             return userList;
         }
 
+        /// <summary>
+        /// Method that retrieve the activities of a specific user.
+        /// The activity could be like make a comment, or a feed, or a reference to another user
+        /// </summary>
+        /// <param name="userId">String that rappresent the ID of the human user</param>
+        /// <returns>Asynchronous operation containing a List of activities</returns>
         public async Task<List<Activity>> GetUserActivity(int userId)
         {
             List<GetUserActivity_Result> list = await usrData.GetUserActivity(userId).ConfigureAwait(false);
@@ -229,6 +248,14 @@ namespace PortableBLL
             return activityList;
         }
 
+        /// <summary>
+        /// Method that retrieve the activities of a specific user.
+        /// The activity could be like make a comment, or a feed, or a reference to another user
+        /// </summary>
+        /// <param name="userId">String that rappresent the ID of the human user</param>
+        /// <param name="activitiesNumber">The number of the Activities to return</param>
+        /// <param name="startId">The starting identifier of an activity in the database</param>
+        /// <returns>Asynchronous operation containing a List of activities</returns>
         public async Task<List<Activity>> GetUserActivity(int userId, int activitiesNumber, int startId)
         {
             List<GetUserActivity_Result> list = await usrData.GetUserActivityFromId(userId, activitiesNumber, startId).ConfigureAwait(false);

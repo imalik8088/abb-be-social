@@ -42,6 +42,13 @@ namespace PortableTransformationLayer
             return JsonConvert.DeserializeObject<GetSensorInformation_Result>(response);
         }
 
+        /// <summary>
+        /// Method that returns all the previous data of a sensor specified by the date time period
+        /// </summary>
+        /// <param name="id">the identifier of the sensor</param>
+        /// <param name="startingTime">the starting time of the time period</param>
+        /// <param name="endingTime">the ending time of the time period</param>
+        /// <returns></returns>
         public async Task<List<ABBConnectServiceRef.GetHistoricalDataFromSensor_Result>> GetHistoricalDataFromSensor(int id, DateTime startingTime, DateTime endingTime)
         {
             var client = new HttpClient();
@@ -241,7 +248,13 @@ namespace PortableTransformationLayer
             return JsonConvert.DeserializeObject<bool>(response);
         }
 
-
+        /// <summary>
+        /// Method that returns a list (with specified size) of GetUserActivity_Result objects, which start from a specific id.
+        /// </summary>
+        /// <param name="userId">the user identifier of the user, whose activity is requested</param>
+        /// <param name="activityNumber">the number defining the list size</param>
+        /// <param name="startId">the starting id of an GetUserActivity_Result object</param>
+        /// <returns></returns>
         public async Task<List<GetUserActivity_Result>> GetUserActivityFromId(int userId, int numActivities, int startId)
         {
             var client = new HttpClient();

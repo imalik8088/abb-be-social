@@ -25,3 +25,6 @@ C:\Users\Dimitrios\Documents\GitHub\abb-be-social\ABBConnect.PortableTL\Portable
 C:\Users\Dimitrios\Documents\GitHub\abb-be-social\ABBConnect.PortableTL\PortableTransformationLayer\PortableTransformationLayer\obj\Debug\PortableTransformationLayer.csprojResolveAssemblyReference.cache
 C:\Users\Dimitrios\Documents\GitHub\abb-be-social\ABBConnect.PortableTL\PortableTransformationLayer\PortableTransformationLayer\obj\Debug\PortableTransformationLayer.dll
 C:\Users\Dimitrios\Documents\GitHub\abb-be-social\ABBConnect.PortableTL\PortableTransformationLayer\PortableTransformationLayer\obj\Debug\PortableTransformationLayer.pdb
+C:\Users\Dimitrios\Documents\GitHub\abb-be-social\ABBConnect.PortableTL\PortableTransformationLayer\PortableTransformationLayer\obj\Debug\PortableTransformationLayer.Properties.Resources.resources
+C:\Users\Dimitrios\Documents\GitHub\abb-be-social\ABBConnect.PortableTL\PortableTransformationLayer\PortableTransformationLayer\obj\Debug\PortableTransformationLayer.csproj.GenerateResource.Cache
+C:\Users\Dimitrios\Documents\GitHub\abb-be-social\ABBConnect.PortableTL\PortableTransformationLayer\PortableTransformationLayer\bin\Debug\PortableTransformationLayer.XML

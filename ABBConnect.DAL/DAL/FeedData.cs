@@ -29,16 +29,16 @@ namespace DAL
         /// <summary>
         /// Method that store a feed from a human user
         /// </summary>
-        /// <param name="usrId">Integer that represent the ID of a human user</param>
+        /// <param name="id">Integer that represent the ID of a human user</param>
         /// <param name="text">String that represent the content of the feed</param>
         /// <param name="filepath">String that represent the the path </param>
         /// <param name="prioId">Integer that represent the priority level of the feed</param>
-        /// <returns>Asynchronous operation that contain the ID of the feed</returns>
+        /// <returns>operation that contain the ID of the feed</returns>
         public int PostFeed(int id, string text, string filepath, int prioId)
         {
             int result = 0;
 
-            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=" + Properties.Resources.Data_Source + "Initial Catalog=" + Properties.Resources.Initial_Catalog + "User id=" + Properties.Resources.User_id + "Password=" + Properties.Resources.Password))
             {
 
                 sqlConn.Open();
@@ -68,12 +68,12 @@ namespace DAL
         /// Method that retrieve all the comments of a feed
         /// </summary>
         /// <param name="feedId">Integer representing the ID of the feed</param>
-        /// <returns>Asynchronous operation that contain the List of comments</returns>
+        /// <returns>operation that contain the List of comments</returns>
         public List<GetFeedComments_Result> GetFeedComments(int feedId)
         {
             List<GetFeedComments_Result> comments = new List<GetFeedComments_Result>();
 
-            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=" + Properties.Resources.Data_Source + "Initial Catalog=" + Properties.Resources.Initial_Catalog + "User id=" + Properties.Resources.User_id + "Password=" + Properties.Resources.Password))
             {
 
                 sqlConn.Open();
@@ -109,12 +109,12 @@ namespace DAL
         /// Method that retrieve all human users referenced into a feed
         /// </summary>
         /// <param name="feedId">Integer representing the ID of the feed</param>
-        /// <returns>Asynchronous operation that contain the List of tags</returns>
+        /// <returns>operation that contain the List of tags</returns>
         public List<GetFeedTags_Result> GetFeedTags(int feedId)
         {
             List<GetFeedTags_Result> tags = new List<GetFeedTags_Result>();
 
-            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=" + Properties.Resources.Data_Source + "Initial Catalog=" + Properties.Resources.Initial_Catalog + "User id=" + Properties.Resources.User_id + "Password=" + Properties.Resources.Password))
             {
 
                 sqlConn.Open();
@@ -157,14 +157,14 @@ namespace DAL
         /// </summary>
         /// <param name="feedId">Integer that represent the ID of a feed</param>
         /// <param name="username">String that represent the username of the human user</param>
-        /// <param name="comment">String that rapresent the content of the comment</param>
-        /// <returns>Asynchronous operation that contain a boolean that indicate if the operation succeed</returns>
+        /// <param name="text">String that rapresent the content of the comment</param>
+        /// <returns> operation that contain a boolean that indicate if the operation succeed</returns>
         public bool PostComment(int feedId, string username, string text)
         {
             int iD = feedId;
             int rowsAffected = 0;
 
-            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=" + Properties.Resources.Data_Source + "Initial Catalog=" + Properties.Resources.Initial_Catalog + "User id=" + Properties.Resources.User_id + "Password=" + Properties.Resources.Password))
             {
 
                 sqlConn.Open();
@@ -193,13 +193,13 @@ namespace DAL
         /// </summary>
         /// <param name="feedId">ID of the feed where the reference should be added</param>
         /// <param name="username">Username of the the user that should be reference in the feed</param>
-        /// <returns>Asynchronous operation that contain a boolean that indicate if the operation succeed</returns>
+        /// <returns> operation that contain a boolean that indicate if the operation succeed</returns>
         public bool AddTag(int feedId, string username)
         {
             int iD = feedId;
             int rowsAffected = 0;
 
-            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=" + Properties.Resources.Data_Source + "Initial Catalog=" + Properties.Resources.Initial_Catalog + "User id=" + Properties.Resources.User_id + "Password=" + Properties.Resources.Password))
             {
 
                 sqlConn.Open();
@@ -226,7 +226,7 @@ namespace DAL
         /// Method that search and retrieve the feeds by all their attributes.
         /// If an attribute of the feed is not needed in the search it can be leaved empty for strings, MinValue for DateTime objects, or -1 for integers.
         /// </summary>
-        /// <param name="userId">Integer that represent the ID of the user, if not needed in the search put it -1</param>
+        /// <param name="id">Integer that represent the ID of the user, if not needed in the search put it -1</param>
         /// <param name="location">String that represent the location of the feed, if not needed in the search leave it empty</param>
         /// <param name="startingTime">Class that represent the date where the search begin, it must be older than the date where the search should stop;
         /// if  not needed in the search put it like MinValue</param>
@@ -234,14 +234,16 @@ namespace DAL
         /// if  not needed in the search put it like MinValue</param>
         /// <param name="feedType">String that represent the type of the feed: human or sensor;
         /// if not needed in the search put it like empty string</param>
+        /// /// <param name="feedCategoryName">String that represent the category of the feed;
+        /// if not needed in the search put it like empty string</param>
         /// <param name="startId"></param>
         /// <param name="numFeeds">Integer that represent the number of feeds that must be retrieved, if not needed in the search put it -1</param>
-        /// <returns>Asynchronous operation that contain the List of feeds required</returns>
+        /// <returns> operation that contain the List of feeds required</returns>
         public List<GetLatestXFeeds_Result> GetXFeedsByFilter(int id, string location, DateTime startingTime, DateTime endingTime, string feedType, string feedCategoryName, int startId, int numFeeds)
         {
             List<GetLatestXFeeds_Result> feeds = new List<GetLatestXFeeds_Result>();
 
-            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=" + Properties.Resources.Data_Source + "Initial Catalog=" + Properties.Resources.Initial_Catalog + "User id=" + Properties.Resources.User_id + "Password=" + Properties.Resources.Password))
             {
                 sqlConn.Open();
                 string sqlQuery = "GetXFeedsByFilter";
@@ -332,12 +334,12 @@ namespace DAL
         /// Method that retrieve the feed with a specified ID
         /// </summary>
         /// <param name="feedId">ID of the feed where the reference should be added</param>
-        /// <returns>Asynchronous operation that contain the feed rewuired</returns>
+        /// <returns>operation that contain the feed rewuired</returns>
         public GetLatestXFeeds_Result GetFeedByFeedId(int feedId)
         {
             GetLatestXFeeds_Result feed = new GetLatestXFeeds_Result();
 
-            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=" + Properties.Resources.Data_Source + "Initial Catalog=" + Properties.Resources.Initial_Catalog + "User id=" + Properties.Resources.User_id + "Password=" + Properties.Resources.Password))
             {
                 sqlConn.Open();
                 string sqlQuery = "GetFeedByFeedId";
@@ -383,13 +385,19 @@ namespace DAL
             return feed;
         }
 
+        /// <summary>
+        /// Method that updates the following state of a human user to a sensor
+        /// </summary>
+        /// <param name="humanId">the identifier of the human user</param>
+        /// <param name="sensorId">the identifier of the sensor user</param>
+        /// <returns></returns>
         public bool FollowSensor(int humanId, int sensorId)
         {
             int humanIntId = humanId;
             int sensorIntId = sensorId;
             int rowsAffected = 0;
 
-            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=" + Properties.Resources.Data_Source + "Initial Catalog=" + Properties.Resources.Initial_Catalog + "User id=" + Properties.Resources.User_id + "Password=" + Properties.Resources.Password))
             {
 
                 sqlConn.Open();
@@ -412,11 +420,16 @@ namespace DAL
                 return false;
         }
 
+        /// <summary>
+        /// Method that returns a specific amount of feeds from the last shift
+        /// </summary>
+        /// <param name="numFeeds">the number of feeds to be returned</param>
+        /// <returns></returns>
         public List<GetLatestXFeeds_Result> GetFeedsFromLastShift(int numFeeds)
         {
             List<GetLatestXFeeds_Result> feeds = new List<GetLatestXFeeds_Result>();
 
-            using (SqlConnection sqlConn = new SqlConnection("Data Source=www3.idt.mdh.se;" + "Initial Catalog=ABBConnect;" + "User id=rgn09003;" + "Password=ABBconnect1;")) //here goes connStrng or the variable of it
+            using (SqlConnection sqlConn = new SqlConnection("Data Source=" + Properties.Resources.Data_Source + "Initial Catalog=" + Properties.Resources.Initial_Catalog + "User id=" + Properties.Resources.User_id + "Password=" + Properties.Resources.Password))
             {
                 sqlConn.Open();
                 string sqlQuery = "GetFeedsFromLastShift";

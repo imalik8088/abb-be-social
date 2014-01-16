@@ -5,8 +5,15 @@ using System.Text;
 
 namespace PortableBLL
 {
+    /// <summary>
+    /// Class that represent a time period of a specific sensor
+    /// </summary>
     public class SensorHistoryData
     {
+        /// <summary>
+        /// Constructor that instanciate the attribute of the class with a specific sensor
+        /// </summary>
+        /// <param name="owner">Class that represent the sensor</param>
         public SensorHistoryData(Sensor owner)
         {
             this.owner = owner;
@@ -14,8 +21,14 @@ namespace PortableBLL
             this.endingTime = DateTime.MinValue;
         }
 
+        /// <summary>
+        /// Attribute that represent the sensor
+        /// </summary>
         private Sensor owner;
-         public Sensor Owner
+        /// <summary>
+        /// Properties that allow to modify or take the sensor
+        /// </summary>
+        public Sensor Owner
         {
             get
             {
@@ -26,8 +39,15 @@ namespace PortableBLL
                 owner = value;
             }
         }
-         private DateTime startingTime; 
-            public DateTime StartingTime
+
+        /// <summary>
+        /// Attribute that represent the starting time when the sensor values are considered
+        /// </summary>
+        private DateTime startingTime;
+        /// <summary>
+        /// Properties that allow to modify or take the starting time when the sensor values are considered
+        /// </summary>
+        public DateTime StartingTime
         {
             get
             {
@@ -38,17 +58,24 @@ namespace PortableBLL
                 startingTime = value;
             }
         }
-            private DateTime endingTime;
-            public DateTime EndingTime
+
+        /// <summary>
+        /// Attribute that represent the ending time when the sensor values are considered
+        /// </summary>
+        private DateTime endingTime;
+        /// <summary>
+        /// Properties that allow to modify or take the ending time when the sensor values are considered
+        /// </summary>
+        public DateTime EndingTime
+        {
+            get
             {
-                get
-                {
-                    return endingTime;
-                }
-                set
-                {
-                    endingTime = value;
-                }
+                return endingTime;
             }
+            set
+            {
+                endingTime = value;
+            }
+        }
     }
 }

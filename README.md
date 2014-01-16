@@ -1,23 +1,22 @@
-Social Media in the Process Automation Industry
-=============
-
-DSD project autumn 2013 ([project webpage][1])  
-For further information about this university project. have a look in to the [wiki pages][2].
+###Social Media in the Process Automation Industry
 
 
-#### Resolve a issue via your commit
-You can add the following keywords in your commit message to `fix` or `close` a issue. If you have solved just a ***part*** of the issue and want to add your work to the corresponding issue then add just the hashtag `#xxx` to the commit message without the ***keywords***.
-  
-```
-fixes #xxx
-fixed #xxx
-fix #xxx
-closes #xxx
-close #xxx
-closed #xxx #xxx
-```
+A project build in the DSD (Distributed software development) [course][1] in cooperation with ABB.
 
+![logo](https://raw.github.com/iNeedCode/abb-be-social/develop/abbconnect-logo.png)
 
+###Vision
+ABB Connect is the starting of a new era. Nowadays, companies are struggling with sticky notes to transfer information between shifts and to share information inside of the company. Until now, it has been a major problem that the sticky notes disappear and the information does not reach the intended receiver.
 
-[1]: http://www.fer.unizg.hr/rasip/dsd/projects/social_media_in_the_process_automation_industry
+Therefore, we have developed two applications, one for hand-held devices and one for desktop to mitigate these problems by digitalize the sticky notes and also add more necessary features that beautifies the working conditions.  
+
+ABB Connect connects the users with each other by providing simple and user friendly graphical user interfaces, fast and reliable services and extraordinary features. But it does not end here, ABB Connects also enables connections with a control systems, to let sensors post feeds. ABB Connect also enables that  sensor data can be viewed in real-time with a graphical representation.
+
+A [commercial video][3] was produced to to visualize the vision of the project and the actual usage of the system in a daily life of an engineer.
+
+##### Information for involved developers
+A set of policies and tutorials are gathered under the [wiki pages][2].
+
+[1]: http://www.fer.unizg.hr/rasip/dsd
 [2]: https://github.com/iNeedCode/abb-be-social/wiki
+[3]: http://youtu.be/snPwXyQZipg

@@ -14,6 +14,16 @@ namespace ABBStreamService
     // NOTE: In order to launch WCF Test Client for testing this service, please select ABBConnectStreamWCF.svc or ABBConnectStreamWCF.svc.cs at the Solution Explorer and start debugging.
     public class ABBConnectStreamWCF : IABBConnectStreamWCF
     {
+        /// <summary>
+        /// Method that accepts a stream of a byte array containing the image. At the beginning a small package is received, where the size of the
+        /// real image byte array is defined and also the id of the feed in which the image should be placed. Since the methods of WCF, which do contain a Stream 
+        /// do not accept more parameters, those values had to be passed in the first package. Moreover, the size of the actual image byte array was needed to request
+        /// a package of the exact same size and store the right string in the database.
+        /// 
+        /// Later the rest package is received and stored in a byte array with size similar to the size defined from the first package. Then the byte array is 
+        /// converted to a base64 string and stored in the database.
+        /// </summary>
+        /// <param name="stream"></param>
         public void saveImage(Stream stream)
         {
             byte[] initialBuffer = new byte[200];
@@ -47,31 +57,6 @@ namespace ABBStreamService
             System.Buffer.BlockCopy(buffer, 0, firstImagePackage, initialBuffer.Length - filebytes.Length, buffer.Length - (initialBuffer.Length - filebytes.Length));
 
             encodedData = Convert.ToBase64String(firstImagePackage);
-
-            //do
-            //{
-            //    bytesRead = stream.Read(buffer, 0, buffer.Length);
-
-            //    if (i == 0)
-            //    {
-            //        chars = new char[buffer.Length / sizeof(char)];
-            //        System.Buffer.BlockCopy(buffer, 0, chars, 0, chars.Length);
-            //        firstPackage = new string(chars);
-            //        words = firstPackage.Split(';');
-            //        feedId = words[0] + ";";
-            //        filebytes = new byte[feedId.Length * sizeof(char)];
-            //        encodedData = Convert.ToBase64String(buffer, filebytes.Length, buffer.Length - filebytes.Length);
-            //        i++;
-            //    }
-            //    else
-            //        encodedData = encodedData + Convert.ToBase64String(buffer);
-            //    totalBytesRead += bytesRead;
-            //} while (bytesRead > 0);
-
-            //System.Buffer.BlockCopy(feedId.ToCharArray(), 0, filebytes, 0, feedId.Length * sizeof(char));
-
-            //string base64Remove = Convert.ToBase64String(filebytes);
-            //base64Remove = base64Remove.Remove(base64Remove.Length - 2);
 
             string imageFile = "data:image/jpeg;base64," + encodedData;
 
